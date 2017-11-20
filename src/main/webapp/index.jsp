@@ -3,7 +3,7 @@
 	<h2>Hello World!</h2>
 	<p>
 		Some magic.
-		Test pish
+		Test push
 	</p>
 </body>
 </html>
