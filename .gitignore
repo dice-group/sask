@@ -26,4 +26,5 @@ hs_err_pid*
 .classpath
 .settings
 .wtpmodules
+.DS_Store
 target
