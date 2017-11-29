@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Compiled class file
 *.class
 
@@ -27,7 +26,4 @@ hs_err_pid*
 .classpath
 .settings
 .wtpmodules
-.DS_Store
 target
-=======
->>>>>>> master
