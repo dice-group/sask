@@ -17,6 +17,7 @@
 		<module>eureka-server</module>
 		<module>discoveryclient</module>
 		<module>webclient</module>
+        <module>chatbot</module>
 	</modules>
 	
 	<properties>
@@ -70,5 +71,5 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
->>>>>>> master
+
 </project>
