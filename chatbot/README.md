@@ -1,6 +1,6 @@
-# sask
-Projectgroups Search and Extraction
-Search:
+# chatbot
+Artifacts for chatbot feature
+Chatbot:
 
 Steps to install:
 
