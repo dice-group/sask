@@ -15,53 +15,57 @@ $(function() {
 		}
 		//searchViaAjax();
 		var data = {}
-		data["message"] = newMsg;
-		//window.alert("Before ajax1");
-		//window.alert($("#textbox").val());
-		$.post( "conversation" ,data , function(data){
-			//window.alert(data);//Publish answer in Content area instead of message box. Crude solution for now, Fix later
-			var prevMsg = $("#container").html();
-			console.log(prevMsg.length);
-			if (prevMsg.length != 6) {
-				prevMsg = prevMsg + "<br>";
-			}
-			$("#container").html(prevMsg + data);
-			/*success : function(data) {
-				console.log("SUCCESS: ", data);
-				window.alert(data);
-			},
-			error : function(e) {
-				console.log("ERROR: ", e);
-				window.alert(e);
-			},
-			done : function(e) {
-				//
-				console.log("DONE");
-				window.alert("DONE");
-			}*/
+		data["userId"] = "1104ea5f-ce7b-4211-8675-e880b9bd0ec7"; //Need to geenrate some ID for Uniqueness.
+		data["messageType"] = "text";
+		data["requestContent"]=[{"text":newMsg}];
 		
-		});
-		/*$.ajax({
+		$.ajax({
 			type : "POST",
-			contentType : "application/json",
-			url : "conversation?message=" + $("#textbox").val(), //Need to debug how to read data: in Spring. Passing as command param is not right.
-			data : {message: "Hello"},//JSON.stringify(data),
-			dataType : 'json',
+			dataType: 'text',
+			data: JSON.stringify(data),
+			 headers: {
+	                'Accept': 'application/json; charset=utf-8',
+	                'Content-Type': 'application/json; charset=utf-8'
+	         },
+	         url: '/chat', //Need to debug how to read data: in Spring. Passing as command param is not right.
+			
 			timeout : 100000,
 			success : function(data) {
 				console.log("SUCCESS: ", data);
-				window.alert(data);
+				var prevMsg = $("#container").html();
+				console.log(prevMsg.length);
+				if (prevMsg.length != 6) {
+					prevMsg = prevMsg + "<br>";
+				}
+				var obj = JSON.parse(data);
+				console.log(obj);
+				var link=obj[0].URI;
+				console.log(link);
+				var displayText="";
+				var elementName="Open in DBPedia";
+				if (typeof obj[0].thumbnail == "undefined")
+					console.log("Thumbnail is not present");
+				else
+					displayText += "<img src=" +  obj[0].thumbnail +" height='200' width='200'/><br>";
+				if (typeof obj[0].comment == "undefined")
+					console.log("Comment is not present");
+				else
+					displayText += obj[0].comment +"<br>";
+				displayText +=elementName.link(link) + "-->For reference,URL=" + link;
+				
+				$("#container").html(prevMsg + displayText);
+				
 			},
 			error : function(e) {
 				console.log("ERROR: ", e);
-				window.alert(e);
+			
 			},
 			done : function(e) {
 				//
 				console.log("DONE");
 				window.alert("DONE");
 			}
-		});*/
+		});
 		
 		$("#container").html(prevMsg + newMsg);
 		$("#container").scrollTop($("#container").prop("scrollHeight"));
