@@ -9,8 +9,7 @@ Maven Build:
 mvn clean package
 mvn clean spring-boot:run
 
-Limitations:
-1. HAWK doesnt work as of now. So less chances of getting responses.
-2. UI displays text as is. Need to make it user readable.
-3. JQUERY.js is present with the UI code. Need to make it dependant on Maven and shared with extraction team.
-4. Others.
+Release Notes:
+1. HAWK Works But UI displays output some what crudely. HAWK still has bugs. Returns erratic output.
+2. UI needs to be smoothed and displayed with proper Indents and niceties.
+3. Some hardcodings still present in flow. Need to add classifier to pass Command to correct Controller.

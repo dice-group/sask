@@ -25,6 +25,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
+import chatbot.core.IncomingRequest.IncomingRequest;
 import chatbot.core.handlers.*;
 import javax.xml.ws.http.HTTPException;
 
@@ -43,25 +45,15 @@ public class qa extends Handler {
 	}
 	private String createHTTPRequest(String question) {
         try {
-        		System.out.println("here");
         		String[] strgs = question.split(" "); //Remove and create words instead of passing complete sentences. Follow format specified in gitthub rdocumentation
         		String query="";
         		for (int j=0; j<strgs.length; j++) {
         			query+= strgs[j] + "+";
         		}
         		query=query.substring(0 , query.length()-1);
-        		System.out.println(query);
-        		//query.remove(query.length()-1, query.length()) //Remove last +sign
-        		//query+= "%3F";
+        		System.out.println(query);    		
         		String URLText= URL+query;
-        		System.out.println(URLText);
             HttpPost httpPost = new HttpPost(URLText);
-            
-            List<NameValuePair> params = new ArrayList<NameValuePair>();
-            params.add(new BasicNameValuePair("query", question));
-
-            UrlEncodedFormEntity entity = new UrlEncodedFormEntity(params, Consts.UTF_8);
-            httpPost.setEntity(entity);
             HttpResponse response = client.execute(httpPost);
             // Error Scenario
             if(response.getStatusLine().getStatusCode() >= 400) {
@@ -79,18 +71,13 @@ public class qa extends Handler {
         
     }
 	
-	public String search(String question) throws JsonProcessingException, IOException {
-		//String answer="";
-		String response = createHTTPRequest(question);
-		//String 
-		//response = output;
-		//Print JSON for now.
-		System.out.println("Response Received:");
-		System.out.println(response);
-		
+	 public String search(IncomingRequest request) throws JsonProcessingException, IOException {
+
+		String json=request.getRequestContent().get(0).getText();
+		String response = createHTTPRequest(json);
 		ObjectMapper mapper = new ObjectMapper();
         JsonNode rootNode = mapper.readTree(response);
-        String Text= rootNode.path("answer").path("value").toString();
+        String Text= rootNode.path("answer").toString();
       
 		return Text;
 		
