@@ -1,5 +1,6 @@
 package org.dice_research.sask.webclient.Bootstrap;
 
+import java.io.File;
 import java.net.URI;
 import java.util.LinkedList;
 import java.util.List;
@@ -87,7 +88,7 @@ public class Bootstrapper {
 			String pageScriptFolder = this.settings.get(MockSettings.KEY_PAGE_SCRIPT_FOLDER);
 			String pageScriptURI = this.settings.get(MockSettings.KEY_PAGE_SCRIPT_URI);
 			
-			String resourcePattern = "classpath:" + pageScriptFolder + pageName + "\\" + "*.js";
+			String resourcePattern = "classpath:" + pageScriptFolder + pageName + File.separator + "*.js";
 			Resource[] resources = getResourcePatternResolver().getResources(resourcePattern);
 			
 			List<String> scripts = new LinkedList<>();

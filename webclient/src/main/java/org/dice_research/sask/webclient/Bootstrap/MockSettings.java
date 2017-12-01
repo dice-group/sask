@@ -1,5 +1,7 @@
 package org.dice_research.sask.webclient.Bootstrap;
 
+import java.io.File;
+
 public class MockSettings {
 	public final static String KEY_SUFFIX = "suffix";
 	public final static String KEY_DEFAULT_PAGE = "defaultPage";
@@ -21,7 +23,7 @@ public class MockSettings {
 		case KEY_PAGE_SCRIPT_URI:
 			return "/js/pages/";
 		case KEY_PAGE_SCRIPT_FOLDER:
-			return "static\\js\\pages\\";
+			return "static" + File.separator + "js" + File.separator +  "pages" + File.separator;
 		default:
 			throw new RuntimeException("Unknown settings key. ");
 		}
