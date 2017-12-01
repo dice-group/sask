@@ -39,11 +39,11 @@ public class qa extends Handler {
 	 private static final String URL = "http://localhost:8181/simple-search?query="; //URL of Hawk Service.
 	 private HttpClient client;
 	 private int timeout = 7000;
-	public qa() {
+	 public qa() {
 		RequestConfig requestConfig = RequestConfig.custom().setSocketTimeout(timeout).build();
         this.client = HttpClientBuilder.create().setDefaultRequestConfig(requestConfig).build();
-	}
-	private String createHTTPRequest(String question) {
+	 }
+	 private String createHTTPRequest(String question) {
         try {
         		String[] strgs = question.split(" "); //Remove and create words instead of passing complete sentences. Follow format specified in gitthub rdocumentation
         		String query="";
@@ -51,7 +51,6 @@ public class qa extends Handler {
         			query+= strgs[j] + "+";
         		}
         		query=query.substring(0 , query.length()-1);
-        		System.out.println(query);    		
         		String URLText= URL+query;
             HttpPost httpPost = new HttpPost(URLText);
             HttpResponse response = client.execute(httpPost);
@@ -60,28 +59,22 @@ public class qa extends Handler {
                 System.out.println("Error In HTTP Request");
                 throw new HTTPException(response.getStatusLine().getStatusCode());
             }
-
             return EntityUtils.toString(response.getEntity());
         }
         catch(Exception e) {
-        	//Check if we can create a logger.
+        		//Check if we can create a logger.
         		System.out.println("Exception occured in qa.java");
             throw new InternalError();
         }
         
-    }
+	 }
 	
 	 public String search(IncomingRequest request) throws JsonProcessingException, IOException {
-
-		String json=request.getRequestContent().get(0).getText();
+	  	String json=request.getRequestContent().get(0).getText();
 		String response = createHTTPRequest(json);
 		ObjectMapper mapper = new ObjectMapper();
-        JsonNode rootNode = mapper.readTree(response);
-        String Text= rootNode.path("answer").toString();
-      
-		return Text;
-		
-	}
-	
-
+        	JsonNode rootNode = mapper.readTree(response);
+        	String Text= rootNode.path("answer").toString();
+        	return Text;
+	 }
 }

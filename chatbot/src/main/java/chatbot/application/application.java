@@ -1,11 +1,12 @@
 package chatbot.application;
-
+import chatbot.core.IncomingRequest.*;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,15 +19,14 @@ import chatbot.core.handlers.*;
  *
  */
 @RestController
+@RequestMapping("/chat")
 public class application {
-
-    @RequestMapping(value="/conversation" , method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST, produces = "application/json")
     public @ResponseBody
-    String route(@RequestParam("message") String value) throws Exception {
-    //	System.out.print(value + ",.");
+    String route(@RequestBody final IncomingRequest request) throws Exception {
        classifier obj =  new classifier();
-       Handler newobj = obj.classify(value);
-       String answer = newobj.search(value);
+       Handler newobj = obj.classify(request);
+       String answer = newobj.search(request);
        return answer;
     }
 }
