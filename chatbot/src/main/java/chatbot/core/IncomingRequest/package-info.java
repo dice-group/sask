@@ -5,4 +5,4 @@
  * @author Prashanth
  *
  */
-package chatbot.core.IncomingRequest;
+package chatbot.core.incomingrequest;

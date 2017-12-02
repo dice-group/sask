@@ -3,14 +3,14 @@
  */
 package chatbot.core.classifier;
 import chatbot.core.handlers.qa.*;
-import chatbot.core.IncomingRequest.IncomingRequest;
+import chatbot.core.incomingrequest.IncomingRequest;
 import chatbot.core.handlers.*;
 
 /**
  * @author Prashanth
  * class to Classify the User Input as QA or KS or Normal emotion.
  */
-public class classifier {
+public class Classifier {
 	
 	//Classify Intent here. Need another function to process Requests. Then finally Search to the correct class. 
 	//One idea would be to have polymorphism here with similar interfaces but different logic for Keyword search and QA. 
@@ -24,7 +24,7 @@ public class classifier {
 		//If rivescript 
 		//TODO
 		//else if QA
-		Handler obj = new qa(); //Direct Hardcoding to check QA for now.//obj.search(question);
+		Handler obj = new QA(); //Direct Hardcoding to check QA for now.//obj.search(question);
 		//else if KS
 		
 		//else //ELIZA/ALICE?

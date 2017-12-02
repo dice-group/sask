@@ -1,7 +1,7 @@
 /**
  * 
  */
-package chatbot.core.IncomingRequest;
+package chatbot.core.incomingrequest;
 import java.util.ArrayList;
 import java.util.List;
 /**
@@ -9,7 +9,7 @@ import java.util.List;
  *
  */
 public class IncomingRequest {
-	public enum MessageType{MessageType_Text, MessageType_Others};
+	public enum MessageType{TEXT, OTHERS};
  	private String userId;
     private MessageType messageType;
     private List<RequestContent> requestContent = new ArrayList<RequestContent>();
@@ -18,9 +18,9 @@ public class IncomingRequest {
     public IncomingRequest(String id, String type, String platform) {
         userId = id;
      	if (type == "text" ) 
-     		messageType = MessageType.MessageType_Text;
+     		messageType = MessageType.TEXT;
 	    else 
-	    		messageType = MessageType.MessageType_Others;
+	    		messageType = MessageType.OTHERS;
 	    client = platform;
     }
     public String getClient() {
@@ -44,9 +44,9 @@ public class IncomingRequest {
     }
     public void setMessageType(String type) {
     		if (type.compareTo("text")==0) 
-     		messageType = MessageType.MessageType_Text;
+     		messageType = MessageType.TEXT;
      	else 
-	    		messageType = MessageType.MessageType_Others;
+	    		messageType = MessageType.OTHERS;
 	 }
     public MessageType getMessageType() {
         return messageType;

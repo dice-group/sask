@@ -1,7 +1,7 @@
 /**
  * 
  */
-package chatbot.core.IncomingRequest;
+package chatbot.core.incomingrequest;
 
 /**
  * @author Prashanth
