@@ -39,9 +39,7 @@ $(function() {
 				}
 				var obj = JSON.parse(data);
 				console.log(obj);
-				var link=obj[0].URI;
-				console.log(link);
-				var displayText="";
+				var displayText="<div class='card'>";
 				var elementName="Open in DBPedia";
 				if (typeof obj[0].thumbnail == "undefined")
 					console.log("Thumbnail is not present");
@@ -51,10 +49,17 @@ $(function() {
 					console.log("Comment is not present");
 				else
 					displayText += obj[0].comment +"<br>";
-				displayText +=elementName.link(link) + "-->For reference,URL=" + link;
-				
+				if (typeof obj[0].URI == "undefined")
+					console.log("URI is not present");
+				else{
+					var link=obj[0].URI;
+					console.log(link);
+					displayText +=elementName.link(link) + "-->For reference,URL=" + link;
+				}
+				displayText +="</div>"
+		
 				$("#container").html(prevMsg + displayText);
-				
+				$("#container").scrollTop($("#container").prop("scrollHeight"));
 			},
 			error : function(e) {
 				console.log("ERROR: ", e);
