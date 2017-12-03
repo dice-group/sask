@@ -37,9 +37,11 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.5/js/fileinput.min.js"></script>
+<!--~~~~~~  page scripts ~~~~~~ -->
 <c:forEach items="${scripts}" var="script">
 	<script src="<c:url value="${script}" />" type="text/javascript"></script>
 </c:forEach>
+<!--~~~~~~  page styles ~~~~~~ -->
 <c:forEach items="${styles}" var="style">
 	<link rel="stylesheet" href="${style}" />
 </c:forEach>
