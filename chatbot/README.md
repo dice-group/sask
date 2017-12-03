@@ -4,7 +4,13 @@ Chatbot:
 
 Steps to install:
 
-Maven Build:
+Check if the Eureka server from the sask/eureka-server module is running.
+	curl -s -o /dev/null -w "%{http_code}" http://localhost:1111 is return value
+
+If return value is 200 then goto step *
+Else then run the eureka-server module using mvn clean spring-boot:run
+
+* Maven Build:
 
 mvn clean package
 mvn clean spring-boot:run
