@@ -2,6 +2,7 @@
  * 
  */
 package chatbot.core.handlers;
+
 import java.io.IOException;
 import javax.xml.ws.http.HTTPException;
 import org.apache.http.HttpResponse;
@@ -20,21 +21,29 @@ import chatbot.core.incomingrequest.IncomingRequest;
  */
 abstract public class Handler {
 	private int timeout = 7000;
-	public String search(IncomingRequest request) throws JsonProcessingException, IOException{
+
+	public String search(IncomingRequest request) throws JsonProcessingException, IOException {
 		return null;
 	}
+
 	public String sendHTTPRequest(String query) throws ClientProtocolException, IOException {
-		HttpClient client;	
-		RequestConfig requestConfig = RequestConfig.custom().setSocketTimeout(timeout).build();
-        client = HttpClientBuilder.create().setDefaultRequestConfig(requestConfig).build();
+		HttpClient client;
+		RequestConfig requestConfig = RequestConfig.custom()
+		                                           .setSocketTimeout(timeout)
+		                                           .build();
+		client = HttpClientBuilder.create()
+		                          .setDefaultRequestConfig(requestConfig)
+		                          .build();
 		HttpPost httpPost = new HttpPost(query);
-        HttpResponse response = client.execute(httpPost);
-        // Error Scenario
-        if(response.getStatusLine().getStatusCode() >= 400) {
-            System.out.println("Error In HTTP Request");
-            throw new HTTPException(response.getStatusLine().getStatusCode());
-        }
-        return EntityUtils.toString(response.getEntity());
+		HttpResponse response = client.execute(httpPost);
+		// Error Scenario
+		if (response.getStatusLine()
+		            .getStatusCode() >= 400) {
+			System.out.println("Error In HTTP Request");
+			throw new HTTPException(response.getStatusLine()
+			                                .getStatusCode());
+		}
+		return EntityUtils.toString(response.getEntity());
 	}
 
 }

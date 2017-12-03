@@ -9,12 +9,11 @@ import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-public class WebclientApplication 
-{
+public class WebclientApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(WebclientApplication.class, args);
 	}
-	
+
 	@Bean
 	@LoadBalanced
 	public RestTemplate restTemplate() {
@@ -22,7 +21,7 @@ public class WebclientApplication
 	}
 
 	@Bean
-	public HelloRepository helloRepository(){
+	public HelloRepository helloRepository() {
 		return new RemoteHelloRepository();
 	}
 }
