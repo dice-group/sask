@@ -8,12 +8,14 @@
    <version>0.0.1-SNAPSHOT</version>
    <name>chatbot</name>
    
-   <url>http://maven.apache.org</url>
    <parent>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-parent</artifactId>
-      <version>1.5.8.RELEASE</version>
+    <groupId>org.dice-research</groupId>
+    <artifactId>sask</artifactId>
+    <version>0.0.7</version>
+    <relativePath>..</relativePath>
    </parent>
+   
+   <url>http://maven.apache.org</url>
    <dependencies>
       <dependency>
          <groupId>junit</groupId>
@@ -27,32 +29,36 @@
          <version>3.1.0</version>
       </dependency>
       <dependency>
-         <groupId>org.springframework</groupId>
-         <artifactId>spring-core</artifactId>
-         <version>${spring.version}</version>
-      </dependency>
-      <dependency>
-         <groupId>org.springframework</groupId>
-         <artifactId>spring-webmvc</artifactId>
-         <version>${spring.version}</version>
-      </dependency>
-      <dependency>
-         <groupId>org.springframework.boot</groupId>
-         <artifactId>spring-boot-starter-web</artifactId>
-      </dependency>
-      <dependency>
-         <groupId>org.springframework.boot</groupId>
-         <artifactId>spring-boot-starter-tomcat</artifactId>
-         <scope>provided</scope>
-      </dependency>
-      <dependency>
          <groupId>org.apache.httpcomponents</groupId>
          <artifactId>httpclient</artifactId>
          <version>4.3.2</version>
       </dependency>
+          
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-starter-eureka</artifactId>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-netflix-eureka-client</artifactId>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-starter-eureka-server</artifactId>
+      </dependency>
+      
    </dependencies>
-   <properties>
-      <!--spring.version>4.2.1.RELEASE</spring.version-->
-      <jdk.version>1.7</jdk.version>
-   </properties>
+  
+   <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-dependencies</artifactId>
+        <version>Camden.SR5</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+   
 </project>
