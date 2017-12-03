@@ -35,6 +35,10 @@ public class Bootstrapper {
 	 */
 	private final static String ATTRIBUTE_NAME_JAVASCRIPTS = "scripts";
 	/**
+	 * The attribute name for the styles.
+	 */
+	private final static String ATTRIBUTE_NAME_STYLES = "styles";
+	/**
 	 * The spring model.
 	 */
 	private final Model model;
@@ -66,9 +70,12 @@ public class Bootstrapper {
 	public String run() {
 		String pageName = getPagenameFromRequest();
 		String pagePath = buildPagePath(pageName);
+
 		List<String> scriptString = getScriptStrings(pageName);
+		List<String> stylesString = getStylesStrings(pageName);
 
 		this.model.addAttribute(ATTRIBUTE_NAME_JAVASCRIPTS, scriptString);
+		this.model.addAttribute(ATTRIBUTE_NAME_STYLES, stylesString);
 		this.model.addAttribute(ATTRIBUTE_NAME_CONTENT_PAGE, pagePath);
 		this.model.addAttribute(ATTRIBUTE_NAME_PAGE_TITLE, "SASK");
 
@@ -84,22 +91,52 @@ public class Bootstrapper {
 	 * @return List of all script files.
 	 */
 	private List<String> getScriptStrings(String pageName) {
+		String pageScriptFolder = this.settings.get(MockSettings.KEY_PAGE_SCRIPT_FOLDER);
+		String pageScriptURI = this.settings.get(MockSettings.KEY_PAGE_SCRIPT_URI);
+
+		return getResoucesURIs(pageName, pageScriptFolder, pageScriptURI, "*.js");
+	}
+
+	/**
+	 * Returns all style files for the passed page name.
+	 * 
+	 * @param pageName
+	 *            The page name.
+	 * @return List of all style files.
+	 */
+	private List<String> getStylesStrings(String pageName) {
+		String pageScriptFolder = this.settings.get(MockSettings.KEY_PAGE_STYLES_FOLDER);
+		String pageScriptURI = this.settings.get(MockSettings.KEY_PAGE_STYLES_URI);
+
+		return getResoucesURIs(pageName, pageScriptFolder, pageScriptURI, "*.css");
+	}
+
+	/**
+	 * Return all resource files for the passed page name, with using the passed
+	 * folder and uri.
+	 * 
+	 * @param pageName
+	 *            The page name.
+	 * @param folder
+	 *            The folder where the files are located.
+	 * @param uri
+	 *            The uri where the files can be reached.
+	 * @return The list of the resource URIs.
+	 */
+	private List<String> getResoucesURIs(String pageName, String folder, String uri, String pattern) {
 		try {
-			String pageScriptFolder = this.settings.get(MockSettings.KEY_PAGE_SCRIPT_FOLDER);
-			String pageScriptURI = this.settings.get(MockSettings.KEY_PAGE_SCRIPT_URI);
-			
-			String resourcePattern = "classpath:" + pageScriptFolder + pageName + File.separator + "*.js";
+			String resourcePattern = "classpath:" + folder + pageName + File.separator + pattern;
 			Resource[] resources = getResourcePatternResolver().getResources(resourcePattern);
-			
+
 			List<String> scripts = new LinkedList<>();
 			for (Resource r : resources) {
 				StringBuilder b = new StringBuilder();
-				
-				b.append(pageScriptURI);
+
+				b.append(uri);
 				b.append(pageName);
 				b.append("/");
 				b.append(r.getFilename());
-				
+
 				scripts.add(b.toString());
 			}
 

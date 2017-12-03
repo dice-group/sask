@@ -9,7 +9,8 @@
 <link rel="stylesheet"
 	href="<c:url value="/bootstrap/3.3.7/css/bootstrap.min.css" />" />
 <!--~~~~~~  jquery ~~~~~~ -->
-<script src="<c:url value="/jquery/jquery-3.2.1.min.js" />" type="text/javascript"></script>
+<script src="<c:url value="/jquery/jquery-3.2.1.min.js" />"
+	type="text/javascript"></script>
 <!--~~~~~~  jquery ui ~~~~~~ -->
 <script src="/jquery-ui-1.12.1/jquery-ui.js"></script>
 <link rel="stylesheet" href="/jquery-ui-1.12.1/jquery-ui.css">
@@ -38,6 +39,9 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.5/js/fileinput.min.js"></script>
 <c:forEach items="${scripts}" var="script">
 	<script src="<c:url value="${script}" />" type="text/javascript"></script>
+</c:forEach>
+<c:forEach items="${styles}" var="style">
+	<link rel="stylesheet" href="${style}" />
 </c:forEach>
 </head>
 <body>

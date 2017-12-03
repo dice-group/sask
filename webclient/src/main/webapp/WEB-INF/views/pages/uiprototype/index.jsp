@@ -9,7 +9,7 @@
 		</div>
 		<div class="col-sm-9">
 			<h4>Workspace</h4>
-			<div id=ex-workspace style="height: 500px"></div>
+			<div id="ex-workspace"></div>
 		</div>
 	</div>
 </div>
