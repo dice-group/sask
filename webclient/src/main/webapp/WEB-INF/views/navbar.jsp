@@ -17,6 +17,7 @@
 				<li><a href="./index">Home</a></li>
 				<li><a href="./status">Status</a></li>
 				<li><a href="./settings">Settings</a></li>
+				<li><a href="./uiprototype">UI prototype</a></li>
 			</ul>
 		</div>
 	</div>

@@ -5,11 +5,18 @@
 
 <head>
 <title>${pageTitle}</title>
+<!-- ~~~~~~ bootstrap ~~~~~~ -->
 <link rel="stylesheet"
 	href="<c:url value="/bootstrap/3.3.7/css/bootstrap.min.css" />" />
-<script src="<c:url value="/js/jquery-3.2.1.min.js" />" type="text/javascript"></script>
+<!--~~~~~~  jquery ~~~~~~ -->
+<script src="<c:url value="/jquery/jquery-3.2.1.min.js" />" type="text/javascript"></script>
+<!--~~~~~~  jquery ui ~~~~~~ -->
 <script src="/jquery-ui-1.12.1/jquery-ui.js"></script>
 <link rel="stylesheet" href="/jquery-ui-1.12.1/jquery-ui.css">
+<!--~~~~~~  bootstrap-treeview ~~~~~~ -->
+<script src="/bootstrap-treeview/bootstrap-treeview.js"></script>
+<link rel="stylesheet" href="/bootstrap-treeview/bootstrap-treeview.css">
+<!--~~~~~~  file input ~~~~~~ -->
 <link
 	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.5/css/fileinput.min.css"
 	media="all" rel="stylesheet" type="text/css" />
