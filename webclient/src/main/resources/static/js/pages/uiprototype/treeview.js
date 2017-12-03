@@ -35,12 +35,28 @@ var exTreeviewDefaultData = [ {
 		icon : 'glyphicon glyphicon-cloud',
 	} ]
 }, {
-	text : 'Database',
+	text : 'Databases',
 	href : '#parent3',
 	nodes : [ {
 		text : 'the one and only',
 		href : '#db',
 		icon : 'glyphicon glyphicon-hdd',
+	} ]
+}, {
+	text : 'Workspaces',
+	href : '#parent4',
+	nodes : [ {
+		text : 'my workspace',
+		href : '#mw',
+		icon : 'glyphicon glyphicon-inbox',
+	}, {
+		text : 'my second workspace',
+		href : '#nsw',
+		icon : 'glyphicon glyphicon-inbox',
+	}, {
+		text : 'not my workspace',
+		href : '#nmwx',
+		icon : 'glyphicon glyphicon-inbox',
 	} ]
 } ];
 
