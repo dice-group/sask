@@ -13,10 +13,10 @@ import chatbot.core.handlers.*;
  * @author Prashanth
  *
  */
-public class QA extends Handler {
+public class QAHandler extends Handler {
 	//Handle Hawk Service.
 	 private static final String URL = "http://localhost:8181/simple-search?query="; //URL of Hawk Service.
-	 public QA() {
+	 public QAHandler() {
 		
 	 }
 	 private String generateResponse(String incomingResponse) throws JsonProcessingException, IOException {
@@ -41,7 +41,7 @@ public class QA extends Handler {
 			String sendText=generateHTTPQuery(query);
 			String response = sendHTTPRequest(sendText);
 			String output = generateResponse(response);
-	        return output;
+			return output;
 		 }
 	     catch(Exception e) {
 	     		//Check if we can create a logger.
