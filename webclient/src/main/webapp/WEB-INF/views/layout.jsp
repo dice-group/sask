@@ -13,6 +13,9 @@
 <!--~~~~~~  jquery ui ~~~~~~ -->
 <script src="/jquery-ui-1.12.1/jquery-ui.js"></script>
 <link rel="stylesheet" href="/jquery-ui-1.12.1/jquery-ui.css">
+<!--~~~~~~  flowchart ~~~~~~ -->
+<script src="/flowchart-js/jquery.flowchart.js"></script>
+<link rel="stylesheet" href="/flowchart-js/jquery.flowchart.css">
 <!--~~~~~~  bootstrap-treeview ~~~~~~ -->
 <script src="/bootstrap-treeview/bootstrap-treeview.js"></script>
 <link rel="stylesheet" href="/bootstrap-treeview/bootstrap-treeview.css">

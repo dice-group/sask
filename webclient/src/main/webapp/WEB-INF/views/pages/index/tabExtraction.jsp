@@ -4,7 +4,7 @@
 <h1>Extraction prototype</h1>
 <form>
 	<div class="form-group">
-		    <label for="email">File:</label> <input id="input-b1"
+		    <label for="email">File:</label> <input id="ex-fileinput"
 			name="input-b1" type="file" class="file form-control">
 	</div>
 	<div class="radio">

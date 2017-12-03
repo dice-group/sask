@@ -1,3 +1,3 @@
 $(document).ready(function() {
-	$("#input-b1").fileinput();
+	$("#ex-fileinput").fileinput();
 });

@@ -1,4 +1,4 @@
-var defaultData = [ {
+var exTreeviewDefaultData = [ {
 	text : 'Data',
 	href : '#data',
 	nodes : [ {
@@ -46,6 +46,6 @@ var defaultData = [ {
 
 $(document).ready(function() {
 	var $tree = $('#ex-treeview').treeview({
-		data : defaultData,
+		data : exTreeviewDefaultData,
 	});
 });
