@@ -1,0 +1,75 @@
+// DBpedia is online or available
++ dbpedia status
+- {"type": "status_check", "name": "dbpedia"}
+
++ [*] dbpedia [is] (@statusup|@statusdown) [*]
+@ dbpedia status
+
++ [*] dbpedia [*] (@statusup|@statusdown)
+@ dbpedia status
+
++ [*] dbpedia [not] running [*]
+@ dbpedia status
+
++ problem with dbpedia [*]
+@ dbpedia status
+
++ status of [*] dbpedia [*]
+@ dbpedia status
+
+// DBpedia SPARQL is online or available
++ [dbpedia] sparql status
+- {"type": "status_check", "name": "dbpedia-sparql"}
+
++ [*] sparql [is] (@statusup|@statusdown) [*]
+@ dbpedia sparql status
+
++ [*] sparql [*] (@statusup|@statusdown)
+@ dbpedia sparql status
+
++ [*] sparql [not] running [*]
+@ dbpedia sparql status
+
++ problem with [dbpedia] sparql [*]
+@ dbpedia sparql status
+
++ status of [*] dbpedia [*]
+@ dbpedia sparql status
+
+// DBpedia Lookup
++ [dbpedia] lookup status
+- {"type": "status_check", "name": "dbpedia-lookup"}
+
++ [*] lookup [is] (@statusup|@statusdown) [*]
+@ dbpedia lookup status
+
++ [*] lookup [*] (@statusup|@statusdown)
+@ dbpedia lookup status
+
++ [*] lookup [not] running [*]
+@ dbpedia lookup status
+
++ problem with [dbpedia] lookup [*]
+@ dbpedia lookup status
+
++ status of [*] lookup [*]
+@ dbpedia lookup status
+
+// DBpedia Mappings
++ [dbpedia] mappings [wiki] status
+- {"type": "status_check", "name": "dbpedia-mappings"}
+
++ [*] mappings [wiki] [is] (@statusup|@statusdown) [*]
+@ dbpedia mappings status
+
++ [*] mappings [*] (@statusup|@statusdown)
+@ dbpedia mappings status
+
++ [*] mappings [wiki] [not] running [*]
+@ dbpedia mappings status
+
++ problem with [dbpedia] mappings [*]
+@ dbpedia mappings status
+
++ status of [*] mappings [*]
+@ dbpedia mappings status
