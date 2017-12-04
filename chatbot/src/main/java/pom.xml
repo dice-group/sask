@@ -50,17 +50,6 @@
       <artifactId>spring-boot-starter-web</artifactId>
       <version>${spring.boot.version}</version>
     </dependency>
-    <dependency>
-      <groupId>com.rivescript</groupId>
-      <artifactId>rivescript-core</artifactId>
-      <version>0.10.0</version>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/org.json/json -->
-    <dependency>
-      <groupId>org.json</groupId>
-      <artifactId>json</artifactId>
-      <version>20171018</version>
-    </dependency>
   </dependencies>
 
   <build>
