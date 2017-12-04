@@ -2,17 +2,14 @@
  * 
  */
 package chatbot.core.classifier;
-
+import chatbot.core.handlers.basictext.*;
 import chatbot.core.handlers.qa.*;
 import chatbot.core.incomingrequest.IncomingRequest;
-
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-
 import chatbot.core.handlers.*;
 import chatbot.core.handlers.eliza.ElizaHandler;
-
 /**
  * @author Prashanth class to Classify the User Input as QA or KS or Normal
  *         emotion.
@@ -37,6 +34,12 @@ public class Classifier {
 		                      .toLowerCase();
 		// check rivescript for existing questions and return the response, Add
 		// code here after Juzer is ready with his files.
+		BasicTextHandler basicText = new BasicTextHandler();
+		boolean flag = basicText.isQueryFound(query);
+		if (flag) {
+			System.out.println("basicText execution");
+			return basicText;
+		}
 		if (queryIsPersonal(query)) {
 			return new ElizaHandler();
 		} else if (queryContainsQuestion(query) || query.contains("?") || query.toLowerCase()
