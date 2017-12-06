@@ -20,9 +20,4 @@ public class WebclientApplication
 	public RestTemplate restTemplate() {
 		return new RestTemplate();
 	}
-
-	@Bean
-	public HelloRepository helloRepository(){
-		return new RemoteHelloRepository();
-	}
 }
