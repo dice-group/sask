@@ -11,7 +11,7 @@ import org.apache.log4j.Logger;
  */
 public class FredDTO implements Serializable {
 
-	public final static Logger LOG = Logger.getLogger(FredDTO.class);
+	public final static Logger logger = Logger.getLogger(FredDTO.class);
 	private static final long serialVersionUID = 1L;
 
 	private String input = "";
@@ -26,6 +26,8 @@ public class FredDTO implements Serializable {
 	private boolean subgraph = false;
 	private String format = "text/rdf+n3";
 
+	public FredDTO() {}
+	
 	public String getInput() {
 		return input;
 	}
@@ -72,6 +74,13 @@ public class FredDTO implements Serializable {
 
 	public String getFormat() {
 		return format;
+	}
+
+	@Override
+	public String toString() {
+		return "FredDTO [input=" + input + ", prefix=" + prefix + ", namespace=" + namespace + ", wsd=" + wsd + ", wfd="
+				+ wfd + ", wfd_profile=" + wfd_profile + ", tense=" + tense + ", roles=" + roles + ", textannotation="
+				+ textannotation + ", subgraph=" + subgraph + ", format=" + format + "]";
 	}
 
 }
