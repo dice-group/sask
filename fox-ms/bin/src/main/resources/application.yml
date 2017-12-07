@@ -2,7 +2,7 @@
 # Service registers under this name
 spring:
   application:
-    name: fox-ms
+    name: discovery-microservice
 
 # Discovery Server Access
 eureka:
