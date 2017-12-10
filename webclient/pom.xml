@@ -14,31 +14,18 @@
 		<groupId>org.dice-research</groupId>
 		<artifactId>sask</artifactId>
 		<version>0.0.7</version>
-		<relativePath>..</relativePath>
+		
 	</parent>
 
 	<dependencies>
-		<!-- ~~~~~~~ spring eureka server ~~~~~~~ -->
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-eureka</artifactId>
-		</dependency>
-		<!-- ~~~~~~~ spring cloud-ribbon ~~~~~~~ -->
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-ribbon</artifactId>
-		</dependency>
-		<!-- ~~~~~~~ spring boot-actuator ~~~~~~~ -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-actuator</artifactId>
-		</dependency>
+		
 		<!-- ~~~~~~~ JSP usage ~~~~~~~ -->
 		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>
 			<artifactId>tomcat-embed-jasper</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>

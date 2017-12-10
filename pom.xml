@@ -1,19 +1,16 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-
   <groupId>org.dice-research</groupId>
   <artifactId>sask</artifactId>
   <version>0.0.7</version>
   <packaging>pom</packaging>
-
-  <parent>
+<parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
     <version>1.5.8.RELEASE</version>
   </parent>
-
-  <modules>
+ <modules>
     <module>eureka-server</module>
     <module>discoveryclient</module>
     <module>webclient</module>
@@ -44,19 +41,45 @@
       <artifactId>spring-cloud-starter</artifactId>
       <version>${spring.cloud.version}</version>
     </dependency>
+    <!-- ~~~~~~~ spring eureka server ~~~~~~~ -->
+      <dependency>
+         <groupId>org.springframework.cloud</groupId>
+         <artifactId>spring-cloud-starter-eureka-server</artifactId>
+      </dependency>
     <!-- ~~~~~~~ spring boot ~~~~~~~ -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
       <version>${spring.boot.version}</version>
     </dependency>
+     <dependency>
+         <groupId>junit</groupId>
+         <artifactId>junit</artifactId>
+         <version>3.8.1</version>
+         <scope>test</scope>
+      </dependency>
+      <!-- ~~~~~~~ spring eureka server ~~~~~~~ -->
+      <dependency>
+         <groupId>org.springframework.cloud</groupId>
+         <artifactId>spring-cloud-starter-eureka</artifactId>
+      </dependency>
+      
+      <!-- ~~~~~~~ spring cloud-ribbon ~~~~~~~ -->
+      <dependency>
+         <groupId>org.springframework.cloud</groupId>
+         <artifactId>spring-cloud-starter-ribbon</artifactId>
+      </dependency>
+      <!-- ~~~~~~~ spring boot-actuator ~~~~~~~ -->
+      <dependency>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-actuator</artifactId>
+      </dependency>
   </dependencies>
 
   <build>
-    <pluginManagement>
-      <plugins>
-        <!--This plugin's configuration is used to store Eclipse m2e settings 
-          only. It has no influence on the Maven build itself. -->
+    <!--pluginManagement>
+      < plugins>
+      
         <plugin>
           <groupId>org.eclipse.m2e</groupId>
           <artifactId>lifecycle-mapping</artifactId>
@@ -135,13 +158,15 @@
           </configuration>
         </plugin>
       </plugins>
-    </pluginManagement>
+    </pluginManagement-->
     <plugins>
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
+        <!-- ~~~~~~~ support java 9 ~~~~~~~ -->
+        
       </plugin>
-      <plugin>
+      <!--plugin>
         <groupId>net.revelc.code</groupId>
         <artifactId>formatter-maven-plugin</artifactId>
         <configuration>
@@ -161,7 +186,7 @@
             </goals>
           </execution>
         </executions>
-      </plugin>
+      </plugin-->
     </plugins>
   </build>
 
