@@ -39,25 +39,26 @@ $(function() {
 				}
 				var obj = JSON.parse(data);
 				console.log(obj);
+				for(var i=0; i<obj.length; i++){
 				var displayText="<div class='card'>";
-				var elementName="Open in DBPedia";
-				if (typeof obj[0].thumbnail == "undefined")
+				var elementName="Open Link in DBpedia";
+				if (typeof obj[i].thumbnail == "undefined")
 					console.log("Thumbnail is not present");
 				else
-					displayText += "<img src=" +  obj[0].thumbnail +" height='200' width='200'/><br>";
-				if (typeof obj[0].comment == "undefined")
+					displayText += "<img src=" +  obj[i].thumbnail +" height='200' width='200'/><br>";
+				if (typeof obj[i].comment == "undefined")
 					console.log("Comment is not present");
 				else
-					displayText += obj[0].comment +"<br>";
-				if (typeof obj[0].URI == "undefined")
+					displayText += obj[i].comment +"<br>";
+				if (typeof obj[i].URI == "undefined")
 					console.log("URI is not present");
 				else{
-					var link=obj[0].URI;
+					var link=obj[i].URI;
 					console.log(link);
 					displayText +=elementName.link(link) + "-->For reference,URL=" + link;
 				}
 				displayText +="</div>"
-		
+				}
 				$("#container").html(prevMsg + displayText);
 				$("#container").scrollTop($("#container").prop("scrollHeight"));
 			},
@@ -68,7 +69,7 @@ $(function() {
 			done : function(e) {
 				//
 				console.log("DONE");
-				window.alert("DONE");
+				//window.alert("DONE");
 			}
 		});
 		
