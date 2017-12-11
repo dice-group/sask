@@ -1,7 +1,6 @@
 package org.dice_research.sask.fred_ms;
 
 import java.io.Serializable;
-
 import org.apache.log4j.Logger;
 
 /**
@@ -26,8 +25,9 @@ public class FredDTO implements Serializable {
 	private boolean subgraph = false;
 	private String format = "text/rdf+n3";
 
-	public FredDTO() {}
-	
+	public FredDTO() {
+	}
+
 	public String getInput() {
 		return input;
 	}
