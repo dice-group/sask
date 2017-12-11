@@ -1,0 +1,8 @@
+#ex-workspace {
+	height: 500px;
+	-webkit-box-sizing: border-box;
+	border: rgb(221, 221, 221);
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 4px;
+}
