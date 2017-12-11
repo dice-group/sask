@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Implementation-Title: discovery-client
+Implementation-Version: 0.0.1
+Built-By: Andre
+Implementation-Vendor-Id: org.dice-research.sask
+Build-Jdk: 1.8.0_151
+Implementation-URL: http://projects.spring.io/spring-boot/sask/discove
+ ryclient/
+Created-By: Maven Integration for Eclipse
+Implementation-Vendor: Pivotal Software, Inc.
+
