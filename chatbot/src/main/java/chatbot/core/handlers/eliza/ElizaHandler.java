@@ -26,7 +26,7 @@ public class ElizaHandler extends Handler {
 			String responseJSON = "[{ \"comment\":\"" + response + "\"}]";
 			return responseJSON;
 		}
-		catch (JsonProcessingException e) {
+		/*catch (JsonProcessingException e) {
 			// Check if we can create a logger.
 			log.error("search, JsonProcessingException in handling QA Queries,Stack Trace=" + e.getMessage());
 			return "error";
@@ -34,7 +34,8 @@ public class ElizaHandler extends Handler {
 			// Check if we can create a logger.
 			log.error("search, IOException in handling QA Queries,Stack Trace=" + e.getMessage());
 			return "error";
-		} catch (Exception e) {
+		} */
+		catch (Exception e) {
 			// Check if we can create a logger.
 			log.error("search, Exception in handling QA Queries,Stack Trace=" + e.getMessage());
 			return "error";

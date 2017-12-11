@@ -16,19 +16,4 @@
 		<version>0.0.7</version>
 		
 	</parent>
-
-	<dependencies>
-		
-		<!-- ~~~~~~~ JSP usage ~~~~~~~ -->
-		<dependency>
-			<groupId>org.apache.tomcat.embed</groupId>
-			<artifactId>tomcat-embed-jasper</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
-		</dependency>
-	</dependencies>
 </project>
