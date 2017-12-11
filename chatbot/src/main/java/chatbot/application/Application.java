@@ -19,11 +19,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/chat")
 public class Application {
+
 	@RequestMapping(method = RequestMethod.POST, produces = "application/json")
 	public @ResponseBody String route(@RequestBody final IncomingRequest request) throws Exception {
 		Classifier obj = new Classifier();
 		Handler newobj = obj.classify(request);
 		String answer = newobj.search(request);
+		if ("error".equals(answer)) {
+			String responseJSON = "[{ \"comment\":\"Internal Server Error.Contact your administrator.\"}]";
+			return responseJSON;
+		}
 		return answer;
 	}
 }

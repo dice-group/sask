@@ -3,6 +3,7 @@
  */
 package chatbot.core.handlers.qa;
 
+import org.apache.log4j.Logger;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -16,10 +17,8 @@ import chatbot.core.handlers.*;
  */
 public class QAHandler extends Handler {
 	// Handle Hawk Service.
+	private static Logger log = Logger.getLogger(QAHandler.class.getName());
 	private static final String URL = "http://localhost:8181/simple-search?query="; // URL
-	                                                                                // of
-	                                                                                // Hawk
-	                                                                                // Service.
 
 	public QAHandler() {
 
@@ -56,10 +55,19 @@ public class QAHandler extends Handler {
 			String response = sendHTTPRequest(sendText);
 			String output = generateResponse(response);
 			return output;
+		} catch (JsonProcessingException e) {
+			// Check if we can create a logger.
+			log.error("search, JsonProcessingException in handling QA Queries,Stack Trace=" + e.getMessage());
+			return "error";
+		} catch (IOException e) {
+			// Check if we can create a logger.
+			log.error("search, IOException in handling QA Queries,Stack Trace=" + e.getMessage());
+			return "error";
 		} catch (Exception e) {
 			// Check if we can create a logger.
-			System.out.println("Exception occured in qa.java");
-			throw new InternalError();
+			log.error("search, Exception in handling QA Queries,Stack Trace=" + e.getMessage());
+			return "error";
+
 		}
 	}
 }

@@ -2,20 +2,23 @@
  * 
  */
 package chatbot.core.classifier;
-import chatbot.core.handlers.basictext.*;
+
+import chatbot.core.handlers.rivescript.*;
 import chatbot.core.handlers.qa.*;
 import chatbot.core.incomingrequest.IncomingRequest;
+import chatbot.core.handlers.*;
+import chatbot.core.handlers.eliza.ElizaHandler;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-import chatbot.core.handlers.*;
-import chatbot.core.handlers.eliza.ElizaHandler;
+import org.apache.log4j.Logger;
+
 /**
  * @author Prashanth class to Classify the User Input as QA or KS or Normal
  *         emotion.
  */
 public class Classifier {
-
+	private static Logger log = Logger.getLogger(Classifier.class.getName());
 	public static final String[] questionTerms = { "what", "why", "how", "when", "where", "who", "which" };
 	public static final String[] personalTerms = { "i", "me", "my", "your ", "us", "you", "am", "we", "mine", "our", "he", "she", "him", "her", "they", "them" };
 
@@ -34,10 +37,10 @@ public class Classifier {
 		                      .toLowerCase();
 		// check rivescript for existing questions and return the response, Add
 		// code here after Juzer is ready with his files.
-		BasicTextHandler basicText = new BasicTextHandler();
+		RiveScriptQueryHandler basicText = new RiveScriptQueryHandler();
 		boolean flag = basicText.isQueryFound(query);
 		if (flag) {
-			System.out.println("basicText execution");
+			log.info("basicText execution");
 			return basicText;
 		}
 		if (queryIsPersonal(query)) {
@@ -46,12 +49,12 @@ public class Classifier {
 		                                                                       .startsWith("is ") || query.toLowerCase()
 		                                                                                                  .startsWith("should")) {
 			// call HAWK
-			System.out.println("HAWK!");
+			log.info("HAWK!");
 			return new QAHandler();
 
 		} else {
 			// call to SESSA
-			System.out.println("SESSA!");
+			log.info("SESSA!");
 		}
 		return null;
 	}
