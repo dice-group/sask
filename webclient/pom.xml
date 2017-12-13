@@ -14,6 +14,24 @@
 		<groupId>org.dice-research</groupId>
 		<artifactId>sask</artifactId>
 		<version>0.0.7</version>
-		
+		<relativePath>..</relativePath>
 	</parent>
+
+	<dependencies>
+		<!-- ~~~~~~~ spring eureka server ~~~~~~~ -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-eureka</artifactId>
+		</dependency>
+		<!-- ~~~~~~~ spring cloud-ribbon ~~~~~~~ -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-ribbon</artifactId>
+		</dependency>
+		<!-- ~~~~~~~ spring boot-actuator ~~~~~~~ -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+	</dependencies>
 </project>

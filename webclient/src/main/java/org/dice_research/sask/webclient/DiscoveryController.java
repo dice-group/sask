@@ -1,50 +1,46 @@
 package org.dice_research.sask.webclient;
 
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 public class DiscoveryController {
-
 	protected Logger logger = Logger.getLogger(DiscoveryController.class.getName());
-
-	@Autowired
-	protected HelloRepository helloRepository;
 
 	@RequestMapping("/")
 	public String root() {
-		return "index";
+		this.logger.info("discovery-microservice root() invoked");
+		return "some root stuff here.";
 	}
-
-	@RequestMapping("/index")
-	public String index() {
-		return "index";
+	
+	@RequestMapping("/hello")
+	public String helloString() {
+		this.logger.info("discovery-microservice hello() invoked");
+		return "Hello projectgroup!";
 	}
-
-	@RequestMapping("/datatest")
-	public String accountDetails(Model model) {
-		try {
-			model.addAttribute("rootstuff", this.helloRepository.getRootstuff());
-		} catch (Exception ex) {
-			model.addAttribute("rootstuff", "exception " + ex.getMessage());
-		}
-
-		try {
-			model.addAttribute("hello", this.helloRepository.getHello());
-		} catch (Exception ex) {
-			model.addAttribute("hello", "exception " + ex.getMessage());
-		}
-
-		try {
-			model.addAttribute("hellojson", this.helloRepository.getHelloJSON());
-		} catch (Exception ex) {
-			model.addAttribute("hellojson", "exception " + ex.getMessage());
-		}
-
-		return "datatest";
-
+	
+	@RequestMapping("/hellojson")
+	public Hello helloJSON() {
+		this.logger.info("discovery-microservice hellojson() invoked");
+		Hello h = new Hello();
+		h.setMessage("Hello Projectgroup (as json)!");
+		return h;
+	}
+	
+	@RequestMapping("/info")
+	public String info() {
+		this.logger.info("discovery-microservice info() invoked");
+		StringBuilder builder = new StringBuilder();
+		
+		builder.append("<!DOCTYPE html>");
+		builder.append("<html><head>");
+		builder.append("<meta charset=\"utf-8\">");
+		builder.append("<title>Microservice running</title>");
+		builder.append("</head><body>");
+		builder.append("<h1>Jep, this REST controller is running.</h1>");
+		builder.append("</body></html>");
+		
+		return builder.toString();
 	}
 }
