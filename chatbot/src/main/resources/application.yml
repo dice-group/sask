@@ -14,4 +14,7 @@ eureka:
 error:
   whitelabel:
     enabled:  false
-      
+
+# Changing default port 8080 to 9191
+server:
+  port: 9191
