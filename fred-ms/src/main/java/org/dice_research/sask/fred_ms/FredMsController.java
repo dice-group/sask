@@ -39,7 +39,7 @@ public class FredMsController {
 	public String extractSimple(String input) {
 		FredDTO fred = new FredDTO();
 		fred.setInput(input);
-		return extract(fred);
+		return "AA";
 	}
 
 	@GetMapping(value = "/extract", produces = "text/rdf+n3", consumes = MediaType.APPLICATION_JSON_VALUE)
