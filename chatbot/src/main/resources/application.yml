@@ -2,7 +2,7 @@
 # Control the InternalResourceViewResolver:
 spring:
   application:
-    name: webclient
+    name: chatbot
 
 # Discovery Server Access
 eureka:
@@ -13,15 +13,8 @@ eureka:
 # Disable Spring Boot's "Whitelabel" default error page, so we can use our own
 error:
   whitelabel:
-    enabled: false
-    
-#server port      
-server:
-  port: 9090
+    enabled:  false
 
-#zuul route
-zuul:
-  routes:
-    chatbot:
-      path: /chatbot/**
-      serviceId: chatbot
+# Changing default port 8080 to 9191
+server:
+  port: 9191

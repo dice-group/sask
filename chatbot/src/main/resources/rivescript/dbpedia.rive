@@ -1,0 +1,43 @@
+// General DBpedia related queries
+
+// Questions about regarding what is DBpedia
++ dbpedia
+- {"type": "template", "name": "dbpedia-about"}
+
++ [*] (is|about) dbpedia
+@ dbpedia
+
++ [*] (started|starter) [*] dbpedia
+@ dbpedia
+
++ [*] guide [*] dbpedia
+@ dbpedia
+
++ dbpedia tutorial@s
+@ dbpedia
+
++ [*] tutorial@s [*] dbpedia
+@ dbpedia
+
+// Contribute to DBpedia
++ dbpedia contribute
+- {"type": "template", "name": "dbpedia-contribute"}
+
++ [how] [*] (contribute|contributing|involved) [*] dbpedia [*]
+@ dbpedia contribute
+
++ how [*] (can|do) i (help|contribute) [*] [project]
+@ dbpedia contribute
+
++ how [*] to (help|contribute) [*] [project]
+@ dbpedia contribute
+
++ [*] dbpedia association
+- {"type": "template", "name": "dbpedia-association"}
+
++ [*] (who|what) is behind dbpedia
+@ dbpedia association
+
+// Fallback
++ * dbpedia *
+- {"type": "template", "name": "dbpedia-fallback|dbpedia"}

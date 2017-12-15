@@ -10,7 +10,9 @@
 <script src="/jquery-3.2.1/jquery-3.2.1.min.js" type="text/javascript"></script>
 <!-- ~~~~~~  jquery ui ~~~~~~ -->
 <script src="/jquery-ui-1.12.1/jquery-ui.js"></script>
+<script type="text/javascript" src="/js/chatbot/chatbot.js"></script>
 <link rel="stylesheet" href="/jquery-ui-1.12.1/jquery-ui.css">
+<link rel="stylesheet" href="/styles/chatbot/chatbot.css">
 <!-- ~~~~~~  file input ~~~~~~ -->
 <link
 	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.5/css/fileinput.min.css"
@@ -87,7 +89,11 @@
 					</form>
 				</div>
 				<div id="tabSearch">
-					<!-- search -->
+						<div id="container"></div>
+						<div id="controls">
+						<textarea id="textbox" placeholder="Enter your query here..."></textarea>
+						<button id="send">SEND</button>
+					</div>
 				</div>
 			</div>
 		</div>

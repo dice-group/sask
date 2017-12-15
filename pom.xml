@@ -18,6 +18,7 @@
 		<module>discoveryclient</module>
 		<module>webclient</module>
 		<module>fred-ms</module>
+		<module>chatbot</module>
 	</modules>
 
 	<properties>
