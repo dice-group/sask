@@ -5,11 +5,10 @@ function ex_sendToFred(text) {
 
 	$.ajax({
 		type : "POST",
-		dataType : "json",
 		data : parameters,
-		url : "./extractSimple",
+		url : "./fred-ms/extractSimple",
 		success : function(data) {
-			$("#ex-result").val(data.result);
+			$("#ex-result").val(data);
 		},
 		error : function(e, textStatus, errorThrown) {
 			alert('Error in processing: ' + textStatus);

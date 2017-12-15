@@ -1,0 +1,15 @@
+! version = 2.0
++ help
+- {"type": "template", "name": "help"}
+
++ start over
+@ help
+
++ [*] what (can you|you can) do
+@ help
+
++ [*] how (can you|you can) help [me]
+@ help
+
++ [*] good (morning|evening|night)
+- good <star> to you too

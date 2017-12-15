@@ -13,13 +13,13 @@ public class DiscoveryController {
 		this.logger.info("discovery-microservice root() invoked");
 		return "some root stuff here.";
 	}
-	
+
 	@RequestMapping("/hello")
 	public String helloString() {
 		this.logger.info("discovery-microservice hello() invoked");
 		return "Hello projectgroup!";
 	}
-	
+
 	@RequestMapping("/hellojson")
 	public Hello helloJSON() {
 		this.logger.info("discovery-microservice hellojson() invoked");
@@ -27,12 +27,12 @@ public class DiscoveryController {
 		h.setMessage("Hello Projectgroup (as json)!");
 		return h;
 	}
-	
+
 	@RequestMapping("/info")
 	public String info() {
 		this.logger.info("discovery-microservice info() invoked");
 		StringBuilder builder = new StringBuilder();
-		
+
 		builder.append("<!DOCTYPE html>");
 		builder.append("<html><head>");
 		builder.append("<meta charset=\"utf-8\">");
@@ -40,7 +40,7 @@ public class DiscoveryController {
 		builder.append("</head><body>");
 		builder.append("<h1>Jep, this REST controller is running.</h1>");
 		builder.append("</body></html>");
-		
+
 		return builder.toString();
 	}
 }
