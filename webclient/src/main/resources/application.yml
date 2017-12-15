@@ -25,3 +25,6 @@ zuul:
     chatbot:
       path: /chatbot/**
       serviceId: chatbot
+    fred:
+      path: /fred-ms/**
+      serviceId: FRED-MS
