@@ -9,7 +9,7 @@ function ex_sendToFred(text) {
 		data : parameters,
 		url : "./extractSimple",
 		success : function(data) {
-			alert("response:" + data.result);
+			$("#ex-result").val(data.result);
 		},
 		error : function(e, textStatus, errorThrown) {
 			alert('Error in processing: ' + textStatus);
