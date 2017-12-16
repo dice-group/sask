@@ -1,4 +1,4 @@
-package org.dice_research.sask.fox_ms;
+package org.dice_research.sask.fred_ms.FOX;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
