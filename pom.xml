@@ -17,6 +17,7 @@
 		<module>eureka-server</module>
 		<module>discoveryclient</module>
 		<module>webclient</module>
+		<module>fox-ms</module>
 		<module>fred-ms</module>
 		<module>chatbot</module>
 	</modules>
