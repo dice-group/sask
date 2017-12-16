@@ -8,14 +8,13 @@
 	<packaging>jar</packaging>
 
 	<name>eureka-server</name>
-
-	<parent>
+        <parent>
 		<groupId>org.dice-research</groupId>
 		<artifactId>sask</artifactId>
 		<version>0.0.7</version>
-		<relativePath>..</relativePath>
+		<!--relativePath>..</relativePath-->
 	</parent>
-
+	
 	<dependencies>
 		<!-- ~~~~~~~ spring eureka server ~~~~~~~ -->
 		<dependency>

@@ -1,0 +1,24 @@
+// Contains Chats related to personal information about the bot
+
++ about
+- I am the <bot name>
+
++ [*] who are you
+@ about
+
++ [*] (what is|tell me) your name [*]
+@ about
+
++ [*] what are you [*]
+@ about
+
++ [*] who (made|created) you [*]
+- My makers are from the Open Source DBpedia Organization
+
++ [*] how are you [*]
+- I am fine thanks for asking
+- I am good
+- Never been better
+
++ *
+-NOT FOUND
