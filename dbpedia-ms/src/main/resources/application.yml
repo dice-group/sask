@@ -2,7 +2,7 @@
 # Service registers under this name
 spring:
   application:
-    name: discovery-microservice
+    name: spotlight-ms
 
 # Discovery Server Access
 eureka:
@@ -12,7 +12,7 @@ eureka:
 
 # HTTP Server (Tomcat) Port
 server: 
-  port: 2222
+  port: 2224
 
 # Disable Spring Boot's "Whitelabel" default error page, so we can use our own
 error:
