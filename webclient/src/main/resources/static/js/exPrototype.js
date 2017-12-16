@@ -1,12 +1,22 @@
 function ex_sendToFred(text) {
+	extractor = $('input[name=ex-extractor]:checked').val();
+	
+	if(extractor == "fred") {
+		uri = "./fred-ms/extractSimple";
+	} else {
+		uri = "./fox-ms/extractSimple";
+	}
+	
+	// parameter
 	parameters = {
 		input : text
 	};
 
+	// request
 	$.ajax({
 		type : "POST",
 		data : parameters,
-		url : "./fred-ms/extractSimple",
+		url : uri,
 		success : function(data) {
 			$("#ex-result").val(data);
 		},

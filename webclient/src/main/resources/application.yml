@@ -28,3 +28,6 @@ zuul:
     fred:
       path: /fred-ms/**
       serviceId: FRED-MS
+    fox:
+      path: /fox-ms/**
+      serviceId: FOX-MS
