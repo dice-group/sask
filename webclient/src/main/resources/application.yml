@@ -3,10 +3,6 @@
 spring:
   application:
     name: webclient
-  mvc:
-    view:
-      prefix: /WEB-INF/views/
-      suffix: .jsp
 
 # Discovery Server Access
 eureka:
@@ -17,5 +13,18 @@ eureka:
 # Disable Spring Boot's "Whitelabel" default error page, so we can use our own
 error:
   whitelabel:
-    enabled:  false
-      
+    enabled: false
+    
+#server port      
+server:
+  port: 9090
+
+#zuul route
+zuul:
+  routes:
+    chatbot:
+      path: /chatbot/**
+      serviceId: chatbot
+    fred:
+      path: /fred-ms/**
+      serviceId: FRED-MS

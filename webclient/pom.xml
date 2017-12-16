@@ -23,6 +23,11 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-eureka</artifactId>
 		</dependency>
+		<!-- ~~~~~~~ spring cloud zuul ~~~~~~~ -->
+		<dependency>
+          		<groupId>org.springframework.cloud</groupId>
+          		<artifactId>spring-cloud-starter-zuul</artifactId>
+      		</dependency>
 		<!-- ~~~~~~~ spring cloud-ribbon ~~~~~~~ -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
@@ -32,16 +37,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
-		</dependency>
-		<!-- ~~~~~~~ JSP usage ~~~~~~~ -->
-		<dependency>
-			<groupId>org.apache.tomcat.embed</groupId>
-			<artifactId>tomcat-embed-jasper</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
 		</dependency>
 	</dependencies>
 </project>

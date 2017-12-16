@@ -18,12 +18,17 @@
 		<module>discoveryclient</module>
 		<module>webclient</module>
 		<module>fox-ms</module>
+		<module>fred-ms</module>
+		<module>chatbot</module>
 	</modules>
-	
+
 	<properties>
+		<!-- ~~~~~~~ general ~~~~~~~ -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+
+		<!-- ~~~~~~~ spring ~~~~~~~ -->
 		<spring.test.version>1.5.8.RELEASE</spring.test.version>
 		<spring.cloud.version>1.3.0.RELEASE</spring.cloud.version>
 		<spring.boot.version>1.5.8.RELEASE</spring.boot.version>
@@ -53,9 +58,15 @@
 
 	<build>
 		<plugins>
+			<!-- ~~~~~~~ spring boot ~~~~~~~ -->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<!-- ~~~~~~~ support java 9 ~~~~~~~ -->
+					<!-- https://blog.frankel.ch/migrating-to-java-9/1/ -->
+					<jvmArguments>--add-modules java.xml.bind</jvmArguments>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
