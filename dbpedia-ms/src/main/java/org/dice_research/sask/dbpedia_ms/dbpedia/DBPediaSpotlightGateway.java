@@ -39,7 +39,7 @@ public class DBPediaSpotlightGateway {
 
 		try {
 			HttpHeaders headers = new HttpHeaders();
-			headers.add("Accept", "text/html");
+			headers.add("Accept", "application/json");
 			HttpEntity<String> entity = new HttpEntity<String>("", headers);
 			ResponseEntity<String> result = restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
 			return result.getBody();
