@@ -71,26 +71,35 @@
 				<div id="tabExtraction">
 					<!-- extraction -->
 					<h1>Extraction prototype</h1>
-						<div class="form-group">
-							<label for="email">File</label> <input id="ex-fileinput"
-								name="input-b1" type="file" class="file form-control">
-						</div>
-						<div class="radio">
-							<label> <input type="radio" name="optradio" checked>RDF
-								Fred
-							</label>
-						</div>
-						<button onclick="ex_submitfile()" class="btn btn-default">Start</button>
-						<hr/>
-						<div class="form-group">
-							<label for="email">Result</label>
-							<textarea class="form-control" id="ex-result"></textarea>
-						</div>
-						
+					<div class="form-group">
+						<label for="email">File</label> <input id="ex-fileinput"
+							type="file" class="file form-control">
+					</div>
+					<div class="radio">
+						<label> <input type="radio" name="ex-extractor"
+							value="spotlight" checked>Spotlight
+						</label>
+					</div>
+					<div class="radio">
+						<label> <input type="radio" name="ex-extractor"
+							value="fred">RDF Fred
+						</label>
+					</div>
+					<div class="radio">
+						<label> <input type="radio" name="ex-extractor"
+							value="fox">FOX
+						</label>
+					</div>
+					<button onclick="ex_submitfile()" class="btn btn-default">Start</button>
+					<hr />
+					<div class="form-group">
+						<label>Result</label>
+						<textarea class="form-control" id="ex-result"></textarea>
+					</div>
 				</div>
 				<div id="tabSearch">
-						<div id="container"></div>
-						<div id="controls">
+					<div id="container"></div>
+					<div id="controls">
 						<textarea id="textbox" placeholder="Enter your query here..."></textarea>
 						<button id="send">SEND</button>
 					</div>
