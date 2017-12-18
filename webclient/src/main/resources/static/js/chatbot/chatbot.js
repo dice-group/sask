@@ -39,8 +39,9 @@ $(function() {
 				}
 				var obj = JSON.parse(data);
 				console.log(obj);
+				var displayText = "";
 				for(var i=0; i<obj.length; i++){
-				var displayText="<div class='card'>";
+				displayText+="<div class='card'>";
 				var elementName="Open Link in DBpedia";
 				if (typeof obj[i].thumbnail == "undefined")
 					console.log("Thumbnail is not present");
