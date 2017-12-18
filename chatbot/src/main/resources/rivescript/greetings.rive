@@ -1,20 +1,16 @@
 ! version = 2.0
-+ (hello|hi|hey) bot
-- Hello human
 
-+ how are you
-- I'm great, how are you?
-- I'm good, you?
-- Good :) you?
-- Great! You?
-- I'm fine, thanks for asking!
+// Greeting
++ (hi|hey|hello|yo) [bot]
+- Hi to you too!
+- Hello there
+- Hi, how may I help you?
+- Hello, how may I help you?
 
-+ (goodbye|good bye|bye)[*]
-- bye
+// Goodbye
++ (goodbye|good bye|bye) [*]
+- Bye
 
-+ (thanks|thankyou|thank you)[*]
-- you are welcome.
-
-+ *
-- Sorry, right now I don't have the answer for this.\n
-^ May be in future I will be able to answer you.
+// Thanks
++ (thanks|thank you|thankyou) [*]
+- You are welcome
