@@ -25,6 +25,7 @@ zuul:
     chatbot:
       path: /chatbot/**
       serviceId: chatbot
+      #strip-prefix: false
     fred:
       path: /fred-ms/**
       serviceId: FRED-MS
@@ -34,3 +35,13 @@ zuul:
     spotlight:
       path: /spotlight-ms/**
       serviceId: SPOTLIGHT-MS
+
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: false
+endpoints:
+  routes:
+    sensitive: false
