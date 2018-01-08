@@ -5,6 +5,7 @@ package chatbot.core.classifier;
 
 import chatbot.core.handlers.rivescript.*;
 import chatbot.core.handlers.qa.*;
+import chatbot.core.handlers.sessa.*;
 import chatbot.core.incomingrequest.IncomingRequest;
 import chatbot.core.handlers.*;
 import chatbot.core.handlers.eliza.ElizaHandler;
@@ -55,8 +56,10 @@ public class Classifier {
 			} else {
 				// call to SESSA
 				log.info("SESSA!");
+				return new SessaHandler();
+
 			}
-			return null;
+			//return null;
 		} catch (Exception e) {
 			log.info(e.getMessage());
 		}
