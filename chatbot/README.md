@@ -14,7 +14,10 @@ Else then run the eureka-server module using mvn clean spring-boot:run
 
 mvn clean package
 mvn clean spring-boot:run
-
+!!!!!!!Intermediate Code update:
+This is intermediate checkin which will break all functionality. DO NOT USE THIS CODE BASE UNTIL ENTIRE CODE HAS BEEN CHECKED IN!!!!!!!
+PURPOSE: CODE TO PROVIDE GOOD READABILITY BY USING DEPENDANCY INJECTION OF SPRING TO MANIPULATE OUTPUT. WHEN OTHERS HAVE TO IMPLEMENT THIS CLASS CAN BE USED FOR EASY IMPLEMENTATION INSTEAD OF UI GUESS WORK!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Release Notes:[Last update: 14.12]
 1. Added Merged UI with Extraction team's UI framework. Chatbot is temporarily accessible via the usual URL and also the Common URL by running the web client package present. Future changes would not be made under chatbot folder.
 2. Changed port ID from default port number.
