@@ -7,7 +7,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
-import chatbot.core.incomingrequest.IncomingRequest;
+
+import chatbot.io.incomingrequest.IncomingRequest;
+import chatbot.io.response.ResponseList;
 import chatbot.core.handlers.*;
 import java.io.*;
 import java.util.*;
@@ -39,27 +41,34 @@ public class SessaHandler extends Handler {
                 response += "]";
 		return response;
 	}
-	public String search(IncomingRequest request) throws JsonProcessingException, IOException {
+	public ResponseList search(IncomingRequest request) throws JsonProcessingException, IOException {
 		try {
+			ResponseList responselist = new ResponseList();
 			String query = request.getRequestContent()
 			                      .get(0)
 			                      .getText();
 			String sendText = URL + URLEncoder.encode(query, "UTF-8");
 			String response = sendHTTPRequest(sendText);
 			String output = generateResponse(response);
-			return output;
+			return responselist;
 		} catch (JsonProcessingException e) {
 			// Check if we can create a logger.
 			log.error("search, JsonProcessingException in handling QA Queries,Stack Trace=" + e.getMessage());
-			return "error";
+			ResponseList responselist = new ResponseList();
+			responselist.setError();
+			return responselist;
 		} catch (IOException e) {
 			// Check if we can create a logger.
 			log.error("search, IOException in handling QA Queries,Stack Trace=" + e.getMessage());
-			return "error";
+			ResponseList responselist = new ResponseList();
+			responselist.setError();
+			return responselist;
 		} catch (Exception e) {
 			// Check if we can create a logger.
 			log.error("search, Exception in handling QA Queries,Stack Trace=" + e.getMessage());
-			return "error";
+			ResponseList responselist = new ResponseList();
+			responselist.setError();
+			return responselist;
 
 		}
 	}
