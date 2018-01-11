@@ -39,6 +39,7 @@ public class SessaHandler extends Handler {
 		{
 			EntryInformation entry = new EntryInformation();
 			entry.setUri(parts[i]);
+			entry.setDisplayText("Open with DBpedia"); // DBpedia links are returned right now so hardcode.
 			entry.setButtonType(Type.URL);
 			obj.addEntry(entry);
 			//response += "{\"URI\":" + parts[i] + "},";
