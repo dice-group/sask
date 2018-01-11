@@ -16,9 +16,11 @@ public class Response {
 	 private List<EntryInformation> entryList = new ArrayList<>();
 	 private String title;
 	 private String content;
+	 private String image;
 	 public Response() {
 		 title="";
 		 content="";
+		 image="";
 	 }
 	 public void addEntry(EntryInformation entry) {
 	   entryList.add(entry);
@@ -41,5 +43,11 @@ public class Response {
 	 public void setContent(String text) {
 		 content = text;
 	 }
+	 public String getImage() {
+	        return image;
+	  }
+     public void setImage(String imageName) {
+        image = imageName;
+     }
 
 }

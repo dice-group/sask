@@ -9,7 +9,7 @@ package chatbot.io.response;
  */
 public class EntryInformation {
 	public enum Type {
-		TEXT, OTHERS
+		TEXT, URL,OTHERS
 	};
 	private String displayText;
     private Type buttonType; //Maybe not required in current context, Will consider removing.

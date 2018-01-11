@@ -15,8 +15,8 @@ import java.util.List;
 public class ResponseList {
 	private List<Response> messageData = new ArrayList<>();
 	public enum MessageType {
-		PLAIN_TEXT,TEXT_WITH_URL,FEEDBACK_REQUEST,OTHERS
-	};
+		PLAIN_TEXT,URL,TEXT_WITH_URL,FEEDBACK_REQUEST,OTHERS
+	}; //URL is temporary till we come up with reading and extracting heading from content.
 	
 	MessageType messageType=MessageType.PLAIN_TEXT;
 	boolean isError = false;

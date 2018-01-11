@@ -5,6 +5,7 @@ import java.util.*;
 import com.rivescript.RiveScript;
 
 import chatbot.io.incomingrequest.IncomingRequest;
+import chatbot.io.response.Response;
 import chatbot.io.response.ResponseList;
 import chatbot.core.handlers.*;
 import java.io.IOException;
@@ -28,7 +29,7 @@ public class RiveScriptQueryHandler extends Handler {
 		}
 		return true;
 	}
-
+	
 	public ResponseList search(IncomingRequest request) throws IOException {
 		try {
 			// Analyze passed Output from Rivescript for whether further
@@ -40,7 +41,7 @@ public class RiveScriptQueryHandler extends Handler {
 			                      .toLowerCase();
 			String reply = obj.reply("user", query);
 			RiveScriptOutputAnalyzer analyzer = new RiveScriptOutputAnalyzer();
-			String output = analyzer.HandleTextMessage(reply);
+			responselist = analyzer.HandleTextMessage(responselist , reply);
 			return responselist;
 
 		} catch (Exception e) {
