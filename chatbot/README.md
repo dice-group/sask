@@ -14,8 +14,7 @@ Else then run the eureka-server module using mvn clean spring-boot:run
 
 mvn clean package
 mvn clean spring-boot:run
-
-Release Notes:[Last update: 14.12]
+Release Notes:[Last update: 11.01.2018]
 1. Added Merged UI with Extraction team's UI framework. Chatbot is temporarily accessible via the usual URL and also the Common URL by running the web client package present. Future changes would not be made under chatbot folder.
 2. Changed port ID from default port number.
 3. Java 9 support.

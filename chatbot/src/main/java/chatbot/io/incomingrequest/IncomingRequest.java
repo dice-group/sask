@@ -1,7 +1,7 @@
 /**
  * 
  */
-package chatbot.core.incomingrequest;
+package chatbot.io.incomingrequest;
 
 import java.util.ArrayList;
 import java.util.List;

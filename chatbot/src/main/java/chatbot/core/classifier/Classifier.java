@@ -6,7 +6,7 @@ package chatbot.core.classifier;
 import chatbot.core.handlers.rivescript.*;
 import chatbot.core.handlers.qa.*;
 import chatbot.core.handlers.sessa.*;
-import chatbot.core.incomingrequest.IncomingRequest;
+import chatbot.io.incomingrequest.IncomingRequest;
 import chatbot.core.handlers.*;
 import chatbot.core.handlers.eliza.ElizaHandler;
 import java.util.Arrays;
