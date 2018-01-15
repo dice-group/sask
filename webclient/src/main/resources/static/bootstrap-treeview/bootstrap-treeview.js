@@ -18,7 +18,7 @@
  * ========================================================= */
 
 ;(function ($, window, document, undefined) {
-
+	
 	/*global jQuery, console*/
 
 	'use strict';
@@ -612,6 +612,11 @@
 			// Recursively add child ndoes
 			if (node.nodes && node.state.expanded && !node.state.disabled) {
 				return _this.buildTree(node.nodes, level);
+			}
+			
+			// type
+			if(node.type) {
+				treeItem.addClass(node.type);
 			}
 		});
 	};
