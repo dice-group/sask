@@ -51,7 +51,5 @@ public class RiveScriptQueryHandler extends Handler {
 			responselist.setError();
 			return responselist;
 		}
-
 	}
-
 }

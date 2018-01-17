@@ -30,7 +30,7 @@ public class RiveScriptOutputAnalyzer {
 				String typeValue = jsonResult.getString("name");
 				log.info("HandleTextMessage:,type of data=" + typeValue);
 				// TODO Get Output after Initializing.
-				//TODO: Update Response List as TYPE_URL and update URL and other details completely based on type
+				// TODO: Update Response List as TYPE_URL and update URL and other details completely based on type
 			}
 			// TODO:Exception Handling for this special case?
 		} else {
