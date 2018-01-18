@@ -1,8 +1,14 @@
 package chatbot.core.handlers.rivescript;
 
+import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.rivescript.RiveScript;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import chatbot.core.handlers.*;
 import chatbot.io.response.Response;
@@ -10,45 +16,140 @@ import chatbot.io.response.ResponseList;
 import chatbot.io.response.ResponseList.MessageType;
 
 import java.lang.String;
+import java.io.File;
 import java.io.IOException;
-import org.json.JSONObject;
 import org.apache.log4j.Logger;
 
 public class RiveScriptOutputAnalyzer {
+
 	private static Logger log = Logger.getLogger(RiveScriptOutputAnalyzer.class.getName());
-	public Response createPlainTextResponse(String response)
-	{
+	private static final String TEMPLATE_FILE = "src/main/resources/rivescript/properties/template.yml";
+	private static final String ERRMSG = "error";
+
+	private static RiveScript bot = null;
+
+	static {
+
+		bot = new RiveScript();
+		bot.loadDirectory("src/main/resources/rivescript/rivefiles");
+		bot.sortReplies();
+	}
+
+	public RiveScriptOutputAnalyzer() {
+
+	}
+
+	public ResponseList riveHandler(String query) {
+
+		ResponseList responselist = new ResponseList();
+		String reply = bot.reply("user", query);
+		responselist = handleTextMessage(responselist, reply);
+		return responselist;
+	}
+
+	private Response createPlainTextResponse(String response) {
 		Response obj = new Response();
 		obj.setContent(response);
 		obj.setTitle("");
 		return obj;
 	}
-	public ResponseList HandleTextMessage(ResponseList responselist, String textMessage) throws IOException {
-		if (isJSONObject(textMessage)) {
-			JSONObject jsonResult = new JSONObject(textMessage);
-			if (jsonResult.has("type")) {
-				String typeValue = jsonResult.getString("name");
+
+	// Custom Function to check if Query is found in Rive Script.
+	public static boolean isQueryFound(String query) {
+		String reply = bot.reply("user", query);
+		if ("NOT FOUND".equals(reply)) {
+			return false;
+		}
+		return true;
+	}
+
+	private ResponseList handleTextMessage(ResponseList responselist, String textMessage) {
+
+		String responseHandleText = null;
+
+		if (isJSONValid(textMessage)) {
+			JsonObject jsonInputText = new JsonObject().getAsJsonObject(textMessage);
+			if (jsonInputText.has("type")) {
+				String typeValue = jsonInputText.get("name").getAsString();
 				log.info("HandleTextMessage:,type of data=" + typeValue);
-				// TODO Get Output after Initializing.
-				//TODO: Update Response List as TYPE_URL and update URL and other details completely based on type
+				responseHandleText = generateResponseFromTemplate(typeValue);
+				if (!responseHandleText.equals(ERRMSG)) {
+					// TODO Get Output after Initializing.
+					// TODO: Update Response List as TYPE_URL and update URL and other details
+					// completely based on type
+					// TODO: Discuss with team on the format for the template file and how to return
+					// the block response block as created in the template
+					log.info("Current reponse is of the format = " + responseHandleText);
+				}
 			}
-			// TODO:Exception Handling for this special case?
 		} else {
+			responseHandleText = responseFromRive(textMessage);
+			// Response will be of the form {"comment":"Great! You?"}
+
+			log.debug("Response message from Rive = " + textMessage);
 			responselist.setMessageType(MessageType.PLAIN_TEXT);
 			responselist.addMessage(createPlainTextResponse(textMessage));
-			//String responseJSON = "[{ \"comment\":\"" + textMessage + "\"}]";
-			//return responseJSON;
 		}
+
 		return responselist;
 	}
 
-	public boolean isJSONObject(String string) {
+	private String responseFromRive(String comment) {
+
+		Gson gson = new Gson();
+		JsonObject responseJsonObject = new JsonObject();
+		String response = null;
+
+		responseJsonObject.add("comment", gson.toJsonTree(comment));
+		response = gson.toJson(responseJsonObject);
+		return response;
+	}
+
+	private String generateResponseFromTemplate(String templateValue) {
+
+		String responseForTemplate = null;
+		if (!templateValue.equalsIgnoreCase("help")) {
+
+			responseForTemplate = convertYamlToJsonString(TEMPLATE_FILE);
+		}
+		return responseForTemplate;
+	}
+
+	private static boolean isJSONValid(String jsonInString) {
+		Gson gson = new Gson();
 		try {
-			new ObjectMapper().readTree(string);
+			gson.fromJson(jsonInString, Object.class);
 			return true;
-		} catch (Exception e) {
-			log.error("isJSON Object, Not a JSON String");
+		} catch (com.google.gson.JsonSyntaxException ex) {
 			return false;
 		}
+	}
+
+	private static String convertYamlToJsonString(String yamlFile) {
+
+		String responseYaml = null;
+		ObjectMapper yamlReader = new ObjectMapper(new YAMLFactory());
+		Object obj = new Object();
+		try {
+			obj = yamlReader.readValue(new File(yamlFile), Object.class);
+			ObjectMapper jsonWriter = new ObjectMapper();
+			System.out.println(obj.toString());
+			responseYaml = jsonWriter.writeValueAsString(obj);
+
+		} catch (JsonParseException e) {
+			log.error("convertYamlToJsonString, Exception in Parsing Json,Stack Trace=" + e.getMessage());
+			responseYaml = ERRMSG;
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			log.error("convertYamlToJsonString, Exception in Mapping Json,Stack Trace=" + e.getMessage());
+			responseYaml = ERRMSG;
+			e.printStackTrace();
+		} catch (IOException e) {
+			log.error(
+					"convertYamlToJsonString, IO Exception while parsing YAML template,Stack Trace=" + e.getMessage());
+			responseYaml = ERRMSG;
+			e.printStackTrace();
+		}
+		return responseYaml;
 	}
 }
