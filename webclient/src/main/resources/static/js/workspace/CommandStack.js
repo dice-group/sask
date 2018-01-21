@@ -2,10 +2,11 @@ var CommandStack = function(options){
 	
 	var root = this;
 	
-	var vars = {
-		commands : [],
-		index : undefined
-    };
+	var commands = [];
+	
+	var index = -1;
+	
+	var settings = {};
 	
 	var logError = function (message) {
 		if (window.console) {
@@ -17,7 +18,7 @@ var CommandStack = function(options){
      * Constructor
      */
     this.construct = function(options){
-        $.extend(vars , options);
+        $.extend(settings , options);
     };
     
     this.construct(options);
@@ -33,7 +34,7 @@ var CommandStack = function(options){
 		var command = commandArray['do'];
 		command();
 		
-		if(commandArray['undo'] && typeof commandArray['undo'] !== 'function') {
+		if(commandArray['undo'] && typeof commandArray['undo'] == 'function') {
 			commands.push(commandArray);
 			index = commands.length - 1;
 		}
@@ -58,6 +59,7 @@ var CommandStack = function(options){
 	 * Redo the next command.
 	 */
 	this.redoCommand = function() {
+		
 		var commandArray = commands[index + 1];
 		
 		if(!commandArray) {
@@ -65,6 +67,7 @@ var CommandStack = function(options){
 		}
 		
 		var command = commandArray['do'];
+		
 		command();
 		index += 1;
 	};
@@ -74,7 +77,7 @@ var CommandStack = function(options){
 	 */
 	this.clear = function() {
 		commands = [];
-		index = undefined;
+		index = -1;
 	};
 	
 	/**

@@ -15,6 +15,12 @@
 	_default.settings = {};
 
 	_default.options = {};
+	
+	var commandStack = new CommandStack({});
+	
+	var undoButton = undefined;
+	
+	var redoButton = undefined;
 
 	var Workspace = function(element, options) {
 
@@ -28,8 +34,8 @@
 			options : this.options,
 			init : $.proxy(this.init, this),
 			remove : $.proxy(this.remove, this),
-
-			addNode : $.proxy(this.addNode, this)
+			addNode : $.proxy(this.addNode, this),
+			load : $.proxy(this.load, this)
 		};
 	}
 
@@ -50,9 +56,32 @@
 
 		this.options = $.extend({}, _default.settings, options);
 
-		this.flowchart = this.$element.flowchart({});
-
-		this.initContextMenu();
+		this.initToolbar();
+		this.initWorkspace();
+		this.initContextMenu();	
+	};
+	
+	Workspace.prototype.initWorkspace = function() {
+		this.$element.append('<div style="height: 92%"></div>');
+		this.flowchart = this.$element.children().eq(1).flowchart({});
+	};
+	
+	Workspace.prototype.initToolbar = function() {
+		this.$element.append('<div>'
+				+ '<button type="button" class="btn btn-default"><a href="#"><span class="glyphicon glyphicon-arrow-left "></span> Undo</a></button>'
+				+ '<button type="button" class="btn btn-default">Redo <a href="#"><span class="glyphicon glyphicon-arrow-right"></span></a></button>'
+				+ '</div>');
+		
+		undoButton = this.$element.children().eq(0).children().eq(0);
+		redoButton = this.$element.children().eq(0).children().eq(1);
+		
+		undoButton.click(function() {
+			commandStack.undoCommand();
+		});
+		
+		redoButton.click(function() {
+			commandStack.redoCommand();
+		});
 	};
 
 	/**
@@ -110,8 +139,19 @@
 				outputs : outputs
 			}
 		};
+		
+		var command = {};
+		var self = this;
+		command['do'] = function() {
+			self.flowchart.flowchart('createOperator', properties.id, newData);
+		};
+		command['undo'] = function() {
+			self.flowchart.flowchart('deleteOperator', properties.id, newData);
+		};
+		
+		commandStack.doCommand(command);
 
-		this.flowchart.flowchart('createOperator', properties.id, newData);
+		
 	};
 	
 	/**

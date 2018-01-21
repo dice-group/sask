@@ -1,28 +1,7 @@
 var exTreeviewDefaultData = [ {
 	text : 'Data',
 	href : '#data',
-	type : 'root',
-	nodes : [ {
-		text : 'one Folder',
-		href : '#child1',
-		type : 'folder',
-		nodes : [ {
-			text : '#grandchild1',
-			icon : 'glyphicon glyphicon-file',
-			href : '#grandchild1',
-			type : 'file'
-		}, {
-			text : '#grandchild2',
-			icon : 'glyphicon glyphicon-file',
-			href : '#grandchild2',
-			type : 'file'
-		} ]
-	}, {
-		text : '#file',
-		href : '#file',
-		type : 'file',
-		icon : 'glyphicon glyphicon-file',
-	} ]
+	type : 'root'
 }, {
 	text : 'Extractors',
 	href : '#parent2',
@@ -85,7 +64,9 @@ var exTreeviewDefaultData = [ {
 		return {
 			options: this.options,
 			init: $.proxy(this.init, this),
-			remove: $.proxy(this.remove, this)};
+			remove: $.proxy(this.remove, this),
+			addData: $.proxy(this.addData, this)
+		};
 	}
 	
 	/**
@@ -105,7 +86,7 @@ var exTreeviewDefaultData = [ {
 		
 		this.options = $.extend({}, _default.settings, options);
 		
-		this.tree = this.$element.treeview({
+		this.treeview = this.$element.treeview({
 			data : exTreeviewDefaultData,
 			enableLinks : true
 		});
@@ -127,6 +108,26 @@ var exTreeviewDefaultData = [ {
 	 */
 	Repository.prototype.getLinkFromTarget = function(target) {
 		return $(target).find("a").first().attr('href');
+	};
+	
+	/**
+	 * Returns the node with the passed href.
+	 */
+	Repository.prototype.getNodeByHref = function(href) {	
+		console.log(this.treeview.result);
+		return $(this.treeview[0]).find('ul li.root a[href="#data"]')[0];
+	};
+	
+	/**
+	 * Add the passed nodes to the dada node.
+	 */
+	Repository.prototype.addData = function(nodes) {		
+		if (typeof nodes !== 'object') {
+			logError("passed parameter 'nodes' is not an object");
+		}
+		
+		var dataNode = this.getNodeByHref("#data");
+		console.log(dataNode.type);
 	};
 	
 	/**
