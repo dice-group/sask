@@ -167,7 +167,7 @@
 
 	        _.each(actionsIds, function(actionId) {
 	            var action = _this.options.actions[actionId];
-
+	            
 	            /* At least an action has an icon. Add the icon of the current action,
 	             * or room to align it with the actions which do have one. */
 	            if (actionsHaveIcon === true) {
@@ -441,8 +441,8 @@
 	        $action.find('.actionName').html(
 	            _.isFunction(action.name) && action.name(targetData) || action.name
 	        );
-
-	        if (action.isEnabled && action.isEnabled(targetData) === false) {
+	        
+	        if (action.disabled === true) {
 	            $action.addClass('disabled');
 	        }
 	    });

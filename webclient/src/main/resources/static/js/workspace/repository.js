@@ -163,11 +163,13 @@ var exTreeviewDefaultData = [ {
 				}
 			}, {
 				name : 'Rename',
+				disabled : true,
 				onClick : function(target) {
 					self.options.executeCommand('rename', 'file', target);
 				}
 			}, {
 				name : 'Delete',
+				disabled : true,
 				onClick : function(target) {
 					self.options.executeCommand('delete', 'file', target);
 				}
@@ -178,11 +180,13 @@ var exTreeviewDefaultData = [ {
 			fetchElementData : this.getLinkFromTarget,
 			actions : [ {
 				name : 'Rename',
+				disabled : true,
 				onClick : function(target) {
 					self.options.executeCommand('rename', 'folder', target);
 				}
 			}, {
 				name : 'Delete',
+				disabled : true,
 				onClick : function(target) {
 					self.options.executeCommand('delete', 'folder', target);
 				}
