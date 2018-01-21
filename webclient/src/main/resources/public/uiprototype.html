@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 
 <head>
-<meta charset="utf-8"/>
+<meta charset="utf-8" />
 <title>SASK - UI Prototype</title>
 <!-- ~~~~~~ bootstrap ~~~~~~ -->
 <link rel="stylesheet" href="/bootstrap/3.3.7/css/bootstrap.min.css" />
@@ -63,10 +63,31 @@
 				<div id="ex-workspace"></div>
 			</div>
 			<script>
-			$(document).ready(function() {
-				$('#ex-repo').repository({});
-				$('#ex-workspace').workspace({});
-			});
+				(function($) {
+					var workspace;
+					var repo;
+
+					$(document).ready(function() {
+						repo = $('#ex-repo').repository({
+							executeCommand : executeRepoCommand
+						});
+						workspace = $('#ex-workspace').workspace({});
+					});
+
+					function executeRepoCommand(command, type, target) {
+						switch (command) {
+						case 'addToWorkspace':
+							workspace.workspace('addNode', {
+								id : target,
+								type : type,
+								xPosition : 20,
+								yPosition : 20
+							});
+							break;
+						}
+					}
+
+				}(jQuery));
 			</script>
 		</div>
 	</div>

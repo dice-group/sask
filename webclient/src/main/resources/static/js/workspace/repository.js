@@ -7,18 +7,18 @@ var exTreeviewDefaultData = [ {
 		href : '#child1',
 		type : 'folder',
 		nodes : [ {
-			text : 'a file',
+			text : '#grandchild1',
 			icon : 'glyphicon glyphicon-file',
 			href : '#grandchild1',
 			type : 'file'
 		}, {
-			text : 'one more file',
+			text : '#grandchild2',
 			icon : 'glyphicon glyphicon-file',
 			href : '#grandchild2',
 			type : 'file'
 		} ]
 	}, {
-		text : 'a file',
+		text : '#file',
 		href : '#file',
 		type : 'file',
 		icon : 'glyphicon glyphicon-file',
@@ -28,17 +28,17 @@ var exTreeviewDefaultData = [ {
 	href : '#parent2',
 	type : 'root',
 	nodes : [ {
-		text : 'FOX',
+		text : '#fox',
 		href : '#fox',
 		type : 'extractor',
 		icon : 'glyphicon glyphicon-cloud',
 	}, {
-		text : 'RDF Fred',
+		text : '#rdffred',
 		href : '#rdffred',
 		type : 'extractor',
 		icon : 'glyphicon glyphicon-cloud',
 	}, {
-		text : 'BOA',
+		text : '#boa',
 		href : '#boa',
 		type : 'extractor',
 		icon : 'glyphicon glyphicon-cloud',
@@ -48,16 +48,12 @@ var exTreeviewDefaultData = [ {
 	href : '#parent3',
 	type : 'root',
 	nodes : [ {
-		text : 'the one and only',
+		text : '#db',
 		href : '#db',
 		type : 'db',
 		icon : 'glyphicon glyphicon-hdd',
 	} ]
 } ];
-
-function executeCommand(command, target) {
-	console.log(command + ": " + target);
-}
 
 /**
  * The IIFE for the repository.
@@ -72,7 +68,9 @@ function executeCommand(command, target) {
 	
 	var _default = {};
 	
-	_default.settings = {};
+	_default.settings = {
+			executeCommand: undefined
+	};
 	
 	_default.options = {};
 	
@@ -105,6 +103,8 @@ function executeCommand(command, target) {
 			return;
 		}
 		
+		this.options = $.extend({}, _default.settings, options);
+		
 		this.tree = this.$element.treeview({
 			data : exTreeviewDefaultData,
 			enableLinks : true
@@ -133,12 +133,13 @@ function executeCommand(command, target) {
 	 * Init the context menu.
 	 */
 	Repository.prototype.initContextMenu = function() {
+		self = this;
 		new BootstrapMenu('#' + this.elementId + ' li.db', {
 			fetchElementData : this.getLinkFromTarget,
 			actions : [ {
 				name : 'Add to Workspace',
 				onClick : function(target) {
-					executeCommand('add', target);
+					self.options.executeCommand('addToWorkspace', 'db', target);
 				}
 			} ]
 		});
@@ -148,7 +149,7 @@ function executeCommand(command, target) {
 			actions : [ {
 				name : 'Add to Workspace',
 				onClick : function(target) {
-					executeCommand('add', target);
+					self.options.executeCommand('addToWorkspace', 'extractor', target);
 				}
 			} ]
 		});
@@ -158,27 +159,17 @@ function executeCommand(command, target) {
 			actions : [ {
 				name : 'Add to Workspace',
 				onClick : function(target) {
-					executeCommand('add', target);
+					self.options.executeCommand('addToWorkspace', 'file', target);
 				}
 			}, {
 				name : 'Rename',
 				onClick : function(target) {
-					executeCommand('rename', target);
-				}
-			}, {
-				name : 'Copy',
-				onClick : function(target) {
-					executeCommand('copy', target);
-				}
-			}, {
-				name : 'Paste',
-				onClick : function(target) {
-					executeCommand('paste', target);
+					self.options.executeCommand('rename', 'file', target);
 				}
 			}, {
 				name : 'Delete',
 				onClick : function(target) {
-					executeCommand('delete', target);
+					self.options.executeCommand('delete', 'file', target);
 				}
 			} ]
 		});
@@ -188,22 +179,12 @@ function executeCommand(command, target) {
 			actions : [ {
 				name : 'Rename',
 				onClick : function(target) {
-					executeCommand('rename', target);
-				}
-			}, {
-				name : 'Copy',
-				onClick : function(target) {
-					executeCommand('copy', target);
-				}
-			}, {
-				name : 'Paste',
-				onClick : function(target) {
-					executeCommand('paste', target);
+					self.options.executeCommand('rename', 'folder', target);
 				}
 			}, {
 				name : 'Delete',
 				onClick : function(target) {
-					executeCommand('delete', target);
+					self.options.executeCommand('delete', 'folder', target);
 				}
 			} ]
 		});
