@@ -21,11 +21,11 @@ public class SpellCheck {
 	public enum LanguageList {ENGLISH, OTHERS};//DEUTSCH, OTHERS}; --> Future extension?
 	private LanguageList lang;
 	private JLanguageTool langTool;
-	private static Language langObj;
+	private static final Language langObj= new AmericanEnglish();
 	//Currently this function is static. But if we want to support different user different language then we need to remove this property and let it be one-one.
 	public SpellCheck(LanguageList alang){
 		lang = alang;
-		langObj = new AmericanEnglish(); 
+		//langObj = new AmericanEnglish(); 
 		//Future extension. Won't support now since scope is unclear for such a requirement. 
 		//Can be a full fledged requirement since rivescript is also currently not flexible to handle queries in other languages.
 		/*switch(lang) {
@@ -40,11 +40,12 @@ public class SpellCheck {
 		
 		langTool = new JLanguageTool(langObj);
 	}
-	public void changeLanguage(LanguageList newLang) {
+	//Currently not required. This would be helpful when we support dynamic language change per user.
+	/*public void changeLanguage(LanguageList newLang) {
 		lang = newLang;
 		langObj = new AmericanEnglish();//TODO: Create Hash Map of Enum vs Language Object and create the right one. Currently Language Info unknown.
 		langTool = new JLanguageTool(langObj);
-	}
+	}*/
 	
 	public String correctSpelling(String query) {
 		 String result = query;
