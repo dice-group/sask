@@ -92,7 +92,20 @@ var exTreeviewDefaultData = [ {
 		});
 		
 		this.initContextMenu();
+		this.initDragNDrop();
 	};
+	
+	/**
+	 * Init the drag n drop function.
+	 */
+	Repository.prototype.initDragNDrop = function () {
+		this.$element.find('li.file, li.extractor, li.db').draggable({
+			helper: "clone",
+			start: function(event, ui) {
+				ui.helper.width(this.clientWidth);
+			}
+		});
+	}
 	
 	/**
 	 * Remove.
@@ -127,7 +140,6 @@ var exTreeviewDefaultData = [ {
 		}
 		
 		var dataNode = this.getNodeByHref("#data");
-		console.log(dataNode.type);
 	};
 	
 	/**

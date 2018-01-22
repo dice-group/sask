@@ -61,10 +61,52 @@
 		this.initToolbar();
 		this.initWorkspace();
 		this.initContextMenu();	
+		this.initDragNDrop();
 		
 		workflowStack.saveWorkflow(this.getWorkflow());
 		this.checkWorkflowStack();
 	};
+	
+	/**
+	 * Init drag n drop function. To receive data from the repo.
+	 */
+	Workspace.prototype.initDragNDrop = function() {
+		var self = this;
+		var flowchart = this.flowchart;
+		this.flowchart.droppable({
+			accept: 'li.extractor, li.file, li.db', 
+	    	drop: function(ev, ui) {
+	    		var link = $(ui.draggable).find('a').attr('href');
+	    	   
+	    		var type;
+	    		if($(ui.draggable).hasClass("extractor")) {
+	    			type = "extractor";
+	    		} else if($(ui.draggable).hasClass("file")) {
+	    			type = "file";
+	    		} else if($(ui.draggable).hasClass("db")) {
+	    			type = "db";
+	    		} else {
+	    			logError("Unknown type dropped.");
+	    		}
+	    		
+	    		var offset = $(this).offset();
+	            var uiPos = ui.position;
+	    		var x = (offset.left - uiPos.left - 160);
+	    		var y = (offset.top - uiPos.top - 80);
+	    		
+	    		console.log('x: ' + x + ' y: ' + y);
+	            
+	    		var newNode = {
+	    				yPosition : y * -1,
+	    				xPosition : x * -1,
+	    				type : type,
+	    				id : link
+	    		};
+	    		
+	    		self.addNode(newNode);
+	       }
+	    });
+	}
 	
 	/**
 	 * Init the workspace.
@@ -102,7 +144,7 @@
 		var self = this;
 		undoButton.click(function() {
 			doingStackOperation = true;
-			console.log("undo");
+			
 			var workflow = workflowStack.getLastWorkflow();
 			self.loadWorkflow(workflow);
 			
@@ -112,7 +154,6 @@
 		
 		redoButton.click(function() {
 			doingStackOperation = true;
-			console.log("redo");
 			var workflow = workflowStack.getNextWorkflow();
 			self.loadWorkflow(workflow);
 			

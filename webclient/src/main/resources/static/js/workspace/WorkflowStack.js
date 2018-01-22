@@ -1,13 +1,28 @@
 var WorkflowStack = function(options){
 	
+	/**
+	 * this.
+	 */
 	var root = this;
 	
+	/**
+	 * The saved workflows.
+	 */
 	var workflows = [];
 	
+	/**
+	 * The current position in the stack.
+	 */
 	var index = -1;
 	
+	/**
+	 * Plugin settings.
+	 */
 	var settings = {};
 	
+	/**
+	 * Log error on the console.
+	 */
 	var logError = function (message) {
 		if (window.console) {
 			window.console.error(message);
