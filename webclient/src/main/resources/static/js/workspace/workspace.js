@@ -243,26 +243,26 @@
 			var inputs = {};
 			var outputs = {
 				output_1 : {
-					label : 'NL',
+					label : 'NL'
 				}
 			};
 			break;
 		case 'extractor':
 			var inputs = {
 				input_1 : {
-					label : 'NL',
+					label : 'NL'
 				}
 			};
 			var outputs = {
 				output_1 : {
-					label : 'RDF',
+					label : 'RDF'
 				}
 			};
 			break;
 		case 'db':
 			var inputs = {
 				input_1 : {
-					label : 'RDF',
+					label : 'RDF'
 				}
 			};
 			var outputs = {};

@@ -22,6 +22,7 @@
 <script src="/bootstrap-menu/BootstrapMenu.js"></script>
 <!-- ~~~~~~ worksapce ~~~~~~ -->
 <script src="/js/workspace/WorkflowStack.js"></script>
+<script src="/js/workspace/DAO.js"></script>
 <script src="/js/workspace/workspace.js"></script>
 <link rel="stylesheet" href="/styles/workspace.css">
 <script src="/js/workspace/repository.js"></script>
@@ -75,21 +76,22 @@
 						});
 						workspace = $('#ex-workspace').workspace({});
 						
-						$("#ex-refreshRepo").click(function() {
-							var dao = new DAO({});
-							
-							var success = function(data) {
-								console.log(data);
-								//repo.repository('addData', JSON.parse(data));
-							}
-							
-							var error = function(data) {
-								console.log(data);
-							}
-							
-							dao.getRepoStructure(success, error);
-						});
+						$("#ex-refreshRepo").click(refreshRepo);
 					});
+					
+					function refreshRepo() {
+						var dao = new DAO({});
+						
+						var success = function(data) {
+							repo.repository('addData', data);
+						}
+						
+						var error = function(data) {
+							console.log(data);
+						}
+						
+						dao.getRepoStructure(success, error);
+					}
 					
 					function executeRepoCommand(command, type, target) {
 						switch (command) {
@@ -103,7 +105,8 @@
 							break;
 						}
 					}
-
+					
+					refreshRepo();
 				}(jQuery));
 			</script>
 		</div>

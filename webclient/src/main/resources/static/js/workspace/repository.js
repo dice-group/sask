@@ -1,39 +1,3 @@
-var exTreeviewDefaultData = [ {
-	text : 'Data',
-	href : '#data',
-	type : 'root'
-}, {
-	text : 'Extractors',
-	href : '#parent2',
-	type : 'root',
-	nodes : [ {
-		text : '#fox',
-		href : '#fox',
-		type : 'extractor',
-		icon : 'glyphicon glyphicon-cloud',
-	}, {
-		text : '#rdffred',
-		href : '#rdffred',
-		type : 'extractor',
-		icon : 'glyphicon glyphicon-cloud',
-	}, {
-		text : '#boa',
-		href : '#boa',
-		type : 'extractor',
-		icon : 'glyphicon glyphicon-cloud',
-	} ]
-}, {
-	text : 'Database',
-	href : '#parent3',
-	type : 'root',
-	nodes : [ {
-		text : '#db',
-		href : '#db',
-		type : 'db',
-		icon : 'glyphicon glyphicon-hdd',
-	} ]
-} ];
-
 /**
  * The IIFE for the repository.
  */
@@ -52,6 +16,45 @@ var exTreeviewDefaultData = [ {
 	};
 	
 	_default.options = {};
+	
+	/**
+	 * The structure template.
+	 */
+	var structureTemplate = [ {
+		text : 'Data',
+		href : '#data',
+		type : 'root'
+	}, {
+		text : 'Extractors',
+		href : '#parent2',
+		type : 'root',
+		nodes : [ {
+			text : '#fox',
+			href : '#fox',
+			type : 'extractor',
+			icon : 'glyphicon glyphicon-cloud',
+		}, {
+			text : '#rdffred',
+			href : '#rdffred',
+			type : 'extractor',
+			icon : 'glyphicon glyphicon-cloud',
+		}, {
+			text : '#boa',
+			href : '#boa',
+			type : 'extractor',
+			icon : 'glyphicon glyphicon-cloud',
+		} ]
+	}, {
+		text : 'Database',
+		href : '#parent3',
+		type : 'root',
+		nodes : [ {
+			text : '#db',
+			href : '#db',
+			type : 'db',
+			icon : 'glyphicon glyphicon-hdd',
+		} ]
+	} ];
 	
 	var Repository = function (element, options) {
 
@@ -87,7 +90,7 @@ var exTreeviewDefaultData = [ {
 		this.options = $.extend({}, _default.settings, options);
 		
 		this.treeview = this.$element.treeview({
-			data : exTreeviewDefaultData,
+			data : structureTemplate,
 			enableLinks : true
 		});
 		
@@ -124,22 +127,21 @@ var exTreeviewDefaultData = [ {
 	};
 	
 	/**
-	 * Returns the node with the passed href.
-	 */
-	Repository.prototype.getNodeByHref = function(href) {	
-		console.log(this.treeview.result);
-		return $(this.treeview[0]).find('ul li.root a[href="#data"]')[0];
-	};
-	
-	/**
 	 * Add the passed nodes to the dada node.
 	 */
-	Repository.prototype.addData = function(nodes) {		
-		if (typeof nodes !== 'object') {
-			logError("passed parameter 'nodes' is not an object");
+	Repository.prototype.addData = function(structure) {		
+		if (typeof structure !== 'object') {
+			logError("passed parameter 'structure' is not an object");
 		}
 		
-		var dataNode = this.getNodeByHref("#data");
+		structureTemplate[0].nodes = structure.nodes;		
+		var options = {
+			data : structureTemplate,
+			enableLinks : true
+		}
+		
+		this.treeview.treeview('init', options);
+		this.initDragNDrop();
 	};
 	
 	/**

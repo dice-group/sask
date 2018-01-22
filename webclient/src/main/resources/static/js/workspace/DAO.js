@@ -19,6 +19,36 @@ var DAO = function(options) {
 	};
 	
 	/**
+	 * Parse the hdfs structure to the ui structure.
+	 */
+	var parseRepoStructure = function(hdfsData) {
+		var type;
+		if(hdfsData.type === 'DIRECTORY') {
+			type = 'folder';
+		} else if(hdfsData.type === 'FILE') {
+			type = 'file';
+		}
+		
+		var nodes = [];
+		
+		$.each(hdfsData.fileList, function( index, value ) {
+			nodes.push(parseRepoStructure(value));
+		});
+			
+		var node = {
+			text : hdfsData.suffix,
+			href : hdfsData.path,
+			type : type
+		};
+		
+		if(nodes.length > 0) {
+			node.nodes = nodes;
+		}
+		
+		return node;
+	};
+	
+	/**
      * Constructor
      */
     this.construct = function(options){
@@ -35,7 +65,11 @@ var DAO = function(options) {
 		$.ajax({
 			type : "POST",
 			url : uri,
-			success : success,
+			success : function(data) {
+				var json = jQuery.parseJSON(data);
+				var structure = parseRepoStructure(json);
+				success(structure);
+			},
 			error : error
 		});
 	};
