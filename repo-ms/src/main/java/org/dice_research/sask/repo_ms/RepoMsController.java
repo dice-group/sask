@@ -24,8 +24,8 @@ public class RepoMsController {
 		return hadoopService.createDirectory(path);
 	}
 
-	@GetMapping(value = "/getRepoStructure", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public String getRepoStructure() {
+	@RequestMapping(value = "/getRepoStructure", produces = MediaType.APPLICATION_JSON_VALUE)
+	public HdfsFile getRepoStructure() {
 		this.logger.info("Repo-microservice getRepoStructure() invoked");
 		return hadoopService.getRepoStructure();
 	}
