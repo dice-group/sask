@@ -16,7 +16,9 @@
 
 	_default.options = {};
 	
-	var commandStack = new CommandStack({});
+	var workflowStack = new WorkflowStack({});
+	
+	var doingStackOperation = false;
 	
 	var undoButton = undefined;
 	
@@ -59,13 +61,35 @@
 		this.initToolbar();
 		this.initWorkspace();
 		this.initContextMenu();	
+		
+		workflowStack.saveWorkflow(this.getWorkflow());
+		this.checkWorkflowStack();
 	};
 	
+	/**
+	 * Init the workspace.
+	 */
 	Workspace.prototype.initWorkspace = function() {
 		this.$element.append('<div style="height: 92%"></div>');
-		this.flowchart = this.$element.children().eq(1).flowchart({});
+		
+		var self = this;
+		
+		var onAfterChange = function(changeType) {
+			// ignnore save on move 
+			if(!doingStackOperation && changeType !== 'operator_moved') {
+				workflowStack.saveWorkflow(self.getWorkflow());
+				self.checkWorkflowStack();
+			}
+		};
+		
+		this.flowchart = this.$element.children().eq(1).flowchart({
+			onAfterChange : onAfterChange
+		});
 	};
 	
+	/**
+	 * Init the toolbar.
+	 */
 	Workspace.prototype.initToolbar = function() {
 		this.$element.append('<div>'
 				+ '<button type="button" class="btn btn-default"><a href="#"><span class="glyphicon glyphicon-arrow-left "></span> Undo</a></button>'
@@ -75,13 +99,40 @@
 		undoButton = this.$element.children().eq(0).children().eq(0);
 		redoButton = this.$element.children().eq(0).children().eq(1);
 		
+		var self = this;
 		undoButton.click(function() {
-			commandStack.undoCommand();
+			doingStackOperation = true;
+			console.log("undo");
+			var workflow = workflowStack.getLastWorkflow();
+			self.loadWorkflow(workflow);
+			
+			doingStackOperation = false;
+			self.checkWorkflowStack();
 		});
 		
 		redoButton.click(function() {
-			commandStack.redoCommand();
+			doingStackOperation = true;
+			console.log("redo");
+			var workflow = workflowStack.getNextWorkflow();
+			self.loadWorkflow(workflow);
+			
+			doingStackOperation = false;
+			self.checkWorkflowStack();
 		});
+	};
+	
+	Workspace.prototype.checkWorkflowStack = function() {
+		if(workflowStack.hasNext()) {
+			redoButton.removeAttr('disabled');
+		} else {
+			redoButton.attr('disabled','disabled');
+		}
+		
+		if(workflowStack.hasLast()) {
+			undoButton.removeAttr('disabled');
+		} else {
+			undoButton.attr('disabled','disabled');
+		}
 	};
 
 	/**
@@ -140,25 +191,21 @@
 			}
 		};
 		
-		var command = {};
-		var self = this;
-		command['do'] = function() {
-			self.flowchart.flowchart('createOperator', properties.id, newData);
-		};
-		command['undo'] = function() {
-			self.flowchart.flowchart('deleteOperator', properties.id, newData);
-		};
-		
-		commandStack.doCommand(command);
-
-		
+		this.flowchart.flowchart('createOperator', properties.id, newData);
 	};
 	
 	/**
 	 * Load the passed workspace
 	 */
-	Workspace.prototype.load = function(workspace) {
-		
+	Workspace.prototype.loadWorkflow = function(workspace) {
+		this.flowchart.flowchart('setData', workspace);
+	};
+	
+	/**
+	 * Returns the current workflow
+	 */
+	Workspace.prototype.getWorkflow = function() {
+		return this.flowchart.flowchart('getData');
 	};
 
 	/**
