@@ -12,17 +12,38 @@
 
 	var _default = {};
 
-	_default.settings = {};
+	_default.settings = {
+			undoButtonTemplate : '<button type="button" class="btn btn-default"><a href="#"><span class="glyphicon glyphicon-arrow-left "></span> Undo</a></button>',
+			redoButtonTemplate : '<button type="button" class="btn btn-default"><a href="#">Redo <span class="glyphicon glyphicon-arrow-right"></span></a></button>',
+			saveButtonTemplate : '<button type="button" class="btn btn-default"><a href="#"><span class="glyphicon glyphicon-floppy-disk"></span> Save</a></button>'
+	};
 
 	_default.options = {};
 	
+	/**
+	 * The wokflowStack for undo and redo.
+	 */
 	var workflowStack = new WorkflowStack({});
 	
+	/**
+	 * Indicates whether the current operation is a stack operation.
+	 */
 	var doingStackOperation = false;
 	
+	/**
+	 * The toolbar undo button.
+	 */
 	var undoButton = undefined;
 	
+	/**
+	 * The toolbar redo button.
+	 */
 	var redoButton = undefined;
+	
+	/**
+	 * The toolbar save button.
+	 */
+	var saveButton = undefined;
 
 	var Workspace = function(element, options) {
 
@@ -36,8 +57,7 @@
 			options : this.options,
 			init : $.proxy(this.init, this),
 			remove : $.proxy(this.remove, this),
-			addNode : $.proxy(this.addNode, this),
-			load : $.proxy(this.load, this)
+			addNode : $.proxy(this.addNode, this)
 		};
 	}
 
@@ -62,6 +82,7 @@
 		this.initWorkspace();
 		this.initContextMenu();	
 		this.initDragNDrop();
+		this.initToolbarListener();
 		
 		workflowStack.saveWorkflow(this.getWorkflow());
 		this.checkWorkflowStack();
@@ -76,8 +97,10 @@
 		this.flowchart.droppable({
 			accept: 'li.extractor, li.file, li.db', 
 	    	drop: function(ev, ui) {
+	    		// get identifier
 	    		var link = $(ui.draggable).find('a').attr('href');
 	    	   
+	    		// get type
 	    		var type;
 	    		if($(ui.draggable).hasClass("extractor")) {
 	    			type = "extractor";
@@ -89,13 +112,13 @@
 	    			logError("Unknown type dropped.");
 	    		}
 	    		
+	    		// get position
 	    		var offset = $(this).offset();
 	            var uiPos = ui.position;
 	    		var x = (offset.left - uiPos.left - 160);
 	    		var y = (offset.top - uiPos.top - 80);
 	    		
-	    		console.log('x: ' + x + ' y: ' + y);
-	            
+	    		// create node
 	    		var newNode = {
 	    				yPosition : y * -1,
 	    				xPosition : x * -1,
@@ -116,6 +139,7 @@
 		
 		var self = this;
 		
+		// change
 		var onAfterChange = function(changeType) {
 			// ignnore save on move 
 			if(!doingStackOperation && changeType !== 'operator_moved') {
@@ -124,8 +148,20 @@
 			}
 		};
 		
+		// validate link create
+		var onLinkCreate = function (linkId, linkData) {
+			var fromOperator = self.flowchart.flowchart('getOperatorData', linkData.fromOperator);
+			var toOperator = self.flowchart.flowchart('getOperatorData', linkData.toOperator);
+			
+			var fromConnector = fromOperator.properties.outputs[linkData.fromConnector];
+			var toConnector = toOperator.properties.inputs[linkData.toConnector];
+			
+			return fromConnector.label === toConnector.label;
+		};
+		
 		this.flowchart = this.$element.children().eq(1).flowchart({
-			onAfterChange : onAfterChange
+			onAfterChange : onAfterChange,
+			onLinkCreate : onLinkCreate
 		});
 	};
 	
@@ -134,14 +170,20 @@
 	 */
 	Workspace.prototype.initToolbar = function() {
 		this.$element.append('<div>'
-				+ '<button type="button" class="btn btn-default"><a href="#"><span class="glyphicon glyphicon-arrow-left "></span> Undo</a></button>'
-				+ '<button type="button" class="btn btn-default">Redo <a href="#"><span class="glyphicon glyphicon-arrow-right"></span></a></button>'
+				+ this.options.undoButtonTemplate
+				+ this.options.redoButtonTemplate
+				+ this.options.saveButtonTemplate
 				+ '</div>');
 		
 		undoButton = this.$element.children().eq(0).children().eq(0);
 		redoButton = this.$element.children().eq(0).children().eq(1);
-		
+		saveButton = this.$element.children().eq(0).children().eq(2);
+	};
+	
+	Workspace.prototype.initToolbarListener = function() {
 		var self = this;
+		
+		// undo
 		undoButton.click(function() {
 			doingStackOperation = true;
 			
@@ -152,6 +194,7 @@
 			self.checkWorkflowStack();
 		});
 		
+		// redo
 		redoButton.click(function() {
 			doingStackOperation = true;
 			var workflow = workflowStack.getNextWorkflow();
@@ -159,6 +202,12 @@
 			
 			doingStackOperation = false;
 			self.checkWorkflowStack();
+		});
+		
+		// save 
+		saveButton.click(function() {
+			var workflow = self.getWorkflow();
+			console.log(workflow);
 		});
 	};
 	
@@ -260,13 +309,17 @@
 	 * Init the context menu.
 	 */
 	Workspace.prototype.initContextMenu = function() {
+		var self = this;
+		
+		var onRemove = function(target) {
+			self.flowchart.flowchart('deleteOperator', target);
+		};
+		
 		new BootstrapMenu('#' + this.elementId + ' div.flowchart-operator', {
 			fetchElementData : this.getNameFromTarget,
 			actions : [ {
 				name : 'Remove',
-				onClick : function(target) {
-					executeCommand('remove', target);
-				}
+				onClick : onRemove
 			} ]
 		});
 	};

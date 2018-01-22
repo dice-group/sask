@@ -76,25 +76,21 @@
 						workspace = $('#ex-workspace').workspace({});
 						
 						$("#ex-refreshRepo").click(function() {
-							loadRepo();
+							var dao = new DAO({});
+							
+							var success = function(data) {
+								console.log(data);
+								//repo.repository('addData', JSON.parse(data));
+							}
+							
+							var error = function(data) {
+								console.log(data);
+							}
+							
+							dao.getRepoStructure(success, error);
 						});
 					});
 					
-					function loadRepo() {
-						uri = "./repo-ms/getRepoStructure";
-						
-						$.ajax({
-							type : "POST",
-							url : uri,
-							success : function(data) {
-								repo.repository('addData', JSON.parse(data));
-							},
-							error : function(e, textStatus, errorThrown) {
-								alert('Error in processing: ' + textStatus);
-							}
-						});
-					}
-
 					function executeRepoCommand(command, type, target) {
 						switch (command) {
 						case 'addToWorkspace':
