@@ -1,0 +1,40 @@
+@relation intent
+
+@attribute query string
+@attribute queryIntent {eliza,hawk,sessa}
+
+@data
+'What is the capital of Germany ?',hawk
+'who is the mayor of berlin ?',hawk
+'what do i do now ?',eliza
+'mayor berlin',sessa
+'capital india',sessa
+'is this true',eliza
+'was michael jackson prodigal',hawk
+'is rome the capital of italy',hawk
+'does pope live in the vatican?',hawk
+'pope',sessa
+'are you saying',eliza
+'are you for real',eliza
+'get me all the details on german cars',hawk
+'how to fix an engine?',hawk
+'mozart birthplace',sessa
+'obama wife',sessa
+'how are you doing',eliza
+'are you sure',eliza
+'is it the biggest in the world',hawk
+'active volcano',sessa
+'what is your problem',eliza
+'where is auschwitz located?',hawk
+'what the different kinds of wine',hawk
+'why is the sky blue',hawk
+'which is the best retaurant in town',hawk
+'when is the best time to visit france?',hawk
+'paderborn weather',sessa
+'good for me',eliza
+'whats up',eliza
+'Hi',eliza
+'hello',eliza
+'where is trump travelling to this quarter',hawk
+'which is the most terrifying movie ever',hawk
+'italian food',sessa
