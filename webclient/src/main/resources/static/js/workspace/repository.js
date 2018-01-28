@@ -138,9 +138,12 @@
 	 * Init the drag n drop function.
 	 */
 	Repository.prototype.initDragNDrop = function () {
+		var self = this;
 		this.$element.find('li.file, li.extractor, li.db').draggable({
 			helper: "clone",
 			start: function(event, ui) {
+				var node = self.getNodeFromTarget(this);
+				ui.helper.data('node', node);
 				ui.helper.width(this.clientWidth);
 			}
 		});

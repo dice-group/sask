@@ -91,7 +91,7 @@
 							"Rename" : function() {
 								var target = $('input[name="target"]').val();
 								var name = $('input[name="name"]').val();
-								console.log(name);
+
 								var dao = new DAO({});
 								dao.rename(target, name);
 
@@ -130,7 +130,6 @@
 					}
 
 					function executeRepoCommand(command, target) {
-						console.log(target);
 						switch (command) {
 						case 'addToWorkspace':
 							workspace.workspace('addNode', {

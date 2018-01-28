@@ -97,21 +97,8 @@
 		this.flowchart.droppable({
 			accept: 'li.extractor, li.file, li.db', 
 	    	drop: function(ev, ui) {
-	    		// get identifier
-	    		var link = $(ui.draggable).find('a').attr('href');
-	    	   
-	    		// get type
-	    		var type;
-	    		if($(ui.draggable).hasClass("extractor")) {
-	    			type = "extractor";
-	    		} else if($(ui.draggable).hasClass("file")) {
-	    			type = "file";
-	    		} else if($(ui.draggable).hasClass("db")) {
-	    			type = "db";
-	    		} else {
-	    			logError("Unknown type dropped.");
-	    		}
-	    		
+	    		var node = ui.helper.data('node');
+
 	    		// get position
 	            var pos = ui.offset;
 	            var dPos = $(this).offset();
@@ -123,8 +110,8 @@
 	    		var newNode = {
 	    				yPosition : y,
 	    				xPosition : x,
-	    				type : type,
-	    				id : link
+	    				type : node.type,
+	    				id : node.id
 	    		};
 	    		
 	    		self.addNode(newNode);
