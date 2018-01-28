@@ -78,6 +78,12 @@
 					</fieldset>
 				</form>
 			</div>
+			<div id="ex-dialog-remove" title="Delete item">
+				<input type="hidden" name="target" />
+				<p>
+					This item will be permanently deleted and cannot be recovered. Are you sure?
+				</p>
+			</div>
 			<script>
 				(function($) {
 					var workspace;
@@ -86,23 +92,41 @@
 					var dialogRename = $("#ex-dialog-rename").dialog({
 						autoOpen : false,
 						modal : true,
-						width: 350,
+						width : 350,
+						height : "auto",
 						buttons : {
 							"Rename" : function() {
 								var target = $('input[name="target"]').val();
 								var name = $('input[name="name"]').val();
-
-								var dao = new DAO({});
-								dao.rename(target, name);
-
+								
+								rename(target, name);
 								$(this).dialog('close');
 							},
 							Cancel : function() {
-								dialogRename.dialog("close");
+								$(this).dialog("close");
 							}
 						},
 						close : function() {
 							$("#ex-dialog-rename form")[0].reset();
+						}
+					});
+
+					var removeDialog = $("#ex-dialog-remove").dialog({
+						autoOpen : false,
+						resizable : false,
+						height : "auto",
+						width : 400,
+						modal : true,
+						buttons : {
+							"Yes" : function() {
+								var target = $('input[name="target"]').val();
+								
+								remove(target);
+								$(this).dialog("close");
+							},
+							Cancel : function() {
+								$(this).dialog("close");
+							}
 						}
 					});
 
@@ -140,12 +164,30 @@
 							});
 							break;
 						case 'rename':
-							rename(target);
+							openRenameDialog(target);
+							break;
+						case 'delete':
+							openRemoveDialog(target);
 							break;
 						}
 					}
+					
+					function remove(target) {
+						var dao = new DAO({});
+						dao.remove(target);
+					}
+					
+					function rename(target, name) {
+						var dao = new DAO({});
+						dao.rename(target, name);
+					}
 
-					function rename(target) {
+					function openRemoveDialog(target) {
+						removeDialog.find('input[name="target"]').val(target.id);
+						removeDialog.dialog('open');
+					}
+
+					function openRenameDialog(target) {
 						dialogRename.find('input[name="name"]')
 								.val(target.text);
 						dialogRename.find('input[name="target"]')

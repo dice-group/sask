@@ -220,7 +220,6 @@
 				}
 			}, {
 				name : 'Delete',
-				disabled : true,
 				onClick : function(target) {
 					self.options.executeCommand('delete', target);
 				}
@@ -236,7 +235,6 @@
 				}
 			}, {
 				name : 'Delete',
-				disabled : true,
 				onClick : function(target) {
 					self.options.executeCommand('delete', target);
 				}

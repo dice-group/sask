@@ -74,7 +74,17 @@ var DAO = function(options) {
 		});
 	};
 	
+	/**
+	 * Rename the passed target.
+	 */
 	this.rename = function(target, name) {
 		console.log("rename " + target + " to " + name);
+	}
+	
+	/**
+	 * Remove the passed target.
+	 */
+	this.remove = function(target) {
+		console.log("remove " + target);
 	}
 };
