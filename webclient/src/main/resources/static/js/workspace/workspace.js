@@ -113,15 +113,16 @@
 	    		}
 	    		
 	    		// get position
-	    		var offset = $(this).offset();
-	            var uiPos = ui.position;
-	    		var x = (offset.left - uiPos.left - 160);
-	    		var y = (offset.top - uiPos.top - 80);
+	            var pos = ui.offset;
+	            var dPos = $(this).offset();
 	    		
+	            var x = pos.left - dPos.left;
+	            var y = pos.top - dPos.top;
+	            
 	    		// create node
 	    		var newNode = {
-	    				yPosition : y * -1,
-	    				xPosition : x * -1,
+	    				yPosition : y,
+	    				xPosition : x,
 	    				type : type,
 	    				id : link
 	    		};
