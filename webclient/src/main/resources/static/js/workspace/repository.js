@@ -23,35 +23,35 @@
 	 */
 	var structureTemplate = [ {
 		text : 'Data',
-		href : '#data',
+		id : '#data',
 		type : 'root'
 	}, {
 		text : 'Extractors',
-		href : '#parent2',
+		id : '#parent2',
 		type : 'root',
 		nodes : [ {
 			text : '#fox',
-			href : '#fox',
+			id : '#fox',
 			type : 'extractor',
 			icon : 'glyphicon glyphicon-cloud',
 		}, {
 			text : '#rdffred',
-			href : '#rdffred',
+			id : '#rdffred',
 			type : 'extractor',
 			icon : 'glyphicon glyphicon-cloud',
 		}, {
 			text : '#boa',
-			href : '#boa',
+			id : '#boa',
 			type : 'extractor',
 			icon : 'glyphicon glyphicon-cloud',
 		} ]
 	}, {
 		text : 'Database',
-		href : '#parent3',
+		id : '#parent3',
 		type : 'root',
 		nodes : [ {
 			text : '#db',
-			href : '#db',
+			id : '#db',
 			type : 'db',
 			icon : 'glyphicon glyphicon-hdd',
 		} ]
@@ -91,8 +91,7 @@
 		this.options = $.extend({}, _default.settings, options);
 		var self = this;
 		this.treeview = this.$element.treeview({
-			data : structureTemplate,
-			enableLinks : true
+			data : structureTemplate
 		});
 		
 		this.initRebuildTreeListener();
@@ -159,8 +158,10 @@
 	/**
 	 * Extract the link from the context menu target
 	 */
-	Repository.prototype.getLinkFromTarget = function(target) {
-		return $(target).find("a").first().attr('href');
+	Repository.prototype.getNodeFromTarget = function(target) {
+		var nodeId = $(target).attr('data-nodeid');
+		var node = self.treeview.treeview('getNode', nodeId);
+		return node;
 	};
 	
 	/**
@@ -183,60 +184,58 @@
 	Repository.prototype.initContextMenu = function() {
 		self = this;
 		new BootstrapMenu('#' + this.elementId + ' li.db', {
-			fetchElementData : this.getLinkFromTarget,
+			fetchElementData : this.getNodeFromTarget,
 			actions : [ {
 				name : 'Add to Workspace',
 				onClick : function(target) {
-					self.options.executeCommand('addToWorkspace', 'db', target);
+					self.options.executeCommand('addToWorkspace', target);
 				}
 			} ]
 		});
 		
 		new BootstrapMenu('#' + this.elementId + ' li.extractor', {
-			fetchElementData : this.getLinkFromTarget,
+			fetchElementData : this.getNodeFromTarget,
 			actions : [ {
 				name : 'Add to Workspace',
 				onClick : function(target) {
-					self.options.executeCommand('addToWorkspace', 'extractor', target);
+					self.options.executeCommand('addToWorkspace', target);
 				}
 			} ]
 		});
 
 		new BootstrapMenu('#' + this.elementId + ' li.file', {
-			fetchElementData : this.getLinkFromTarget,
+			fetchElementData : this.getNodeFromTarget,
 			actions : [ {
 				name : 'Add to Workspace',
 				onClick : function(target) {
-					self.options.executeCommand('addToWorkspace', 'file', target);
+					self.options.executeCommand('addToWorkspace', target);
 				}
 			}, {
 				name : 'Rename',
-				disabled : true,
 				onClick : function(target) {
-					self.options.executeCommand('rename', 'file', target);
+					self.options.executeCommand('rename', target);
 				}
 			}, {
 				name : 'Delete',
 				disabled : true,
 				onClick : function(target) {
-					self.options.executeCommand('delete', 'file', target);
+					self.options.executeCommand('delete', target);
 				}
 			} ]
 		});
 
 		new BootstrapMenu('#' + this.elementId + ' li.folder', {
-			fetchElementData : this.getLinkFromTarget,
+			fetchElementData : this.getNodeFromTarget,
 			actions : [ {
 				name : 'Rename',
-				disabled : true,
 				onClick : function(target) {
-					self.options.executeCommand('rename', 'folder', target);
+					self.options.executeCommand('rename', target);
 				}
 			}, {
 				name : 'Delete',
 				disabled : true,
 				onClick : function(target) {
-					self.options.executeCommand('delete', 'folder', target);
+					self.options.executeCommand('delete', target);
 				}
 			} ]
 		});

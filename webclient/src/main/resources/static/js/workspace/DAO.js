@@ -37,7 +37,7 @@ var DAO = function(options) {
 			
 		var node = {
 			text : hdfsData.suffix,
-			href : hdfsData.path,
+			id : hdfsData.path,
 			type : type
 		};
 		
@@ -73,4 +73,8 @@ var DAO = function(options) {
 			error : error
 		});
 	};
+	
+	this.rename = function(target, name) {
+		console.log("rename " + target + " to " + name);
+	}
 };
