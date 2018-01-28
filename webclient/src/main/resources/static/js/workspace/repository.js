@@ -9,7 +9,8 @@
 
 	var pluginName = 'repository';
 	
-	var _default = {};
+	var _default = {
+	};
 	
 	_default.settings = {
 			executeCommand: undefined
@@ -88,14 +89,50 @@
 		}
 		
 		this.options = $.extend({}, _default.settings, options);
-		
+		var self = this;
 		this.treeview = this.$element.treeview({
 			data : structureTemplate,
 			enableLinks : true
 		});
 		
+		this.initRebuildTreeListener();
+		this.initClasses();
 		this.initContextMenu();
 		this.initDragNDrop();
+	};
+	
+	/**
+	 * Init the listener on tree rebuild.
+	 */
+	Repository.prototype.initRebuildTreeListener = function() {
+		// to listen on the buildTree method from the underlying plugin:
+		// override the default append method and cause it to trigger a custom append event.
+		// Then bind a handler to an element for that event
+		var originalAppend = $.fn.append;
+	    $.fn.append = function () {
+	        return originalAppend.apply(this, arguments).trigger("append");
+	    };
+	    
+	    var self = this;
+		this.$element.bind("append", function() { 
+			self.initClasses();
+			self.initDragNDrop();
+		});
+	}
+	
+	/**
+	 * Set the css classes of the nodes.
+	 */
+	Repository.prototype.initClasses = function () {
+		var self = this;
+		this.$element.find('li').each(function() {
+			var nodeId = $(this).attr('data-nodeid');
+			var node = self.treeview.treeview('getNode', nodeId);
+			
+			if(node.type) {
+				$(this).addClass(node.type);
+			}
+		});
 	};
 	
 	/**
@@ -108,7 +145,7 @@
 				ui.helper.width(this.clientWidth);
 			}
 		});
-	}
+	};
 	
 	/**
 	 * Remove.
@@ -127,7 +164,7 @@
 	};
 	
 	/**
-	 * Add the passed nodes to the dada node.
+	 * Add the passed structure to the data node.
 	 */
 	Repository.prototype.addData = function(structure) {		
 		if (typeof structure !== 'object') {
@@ -135,13 +172,9 @@
 		}
 		
 		structureTemplate[0].nodes = structure.nodes;		
-		var options = {
-			data : structureTemplate,
-			enableLinks : true
-		}
+		this.options.data = structureTemplate;
 		
-		this.treeview.treeview('init', options);
-		this.initDragNDrop();
+		this.init(this.options);
 	};
 	
 	/**
