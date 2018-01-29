@@ -98,7 +98,48 @@ var DAO = function(options) {
 	/**
 	 * Save workflow.
 	 */
-	this.saveWorkflow = function(target, workflow) {
+	this.saveWorkflow = function(success, error, target, workflow) {
 		console.log("save workflow " + target + " " + workflow);
 	}
+	
+	/**
+	 * Upload files.
+	 */
+	this.uploadFiles = function(success, error, path, files) {
+		if (!window.File || !window.FileReader || !window.FileList || !window.Blob) {
+			logError('The File APIs are not fully supported in this browser.');
+			return;
+		}
+
+		if (!input) {
+			logError("Unable to find the fileinput element.");
+			return false;
+		}
+
+		if (!input.files) {
+			logError("This browser does not to support the 'files' property.");
+			return;
+		}
+
+		if (!input.files[0]) {
+			logError("No file selected");
+			return;
+		}
+		
+	    var formData = new FormData();  
+	    formData.append('path', path);
+	    formData.append('files', files);
+		
+		uri = "./repo-ms/storeFiles";
+		$.ajax({
+            url: uri,
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: formData,                         
+            type: 'post',
+            success: success,
+            error: error
+ });
+	};
 };

@@ -41,18 +41,23 @@ var Dialogs = function(options) {
 				+ '<fieldset>'
 				+ '<input type="hidden" name="target" />'
 				+ '<label for="name">Name</label>'
-				+ '<input type="text" name="name" required="required" class="text ui-widget-content ui-corner-all">'
+				+ '<input type="text" name="name" required="required" class="text ui-widget-content ui-corner-all" />'
 				+ '</fieldset>' + '</form>' + '</div>',
 		newFolder : '<div title="New folder">'
 				+ '<form>'
 				+ '<fieldset>'
 				+ '<input type="hidden" name="target" />'
-				+ '<label for="name">Name</label> <input type="text" name="name" required="required" class="text ui-widget-content ui-corner-all">'
+				+ '<label for="name">Name</label> <input type="text" name="name" required="required" class="text ui-widget-content ui-corner-all" />'
 				+ '</fieldset>' + '</form>' + '</div>',
 		newWorkflow : '<div title="New workflow">'
 				+ '<form>'
 				+ '<fieldset>'
-				+ '<label for="name">Name</label> <input type="text" name="name" required="required" class="text ui-widget-content ui-corner-all">'
+				+ '<label for="name">Name</label> <input type="text" name="name" required="required" class="text ui-widget-content ui-corner-all" />'
+				+ '</fieldset>' + '</form>' + '</div>',
+		upload : '<div title="Upload">'
+				+ '<form>'
+				+ '<fieldset>'
+				+ '<label for="file">File</label> <input type="file" name="file" required="required" />'
 				+ '</fieldset>' + '</form>' + '</div>'
 	};
 
@@ -143,6 +148,26 @@ var Dialogs = function(options) {
 
 		var dialog = createDialog('newFolder', buttons);
 		dialog.find('input[name="target"]').val(target.id);
+
+		// positiv on enter
+		dialog.submit(function(e) {
+			$(this).parent().find("button:eq(1)").trigger("click");
+			return false;
+		});
+
+		return dialog;
+	};
+
+	/**
+	 * Upload dialog.
+	 */
+	this.dialogUpload = function(positiv, negativ) {
+		var buttons = {
+			"Upload" : positiv,
+			Cancel : negativ
+		};
+
+		var dialog = createDialog('upload', buttons);
 
 		// positiv on enter
 		dialog.submit(function(e) {
