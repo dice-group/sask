@@ -8,14 +8,27 @@
 
 	'use strict';
 
+	/**
+	 * The plugin name.
+	 */
 	var pluginName = 'workspace';
+	
+	/**
+	 * Data access object.
+	 */
+	var dao = new DAO({});
+	
+	/**
+	 * Dialogs.
+	 */
+	var dialogs = new Dialogs({});
 
 	var _default = {};
 
 	_default.settings = {
 		undoButtonTemplate : '<button type="button" class="btn btn-default"><a href="#"><span class="glyphicon glyphicon-arrow-left "></span> Undo</a></button>',
 		redoButtonTemplate : '<button type="button" class="btn btn-default"><a href="#">Redo <span class="glyphicon glyphicon-arrow-right"></span></a></button>',
-		saveButtonTemplate : '<button disabled="disabled" type="button" class="btn btn-default"><a href="#"><span class="glyphicon glyphicon-floppy-disk"></span> Save</a></button>'
+		saveButtonTemplate : '<button type="button" class="btn btn-default"><a href="#"><span class="glyphicon glyphicon-floppy-disk"></span> Save</a></button>'
 	};
 
 	_default.options = {};
@@ -111,6 +124,7 @@
 					yPosition : y,
 					xPosition : x,
 					type : node.type,
+					text : node.text,
 					id : node.id
 				};
 
@@ -195,7 +209,9 @@
 		// save
 		saveButton.click(function() {
 			var workflow = self.getWorkflow();
-			console.log(workflow);
+			dao.saveWorkflow("xxx", workflow);
+			workflowStack.setSaved();
+			self.checkWorkflowStack();
 		});
 	};
 
@@ -210,6 +226,12 @@
 			undoButton.removeAttr('disabled');
 		} else {
 			undoButton.attr('disabled', 'disabled');
+		}
+		
+		if(workflowStack.isSaved()) {
+			saveButton.attr('disabled', 'disabled');
+		} else {
+			saveButton.removeAttr('disabled');
 		}
 	};
 
@@ -256,14 +278,14 @@
 			var outputs = {};
 			break;
 		}
-
+		
 		var newData = {
 			top : properties.yPosition,
 			left : properties.xPosition,
 			properties : {
 				type : properties.type,
 				id : properties.id,
-				title : properties.id,
+				title : properties.text,
 				inputs : inputs,
 				outputs : outputs
 			}

@@ -7,13 +7,26 @@
 
 	'use strict';
 
+	/**
+	 * The plugin name.
+	 */
 	var pluginName = 'repository';
+	
+	/**
+	 * Data access object.
+	 */
+	var dao = new DAO({});
+	
+	/**
+	 * Dialogs.
+	 */
+	var dialogs = new Dialogs({});
 	
 	var _default = {
 	};
 	
 	_default.settings = {
-			executeCommand: undefined
+			onAddToWorkspace: undefined
 	};
 	
 	_default.options = {};
@@ -69,7 +82,7 @@
 			options: this.options,
 			init: $.proxy(this.init, this),
 			remove: $.proxy(this.remove, this),
-			addData: $.proxy(this.addData, this)
+			refresh: $.proxy(this.refresh, this)
 		};
 	}
 	
@@ -169,18 +182,23 @@
 	};
 	
 	/**
-	 * Add the passed structure to the data node.
+	 * Refresh the repo.
 	 */
-	Repository.prototype.addData = function(structure) {		
-		if (typeof structure !== 'object') {
-			logError("passed parameter 'structure' is not an object");
+	Repository.prototype.refresh = function() {	
+		var self = this;
+		var success = function(data) {
+			structureTemplate[0].id = data.id;
+			structureTemplate[0].nodes = data.nodes;		
+			self.options.data = structureTemplate;
+			
+			self.init(self.options);
+		}
+
+		var error = function(data) {
+			logError(data);
 		}
 		
-		structureTemplate[0].id = structure.id:
-		structureTemplate[0].nodes = structure.nodes;		
-		this.options.data = structureTemplate;
-		
-		this.init(this.options);
+		dao.getRepoStructure(success, error);
 	};
 	
 	/**
@@ -195,7 +213,7 @@
 			actions : [ {
 				name : 'New folder',
 				onClick : function(target) {
-					self.options.executeCommand('newFolder', target);
+					openNewFolderDialog(target);
 				}
 			} ]
 		});
@@ -206,7 +224,7 @@
 			actions : [ {
 				name : 'Add to Workspace',
 				onClick : function(target) {
-					self.options.executeCommand('addToWorkspace', target);
+					self.options.onAddToWorkspace(target);
 				}
 			} ]
 		});
@@ -217,7 +235,7 @@
 			actions : [ {
 				name : 'Add to Workspace',
 				onClick : function(target) {
-					self.options.executeCommand('addToWorkspace', target);
+					self.options.onAddToWorkspace(target);
 				}
 			} ]
 		});
@@ -228,17 +246,17 @@
 			actions : [ {
 				name : 'Add to Workspace',
 				onClick : function(target) {
-					self.options.executeCommand('addToWorkspace', target);
+					self.options.onAddToWorkspace(target);
 				}
 			}, {
 				name : 'Rename',
 				onClick : function(target) {
-					self.options.executeCommand('rename', target);
+					openRenameDialog(target);
 				}
 			}, {
-				name : 'Delete',
+				name : 'Remove',
 				onClick : function(target) {
-					self.options.executeCommand('delete', target);
+					openRemoveDialog(target);
 				}
 			} ]
 		});
@@ -249,20 +267,81 @@
 			actions : [  {
 				name : 'New folder',
 				onClick : function(target) {
-					self.options.executeCommand('newFolder', target);
+					openNewFolderDialog(target);
 				}
 			}, {
 				name : 'Rename',
 				onClick : function(target) {
-					self.options.executeCommand('rename', target);
+					openRenameDialog(target);
 				}
 			}, {
-				name : 'Delete',
+				name : 'Remove',
 				onClick : function(target) {
-					self.options.executeCommand('delete', target);
+					openRemoveDialog(target);
 				}
 			}]
 		});
+	};
+	
+	/**
+	 * Open the rename dialog.
+	 */
+	var openRenameDialog = function (target) {
+		var positiv = function() {
+			var target = $(this).find('input[name="target"]')
+					.val();
+			var name = $(this).find('input[name="name"]').val();
+
+			dao.rename(target, name);
+			$(this).dialog('close');
+		};
+
+		var negativ = function() {
+			$(this).dialog("close");
+		};
+
+		dialogs.dialogRename(positiv, negativ, target).dialog(
+				'open');
+	};
+	
+	/**
+	 * Open the new folder dialog.
+	 */
+	var openNewFolderDialog = function (target) {
+		var positiv = function() {
+			var target = $(this).find('input[name="target"]')
+					.val();
+			var name = $(this).find('input[name="name"]').val();
+
+			dao.newFolder(target, name);
+			$(this).dialog('close');
+		};
+
+		var negativ = function() {
+			$(this).dialog("close");
+		};
+
+		dialogs.dialogNewFolder(positiv, negativ, target)
+				.dialog('open');
+	};
+	
+	/**
+	 * Open the remove dialog.
+	 */
+	var openRemoveDialog = function(target) {
+		var positiv = function() {
+			var target = $(this).find('input[name="target"]')
+					.val();
+			dao.remove(target);
+			$(this).dialog("close");
+		};
+
+		var negativ = function() {
+			$(this).dialog("close");
+		};
+
+		dialogs.dialogRemove(positiv, negativ, target).dialog(
+				'open');
 	};
 	
 	/**

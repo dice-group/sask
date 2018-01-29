@@ -94,4 +94,11 @@ var DAO = function(options) {
 	this.newFolder = function(target, name) {
 		console.log("newFolder " + target + " name " + name);
 	}
+	
+	/**
+	 * Save workflow.
+	 */
+	this.saveWorkflow = function(target, workflow) {
+		console.log("save workflow " + target + " " + workflow);
+	}
 };

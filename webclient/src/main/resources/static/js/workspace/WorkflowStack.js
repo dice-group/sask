@@ -9,6 +9,11 @@ var WorkflowStack = function(options) {
 	 * The saved workflows.
 	 */
 	var workflows = [];
+	
+	/**
+	 * The last saved index.
+	 */
+	var lastSaved = 0;
 
 	/**
 	 * The current position in the stack.
@@ -94,6 +99,20 @@ var WorkflowStack = function(options) {
 	this.hasLast = function() {
 		return index > 0;
 	};
+	
+	/**
+	 * Is saved.
+	 */
+	this.isSaved = function() {
+		return index == lastSaved;
+	};
+	
+	/**
+	 * Set the current index on saved.
+	 */
+	this.setSaved = function() {
+		lastSaved = index;
+	}
 
 	/**
 	 * Has a next workflow.
