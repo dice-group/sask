@@ -87,4 +87,11 @@ var DAO = function(options) {
 	this.remove = function(target) {
 		console.log("remove " + target);
 	}
+	
+	/**
+	 * Creates a new folder in the passed target.
+	 */
+	this.newFolder = function(target, name) {
+		console.log("newFolder " + target + " name " + name);
+	}
 };

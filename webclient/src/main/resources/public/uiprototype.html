@@ -23,6 +23,7 @@
 <!-- ~~~~~~ worksapce ~~~~~~ -->
 <script src="/js/workspace/WorkflowStack.js"></script>
 <script src="/js/workspace/DAO.js"></script>
+<script src="/js/workspace/Dialogs.js"></script>
 <script src="/js/workspace/workspace.js"></script>
 <link rel="stylesheet" href="/styles/workspace.css">
 <script src="/js/workspace/repository.js"></script>
@@ -67,69 +68,13 @@
 				<h4>Workspace</h4>
 				<div id="ex-workspace"></div>
 			</div>
-			<div id="ex-dialog-rename" title="Rename">
-				<form>
-					<fieldset>
-						<label for="name">Name</label> <input type="text" name="name"
-							required="required" class="text ui-widget-content ui-corner-all">
-						<!-- Allow form submission with keyboard without duplicating the dialog button -->
-						<input type="submit" tabindex="-1"
-							style="position: absolute; top: -1000px">
-					</fieldset>
-				</form>
-			</div>
-			<div id="ex-dialog-remove" title="Delete item">
-				<input type="hidden" name="target" />
-				<p>
-					This item will be permanently deleted and cannot be recovered. Are you sure?
-				</p>
-			</div>
 			<script>
 				(function($) {
 					var workspace;
 					var repo;
-
-					var dialogRename = $("#ex-dialog-rename").dialog({
-						autoOpen : false,
-						modal : true,
-						width : 350,
-						height : "auto",
-						buttons : {
-							"Rename" : function() {
-								var target = $('input[name="target"]').val();
-								var name = $('input[name="name"]').val();
-								
-								rename(target, name);
-								$(this).dialog('close');
-							},
-							Cancel : function() {
-								$(this).dialog("close");
-							}
-						},
-						close : function() {
-							$("#ex-dialog-rename form")[0].reset();
-						}
-					});
-
-					var removeDialog = $("#ex-dialog-remove").dialog({
-						autoOpen : false,
-						resizable : false,
-						height : "auto",
-						width : 400,
-						modal : true,
-						buttons : {
-							"Yes" : function() {
-								var target = $('input[name="target"]').val();
-								
-								remove(target);
-								$(this).dialog("close");
-							},
-							Cancel : function() {
-								$(this).dialog("close");
-							}
-						}
-					});
-
+					var dao = new DAO({});
+					var dialogs = new Dialogs({});
+					
 					$(document).ready(function() {
 						repo = $('#ex-repo').repository({
 							executeCommand : executeRepoCommand
@@ -140,8 +85,6 @@
 					});
 
 					function refreshRepo() {
-						var dao = new DAO({});
-
 						var success = function(data) {
 							repo.repository('addData', data);
 						}
@@ -169,30 +112,56 @@
 						case 'delete':
 							openRemoveDialog(target);
 							break;
+						case 'newFolder':
+							openNewFolderDialog(target);
+							break;
 						}
-					}
-					
-					function remove(target) {
-						var dao = new DAO({});
-						dao.remove(target);
-					}
-					
-					function rename(target, name) {
-						var dao = new DAO({});
-						dao.rename(target, name);
 					}
 
 					function openRemoveDialog(target) {
-						removeDialog.find('input[name="target"]').val(target.id);
-						removeDialog.dialog('open');
+						var positiv = function() {
+		    				var target = $(this).find('input[name="target"]').val();
+		    				dao.remove(target);
+		    				$(this).dialog("close");
+		    			};
+		    			
+		    			var negativ = function() {
+		    				$(this).dialog("close");
+		    			};
+						
+						dialogs.dialogRemove(positiv, negativ, target).dialog('open');
+					}
+					
+					function openNewFolderDialog(target) {
+						var positiv = function() {
+							var target = $(this).find('input[name="target"]').val();
+							var name = $(this).find('input[name="name"]').val();
+							
+							dao.newFolder(target, name);
+							$(this).dialog('close');
+						};
+						
+						var negativ = function() {
+		    				$(this).dialog("close");
+		    			};
+		    			
+		    			dialogs.dialogNewFolder(positiv, negativ, target).dialog('open');
 					}
 
 					function openRenameDialog(target) {
-						dialogRename.find('input[name="name"]')
-								.val(target.text);
-						dialogRename.find('input[name="target"]')
-								.val(target.id);
-						dialogRename.dialog("open");
+						var positiv = function() {
+							var target = $(this).find('input[name="target"]').val();
+							var name = $(this).find('input[name="name"]').val();
+							
+							dao.rename(target, name);
+							$(this).dialog('close');
+						};
+						
+						var negativ = function() {
+		    				$(this).dialog("close");
+		    			};
+		    			
+		    			dialogs.dialogRename(positiv, negativ, target).dialog('open');
 					}
 
 					refreshRepo();

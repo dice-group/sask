@@ -186,6 +186,19 @@
 	 */
 	Repository.prototype.initContextMenu = function() {
 		self = this;
+		
+		// data root
+		new BootstrapMenu('#' + this.elementId + ' li.root[data-nodeid="0"]', {
+			fetchElementData : this.getNodeFromTarget,
+			actions : [ {
+				name : 'New folder',
+				onClick : function(target) {
+					self.options.executeCommand('newFolder', target);
+				}
+			} ]
+		});
+		
+		// db
 		new BootstrapMenu('#' + this.elementId + ' li.db', {
 			fetchElementData : this.getNodeFromTarget,
 			actions : [ {
@@ -196,6 +209,7 @@
 			} ]
 		});
 		
+		// extractor
 		new BootstrapMenu('#' + this.elementId + ' li.extractor', {
 			fetchElementData : this.getNodeFromTarget,
 			actions : [ {
@@ -206,6 +220,7 @@
 			} ]
 		});
 
+		// file
 		new BootstrapMenu('#' + this.elementId + ' li.file', {
 			fetchElementData : this.getNodeFromTarget,
 			actions : [ {
@@ -226,9 +241,15 @@
 			} ]
 		});
 
+		// folder
 		new BootstrapMenu('#' + this.elementId + ' li.folder', {
 			fetchElementData : this.getNodeFromTarget,
-			actions : [ {
+			actions : [  {
+				name : 'New folder',
+				onClick : function(target) {
+					self.options.executeCommand('newFolder', target);
+				}
+			}, {
 				name : 'Rename',
 				onClick : function(target) {
 					self.options.executeCommand('rename', target);
@@ -238,7 +259,7 @@
 				onClick : function(target) {
 					self.options.executeCommand('delete', target);
 				}
-			} ]
+			}]
 		});
 	};
 	
