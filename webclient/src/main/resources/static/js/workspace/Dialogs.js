@@ -48,6 +48,11 @@ var Dialogs = function(options) {
 				+ '<fieldset>'
 				+ '<input type="hidden" name="target" />'
 				+ '<label for="name">Name</label> <input type="text" name="name" required="required" class="text ui-widget-content ui-corner-all">'
+				+ '</fieldset>' + '</form>' + '</div>',
+		newWorkflow : '<div title="New workflow">'
+				+ '<form>'
+				+ '<fieldset>'
+				+ '<label for="name">Name</label> <input type="text" name="name" required="required" class="text ui-widget-content ui-corner-all">'
 				+ '</fieldset>' + '</form>' + '</div>'
 	};
 
@@ -109,6 +114,23 @@ var Dialogs = function(options) {
 
 		return dialog;
 	};
+
+	this.dialogNewWorkflow = function(positiv, negativ) {
+		var buttons = {
+			"OK" : positiv,
+			Cancel : negativ
+		};
+
+		var dialog = createDialog('newWorkflow', buttons);
+
+		// positiv on enter
+		dialog.submit(function(e) {
+			$(this).parent().find("button:eq(1)").trigger("click");
+			return false;
+		});
+
+		return dialog;
+	}
 
 	/**
 	 * New folder dialog.

@@ -12,12 +12,12 @@
 	 * The plugin name.
 	 */
 	var pluginName = 'workspace';
-	
+
 	/**
 	 * Data access object.
 	 */
 	var dao = new DAO({});
-	
+
 	/**
 	 * Dialogs.
 	 */
@@ -28,7 +28,8 @@
 	_default.settings = {
 		undoButtonTemplate : '<button type="button" class="btn btn-default"><a href="#"><span class="glyphicon glyphicon-arrow-left "></span> Undo</a></button>',
 		redoButtonTemplate : '<button type="button" class="btn btn-default"><a href="#">Redo <span class="glyphicon glyphicon-arrow-right"></span></a></button>',
-		saveButtonTemplate : '<button type="button" class="btn btn-default"><a href="#"><span class="glyphicon glyphicon-floppy-disk"></span> Save</a></button>'
+		saveButtonTemplate : '<button type="button" class="btn btn-default"><a href="#"><span class="glyphicon glyphicon-floppy-disk"></span> Save</a></button>',
+		workflownameFieldTemplate : '<span class="pull-right"></span>'
 	};
 
 	_default.options = {};
@@ -57,6 +58,16 @@
 	 * The toolbar save button.
 	 */
 	var saveButton = undefined;
+
+	/**
+	 * The toolbar workflow name.
+	 */
+	var workflownameField = undefined;
+
+	/**
+	 * The workflow id of the current loaded workflow.
+	 */
+	var workflowId = undefined;
 
 	var Workspace = function(element, options) {
 
@@ -98,7 +109,7 @@
 		this.initToolbarListener();
 
 		workflowStack.saveWorkflow(this.getWorkflow());
-		this.checkWorkflowStack();
+		this.syncWorkflowStack();
 	};
 
 	/**
@@ -146,7 +157,7 @@
 			// ignnore save on move
 			if (!doingStackOperation && changeType !== 'operator_moved') {
 				workflowStack.saveWorkflow(self.getWorkflow());
-				self.checkWorkflowStack();
+				self.syncWorkflowStack();
 			}
 		};
 
@@ -175,11 +186,13 @@
 	Workspace.prototype.initToolbar = function() {
 		this.$element.append('<div>' + this.options.undoButtonTemplate
 				+ this.options.redoButtonTemplate
-				+ this.options.saveButtonTemplate + '</div>');
+				+ this.options.saveButtonTemplate
+				+ this.options.workflownameFieldTemplate + '</div>');
 
 		undoButton = this.$element.children().eq(0).children().eq(0);
 		redoButton = this.$element.children().eq(0).children().eq(1);
 		saveButton = this.$element.children().eq(0).children().eq(2);
+		workflownameField = this.$element.children().eq(0).children().eq(3);
 	};
 
 	Workspace.prototype.initToolbarListener = function() {
@@ -193,7 +206,7 @@
 			self.loadWorkflow(workflow);
 
 			doingStackOperation = false;
-			self.checkWorkflowStack();
+			self.syncWorkflowStack();
 		});
 
 		// redo
@@ -203,19 +216,42 @@
 			self.loadWorkflow(workflow);
 
 			doingStackOperation = false;
-			self.checkWorkflowStack();
+			self.syncWorkflowStack();
 		});
 
 		// save
 		saveButton.click(function() {
-			var workflow = self.getWorkflow();
-			dao.saveWorkflow("xxx", workflow);
-			workflowStack.setSaved();
-			self.checkWorkflowStack();
+
+			if (workflowId === undefined) {
+				// open dialog
+				self.openNewWorkflowDialog();
+			} else {
+				self.saveWorkflow();
+			}
 		});
 	};
 
-	Workspace.prototype.checkWorkflowStack = function() {
+	/**
+	 * Save the workflow.
+	 */
+	Workspace.prototype.saveWorkflow = function() {
+		if (workflowId === undefined) {
+			logError("workflowId not set.");
+			return;
+		}
+
+		var workflow = this.getWorkflow();
+		dao.saveWorkflow(workflowId, workflow);
+
+		workflowStack.setSaved();
+
+		this.syncWorkflowStack();
+	};
+
+	/**
+	 * Sync the workflow stack with the ui buttons.
+	 */
+	Workspace.prototype.syncWorkflowStack = function() {
 		if (workflowStack.hasNext()) {
 			redoButton.removeAttr('disabled');
 		} else {
@@ -227,8 +263,8 @@
 		} else {
 			undoButton.attr('disabled', 'disabled');
 		}
-		
-		if(workflowStack.isSaved()) {
+
+		if (workflowStack.isSaved()) {
 			saveButton.attr('disabled', 'disabled');
 		} else {
 			saveButton.removeAttr('disabled');
@@ -278,7 +314,7 @@
 			var outputs = {};
 			break;
 		}
-		
+
 		var newData = {
 			top : properties.yPosition,
 			left : properties.xPosition,
@@ -292,6 +328,26 @@
 		};
 
 		this.flowchart.flowchart('createOperator', properties.id, newData);
+	};
+
+	/**
+	 * Open the new workflow dialog.
+	 */
+	Workspace.prototype.openNewWorkflowDialog = function() {
+		var self = this;
+		var positiv = function() {
+			var name = $(this).find('input[name="name"]').val();
+			workflowId = name;
+			workflownameField.text(name);
+			self.saveWorkflow();
+			$(this).dialog('close');
+		};
+
+		var negativ = function() {
+			$(this).dialog("close");
+		};
+
+		dialogs.dialogNewWorkflow(positiv, negativ).dialog('open');
 	};
 
 	/**
