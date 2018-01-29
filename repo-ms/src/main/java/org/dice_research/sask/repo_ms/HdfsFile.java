@@ -1,29 +1,50 @@
 package org.dice_research.sask.repo_ms;
 
-public class HdfsFile {
-	private String fileName;
-	private String fileType;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
-	/**
-	 * Returns hdfs file name
-	 * 
-	 * @return Not null
-	 */
-	public String getFileName() {
-		return fileName;
+public class HdfsFile implements Serializable{
+
+	private String suffix;
+	private String path;
+	private Types type;
+	private List<HdfsFile> fileList;
+	
+	public HdfsFile(String suffix, String path, Types type) {
+		super();
+		this.suffix = suffix;
+		this.path = path;
+		this.type = type;
+		this.fileList = new ArrayList<>();
 	}
 
-	/**
-	 * Returns hdfs file type (file / directory)
-	 * 
-	 * @return Not null
-	 */
-	public String getFileType() {
-		return fileType;
+	public String getSuffix() {
+		return suffix;
 	}
 
-	public HdfsFile(String name, String type) {
-		this.fileName = name;
-		this.fileType = type;
+	public String getPath() {
+		return path;
 	}
+
+	public Types getType() {
+		return type;
+	}
+
+	public List<HdfsFile> getFileList() {
+		return fileList;
+	}
+	
+	public void addFileToList(HdfsFile file) {
+		fileList.add(file);
+	}
+
+	@Override
+	public String toString() {
+		return "HdfsFile [suffix=" + suffix + ", path=" + path + ", type=" + type + ", fileList=" + fileList + "]";
+	}
+	
+	
+	
+	
 }
