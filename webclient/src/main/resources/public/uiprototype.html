@@ -74,7 +74,7 @@
 					var repo;
 					var dao = new DAO({});
 					var dialogs = new Dialogs({});
-					
+
 					$(document).ready(function() {
 						repo = $('#ex-repo').repository({
 							executeCommand : executeRepoCommand
@@ -120,48 +120,54 @@
 
 					function openRemoveDialog(target) {
 						var positiv = function() {
-		    				var target = $(this).find('input[name="target"]').val();
-		    				dao.remove(target);
-		    				$(this).dialog("close");
-		    			};
-		    			
-		    			var negativ = function() {
-		    				$(this).dialog("close");
-		    			};
-						
-						dialogs.dialogRemove(positiv, negativ, target).dialog('open');
+							var target = $(this).find('input[name="target"]')
+									.val();
+							dao.remove(target);
+							$(this).dialog("close");
+						};
+
+						var negativ = function() {
+							$(this).dialog("close");
+						};
+
+						dialogs.dialogRemove(positiv, negativ, target).dialog(
+								'open');
 					}
-					
+
 					function openNewFolderDialog(target) {
 						var positiv = function() {
-							var target = $(this).find('input[name="target"]').val();
+							var target = $(this).find('input[name="target"]')
+									.val();
 							var name = $(this).find('input[name="name"]').val();
-							
+
 							dao.newFolder(target, name);
 							$(this).dialog('close');
 						};
-						
+
 						var negativ = function() {
-		    				$(this).dialog("close");
-		    			};
-		    			
-		    			dialogs.dialogNewFolder(positiv, negativ, target).dialog('open');
+							$(this).dialog("close");
+						};
+
+						dialogs.dialogNewFolder(positiv, negativ, target)
+								.dialog('open');
 					}
 
 					function openRenameDialog(target) {
 						var positiv = function() {
-							var target = $(this).find('input[name="target"]').val();
+							var target = $(this).find('input[name="target"]')
+									.val();
 							var name = $(this).find('input[name="name"]').val();
-							
+
 							dao.rename(target, name);
 							$(this).dialog('close');
 						};
-						
+
 						var negativ = function() {
-		    				$(this).dialog("close");
-		    			};
-		    			
-		    			dialogs.dialogRename(positiv, negativ, target).dialog('open');
+							$(this).dialog("close");
+						};
+
+						dialogs.dialogRename(positiv, negativ, target).dialog(
+								'open');
 					}
 
 					refreshRepo();

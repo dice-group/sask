@@ -13,33 +13,33 @@
 	var _default = {};
 
 	_default.settings = {
-			undoButtonTemplate : '<button type="button" class="btn btn-default"><a href="#"><span class="glyphicon glyphicon-arrow-left "></span> Undo</a></button>',
-			redoButtonTemplate : '<button type="button" class="btn btn-default"><a href="#">Redo <span class="glyphicon glyphicon-arrow-right"></span></a></button>',
-			saveButtonTemplate : '<button disabled="disabled" type="button" class="btn btn-default"><a href="#"><span class="glyphicon glyphicon-floppy-disk"></span> Save</a></button>'
+		undoButtonTemplate : '<button type="button" class="btn btn-default"><a href="#"><span class="glyphicon glyphicon-arrow-left "></span> Undo</a></button>',
+		redoButtonTemplate : '<button type="button" class="btn btn-default"><a href="#">Redo <span class="glyphicon glyphicon-arrow-right"></span></a></button>',
+		saveButtonTemplate : '<button disabled="disabled" type="button" class="btn btn-default"><a href="#"><span class="glyphicon glyphicon-floppy-disk"></span> Save</a></button>'
 	};
 
 	_default.options = {};
-	
+
 	/**
 	 * The wokflowStack for undo and redo.
 	 */
 	var workflowStack = new WorkflowStack({});
-	
+
 	/**
 	 * Indicates whether the current operation is a stack operation.
 	 */
 	var doingStackOperation = false;
-	
+
 	/**
 	 * The toolbar undo button.
 	 */
 	var undoButton = undefined;
-	
+
 	/**
 	 * The toolbar redo button.
 	 */
 	var redoButton = undefined;
-	
+
 	/**
 	 * The toolbar save button.
 	 */
@@ -80,14 +80,14 @@
 
 		this.initToolbar();
 		this.initWorkspace();
-		this.initContextMenu();	
+		this.initContextMenu();
 		this.initDragNDrop();
 		this.initToolbarListener();
-		
+
 		workflowStack.saveWorkflow(this.getWorkflow());
 		this.checkWorkflowStack();
 	};
-	
+
 	/**
 	 * Init drag n drop function. To receive data from the repo.
 	 */
@@ -95,121 +95,121 @@
 		var self = this;
 		var flowchart = this.flowchart;
 		this.flowchart.droppable({
-			accept: 'li.extractor, li.file, li.db', 
-	    	drop: function(ev, ui) {
-	    		var node = ui.helper.data('node');
+			accept : 'li.extractor, li.file, li.db',
+			drop : function(ev, ui) {
+				var node = ui.helper.data('node');
 
-	    		// get position
-	            var pos = ui.offset;
-	            var dPos = $(this).offset();
-	    		
-	            var x = pos.left - dPos.left;
-	            var y = pos.top - dPos.top;
-	            
-	    		// create node
-	    		var newNode = {
-	    				yPosition : y,
-	    				xPosition : x,
-	    				type : node.type,
-	    				id : node.id
-	    		};
-	    		
-	    		self.addNode(newNode);
-	       }
-	    });
+				// get position
+				var pos = ui.offset;
+				var dPos = $(this).offset();
+
+				var x = pos.left - dPos.left;
+				var y = pos.top - dPos.top;
+
+				// create node
+				var newNode = {
+					yPosition : y,
+					xPosition : x,
+					type : node.type,
+					id : node.id
+				};
+
+				self.addNode(newNode);
+			}
+		});
 	}
-	
+
 	/**
 	 * Init the workspace.
 	 */
 	Workspace.prototype.initWorkspace = function() {
 		this.$element.append('<div style="height: 92%"></div>');
-		
+
 		var self = this;
-		
+
 		// change
 		var onAfterChange = function(changeType) {
-			// ignnore save on move 
-			if(!doingStackOperation && changeType !== 'operator_moved') {
+			// ignnore save on move
+			if (!doingStackOperation && changeType !== 'operator_moved') {
 				workflowStack.saveWorkflow(self.getWorkflow());
 				self.checkWorkflowStack();
 			}
 		};
-		
+
 		// validate link create
-		var onLinkCreate = function (linkId, linkData) {
-			var fromOperator = self.flowchart.flowchart('getOperatorData', linkData.fromOperator);
-			var toOperator = self.flowchart.flowchart('getOperatorData', linkData.toOperator);
-			
+		var onLinkCreate = function(linkId, linkData) {
+			var fromOperator = self.flowchart.flowchart('getOperatorData',
+					linkData.fromOperator);
+			var toOperator = self.flowchart.flowchart('getOperatorData',
+					linkData.toOperator);
+
 			var fromConnector = fromOperator.properties.outputs[linkData.fromConnector];
 			var toConnector = toOperator.properties.inputs[linkData.toConnector];
-			
+
 			return fromConnector.label === toConnector.label;
 		};
-		
+
 		this.flowchart = this.$element.children().eq(1).flowchart({
 			onAfterChange : onAfterChange,
 			onLinkCreate : onLinkCreate
 		});
 	};
-	
+
 	/**
 	 * Init the toolbar.
 	 */
 	Workspace.prototype.initToolbar = function() {
-		this.$element.append('<div>'
-				+ this.options.undoButtonTemplate
+		this.$element.append('<div>' + this.options.undoButtonTemplate
 				+ this.options.redoButtonTemplate
-				+ this.options.saveButtonTemplate
-				+ '</div>');
-		
+				+ this.options.saveButtonTemplate + '</div>');
+
 		undoButton = this.$element.children().eq(0).children().eq(0);
 		redoButton = this.$element.children().eq(0).children().eq(1);
 		saveButton = this.$element.children().eq(0).children().eq(2);
 	};
-	
+
 	Workspace.prototype.initToolbarListener = function() {
 		var self = this;
-		
+
 		// undo
 		undoButton.click(function() {
 			doingStackOperation = true;
-			
+
 			var workflow = workflowStack.getLastWorkflow();
 			self.loadWorkflow(workflow);
-			
+
 			doingStackOperation = false;
 			self.checkWorkflowStack();
 		});
-		
+
 		// redo
 		redoButton.click(function() {
 			doingStackOperation = true;
 			var workflow = workflowStack.getNextWorkflow();
 			self.loadWorkflow(workflow);
-			
+
 			doingStackOperation = false;
 			self.checkWorkflowStack();
 		});
-		
-		// save 
+
+		// save
 		saveButton.click(function() {
 			var workflow = self.getWorkflow();
 			console.log(workflow);
 		});
 	};
-	
+
 	Workspace.prototype.checkWorkflowStack = function() {
-		if(workflowStack.hasNext()) {
+		if (workflowStack.hasNext()) {
 			redoButton.removeAttr('disabled');
 		} else {
-			redoButton.attr('disabled','disabled');
+			redoButton.attr('disabled', 'disabled');
 		}
-		
-		if(workflowStack.hasLast()) {
+
+		if (workflowStack.hasLast()) {
 			undoButton.removeAttr('disabled');
 		} else {
-			undoButton.attr('disabled','disabled');
+			undoButton.attr('disabled', 'disabled');
 		}
 	};
 
@@ -268,17 +268,17 @@
 				outputs : outputs
 			}
 		};
-		
+
 		this.flowchart.flowchart('createOperator', properties.id, newData);
 	};
-	
+
 	/**
 	 * Load the passed workspace
 	 */
 	Workspace.prototype.loadWorkflow = function(workspace) {
 		this.flowchart.flowchart('setData', workspace);
 	};
-	
+
 	/**
 	 * Returns the current workflow
 	 */
@@ -298,11 +298,11 @@
 	 */
 	Workspace.prototype.initContextMenu = function() {
 		var self = this;
-		
+
 		var onRemove = function(target) {
 			self.flowchart.flowchart('deleteOperator', target);
 		};
-		
+
 		new BootstrapMenu('#' + this.elementId + ' div.flowchart-operator', {
 			fetchElementData : this.getNameFromTarget,
 			actions : [ {

@@ -3,7 +3,7 @@
  */
 ;(function ($, window, document) {
 
-	/*global jQuery, console*/
+	/* global jQuery, console */
 
 	'use strict';
 
@@ -105,7 +105,8 @@
 	 */
 	Repository.prototype.initRebuildTreeListener = function() {
 		// to listen on the buildTree method from the underlying plugin:
-		// override the default append method and cause it to trigger a custom append event.
+		// override the default append method and cause it to trigger a custom
+		// append event.
 		// Then bind a handler to an element for that event
 		var originalAppend = $.fn.append;
 	    $.fn.append = function () {
@@ -175,6 +176,7 @@
 			logError("passed parameter 'structure' is not an object");
 		}
 		
+		structureTemplate[0].id = structure.id:
 		structureTemplate[0].nodes = structure.nodes;		
 		this.options.data = structureTemplate;
 		
