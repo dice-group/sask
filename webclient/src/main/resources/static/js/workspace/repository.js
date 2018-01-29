@@ -357,7 +357,7 @@
 			console.log(data);
 		};
 
-		dao.uploadFiles(success, error, path, input.files);
+		dao.uploadFiles(success, error, path, input);
 	};
 	
 	/**

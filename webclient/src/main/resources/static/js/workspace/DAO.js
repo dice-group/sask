@@ -105,7 +105,7 @@ var DAO = function(options) {
 	/**
 	 * Upload files.
 	 */
-	this.uploadFiles = function(success, error, path, files) {
+	this.uploadFiles = function(success, error, path, input) {
 		if (!window.File || !window.FileReader || !window.FileList || !window.Blob) {
 			logError('The File APIs are not fully supported in this browser.');
 			return;
@@ -128,8 +128,12 @@ var DAO = function(options) {
 		
 	    var formData = new FormData();  
 	    formData.append('path', path);
-	    formData.append('files', files);
-		
+	    formData.append('location', "REPO");
+	    
+	    for (var i = 0; i < input.files.length; i++) {
+	    	formData.append('files', input.files[i]);
+	    }
+	    
 		uri = "./repo-ms/storeFiles";
 		$.ajax({
             url: uri,

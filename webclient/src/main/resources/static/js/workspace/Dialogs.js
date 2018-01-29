@@ -57,7 +57,7 @@ var Dialogs = function(options) {
 		upload : '<div title="Upload">'
 				+ '<form>'
 				+ '<fieldset>'
-				+ '<label for="file">File</label> <input type="file" name="file" required="required" />'
+				+ '<label for="file">File</label> <input type="file" name="file" required="required" multiple/>'
 				+ '</fieldset>' + '</form>' + '</div>'
 	};
 
