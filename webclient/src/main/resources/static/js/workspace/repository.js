@@ -349,12 +349,23 @@
 	 * Handle the file upload.
 	 */
 	var handleFileUpload = function(path, input) {
+
 		var success = function(data) {
-			console.log(data);
+			$.each(data.result.files, function (index, file) {
+                $('<p/>').text(file.name).appendTo('#files');
+            });
 		};
 		
+		var progress = function(data) {
+			var progress = parseInt(data.loaded / data.total * 100, 10);
+            $('#progress .progress-bar').css(
+                'width',
+                progress + '%'
+            );
+		}
+		
 		var error = function(data) {
-			console.log(data);
+			logError(data);
 		};
 
 		dao.uploadFiles(success, error, path, input);
