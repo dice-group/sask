@@ -2,7 +2,7 @@
 # Service registers under this name
 spring:
   application:
-    name: fred-ms
+    name: executer-ms
 
 # Discovery Server Access
 eureka:
