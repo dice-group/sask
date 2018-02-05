@@ -39,32 +39,62 @@ $(function() {
 				}
 				var obj = JSON.parse(data);
 				console.log(obj);
+				
 				var displayText = "";
-				for(var i=0; i<obj.length; i++){
-				displayText+="<div class='card'>";
-				var elementName="Open Link in DBpedia";
-				if (typeof obj[i].thumbnail == "undefined")
-					console.log("Thumbnail is not present");
-				else
-					displayText += "<img src=" +  obj[i].thumbnail +" height='200' width='200'/><br>";
-				if (typeof obj[i].comment == "undefined")
-					console.log("Comment is not present");
-				else
-					displayText += obj[i].comment +"<br>";
-				if (typeof obj[i].URI == "undefined")
-					console.log("URI is not present");
-				else{
-					var link=obj[i].URI;
-					console.log(link);
-					displayText +=elementName.link(link) + "-->For reference,URL=" + link;
+				console.log(obj.messageType);
+				if(obj.error == true){
+					//Create a Internal Server Error card
+					displayText+="<div class='card'>Internal Server error. Please contact your administrator<br></div>";
 				}
-				displayText +="</div>"
+				else{
+					var newobj = obj.messageData;
+					var messageType= obj.messageType;
+					if(messageType== "PLAIN_TEXT"){
+						displayText+="<div class='card'>";
+						displayText += newobj[0].content;
+						displayText += "</div>";
+						
+					}
+					else if (messageType == "TEXT_WITH_URL" || messageType == "URL"){
+						//Need to polish read Entry Information.
+						for(var i=0; i< newobj.length; i++){
+							displayText+="<div class='card'>";
+							if(newobj[i].content != ""){
+								displayText += newobj[0].content + "<br>";
+							}
+							if(newobj[i].image != "" && newobj[i].image != null ){
+								displayText += "<img src=" +  newobj[i].image +" height='200' width='200'/><br>";
+							}
+							//Read Entry List
+							var entryobj = newobj[i].entryList;
+							for(var j=0 ; j< entryobj.length; j++){
+								if(entryobj[j].buttonType == "URL"){
+									var text = entryobj[j].displayText;
+									displayText +=text.link(entryobj[j].uri) + "-->For reference,URL=" + entryobj[j].uri + "<br>";
+									console.log(entryobj[j].uri);
+									//displayText +='<a href="' + entryobj[j].uri + '">' + text + '</a>';
+									
+								}
+								else{
+									displayText += entryobj[j].displayText + "<br>";
+								}
+							}
+							displayText += "</div>";
+						}
+					}
+					else{
+						//Read and implement Feedback for Active Learning Intent classification TODO:
+						console.log("Not implemented yet");
+					}
 				}
 				$("#container").html(prevMsg + displayText);
 				$("#container").scrollTop($("#container").prop("scrollHeight"));
 			},
 			error : function(e) {
 				console.log("ERROR: ", e);
+				var displayText="<div class='card'>Internal Server error. Please contact your administrator<br></div>";
+				$("#container").html(prevMsg + displayText);
+				$("#container").scrollTop($("#container").prop("scrollHeight"));
 			
 			},
 			done : function(e) {
