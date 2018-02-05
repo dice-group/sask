@@ -20,6 +20,7 @@
 		<module>fox-ms</module>
 		<module>fred-ms</module>
 		<module>chatbot</module>
+		<module>database-ms</module>
 	</modules>
 
 	<properties>
