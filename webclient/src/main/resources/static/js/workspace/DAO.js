@@ -23,10 +23,13 @@ var DAO = function(options) {
 	 */
 	var parseRepoStructure = function(hdfsData) {
 		var type;
+		var icon;
 		if(hdfsData.type === 'DIRECTORY') {
 			type = 'folder';
+			icon = 'glyphicon glyphicon-folder-open';
 		} else if(hdfsData.type === 'FILE') {
 			type = 'file';
+			icon = 'glyphicon glyphicon-file';
 		}
 		
 		var nodes = [];
@@ -38,7 +41,8 @@ var DAO = function(options) {
 		var node = {
 			text : hdfsData.suffix,
 			id : hdfsData.path,
-			type : type
+			type : type,
+			icon : icon
 		};
 		
 		if(nodes.length > 0) {
@@ -80,28 +84,45 @@ var DAO = function(options) {
 	 * Rename the passed target.
 	 */
 	this.rename = function(target, name) {
-		console.log("rename " + target + " to " + name);
+		console.log("(MOCK) rename " + target + " to " + name);
 	}
 	
 	/**
 	 * Remove the passed target.
 	 */
 	this.remove = function(target) {
-		console.log("remove " + target);
+		console.log("(MOCK) remove " + target);
 	}
 	
 	/**
 	 * Creates a new folder in the passed target.
 	 */
 	this.newFolder = function(target, name) {
-		console.log("newFolder " + target + " name " + name);
+		console.log("(MOCK) newFolder " + target + " name " + name);
 	}
 	
 	/**
 	 * Save workflow.
 	 */
 	this.saveWorkflow = function(success, error, target, workflow) {
-		console.log("save workflow " + target + " " + workflow);
+		console.log("(MOCK) save workflow " + target + " " + workflow);
+	}
+	
+	/**
+	 * Return all target graphs.
+	 */
+	this.getTargetGraphs = function(success, error) {
+		console.log("(MOCK) get target graphs");
+		
+		var graphs = [];
+		graphs.push({
+			text : 'sask',
+			id : 'sask',
+			type : 'db',
+			icon : 'glyphicon glyphicon-hdd'
+		});
+
+		success(graphs);
 	}
 	
 	/**

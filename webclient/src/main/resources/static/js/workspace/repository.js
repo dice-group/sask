@@ -43,31 +43,31 @@
 		id : '#parent2',
 		type : 'root',
 		nodes : [ {
-			text : '#fox',
+			text : 'FOX',
 			id : '#fox',
 			type : 'extractor',
-			icon : 'glyphicon glyphicon-cloud',
+			icon : 'glyphicon glyphicon-wrench'
 		}, {
-			text : '#rdffred',
+			text : 'RDF Fred',
 			id : '#rdffred',
 			type : 'extractor',
-			icon : 'glyphicon glyphicon-cloud',
+			icon : 'glyphicon glyphicon-wrench'
 		}, {
-			text : '#boa',
-			id : '#boa',
+			text : 'Spotlight',
+			id : '#spotlight',
 			type : 'extractor',
-			icon : 'glyphicon glyphicon-cloud',
+			icon : 'glyphicon glyphicon-wrench'
 		} ]
 	}, {
-		text : 'Database',
+		text : 'Target graphs',
 		id : '#parent3',
 		type : 'root',
-		nodes : [ {
-			text : '#db',
-			id : '#db',
-			type : 'db',
-			icon : 'glyphicon glyphicon-hdd',
-		} ]
+		nodes : []
+	}, {
+		text : 'Workflows',
+		id : '#parent4',
+		type : 'root',
+		nodes : []
 	} ];
 	
 	var Repository = function (element, options) {
@@ -185,7 +185,7 @@
 	/**
 	 * Refresh the repo.
 	 */
-	Repository.prototype.refresh = function() {	
+	Repository.prototype.refreshRepo = function() {	
 		var self = this;
 		var success = function(data) {
 			structureTemplate[0].id = data.id;
@@ -200,6 +200,32 @@
 		}
 		
 		dao.getRepoStructure(success, error);
+	};
+	
+	/**
+	 * Refresh the db.
+	 */
+	Repository.prototype.refreshDB = function() {	
+		var self = this;
+		var success = function(data) {
+			structureTemplate[2].nodes = data;
+			self.options.data = structureTemplate;
+			self.init(self.options);
+		}
+
+		var error = function(data) {
+			logError(data);
+		}
+		
+		dao.getTargetGraphs(success, error);
+	};
+	
+	/**
+	 * Refresh the whole content of the repo.
+	 */
+	Repository.prototype.refresh = function() {	
+		this.refreshRepo();
+		this.refreshDB();
 	};
 	
 	/**
