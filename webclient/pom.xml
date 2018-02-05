@@ -18,6 +18,25 @@
 	</parent>
 
 	<dependencies>
+		<!-- https://mvnrepository.com/artifact/org.webjars/jquery -->
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>jquery</artifactId>
+			<version>3.2.1</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.webjars/jquery-ui -->
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>jquery-ui</artifactId>
+			<version>1.12.1</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.webjars/bootstrap -->
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>bootstrap</artifactId>
+			<version>3.3.7</version>
+		</dependency>
 		<!-- ~~~~~~~ spring eureka server ~~~~~~~ -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
@@ -25,9 +44,9 @@
 		</dependency>
 		<!-- ~~~~~~~ spring cloud zuul ~~~~~~~ -->
 		<dependency>
-          		<groupId>org.springframework.cloud</groupId>
-          		<artifactId>spring-cloud-starter-zuul</artifactId>
-      		</dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-zuul</artifactId>
+		</dependency>
 		<!-- ~~~~~~~ spring cloud-ribbon ~~~~~~~ -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
