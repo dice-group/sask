@@ -203,6 +203,26 @@
 	};
 	
 	/**
+	 * Refresh the workflows
+	 */
+	Repository.prototype.refreshWorkflows = function() {	
+		var self = this;
+		var success = function(data) {
+			structureTemplate[3].id = data.id;
+			structureTemplate[3].nodes = data.nodes;		
+			self.options.data = structureTemplate;
+			
+			self.init(self.options);
+		}
+
+		var error = function(data) {
+			logError(data);
+		}
+		
+		dao.getWorkflows(success, error);
+	};
+	
+	/**
 	 * Refresh the db.
 	 */
 	Repository.prototype.refreshDB = function() {	
@@ -226,6 +246,7 @@
 	Repository.prototype.refresh = function() {	
 		this.refreshRepo();
 		this.refreshDB();
+		this.refreshWorkflows();
 	};
 	
 	/**

@@ -81,6 +81,25 @@ var DAO = function(options) {
 	};
 	
 	/**
+	 * Get all workflows.
+	 */
+	this.getWorkflows = function(success, error) {
+    	uri = "./repo-ms/getHdfsStructure";
+    	var data = {location : 'WORKFLOW'};
+    	
+		$.ajax({
+			type : "POST",
+			url : uri,
+			data : data,
+			success : function(data) {
+				var structure = parseRepoStructure(data);
+				success(structure);
+			},
+			error : error
+		});
+	};
+	
+	/**
 	 * Rename the passed target.
 	 */
 	this.rename = function(target, name) {
