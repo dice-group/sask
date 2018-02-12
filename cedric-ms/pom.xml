@@ -9,6 +9,13 @@
 
 	<name>cedric-ms</name>
 
+	<repositories>
+		<repository>
+			<id>jitpack.io</id>
+			<url>https://jitpack.io</url>
+		</repository>
+	</repositories>
+
 	<parent>
 		<groupId>org.dice-research</groupId>
 		<artifactId>sask</artifactId>
@@ -17,6 +24,12 @@
 	</parent>
 
 	<dependencies>
+		<dependency>
+			<groupId>com.github.KHaack</groupId>
+			<artifactId>relationextraction</artifactId>
+			<version>v0.93</version>
+		</dependency>
+
 		<!-- ~~~~~~~ spring eureka server ~~~~~~~ -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
