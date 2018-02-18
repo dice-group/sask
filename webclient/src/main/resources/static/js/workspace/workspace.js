@@ -156,8 +156,7 @@
 
 		// change
 		var onAfterChange = function(changeType) {
-			// ignnore save on move
-			if (!doingStackOperation && changeType !== 'operator_moved') {
+			if (!doingStackOperation) {
 				workflowStack.saveWorkflow(self.getWorkflow());
 				self.syncWorkflowStack();
 			}
