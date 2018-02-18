@@ -63,7 +63,7 @@ public class HadoopService {
 	private String hostURL = HADOOP_HOSTSERVER + ":" + HADOOP_NAMENODE_PORT + "/" + protocol + "/" + version;
 	private String hdfsDirPath = "/user/DICE";
 	private String hdfsDirRepoPath = "/repo";
-	private String hdfsDirWorkspacePath = "/workspace";
+	private String hdfsDirWorkspacePath = "/workflow";
 	private RestTemplate restTemplate = new RestTemplate();
 
 	private static HadoopService instance;
