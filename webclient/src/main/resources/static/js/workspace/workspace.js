@@ -29,7 +29,9 @@
 		undoButtonTemplate : '<button type="button" class="btn btn-default"><a href="#"><span class="glyphicon glyphicon-arrow-left "></span> Undo</a></button>',
 		redoButtonTemplate : '<button type="button" class="btn btn-default"><a href="#">Redo <span class="glyphicon glyphicon-arrow-right"></span></a></button>',
 		saveButtonTemplate : '<button type="button" class="btn btn-default"><a href="#"><span class="glyphicon glyphicon-floppy-disk"></span> Save</a></button>',
-		workflownameFieldTemplate : '<span class="pull-right"></span>'
+		workflownameFieldTemplate : '<span class="pull-right"></span>',
+		forceFileEnding : true,
+		fileEnding : ".wf"
 	};
 
 	_default.options = {};
@@ -343,8 +345,16 @@
 	 */
 	Workspace.prototype.openNewWorkflowDialog = function() {
 		var self = this;
+		var options = this.options;
 		var positiv = function() {
 			var name = $(this).find('input[name="name"]').val();
+			
+			if(options.forceFileEnding) {
+				if(!name.endsWith(options.fileEnding)) {
+					name += options.fileEnding;
+				}
+			}
+
 			workflowId = name;
 			workflownameField.text(name);
 			self.saveWorkflow();

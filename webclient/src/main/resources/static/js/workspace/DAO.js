@@ -25,9 +25,9 @@ var DAO = function(options) {
 	};
 
 	/**
-	 * Parse the hdfs structure to the ui structure.
+	 * Parse the hdfs repo structure to the ui structure.
 	 */
-	var parseRepoStructure = function(hdfsData, fileIcon) {
+	var parseRepoStructure = function(hdfsData) {
 		var type;
 		var icon;
 		if (hdfsData.type === 'DIRECTORY') {
@@ -35,13 +35,47 @@ var DAO = function(options) {
 			icon = settings.icons.folder;
 		} else if (hdfsData.type === 'FILE') {
 			type = 'file';
-			icon = fileIcon;
+			icon = settings.icons.file;
 		}
 
 		var nodes = [];
 
 		$.each(hdfsData.fileList, function(index, value) {
-			nodes.push(parseRepoStructure(value, fileIcon));
+			nodes.push(parseRepoStructure(value));
+		});
+
+		var node = {
+			text : hdfsData.suffix,
+			id : hdfsData.path,
+			type : type,
+			icon : icon
+		};
+
+		if (nodes.length > 0) {
+			node.nodes = nodes;
+		}
+
+		return node;
+	};
+	
+	/**
+	 * Parse the hdfs workflows structure to the ui structure.
+	 */
+	var parseWorkflowStructure = function(hdfsData) {
+		var type;
+		var icon;
+		if (hdfsData.type === 'DIRECTORY') {
+			type = 'folder';
+			icon = settings.icons.folder;
+		} else if (hdfsData.type === 'FILE') {
+			type = 'workflow';
+			icon = settings.icons.workflow;
+		}
+
+		var nodes = [];
+
+		$.each(hdfsData.fileList, function(index, value) {
+			nodes.push(parseWorkflowStructure(value));
 		});
 
 		var node = {
@@ -81,7 +115,7 @@ var DAO = function(options) {
 			url : uri,
 			data : data,
 			success : function(data) {
-				var structure = parseRepoStructure(data, settings.icons.file);
+				var structure = parseRepoStructure(data);
 				success(structure);
 			},
 			error : error
@@ -102,8 +136,7 @@ var DAO = function(options) {
 			url : uri,
 			data : data,
 			success : function(data) {
-				var structure = parseRepoStructure(data,
-						settings.icons.workflow);
+				var structure = parseWorkflowStructure(data);
 				success(structure);
 			},
 			error : error
