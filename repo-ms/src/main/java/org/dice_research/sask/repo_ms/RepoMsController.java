@@ -18,17 +18,25 @@ public class RepoMsController {
 	private Logger logger = Logger.getLogger(RepoMsController.class.getName());
 	private HadoopService hadoopService = HadoopService.getInstance();
 
-	@RequestMapping(value = "/storeFile")
-	public String storeFiles(String path, MultipartFile[] uploadfiles, Location location) throws IOException {
-		this.logger.info("Repo-microservice storeFile() invoked");
-		
-		// Get file name
-        String uploadedFileName = Arrays.stream(uploadfiles).map(x -> x.getOriginalFilename())
+	@RequestMapping(value = "/storeFiles")
+	public String storeFiles(String path, MultipartFile[] files, Location location) throws IOException {
+		this.logger.info("Repo-microservice storeFile() invoked");		
+        String uploadedFileName = Arrays.stream(files).map(x -> x.getOriginalFilename())
                 .filter(x -> !StringUtils.isEmpty(x)).collect(Collectors.joining(" , "));
-		return new String(Arrays.asList(uploadfiles).get(0).getBytes());
-		//return hadoopService.storeFiles(path,Arrays.asList(uploadfiles),location);
+		return hadoopService.storeFiles(path,Arrays.asList(files),location);
 	}
+	
+	/*@RequestMapping(value = "/readFiles", produces = MediaType.APPLICATION_JSON_VALUE)
+	public String readFiles(String path, Location location) throws IOException {
+		this.logger.info("Repo-microservice readFiles() invoked");		
+		return hadoopService.readFiles(path,location);
+	}*/
 
+	@RequestMapping(value = "/readFile")
+	public String readFile() throws IOException {
+		this.logger.info("Repo-microservice readFiles() invoked");		
+		return hadoopService.readFile("/Ablauf.txt",Location.REPO);
+	}
 	@RequestMapping(value = "/rename")
 	public String rename(String from, String to, Location location) {
 		this.logger.info("Repo-microservice rename() invoked");
@@ -37,7 +45,7 @@ public class RepoMsController {
 
 	@RequestMapping(value = "/getHdfsStructure", produces = MediaType.APPLICATION_JSON_VALUE)
 	public HdfsFile getHdfsStructure(Location location) {
-		this.logger.info("Repo-microservice getRepoStructure() invoked");
+		this.logger.info("Repo-microservice getHdfsStructure() invoked");
 		return hadoopService.getHdfsStructure(location);
 	}
 
