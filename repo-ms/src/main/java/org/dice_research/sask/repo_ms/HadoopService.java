@@ -1,19 +1,16 @@
 package org.dice_research.sask.repo_ms;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.core.io.FileSystemResource;
-import org.springframework.core.io.Resource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -27,15 +24,15 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 public class HadoopService {
 
 	private Logger logger = Logger.getLogger(RepoMsController.class.getName());
 
-	private static final String hostServer = "http://localhost";
-	private static final String port = "2400";
+	private static final String HADOOP_HOSTSERVER = "http://localhost";
+	private static final int HADOOP_DATANODE_PORT = 50075;
+	private static final int HADOOP_NAMENODE_PORT = 50070;
+		
 	private static final String protocol = "webhdfs";
 	private static final String version = "v1";
 	private static final String opString = "?op=";
@@ -63,7 +60,7 @@ public class HadoopService {
 	private static final String buffersizeValue = "1024";
 	private static final String overwriteValue = "true";
 
-	private String hostURL = hostServer + ":" + port + "/" + protocol + "/" + version;
+	private String hostURL = HADOOP_HOSTSERVER + ":" + HADOOP_NAMENODE_PORT + "/" + protocol + "/" + version;
 	private String hdfsDirPath = "/user/DICE";
 	private String hdfsDirRepoPath = "/repo";
 	private String hdfsDirWorkspacePath = "/workspace";
@@ -150,7 +147,7 @@ public class HadoopService {
 			this.logger.info(uri);
 			ResponseEntity<String> response = restTemplate.exchange(uri, HttpMethod.PUT, null, String.class);
 			URI nodeLocation = response.getHeaders().getLocation();
-			URI nodeURI = URI.create(hostServer + ":" + 2402 + nodeLocation.getPath() + "?" + nodeLocation.getQuery());
+			URI nodeURI = URI.create(HADOOP_HOSTSERVER + ":" + HADOOP_DATANODE_PORT + nodeLocation.getPath() + "?" + nodeLocation.getQuery());
 
 			try {
 				map = new LinkedMultiValueMap<>();

@@ -67,9 +67,9 @@ var DAO = function(options) {
     this.getRepoStructure = function(success, error) {
     	uri = "./repo-ms/getHdfsStructure";
     	var data = {location : 'REPO'};
-    	
 		$.ajax({
 			type : "POST",
+			data : data,
 			url : uri,
 			data : data,
 			success : function(data) {
