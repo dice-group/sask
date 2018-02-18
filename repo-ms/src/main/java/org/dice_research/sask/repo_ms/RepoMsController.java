@@ -17,13 +17,19 @@ public class RepoMsController {
 	private HadoopService hadoopService = HadoopService.getInstance();
 
 	@RequestMapping(value = "/storeFiles")
-	public String storeFiles(String path, MultipartFile[] files, Location location) throws IOException {
+	public boolean storeFiles(String path, MultipartFile[] files, Location location) throws IOException {
 		this.logger.info("Repo-microservice storeFile() invoked");
 		Arrays.stream(files)
 		      .map(x -> x.getOriginalFilename())
 		      .filter(x -> !StringUtils.isEmpty(x))
 		      .collect(Collectors.joining(" , "));
 		return hadoopService.storeFiles(path, Arrays.asList(files), location);
+	}
+	
+	@RequestMapping(value = "/storeContentInFile")
+	public boolean storeContentInFile(String path, String filename, Location location, String content) {
+		this.logger.info("Repo-microservice storeContentInFile() invoked");
+		return hadoopService.storeContentInFile(path, filename, location, content);
 	}
 
 	// @RequestMapping(value = "/readFiles", produces =
@@ -35,7 +41,7 @@ public class RepoMsController {
 	// }
 
 	@RequestMapping(value = "/readFile")
-	public String readFile() throws IOException {
+	public boolean readFile() throws IOException {
 		this.logger.info("Repo-microservice readFiles() invoked");
 		return hadoopService.readFile("/Ablauf.txt", Location.REPO);
 	}

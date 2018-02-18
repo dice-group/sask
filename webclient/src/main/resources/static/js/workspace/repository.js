@@ -398,9 +398,7 @@
 	var handleFileUpload = function(path, input) {
 
 		var success = function(data) {
-			$.each(data.result.files, function (index, file) {
-                $('<p/>').text(file.name).appendTo('#files');
-            });
+			console.log(data);
 		};
 		
 		var progress = function(data) {

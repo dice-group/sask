@@ -239,9 +239,17 @@
 			logError("workflowId not set.");
 			return;
 		}
+		
+		var success = function(data) {
+			console.log(data);
+		}
+		
+		var error = function(data) {
+			logError(data);
+		}
 
 		var workflow = this.getWorkflow();
-		dao.saveWorkflow(workflowId, workflow);
+		dao.saveWorkflow(success, error, workflowId, workflow);
 
 		workflowStack.setSaved();
 

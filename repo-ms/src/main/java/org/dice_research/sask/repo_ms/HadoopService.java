@@ -1,7 +1,9 @@
 package org.dice_research.sask.repo_ms;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URI;
 import java.nio.file.Files;
@@ -32,7 +34,9 @@ public class HadoopService {
 	private static final String HADOOP_HOSTSERVER = "http://localhost";
 	private static final int HADOOP_DATANODE_PORT = 50075;
 	private static final int HADOOP_NAMENODE_PORT = 50070;
-		
+
+	private static final String TEMP_FOLDER = "tempRepo";
+
 	private static final String protocol = "webhdfs";
 	private static final String version = "v1";
 	private static final String opString = "?op=";
@@ -78,7 +82,7 @@ public class HadoopService {
 		return HadoopService.instance;
 	}
 
-	public String readFile(String path, Location location) {
+	public boolean readFile(String path, Location location) {
 
 		path = path.startsWith(forwardSlash) ? path : forwardSlash + path;
 
@@ -92,30 +96,86 @@ public class HadoopService {
 		default:
 			break;
 		}
-		
+
 		String uri = hostURL + hdfsDirPath + path + opString + readOp;
 		this.logger.info(uri);
 
 		HttpHeaders headers = new HttpHeaders();
 		headers.setAccept(Arrays.asList(MediaType.APPLICATION_OCTET_STREAM));
 		HttpEntity<String> entity = new HttpEntity<>(headers);
-		ResponseEntity<byte[]> response = restTemplate.exchange(uri,HttpMethod.GET, entity, byte[].class);
-		//this.logger.info(response.getStatusCode()+" "+response.getStatusCodeValue());
-		
-		
+		ResponseEntity<byte[]> response = restTemplate.exchange(uri, HttpMethod.GET, entity, byte[].class);
+		// this.logger.info(response.getStatusCode()+"
+		// "+response.getStatusCodeValue());
+
 		/*
-		//http://localhost:2400/webhdfs/v1/user/DICE/repo/Ablauf.txt?op=OPEN
+		 * //http://localhost:2400/webhdfs/v1/user/DICE/repo/Ablauf.txt?op=OPEN
+		 * if (!Files.exists(Paths.get(File.separator + "tempRepo"))) {
+		 * this.logger.info("Create /tempRepo/ -> " + new File(File.separator +
+		 * "tempRepo").mkdir()); }
+		 * 
+		 * Files.write(Paths.get(File.separator +
+		 * "tempRepo"+File.separator+"test.txt"), response.getBody()); return
+		 * Files.readAllLines(Paths.get(File.separator +
+		 * "tempRepo"+File.separator+"test.txt")).toString();
+		 */
+		return true;
+	}
+
+	/**
+	 * Store the passed content in the passed file.
+	 * 
+	 * @param path
+	 * @param filename
+	 * @param location
+	 * @param content
+	 * @return
+	 */
+	public boolean storeContentInFile(String path, String filename, Location location, String content) {
 		if (!Files.exists(Paths.get(File.separator + "tempRepo"))) {
 			this.logger.info("Create /tempRepo/ -> " + new File(File.separator + "tempRepo").mkdir());
 		}
-		
-		Files.write(Paths.get(File.separator + "tempRepo"+File.separator+"test.txt"), response.getBody());
-		return Files.readAllLines(Paths.get(File.separator + "tempRepo"+File.separator+"test.txt")).toString();*/
-		return "";
+
+		String tempFileName = File.separator + TEMP_FOLDER + File.separator + filename;
+
+		BufferedWriter out = null;
+		try {
+			out = new BufferedWriter(new FileWriter(tempFileName));
+			out.write(content);
+		} catch (IOException ex) {
+			throw new RuntimeException("Unable to create tempfile '" + tempFileName + "'", ex);
+		} finally {
+			try {
+				if (null != out) {
+					out.close();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+		LinkedMultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+		map.add("file", new FileSystemResource(tempFileName));
+
+		uploadFile(location, path, tempFileName, filename, map);
+
+		try {
+			Files.deleteIfExists(Paths.get(tempFileName));
+		} catch (IOException e) {
+			throw new RuntimeException("Unable to delete temp file '" + tempFileName + "'");
+		}
+
+		return true;
 	}
 
-	public String storeFiles(String path, List<MultipartFile> files, Location location) {
-
+	/**
+	 * Upload the passed file to hadoop.
+	 * 
+	 * @param path
+	 * @param tempFileName
+	 * @param originalFileName
+	 * @param map
+	 */
+	private void uploadFile(Location location, String path, String tempFileName, String originalFileName, LinkedMultiValueMap<String, Object> map) {
 		switch (location) {
 		case REPO:
 			path = hdfsDirRepoPath + path;
@@ -126,12 +186,39 @@ public class HadoopService {
 		default:
 			break;
 		}
+		
+		URI uri = URI.create(hostURL + hdfsDirPath + path + originalFileName + opString + createFileOp + overwrite + overwriteValue);
 
+		this.logger.info(uri);
+		ResponseEntity<String> response = restTemplate.exchange(uri, HttpMethod.PUT, null, String.class);
+		URI nodeLocation = response.getHeaders()
+		                           .getLocation();
+		URI nodeURI = URI.create(HADOOP_HOSTSERVER + ":" + HADOOP_DATANODE_PORT + nodeLocation.getPath() + "?" + nodeLocation.getQuery());
+		this.logger.info(nodeURI);
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+		HttpEntity<LinkedMultiValueMap<String, Object>> requestEntity = new HttpEntity<LinkedMultiValueMap<String, Object>>(map, headers);
+		response = restTemplate.exchange(nodeURI, HttpMethod.PUT, requestEntity, String.class);
+		this.logger.info(response.getBody());
+		this.logger.info(response.getHeaders()
+		                         .toString());
+	}
+
+	/**
+	 * Store the passed multipartfiles at the passed path and location.
+	 * 
+	 * @param path
+	 * @param files
+	 * @param location
+	 * @return
+	 */
+	public boolean storeFiles(String path, List<MultipartFile> files, Location location) {
 		if (!Files.exists(Paths.get(File.separator + "tempRepo"))) {
 			this.logger.info("Create /tempRepo/ -> " + new File(File.separator + "tempRepo").mkdir());
 		}
 
-		LinkedMultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+		LinkedMultiValueMap<String, Object> map = null;
 		String tempFileName = null;
 		FileOutputStream fo = null;
 
@@ -141,24 +228,14 @@ public class HadoopService {
 				continue;
 			}
 
-			URI uri = URI.create(hostURL + hdfsDirPath + path + file.getOriginalFilename() + opString + createFileOp
-					+ overwrite + overwriteValue);// + blocksizeOp + file.getSize() + replicationOp + replicationValue
-													// +buffersizeOp + buffersizeValue;
-			this.logger.info(uri);
-			ResponseEntity<String> response = restTemplate.exchange(uri, HttpMethod.PUT, null, String.class);
-			URI nodeLocation = response.getHeaders().getLocation();
-			URI nodeURI = URI.create(HADOOP_HOSTSERVER + ":" + HADOOP_DATANODE_PORT + nodeLocation.getPath() + "?" + nodeLocation.getQuery());
-
 			try {
 				map = new LinkedMultiValueMap<>();
-				tempFileName = File.separator + "tempRepo" + File.separator + file.getOriginalFilename();
+				tempFileName = File.separator + TEMP_FOLDER + File.separator + file.getOriginalFilename();
 				fo = new FileOutputStream(tempFileName);
 				fo.write(file.getBytes());
 				map.add("file", new FileSystemResource(tempFileName));
-
-			} catch (IOException e) {
-				e.printStackTrace();
-				break;
+			} catch (IOException ex) {
+				throw new RuntimeException("Unable to create tempfile '" + tempFileName + "'", ex);
 			} finally {
 				try {
 					fo.close();
@@ -167,35 +244,24 @@ public class HadoopService {
 				}
 			}
 
-			logger.info(nodeURI);
-
-			HttpHeaders headers = new HttpHeaders();
-			headers.setContentType(MediaType.MULTIPART_FORM_DATA);
-			HttpEntity<LinkedMultiValueMap<String, Object>> requestEntity = new HttpEntity<LinkedMultiValueMap<String, Object>>(
-					map, headers);
-			response = restTemplate.exchange(nodeURI, HttpMethod.PUT, requestEntity, String.class);
-			this.logger.info(response.getBody());
-			this.logger.info(response.getHeaders().toString());
+			uploadFile(location, path, tempFileName, file.getOriginalFilename(), map);
 
 			try {
-				this.logger
-						.info("Delete file: " + tempFileName + " -> " + Files.deleteIfExists(Paths.get(tempFileName)));
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				Files.deleteIfExists(Paths.get(tempFileName));
+			} catch (IOException ex) {
+				throw new RuntimeException("Unable to delete temp file '" + tempFileName + "'", ex);
 			}
 		}
 
 		try {
 			if (Files.exists(Paths.get(File.separator + "tempRepo"))) {
-				this.logger.info("Delete Folder:  " + File.separator + "tempRepo -> "
-						+ Files.deleteIfExists(Paths.get(File.separator + "tempRepo")));
+				this.logger.info("Delete Folder:  " + File.separator + "tempRepo -> " + Files.deleteIfExists(Paths.get(File.separator + "tempRepo")));
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
-		return "";
+		return true;
 	}
 
 	public HdfsFile getHdfsStructure(Location location) {
@@ -225,13 +291,11 @@ public class HadoopService {
 
 		for (FileStatus status : statuses.getFileStatuses()) {
 			String uri = path + "/" + status.getPathSuffix();
-			HdfsFile node = new HdfsFile(status.getPathSuffix(), tree.getPath() + forwardSlash + status.getPathSuffix(),
-					status.getType());
+			HdfsFile node = new HdfsFile(status.getPathSuffix(), tree.getPath() + forwardSlash + status.getPathSuffix(), status.getType());
 			tree.addFileToList(node);
 
 			if (status.getType() == Types.DIRECTORY) {
-				ResponseEntity<String> response = restTemplate.exchange(uri + opString + listFilesOp, HttpMethod.GET,
-						null, String.class);
+				ResponseEntity<String> response = restTemplate.exchange(uri + opString + listFilesOp, HttpMethod.GET, null, String.class);
 				dfs(response.getBody(), uri, node);
 			}
 		}
