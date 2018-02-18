@@ -61,13 +61,17 @@ var DAO = function(options) {
      * Get the repo file structure
      */
     this.getRepoStructure = function(success, error) {
-    	uri = "./repo-ms/getRepoStructure";
+    	var data = {
+    			location: "REPO"
+    	};
+    	
+    	uri = "./repo-ms/getHdfsStructure";
 		$.ajax({
 			type : "POST",
+			data : data,
 			url : uri,
 			success : function(data) {
-				var json = jQuery.parseJSON(data);
-				var structure = parseRepoStructure(json);
+				var structure = parseRepoStructure(data);
 				success(structure);
 			},
 			error : error
