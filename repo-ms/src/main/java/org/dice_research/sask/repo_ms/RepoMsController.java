@@ -7,8 +7,6 @@ import java.util.stream.Collectors;
 import org.apache.log4j.Logger;
 import org.springframework.http.MediaType;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,23 +18,28 @@ public class RepoMsController {
 
 	@RequestMapping(value = "/storeFiles")
 	public String storeFiles(String path, MultipartFile[] files, Location location) throws IOException {
-		this.logger.info("Repo-microservice storeFile() invoked");		
-        String uploadedFileName = Arrays.stream(files).map(x -> x.getOriginalFilename())
-                .filter(x -> !StringUtils.isEmpty(x)).collect(Collectors.joining(" , "));
-		return hadoopService.storeFiles(path,Arrays.asList(files),location);
+		this.logger.info("Repo-microservice storeFile() invoked");
+		Arrays.stream(files)
+		      .map(x -> x.getOriginalFilename())
+		      .filter(x -> !StringUtils.isEmpty(x))
+		      .collect(Collectors.joining(" , "));
+		return hadoopService.storeFiles(path, Arrays.asList(files), location);
 	}
-	
-	/*@RequestMapping(value = "/readFiles", produces = MediaType.APPLICATION_JSON_VALUE)
-	public String readFiles(String path, Location location) throws IOException {
-		this.logger.info("Repo-microservice readFiles() invoked");		
-		return hadoopService.readFiles(path,location);
-	}*/
+
+	// @RequestMapping(value = "/readFiles", produces =
+	// MediaType.APPLICATION_JSON_VALUE)
+	// public String readFiles(String path, Location location) throws
+	// IOException {
+	// this.logger.info("Repo-microservice readFiles() invoked");
+	// return hadoopService.readFiles(path,location);
+	// }
 
 	@RequestMapping(value = "/readFile")
 	public String readFile() throws IOException {
-		this.logger.info("Repo-microservice readFiles() invoked");		
-		return hadoopService.readFile("/Ablauf.txt",Location.REPO);
+		this.logger.info("Repo-microservice readFiles() invoked");
+		return hadoopService.readFile("/Ablauf.txt", Location.REPO);
 	}
+
 	@RequestMapping(value = "/rename")
 	public String rename(String from, String to, Location location) {
 		this.logger.info("Repo-microservice rename() invoked");
