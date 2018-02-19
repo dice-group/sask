@@ -32,18 +32,10 @@ public class RepoMsController {
 		return hadoopService.storeContentInFile(path, filename, location, content);
 	}
 
-	// @RequestMapping(value = "/readFiles", produces =
-	// MediaType.APPLICATION_JSON_VALUE)
-	// public String readFiles(String path, Location location) throws
-	// IOException {
-	// this.logger.info("Repo-microservice readFiles() invoked");
-	// return hadoopService.readFiles(path,location);
-	// }
-
 	@RequestMapping(value = "/readFile")
-	public boolean readFile() throws IOException {
+	public boolean readFile(String path, Location location) throws IOException {
 		this.logger.info("Repo-microservice readFiles() invoked");
-		return hadoopService.readFile("/Ablauf.txt", Location.repo);
+		return hadoopService.readFile(path, location);
 	}
 
 	@RequestMapping(value = "/rename")
