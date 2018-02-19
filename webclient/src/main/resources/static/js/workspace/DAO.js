@@ -226,7 +226,6 @@ var DAO = function(options) {
 	 */
 	this.removeFromWorkflows = function(success, error, target) {
 		uri = "./repo-ms/delete";
-		target = target.replace("workflow/", "");
 		var data = {
 			location : 'workflow',
 			path : target
@@ -244,8 +243,20 @@ var DAO = function(options) {
 	/**
 	 * Creates a new folder in the passed target.
 	 */
-	this.newFolder = function(target, name) {
-		console.log("(MOCK) newFolder " + target + " name " + name);
+	this.createDirectory = function(target, name) {
+		uri = "./repo-ms/createDirectory";
+		var data = {
+			location : 'repo',
+			path : target + name
+		};
+
+		$.ajax({
+			type : "POST",
+			url : uri,
+			data : data,
+			success : success,
+			error : error
+		});
 	}
 
 	/**

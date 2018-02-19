@@ -417,7 +417,7 @@
 			var target = $(this).find('input[name="target"]').val();
 			var name = $(this).find('input[name="name"]').val();
 
-			dao.newFolder(target, name);
+			dao.createDirectory(target, name);
 			$(this).dialog('close');
 		};
 
