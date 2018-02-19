@@ -26,7 +26,8 @@
 	};
 	
 	_default.settings = {
-			onAddToWorkspace: undefined
+			onAddToWorkspace: undefined,
+			onLoadToWorkspace: undefined
 	};
 	
 	_default.options = {};
@@ -284,6 +285,17 @@
 				name : 'Add to Workspace',
 				onClick : function(target) {
 					self.options.onAddToWorkspace(target);
+				}
+			} ]
+		});
+		
+		// workflow
+		new BootstrapMenu('#' + this.elementId + ' li.workflow', {
+			fetchElementData : this.getNodeFromTarget,
+			actions : [ {
+				name : 'Load to workspace',
+				onClick : function(target) {
+					self.options.onLoadToWorkspace(target);
 				}
 			} ]
 		});

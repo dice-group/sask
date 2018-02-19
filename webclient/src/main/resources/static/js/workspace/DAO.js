@@ -142,6 +142,26 @@ var DAO = function(options) {
 			error : error
 		});
 	};
+	
+	/**
+	 * Get the workflow.
+	 */
+	this.getWorkflow = function(success, error, target) {
+		uri = "./repo-ms/readFile";
+		target = target.replace("workflow/", "");
+		var data = {
+			location : 'WORKFLOW',
+			path : target
+		};
+
+		$.ajax({
+			type : "POST",
+			url : uri,
+			data : data,
+			success : success,
+			error : error
+		});
+	};
 
 	/**
 	 * Rename the passed target.

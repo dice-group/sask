@@ -83,7 +83,8 @@
 			options : this.options,
 			init : $.proxy(this.init, this),
 			remove : $.proxy(this.remove, this),
-			addNode : $.proxy(this.addNode, this)
+			addNode : $.proxy(this.addNode, this),
+			loadWorkflowFromPath : $.proxy(this.loadWorkflowFromPath, this)
 		};
 	}
 
@@ -240,11 +241,11 @@
 			logError("workflowId not set.");
 			return;
 		}
-		
+
 		var success = function(data) {
 			console.log(data);
 		}
-		
+
 		var error = function(data) {
 			logError(data);
 		}
@@ -347,9 +348,9 @@
 		var options = this.options;
 		var positiv = function() {
 			var name = $(this).find('input[name="name"]').val();
-			
-			if(options.forceFileEnding) {
-				if(!name.endsWith(options.fileEnding)) {
+
+			if (options.forceFileEnding) {
+				if (!name.endsWith(options.fileEnding)) {
 					name += options.fileEnding;
 				}
 			}
@@ -372,6 +373,30 @@
 	 */
 	Workspace.prototype.loadWorkflow = function(workspace) {
 		this.flowchart.flowchart('setData', workspace);
+	};
+
+	/**
+	 * Load the workflow from the passed repo path.
+	 */
+	Workspace.prototype.loadWorkflowFromPath = function(path) {
+		var self = this;
+		var success = function(data) {
+			console.log(data);
+			self.flowchart.flowchart('setData', data);
+			
+			workflowId = path;
+			workflownameField.text(path);
+			
+			workflowStack.clear();
+			workflowStack.setSaved();
+			self.syncWorkflowStack();
+		};
+
+		var error = function(data) {
+			logError(data);
+		};
+
+		dao.getWorkflow(success, error, path);
 	};
 
 	/**
