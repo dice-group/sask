@@ -158,11 +158,7 @@ public class HadoopService {
 
 		uploadFile(location, path, tempFileName, filename, map);
 
-		try {
-			Files.deleteIfExists(Paths.get(tempFileName));
-		} catch (IOException e) {
-			throw new RuntimeException("Unable to delete temp file '" + tempFileName + "'");
-		}
+		deleteTempFolder();
 
 		return true;
 	}
@@ -186,7 +182,7 @@ public class HadoopService {
 		default:
 			break;
 		}
-		
+
 		URI uri = URI.create(hostURL + hdfsDirPath + path + originalFileName + opString + createFileOp + overwrite + overwriteValue);
 
 		this.logger.info(uri);
@@ -238,7 +234,9 @@ public class HadoopService {
 				throw new RuntimeException("Unable to create tempfile '" + tempFileName + "'", ex);
 			} finally {
 				try {
-					fo.close();
+					if (null != fo) {
+						fo.close();
+					}
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -253,15 +251,23 @@ public class HadoopService {
 			}
 		}
 
-		try {
-			if (Files.exists(Paths.get(File.separator + "tempRepo"))) {
-				this.logger.info("Delete Folder:  " + File.separator + "tempRepo -> " + Files.deleteIfExists(Paths.get(File.separator + "tempRepo")));
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		deleteTempFolder();
 
 		return true;
+	}
+
+	private void deleteTempFolder() {
+		File temp = new File(File.separator + "tempRepo");
+		if (temp.exists()) {
+
+			String[] entries = temp.list();
+			for (String s : entries) {
+				File currentFile = new File(temp.getPath(), s);
+				currentFile.delete();
+			}
+
+			temp.delete();
+		}
 	}
 
 	public HdfsFile getHdfsStructure(Location location) {
