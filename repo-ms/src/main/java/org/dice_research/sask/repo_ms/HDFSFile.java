@@ -4,14 +4,14 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HdfsFile implements Serializable{
+public class HDFSFile implements Serializable{
 
 	private String suffix;
 	private String path;
 	private Types type;
-	private List<HdfsFile> fileList;
+	private List<HDFSFile> fileList;
 	
-	public HdfsFile(String suffix, String path, Types type) {
+	public HDFSFile(String suffix, String path, Types type) {
 		super();
 		this.suffix = suffix;
 		this.path = path;
@@ -31,11 +31,11 @@ public class HdfsFile implements Serializable{
 		return type;
 	}
 
-	public List<HdfsFile> getFileList() {
+	public List<HDFSFile> getFileList() {
 		return fileList;
 	}
 	
-	public void addFileToList(HdfsFile file) {
+	public void addFileToList(HDFSFile file) {
 		fileList.add(file);
 	}
 
