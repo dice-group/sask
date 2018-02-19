@@ -298,6 +298,11 @@
 					self.options.onLoadToWorkspace(target);
 				}
 			}, {
+				name : 'Rename',
+				onClick : function(target) {
+					openRenameWorkflowDialog(target);
+				}
+			}, {
 				name : 'Remove',
 				onClick : function(target) {
 					openRemoveFromWorkflowsDialog(target);
@@ -316,7 +321,7 @@
 			}, {
 				name : 'Rename',
 				onClick : function(target) {
-					openRenameDialog(target);
+					openRenameRepoDialog(target);
 				}
 			}, {
 				name : 'Remove',
@@ -337,7 +342,7 @@
 			}, {
 				name : 'Rename',
 				onClick : function(target) {
-					openRenameDialog(target);
+					openRenameRepoDialog(target);
 				}
 			}, {
 				name : 'Remove',
@@ -349,14 +354,51 @@
 	};
 
 	/**
-	 * Open the rename dialog.
+	 * Open the rename in repo dialog.
 	 */
-	var openRenameDialog = function(target) {
+	var openRenameRepoDialog = function(target) {
+		
+		var success = function(data) {
+			console.log(data);
+		}
+		
+		var error = function(data) {
+			logError(data);
+		}
+		
 		var positiv = function() {
 			var target = $(this).find('input[name="target"]').val();
 			var name = $(this).find('input[name="name"]').val();
 
-			dao.rename(target, name);
+			dao.renameRepo(success, error, target, name);
+			$(this).dialog('close');
+		};
+
+		var negativ = function() {
+			$(this).dialog("close");
+		};
+
+		dialogs.dialogRename(positiv, negativ, target).dialog('open');
+	};
+	
+	/**
+	 * Open the rename in workflows dialog.
+	 */
+	var openRenameWorkflowDialog = function(target) {
+		
+		var success = function(data) {
+			console.log(data);
+		}
+		
+		var error = function(data) {
+			logError(data);
+		}
+		
+		var positiv = function() {
+			var target = $(this).find('input[name="target"]').val();
+			var name = $(this).find('input[name="name"]').val();
+
+			dao.renameWorkflow(success, error, target, name);
 			$(this).dialog('close');
 		};
 
