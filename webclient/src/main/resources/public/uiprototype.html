@@ -81,16 +81,8 @@
 
 					$(document).ready(function() {
 						repo = $('#ex-repo').repository({
-							onAddToWorkspace : function(target) {
-								var newNode = {
-									id : target.id,
-									text : target.text,
-									type : target.type,
-									xPosition : 20,
-									yPosition : 20
-								};
-								workspace.workspace('addNode', newNode);
-							}
+							onAddToWorkspace : onAddToWorkspace,
+							onLoadToWorkspace : onLoadToWorkspace
 						});
 						workspace = $('#ex-workspace').workspace({});
 
@@ -99,6 +91,21 @@
 
 						refreshRepo();
 					});
+					
+					function onLoadToWorkspace(target) {
+						workspace.workspace('loadWorkflowFromPath', target.id);
+					}
+					
+					function onAddToWorkspace(target) {
+						var newNode = {
+								id : target.id,
+								text : target.text,
+								type : target.type,
+								xPosition : 20,
+								yPosition : 20
+							};
+							workspace.workspace('addNode', newNode);
+					}
 
 					function refreshRepo() {
 						repo.repository('refresh');

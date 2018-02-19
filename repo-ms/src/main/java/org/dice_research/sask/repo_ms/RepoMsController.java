@@ -43,7 +43,7 @@ public class RepoMsController {
 	@RequestMapping(value = "/readFile")
 	public boolean readFile() throws IOException {
 		this.logger.info("Repo-microservice readFiles() invoked");
-		return hadoopService.readFile("/Ablauf.txt", Location.REPO);
+		return hadoopService.readFile("/Ablauf.txt", Location.repo);
 	}
 
 	@RequestMapping(value = "/rename")
@@ -53,7 +53,7 @@ public class RepoMsController {
 	}
 
 	@RequestMapping(value = "/getHdfsStructure", produces = MediaType.APPLICATION_JSON_VALUE)
-	public HdfsFile getHdfsStructure(Location location) {
+	public HDFSFile getHdfsStructure(Location location) {
 		this.logger.info("Repo-microservice getHdfsStructure() invoked");
 		return hadoopService.getHdfsStructure(location);
 	}
@@ -65,9 +65,9 @@ public class RepoMsController {
 	}
 
 	@RequestMapping("/createDirectory")
-	public String createDirectory(String path) {
+	public String createDirectory(String path, Location location) {
 		this.logger.info("Repo-microservice createDirectory() invoked");
-		return hadoopService.createDirectory(path);
+		return hadoopService.createDirectory(location, path);
 	}
 
 }

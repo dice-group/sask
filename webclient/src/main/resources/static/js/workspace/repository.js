@@ -1,7 +1,8 @@
 /**
  * The IIFE for the repository.
  */
-;(function ($, window, document) {
+;
+(function($, window, document) {
 
 	/* global jQuery, console */
 
@@ -11,26 +12,26 @@
 	 * The plugin name.
 	 */
 	var pluginName = 'repository';
-	
+
 	/**
 	 * Data access object.
 	 */
 	var dao = new DAO({});
-	
+
 	/**
 	 * Dialogs.
 	 */
 	var dialogs = new Dialogs({});
-	
-	var _default = {
-	};
-	
+
+	var _default = {};
+
 	_default.settings = {
-			onAddToWorkspace: undefined
+		onAddToWorkspace : undefined,
+		onLoadToWorkspace : undefined
 	};
-	
+
 	_default.options = {};
-	
+
 	/**
 	 * The structure template.
 	 */
@@ -69,8 +70,8 @@
 		type : 'root',
 		nodes : []
 	} ];
-	
-	var Repository = function (element, options) {
+
+	var Repository = function(element, options) {
 
 		this.$element = $(element);
 		this.elementId = element.id;
@@ -79,41 +80,41 @@
 		this.init(options);
 
 		return {
-			options: this.options,
-			init: $.proxy(this.init, this),
-			remove: $.proxy(this.remove, this),
-			refresh: $.proxy(this.refresh, this),
-			openUploadDialog: $.proxy(this.openUploadDialog, this)
+			options : this.options,
+			init : $.proxy(this.init, this),
+			remove : $.proxy(this.remove, this),
+			refresh : $.proxy(this.refresh, this),
+			openUploadDialog : $.proxy(this.openUploadDialog, this)
 		};
 	}
-	
+
 	/**
 	 * Init.
 	 */
-	Repository.prototype.init = function (options) {	
+	Repository.prototype.init = function(options) {
 		// check dependencies
-		if(!jQuery().treeview) {
+		if (!jQuery().treeview) {
 			logError("'treeview' plugin not initialized.");
 			return;
 		}
-		
+
 		if (typeof BootstrapMenu !== 'function') {
 			logError("'BootstrapMenu' plugin not initialized.");
 			return;
 		}
-		
+
 		this.options = $.extend({}, _default.settings, options);
 		var self = this;
 		this.treeview = this.$element.treeview({
 			data : structureTemplate
 		});
-		
+
 		this.initRebuildTreeListener();
 		this.initClasses();
 		this.initContextMenu();
 		this.initDragNDrop();
 	};
-	
+
 	/**
 	 * Init the listener on tree rebuild.
 	 */
@@ -123,56 +124,56 @@
 		// append event.
 		// Then bind a handler to an element for that event
 		var originalAppend = $.fn.append;
-	    $.fn.append = function () {
-	        return originalAppend.apply(this, arguments).trigger("append");
-	    };
-	    
-	    var self = this;
-		this.$element.bind("append", function() { 
+		$.fn.append = function() {
+			return originalAppend.apply(this, arguments).trigger("append");
+		};
+
+		var self = this;
+		this.$element.bind("append", function() {
 			self.initClasses();
 			self.initDragNDrop();
 		});
 	}
-	
+
 	/**
 	 * Set the css classes of the nodes.
 	 */
-	Repository.prototype.initClasses = function () {
+	Repository.prototype.initClasses = function() {
 		var self = this;
 		this.$element.find('li').each(function() {
 			var nodeId = $(this).attr('data-nodeid');
 			var node = self.treeview.treeview('getNode', nodeId);
-			
-			if(node.type) {
+
+			if (node.type) {
 				$(this).addClass(node.type);
 			}
 		});
 	};
-	
+
 	/**
 	 * Init the drag n drop function.
 	 */
-	Repository.prototype.initDragNDrop = function () {
+	Repository.prototype.initDragNDrop = function() {
 		var self = this;
 		this.$element.find('li.file, li.extractor, li.db').draggable({
-			helper: "clone",
-			start: function(event, ui) {
+			helper : "clone",
+			start : function(event, ui) {
 				var node = self.getNodeFromTarget(this);
 				ui.helper.data('node', node);
 				ui.helper.width(this.clientWidth);
 			}
 		});
 	};
-	
+
 	/**
 	 * Remove.
 	 */
-	Repository.prototype.remove = function () {
+	Repository.prototype.remove = function() {
 		this.destroy();
 		$.removeData(this, pluginName);
 		$('#' + this.styleId).remove();
 	};
-	
+
 	/**
 	 * Extract the link from the context menu target
 	 */
@@ -181,51 +182,51 @@
 		var node = self.treeview.treeview('getNode', nodeId);
 		return node;
 	};
-	
+
 	/**
 	 * Refresh the repo.
 	 */
-	Repository.prototype.refreshRepo = function() {	
+	Repository.prototype.refreshRepo = function() {
 		var self = this;
 		var success = function(data) {
 			structureTemplate[0].id = data.id;
-			structureTemplate[0].nodes = data.nodes;		
+			structureTemplate[0].nodes = data.nodes;
 			self.options.data = structureTemplate;
-			
+
 			self.init(self.options);
 		}
 
 		var error = function(data) {
 			logError(data);
 		}
-		
+
 		dao.getRepoStructure(success, error);
 	};
-	
+
 	/**
 	 * Refresh the workflows
 	 */
-	Repository.prototype.refreshWorkflows = function() {	
+	Repository.prototype.refreshWorkflows = function() {
 		var self = this;
 		var success = function(data) {
 			structureTemplate[3].id = data.id;
-			structureTemplate[3].nodes = data.nodes;		
+			structureTemplate[3].nodes = data.nodes;
 			self.options.data = structureTemplate;
-			
+
 			self.init(self.options);
 		}
 
 		var error = function(data) {
 			logError(data);
 		}
-		
+
 		dao.getWorkflows(success, error);
 	};
-	
+
 	/**
 	 * Refresh the db.
 	 */
-	Repository.prototype.refreshDB = function() {	
+	Repository.prototype.refreshDB = function() {
 		var self = this;
 		var success = function(data) {
 			structureTemplate[2].nodes = data;
@@ -236,25 +237,25 @@
 		var error = function(data) {
 			logError(data);
 		}
-		
+
 		dao.getTargetGraphs(success, error);
 	};
-	
+
 	/**
 	 * Refresh the whole content of the repo.
 	 */
-	Repository.prototype.refresh = function() {	
+	Repository.prototype.refresh = function() {
 		this.refreshRepo();
 		this.refreshDB();
 		this.refreshWorkflows();
 	};
-	
+
 	/**
 	 * Init the context menu.
 	 */
 	Repository.prototype.initContextMenu = function() {
 		self = this;
-		
+
 		// data root
 		new BootstrapMenu('#' + this.elementId + ' li.root[data-nodeid="0"]', {
 			fetchElementData : this.getNodeFromTarget,
@@ -265,7 +266,7 @@
 				}
 			} ]
 		});
-		
+
 		// db
 		new BootstrapMenu('#' + this.elementId + ' li.db', {
 			fetchElementData : this.getNodeFromTarget,
@@ -276,7 +277,7 @@
 				}
 			} ]
 		});
-		
+
 		// extractor
 		new BootstrapMenu('#' + this.elementId + ' li.extractor', {
 			fetchElementData : this.getNodeFromTarget,
@@ -284,6 +285,22 @@
 				name : 'Add to Workspace',
 				onClick : function(target) {
 					self.options.onAddToWorkspace(target);
+				}
+			} ]
+		});
+
+		// workflow
+		new BootstrapMenu('#' + this.elementId + ' li.workflow', {
+			fetchElementData : this.getNodeFromTarget,
+			actions : [ {
+				name : 'Load to workspace',
+				onClick : function(target) {
+					self.options.onLoadToWorkspace(target);
+				}
+			}, {
+				name : 'Remove',
+				onClick : function(target) {
+					openRemoveFromWorkflowsDialog(target);
 				}
 			} ]
 		});
@@ -304,7 +321,7 @@
 			}, {
 				name : 'Remove',
 				onClick : function(target) {
-					openRemoveDialog(target);
+					openRemoveFromRepoDialog(target);
 				}
 			} ]
 		});
@@ -312,7 +329,7 @@
 		// folder
 		new BootstrapMenu('#' + this.elementId + ' li.folder', {
 			fetchElementData : this.getNodeFromTarget,
-			actions : [  {
+			actions : [ {
 				name : 'New folder',
 				onClick : function(target) {
 					openNewFolderDialog(target);
@@ -325,19 +342,18 @@
 			}, {
 				name : 'Remove',
 				onClick : function(target) {
-					openRemoveDialog(target);
+					openRemoveFromRepoDialog(target);
 				}
-			}]
+			} ]
 		});
 	};
-	
+
 	/**
 	 * Open the rename dialog.
 	 */
-	var openRenameDialog = function (target) {
+	var openRenameDialog = function(target) {
 		var positiv = function() {
-			var target = $(this).find('input[name="target"]')
-					.val();
+			var target = $(this).find('input[name="target"]').val();
 			var name = $(this).find('input[name="name"]').val();
 
 			dao.rename(target, name);
@@ -348,17 +364,15 @@
 			$(this).dialog("close");
 		};
 
-		dialogs.dialogRename(positiv, negativ, target).dialog(
-				'open');
+		dialogs.dialogRename(positiv, negativ, target).dialog('open');
 	};
-	
+
 	/**
 	 * Open the new folder dialog.
 	 */
-	var openNewFolderDialog = function (target) {
+	var openNewFolderDialog = function(target) {
 		var positiv = function() {
-			var target = $(this).find('input[name="target"]')
-					.val();
+			var target = $(this).find('input[name="target"]').val();
 			var name = $(this).find('input[name="name"]').val();
 
 			dao.newFolder(target, name);
@@ -369,18 +383,24 @@
 			$(this).dialog("close");
 		};
 
-		dialogs.dialogNewFolder(positiv, negativ, target)
-				.dialog('open');
+		dialogs.dialogNewFolder(positiv, negativ, target).dialog('open');
 	};
-	
+
 	/**
-	 * Open the remove dialog.
+	 * Open the remove from repo dialog.
 	 */
-	var openRemoveDialog = function(target) {
+	var openRemoveFromRepoDialog = function(target) {
+		var success = function(data) {
+			console.log(data);
+		}
+
+		var error = function(data) {
+			logError(data);
+		}
+
 		var positiv = function() {
-			var target = $(this).find('input[name="target"]')
-					.val();
-			dao.remove(target);
+			var target = $(this).find('input[name="target"]').val();
+			dao.removeFromRepo(success, error, target);
 			$(this).dialog("close");
 		};
 
@@ -388,10 +408,34 @@
 			$(this).dialog("close");
 		};
 
-		dialogs.dialogRemove(positiv, negativ, target).dialog(
-				'open');
+		dialogs.dialogRemove(positiv, negativ, target).dialog('open');
 	};
-	
+
+	/**
+	 * Open the remove from workflows dialog.
+	 */
+	var openRemoveFromWorkflowsDialog = function(target) {
+		var success = function(data) {
+			console.log(data);
+		}
+
+		var error = function(data) {
+			logError(data);
+		}
+		
+		var positiv = function() {
+			var target = $(this).find('input[name="target"]').val();
+			dao.removeFromWorkflows(success, error, target);
+			$(this).dialog("close");
+		};
+
+		var negativ = function() {
+			$(this).dialog("close");
+		};
+
+		dialogs.dialogRemove(positiv, negativ, target).dialog('open');
+	};
+
 	/**
 	 * Handle the file upload.
 	 */
@@ -400,22 +444,19 @@
 		var success = function(data) {
 			console.log(data);
 		};
-		
+
 		var progress = function(data) {
 			var progress = parseInt(data.loaded / data.total * 100, 10);
-            $('#progress .progress-bar').css(
-                'width',
-                progress + '%'
-            );
+			$('#progress .progress-bar').css('width', progress + '%');
 		}
-		
+
 		var error = function(data) {
 			logError(data);
 		};
 
 		dao.uploadFiles(success, error, path, input);
 	};
-	
+
 	/**
 	 * Open the upload dialog.
 	 */
@@ -429,54 +470,52 @@
 			$(this).dialog("close");
 		};
 
-		dialogs.dialogUpload(positiv, negativ).dialog(
-				'open');
+		dialogs.dialogUpload(positiv, negativ).dialog('open');
 	};
-	
+
 	/**
 	 * logging function
 	 */
-	var logError = function (message) {
+	var logError = function(message) {
 		if (window.console) {
 			window.console.error(pluginName + ": " + message);
 		}
 	};
-	
+
 	/**
 	 * Add plugin.
 	 */
-	$.fn[pluginName] = function (options, args) {
+	$.fn[pluginName] = function(options, args) {
 		// Prevent against multiple instantiations,
 		// handle updates and method calls
 		var result;
 
-		this.each(function () {
+		this.each(function() {
 			var _this = $.data(this, pluginName);
-			
+
 			if (typeof options === 'string') {
 				if (!_this) {
-					logError('Not initialized, can not call method : ' + options);
-				}
-				else if (!$.isFunction(_this[options]) || options.charAt(0) === '_') {
+					logError('Not initialized, can not call method : '
+							+ options);
+				} else if (!$.isFunction(_this[options])
+						|| options.charAt(0) === '_') {
 					logError('No such method : ' + options);
-				}
-				else {
+				} else {
 					if (!(args instanceof Array)) {
 						args = [ args ];
 					}
 					result = _this[options].apply(_this, args);
 				}
-			}
-			else if (typeof options === 'boolean') {
+			} else if (typeof options === 'boolean') {
 				result = _this;
-			}
-			else {
-				$.data(this, pluginName, new Repository(this, $.extend(true, {}, options)));
+			} else {
+				$.data(this, pluginName, new Repository(this, $.extend(true,
+						{}, options)));
 			}
 		});
 
 		return result || this;
 	};
-	
+
 })(jQuery, window, document);
 0

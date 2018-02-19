@@ -107,7 +107,7 @@ var DAO = function(options) {
 	this.getRepoStructure = function(success, error) {
 		uri = "./repo-ms/getHdfsStructure";
 		var data = {
-			location : 'REPO'
+			location : 'repo'
 		};
 		$.ajax({
 			type : "POST",
@@ -128,7 +128,7 @@ var DAO = function(options) {
 	this.getWorkflows = function(success, error) {
 		uri = "./repo-ms/getHdfsStructure";
 		var data = {
-			location : 'WORKFLOW'
+			location : 'workflow'
 		};
 
 		$.ajax({
@@ -142,6 +142,25 @@ var DAO = function(options) {
 			error : error
 		});
 	};
+	
+	/**
+	 * Get the workflow.
+	 */
+	this.getWorkflow = function(success, error, target) {
+		uri = "./repo-ms/readFile";
+		var data = {
+			location : 'workflow',
+			path : target
+		};
+
+		$.ajax({
+			type : "POST",
+			url : uri,
+			data : data,
+			success : success,
+			error : error
+		});
+	};
 
 	/**
 	 * Rename the passed target.
@@ -151,10 +170,41 @@ var DAO = function(options) {
 	}
 
 	/**
-	 * Remove the passed target.
+	 * Remove the passed target from the repo.
 	 */
-	this.remove = function(target) {
-		console.log("(MOCK) remove " + target);
+	this.removeFromRepo = function(success, error, target) {
+		uri = "./repo-ms/delete";
+		var data = {
+			location : 'repo',
+			path : target
+		};
+
+		$.ajax({
+			type : "POST",
+			url : uri,
+			data : data,
+			success : success,
+			error : error
+		});
+	}
+	
+	/**
+	 * Remove the passed target from the workflows.
+	 */
+	this.removeFromWorkflows = function(success, error, target) {
+		uri = "./repo-ms/delete";
+		var data = {
+			location : 'workflow',
+			path : target
+		};
+
+		$.ajax({
+			type : "POST",
+			url : uri,
+			data : data,
+			success : success,
+			error : error
+		});
 	}
 
 	/**
@@ -170,7 +220,7 @@ var DAO = function(options) {
 	this.saveWorkflow = function(success, error, target, workflow) {
 		var data = {
 				path : '/',
-				location : 'WORKFLOW',
+				location : 'workflow',
 				filename : target,
 				content : JSON.stringify(workflow)
 		};
@@ -230,7 +280,7 @@ var DAO = function(options) {
 
 		var formData = new FormData();
 		formData.append('path', path);
-		formData.append('location', "REPO");
+		formData.append('location', "repo");
 
 		for (var i = 0; i < input.files.length; i++) {
 			formData.append('files', input.files[i]);
