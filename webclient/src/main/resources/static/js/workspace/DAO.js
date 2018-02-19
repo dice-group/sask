@@ -171,10 +171,43 @@ var DAO = function(options) {
 	}
 
 	/**
-	 * Remove the passed target.
+	 * Remove the passed target from the repo.
 	 */
-	this.remove = function(target) {
-		console.log("(MOCK) remove " + target);
+	this.removeFromRepo = function(success, error, target) {
+		uri = "./repo-ms/delete";
+		target = target.replace("repo/", "");
+		var data = {
+			location : 'REPO',
+			path : target
+		};
+
+		$.ajax({
+			type : "POST",
+			url : uri,
+			data : data,
+			success : success,
+			error : error
+		});
+	}
+	
+	/**
+	 * Remove the passed target from the workflows.
+	 */
+	this.removeFromWorkflows = function(success, error, target) {
+		uri = "./repo-ms/delete";
+		target = target.replace("workflow/", "");
+		var data = {
+			location : 'WORKFLOW',
+			path : target
+		};
+
+		$.ajax({
+			type : "POST",
+			url : uri,
+			data : data,
+			success : success,
+			error : error
+		});
 	}
 
 	/**
