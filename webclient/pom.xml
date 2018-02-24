@@ -17,6 +17,11 @@
 		<relativePath>..</relativePath>
 	</parent>
 
+	<properties>
+		<timestamp>${maven.build.timestamp}</timestamp>
+		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
+	</properties>
+
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/org.webjars/jquery -->
 		<dependency>
@@ -30,7 +35,6 @@
 			<artifactId>jquery-ui</artifactId>
 			<version>1.12.1</version>
 		</dependency>
-
 		<!-- https://mvnrepository.com/artifact/org.webjars/bootstrap -->
 		<dependency>
 			<groupId>org.webjars</groupId>
@@ -58,4 +62,37 @@
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
 	</dependencies>
+
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources/</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>**/*.html</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/resources/</directory>
+				<filtering>false</filtering>
+				<excludes>
+					<exclude>**/*.html</exclude>
+				</excludes>
+			</resource>
+			<resource>
+				<directory>src/main/resources/public</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>**/*.html</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/resources/public</directory>
+				<filtering>false</filtering>
+				<excludes>
+					<exclude>**/*.html</exclude>
+				</excludes>
+			</resource>
+		</resources>
+	</build>
 </project>

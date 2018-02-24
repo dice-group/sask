@@ -183,6 +183,26 @@ var DAO = function(options) {
 	}
 	
 	/**
+	 * Rename the passed workflow.
+	 */
+	this.renameRepo = function(success, error, from, to) {
+		uri = "./repo-ms/rename";
+		var data = {
+			location : 'workflow',
+			from : from,
+			to: to
+		};
+
+		$.ajax({
+			type : "POST",
+			url : uri,
+			data : data,
+			success : success,
+			error : error
+		});
+	}
+	
+	/**
 	 * Rename the passed target.
 	 */
 	this.renameWorkflow = function(success, error, from, to) {

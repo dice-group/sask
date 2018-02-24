@@ -60,6 +60,11 @@
 	 * The toolbar save button.
 	 */
 	var saveButton = undefined;
+	
+	/**
+	 * The toolbar.
+	 */
+	 var toolbar = undefined;
 
 	/**
 	 * The toolbar workflow name.
@@ -186,15 +191,17 @@
 	 * Init the toolbar.
 	 */
 	Workspace.prototype.initToolbar = function() {
-		this.$element.append('<div>' + this.options.undoButtonTemplate
-				+ this.options.redoButtonTemplate
-				+ this.options.saveButtonTemplate
-				+ this.options.workflownameFieldTemplate + '</div>');
-
-		undoButton = this.$element.children().eq(0).children().eq(0);
-		redoButton = this.$element.children().eq(0).children().eq(1);
-		saveButton = this.$element.children().eq(0).children().eq(2);
-		workflownameField = this.$element.children().eq(0).children().eq(3);
+		toolbar = $('<div></div>');
+		undoButton = $(this.options.undoButtonTemplate);
+		redoButton = $(this.options.redoButtonTemplate);
+		saveButton = $(this.options.saveButtonTemplate);
+		workflownameField = $(this.options.workflownameFieldTemplate);
+		
+		this.$element.append(toolbar);
+		toolbar.append(undoButton);
+		toolbar.append(redoButton);
+		toolbar.append(saveButton);
+		toolbar.append(workflownameField);
 	};
 
 	Workspace.prototype.initToolbarListener = function() {
@@ -355,8 +362,7 @@
 				}
 			}
 
-			workflowId = name;
-			workflownameField.text(name);
+			self.changeWorkflowName(name);
 			self.saveWorkflow();
 			$(this).dialog('close');
 		};
@@ -367,6 +373,14 @@
 
 		dialogs.dialogNewWorkflow(positiv, negativ).dialog('open');
 	};
+	
+	/**
+	 * Change the displayed workflow name.
+	 */
+	Workspace.prototype.changeWorkflowName = function(name) {
+		workflowId = name;
+		workflownameField.text(name);
+	}
 
 	/**
 	 * Load the passed workspace
@@ -384,8 +398,7 @@
 			console.log(data);
 			self.flowchart.flowchart('setData', data);
 			
-			workflowId = path;
-			workflownameField.text(path);
+			self.changeWorkflowName(name);
 			
 			workflowStack.clear();
 			workflowStack.setSaved();
