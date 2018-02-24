@@ -29,6 +29,7 @@
 <script src="/js/workspace/workspace.js"></script>
 <link rel="stylesheet" href="/styles/workspace.css">
 <script src="/js/workspace/repository.js"></script>
+<script src="/js/workspace/Upload.js"></script>
 </head>
 <body>
 	<nav class="navbar navbar-default">
@@ -78,16 +79,23 @@
 				(function($) {
 					var workspace;
 					var repo;
+					var upload;
 
 					$(document).ready(function() {
+						// repo
 						repo = $('#ex-repo').repository({
 							onAddToWorkspace : onAddToWorkspace,
 							onLoadToWorkspace : onLoadToWorkspace
 						});
+						
+						// workspace
 						workspace = $('#ex-workspace').workspace({});
+						
+						// upload
+						upload = new Upload({});
 
 						$("#ex-refreshRepo").click(refreshRepo);
-						$("#ex-uploadFile").click(uploadFile);
+						$("#ex-uploadFile").click(upload.open);
 
 						refreshRepo();
 					});
@@ -109,10 +117,6 @@
 
 					function refreshRepo() {
 						repo.repository('refresh');
-					}
-
-					function uploadFile() {
-						repo.repository('openUploadDialog');
 					}
 				}(jQuery));
 			</script>

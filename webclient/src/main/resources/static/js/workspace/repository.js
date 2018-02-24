@@ -83,8 +83,7 @@
 			options : this.options,
 			init : $.proxy(this.init, this),
 			remove : $.proxy(this.remove, this),
-			refresh : $.proxy(this.refresh, this),
-			openUploadDialog : $.proxy(this.openUploadDialog, this)
+			refresh : $.proxy(this.refresh, this)
 		};
 	}
 
@@ -476,43 +475,6 @@
 		};
 
 		dialogs.dialogRemove(positiv, negativ, target).dialog('open');
-	};
-
-	/**
-	 * Handle the file upload.
-	 */
-	var handleFileUpload = function(path, input) {
-
-		var success = function(data) {
-			console.log(data);
-		};
-
-		var progress = function(data) {
-			var progress = parseInt(data.loaded / data.total * 100, 10);
-			$('#progress .progress-bar').css('width', progress + '%');
-		}
-
-		var error = function(data) {
-			logError(data);
-		};
-
-		dao.uploadFiles(success, error, path, input);
-	};
-
-	/**
-	 * Open the upload dialog.
-	 */
-	Repository.prototype.openUploadDialog = function(target) {
-		var positiv = function() {
-			var input = $(this).find('input[name="file"]')[0];
-			handleFileUpload('/', input);
-		};
-
-		var negativ = function() {
-			$(this).dialog("close");
-		};
-
-		dialogs.dialogUpload(positiv, negativ).dialog('open');
 	};
 
 	/**
