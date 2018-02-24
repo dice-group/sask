@@ -38,3 +38,6 @@ zuul:
     repo:
       path: /repo-ms/**
       serviceId: REPO-MS
+    webclient:
+      path: /webclient/**
+      serviceId: WEBCLIENT
