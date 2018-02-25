@@ -204,7 +204,7 @@ var Upload = function(options) {
 		var status = row.find('span');
 		
 		row.attr('data-status', 'error');
-		row.addClass('list-group-item-error');
+		row.addClass('list-group-item-danger');
 		status.text('Error');
 	};
 	
