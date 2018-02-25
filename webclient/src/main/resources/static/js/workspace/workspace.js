@@ -26,10 +26,6 @@
 	var _default = {};
 
 	_default.settings = {
-		undoButtonTemplate : '<button type="button" class="btn btn-default"><a href="#"><span class="glyphicon glyphicon-arrow-left "></span> Undo</a></button>',
-		redoButtonTemplate : '<button type="button" class="btn btn-default"><a href="#">Redo <span class="glyphicon glyphicon-arrow-right"></span></a></button>',
-		saveButtonTemplate : '<button type="button" class="btn btn-default"><a href="#"><span class="glyphicon glyphicon-floppy-disk"></span> Save</a></button>',
-		workflownameFieldTemplate : '<span class="pull-right"></span>',
 		forceFileEnding : true,
 		fileEnding : ".wf"
 	};
@@ -47,29 +43,9 @@
 	var doingStackOperation = false;
 
 	/**
-	 * The toolbar undo button.
-	 */
-	var undoButton = undefined;
-
-	/**
-	 * The toolbar redo button.
-	 */
-	var redoButton = undefined;
-
-	/**
-	 * The toolbar save button.
-	 */
-	var saveButton = undefined;
-	
-	/**
 	 * The toolbar.
 	 */
 	 var toolbar = undefined;
-
-	/**
-	 * The toolbar workflow name.
-	 */
-	var workflownameField = undefined;
 
 	/**
 	 * The workflow id of the current loaded workflow.
@@ -87,7 +63,6 @@
 		return {
 			options : this.options,
 			init : $.proxy(this.init, this),
-			remove : $.proxy(this.remove, this),
 			addNode : $.proxy(this.addNode, this),
 			loadWorkflowFromPath : $.proxy(this.loadWorkflowFromPath, this)
 		};
@@ -102,6 +77,11 @@
 			logError("'flowchart' plugin not initialized.");
 			return;
 		}
+		
+		if (!jQuery().toolbar) {
+			logError("'toolbar' plugin not initialized.");
+			return;
+		}
 
 		if (typeof BootstrapMenu !== 'function') {
 			logError("'BootstrapMenu' plugin not initialized.");
@@ -114,7 +94,6 @@
 		this.initWorkspace();
 		this.initContextMenu();
 		this.initDragNDrop();
-		this.initToolbarListener();
 
 		workflowStack.saveWorkflow(this.getWorkflow());
 		this.syncWorkflowStack();
@@ -191,24 +170,10 @@
 	 * Init the toolbar.
 	 */
 	Workspace.prototype.initToolbar = function() {
-		toolbar = $('<div></div>');
-		undoButton = $(this.options.undoButtonTemplate);
-		redoButton = $(this.options.redoButtonTemplate);
-		saveButton = $(this.options.saveButtonTemplate);
-		workflownameField = $(this.options.workflownameFieldTemplate);
-		
-		this.$element.append(toolbar);
-		toolbar.append(undoButton);
-		toolbar.append(redoButton);
-		toolbar.append(saveButton);
-		toolbar.append(workflownameField);
-	};
-
-	Workspace.prototype.initToolbarListener = function() {
 		var self = this;
-
+		
 		// undo
-		undoButton.click(function() {
+		var onUndoButtonClick = function() {
 			doingStackOperation = true;
 
 			var workflow = workflowStack.getLastWorkflow();
@@ -216,27 +181,37 @@
 
 			doingStackOperation = false;
 			self.syncWorkflowStack();
-		});
-
+		}
+		
 		// redo
-		redoButton.click(function() {
+		var onRedoButtonClick = function() {
 			doingStackOperation = true;
 			var workflow = workflowStack.getNextWorkflow();
 			self.loadWorkflow(workflow);
 
 			doingStackOperation = false;
 			self.syncWorkflowStack();
-		});
-
+		}
+		
 		// save
-		saveButton.click(function() {
-
+		var onSaveButtonClick = function() {
 			if (workflowId === undefined) {
 				// open dialog
 				self.openNewWorkflowDialog();
 			} else {
 				self.saveWorkflow();
 			}
+		}
+		
+		/*
+		 * create
+		 */
+		toolbar = $('<div></div>');
+		this.$element.append(toolbar);
+		toolbar.toolbar({
+			onUndoButtonClick : onUndoButtonClick,
+			onRedoButtonClick : onRedoButtonClick,
+			onSaveButtonClick : onSaveButtonClick
 		});
 	};
 
@@ -269,32 +244,9 @@
 	 * Sync the workflow stack with the ui buttons.
 	 */
 	Workspace.prototype.syncWorkflowStack = function() {
-		if (workflowStack.hasNext()) {
-			redoButton.removeAttr('disabled');
-		} else {
-			redoButton.attr('disabled', 'disabled');
-		}
-
-		if (workflowStack.hasLast()) {
-			undoButton.removeAttr('disabled');
-		} else {
-			undoButton.attr('disabled', 'disabled');
-		}
-
-		if (workflowStack.isSaved()) {
-			saveButton.attr('disabled', 'disabled');
-		} else {
-			saveButton.removeAttr('disabled');
-		}
-	};
-
-	/**
-	 * remove.
-	 */
-	Workspace.prototype.remove = function() {
-		this.destroy();
-		$.removeData(this, pluginName);
-		$('#' + this.styleId).remove();
+		toolbar.toolbar('disableRedo', workflowStack.hasNext());
+		toolbar.toolbar('disableUndo', workflowStack.hasLast());
+		toolbar.toolbar('disableSave', !workflowStack.isSaved());
 	};
 
 	/**
@@ -379,7 +331,7 @@
 	 */
 	Workspace.prototype.changeWorkflowName = function(name) {
 		workflowId = name;
-		workflownameField.text(name);
+		toolbar.toolbar('setWorkflowName', name);
 	}
 
 	/**
