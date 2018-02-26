@@ -23,23 +23,35 @@
 	</properties>
 
 	<dependencies>
-		<!-- https://mvnrepository.com/artifact/org.webjars/jquery -->
+		<!-- ~~~~~~~ jquery ~~~~~~~ -->
 		<dependency>
 			<groupId>org.webjars</groupId>
 			<artifactId>jquery</artifactId>
 			<version>3.2.1</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.webjars/jquery-ui -->
+		<!-- ~~~~~~~ jquery-ui ~~~~~~~ -->
 		<dependency>
 			<groupId>org.webjars</groupId>
 			<artifactId>jquery-ui</artifactId>
 			<version>1.12.1</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.webjars/bootstrap -->
+		<!-- ~~~~~~~ bootstrap ~~~~~~~ -->
 		<dependency>
 			<groupId>org.webjars</groupId>
 			<artifactId>bootstrap</artifactId>
 			<version>3.3.7</version>
+		</dependency>
+		<!-- ~~~~~~~ bootstrap-treeview ~~~~~~~ -->
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>bootstrap-treeview</artifactId>
+			<version>1.2.0</version>
+		</dependency>
+		<!-- ~~~~~~~ bootstrap-menu ~~~~~~~ -->
+		<dependency>
+			<groupId>org.webjars.npm</groupId>
+			<artifactId>bootstrap-menu</artifactId>
+			<version>1.0.14</version>
 		</dependency>
 		<!-- ~~~~~~~ spring eureka server ~~~~~~~ -->
 		<dependency>
