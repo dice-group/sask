@@ -3,6 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 
 <head>
+<meta charset="utf-8" />
 <title>SASK - Status</title>
 <!-- ~~~~~~ jquery ~~~~~~ -->
 <script src="/webjars/jquery/3.2.1/jquery.min.js"></script>
@@ -13,6 +14,8 @@
 <script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js"></script>
 <link rel="stylesheet"
 	href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css" />
+<!-- ~~~~~~ status ~~~~~~ -->
+<script src="/js/workspace/DAO.js"></script>
 </head>
 <body>
 	<!-- navbar -->
@@ -42,7 +45,10 @@
 	</nav>
 	<!-- content -->
 	<div class="container">
-		<div class="row"></div>
+		<div class="row">
+			<ul class="list-group" id="ex-microservices">
+			</ul>
+		</div>
 	</div>
 	<footer class="footer">
 		<div class="container">
@@ -50,5 +56,31 @@
 				Build time: @timestamp@ (GMT)</span>
 		</div>
 	</footer>
+	<script>
+		(function($) {
+			var dao = new DAO({});
+
+			$(document).ready(function() {
+				discover();
+			});
+
+
+			function discover() {
+				var success = function(data) {
+					data.forEach(function(microservice) {
+						var item = $('<li class="list-group-item"></li>');
+						item.text(microservice.serviceId);
+						$('#ex-microservices').append(item);
+					});
+				} 
+				
+				var error = function(data) {
+					console.log("ERROR");
+				} 
+				
+				dao.discoverMicroservices(success, error)
+			}
+		}(jQuery));
+	</script>
 </body>
 </html>

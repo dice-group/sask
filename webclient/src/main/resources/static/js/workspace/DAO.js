@@ -57,7 +57,7 @@ var DAO = function(options) {
 
 		return node;
 	};
-	
+
 	/**
 	 * Parse the hdfs workflows structure to the ui structure.
 	 */
@@ -102,6 +102,20 @@ var DAO = function(options) {
 	this.construct(options);
 
 	/**
+	 * Discover the registered microservices.
+	 */
+	this.discoverMicroservices = function(success, error) {
+		uri = "./discoverMicroservices";
+
+		$.ajax({
+			type : "GET",
+			url : uri,
+			success : success,
+			error : error
+		});
+	};
+
+	/**
 	 * Get the repo file structure
 	 */
 	this.getRepoStructure = function(success, error) {
@@ -113,7 +127,6 @@ var DAO = function(options) {
 			type : "POST",
 			data : data,
 			url : uri,
-			data : data,
 			success : function(data) {
 				var structure = parseRepoStructure(data);
 				success(structure);
@@ -142,7 +155,7 @@ var DAO = function(options) {
 			error : error
 		});
 	};
-	
+
 	/**
 	 * Get the workflow.
 	 */
@@ -170,7 +183,7 @@ var DAO = function(options) {
 		var data = {
 			location : 'repo',
 			from : from,
-			to: to
+			to : to
 		};
 
 		$.ajax({
@@ -181,7 +194,7 @@ var DAO = function(options) {
 			error : error
 		});
 	}
-	
+
 	/**
 	 * Rename the passed workflow.
 	 */
@@ -190,7 +203,7 @@ var DAO = function(options) {
 		var data = {
 			location : 'workflow',
 			from : from,
-			to: to
+			to : to
 		};
 
 		$.ajax({
@@ -201,7 +214,7 @@ var DAO = function(options) {
 			error : error
 		});
 	}
-	
+
 	/**
 	 * Rename the passed target.
 	 */
@@ -210,7 +223,7 @@ var DAO = function(options) {
 		var data = {
 			location : 'workflow',
 			from : from,
-			to: to
+			to : to
 		};
 
 		$.ajax({
@@ -240,7 +253,7 @@ var DAO = function(options) {
 			error : error
 		});
 	}
-	
+
 	/**
 	 * Remove the passed target from the workflows.
 	 */
@@ -284,10 +297,10 @@ var DAO = function(options) {
 	 */
 	this.saveWorkflow = function(success, error, target, workflow) {
 		var data = {
-				path : '/',
-				location : 'workflow',
-				filename : target,
-				content : JSON.stringify(workflow)
+			path : '/',
+			location : 'workflow',
+			filename : target,
+			content : JSON.stringify(workflow)
 		};
 
 		var uri = "./repo-ms/storeContentInFile";
@@ -337,12 +350,12 @@ var DAO = function(options) {
 			data : formData,
 			type : 'post',
 			success : function(data) {
-				if(success) {
+				if (success) {
 					success(data, path, file);
 				}
 			},
 			error : function(data) {
-				if(error) {
+				if (error) {
 					error(data, path, file);
 				}
 			}
