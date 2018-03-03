@@ -2,7 +2,7 @@
 # Service registers under this name
 spring:
   application:
-    name: fred-ms
+    name: cedric-ms
 
 # Discovery Server Access
 eureka:
@@ -15,7 +15,7 @@ eureka:
 
 # HTTP Server (Tomcat) Port
 server: 
-  port: 2223
+  port: 2225
 
 # Disable Spring Boot's "Whitelabel" default error page, so we can use our own
 error:
