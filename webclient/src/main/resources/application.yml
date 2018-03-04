@@ -9,6 +9,7 @@ eureka:
   instance:
     metadataMap:
       type: webclient
+      friendlyname: Webclient
   client:
     serviceUrl:
       defaultZone: http://localhost:1111/eureka/

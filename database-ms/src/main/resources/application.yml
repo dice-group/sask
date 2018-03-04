@@ -9,6 +9,7 @@ eureka:
   instance:
     metadataMap:
       type: db
+      friendlyname: Fuseki
   client:
     serviceUrl:
       defaultZone: http://localhost:1111/eureka/

@@ -38,7 +38,8 @@
 	var structureTemplate = [ {
 		text : 'Data',
 		id : '#data',
-		type : 'root'
+		type : 'root',
+		nodes : []
 	}, {
 		text : 'Extractors',
 		id : '#parent2',

@@ -77,17 +77,22 @@
 
 			function appendMicroservice(microservice, to) {
 				var type = $('<small class="text-muted pull-right"></small>');
+				var friendlyname = $('<span></span>');
+				var serviceId = $('<small class="text-muted"></small>');
 				var head = $('<h4 class="mb-1"></h4>');
 				var wrapper = $('<div class="d-flex w-100 justify-content-between">');
 				var port = $('<p class="mb-1"></p>');
 				var host = $('<p class="mb-1"></p>');
 				var item = $('<li class="list-group-item"></li>');
 
-				head.text(microservice.serviceId);
+				friendlyname.text(microservice.friendlyname);
+				serviceId.text(" (" + microservice.serviceId + ")");
 				type.text(microservice.type);
 				port.text('Port: ' + microservice.port);
 				host.text('Host: ' + microservice.host);
 
+				head.append(friendlyname);
+				head.append(serviceId);
 				item.append(wrapper);
 				wrapper.append(head);
 				wrapper.append(port);
@@ -100,19 +105,19 @@
 			function discover() {
 				var success = function(data) {
 					var emptyMessage = '<li class="list-group-item"><p class="text-muted text-center">No microservices of this type registered.</p></li>';
-					
+
 					var extractor = $("#ex-extractor");
 					var webclient = $("#ex-webclient");
 					var repo = $("#ex-repository");
 					var database = $("#ex-database");
-					
+
 					extractor.empty();
 					webclient.empty();
 					repo.empty();
 					database.empty();
-					
+
 					data.forEach(function(microservice) {
-						switch(microservice.type) {
+						switch (microservice.type) {
 						case "extractor":
 							appendMicroservice(microservice, extractor);
 							break;
@@ -126,19 +131,19 @@
 							appendMicroservice(microservice, database);
 							break;
 						}
-						
+
 					});
 
-					if(database.is(':empty')) {
+					if (database.is(':empty')) {
 						database.append(emptyMessage);
 					}
-					if(extractor.is(':empty')) {
+					if (extractor.is(':empty')) {
 						extractor.append(emptyMessage);
 					}
-					if(webclient.is(':empty')) {
+					if (webclient.is(':empty')) {
 						webclient.append(emptyMessage);
 					}
-					if(repo.is(':empty')) {
+					if (repo.is(':empty')) {
 						repo.append(emptyMessage);
 					}
 				}
