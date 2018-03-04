@@ -30,7 +30,7 @@ public class WebHDFSUriBuilder {
 		builder.setScheme(SCHEME);
 		builder.setHost(HADOOP_HOSTSERVER);
 		builder.setPort(HADOOP_NAMENODE_PORT);
-		builder.setPath(PROTOCOL + "/" + VERSION + "/" + HDFSDIRUSERPATH + "/" + location + "/" + path+fileName);
+		builder.setPath(PROTOCOL + "/" + VERSION + "/" + HDFSDIRUSERPATH + "/" + location + "/" + path + fileName);
 		builder.setParameter(OPERATION, WebHDFSOperation.CREATE.name());
 		builder.addParameter(WebHDFSParameter.overwrite.name(), "true");
 
@@ -63,11 +63,15 @@ public class WebHDFSUriBuilder {
 
 	public static URI getHDFSStructureURI(Location location, String path) {
 
+		if (!path.startsWith("/")) {
+			path = "/" + path;
+		}
+
 		URIBuilder builder = new URIBuilder();
 		builder.setScheme(SCHEME);
 		builder.setHost(HADOOP_HOSTSERVER);
 		builder.setPort(HADOOP_NAMENODE_PORT);
-		builder.setPath(PROTOCOL + "/" + VERSION + "/" + HDFSDIRUSERPATH + "/" + location + "/" + path);
+		builder.setPath(PROTOCOL + "/" + VERSION + "/" + HDFSDIRUSERPATH + "/" + location + path);
 		builder.setParameter(OPERATION, WebHDFSOperation.LISTSTATUS.name());
 
 		try {

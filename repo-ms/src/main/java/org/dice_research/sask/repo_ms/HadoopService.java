@@ -110,13 +110,14 @@ public class HadoopService {
 		// "+response.getStatusCodeValue());
 
 		/*
-		 * //http://localhost:2400/webhdfs/v1/user/DICE/repo/Ablauf.txt?op=OPEN if
-		 * (!Files.exists(Paths.get(File.separator + "tempRepo"))) {
+		 * //http://localhost:2400/webhdfs/v1/user/DICE/repo/Ablauf.txt?op=OPEN
+		 * if (!Files.exists(Paths.get(File.separator + "tempRepo"))) {
 		 * this.logger.info("Create /tempRepo/ -> " + new File(File.separator +
 		 * "tempRepo").mkdir()); }
 		 * 
-		 * Files.write(Paths.get(File.separator + "tempRepo"+File.separator+"test.txt"),
-		 * response.getBody()); return Files.readAllLines(Paths.get(File.separator +
+		 * Files.write(Paths.get(File.separator +
+		 * "tempRepo"+File.separator+"test.txt"), response.getBody()); return
+		 * Files.readAllLines(Paths.get(File.separator +
 		 * "tempRepo"+File.separator+"test.txt")).toString();
 		 */
 		return true;
@@ -173,13 +174,16 @@ public class HadoopService {
 	 * @param map
 	 */
 	private void uploadFile(Location location, String path, String tempFileName, String originalFileName, LinkedMultiValueMap<String, Object> map) {
-		
+
 		URI createFileURI = WebHDFSUriBuilder.getCreateURL(location, path, originalFileName);
 		this.logger.info(createFileURI);
 		ResponseEntity<String> response = restTemplate.exchange(createFileURI, HttpMethod.PUT, null, String.class);
 
-		URI nodeLocation = response.getHeaders().getLocation();
-		//URI nodeURI = URI.create(HADOOP_HOSTSERVER + ":" + HADOOP_DATANODE_PORT + nodeLocation.getPath() + "?"+ nodeLocation.getQuery());
+		URI nodeLocation = response.getHeaders()
+		                           .getLocation();
+		// URI nodeURI = URI.create(HADOOP_HOSTSERVER + ":" +
+		// HADOOP_DATANODE_PORT + nodeLocation.getPath() + "?"+
+		// nodeLocation.getQuery());
 		this.logger.info(nodeLocation);
 
 		HttpHeaders headers = new HttpHeaders();
@@ -256,7 +260,7 @@ public class HadoopService {
 	}
 
 	public HDFSFile getHdfsStructure(Location location) {
-		
+
 		String path = "";
 		URI hdfsStructureURI = WebHDFSUriBuilder.getHDFSStructureURI(location, path);
 		this.logger.info(hdfsStructureURI);
@@ -273,15 +277,18 @@ public class HadoopService {
 		for (FileStatus status : statuses.getFileStatuses()) {
 			String uri = path + "/" + status.getPathSuffix();
 			uri.replaceAll(location.name(), "");
-			HDFSFile node = new HDFSFile(status.getPathSuffix(), tree.getPath() + forwardSlash + status.getPathSuffix(),status.getType());
+			HDFSFile node = new HDFSFile(status.getPathSuffix(), tree.getPath() + forwardSlash + status.getPathSuffix(), status.getType());
 			tree.addFileToList(node);
 
 			if (status.getType() == Types.DIRECTORY) {
-				
-				URI hdfsStructureURI = WebHDFSUriBuilder.getHDFSStructureURI(location, path + "/" + status.getPathSuffix());
+				if (!path.endsWith("/")) {
+					path = path + "/";
+				}
+
+				URI hdfsStructureURI = WebHDFSUriBuilder.getHDFSStructureURI(location, path + status.getPathSuffix());
 				this.logger.info(hdfsStructureURI);
-				ResponseEntity<String> response = restTemplate.exchange(hdfsStructureURI, HttpMethod.GET,null, String.class);
-				dfs(location,response.getBody(), uri, node);
+				ResponseEntity<String> response = restTemplate.exchange(hdfsStructureURI, HttpMethod.GET, null, String.class);
+				dfs(location, response.getBody(), uri, node);
 			}
 		}
 
@@ -304,7 +311,7 @@ public class HadoopService {
 		return null;
 	}
 
-	public String createDirectory(Location location,String path) {
+	public String createDirectory(Location location, String path) {
 		URI mkdirURI = WebHDFSUriBuilder.getMkdirURI(location, path);
 		this.logger.info(mkdirURI);
 		ResponseEntity<String> response = restTemplate.exchange(mkdirURI, HttpMethod.PUT, null, String.class);
