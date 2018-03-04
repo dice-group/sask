@@ -44,22 +44,7 @@
 		text : 'Extractors',
 		id : '#parent2',
 		type : 'root',
-		nodes : [ {
-			text : 'FOX',
-			id : '#fox',
-			type : 'extractor',
-			icon : 'glyphicon glyphicon-wrench'
-		}, {
-			text : 'RDF Fred',
-			id : '#rdffred',
-			type : 'extractor',
-			icon : 'glyphicon glyphicon-wrench'
-		}, {
-			text : 'Spotlight',
-			id : '#spotlight',
-			type : 'extractor',
-			icon : 'glyphicon glyphicon-wrench'
-		} ]
+		nodes : []
 	}, {
 		text : 'Target graphs',
 		id : '#parent3',
@@ -222,6 +207,36 @@
 
 		dao.getWorkflows(success, error);
 	};
+	
+	/**
+	 * Refresh extractors.
+	 */
+	Repository.prototype.refreshExtractors = function() {
+		var self = this;
+		var success = function(data) {
+			structureTemplate[1].nodes = [];
+			
+			data.forEach(function(microservice) {
+				if (microservice.type === "extractor") {
+					structureTemplate[1].nodes.push({
+						text : microservice.friendlyname,
+						id : microservice.serviceId,
+						type : 'extractor',
+						icon : 'glyphicon glyphicon-wrench'
+					})
+				}
+			});
+			
+			self.options.data = structureTemplate;
+			self.init(self.options);
+		}
+
+		var error = function(data) {
+			logError(data);
+		}
+
+		dao.discoverMicroservices(success, error);
+	};
 
 	/**
 	 * Refresh the db.
@@ -246,6 +261,7 @@
 	 */
 	Repository.prototype.refresh = function() {
 		this.refreshRepo();
+		this.refreshExtractors();
 		this.refreshDB();
 		this.refreshWorkflows();
 	};
