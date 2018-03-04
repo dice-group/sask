@@ -46,8 +46,14 @@
 	<!-- content -->
 	<div class="container">
 		<div class="row">
-			<ul class="list-group" id="ex-microservices">
-			</ul>
+			<h2>Extractor</h2>
+			<ul class="list-group" id="ex-extractor"></ul>
+			<h2>Database</h2>
+			<ul class="list-group" id="ex-database"></ul>
+			<h2>Repository</h2>
+			<ul class="list-group" id="ex-repository"></ul>
+			<h2>Webclient</h2>
+			<ul class="list-group" id="ex-webclient"></ul>
 			<button class="btn btn-primary" id="ex-refresh">
 				<span class="glyphicon glyphicon-refresh"></span> Refresh
 			</button>
@@ -69,13 +75,13 @@
 				$('#ex-refresh').click(discover);
 			});
 
-			function appendMicroservice(microservice) {
+			function appendMicroservice(microservice, to) {
 				var type = $('<small class="text-muted pull-right"></small>');
 				var head = $('<h4 class="mb-1"></h4>');
 				var wrapper = $('<div class="d-flex w-100 justify-content-between">');
 				var port = $('<p class="mb-1"></p>');
 				var host = $('<p class="mb-1"></p>');
-				var item = $('<li class="list-group-item list-group-item-action flex-column align-items-start"></li>');
+				var item = $('<li class="list-group-item"></li>');
 
 				head.text(microservice.serviceId);
 				type.text(microservice.type);
@@ -88,14 +94,53 @@
 				wrapper.append(host);
 				head.append(type);
 
-				$('#ex-microservices').append(item);
+				to.append(item);
 			}
 
 			function discover() {
 				var success = function(data) {
-					$('#ex-microservices').empty();
-					data.forEach(appendMicroservice);
+					var emptyMessage = '<li class="list-group-item"><p class="text-muted text-center">No microservices of this type registered.</p></li>';
 					
+					var extractor = $("#ex-extractor");
+					var webclient = $("#ex-webclient");
+					var repo = $("#ex-repository");
+					var database = $("#ex-database");
+					
+					extractor.empty();
+					webclient.empty();
+					repo.empty();
+					database.empty();
+					
+					data.forEach(function(microservice) {
+						switch(microservice.type) {
+						case "extractor":
+							appendMicroservice(microservice, extractor);
+							break;
+						case "webclient":
+							appendMicroservice(microservice, webclient);
+							break;
+						case "repo":
+							appendMicroservice(microservice, repo);
+							break;
+						case "db":
+							appendMicroservice(microservice, database);
+							break;
+						}
+						
+					});
+
+					if(database.is(':empty')) {
+						database.append(emptyMessage);
+					}
+					if(extractor.is(':empty')) {
+						extractor.append(emptyMessage);
+					}
+					if(webclient.is(':empty')) {
+						webclient.append(emptyMessage);
+					}
+					if(repo.is(':empty')) {
+						repo.append(emptyMessage);
+					}
 				}
 
 				var error = function(data) {
