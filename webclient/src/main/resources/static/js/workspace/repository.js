@@ -207,7 +207,7 @@
 
 		dao.getWorkflows(success, error);
 	};
-	
+
 	/**
 	 * Refresh extractors.
 	 */
@@ -215,7 +215,7 @@
 		var self = this;
 		var success = function(data) {
 			structureTemplate[1].nodes = [];
-			
+
 			data.forEach(function(microservice) {
 				if (microservice.type === "extractor") {
 					structureTemplate[1].nodes.push({
@@ -226,7 +226,7 @@
 					})
 				}
 			});
-			
+
 			self.options.data = structureTemplate;
 			self.init(self.options);
 		}
@@ -278,7 +278,7 @@
 			actions : [ {
 				name : 'New folder',
 				onClick : function(target) {
-					openNewFolderDialog(target);
+					openNewFolderDialog(target == "#data" ? "" : target);
 				}
 			} ]
 		});
@@ -373,15 +373,15 @@
 	 * Open the rename in repo dialog.
 	 */
 	var openRenameRepoDialog = function(target) {
-		
+
 		var success = function(data) {
 			console.log(data);
 		}
-		
+
 		var error = function(data) {
 			logError(data);
 		}
-		
+
 		var positiv = function() {
 			var target = $(this).find('input[name="target"]').val();
 			var name = $(this).find('input[name="name"]').val();
@@ -396,20 +396,20 @@
 
 		dialogs.dialogRename(positiv, negativ, target).dialog('open');
 	};
-	
+
 	/**
 	 * Open the rename in workflows dialog.
 	 */
 	var openRenameWorkflowDialog = function(target) {
-		
+
 		var success = function(data) {
 			console.log(data);
 		}
-		
+
 		var error = function(data) {
 			logError(data);
 		}
-		
+
 		var positiv = function() {
 			var target = $(this).find('input[name="target"]').val();
 			var name = $(this).find('input[name="name"]').val();
@@ -430,10 +430,18 @@
 	 */
 	var openNewFolderDialog = function(target) {
 		var positiv = function() {
+			var success = function(data) {
+				console.log(data);
+			}
+
+			var error = function(data) {
+				logError(data);
+			}
+
 			var target = $(this).find('input[name="target"]').val();
 			var name = $(this).find('input[name="name"]').val();
 
-			dao.createDirectory(target, name);
+			dao.createDirectory(success, error, target, name);
 			$(this).dialog('close');
 		};
 
@@ -480,7 +488,7 @@
 		var error = function(data) {
 			logError(data);
 		}
-		
+
 		var positiv = function() {
 			var target = $(this).find('input[name="target"]').val();
 			dao.removeFromWorkflows(success, error, target);
