@@ -83,8 +83,7 @@
 			options : this.options,
 			init : $.proxy(this.init, this),
 			remove : $.proxy(this.remove, this),
-			refresh : $.proxy(this.refresh, this),
-			openUploadDialog : $.proxy(this.openUploadDialog, this)
+			refresh : $.proxy(this.refresh, this)
 		};
 	}
 
@@ -298,6 +297,11 @@
 					self.options.onLoadToWorkspace(target);
 				}
 			}, {
+				name : 'Rename',
+				onClick : function(target) {
+					openRenameWorkflowDialog(target);
+				}
+			}, {
 				name : 'Remove',
 				onClick : function(target) {
 					openRemoveFromWorkflowsDialog(target);
@@ -316,7 +320,7 @@
 			}, {
 				name : 'Rename',
 				onClick : function(target) {
-					openRenameDialog(target);
+					openRenameRepoDialog(target);
 				}
 			}, {
 				name : 'Remove',
@@ -337,7 +341,7 @@
 			}, {
 				name : 'Rename',
 				onClick : function(target) {
-					openRenameDialog(target);
+					openRenameRepoDialog(target);
 				}
 			}, {
 				name : 'Remove',
@@ -349,14 +353,51 @@
 	};
 
 	/**
-	 * Open the rename dialog.
+	 * Open the rename in repo dialog.
 	 */
-	var openRenameDialog = function(target) {
+	var openRenameRepoDialog = function(target) {
+		
+		var success = function(data) {
+			console.log(data);
+		}
+		
+		var error = function(data) {
+			logError(data);
+		}
+		
 		var positiv = function() {
 			var target = $(this).find('input[name="target"]').val();
 			var name = $(this).find('input[name="name"]').val();
 
-			dao.rename(target, name);
+			dao.renameRepo(success, error, target, name);
+			$(this).dialog('close');
+		};
+
+		var negativ = function() {
+			$(this).dialog("close");
+		};
+
+		dialogs.dialogRename(positiv, negativ, target).dialog('open');
+	};
+	
+	/**
+	 * Open the rename in workflows dialog.
+	 */
+	var openRenameWorkflowDialog = function(target) {
+		
+		var success = function(data) {
+			console.log(data);
+		}
+		
+		var error = function(data) {
+			logError(data);
+		}
+		
+		var positiv = function() {
+			var target = $(this).find('input[name="target"]').val();
+			var name = $(this).find('input[name="name"]').val();
+
+			dao.renameWorkflow(success, error, target, name);
 			$(this).dialog('close');
 		};
 
@@ -375,7 +416,7 @@
 			var target = $(this).find('input[name="target"]').val();
 			var name = $(this).find('input[name="name"]').val();
 
-			dao.newFolder(target, name);
+			dao.createDirectory(target, name);
 			$(this).dialog('close');
 		};
 
@@ -434,43 +475,6 @@
 		};
 
 		dialogs.dialogRemove(positiv, negativ, target).dialog('open');
-	};
-
-	/**
-	 * Handle the file upload.
-	 */
-	var handleFileUpload = function(path, input) {
-
-		var success = function(data) {
-			console.log(data);
-		};
-
-		var progress = function(data) {
-			var progress = parseInt(data.loaded / data.total * 100, 10);
-			$('#progress .progress-bar').css('width', progress + '%');
-		}
-
-		var error = function(data) {
-			logError(data);
-		};
-
-		dao.uploadFiles(success, error, path, input);
-	};
-
-	/**
-	 * Open the upload dialog.
-	 */
-	Repository.prototype.openUploadDialog = function(target) {
-		var positiv = function() {
-			var input = $(this).find('input[name="file"]')[0];
-			handleFileUpload('/', input);
-		};
-
-		var negativ = function() {
-			$(this).dialog("close");
-		};
-
-		dialogs.dialogUpload(positiv, negativ).dialog('open');
 	};
 
 	/**
