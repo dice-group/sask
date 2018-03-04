@@ -176,7 +176,6 @@ public class HadoopService {
 	private void uploadFile(Location location, String path, String tempFileName, String originalFileName, LinkedMultiValueMap<String, Object> map) {
 
 		URI createFileURI = WebHDFSUriBuilder.getCreateURL(location, path, originalFileName);
-		this.logger.info(createFileURI);
 		ResponseEntity<String> response = restTemplate.exchange(createFileURI, HttpMethod.PUT, null, String.class);
 
 		URI nodeLocation = response.getHeaders()
@@ -185,7 +184,7 @@ public class HadoopService {
 		// HADOOP_DATANODE_PORT + nodeLocation.getPath() + "?"+
 		// nodeLocation.getQuery());
 		this.logger.info(nodeLocation);
-
+		
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.MULTIPART_FORM_DATA);
 		HttpEntity<LinkedMultiValueMap<String, Object>> requestEntity = new HttpEntity<LinkedMultiValueMap<String, Object>>(map, headers);

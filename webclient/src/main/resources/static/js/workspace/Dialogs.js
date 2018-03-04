@@ -53,11 +53,6 @@ var Dialogs = function(options) {
 				+ '<form>'
 				+ '<fieldset>'
 				+ '<label for="name">Name</label> <input type="text" name="name" required="required" class="text ui-widget-content ui-corner-all" />'
-				+ '</fieldset>' + '</form>' + '</div>',
-		upload : '<div title="Upload">'
-				+ '<form>'
-				+ '<fieldset>'
-				+ '<label for="file">File</label> <input type="file" name="file" required="required" multiple/>'
 				+ '</fieldset>' + '</form>' + '</div>'
 	};
 

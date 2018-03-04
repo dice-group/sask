@@ -4,15 +4,11 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import org.apache.http.client.utils.URIBuilder;
-import org.apache.log4j.Logger;
 
 public class WebHDFSUriBuilder {
 
-	private static Logger logger = Logger.getLogger(WebHDFSUriBuilder.class.getName());
-
 	private static final String SCHEME = "http";
 	private static final String HADOOP_HOSTSERVER = "localhost";
-	private static final int HADOOP_DATANODE_PORT = 50075;
 	private static final int HADOOP_NAMENODE_PORT = 50070;
 
 	private static final String PROTOCOL = "webhdfs";
@@ -85,7 +81,6 @@ public class WebHDFSUriBuilder {
 	public static URI getDeleteURI(Location location, String path) {
 
 		path = path.startsWith(FORWARDSLASH) ? path.substring(1) : path;
-
 		URIBuilder builder = new URIBuilder();
 		builder.setScheme(SCHEME);
 		builder.setHost(HADOOP_HOSTSERVER);
@@ -106,7 +101,6 @@ public class WebHDFSUriBuilder {
 	public static URI getMkdirURI(Location location, String path) {
 
 		path = path.startsWith(FORWARDSLASH) ? path.substring(1) : path;
-
 		URIBuilder builder = new URIBuilder();
 		builder.setScheme(SCHEME);
 		builder.setHost(HADOOP_HOSTSERVER);

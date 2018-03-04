@@ -57,7 +57,7 @@ var DAO = function(options) {
 
 		return node;
 	};
-	
+
 	/**
 	 * Parse the hdfs workflows structure to the ui structure.
 	 */
@@ -102,6 +102,20 @@ var DAO = function(options) {
 	this.construct(options);
 
 	/**
+	 * Discover the registered microservices.
+	 */
+	this.discoverMicroservices = function(success, error) {
+		uri = "./discoverMicroservices";
+
+		$.ajax({
+			type : "GET",
+			url : uri,
+			success : success,
+			error : error
+		});
+	};
+
+	/**
 	 * Get the repo file structure
 	 */
 	this.getRepoStructure = function(success, error) {
@@ -113,7 +127,6 @@ var DAO = function(options) {
 			type : "POST",
 			data : data,
 			url : uri,
-			data : data,
 			success : function(data) {
 				var structure = parseRepoStructure(data);
 				success(structure);
@@ -142,7 +155,7 @@ var DAO = function(options) {
 			error : error
 		});
 	};
-	
+
 	/**
 	 * Get the workflow.
 	 */
@@ -165,8 +178,61 @@ var DAO = function(options) {
 	/**
 	 * Rename the passed target.
 	 */
-	this.rename = function(target, name) {
-		console.log("(MOCK) rename " + target + " to " + name);
+	this.renameRepo = function(success, error, from, to) {
+		uri = "./repo-ms/rename";
+		var data = {
+			location : 'repo',
+			from : from,
+			to : to
+		};
+
+		$.ajax({
+			type : "POST",
+			url : uri,
+			data : data,
+			success : success,
+			error : error
+		});
+	}
+
+	/**
+	 * Rename the passed workflow.
+	 */
+	this.renameRepo = function(success, error, from, to) {
+		uri = "./repo-ms/rename";
+		var data = {
+			location : 'workflow',
+			from : from,
+			to : to
+		};
+
+		$.ajax({
+			type : "POST",
+			url : uri,
+			data : data,
+			success : success,
+			error : error
+		});
+	}
+
+	/**
+	 * Rename the passed target.
+	 */
+	this.renameWorkflow = function(success, error, from, to) {
+		uri = "./repo-ms/rename";
+		var data = {
+			location : 'workflow',
+			from : from,
+			to : to
+		};
+
+		$.ajax({
+			type : "POST",
+			url : uri,
+			data : data,
+			success : success,
+			error : error
+		});
 	}
 
 	/**
@@ -187,7 +253,7 @@ var DAO = function(options) {
 			error : error
 		});
 	}
-	
+
 	/**
 	 * Remove the passed target from the workflows.
 	 */
@@ -210,8 +276,20 @@ var DAO = function(options) {
 	/**
 	 * Creates a new folder in the passed target.
 	 */
-	this.newFolder = function(target, name) {
-		console.log("(MOCK) newFolder " + target + " name " + name);
+	this.createDirectory = function(target, name) {
+		uri = "./repo-ms/createDirectory";
+		var data = {
+			location : 'repo',
+			path : target + name
+		};
+
+		$.ajax({
+			type : "POST",
+			url : uri,
+			data : data,
+			success : success,
+			error : error
+		});
 	}
 
 	/**
@@ -219,10 +297,10 @@ var DAO = function(options) {
 	 */
 	this.saveWorkflow = function(success, error, target, workflow) {
 		var data = {
-				path : '/',
-				location : 'workflow',
-				filename : target,
-				content : JSON.stringify(workflow)
+			path : '/',
+			location : 'workflow',
+			filename : target,
+			content : JSON.stringify(workflow)
 		};
 
 		var uri = "./repo-ms/storeContentInFile";
@@ -254,37 +332,14 @@ var DAO = function(options) {
 	}
 
 	/**
-	 * Upload files.
+	 * Upload file.
 	 */
-	this.uploadFiles = function(success, error, path, input) {
-		if (!window.File || !window.FileReader || !window.FileList
-				|| !window.Blob) {
-			logError('The File APIs are not fully supported in this browser.');
-			return;
-		}
-
-		if (!input) {
-			logError("Unable to find the fileinput element.");
-			return false;
-		}
-
-		if (!input.files) {
-			logError("This browser does not to support the 'files' property.");
-			return;
-		}
-
-		if (!input.files[0]) {
-			logError("No file selected");
-			return;
-		}
-
+	this.uploadFile = function(success, error, path, file) {
 		var formData = new FormData();
 		formData.append('path', path);
 		formData.append('location', "repo");
 
-		for (var i = 0; i < input.files.length; i++) {
-			formData.append('files', input.files[i]);
-		}
+		formData.append('files', file);
 
 		uri = "./repo-ms/storeFiles";
 		$.ajax({
@@ -294,8 +349,16 @@ var DAO = function(options) {
 			processData : false,
 			data : formData,
 			type : 'post',
-			success : success,
-			error : error
+			success : function(data) {
+				if (success) {
+					success(data, path, file);
+				}
+			},
+			error : function(data) {
+				if (error) {
+					error(data, path, file);
+				}
+			}
 		});
 	};
 };
