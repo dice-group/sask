@@ -48,6 +48,9 @@
 		<div class="row">
 			<ul class="list-group" id="ex-microservices">
 			</ul>
+			<button class="btn btn-primary" id="ex-refresh">
+				<span class="glyphicon glyphicon-refresh"></span> Refresh
+			</button>
 		</div>
 	</div>
 	<footer class="footer">
@@ -62,22 +65,43 @@
 
 			$(document).ready(function() {
 				discover();
+
+				$('#ex-refresh').click(discover);
 			});
 
+			function appendMicroservice(microservice) {
+				var type = $('<small class="text-muted pull-right"></small>');
+				var head = $('<h4 class="mb-1"></h4>');
+				var wrapper = $('<div class="d-flex w-100 justify-content-between">');
+				var port = $('<p class="mb-1"></p>');
+				var host = $('<p class="mb-1"></p>');
+				var item = $('<li class="list-group-item list-group-item-action flex-column align-items-start"></li>');
+
+				head.text(microservice.serviceId);
+				type.text(microservice.type);
+				port.text('Port: ' + microservice.port);
+				host.text('Host: ' + microservice.host);
+
+				item.append(wrapper);
+				wrapper.append(head);
+				wrapper.append(port);
+				wrapper.append(host);
+				head.append(type);
+
+				$('#ex-microservices').append(item);
+			}
 
 			function discover() {
 				var success = function(data) {
-					data.forEach(function(microservice) {
-						var item = $('<li class="list-group-item"></li>');
-						item.text(microservice.serviceId);
-						$('#ex-microservices').append(item);
-					});
-				} 
-				
+					$('#ex-microservices').empty();
+					data.forEach(appendMicroservice);
+					
+				}
+
 				var error = function(data) {
 					console.log("ERROR");
-				} 
-				
+				}
+
 				dao.discoverMicroservices(success, error)
 			}
 		}(jQuery));
