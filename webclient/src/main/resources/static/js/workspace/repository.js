@@ -278,7 +278,11 @@
 			actions : [ {
 				name : 'New folder',
 				onClick : function(target) {
-					openNewFolderDialog(target == "#data" ? "" : target);
+					if(target == "#data") {
+						target = "";
+					}
+					
+					openNewFolderDialog(target);
 				}
 			} ]
 		});
