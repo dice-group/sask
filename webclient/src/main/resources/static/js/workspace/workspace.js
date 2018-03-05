@@ -375,7 +375,6 @@
 	Workspace.prototype.loadWorkflowFromPath = function(path) {
 		var self = this;
 		var success = function(data) {
-			console.log(data);
 			self.flowchart.flowchart('setData', data);
 
 			self.changeWorkflowName(name);

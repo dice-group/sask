@@ -105,7 +105,7 @@ var DAO = function(options) {
 	 * Discover the registered microservices.
 	 */
 	this.discoverMicroservices = function(success, error) {
-		uri = "./discoverMicroservices";
+		var uri = "./discoverMicroservices";
 
 		$.ajax({
 			type : "GET",
@@ -119,7 +119,7 @@ var DAO = function(options) {
 	 * Get the repo file structure
 	 */
 	this.getRepoStructure = function(success, error) {
-		uri = "./repo-ms/getHdfsStructure";
+		var uri = "./repo-ms/getHdfsStructure";
 		var data = {
 			location : 'repo'
 		};
@@ -139,7 +139,7 @@ var DAO = function(options) {
 	 * Get all workflows.
 	 */
 	this.getWorkflows = function(success, error) {
-		uri = "./repo-ms/getHdfsStructure";
+		var uri = "./repo-ms/getHdfsStructure";
 		var data = {
 			location : 'workflow'
 		};
@@ -160,7 +160,7 @@ var DAO = function(options) {
 	 * Get the workflow.
 	 */
 	this.getWorkflow = function(success, error, target) {
-		uri = "./repo-ms/readFile";
+		var uri = "./repo-ms/readFile";
 		var data = {
 			location : 'workflow',
 			path : target
@@ -179,7 +179,7 @@ var DAO = function(options) {
 	 * Rename the passed target.
 	 */
 	this.renameRepo = function(success, error, from, to) {
-		uri = "./repo-ms/rename";
+		var uri = "./repo-ms/rename";
 		var data = {
 			location : 'repo',
 			from : from,
@@ -199,7 +199,7 @@ var DAO = function(options) {
 	 * Rename the passed workflow.
 	 */
 	this.renameWorkflow = function(success, error, from, to) {
-		uri = "./repo-ms/rename";
+		var uri = "./repo-ms/rename";
 		var data = {
 			location : 'workflow',
 			from : from,
@@ -219,7 +219,7 @@ var DAO = function(options) {
 	 * Rename the passed target.
 	 */
 	this.renameWorkflow = function(success, error, from, to) {
-		uri = "./repo-ms/rename";
+		var uri = "./repo-ms/rename";
 		var data = {
 			location : 'workflow',
 			from : from,
@@ -239,7 +239,7 @@ var DAO = function(options) {
 	 * Remove the passed target from the repo.
 	 */
 	this.removeFromRepo = function(success, error, target) {
-		uri = "./repo-ms/delete";
+		var uri = "./repo-ms/delete";
 		var data = {
 			location : 'repo',
 			path : target
@@ -258,7 +258,7 @@ var DAO = function(options) {
 	 * Remove the passed target from the workflows.
 	 */
 	this.removeFromWorkflows = function(success, error, target) {
-		uri = "./repo-ms/delete";
+		var uri = "./repo-ms/delete";
 		var data = {
 			location : 'workflow',
 			path : target
@@ -281,7 +281,7 @@ var DAO = function(options) {
 			target = target + "/";
 		}
 
-		uri = "./repo-ms/createDirectory";
+		var uri = "./repo-ms/createDirectory";
 		var data = {
 			location : 'repo',
 			path : target + name
@@ -305,7 +305,7 @@ var DAO = function(options) {
 		formData.append('location', 'workflow');
 		formData.append('filename', target);
 		formData.append('file', JSON.stringify(workflow));
-		
+
 		var uri = "./repo-ms/storeContentInFile";
 		$.ajax({
 			url : uri,
@@ -343,7 +343,7 @@ var DAO = function(options) {
 		formData.append('location', "repo");
 		formData.append('file', file);
 
-		uri = "./repo-ms/storeFile";
+		var uri = "./repo-ms/storeFile";
 		$.ajax({
 			url : uri,
 			cache : false,
@@ -351,9 +351,9 @@ var DAO = function(options) {
 			processData : false,
 			data : formData,
 			type : 'post',
-			success : function(data) {
+			success : function() {
 				if (success) {
-					success(data, path, file);
+					success(path, file);
 				}
 			},
 			error : function(data) {

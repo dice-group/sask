@@ -96,7 +96,9 @@
 						});
 						
 						// upload
-						upload = new Upload({});
+						upload = new Upload({
+							onUploaded : refreshRepo
+						});
 
 						$("#ex-refreshRepo").click(refresh);
 						$("#ex-uploadFile").click(upload.open);
@@ -117,6 +119,10 @@
 								yPosition : 20
 							};
 							workspace.workspace('addNode', newNode);
+					}
+					
+					function refreshRepo() {
+						repo.repository('refreshRepo');
 					}
 					
 					function refreshWorkflows() {

@@ -70,7 +70,8 @@
 			init : $.proxy(this.init, this),
 			remove : $.proxy(this.remove, this),
 			refresh : $.proxy(this.refresh, this),
-			refreshWorkflows : $.proxy(this.refreshWorkflows, this)
+			refreshWorkflows : $.proxy(this.refreshWorkflows, this),
+			refreshRepo : $.proxy(this.refreshRepo, this)
 		};
 	}
 
@@ -195,9 +196,6 @@
 					return 1;
 				return 0;
 			});
-
-			// node.
-			console.log(node);
 		}
 
 		return node;
