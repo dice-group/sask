@@ -14,11 +14,6 @@
 	var pluginName = 'status';
 
 	/**
-	 * The Discoverer
-	 */
-	var discoverer = undefined;
-
-	/**
 	 * Contains the type lists.
 	 */
 	var lists = {};
@@ -26,6 +21,7 @@
 	var _default = {};
 
 	_default.settings = {
+		dao : undefined,
 		knownTypes : {
 			'extractor' : 'Extractors', 
 			'webclient' : 'Webclient',
@@ -60,11 +56,13 @@
 		this.styleId = this.elementId + '-style';
 
 		this.init(options);
-
+		var self = this;
 		return {
 			options : this.options,
 			init : $.proxy(this.init, this),
-			discover : $.proxy(this.discover, this)
+			discover : $.proxy(function() {
+				self.discover();
+			}, this)
 		};
 	}
 
@@ -77,15 +75,14 @@
 			logError("'DAO' not initialized.");
 			return;
 		}
-
-		if (typeof Discoverer !== 'function') {
-			logError("'Discoverer' not initialized.");
+		
+		this.options = $.extend({}, _default.settings, options);
+		
+		if(!this.options.dao) {
+			logError('dao is not defined.');
 			return;
 		}
-
-		this.options = $.extend({}, _default.settings, options);
-		var self = this;
-
+		
 		this.initDiscoverer();
 		this.initStructure();
 		this.discover();
@@ -95,7 +92,7 @@
 	 * Start discover.
 	 */
 	Status.prototype.discover = function() {
-		discoverer.discover();
+		this.options.dao.getDiscoverer().discover();
 	}
 
 	/**
@@ -103,14 +100,16 @@
 	 */
 	Status.prototype.initDiscoverer = function() {
 		var self = this;
-		discoverer = new Discoverer({
-			onRefreshed : function() {
-				self.onMSRefreshed();
-			},
-			onError : function() {
-				self.onRefreshError();
-			}
-		});
+		var discoverer = this.options.dao.getDiscoverer();
+		var settings = discoverer.settings;
+		
+		settings.onRefreshed = function() {
+			self.onMSRefreshed();
+		};
+		
+		settings.onError = function() {
+			self.onRefreshError();
+		};
 	}
 
 	/**
@@ -152,11 +151,10 @@
 	 */
 	Status.prototype.onMSRefreshed = function() {
 		this.clearLists();
-		var microservices = discoverer.getmicroservices();
+		var microservices = this.options.dao.getDiscoverer().getmicroservices();
 		
 		for (var type in microservices) {
 			for(var microservice in microservices[type]) {
-				console.log(microservices[type][microservice]);
 				this.appendMicroservice(microservices[type][microservice]);
 			}
 		}

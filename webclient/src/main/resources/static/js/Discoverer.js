@@ -5,11 +5,6 @@ var Discoverer = function(options) {
 	var root = this;
 	
 	/**
-	 * Data access object.
-	 */
-	var dao = new DAO({});
-	
-	/**
 	 * The discovered microservices.
 	 */
 	var microservices = {};
@@ -17,7 +12,8 @@ var Discoverer = function(options) {
 	/**
 	 * Plugin settings.
 	 */
-	var settings = {
+	this.settings = {
+		dao : undefined,
 		onRefreshed : undefined,
 		onError : undefined
 	};
@@ -48,7 +44,12 @@ var Discoverer = function(options) {
 	 * Constructor
 	 */
 	this.construct = function(options) {
-		$.extend(settings, options);
+		$.extend(this.settings, options);
+		
+		if(!this.settings.dao) {
+			logError('dao is not defined.');
+			return;
+		}
 	};
 
 	this.construct(options);
@@ -61,21 +62,22 @@ var Discoverer = function(options) {
 	 * Discover the microservices.
 	 */
 	this.discover = function() {
+		var self = this;
 		var success = function(data) {
 			microservices = {};
 			sortMicroservices(data);
 			
-			if(typeof settings.onRefreshed !== "undefined") {
-				settings.onRefreshed();
+			if(typeof self.settings.onRefreshed !== "undefined") {
+				self.settings.onRefreshed();
 			}
 		}
 		
 		var error = function(data) {
-			if(typeof settings.onError !== "undefined") {
-				settings.onError(data);
+			if(typeof self.settings.onError !== "undefined") {
+				self.settings.onError(data);
 			}
 		}
 		
-		dao.discoverMicroservices(success, error);
+		this.settings.dao.discoverMicroservices(success, error);
 	}
 };

@@ -3,6 +3,13 @@ var DAO = function(options) {
 	 * this.
 	 */
 	var root = this;
+	
+	/**
+	 * Discoverer.
+	 */
+	var discoverer = new Discoverer({
+		dao : this
+	});
 
 	/**
 	 * Plugin settings.
@@ -97,9 +104,21 @@ var DAO = function(options) {
 	 */
 	this.construct = function(options) {
 		$.extend(settings, options);
+		
+		if (typeof Discoverer !== 'function') {
+			logError("'Discoverer' not initialized.");
+			return;
+		}
 	};
 
 	this.construct(options);
+	
+	/**
+	 * Return the discoverer.
+	 */
+	this.getDiscoverer = function() {
+		return discoverer;
+	}
 
 	/**
 	 * Discover the registered microservices.

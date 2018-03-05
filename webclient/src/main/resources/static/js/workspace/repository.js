@@ -14,11 +14,6 @@
 	var pluginName = 'repository';
 
 	/**
-	 * Data access object.
-	 */
-	var dao = new DAO({});
-
-	/**
 	 * Dialogs.
 	 */
 	var dialogs = new Dialogs({});
@@ -27,7 +22,8 @@
 
 	_default.settings = {
 		onAddToWorkspace : undefined,
-		onLoadToWorkspace : undefined
+		onLoadToWorkspace : undefined,
+		dao : undefined
 	};
 
 	_default.options = {};
@@ -91,6 +87,12 @@
 		}
 
 		this.options = $.extend({}, _default.settings, options);
+		
+		if(!this.options.dao) {
+			logError('dao is not defined.');
+			return;
+		}
+		
 		var self = this;
 		this.treeview = this.$element.treeview({
 			data : structureTemplate
@@ -220,7 +222,7 @@
 			logError(data);
 		}
 
-		dao.getRepoStructure(success, error);
+		this.options.dao.getRepoStructure(success, error);
 	};
 
 	/**
@@ -240,13 +242,18 @@
 			logError(data);
 		}
 
-		dao.getWorkflows(success, error);
+		this.options.dao.getWorkflows(success, error);
 	};
 
 	/**
 	 * Refresh extractors.
 	 */
 	Repository.prototype.refreshExtractors = function() {
+		if(!this.options.dao) {
+			logError('dao is not defined.');
+			return;
+		}
+		
 		var self = this;
 		var success = function(data) {
 			structureTemplate[1].nodes = [];
@@ -270,7 +277,7 @@
 			logError(data);
 		}
 
-		dao.discoverMicroservices(success, error);
+		this.options.dao.discoverMicroservices(success, error);
 	};
 
 	/**
@@ -288,7 +295,7 @@
 			logError(data);
 		}
 
-		dao.getTargetGraphs(success, error);
+		this.options.dao.getTargetGraphs(success, error);
 	};
 
 	/**
@@ -437,7 +444,7 @@
 			var target = $(this).find('input[name="target"]').val();
 			var name = $(this).find('input[name="name"]').val();
 
-			dao.renameRepo(success, error, target, name);
+			self.options.dao.renameRepo(success, error, target, name);
 			$(this).dialog('close');
 		};
 
@@ -465,7 +472,7 @@
 			var target = $(this).find('input[name="target"]').val();
 			var name = $(this).find('input[name="name"]').val();
 
-			dao.renameWorkflow(success, error, target, name);
+			self.options.dao.renameWorkflow(success, error, target, name);
 			$(this).dialog('close');
 		};
 
@@ -493,7 +500,7 @@
 			var target = $(this).find('input[name="target"]').val();
 			var name = $(this).find('input[name="name"]').val();
 
-			dao.createDirectory(success, error, target, name);
+			self.options.dao.createDirectory(success, error, target, name);
 			$(this).dialog('close');
 		};
 
@@ -519,7 +526,8 @@
 
 		var positiv = function() {
 			var target = $(this).find('input[name="target"]').val();
-			dao.removeFromRepo(success, error, target);
+
+			self.options.dao.removeFromRepo(success, error, target);
 			$(this).dialog("close");
 		};
 
@@ -545,7 +553,8 @@
 
 		var positiv = function() {
 			var target = $(this).find('input[name="target"]').val();
-			dao.removeFromWorkflows(success, error, target);
+
+			self.options.dao.removeFromWorkflows(success, error, target);
 			$(this).dialog("close");
 		};
 

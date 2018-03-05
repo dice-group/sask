@@ -8,7 +8,8 @@ var Upload = function(options) {
 	 * Plugin settings.
 	 */
 	var settings = {
-		onUploaded : undefined
+		onUploaded : undefined,
+		dao : undefined
 	};
 
 	/**
@@ -52,11 +53,6 @@ var Upload = function(options) {
 	var uploadingFiles = [];
 
 	/**
-	 * Data access object.
-	 */
-	var dao = new DAO({});
-
-	/**
 	 * Log error on the console.
 	 */
 	var logError = function(message) {
@@ -70,6 +66,11 @@ var Upload = function(options) {
 	 */
 	this.construct = function(options) {
 		$.extend(settings, options);
+		
+		if(!settings.dao) {
+			logError('dao is not defined.');
+			return;
+		}
 
 		initDialog();
 	};
@@ -186,7 +187,7 @@ var Upload = function(options) {
 				onUploadError(path, file.name);
 			};
 
-			dao.uploadFile(success, error, path, file);
+			settings.dao.uploadFile(success, error, path, file);
 		}
 	};
 
