@@ -19,7 +19,8 @@
 <link rel="stylesheet" href="/flowchart-js/jquery.flowchart.css">
 <!-- ~~~~~~ bootstrap-treeview ~~~~~~ -->
 <script src="/webjars/bootstrap-treeview/1.2.0/js/bootstrap-treeview.js"></script>
-<link rel="stylesheet" href="/webjars/bootstrap-treeview/1.2.0/css/bootstrap-treeview.css">
+<link rel="stylesheet"
+	href="/webjars/bootstrap-treeview/1.2.0/css/bootstrap-treeview.css">
 <!-- ~~~~~~  bootstrap-menu ~~~~~~ -->
 <script src="/webjars/bootstrap-menu/1.0.14/dist/BootstrapMenu.js"></script>
 <!-- ~~~~~~ worksapce ~~~~~~ -->
@@ -90,15 +91,17 @@
 						});
 						
 						// workspace
-						workspace = $('#ex-workspace').workspace({});
+						workspace = $('#ex-workspace').workspace({
+							onWorkflowSaved : refreshWorkflows
+						});
 						
 						// upload
 						upload = new Upload({});
 
-						$("#ex-refreshRepo").click(refreshRepo);
+						$("#ex-refreshRepo").click(refresh);
 						$("#ex-uploadFile").click(upload.open);
 
-						refreshRepo();
+						refresh();
 					});
 					
 					function onLoadToWorkspace(target) {
@@ -115,8 +118,12 @@
 							};
 							workspace.workspace('addNode', newNode);
 					}
+					
+					function refreshWorkflows() {
+						repo.repository('refreshWorkflows');
+					}
 
-					function refreshRepo() {
+					function refresh() {
 						repo.repository('refresh');
 					}
 				}(jQuery));

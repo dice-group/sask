@@ -27,7 +27,8 @@
 
 	_default.settings = {
 		forceFileEnding : true,
-		fileEnding : ".wf"
+		fileEnding : ".wf",
+		onWorkflowSaved : undefined
 	};
 
 	_default.options = {};
@@ -224,8 +225,9 @@
 			return;
 		}
 
+		var self = this;
 		var success = function(data) {
-			console.log(data);
+			self.options.onWorkflowSaved();
 		}
 
 		var error = function(data) {

@@ -69,7 +69,8 @@
 			options : this.options,
 			init : $.proxy(this.init, this),
 			remove : $.proxy(this.remove, this),
-			refresh : $.proxy(this.refresh, this)
+			refresh : $.proxy(this.refresh, this),
+			refreshWorkflows : $.proxy(this.refreshWorkflows, this)
 		};
 	}
 
@@ -282,7 +283,7 @@
 						target = "";
 					}
 					
-					openNewFolderDialog(target);
+					self.openNewFolderDialog(target);
 				}
 			} ]
 		});
@@ -320,12 +321,12 @@
 			}, {
 				name : 'Rename',
 				onClick : function(target) {
-					openRenameWorkflowDialog(target);
+					self.openRenameWorkflowDialog(target);
 				}
 			}, {
 				name : 'Remove',
 				onClick : function(target) {
-					openRemoveFromWorkflowsDialog(target);
+					self.openRemoveFromWorkflowsDialog(target);
 				}
 			} ]
 		});
@@ -341,12 +342,12 @@
 			}, {
 				name : 'Rename',
 				onClick : function(target) {
-					openRenameRepoDialog(target);
+					self.openRenameRepoDialog(target);
 				}
 			}, {
 				name : 'Remove',
 				onClick : function(target) {
-					openRemoveFromRepoDialog(target);
+					self.openRemoveFromRepoDialog(target);
 				}
 			} ]
 		});
@@ -357,17 +358,17 @@
 			actions : [ {
 				name : 'New folder',
 				onClick : function(target) {
-					openNewFolderDialog(target);
+					self.openNewFolderDialog(target);
 				}
 			}, {
 				name : 'Rename',
 				onClick : function(target) {
-					openRenameRepoDialog(target);
+					self.openRenameRepoDialog(target);
 				}
 			}, {
 				name : 'Remove',
 				onClick : function(target) {
-					openRemoveFromRepoDialog(target);
+					self.openRemoveFromRepoDialog(target);
 				}
 			} ]
 		});
@@ -376,10 +377,10 @@
 	/**
 	 * Open the rename in repo dialog.
 	 */
-	var openRenameRepoDialog = function(target) {
-
+	Repository.prototype.openRenameRepoDialog = function(target) {
+		var self = this;
 		var success = function(data) {
-			console.log(data);
+			self.refreshRepo();
 		}
 
 		var error = function(data) {
@@ -404,10 +405,10 @@
 	/**
 	 * Open the rename in workflows dialog.
 	 */
-	var openRenameWorkflowDialog = function(target) {
-
+	Repository.prototype.openRenameWorkflowDialog = function(target) {
+		var self = this;
 		var success = function(data) {
-			console.log(data);
+			self.refreshWorkflows();
 		}
 
 		var error = function(data) {
@@ -432,10 +433,11 @@
 	/**
 	 * Open the new folder dialog.
 	 */
-	var openNewFolderDialog = function(target) {
+	Repository.prototype.openNewFolderDialog = function(target) {
+		var self = this;
 		var positiv = function() {
 			var success = function(data) {
-				console.log(data);
+				self.refreshRepo();
 			}
 
 			var error = function(data) {
@@ -459,9 +461,10 @@
 	/**
 	 * Open the remove from repo dialog.
 	 */
-	var openRemoveFromRepoDialog = function(target) {
+	Repository.prototype.openRemoveFromRepoDialog = function(target) {
+		var self = this;
 		var success = function(data) {
-			console.log(data);
+			self.refreshRepo();
 		}
 
 		var error = function(data) {
@@ -484,9 +487,10 @@
 	/**
 	 * Open the remove from workflows dialog.
 	 */
-	var openRemoveFromWorkflowsDialog = function(target) {
+	Repository.prototype.openRemoveFromWorkflowsDialog = function(target) {
+		var self = this;
 		var success = function(data) {
-			console.log(data);
+			self.refreshWorkflows();
 		}
 
 		var error = function(data) {

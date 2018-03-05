@@ -198,7 +198,7 @@ var DAO = function(options) {
 	/**
 	 * Rename the passed workflow.
 	 */
-	this.renameRepo = function(success, error, from, to) {
+	this.renameWorkflow = function(success, error, from, to) {
 		uri = "./repo-ms/rename";
 		var data = {
 			location : 'workflow',
