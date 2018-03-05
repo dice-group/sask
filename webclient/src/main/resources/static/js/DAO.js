@@ -51,7 +51,7 @@ var DAO = function(options) {
 			icon : icon
 		};
 
-		if (nodes.length > 0) {
+		if (type == 'folder') {
 			node.nodes = nodes;
 		}
 
