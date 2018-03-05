@@ -16,6 +16,8 @@
 	href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css" />
 <!-- ~~~~~~ status ~~~~~~ -->
 <script src="/js/DAO.js"></script>
+<script src="/js/Discoverer.js"></script>
+<script src="/js/status/Status.js"></script>
 </head>
 <body>
 	<!-- navbar -->
@@ -45,18 +47,7 @@
 	</nav>
 	<!-- content -->
 	<div class="container">
-		<div class="row">
-			<h2>Extractor</h2>
-			<ul class="list-group" id="ex-extractor"></ul>
-			<h2>Database</h2>
-			<ul class="list-group" id="ex-database"></ul>
-			<h2>Repository</h2>
-			<ul class="list-group" id="ex-repository"></ul>
-			<h2>Webclient</h2>
-			<ul class="list-group" id="ex-webclient"></ul>
-			<button class="btn btn-primary" id="ex-refresh">
-				<span class="glyphicon glyphicon-refresh"></span> Refresh
-			</button>
+		<div class="row" id="ex-microserviceList">
 		</div>
 	</div>
 	<footer class="footer">
@@ -67,93 +58,10 @@
 	</footer>
 	<script>
 		(function($) {
-			var dao = new DAO({});
-
 			$(document).ready(function() {
-				discover();
-
-				$('#ex-refresh').click(discover);
+				$("#ex-microserviceList").status({});
+				
 			});
-
-			function appendMicroservice(microservice, to) {
-				var type = $('<small class="text-muted pull-right"></small>');
-				var friendlyname = $('<span></span>');
-				var serviceId = $('<small class="text-muted"></small>');
-				var head = $('<h4 class="mb-1"></h4>');
-				var wrapper = $('<div class="d-flex w-100 justify-content-between">');
-				var port = $('<p class="mb-1"></p>');
-				var host = $('<p class="mb-1"></p>');
-				var item = $('<li class="list-group-item"></li>');
-
-				friendlyname.text(microservice.friendlyname);
-				serviceId.text(" (" + microservice.serviceId + ")");
-				type.text(microservice.type);
-				port.text('Port: ' + microservice.port);
-				host.text('Host: ' + microservice.host);
-
-				head.append(friendlyname);
-				head.append(serviceId);
-				item.append(wrapper);
-				wrapper.append(head);
-				wrapper.append(port);
-				wrapper.append(host);
-				head.append(type);
-
-				to.append(item);
-			}
-
-			function discover() {
-				var success = function(data) {
-					var emptyMessage = '<li class="list-group-item"><p class="text-muted text-center">No microservices of this type registered.</p></li>';
-
-					var extractor = $("#ex-extractor");
-					var webclient = $("#ex-webclient");
-					var repo = $("#ex-repository");
-					var database = $("#ex-database");
-
-					extractor.empty();
-					webclient.empty();
-					repo.empty();
-					database.empty();
-
-					data.forEach(function(microservice) {
-						switch (microservice.type) {
-						case "extractor":
-							appendMicroservice(microservice, extractor);
-							break;
-						case "webclient":
-							appendMicroservice(microservice, webclient);
-							break;
-						case "repo":
-							appendMicroservice(microservice, repo);
-							break;
-						case "db":
-							appendMicroservice(microservice, database);
-							break;
-						}
-
-					});
-
-					if (database.is(':empty')) {
-						database.append(emptyMessage);
-					}
-					if (extractor.is(':empty')) {
-						extractor.append(emptyMessage);
-					}
-					if (webclient.is(':empty')) {
-						webclient.append(emptyMessage);
-					}
-					if (repo.is(':empty')) {
-						repo.append(emptyMessage);
-					}
-				}
-
-				var error = function(data) {
-					console.log("ERROR");
-				}
-
-				dao.discoverMicroservices(success, error)
-			}
 		}(jQuery));
 	</script>
 </body>
