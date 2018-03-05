@@ -55,9 +55,31 @@ var Discoverer = function(options) {
 	this.construct(options);
 	
 	/**
+	 * Is true, if a microservice with the type 'repo' is discovered.
+	 */
+	this.isRepoDiscovered = function() {	
+		if(!('repo' in microservices)) {
+			return false;
+		}
+		return microservices.repo.length > 0
+	}
+	
+	/**
+	 * Return the discovered microservice with the type 'repo'.
+	 */
+	this.getRepo = function() {
+		if(!this.isRepoDiscovered()) {
+			logError("no microservice with the type 'repo' discovered.");
+			return;
+		}
+		
+		return microservices["repo"][0];
+	}
+	
+	/**
 	 * Returns the discovered microservices.
 	 */
-	this.getmicroservices = function() {
+	this.getMicroservices = function() {
 		return microservices;
 	}
 

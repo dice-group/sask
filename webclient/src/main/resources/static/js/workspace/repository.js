@@ -102,6 +102,7 @@
 		this.initClasses();
 		this.initContextMenu();
 		this.initDragNDrop();
+		this.initDiscoverer();
 	};
 
 	/**
@@ -153,6 +154,26 @@
 			}
 		});
 	};
+	
+	/**
+	 * Init the discoverer.
+	 */
+	Repository.prototype.initDiscoverer = function() {
+		var self = this;
+		var discoverer = this.options.dao.getDiscoverer();
+		var settings = discoverer.settings;
+		
+		settings.onRefreshed = function() {
+			self.refreshRepo();
+			self.refreshDB();
+			self.refreshWorkflows();
+			self.setExtractors();
+		};
+		
+		settings.onError = function() {
+			logError("Discover failed.");
+		};
+	}
 
 	/**
 	 * Remove.
@@ -214,7 +235,7 @@
 			structureTemplate[0].id = data.id;
 			structureTemplate[0].nodes = data.nodes;
 			self.options.data = structureTemplate;
-
+			
 			self.init(self.options);
 		}
 
@@ -248,36 +269,23 @@
 	/**
 	 * Refresh extractors.
 	 */
-	Repository.prototype.refreshExtractors = function() {
-		if(!this.options.dao) {
-			logError('dao is not defined.');
-			return;
-		}
+	Repository.prototype.setExtractors = function() {
+		structureTemplate[1].nodes = [];
+		var discoverer = this.options.dao.getDiscoverer();
 		
-		var self = this;
-		var success = function(data) {
-			structureTemplate[1].nodes = [];
-
-			data.forEach(function(microservice) {
-				if (microservice.type === "extractor") {
-					structureTemplate[1].nodes.push({
-						text : microservice.friendlyname,
-						id : microservice.serviceId,
-						type : 'extractor',
-						icon : 'glyphicon glyphicon-wrench'
-					})
-				}
-			});
-
-			self.options.data = structureTemplate;
-			self.init(self.options);
+		for(var microservice in discoverer.getMicroservices()) {
+			if (microservice.type === "extractor") {
+				structureTemplate[1].nodes.push({
+					text : microservice.friendlyname,
+					id : microservice.serviceId,
+					type : 'extractor',
+					icon : 'glyphicon glyphicon-wrench'
+				})
+			}
 		}
 
-		var error = function(data) {
-			logError(data);
-		}
-
-		this.options.dao.discoverMicroservices(success, error);
+		this.options.data = structureTemplate;
+		this.init(this.options);
 	};
 
 	/**
@@ -302,10 +310,8 @@
 	 * Refresh the whole content of the repo.
 	 */
 	Repository.prototype.refresh = function() {
-		this.refreshRepo();
-		this.refreshExtractors();
-		this.refreshDB();
-		this.refreshWorkflows();
+		// discover
+		this.options.dao.getDiscoverer().discover();
 	};
 
 	/**

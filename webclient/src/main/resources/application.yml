@@ -39,5 +39,5 @@ zuul:
       path: /spotlight-ms/**
       serviceId: SPOTLIGHT-MS
     repo:
-      path: /repo-ms/**
+      path: /REPO-MS/**
       serviceId: REPO-MS
