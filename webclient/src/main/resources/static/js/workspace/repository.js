@@ -165,9 +165,43 @@
 	 */
 	Repository.prototype.getNodeFromTarget = function(target) {
 		var nodeId = $(target).attr('data-nodeid');
-		var node = self.treeview.treeview('getNode', nodeId);
+		var node = this.treeview.treeview('getNode', nodeId);
 		return node;
 	};
+
+	/**
+	 * Order the passed node by type and text.
+	 */
+	Repository.prototype.orderNode = function(node) {
+		if (node.nodes) {
+			var i = 0;
+			while (i < node.nodes.length) {
+				node.nodes[i] = this.orderNode(node.nodes[i]);
+				i++;
+			}
+
+			node.nodes.sort(function(a, b) {
+				if (a.type == "folder" && b.type != "folder") {
+					return -1;
+				}
+
+				if (a.type != "folder" && b.type == "folder") {
+					return 1;
+				}
+
+				if (node.text < node.text)
+					return -1;
+				if (node.text > node.text)
+					return 1;
+				return 0;
+			});
+
+			// node.
+			console.log(node);
+		}
+
+		return node;
+	}
 
 	/**
 	 * Refresh the repo.
@@ -175,6 +209,8 @@
 	Repository.prototype.refreshRepo = function() {
 		var self = this;
 		var success = function(data) {
+			data = self.orderNode(data);
+
 			structureTemplate[0].id = data.id;
 			structureTemplate[0].nodes = data.nodes;
 			self.options.data = structureTemplate;
@@ -275,14 +311,16 @@
 
 		// data root
 		new BootstrapMenu('#' + this.elementId + ' li.root[data-nodeid="0"]', {
-			fetchElementData : this.getNodeFromTarget,
+			fetchElementData : function(target) {
+				return self.getNodeFromTarget(target);
+			},
 			actions : [ {
 				name : 'New folder',
 				onClick : function(target) {
-					if(target == "#data") {
+					if (target == "#data") {
 						target = "";
 					}
-					
+
 					self.openNewFolderDialog(target);
 				}
 			} ]
@@ -290,7 +328,9 @@
 
 		// db
 		new BootstrapMenu('#' + this.elementId + ' li.db', {
-			fetchElementData : this.getNodeFromTarget,
+			fetchElementData : function(target) {
+				return self.getNodeFromTarget(target);
+			},
 			actions : [ {
 				name : 'Add to Workspace',
 				onClick : function(target) {
@@ -301,7 +341,9 @@
 
 		// extractor
 		new BootstrapMenu('#' + this.elementId + ' li.extractor', {
-			fetchElementData : this.getNodeFromTarget,
+			fetchElementData : function(target) {
+				return self.getNodeFromTarget(target);
+			},
 			actions : [ {
 				name : 'Add to Workspace',
 				onClick : function(target) {
@@ -312,7 +354,9 @@
 
 		// workflow
 		new BootstrapMenu('#' + this.elementId + ' li.workflow', {
-			fetchElementData : this.getNodeFromTarget,
+			fetchElementData : function(target) {
+				return self.getNodeFromTarget(target);
+			},
 			actions : [ {
 				name : 'Load to workspace',
 				onClick : function(target) {
@@ -333,7 +377,9 @@
 
 		// file
 		new BootstrapMenu('#' + this.elementId + ' li.file', {
-			fetchElementData : this.getNodeFromTarget,
+			fetchElementData : function(target) {
+				return self.getNodeFromTarget(target);
+			},
 			actions : [ {
 				name : 'Add to Workspace',
 				onClick : function(target) {
@@ -354,7 +400,9 @@
 
 		// folder
 		new BootstrapMenu('#' + this.elementId + ' li.folder', {
-			fetchElementData : this.getNodeFromTarget,
+			fetchElementData : function(target) {
+				return self.getNodeFromTarget(target);
+			},
 			actions : [ {
 				name : 'New folder',
 				onClick : function(target) {

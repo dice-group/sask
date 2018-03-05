@@ -277,10 +277,10 @@ var DAO = function(options) {
 	 * Creates a new folder in the passed target.
 	 */
 	this.createDirectory = function(success, error, target, name) {
-		if(!target.endsWith("/")) {
+		if (!target.endsWith("/")) {
 			target = target + "/";
 		}
-		
+
 		uri = "./repo-ms/createDirectory";
 		var data = {
 			location : 'repo',
