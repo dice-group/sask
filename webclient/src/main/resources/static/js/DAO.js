@@ -69,6 +69,10 @@ var DAO = function(options) {
 	 * Return the repo serviceId.
 	 */
 	var getRepoServiceUri = function() {
+		if(!discoverer.getRepo()) {
+			return;
+		}
+		
 		return "./" + discoverer.getRepo().serviceId + "/";
 	}
 
