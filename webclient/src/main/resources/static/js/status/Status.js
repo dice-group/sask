@@ -154,7 +154,7 @@
 	 */
 	Status.prototype.onMSRefreshed = function() {
 		this.clearLists();
-		var microservices = this.options.dao.getDiscoverer().getmicroservices();
+		var microservices = this.options.dao.getDiscoverer().getMicroservices();
 		
 		for (var type in microservices) {
 			for(var microservice in microservices[type]) {
