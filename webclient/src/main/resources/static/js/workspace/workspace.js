@@ -173,6 +173,17 @@
 	Workspace.prototype.initToolbar = function() {
 		var self = this;
 		
+		// new
+		var onNewButtonClick = function() {
+			doingStackOperation = true;
+			
+			self.clearWorkflow();
+
+			doingStackOperation = false;
+			workflowStack.clear();
+			self.syncWorkflowStack();
+		}
+		
 		// undo
 		var onUndoButtonClick = function() {
 			doingStackOperation = true;
@@ -210,6 +221,7 @@
 		toolbar = $('<div></div>');
 		this.$element.append(toolbar);
 		toolbar.toolbar({
+			onNewButtonClick : onNewButtonClick,
 			onUndoButtonClick : onUndoButtonClick,
 			onRedoButtonClick : onRedoButtonClick,
 			onSaveButtonClick : onSaveButtonClick
@@ -341,6 +353,15 @@
 	 */
 	Workspace.prototype.loadWorkflow = function(workspace) {
 		this.flowchart.flowchart('setData', workspace);
+	};
+	
+	/**
+	 * Clear workspace
+	 */
+	Workspace.prototype.clearWorkflow = function(workspace) {
+		this.changeWorkflowName("");
+		workflowId = undefined;
+		this.flowchart.flowchart('setData', "");
 	};
 
 	/**

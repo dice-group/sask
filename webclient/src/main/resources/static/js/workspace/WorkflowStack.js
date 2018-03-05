@@ -91,6 +91,7 @@ var WorkflowStack = function(options) {
 	this.clear = function() {
 		workflows = [];
 		index = -1;
+		this.setSaved();
 	};
 
 	/**

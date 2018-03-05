@@ -15,16 +15,23 @@
 	var _default = {};
 
 	_default.settings = {
-		undoButtonTemplate : '<button type="button" class="btn btn-default"><a href="#"><span class="glyphicon glyphicon-arrow-left "></span> Undo</a></button>',
+		newButtonTemplate : '<button type="button" class="btn btn-default"><a href="#"><span class="glyphicon glyphicon glyphicon-file"></span> New</a></button>',
+		undoButtonTemplate : '<button type="button" class="btn btn-default"><a href="#"><span class="glyphicon glyphicon-arrow-left"></span> Undo</a></button>',
 		redoButtonTemplate : '<button type="button" class="btn btn-default"><a href="#">Redo <span class="glyphicon glyphicon-arrow-right"></span></a></button>',
 		saveButtonTemplate : '<button type="button" class="btn btn-default"><a href="#"><span class="glyphicon glyphicon-floppy-disk"></span> Save</a></button>',
 		workflownameFieldTemplate : '<span class="pull-right"></span>',
+		onNewButtonClick : undefined,
 		onUndoButtonClick : undefined,
 		onRedoButtonClick : undefined,
 		onSaveButtonClick : undefined
 	};
 
 	_default.options = {};
+	
+	/**
+	 * The new button.
+	 */
+	var newButton = undefined;
 
 	/**
 	 * The undo button.
@@ -87,11 +94,13 @@
 	 * Init the buttons.
 	 */
 	Toolbar.prototype.initButtons = function() {
+		newButton = $(this.options.newButtonTemplate);
 		undoButton = $(this.options.undoButtonTemplate);
 		redoButton = $(this.options.redoButtonTemplate);
 		saveButton = $(this.options.saveButtonTemplate);
 		workflownameField = $(this.options.workflownameFieldTemplate);
 
+		this.$element.append(newButton);
 		this.$element.append(undoButton);
 		this.$element.append(redoButton);
 		this.$element.append(saveButton);
@@ -103,6 +112,13 @@
 	 */
 	Toolbar.prototype.initListener = function() {
 		var self = this;
+		
+		// new
+		newButton.click(function() {
+			if (self.options.onNewButtonClick) {
+				self.options.onNewButtonClick();
+			}
+		});
 		
 		// undo
 		undoButton.click(function() {
