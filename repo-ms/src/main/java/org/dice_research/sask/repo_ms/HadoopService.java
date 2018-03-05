@@ -73,6 +73,103 @@ public class HadoopService {
 		showFileContent(File.separator + "tempRepo"+File.separator+"test.txt");
 		
 		return "";
+=======
+		try {
+
+			readFileUri = WebHDFSUriBuilder.getOpenURL(location, path);
+			this.logger.info(readFileUri);
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.setAccept(Arrays.asList(MediaType.APPLICATION_OCTET_STREAM));
+		HttpEntity<String> entity = new HttpEntity<>(headers);
+		ResponseEntity<byte[]> response = restTemplate.exchange(readFileUri, HttpMethod.GET, entity, byte[].class);
+		// this.logger.info(response.getStatusCode()+"
+		// "+response.getStatusCodeValue());
+
+		/*
+		 * //http://localhost:2400/webhdfs/v1/user/DICE/repo/Ablauf.txt?op=OPEN
+		 * if (!Files.exists(Paths.get(File.separator + "tempRepo"))) {
+		 * this.logger.info("Create /tempRepo/ -> " + new File(File.separator +
+		 * "tempRepo").mkdir()); }
+		 * 
+		 * Files.write(Paths.get(File.separator +
+		 * "tempRepo"+File.separator+"test.txt"), response.getBody()); return
+		 * Files.readAllLines(Paths.get(File.separator +
+		 * "tempRepo"+File.separator+"test.txt")).toString();
+		 */
+		return true;
+	}
+
+	/**
+	 * Store the passed content in the passed file.
+	 * 
+	 * @param path
+	 * @param filename
+	 * @param location
+	 * @param content
+	 * @return
+	 */
+	public boolean storeContentInFile(String path, String filename, Location location, String content) {
+		if (!Files.exists(Paths.get(File.separator + "tempRepo"))) {
+			this.logger.info("Create /tempRepo/ -> " + new File(File.separator + "tempRepo").mkdir());
+		}
+
+		String tempFileName = File.separator + TEMP_FOLDER + File.separator + filename;
+
+		BufferedWriter out = null;
+		try {
+			out = new BufferedWriter(new FileWriter(tempFileName));
+			out.write(content);
+		} catch (IOException ex) {
+			throw new RuntimeException("Unable to create tempfile '" + tempFileName + "'", ex);
+		} finally {
+			try {
+				if (null != out) {
+					out.close();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+		LinkedMultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+		map.add("file", new FileSystemResource(tempFileName));
+
+		uploadFile(location, path, tempFileName, filename, map);
+
+		deleteTempFolder();
+
+		return true;
+	}
+
+	/**
+	 * Upload the passed file to hadoop.
+	 * 
+	 * @param path
+	 * @param tempFileName
+	 * @param originalFileName
+	 * @param map
+	 */
+	private void uploadFile(Location location, String path, String tempFileName, String originalFileName, LinkedMultiValueMap<String, Object> map) {
+
+		URI createFileURI = WebHDFSUriBuilder.getCreateURL(location, path, originalFileName);
+		ResponseEntity<String> response = restTemplate.exchange(createFileURI, HttpMethod.PUT, null, String.class);
+
+		URI nodeLocation = response.getHeaders()
+		                           .getLocation();
+		// URI nodeURI = URI.create(HADOOP_HOSTSERVER + ":" +
+		// HADOOP_DATANODE_PORT + nodeLocation.getPath() + "?"+
+		// nodeLocation.getQuery());
+		this.logger.info(nodeLocation);
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+		HttpEntity<LinkedMultiValueMap<String, Object>> requestEntity = new HttpEntity<LinkedMultiValueMap<String, Object>>(map, headers);
+		response = restTemplate.exchange(nodeLocation, HttpMethod.PUT, requestEntity, String.class);
+>>>>>>> branch 'Repository' of https://github.com/dice-group/sask.git
 	}
 
 	public boolean storeFilesLocal(String path, List<MultipartFile> files, Location location) {
@@ -180,6 +277,49 @@ public class HadoopService {
 		return root;
 	}
 
+<<<<<<< HEAD
+=======
+	private void dfs(Location location, String jsonStr, String path, HDFSFile tree) {
+		FileStatuses statuses = jsonToFileStatuses(jsonStr);
+
+		for (FileStatus status : statuses.getFileStatuses()) {
+			String uri = path + "/" + status.getPathSuffix();
+			uri.replaceAll(location.name(), "");
+			HDFSFile node = new HDFSFile(status.getPathSuffix(), tree.getPath() + forwardSlash + status.getPathSuffix(), status.getType());
+			tree.addFileToList(node);
+
+			if (status.getType() == Types.DIRECTORY) {
+				if (!path.endsWith("/")) {
+					path = path + "/";
+				}
+
+				URI hdfsStructureURI = WebHDFSUriBuilder.getHDFSStructureURI(location, path + status.getPathSuffix());
+				this.logger.info(hdfsStructureURI);
+				ResponseEntity<String> response = restTemplate.exchange(hdfsStructureURI, HttpMethod.GET, null, String.class);
+				dfs(location, response.getBody(), uri, node);
+			}
+		}
+
+	}
+
+	// https://stackoverflow.com/questions/27895376/deserialize-nested-array-as-arraylist-with-jackson
+	private FileStatuses jsonToFileStatuses(String jsonStr) {
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.configure(DeserializationFeature.UNWRAP_ROOT_VALUE, true);
+		try {
+			FileStatuses fileStatuses = mapper.readValue(jsonStr, FileStatuses.class);
+			return fileStatuses;
+		} catch (JsonParseException e) {
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+>>>>>>> branch 'Repository' of https://github.com/dice-group/sask.git
 	public String createDirectory(Location location, String path) {
 		URI mkdirURI = WebHDFSUriBuilder.getMkdirURI(location, path);
 		this.logger.info(mkdirURI);
