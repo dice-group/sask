@@ -39,7 +39,7 @@ var Discoverer = function(options) {
 			microservices[microservice.type].push(microservice);
 		});
 	}
-
+	
 	/**
 	 * Constructor
 	 */
@@ -54,6 +54,9 @@ var Discoverer = function(options) {
 
 	this.construct(options);
 	
+	/**
+	 * Returns the discovered microservices.
+	 */
 	this.getmicroservices = function() {
 		return microservices;
 	}
@@ -79,5 +82,5 @@ var Discoverer = function(options) {
 		}
 		
 		this.settings.dao.discoverMicroservices(success, error);
-	}
+	};
 };

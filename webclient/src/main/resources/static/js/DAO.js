@@ -98,6 +98,13 @@ var DAO = function(options) {
 
 		return node;
 	};
+	
+	/**
+	 * Return the discoverer.
+	 */
+	this.getDiscoverer = function() {
+		return discoverer;
+	}
 
 	/**
 	 * Constructor
@@ -113,13 +120,6 @@ var DAO = function(options) {
 
 	this.construct(options);
 	
-	/**
-	 * Return the discoverer.
-	 */
-	this.getDiscoverer = function() {
-		return discoverer;
-	}
-
 	/**
 	 * Discover the registered microservices.
 	 */

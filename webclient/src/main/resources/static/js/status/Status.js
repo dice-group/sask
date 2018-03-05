@@ -116,6 +116,7 @@
 	 * Init the structure.
 	 */
 	Status.prototype.initStructure = function() {
+		var self = this;
 		for(var type in this.options.knownTypes) {
 			// type headers
 			var typeHeader = $(this.options.templates.typeHeader);
@@ -133,7 +134,9 @@
 		
 		// refresh button
 		var refreshButton = $(this.options.templates.refreshButton);
-		refreshButton.click(this.discover);
+		refreshButton.click(function() {
+			self.options.dao.getDiscoverer().discover();
+		});
 		this.$element.append(refreshButton);
 	}
 	
