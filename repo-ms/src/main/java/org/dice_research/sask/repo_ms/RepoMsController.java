@@ -18,7 +18,7 @@ public class RepoMsController {
 	private HadoopService hadoopService = new HadoopService();
 
 	@RequestMapping(value = "/storeFile")
-	public void storeFile(HttpServletRequest request) throws FileUploadException, IOException {
+	public boolean storeFile(HttpServletRequest request) throws FileUploadException, IOException {
 		this.logger.info("Repo-microservice storeFile() invoked");
 		// http://www.baeldung.com/spring-apache-file-upload
 
@@ -32,10 +32,11 @@ public class RepoMsController {
 			e.printStackTrace();
 		}
 
+		return true;
 	}
 
 	@RequestMapping(value = "/storeContentInFile")
-	public void storeContentInFile(HttpServletRequest request) throws IOException {
+	public boolean storeContentInFile(HttpServletRequest request) throws IOException {
 		this.logger.info("Repo-microservice storeContentInFile() invoked");
 
 		try {
@@ -47,6 +48,8 @@ public class RepoMsController {
 
 			e.printStackTrace();
 		}
+		
+		return true;
 	}
 
 	@RequestMapping(value = "/readFile")
