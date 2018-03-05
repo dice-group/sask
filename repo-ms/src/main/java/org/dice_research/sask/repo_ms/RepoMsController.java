@@ -23,7 +23,7 @@ public class RepoMsController {
 		      .map(x -> x.getOriginalFilename())
 		      .filter(x -> !StringUtils.isEmpty(x))
 		      .collect(Collectors.joining(" , "));
-		return hadoopService.storeFiles(path, Arrays.asList(files), location);
+		return hadoopService.storeFilesLocal(path, Arrays.asList(files), location);
 	}
 	
 	@RequestMapping(value = "/storeContentInFile")
@@ -33,7 +33,7 @@ public class RepoMsController {
 	}
 
 	@RequestMapping(value = "/readFile")
-	public boolean readFile(String path, Location location) throws IOException {
+	public String readFile(String path, Location location) throws IOException {
 		this.logger.info("Repo-microservice readFiles() invoked");
 		return hadoopService.readFile(path, location);
 	}

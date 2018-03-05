@@ -38,7 +38,7 @@ public class WebHDFSUriBuilder {
 		return null;
 	}
 
-	public static URI getOpenURL(Location location, String path) throws URISyntaxException {
+	public static URI getOpenURL(Location location, String path) {
 
 		path = path.startsWith(FORWARDSLASH) ? path.substring(1) : path;
 
