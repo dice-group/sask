@@ -310,6 +310,8 @@ var DAO = function(options) {
 		$.ajax({
 			url : uri,
 			cache : false,
+			contentType : false,
+			processData : false,
 			data : formData,
 			type : 'post',
 			success : success,
