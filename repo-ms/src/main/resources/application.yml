@@ -9,6 +9,7 @@ eureka:
   instance:
     metadataMap:
       type: repo
+      friendlyname: Hadoop
   client:
     serviceUrl:
       defaultZone: http://localhost:1111/eureka/

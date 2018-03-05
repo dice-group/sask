@@ -9,6 +9,7 @@ eureka:
   instance:
     metadataMap:
       type: extractor
+      friendlyname: FOX
   client:
     serviceUrl:
       defaultZone: http://localhost:1111/eureka/

@@ -38,27 +38,13 @@
 	var structureTemplate = [ {
 		text : 'Data',
 		id : '#data',
-		type : 'root'
+		type : 'root',
+		nodes : []
 	}, {
 		text : 'Extractors',
 		id : '#parent2',
 		type : 'root',
-		nodes : [ {
-			text : 'FOX',
-			id : '#fox',
-			type : 'extractor',
-			icon : 'glyphicon glyphicon-wrench'
-		}, {
-			text : 'RDF Fred',
-			id : '#rdffred',
-			type : 'extractor',
-			icon : 'glyphicon glyphicon-wrench'
-		}, {
-			text : 'Spotlight',
-			id : '#spotlight',
-			type : 'extractor',
-			icon : 'glyphicon glyphicon-wrench'
-		} ]
+		nodes : []
 	}, {
 		text : 'Target graphs',
 		id : '#parent3',
@@ -83,7 +69,8 @@
 			options : this.options,
 			init : $.proxy(this.init, this),
 			remove : $.proxy(this.remove, this),
-			refresh : $.proxy(this.refresh, this)
+			refresh : $.proxy(this.refresh, this),
+			refreshWorkflows : $.proxy(this.refreshWorkflows, this)
 		};
 	}
 
@@ -178,9 +165,43 @@
 	 */
 	Repository.prototype.getNodeFromTarget = function(target) {
 		var nodeId = $(target).attr('data-nodeid');
-		var node = self.treeview.treeview('getNode', nodeId);
+		var node = this.treeview.treeview('getNode', nodeId);
 		return node;
 	};
+
+	/**
+	 * Order the passed node by type and text.
+	 */
+	Repository.prototype.orderNode = function(node) {
+		if (node.nodes) {
+			var i = 0;
+			while (i < node.nodes.length) {
+				node.nodes[i] = this.orderNode(node.nodes[i]);
+				i++;
+			}
+
+			node.nodes.sort(function(a, b) {
+				if (a.type == "folder" && b.type != "folder") {
+					return -1;
+				}
+
+				if (a.type != "folder" && b.type == "folder") {
+					return 1;
+				}
+
+				if (node.text < node.text)
+					return -1;
+				if (node.text > node.text)
+					return 1;
+				return 0;
+			});
+
+			// node.
+			console.log(node);
+		}
+
+		return node;
+	}
 
 	/**
 	 * Refresh the repo.
@@ -188,6 +209,8 @@
 	Repository.prototype.refreshRepo = function() {
 		var self = this;
 		var success = function(data) {
+			data = self.orderNode(data);
+
 			structureTemplate[0].id = data.id;
 			structureTemplate[0].nodes = data.nodes;
 			self.options.data = structureTemplate;
@@ -223,6 +246,36 @@
 	};
 
 	/**
+	 * Refresh extractors.
+	 */
+	Repository.prototype.refreshExtractors = function() {
+		var self = this;
+		var success = function(data) {
+			structureTemplate[1].nodes = [];
+
+			data.forEach(function(microservice) {
+				if (microservice.type === "extractor") {
+					structureTemplate[1].nodes.push({
+						text : microservice.friendlyname,
+						id : microservice.serviceId,
+						type : 'extractor',
+						icon : 'glyphicon glyphicon-wrench'
+					})
+				}
+			});
+
+			self.options.data = structureTemplate;
+			self.init(self.options);
+		}
+
+		var error = function(data) {
+			logError(data);
+		}
+
+		dao.discoverMicroservices(success, error);
+	};
+
+	/**
 	 * Refresh the db.
 	 */
 	Repository.prototype.refreshDB = function() {
@@ -245,6 +298,7 @@
 	 */
 	Repository.prototype.refresh = function() {
 		this.refreshRepo();
+		this.refreshExtractors();
 		this.refreshDB();
 		this.refreshWorkflows();
 	};
@@ -257,18 +311,26 @@
 
 		// data root
 		new BootstrapMenu('#' + this.elementId + ' li.root[data-nodeid="0"]', {
-			fetchElementData : this.getNodeFromTarget,
+			fetchElementData : function(target) {
+				return self.getNodeFromTarget(target);
+			},
 			actions : [ {
 				name : 'New folder',
 				onClick : function(target) {
-					openNewFolderDialog(target);
+					if (target == "#data") {
+						target = "";
+					}
+
+					self.openNewFolderDialog(target);
 				}
 			} ]
 		});
 
 		// db
 		new BootstrapMenu('#' + this.elementId + ' li.db', {
-			fetchElementData : this.getNodeFromTarget,
+			fetchElementData : function(target) {
+				return self.getNodeFromTarget(target);
+			},
 			actions : [ {
 				name : 'Add to Workspace',
 				onClick : function(target) {
@@ -279,7 +341,9 @@
 
 		// extractor
 		new BootstrapMenu('#' + this.elementId + ' li.extractor', {
-			fetchElementData : this.getNodeFromTarget,
+			fetchElementData : function(target) {
+				return self.getNodeFromTarget(target);
+			},
 			actions : [ {
 				name : 'Add to Workspace',
 				onClick : function(target) {
@@ -290,7 +354,9 @@
 
 		// workflow
 		new BootstrapMenu('#' + this.elementId + ' li.workflow', {
-			fetchElementData : this.getNodeFromTarget,
+			fetchElementData : function(target) {
+				return self.getNodeFromTarget(target);
+			},
 			actions : [ {
 				name : 'Load to workspace',
 				onClick : function(target) {
@@ -299,19 +365,21 @@
 			}, {
 				name : 'Rename',
 				onClick : function(target) {
-					openRenameWorkflowDialog(target);
+					self.openRenameWorkflowDialog(target);
 				}
 			}, {
 				name : 'Remove',
 				onClick : function(target) {
-					openRemoveFromWorkflowsDialog(target);
+					self.openRemoveFromWorkflowsDialog(target);
 				}
 			} ]
 		});
 
 		// file
 		new BootstrapMenu('#' + this.elementId + ' li.file', {
-			fetchElementData : this.getNodeFromTarget,
+			fetchElementData : function(target) {
+				return self.getNodeFromTarget(target);
+			},
 			actions : [ {
 				name : 'Add to Workspace',
 				onClick : function(target) {
@@ -320,33 +388,35 @@
 			}, {
 				name : 'Rename',
 				onClick : function(target) {
-					openRenameRepoDialog(target);
+					self.openRenameRepoDialog(target);
 				}
 			}, {
 				name : 'Remove',
 				onClick : function(target) {
-					openRemoveFromRepoDialog(target);
+					self.openRemoveFromRepoDialog(target);
 				}
 			} ]
 		});
 
 		// folder
 		new BootstrapMenu('#' + this.elementId + ' li.folder', {
-			fetchElementData : this.getNodeFromTarget,
+			fetchElementData : function(target) {
+				return self.getNodeFromTarget(target);
+			},
 			actions : [ {
 				name : 'New folder',
 				onClick : function(target) {
-					openNewFolderDialog(target);
+					self.openNewFolderDialog(target);
 				}
 			}, {
 				name : 'Rename',
 				onClick : function(target) {
-					openRenameRepoDialog(target);
+					self.openRenameRepoDialog(target);
 				}
 			}, {
 				name : 'Remove',
 				onClick : function(target) {
-					openRemoveFromRepoDialog(target);
+					self.openRemoveFromRepoDialog(target);
 				}
 			} ]
 		});
@@ -355,16 +425,16 @@
 	/**
 	 * Open the rename in repo dialog.
 	 */
-	var openRenameRepoDialog = function(target) {
-		
+	Repository.prototype.openRenameRepoDialog = function(target) {
+		var self = this;
 		var success = function(data) {
-			console.log(data);
+			self.refreshRepo();
 		}
-		
+
 		var error = function(data) {
 			logError(data);
 		}
-		
+
 		var positiv = function() {
 			var target = $(this).find('input[name="target"]').val();
 			var name = $(this).find('input[name="name"]').val();
@@ -379,20 +449,20 @@
 
 		dialogs.dialogRename(positiv, negativ, target).dialog('open');
 	};
-	
+
 	/**
 	 * Open the rename in workflows dialog.
 	 */
-	var openRenameWorkflowDialog = function(target) {
-		
+	Repository.prototype.openRenameWorkflowDialog = function(target) {
+		var self = this;
 		var success = function(data) {
-			console.log(data);
+			self.refreshWorkflows();
 		}
-		
+
 		var error = function(data) {
 			logError(data);
 		}
-		
+
 		var positiv = function() {
 			var target = $(this).find('input[name="target"]').val();
 			var name = $(this).find('input[name="name"]').val();
@@ -411,12 +481,21 @@
 	/**
 	 * Open the new folder dialog.
 	 */
-	var openNewFolderDialog = function(target) {
+	Repository.prototype.openNewFolderDialog = function(target) {
+		var self = this;
 		var positiv = function() {
+			var success = function(data) {
+				self.refreshRepo();
+			}
+
+			var error = function(data) {
+				logError(data);
+			}
+
 			var target = $(this).find('input[name="target"]').val();
 			var name = $(this).find('input[name="name"]').val();
 
-			dao.createDirectory(target, name);
+			dao.createDirectory(success, error, target, name);
 			$(this).dialog('close');
 		};
 
@@ -430,9 +509,10 @@
 	/**
 	 * Open the remove from repo dialog.
 	 */
-	var openRemoveFromRepoDialog = function(target) {
+	Repository.prototype.openRemoveFromRepoDialog = function(target) {
+		var self = this;
 		var success = function(data) {
-			console.log(data);
+			self.refreshRepo();
 		}
 
 		var error = function(data) {
@@ -455,15 +535,16 @@
 	/**
 	 * Open the remove from workflows dialog.
 	 */
-	var openRemoveFromWorkflowsDialog = function(target) {
+	Repository.prototype.openRemoveFromWorkflowsDialog = function(target) {
+		var self = this;
 		var success = function(data) {
-			console.log(data);
+			self.refreshWorkflows();
 		}
 
 		var error = function(data) {
 			logError(data);
 		}
-		
+
 		var positiv = function() {
 			var target = $(this).find('input[name="target"]').val();
 			dao.removeFromWorkflows(success, error, target);

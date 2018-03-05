@@ -19,6 +19,7 @@
 		<module>webclient</module>
 		<module>fox-ms</module>
 		<module>fred-ms</module>
+		<module>cedric-ms</module>
 		<module>chatbot</module>
 		<module>database-ms</module>
 	</modules>

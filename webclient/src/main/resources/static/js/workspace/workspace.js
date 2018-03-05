@@ -27,7 +27,8 @@
 
 	_default.settings = {
 		forceFileEnding : true,
-		fileEnding : ".wf"
+		fileEnding : ".wf",
+		onWorkflowSaved : undefined
 	};
 
 	_default.options = {};
@@ -45,7 +46,7 @@
 	/**
 	 * The toolbar.
 	 */
-	 var toolbar = undefined;
+	var toolbar = undefined;
 
 	/**
 	 * The workflow id of the current loaded workflow.
@@ -77,7 +78,7 @@
 			logError("'flowchart' plugin not initialized.");
 			return;
 		}
-		
+
 		if (!jQuery().toolbar) {
 			logError("'toolbar' plugin not initialized.");
 			return;
@@ -171,7 +172,18 @@
 	 */
 	Workspace.prototype.initToolbar = function() {
 		var self = this;
-		
+
+		// new
+		var onNewButtonClick = function() {
+			doingStackOperation = true;
+
+			self.clearWorkflow();
+
+			doingStackOperation = false;
+			workflowStack.clear();
+			self.syncWorkflowStack();
+		}
+
 		// undo
 		var onUndoButtonClick = function() {
 			doingStackOperation = true;
@@ -182,7 +194,7 @@
 			doingStackOperation = false;
 			self.syncWorkflowStack();
 		}
-		
+
 		// redo
 		var onRedoButtonClick = function() {
 			doingStackOperation = true;
@@ -192,23 +204,23 @@
 			doingStackOperation = false;
 			self.syncWorkflowStack();
 		}
-		
+
 		// save
 		var onSaveButtonClick = function() {
 			if (workflowId === undefined) {
-				// open dialog
 				self.openNewWorkflowDialog();
 			} else {
 				self.saveWorkflow();
 			}
 		}
-		
+
 		/*
 		 * create
 		 */
 		toolbar = $('<div></div>');
 		this.$element.append(toolbar);
 		toolbar.toolbar({
+			onNewButtonClick : onNewButtonClick,
 			onUndoButtonClick : onUndoButtonClick,
 			onRedoButtonClick : onRedoButtonClick,
 			onSaveButtonClick : onSaveButtonClick
@@ -224,8 +236,9 @@
 			return;
 		}
 
+		var self = this;
 		var success = function(data) {
-			console.log(data);
+			self.options.onWorkflowSaved();
 		}
 
 		var error = function(data) {
@@ -284,19 +297,25 @@
 			break;
 		}
 
+		// create unique id
+		var uuid = Math.random().toString(36).substr(2, 16);
+		var id = "node-" + uuid;
+
+		// create data
 		var newData = {
 			top : properties.yPosition,
 			left : properties.xPosition,
 			properties : {
 				type : properties.type,
-				id : properties.id,
+				id : id,
+				content : properties.id,
 				title : properties.text,
 				inputs : inputs,
 				outputs : outputs
 			}
 		};
 
-		this.flowchart.flowchart('createOperator', properties.id, newData);
+		this.flowchart.flowchart('createOperator', id, newData);
 	};
 
 	/**
@@ -325,7 +344,7 @@
 
 		dialogs.dialogNewWorkflow(positiv, negativ).dialog('open');
 	};
-	
+
 	/**
 	 * Change the displayed workflow name.
 	 */
@@ -342,6 +361,15 @@
 	};
 
 	/**
+	 * Clear workspace
+	 */
+	Workspace.prototype.clearWorkflow = function(workspace) {
+		this.changeWorkflowName("");
+		workflowId = undefined;
+		this.flowchart.flowchart('setData', "");
+	};
+
+	/**
 	 * Load the workflow from the passed repo path.
 	 */
 	Workspace.prototype.loadWorkflowFromPath = function(path) {
@@ -349,9 +377,9 @@
 		var success = function(data) {
 			console.log(data);
 			self.flowchart.flowchart('setData', data);
-			
+
 			self.changeWorkflowName(name);
-			
+
 			workflowStack.clear();
 			workflowStack.setSaved();
 			self.syncWorkflowStack();

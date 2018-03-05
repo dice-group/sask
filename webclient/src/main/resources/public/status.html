@@ -15,7 +15,9 @@
 <link rel="stylesheet"
 	href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css" />
 <!-- ~~~~~~ status ~~~~~~ -->
-<script src="/js/workspace/DAO.js"></script>
+<script src="/js/DAO.js"></script>
+<script src="/js/Discoverer.js"></script>
+<script src="/js/status/Status.js"></script>
 </head>
 <body>
 	<!-- navbar -->
@@ -45,10 +47,7 @@
 	</nav>
 	<!-- content -->
 	<div class="container">
-		<div class="row">
-			<ul class="list-group" id="ex-microservices">
-			</ul>
-		</div>
+		<div class="row" id="ex-microserviceList"></div>
 	</div>
 	<footer class="footer">
 		<div class="container">
@@ -58,28 +57,10 @@
 	</footer>
 	<script>
 		(function($) {
-			var dao = new DAO({});
-
 			$(document).ready(function() {
-				discover();
+				$("#ex-microserviceList").status({});
+
 			});
-
-
-			function discover() {
-				var success = function(data) {
-					data.forEach(function(microservice) {
-						var item = $('<li class="list-group-item"></li>');
-						item.text(microservice.serviceId);
-						$('#ex-microservices').append(item);
-					});
-				} 
-				
-				var error = function(data) {
-					console.log("ERROR");
-				} 
-				
-				dao.discoverMicroservices(success, error)
-			}
 		}(jQuery));
 	</script>
 </body>
