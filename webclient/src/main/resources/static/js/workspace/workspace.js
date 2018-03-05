@@ -208,7 +208,6 @@
 		// save
 		var onSaveButtonClick = function() {
 			if (workflowId === undefined) {
-				// open dialog
 				self.openNewWorkflowDialog();
 			} else {
 				self.saveWorkflow();
@@ -297,20 +296,26 @@
 			var outputs = {};
 			break;
 		}
+		
+		// create unique id
+		var uuid = Math.random().toString(36).substr(2, 16);
+		var id = "node-" + uuid;
 
+		// create data
 		var newData = {
 			top : properties.yPosition,
 			left : properties.xPosition,
 			properties : {
 				type : properties.type,
-				id : properties.id,
+				id : id,
+				content: properties.id,
 				title : properties.text,
 				inputs : inputs,
 				outputs : outputs
 			}
 		};
 
-		this.flowchart.flowchart('createOperator', properties.id, newData);
+		this.flowchart.flowchart('createOperator', id, newData);
 	};
 
 	/**
