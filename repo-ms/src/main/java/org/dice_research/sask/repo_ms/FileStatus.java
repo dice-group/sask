@@ -1,12 +1,12 @@
 package org.dice_research.sask.repo_ms;
 
 import java.io.Serializable;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class FileStatus implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private long accessTime;
 	private int blockSize;
 	private int childrenNum;

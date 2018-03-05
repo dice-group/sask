@@ -4,13 +4,14 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HDFSFile implements Serializable{
+public class HDFSFile implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private String suffix;
 	private String path;
 	private Types type;
 	private List<HDFSFile> fileList;
-	
+
 	public HDFSFile(String suffix, String path, Types type) {
 		super();
 		this.suffix = suffix;
@@ -34,7 +35,7 @@ public class HDFSFile implements Serializable{
 	public List<HDFSFile> getFileList() {
 		return fileList;
 	}
-	
+
 	public void addFileToList(HDFSFile file) {
 		fileList.add(file);
 	}
@@ -43,8 +44,5 @@ public class HDFSFile implements Serializable{
 	public String toString() {
 		return "HdfsFile [suffix=" + suffix + ", path=" + path + ", type=" + type + ", fileList=" + fileList + "]";
 	}
-	
-	
-	
-	
+
 }

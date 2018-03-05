@@ -296,13 +296,12 @@ var DAO = function(options) {
 	 * Save workflow.
 	 */
 	this.saveWorkflow = function(success, error, target, workflow) {
-		var data = {
-			path : '/',
-			location : 'workflow',
-			filename : target,
-			content : JSON.stringify(workflow)
-		};
-
+		var formData = new FormData();
+		formData.append('path', '/');
+		formData.append('location', 'workflow');
+		formData.append('filename', target);
+		formData.append('file', JSON.stringify(workflow));
+		
 		var uri = "./repo-ms/storeContentInFile";
 		$.ajax({
 			url : uri,
@@ -338,10 +337,9 @@ var DAO = function(options) {
 		var formData = new FormData();
 		formData.append('path', path);
 		formData.append('location', "repo");
+		formData.append('file', file);
 
-		formData.append('files', file);
-
-		uri = "./repo-ms/storeFiles";
+		uri = "./repo-ms/storeFile";
 		$.ajax({
 			url : uri,
 			cache : false,

@@ -253,7 +253,7 @@
 	 * Init the context menu.
 	 */
 	Repository.prototype.initContextMenu = function() {
-		self = this;
+		var self = this;
 
 		// data root
 		new BootstrapMenu('#' + this.elementId + ' li.root[data-nodeid="0"]', {

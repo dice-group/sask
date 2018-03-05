@@ -9,9 +9,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonRootName("FileStatuses")
-public class FileStatuses implements Serializable{
+public class FileStatuses implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private List<FileStatus> fileStatuses;
-	
+
 	@JsonCreator
 	public FileStatuses(@JsonProperty("FileStatus") List<FileStatus> fileStatuses) {
 		this.fileStatuses = fileStatuses;
@@ -26,7 +27,4 @@ public class FileStatuses implements Serializable{
 		this.fileStatuses = fileStatuses;
 	}
 
-	
-	
-	
 }

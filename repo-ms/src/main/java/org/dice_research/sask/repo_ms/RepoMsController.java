@@ -1,35 +1,52 @@
 package org.dice_research.sask.repo_ms;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.stream.Collectors;
-
+import java.io.InputStream;
+import java.nio.file.Paths;
+import javax.servlet.ServletException;
+import javax.servlet.http.Part;
+import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.apache.log4j.Logger;
+import org.apache.tomcat.util.http.fileupload.FileUploadException;
 import org.springframework.http.MediaType;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 public class RepoMsController {
 	private Logger logger = Logger.getLogger(RepoMsController.class.getName());
-	private HadoopService hadoopService = HadoopService.getInstance();
+	private HadoopService hadoopService = new HadoopService();
 
-	@RequestMapping(value = "/storeFiles")
-	public boolean storeFiles(String path, MultipartFile[] files, Location location) throws IOException {
+	@RequestMapping(value = "/storeFile")
+	public void storeFile(HttpServletRequest request) throws FileUploadException, IOException {
 		this.logger.info("Repo-microservice storeFile() invoked");
-		Arrays.stream(files)
-		      .map(x -> x.getOriginalFilename())
-		      .filter(x -> !StringUtils.isEmpty(x))
-		      .collect(Collectors.joining(" , "));
-		return hadoopService.storeFilesLocal(path, Arrays.asList(files), location);
+		// http://www.baeldung.com/spring-apache-file-upload
+
+		try {
+			Part filePart = request.getPart("file");
+			InputStream fileContent = filePart.getInputStream();
+			hadoopService.createFile(Location.valueOf(request.getParameter("location")), request.getParameter("path"),
+					Paths.get(filePart.getSubmittedFileName()).getFileName().toString(), fileContent);
+		} catch (ServletException e) {
+
+			e.printStackTrace();
+		}
+
 	}
-	
+
 	@RequestMapping(value = "/storeContentInFile")
-	public boolean storeContentInFile(String path, String filename, Location location, String content) {
+	public void storeContentInFile(HttpServletRequest request) throws IOException {
 		this.logger.info("Repo-microservice storeContentInFile() invoked");
-		return hadoopService.storeContentInFile(path, filename, location, content);
+
+		try {
+			Part filePart = request.getPart("file");
+			InputStream fileContent = filePart.getInputStream();
+			hadoopService.createFile(Location.valueOf(request.getParameter("location")), request.getParameter("path"),
+					request.getParameter("filename"), fileContent);
+		} catch (ServletException e) {
+
+			e.printStackTrace();
+		}
 	}
 
 	@RequestMapping(value = "/readFile")

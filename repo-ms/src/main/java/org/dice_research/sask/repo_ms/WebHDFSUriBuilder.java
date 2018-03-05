@@ -2,7 +2,6 @@ package org.dice_research.sask.repo_ms;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import org.apache.http.client.utils.URIBuilder;
 
 public class WebHDFSUriBuilder {
