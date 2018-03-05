@@ -22,6 +22,7 @@
 		<module>cedric-ms</module>
 		<module>chatbot</module>
 		<module>database-ms</module>
+		<module>OpenIE-ms</module>
 	</modules>
 
 	<properties>
