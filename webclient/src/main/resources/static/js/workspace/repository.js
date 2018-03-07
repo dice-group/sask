@@ -87,12 +87,12 @@
 		}
 
 		this.options = $.extend({}, _default.settings, options);
-		
-		if(!this.options.dao) {
+
+		if (!this.options.dao) {
 			logError('dao is not defined.');
 			return;
 		}
-		
+
 		var self = this;
 		this.treeview = this.$element.treeview({
 			data : structureTemplate
@@ -154,7 +154,7 @@
 			}
 		});
 	};
-	
+
 	/**
 	 * Init the discoverer.
 	 */
@@ -162,14 +162,14 @@
 		var self = this;
 		var discoverer = this.options.dao.getDiscoverer();
 		var settings = discoverer.settings;
-		
+
 		settings.onRefreshed = function() {
 			self.refreshRepo();
 			self.refreshDB();
 			self.refreshWorkflows();
 			self.setExtractors();
 		};
-		
+
 		settings.onError = function() {
 			logError("Discover failed.");
 		};
@@ -235,7 +235,7 @@
 			structureTemplate[0].id = data.id;
 			structureTemplate[0].nodes = data.nodes;
 			self.options.data = structureTemplate;
-			
+
 			self.init(self.options);
 		}
 
@@ -272,16 +272,20 @@
 	Repository.prototype.setExtractors = function() {
 		structureTemplate[1].nodes = [];
 		var discoverer = this.options.dao.getDiscoverer();
-		
-		for(var microservice in discoverer.getMicroservices()) {
-			if (microservice.type === "extractor") {
+		var microservices = discoverer.getMicroservices();
+
+		if (microservices['extractor']) {
+			for (var i = 0; i < microservices.extractor.length; i++) {
+				var microservice = microservices.extractor[i];
 				structureTemplate[1].nodes.push({
 					text : microservice.friendlyname,
 					id : microservice.serviceId,
 					type : 'extractor',
 					icon : 'glyphicon glyphicon-wrench'
-				})
+				});
 			}
+		} else {
+			logError("no extractors discovered");
 		}
 
 		this.options.data = structureTemplate;
