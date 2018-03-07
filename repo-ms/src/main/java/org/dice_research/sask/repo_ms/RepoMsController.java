@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Paths;
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.apache.log4j.Logger;
@@ -48,36 +49,35 @@ public class RepoMsController {
 
 			e.printStackTrace();
 		}
-		
 		return true;
 	}
-
+	
 	@RequestMapping(value = "/readFile")
-	public String readFile(String path, Location location) throws IOException {
-		this.logger.info("Repo-microservice readFiles() invoked");
-		return hadoopService.readFile(path, location);
+	public void readFile(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		this.logger.info("Repo-microservice readFile() invoked");
+		hadoopService.readFile(Location.valueOf(request.getParameter("location")), request.getParameter("path"), response.getOutputStream());
 	}
-
-	@RequestMapping(value = "/rename")
-	public String rename(String from, String to, Location location) {
-		this.logger.info("Repo-microservice rename() invoked");
-		return hadoopService.rename(from, to, location);
-	}
-
+	
 	@RequestMapping(value = "/getHdfsStructure", produces = MediaType.APPLICATION_JSON_VALUE)
 	public HDFSFile getHdfsStructure(Location location) {
 		this.logger.info("Repo-microservice getHdfsStructure() invoked");
 		return hadoopService.getHdfsStructure(location);
 	}
 
+	@RequestMapping(value = "/rename")
+	public boolean rename(String from, String to, Location location) {
+		this.logger.info("Repo-microservice rename() invoked");
+		return hadoopService.rename(from, to, location);
+	}
+	
 	@RequestMapping("/delete")
-	public String delete(String path, Location location) {
+	public boolean delete(String path, Location location) {
 		this.logger.info("Repo-microservice delete() invoked");
 		return hadoopService.delete(path, location);
 	}
 
 	@RequestMapping("/createDirectory")
-	public String createDirectory(String path, Location location) {
+	public boolean createDirectory(String path, Location location) {
 		this.logger.info("Repo-microservice createDirectory() invoked");
 		return hadoopService.createDirectory(location, path);
 	}

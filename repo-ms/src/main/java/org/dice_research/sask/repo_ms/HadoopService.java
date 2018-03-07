@@ -1,21 +1,21 @@
 package org.dice_research.sask.repo_ms;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+
+import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.http.HttpMethod;
@@ -27,7 +27,6 @@ import org.springframework.web.client.HttpMessageConverterExtractor;
 import org.springframework.web.client.RequestCallback;
 import org.springframework.web.client.ResponseExtractor;
 import org.springframework.web.client.RestTemplate;
-
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -38,7 +37,7 @@ public class HadoopService {
 	private Logger logger = Logger.getLogger(RepoMsController.class.getName());
 	private RestTemplate restTemplate = new RestTemplate();
 
-	public void createFile(Location location, String path, String originalFileName, InputStream fis) {
+	public boolean createFile(Location location, String path, String originalFileName, InputStream fis) {
 		
 		URI createFileURI = WebHDFSUriBuilder.getCreateURL(location, path, originalFileName);
 		ResponseEntity<String> response = restTemplate.exchange(createFileURI, HttpMethod.PUT, null, String.class);
@@ -57,28 +56,25 @@ public class HadoopService {
 		restTemplate.setRequestFactory(requestFactory);     
 		HttpMessageConverterExtractor<String> responseExtractor = new HttpMessageConverterExtractor<String>(String.class, restTemplate.getMessageConverters());
 		restTemplate.execute(nodeLocation, HttpMethod.PUT, requestCallback, responseExtractor);    
+		return true;
 	}
 		
-	public void storeContentInFile(Location location, String path, String originalFileName, InputStream fis) {
-		createFile(location, path, originalFileName, fis);
+	public boolean storeContentInFile(Location location, String path, String originalFileName, InputStream fis) {
+		return createFile(location, path, originalFileName, fis);
 	}
 	
-	public String readFile(String path, Location location) {
+	public void readFile(Location location, String path, ServletOutputStream ops) {
 
 		URI readFileUri = WebHDFSUriBuilder.getOpenURL(location, path);
 		this.logger.info(readFileUri);
-
-		RequestCallback requestCallback = request -> request.getHeaders().setAccept(Arrays.asList(MediaType.APPLICATION_OCTET_STREAM, MediaType.ALL));		
+		
+		RequestCallback requestCallback = request -> request.getHeaders().setAccept(Arrays.asList(MediaType.APPLICATION_OCTET_STREAM, MediaType.ALL));				
 		ResponseExtractor<Void> responseExtractor = response -> {
-		    Path localPath = Paths.get(File.separator + "tempRepo"+File.separator+"test.txt");
-		    Files.copy(response.getBody(), localPath);
+			IOUtils.copy(response.getBody(), ops);	
 		    return null;
 		};
-		
-		restTemplate.execute(readFileUri, HttpMethod.GET, requestCallback, responseExtractor);				
-		showFileContent(File.separator + "tempRepo"+File.separator+"test.txt");
-		
-		return "";
+
+		restTemplate.execute(readFileUri, HttpMethod.GET, requestCallback, responseExtractor);						
 	}
 	
 	public HDFSFile getHdfsStructure(Location location) {
@@ -93,25 +89,25 @@ public class HadoopService {
 		return root;
 	}
 	
-	public String createDirectory(Location location, String path) {
+	public boolean createDirectory(Location location, String path) {
 		URI mkdirURI = WebHDFSUriBuilder.getMkdirURI(location, path);
 		this.logger.info(mkdirURI);
 		ResponseEntity<String> response = restTemplate.exchange(mkdirURI, HttpMethod.PUT, null, String.class);
-		return response.getBody();
+		return true;
 	}
 
-	public String rename(String from, String to, Location location) {
+	public boolean rename(String from, String to, Location location) {
 		URI renameURI = WebHDFSUriBuilder.getRenameURI(location, from, to);
 		this.logger.info(renameURI);
 		ResponseEntity<String> response = restTemplate.exchange(renameURI, HttpMethod.PUT, null, String.class);
-		return response.getBody();
+		return true;
 	}
 
-	public String delete(String path, Location location) {
+	public boolean delete(String path, Location location) {
 		URI deleteURI = WebHDFSUriBuilder.getDeleteURI(location, path);
 		this.logger.info(deleteURI);
 		ResponseEntity<String> response = restTemplate.exchange(deleteURI, HttpMethod.DELETE, null, String.class);
-		return response.getBody();
+		return true;
 	}
 	
 	private FileStatuses jsonToFileStatuses(String jsonStr) {
