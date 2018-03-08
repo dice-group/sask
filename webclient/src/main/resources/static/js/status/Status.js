@@ -24,6 +24,7 @@
 		dao : undefined,
 		knownTypes : {
 			'extractor' : 'Extractors',
+			'executer' : 'Executer',
 			'webclient' : 'Webclient',
 			'repo' : 'Repository',
 			'db' : 'Database'
