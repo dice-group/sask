@@ -63,6 +63,16 @@ var Discoverer = function(options) {
 		}
 		return microservices.repo.length > 0
 	}
+	
+	/**
+	 * Is true, if a microservice with the type 'executer' is discovered.
+	 */
+	this.isExecuterDiscovered = function() {
+		if (!('executer' in microservices)) {
+			return false;
+		}
+		return microservices.executer.length > 0
+	}
 
 	/**
 	 * Return the discovered microservice with the type 'repo'.
@@ -74,6 +84,18 @@ var Discoverer = function(options) {
 		}
 
 		return microservices["repo"][0];
+	}
+	
+	/**
+	 * Return the discovered microservice with the type 'executer'.
+	 */
+	this.getExecuter = function() {
+		if (!this.isExecuterDiscovered()) {
+			logError("no microservice with the type 'executer' discovered.");
+			return;
+		}
+
+		return microservices["executer"][0];
 	}
 
 	/**
