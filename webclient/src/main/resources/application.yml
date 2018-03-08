@@ -6,6 +6,10 @@ spring:
 
 # Discovery Server Access
 eureka:
+  instance:
+    metadataMap:
+      type: webclient
+      friendlyname: Webclient
   client:
     serviceUrl:
       defaultZone: http://localhost:1111/eureka/
@@ -25,7 +29,6 @@ zuul:
     chatbot:
       path: /chatbot/**
       serviceId: chatbot
-      #strip-prefix: false
     fred:
       path: /fred-ms/**
       serviceId: FRED-MS
@@ -35,13 +38,14 @@ zuul:
     spotlight:
       path: /spotlight-ms/**
       serviceId: SPOTLIGHT-MS
-
+    repo:
+      path: /REPO-MS/**
+      serviceId: REPO-MS
 hystrix:
   command:
     default:
       execution:
-        timeout:
-          enabled: false
-endpoints:
-  routes:
-    sensitive: false
+        isolation:
+          strategy: THREAD
+          thread:
+            timeoutInMilliseconds: 10000

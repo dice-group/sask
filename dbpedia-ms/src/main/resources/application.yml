@@ -6,9 +6,13 @@ spring:
 
 # Discovery Server Access
 eureka:
-    client:
-      serviceUrl:
-        defaultZone: http://localhost:1111/eureka/
+  instance:
+    metadataMap:
+      type: extractor
+      friendlyname: Spotlight
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:1111/eureka/
 
 # HTTP Server (Tomcat) Port
 server: 
