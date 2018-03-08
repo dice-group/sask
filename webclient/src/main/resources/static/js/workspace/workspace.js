@@ -376,9 +376,9 @@
 	Workspace.prototype.loadWorkflowFromPath = function(path) {
 		var self = this;
 		var success = function(data) {
-			self.flowchart.flowchart('setData', data);
+			self.flowchart.flowchart('setData', jQuery.parseJSON(data));
 
-			self.changeWorkflowName(name);
+			self.changeWorkflowName(path);
 
 			workflowStack.clear();
 			workflowStack.setSaved();

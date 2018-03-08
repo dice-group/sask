@@ -330,6 +330,10 @@ var DAO = function(options) {
 	 * Save workflow.
 	 */
 	this.saveWorkflow = function(success, error, target, workflow) {
+		if(target.startsWith('/')) {
+			target = target.substring(1);
+		}
+		
 		var formData = new FormData();
 		formData.append('path', '/');
 		formData.append('location', 'workflow');
