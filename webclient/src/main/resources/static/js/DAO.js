@@ -75,6 +75,17 @@ var DAO = function(options) {
 
 		return "./" + discoverer.getRepo().serviceId + "/";
 	}
+	
+	/**
+	 * Return the executer service id.
+	 */
+	var getExecuterServiceUri = function() {
+		if (!discoverer.getExecuter()) {
+			return;
+		}
+
+		return "./" + discoverer.getExecuter().serviceId + "/";
+	}
 
 	/**
 	 * Parse the hdfs workflows structure to the ui structure.
@@ -139,6 +150,21 @@ var DAO = function(options) {
 
 		$.ajax({
 			type : "GET",
+			url : uri,
+			success : success,
+			error : error
+		});
+	};
+	
+	/**
+	 * Send the passed workflow to the executer.
+	 */
+	this.executeWorkflow = function(success, error, workflow) {
+		var uri = getExecuterServiceUri() + "executeWorkflow";
+
+		$.ajax({
+			type : "POST",
+			data : workflow,
 			url : uri,
 			success : success,
 			error : error

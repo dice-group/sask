@@ -214,6 +214,11 @@
 				self.saveWorkflow();
 			}
 		}
+		
+		// execute
+		var onExecuteButtonClick = function() {
+			self.executeWorkflow();
+		}
 
 		/*
 		 * create
@@ -224,10 +229,28 @@
 			onNewButtonClick : onNewButtonClick,
 			onUndoButtonClick : onUndoButtonClick,
 			onRedoButtonClick : onRedoButtonClick,
-			onSaveButtonClick : onSaveButtonClick
+			onSaveButtonClick : onSaveButtonClick,
+			onExecuteButtonClick : onExecuteButtonClick
 		});
 	};
 
+	/**
+	 * Execute the workflow.
+	 */
+	Workspace.prototype.executeWorkflow = function() {
+		var self = this;
+		var success = function(data) {
+			console.log(data);
+		}
+
+		var error = function(data) {
+			logError(data);
+		}
+
+		var workflow = this.getWorkflow();
+		this.options.dao.executeWorkflow(success, error, workflow);
+	};
+	
 	/**
 	 * Save the workflow.
 	 */
