@@ -41,3 +41,11 @@ zuul:
     repo:
       path: /REPO-MS/**
       serviceId: REPO-MS
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          strategy: THREAD
+          thread:
+            timeoutInMilliseconds: 10000
