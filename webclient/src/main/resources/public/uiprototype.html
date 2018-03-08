@@ -92,13 +92,13 @@
 							onAddToWorkspace : onAddToWorkspace,
 							onLoadToWorkspace : onLoadToWorkspace
 						});
-						
+
 						// workspace
 						workspace = $('#ex-workspace').workspace({
 							dao : dao,
 							onWorkflowSaved : refreshWorkflows
 						});
-						
+
 						// upload
 						upload = new Upload({
 							dao : dao,
@@ -110,26 +110,26 @@
 
 						refresh();
 					});
-					
+
 					function onLoadToWorkspace(target) {
 						workspace.workspace('loadWorkflowFromPath', target.id);
 					}
-					
+
 					function onAddToWorkspace(target) {
 						var newNode = {
-								id : target.id,
-								text : target.text,
-								type : target.type,
-								xPosition : 20,
-								yPosition : 20
-							};
-							workspace.workspace('addNode', newNode);
+							id : target.id,
+							text : target.text,
+							type : target.type,
+							xPosition : 20,
+							yPosition : 20
+						};
+						workspace.workspace('addNode', newNode);
 					}
-					
+
 					function refreshRepo() {
 						repo.repository('refreshRepo');
 					}
-					
+
 					function refreshWorkflows() {
 						repo.repository('refreshWorkflows');
 					}

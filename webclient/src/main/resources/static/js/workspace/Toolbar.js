@@ -27,7 +27,7 @@
 	};
 
 	_default.options = {};
-	
+
 	/**
 	 * The new button.
 	 */
@@ -61,7 +61,7 @@
 			window.console.error(pluginName + ": " + message);
 		}
 	};
-	
+
 	var Toolbar = function(element, options) {
 
 		this.$element = $(element);
@@ -89,7 +89,7 @@
 		this.initButtons();
 		this.initListener();
 	};
-	
+
 	/**
 	 * Init the buttons.
 	 */
@@ -112,14 +112,14 @@
 	 */
 	Toolbar.prototype.initListener = function() {
 		var self = this;
-		
+
 		// new
 		newButton.click(function() {
 			if (self.options.onNewButtonClick) {
 				self.options.onNewButtonClick();
 			}
 		});
-		
+
 		// undo
 		undoButton.click(function() {
 			if (self.options.onUndoButtonClick) {
@@ -141,7 +141,7 @@
 			}
 		});
 	};
-	
+
 	/**
 	 * Disable the redo button.
 	 */

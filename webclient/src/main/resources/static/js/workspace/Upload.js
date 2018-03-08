@@ -66,8 +66,8 @@ var Upload = function(options) {
 	 */
 	this.construct = function(options) {
 		$.extend(settings, options);
-		
-		if(!settings.dao) {
+
+		if (!settings.dao) {
 			logError('dao is not defined.');
 			return;
 		}

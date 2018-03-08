@@ -86,8 +86,8 @@
 		}
 
 		this.options = $.extend({}, _default.settings, options);
-		
-		if(!this.options.dao) {
+
+		if (!this.options.dao) {
 			logError('dao is not defined.');
 			return;
 		}

@@ -3,7 +3,7 @@ var DAO = function(options) {
 	 * this.
 	 */
 	var root = this;
-	
+
 	/**
 	 * Discoverer.
 	 */
@@ -64,15 +64,15 @@ var DAO = function(options) {
 
 		return node;
 	};
-	
+
 	/**
 	 * Return the repo serviceId.
 	 */
 	var getRepoServiceUri = function() {
-		if(!discoverer.getRepo()) {
+		if (!discoverer.getRepo()) {
 			return;
 		}
-		
+
 		return "./" + discoverer.getRepo().serviceId + "/";
 	}
 
@@ -109,7 +109,7 @@ var DAO = function(options) {
 
 		return node;
 	};
-	
+
 	/**
 	 * Return the discoverer.
 	 */
@@ -122,7 +122,7 @@ var DAO = function(options) {
 	 */
 	this.construct = function(options) {
 		$.extend(settings, options);
-		
+
 		if (typeof Discoverer !== 'function') {
 			logError("'Discoverer' not initialized.");
 			return;
@@ -130,7 +130,7 @@ var DAO = function(options) {
 	};
 
 	this.construct(options);
-	
+
 	/**
 	 * Discover the registered microservices.
 	 */
@@ -330,10 +330,10 @@ var DAO = function(options) {
 	 * Save workflow.
 	 */
 	this.saveWorkflow = function(success, error, target, workflow) {
-		if(target.startsWith('/')) {
+		if (target.startsWith('/')) {
 			target = target.substring(1);
 		}
-		
+
 		var formData = new FormData();
 		formData.append('path', '/');
 		formData.append('location', 'workflow');
