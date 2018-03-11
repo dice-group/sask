@@ -1,6 +1,9 @@
-package org.dice_research.sask.executer_ms;
+package org.dice_research.sask.executer_ms.workflow;
 
-public class SimpleWorkflow {
+import java.io.Serializable;
+
+public class SimpleWorkflow implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private String data;
 	private String extractor;
 	private String targetgraph;
