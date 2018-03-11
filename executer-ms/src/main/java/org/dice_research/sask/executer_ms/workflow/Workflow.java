@@ -81,7 +81,7 @@ public class Workflow implements Serializable {
 			throw new RuntimeException("More then one output not supported");
 		}
 		
-		Link link = getLinkWithFrom(prev.getId());
+		Link link = getLinkWithFrom(prev);
 		
 		if(null == link) {
 			throw new RuntimeException("Link with the fromOperator '" + prev.getId() + "' not found.");
@@ -115,13 +115,13 @@ public class Workflow implements Serializable {
 	 * @param key
 	 * @return The found link.
 	 */
-	private Link getLinkWithFrom(String key) {
+	private Link getLinkWithFrom(Operator from) {
 		Link link = null;
 		
 		for(Link l : this.links) {
-			if(l.getFromOperator().equals(key)) {
+			if(l.getFromOperator().equals(from.getId())) {
 				if(null != link) {
-					throw new RuntimeException("More then one connecting link (" + key + ") is not supported.");
+					throw new RuntimeException("More then one connecting link (" + from.getId() + ") is not supported.");
 				}
 				
 				link = l;

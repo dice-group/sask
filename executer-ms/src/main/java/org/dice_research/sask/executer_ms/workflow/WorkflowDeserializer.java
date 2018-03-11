@@ -51,7 +51,7 @@ public class WorkflowDeserializer extends JsonDeserializer<Workflow> {
 		if (root.has(Workflow.KEY_LINKS)) {
 			JsonNode node = root.get(Workflow.KEY_LINKS);
 
-			if (node.isArray()) {
+			if (node.isContainerNode()) {
 				for (final JsonNode sub : node) {
 					Link link = parseLink(sub);
 					if (null != link) {

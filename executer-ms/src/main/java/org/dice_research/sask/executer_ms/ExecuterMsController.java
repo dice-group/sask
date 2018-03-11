@@ -42,8 +42,8 @@ public class ExecuterMsController {
 
 	@RequestMapping("/executeWorkflow")
 	public String executeWorkflow(@RequestBody Workflow workflow) {
-		
-		return "jo";
+		ExecuterService service = new ExecuterService(restTemplate);
+		return service.execute(workflow);
 	}
 
 	@ExceptionHandler

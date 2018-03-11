@@ -35,4 +35,9 @@ public class Link {
 	public void setToOperator(String toOperator) {
 		this.toOperator = toOperator;
 	}
+	
+	@Override
+	public String toString() {
+		return "Link [" + fromOperator + " (" + fromConnector + "), " + toOperator + " (" + toConnector + ")" + "]";
+	}
 }
