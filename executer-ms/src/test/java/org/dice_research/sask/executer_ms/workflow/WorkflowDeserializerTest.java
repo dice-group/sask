@@ -175,4 +175,60 @@ public class WorkflowDeserializerTest {
 		                     .getOutputs()
 		                     .get("out1"));
 	}
+	
+	@Test
+	public void testCreateQueue() {
+		System.out.println("Create queue");
+		
+		/*
+		 * pre
+		 */
+		Operator start = new Operator();
+		start.setContent("/text.txt");
+		start.setType("file");
+		start.setId("id1");
+		start.getOutputs().put("out1", "NL");
+		
+		Operator extractor = new Operator();
+		extractor.setContent("CEDRIC-MS");
+		extractor.setType("extractor");
+		extractor.setId("id2");
+		extractor.getInputs().put("in2", "NL");
+		extractor.getOutputs().put("out2", "RDF");
+		
+		Operator db = new Operator();
+		db.setContent("sask");
+		db.setType("db");
+		db.setId("id3");
+		db.getInputs().put("in3", "RDF");
+		
+		Link link1 = new Link();
+		link1.setFromOperator("id1");
+		link1.setToOperator("id2");
+		link1.setFromConnector("out1");
+		link1.setToConnector("in2");
+		
+		Link link2 = new Link();
+		link2.setFromOperator("id2");
+		link2.setToOperator("id3");
+		link2.setFromConnector("out2");
+		link2.setToConnector("in3");
+		
+		Workflow workflow = new Workflow();
+		workflow.getOperators().put(start.getId(), start);
+		workflow.getOperators().put(extractor.getId(), extractor);
+		workflow.getOperators().put(db.getId(), db);
+		workflow.getLinks().add(link1);
+		workflow.getLinks().add(link2);
+		
+		/*
+		 * test
+		 */
+		List<Operator> queue = workflow.createQueue();
+		assertEquals(3, queue.size());
+		assertEquals("id1", queue.get(0).getId());
+		assertEquals("id2", queue.get(1).getId());
+		assertEquals("id3", queue.get(2).getId());
+		
+	}
 }
