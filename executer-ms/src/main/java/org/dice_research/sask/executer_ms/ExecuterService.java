@@ -24,6 +24,9 @@ public class ExecuterService {
 	 * @return
 	 */
 	public String execute(Workflow workflow) {
+		/*
+		 * simple version only allow a queue length of 3.
+		 */
 		List<Operator> queue = workflow.createQueue();
 		String filePath = queue.get(0)
 		                       .getContent();
@@ -36,19 +39,36 @@ public class ExecuterService {
 
 	public String execute(String data, String extractor, String targetgraph) {
 		String content = getFileContent(data);
-		String uri = getExtractorURI(extractor);
-
-		String result = this.restTemplate.getForObject(uri + "/extractSimple?input={content}", String.class, content);
-
+		String extractedData = extract(extractor, content);
+		writeInDb(extractedData);
 		// write in db
 
-		return result;
+		return extractedData;
+	}
+	
+	private void writeInDb(String data) {
+		String uri = getDBURI();
+		this.restTemplate.getForObject(uri + "/updateGraph?input={data}", String.class, data);
+	}
+	
+	private String extract(String extractor, String content) {
+		String uri = getExtractorURI(extractor);
+		return this.restTemplate.getForObject(uri + "/extractSimple?input={content}", String.class, content);
 	}
 
 	private String getFileContent(String file) {
-		return "Barack Obama is married to Michelle Obama.";
+		String uri = getRepoURI();
+		return this.restTemplate.getForObject(uri + "/readFile?location=repo&path={file}", String.class, file);
 	}
-
+	
+	private String getDBURI() {
+		return "http://DATABASE-MS";
+	}
+	
+	private String getRepoURI() {
+		return "http://REPO-MS";
+	}
+	
 	private String getExtractorURI(String extractor) {
 		String uri;
 
