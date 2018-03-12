@@ -23,6 +23,8 @@
 		<module>chatbot</module>
 		<module>database-ms</module>
 		<module>OpenIE-ms</module>
+		<module>sorookin-ms</module>
+
 	</modules>
 
 	<properties>
