@@ -43,7 +43,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * 
  * @author André Sonntag
  */
-public class HadoopService {
+public class HadoopService implements IHadoopService {
 
 	private Logger logger = Logger.getLogger(RepoMsController.class.getName());
 	private RestTemplate restTemplate;
@@ -52,19 +52,7 @@ public class HadoopService {
 		this.restTemplate = restTemplate;
 	}
 
-	/**
-	 * This method uploads a file to the Hadoop System.
-	 * 
-	 * @param location
-	 *            folder on the Hadoop System
-	 * @param path
-	 *            path in the location folder
-	 * @param originalFileName
-	 *            name of the uploaded file
-	 * @param fis
-	 *            contains the file
-	 * @return
-	 */
+	@Override
 	public boolean createFile(Location location, String path, String originalFileName, InputStream fis) {
 
 		URI createFileURI = null;
@@ -94,17 +82,7 @@ public class HadoopService {
 		return true;
 	}
 
-	/**
-	 * This method downloads a file from the Hadoop System. The file will copy in
-	 * the ServletOutputStream of a HttpServletResponse.
-	 * 
-	 * @param location
-	 *            folder on the Hadoop System
-	 * @param path
-	 *            path in the location folder
-	 * @param ops
-	 *            contains the file
-	 */
+	@Override
 	public void readFile(Location location, String path, ServletOutputStream ops) {
 
 		URI readFileUri = null;
@@ -124,14 +102,7 @@ public class HadoopService {
 		restTemplate.execute(readFileUri, HttpMethod.GET, requestCallback, responseExtractor);
 	}
 
-	/**
-	 * This method lists the structure of a folder. This include all subfolders and
-	 * files.
-	 * 
-	 * @param location
-	 *            folder on the Hadoop System
-	 * @return a HDFSFile object
-	 */
+	@Override
 	public HDFSFile getHdfsStructure(Location location) {
 
 		String path = "";
@@ -149,15 +120,7 @@ public class HadoopService {
 		return root;
 	}
 
-	/**
-	 * This method creates a new directory on the Hadoop System.
-	 * 
-	 * @param location
-	 *            folder on the Hadoop System
-	 * @param path
-	 *            path in the location folder
-	 * @return
-	 */
+	@Override
 	public boolean createDirectory(Location location, String path) {
 		URI mkdirURI = null;
 		try {
@@ -170,17 +133,7 @@ public class HadoopService {
 		return true;
 	}
 
-	/**
-	 * This method rename or move a file or directory on the Hadoop System.
-	 * 
-	 * @param location
-	 *            folder on the Hadoop System
-	 * @param from
-	 *            source path in the location folder
-	 * @param from
-	 *            target path in the location folder
-	 * @return
-	 */
+	@Override
 	public boolean rename(Location location, String from, String to) {
 		URI renameURI = null;
 		try {
@@ -193,15 +146,7 @@ public class HadoopService {
 		return true;
 	}
 
-	/**
-	 * This method delete a file or directory on the Hadoop System.
-	 * 
-	 * @param location
-	 *            folder on the Hadoop System
-	 * @param path
-	 *            path in the location folder
-	 * @return
-	 */
+	@Override
 	public boolean delete(Location location, String path) {
 		URI deleteURI = null;
 		try {

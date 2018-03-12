@@ -32,7 +32,7 @@ public class RepoMsController {
 	private RestTemplate restTemplate;
 
 	private Logger logger = Logger.getLogger(RepoMsController.class.getName());
-	private HadoopService hadoopService = new HadoopService(restTemplate);
+	private IHadoopService hadoopService = new HadoopService(restTemplate);
 
 	@RequestMapping(value = "/storeFile")
 	public boolean storeFile(HttpServletRequest request) throws FileUploadException, IOException {
