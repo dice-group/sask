@@ -5,7 +5,9 @@ import java.io.InputStream;
 import javax.servlet.ServletOutputStream;
 
 import org.dice_research.sask.repo_ms.hdfs.HDFSFile;
-
+/**
+ * @author André Sonntag
+ */
 public interface IHadoopService {
 
 	/**
