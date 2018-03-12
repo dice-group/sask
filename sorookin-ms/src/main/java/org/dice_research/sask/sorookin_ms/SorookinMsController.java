@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 
- * @author 
+ * @author
  *
  */
 @RestController
 public class SorookinMsController {
-	
+
 	private Logger logger = Logger.getLogger(SorookinMsController.class.getName());
-	
+
 	/**
 	 * Represent a simple version of extraction, without configuration.
 	 * 
@@ -27,7 +27,7 @@ public class SorookinMsController {
 	 */
 	@RequestMapping("/extractSimple")
 	public String extractSimple(String input) {
-return "";
+		return "";
 	}
 
 	@ExceptionHandler
