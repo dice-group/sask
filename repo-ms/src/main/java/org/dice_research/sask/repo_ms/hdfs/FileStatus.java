@@ -1,8 +1,13 @@
-package org.dice_research.sask.repo_ms;
+package org.dice_research.sask.repo_ms.hdfs;
 
 import java.io.Serializable;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+/**
+ * This class map a FileStatus object from the Hadoop System.
+ * 
+ * @author André Sonntag
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class FileStatus implements Serializable {
 

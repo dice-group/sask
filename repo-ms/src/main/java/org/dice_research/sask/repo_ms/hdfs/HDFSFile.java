@@ -1,9 +1,14 @@
-package org.dice_research.sask.repo_ms;
+package org.dice_research.sask.repo_ms.hdfs;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class map the Hadoop System folder structure.
+ * 
+ * @author André Sonntag
+ */
 public class HDFSFile implements Serializable {
 
 	private static final long serialVersionUID = 1L;

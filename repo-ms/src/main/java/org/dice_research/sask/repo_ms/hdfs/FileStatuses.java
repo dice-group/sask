@@ -1,4 +1,4 @@
-package org.dice_research.sask.repo_ms;
+package org.dice_research.sask.repo_ms.hdfs;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -8,6 +8,11 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
+/**
+ * This class map a FileStatuses object from the Hadoop System.
+ * 
+ * @author André Sonntag
+ */
 @JsonRootName("FileStatuses")
 public class FileStatuses implements Serializable {
 	private static final long serialVersionUID = 1L;
