@@ -28,7 +28,7 @@ public class DbController {
 	protected Logger logger = Logger.getLogger(DbController.class);
 
 	// storing the triples(@input) inside default graph
-	@RequestMapping(method = RequestMethod.POST, value = "/updateGraph")
+	@RequestMapping(value = "/updateGraph")
 	public void updateGraph(String input) {
 
 		logger.info("db-microservice is invoked");
