@@ -164,7 +164,8 @@ var DAO = function(options) {
 
 		$.ajax({
 			type : "POST",
-			data : workflow,
+			data : JSON.stringify(workflow),
+			contentType: "application/json",
 			url : uri,
 			success : success,
 			error : error
