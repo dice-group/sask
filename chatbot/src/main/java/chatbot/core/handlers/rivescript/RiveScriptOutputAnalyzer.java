@@ -16,6 +16,8 @@ import chatbot.io.response.ResponseList;
 import chatbot.io.response.ResponseList.MessageType;
 
 import java.lang.String;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.io.File;
 import java.io.IOException;
 import org.apache.log4j.Logger;
@@ -25,22 +27,34 @@ public class RiveScriptOutputAnalyzer {
 	private static Logger log = Logger.getLogger(RiveScriptOutputAnalyzer.class.getName());
 	private static final String TEMPLATE_FILE = "src/main/resources/rivescript/properties/template.yml";
 	private static final String ERRMSG = "error";
-
+	private static String yamlTemplateContents = null;
 	private static RiveScript bot = null;
 
-	static {
-
+	public RiveScriptOutputAnalyzer() {
+		
+	}
+	
+	private static void resourceLoader() {
+		
 		bot = new RiveScript();
 		bot.loadDirectory("src/main/resources/rivescript/rivefiles");
 		bot.sortReplies();
+		
+		try {
+			yamlTemplateContents = new String(Files.readAllBytes(Paths.get(TEMPLATE_FILE)));
+		} catch (IOException e) {
+			log.error("resourceLoader, IO Exception while parsing YAML template,Stack Trace=" + e.getMessage());
+			e.printStackTrace();
+		}
+		
 	}
 
-	public RiveScriptOutputAnalyzer() {
 
-	}
 
 	public ResponseList riveHandler(String query) {
 
+		// Initalize the resources 
+		resourceLoader();
 		ResponseList responselist = new ResponseList();
 		String reply = bot.reply("user", query);
 		responselist = handleTextMessage(responselist, reply);
@@ -110,7 +124,7 @@ public class RiveScriptOutputAnalyzer {
 		String responseForTemplate = null;
 		if (!templateValue.equalsIgnoreCase("help")) {
 
-			responseForTemplate = convertYamlToJsonString(TEMPLATE_FILE);
+			responseForTemplate = convertYamlToJsonString(yamlTemplateContents);
 		}
 		return responseForTemplate;
 	}
@@ -125,13 +139,13 @@ public class RiveScriptOutputAnalyzer {
 		}
 	}
 
-	private static String convertYamlToJsonString(String yamlFile) {
+	private static String convertYamlToJsonString(String yamlFileContents) {
 
 		String responseYaml = null;
 		ObjectMapper yamlReader = new ObjectMapper(new YAMLFactory());
 		Object obj = new Object();
 		try {
-			obj = yamlReader.readValue(new File(yamlFile), Object.class);
+			obj = yamlReader.readValue(yamlFileContents, Object.class);
 			ObjectMapper jsonWriter = new ObjectMapper();
 			System.out.println(obj.toString());
 			responseYaml = jsonWriter.writeValueAsString(obj);
