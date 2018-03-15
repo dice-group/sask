@@ -3,11 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>org.dice-research.sask</groupId>
-	<artifactId>fred-ms</artifactId>
+	<artifactId>executer-ms</artifactId>
 	<version>0.0.1</version>
 	<packaging>jar</packaging>
 
-	<name>fred-ms</name>
+	<name>executer-ms</name>
 
 	<parent>
 		<groupId>org.dice-research</groupId>
