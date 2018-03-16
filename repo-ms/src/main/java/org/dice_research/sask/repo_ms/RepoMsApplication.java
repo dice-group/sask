@@ -20,10 +20,4 @@ public class RepoMsApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(RepoMsApplication.class, args);
 	}
-
-	@Bean
-	@LoadBalanced
-	RestTemplate restTemplate() {
-		return new RestTemplate();
-	}
 }

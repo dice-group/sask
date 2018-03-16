@@ -27,12 +27,9 @@ import org.springframework.web.client.RestTemplate;
 @RestController
 public class RepoMsController {
 
-	@Autowired
-	@LoadBalanced
-	protected RestTemplate restTemplate;
-
+	private RestTemplate restTemplate = new RestTemplate();
 	private Logger logger = Logger.getLogger(RepoMsController.class.getName());
-	private IHadoopService hadoopService = new HadoopService(restTemplate);
+	private HadoopService hadoopService = new HadoopService(restTemplate);
 
 	@RequestMapping(value = "/storeFile")
 	public boolean storeFile(HttpServletRequest request) throws FileUploadException, IOException {
