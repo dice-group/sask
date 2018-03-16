@@ -45,12 +45,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 public class HadoopService implements IHadoopService {
 
-	private Logger logger = Logger.getLogger(RepoMsController.class.getName());
 	private RestTemplate restTemplate;
+	private Logger logger = Logger.getLogger(RepoMsController.class.getName());
 
+	
 	public HadoopService(RestTemplate restTemplate) {
 		this.restTemplate = restTemplate;
 	}
+
 
 	@Override
 	public boolean createFile(Location location, String path, String originalFileName, InputStream fis) {
@@ -58,6 +60,7 @@ public class HadoopService implements IHadoopService {
 		URI createFileURI = null;
 		try {
 			createFileURI = WebHDFSUriBuilder.getCreateURL(location, path, originalFileName);
+			logger.info(createFileURI);
 		} catch (URISyntaxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -109,6 +112,8 @@ public class HadoopService implements IHadoopService {
 		URI hdfsStructureURI = null;
 		try {
 			hdfsStructureURI = WebHDFSUriBuilder.getHDFSStructureURI(location, path);
+			logger.info(hdfsStructureURI);
+
 		} catch (URISyntaxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

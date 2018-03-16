@@ -29,7 +29,7 @@ public class RepoMsController {
 
 	@Autowired
 	@LoadBalanced
-	private RestTemplate restTemplate;
+	protected RestTemplate restTemplate;
 
 	private Logger logger = Logger.getLogger(RepoMsController.class.getName());
 	private IHadoopService hadoopService = new HadoopService(restTemplate);

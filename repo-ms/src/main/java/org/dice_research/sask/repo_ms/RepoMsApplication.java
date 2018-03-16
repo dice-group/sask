@@ -11,7 +11,9 @@ import org.springframework.web.client.RestTemplate;
  * This class is responsible to starting the micro service
  * 
  * @author André Sonntag
+ *
  */
+
 @SpringBootApplication
 @EnableDiscoveryClient
 public class RepoMsApplication {

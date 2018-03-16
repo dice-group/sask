@@ -2,8 +2,10 @@ package org.dice_research.sask.repo_ms.webHDFS;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import org.apache.http.client.utils.URIBuilder;
 import org.dice_research.sask.repo_ms.Location;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.util.UriComponentsBuilder;
 
 /**
  * This class is responsible for generating URLs for Docker/Hadoop REST calls.
@@ -38,16 +40,19 @@ public class WebHDFSUriBuilder {
 	 * 
 	 */
 	public static URI getCreateURL(Location location, String path, String fileName) throws URISyntaxException {
-
 		path = path.startsWith(FORWARDSLASH) ? path.substring(1) : path;
-		URIBuilder builder = new URIBuilder();
-		builder.setScheme(SCHEME);
-		builder.setHost(HADOOP_HOSTSERVER);
-		builder.setPort(HADOOP_NAMENODE_PORT);
-		builder.setPath(PROTOCOL + "/" + VERSION + "/" + HDFSDIRUSERPATH + "/" + location + "/" + path + fileName);
-		builder.setParameter(OPERATION, WebHDFSOperation.CREATE.name());
-		builder.addParameter(WebHDFSParameter.overwrite.name(), "true");
-		return builder.build();
+		
+		UriComponentsBuilder builder = UriComponentsBuilder.newInstance();
+		builder.scheme(SCHEME);
+		builder.host(HADOOP_HOSTSERVER);
+		builder.port(HADOOP_NAMENODE_PORT);
+		builder.path(PROTOCOL + "/" + VERSION + "/" + HDFSDIRUSERPATH + "/" + location + "/" + path + fileName);
+		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+		params.add(OPERATION, WebHDFSOperation.CREATE.name());
+		params.add(WebHDFSParameter.overwrite.name(), "true");
+		builder.queryParams(params);
+		
+		return new URI(builder.toUriString());
 	}
 
 	/**
@@ -63,15 +68,16 @@ public class WebHDFSUriBuilder {
 	 * 
 	 */
 	public static URI getOpenURL(Location location, String path) throws URISyntaxException {
-
 		path = path.startsWith(FORWARDSLASH) ? path.substring(1) : path;
-		URIBuilder builder = new URIBuilder();
-		builder.setScheme(SCHEME);
-		builder.setHost(HADOOP_HOSTSERVER);
-		builder.setPort(HADOOP_NAMENODE_PORT);
-		builder.setPath(PROTOCOL + "/" + VERSION + "/" + HDFSDIRUSERPATH + "/" + location + "/" + path);
-		builder.setParameter(OPERATION, WebHDFSOperation.OPEN.name());
-		return builder.build();
+		
+		UriComponentsBuilder builder = UriComponentsBuilder.newInstance();
+		builder.scheme(SCHEME);
+		builder.host(HADOOP_HOSTSERVER);
+		builder.port(HADOOP_NAMENODE_PORT);
+		builder.path(PROTOCOL + "/" + VERSION + "/" + HDFSDIRUSERPATH + "/" + location + "/" + path);		
+		builder.queryParam(OPERATION, WebHDFSOperation.OPEN.name());
+		
+		return new URI(builder.toUriString());
 	}
 
 	/**
@@ -88,15 +94,16 @@ public class WebHDFSUriBuilder {
 	 * 
 	 */
 	public static URI getHDFSStructureURI(Location location, String path) throws URISyntaxException {
-
 		path = path.startsWith(FORWARDSLASH) ? path : "/" + path;
-		URIBuilder builder = new URIBuilder();
-		builder.setScheme(SCHEME);
-		builder.setHost(HADOOP_HOSTSERVER);
-		builder.setPort(HADOOP_NAMENODE_PORT);
-		builder.setPath(PROTOCOL + "/" + VERSION + "/" + HDFSDIRUSERPATH + "/" + location + path);
-		builder.setParameter(OPERATION, WebHDFSOperation.LISTSTATUS.name());
-		return builder.build();
+		
+		UriComponentsBuilder builder = UriComponentsBuilder.newInstance();
+		builder.scheme(SCHEME);
+		builder.host(HADOOP_HOSTSERVER);
+		builder.port(HADOOP_NAMENODE_PORT);
+		builder.path(PROTOCOL + "/" + VERSION + "/" + HDFSDIRUSERPATH + "/" + location + path);
+		builder.queryParam(OPERATION, WebHDFSOperation.LISTSTATUS.name());
+		
+		return new URI(builder.toUriString());
 	}
 
 	/**
@@ -114,16 +121,19 @@ public class WebHDFSUriBuilder {
 	 * 
 	 */
 	public static URI getDeleteURI(Location location, String path) throws URISyntaxException {
-
 		path = path.startsWith(FORWARDSLASH) ? path.substring(1) : path;
-		URIBuilder builder = new URIBuilder();
-		builder.setScheme(SCHEME);
-		builder.setHost(HADOOP_HOSTSERVER);
-		builder.setPort(HADOOP_NAMENODE_PORT);
-		builder.setPath(PROTOCOL + "/" + VERSION + "/" + HDFSDIRUSERPATH + "/" + location + "/" + path);
-		builder.setParameter(OPERATION, WebHDFSOperation.DELETE.name());
-		builder.addParameter(WebHDFSParameter.replication.name(), "true");
-		return builder.build();
+		
+		UriComponentsBuilder builder = UriComponentsBuilder.newInstance();
+		builder.scheme(SCHEME);
+		builder.host(HADOOP_HOSTSERVER);
+		builder.port(HADOOP_NAMENODE_PORT);
+		builder.path(PROTOCOL + "/" + VERSION + "/" + HDFSDIRUSERPATH + "/" + location + "/" + path);
+		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+		params.add(OPERATION, WebHDFSOperation.DELETE.name());
+		params.add(WebHDFSParameter.replication.name(), "true");
+		builder.queryParams(params);
+		
+		return new URI(builder.toUriString());
 	}
 
 	/**
@@ -139,15 +149,16 @@ public class WebHDFSUriBuilder {
 	 * 
 	 */
 	public static URI getMkdirURI(Location location, String path) throws URISyntaxException {
-
 		path = path.startsWith(FORWARDSLASH) ? path.substring(1) : path;
-		URIBuilder builder = new URIBuilder();
-		builder.setScheme(SCHEME);
-		builder.setHost(HADOOP_HOSTSERVER);
-		builder.setPort(HADOOP_NAMENODE_PORT);
-		builder.setPath(PROTOCOL + "/" + VERSION + "/" + HDFSDIRUSERPATH + "/" + location + "/" + path);
-		builder.setParameter(OPERATION, WebHDFSOperation.MKDIRS.name());
-		return builder.build();
+		
+		UriComponentsBuilder builder = UriComponentsBuilder.newInstance();
+		builder.scheme(SCHEME);
+		builder.host(HADOOP_HOSTSERVER);
+		builder.port(HADOOP_NAMENODE_PORT);
+		builder.path(PROTOCOL + "/" + VERSION + "/" + HDFSDIRUSERPATH + "/" + location + "/" + path);
+		builder.queryParam(OPERATION, WebHDFSOperation.MKDIRS.name());
+		
+		return new URI(builder.toUriString());
 	}
 
 	/**
@@ -169,14 +180,18 @@ public class WebHDFSUriBuilder {
 
 		from = from.startsWith(FORWARDSLASH) ? from.substring(1) : from;
 		to = to.startsWith(FORWARDSLASH) ? to.substring(1) : to;
-		URIBuilder builder = new URIBuilder();
-		builder.setScheme(SCHEME);
-		builder.setHost(HADOOP_HOSTSERVER);
-		builder.setPort(HADOOP_NAMENODE_PORT);
-		builder.setPath(PROTOCOL + "/" + VERSION + "/" + HDFSDIRUSERPATH + "/" + location + "/" + from);
-		builder.setParameter(OPERATION, WebHDFSOperation.RENAME.name());
-		builder.setParameter(WebHDFSParameter.destination.name(), "/" + HDFSDIRUSERPATH + "/" + location + "/" + to);
-		return builder.build();
+		
+		UriComponentsBuilder builder = UriComponentsBuilder.newInstance();
+		builder.scheme(SCHEME);
+		builder.host(HADOOP_HOSTSERVER);
+		builder.port(HADOOP_NAMENODE_PORT);
+		builder.path(PROTOCOL + "/" + VERSION + "/" + HDFSDIRUSERPATH + "/" + location + "/" + from);
+		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+		params.add(OPERATION, WebHDFSOperation.RENAME.name());
+		params.add(WebHDFSParameter.destination.name(), "/" + HDFSDIRUSERPATH + "/" + location + "/" + to);
+		builder.queryParams(params);
+		
+		return new URI(builder.toUriString());
 	}
 
 }
