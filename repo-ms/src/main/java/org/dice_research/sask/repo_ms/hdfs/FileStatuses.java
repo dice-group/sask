@@ -1,7 +1,6 @@
 package org.dice_research.sask.repo_ms.hdfs;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
