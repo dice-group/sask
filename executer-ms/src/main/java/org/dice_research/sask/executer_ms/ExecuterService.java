@@ -85,12 +85,6 @@ public class ExecuterService {
 		case "FRED-MS":
 			uri = "http://FRED-MS";
 			break;
-		case "FOX-MS":
-			uri = "http://FOX-MS";
-			break;
-		case "SPOTLIGHT-MS":
-			uri = "http://SPOTLIGHT-MS";
-			break;
 		case "OPEN-IE-MS":
 			uri = "http://OPEN-IE-MS";
 			break;
