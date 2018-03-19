@@ -5,8 +5,8 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
-import org.dice_research.sask.fred_ms.FOX.FoxDTO;
-import org.dice_research.sask.fred_ms.FOX.FoxGateway;
+import org.dice_research.sask.fox_ms.fox.FoxDTO;
+import org.dice_research.sask.fox_ms.fox.FoxGateway;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.ExceptionHandler;
