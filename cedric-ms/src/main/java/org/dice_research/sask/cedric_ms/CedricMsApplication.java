@@ -17,5 +17,6 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 public class CedricMsApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(CedricMsApplication.class, args);
+		CedricMsService.getInstance();
 	}
 }
