@@ -1,4 +1,4 @@
-package org.dice_research.sask.dbpedia_ms.dbpedia;
+package org.dice_research.sask.dbpedia_ms.DTO;
 
 /**
  * The DBPedia data transfer object.

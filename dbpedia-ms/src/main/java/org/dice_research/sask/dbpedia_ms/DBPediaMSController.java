@@ -5,8 +5,7 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
-import org.dice_research.sask.dbpedia_ms.dbpedia.DBPediaDTO;
-import org.dice_research.sask.dbpedia_ms.dbpedia.DBPediaSpotlightGateway;
+import org.dice_research.sask.dbpedia_ms.DTO.DBPediaDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,7 +42,7 @@ public class DBPediaMSController {
 			throw new IllegalArgumentException("No input");
 		}
 
-		DBPediaSpotlightGateway gateway = new DBPediaSpotlightGateway();
+		DBPediaSpotlightService gateway = new DBPediaSpotlightService();
 		return gateway.extract(dbpedia);
 	}
 
