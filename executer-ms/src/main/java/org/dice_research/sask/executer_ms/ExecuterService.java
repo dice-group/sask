@@ -6,6 +6,12 @@ import org.dice_research.sask.executer_ms.workflow.Operator;
 import org.dice_research.sask.executer_ms.workflow.Workflow;
 import org.springframework.web.client.RestTemplate;
 
+/**
+ * This class represents the executer functions.
+ * 
+ * @author Kevin Haack
+ *
+ */
 public class ExecuterService {
 
 	/**
@@ -45,12 +51,12 @@ public class ExecuterService {
 
 		return extractedData;
 	}
-	
+
 	private void writeInDb(String data) {
 		String uri = getDBURI();
 		this.restTemplate.getForObject(uri + "/updateGraph?input={data}", String.class, data);
 	}
-	
+
 	private String extract(String extractor, String content) {
 		String uri = getExtractorURI(extractor);
 		return this.restTemplate.getForObject(uri + "/extractSimple?input={content}", String.class, content);
@@ -60,15 +66,15 @@ public class ExecuterService {
 		String uri = getRepoURI();
 		return this.restTemplate.getForObject(uri + "/readFile?location=repo&path={file}", String.class, file);
 	}
-	
+
 	private String getDBURI() {
 		return "http://DATABASE-MS";
 	}
-	
+
 	private String getRepoURI() {
 		return "http://REPO-MS";
 	}
-	
+
 	private String getExtractorURI(String extractor) {
 		String uri;
 

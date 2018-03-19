@@ -14,6 +14,12 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 
+/**
+ * This class represents a jackson deserializer for the workflow class.
+ * 
+ * @author Kevin Haack
+ *
+ */
 public class WorkflowDeserializer extends JsonDeserializer<Workflow> {
 
 	@Override
@@ -152,44 +158,40 @@ public class WorkflowDeserializer extends JsonDeserializer<Workflow> {
 		operator.setId(id.textValue());
 		operator.setType(type.textValue());
 
-		/*
-		 * outputs
-		 */
+		// outputs
 		if (properties.has(Operator.KEY_OUTPUTS)) {
 			operator.setOutputs(parseIOs(properties.get(Operator.KEY_OUTPUTS)));
 		}
 
-		/*
-		 * inputs
-		 */
+		// inputs
 		if (properties.has(Operator.KEY_INPUTS)) {
 			operator.setInputs(parseIOs(properties.get(Operator.KEY_INPUTS)));
 		}
-		
+
 		return operator;
 	}
-	
+
 	/**
 	 * Parse the out and inputs.
+	 * 
 	 * @param object
 	 * @return The out or inputs.
 	 */
 	protected Map<String, String> parseIOs(JsonNode object) {
 		Map<String, String> ios = new HashMap<String, String>();
-		
+
 		Iterator<String> keys = object.fieldNames();
-		while (keys.hasNext())
-		{
+		while (keys.hasNext()) {
 			String key = keys.next();
-		    JsonNode out = object.get(key);
-		    
-		    if(out.isObject() && out.has(Operator.KEY_LABEL)) {
-		    	JsonNode label = out.get(Operator.KEY_LABEL);
-		    	
-		    	if (label.isTextual()) {
+			JsonNode out = object.get(key);
+
+			if (out.isObject() && out.has(Operator.KEY_LABEL)) {
+				JsonNode label = out.get(Operator.KEY_LABEL);
+
+				if (label.isTextual()) {
 					ios.put(key, label.textValue());
 				}
-		    }
+			}
 		}
 
 		return ios;

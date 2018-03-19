@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 /**
+ * The class provides the REST interface for the microservice.
  * 
  * @author Kevin Haack
  *
