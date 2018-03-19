@@ -14,11 +14,6 @@
 	var pluginName = 'repository';
 
 	/**
-	 * Data access object.
-	 */
-	var dao = new DAO({});
-
-	/**
 	 * Dialogs.
 	 */
 	var dialogs = new Dialogs({});
@@ -27,7 +22,8 @@
 
 	_default.settings = {
 		onAddToWorkspace : undefined,
-		onLoadToWorkspace : undefined
+		onLoadToWorkspace : undefined,
+		dao : undefined
 	};
 
 	_default.options = {};
@@ -91,6 +87,12 @@
 		}
 
 		this.options = $.extend({}, _default.settings, options);
+
+		if (!this.options.dao) {
+			logError('dao is not defined.');
+			return;
+		}
+
 		var self = this;
 		this.treeview = this.$element.treeview({
 			data : structureTemplate
@@ -100,6 +102,7 @@
 		this.initClasses();
 		this.initContextMenu();
 		this.initDragNDrop();
+		this.initDiscoverer();
 	};
 
 	/**
@@ -151,6 +154,26 @@
 			}
 		});
 	};
+
+	/**
+	 * Init the discoverer.
+	 */
+	Repository.prototype.initDiscoverer = function() {
+		var self = this;
+		var discoverer = this.options.dao.getDiscoverer();
+		var settings = discoverer.settings;
+
+		settings.onRefreshed = function() {
+			self.refreshRepo();
+			self.refreshDB();
+			self.refreshWorkflows();
+			self.setExtractors();
+		};
+
+		settings.onError = function() {
+			logError("Discover failed.");
+		};
+	}
 
 	/**
 	 * Remove.
@@ -220,7 +243,7 @@
 			logError(data);
 		}
 
-		dao.getRepoStructure(success, error);
+		this.options.dao.getRepoStructure(success, error);
 	};
 
 	/**
@@ -240,37 +263,33 @@
 			logError(data);
 		}
 
-		dao.getWorkflows(success, error);
+		this.options.dao.getWorkflows(success, error);
 	};
 
 	/**
 	 * Refresh extractors.
 	 */
-	Repository.prototype.refreshExtractors = function() {
-		var self = this;
-		var success = function(data) {
-			structureTemplate[1].nodes = [];
+	Repository.prototype.setExtractors = function() {
+		structureTemplate[1].nodes = [];
+		var discoverer = this.options.dao.getDiscoverer();
+		var microservices = discoverer.getMicroservices();
 
-			data.forEach(function(microservice) {
-				if (microservice.type === "extractor") {
-					structureTemplate[1].nodes.push({
-						text : microservice.friendlyname,
-						id : microservice.serviceId,
-						type : 'extractor',
-						icon : 'glyphicon glyphicon-wrench'
-					})
-				}
-			});
-
-			self.options.data = structureTemplate;
-			self.init(self.options);
+		if (microservices['extractor']) {
+			for (var i = 0; i < microservices.extractor.length; i++) {
+				var microservice = microservices.extractor[i];
+				structureTemplate[1].nodes.push({
+					text : microservice.friendlyname,
+					id : microservice.serviceId,
+					type : 'extractor',
+					icon : 'glyphicon glyphicon-wrench'
+				});
+			}
+		} else {
+			logError("no extractors discovered");
 		}
 
-		var error = function(data) {
-			logError(data);
-		}
-
-		dao.discoverMicroservices(success, error);
+		this.options.data = structureTemplate;
+		this.init(this.options);
 	};
 
 	/**
@@ -288,17 +307,15 @@
 			logError(data);
 		}
 
-		dao.getTargetGraphs(success, error);
+		this.options.dao.getTargetGraphs(success, error);
 	};
 
 	/**
 	 * Refresh the whole content of the repo.
 	 */
 	Repository.prototype.refresh = function() {
-		this.refreshRepo();
-		this.refreshExtractors();
-		this.refreshDB();
-		this.refreshWorkflows();
+		// discover
+		this.options.dao.getDiscoverer().discover();
 	};
 
 	/**
@@ -437,7 +454,7 @@
 			var target = $(this).find('input[name="target"]').val();
 			var name = $(this).find('input[name="name"]').val();
 
-			dao.renameRepo(success, error, target, name);
+			self.options.dao.renameRepo(success, error, target, name);
 			$(this).dialog('close');
 		};
 
@@ -465,7 +482,7 @@
 			var target = $(this).find('input[name="target"]').val();
 			var name = $(this).find('input[name="name"]').val();
 
-			dao.renameWorkflow(success, error, target, name);
+			self.options.dao.renameWorkflow(success, error, target, name);
 			$(this).dialog('close');
 		};
 
@@ -493,7 +510,7 @@
 			var target = $(this).find('input[name="target"]').val();
 			var name = $(this).find('input[name="name"]').val();
 
-			dao.createDirectory(success, error, target, name);
+			self.options.dao.createDirectory(success, error, target, name);
 			$(this).dialog('close');
 		};
 
@@ -519,7 +536,8 @@
 
 		var positiv = function() {
 			var target = $(this).find('input[name="target"]').val();
-			dao.removeFromRepo(success, error, target);
+
+			self.options.dao.removeFromRepo(success, error, target);
 			$(this).dialog("close");
 		};
 
@@ -545,7 +563,8 @@
 
 		var positiv = function() {
 			var target = $(this).find('input[name="target"]').val();
-			dao.removeFromWorkflows(success, error, target);
+
+			self.options.dao.removeFromWorkflows(success, error, target);
 			$(this).dialog("close");
 		};
 

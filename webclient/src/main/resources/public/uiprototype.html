@@ -26,6 +26,7 @@
 <!-- ~~~~~~ worksapce ~~~~~~ -->
 <script src="/js/workspace/Toolbar.js"></script>
 <script src="/js/workspace/WorkflowStack.js"></script>
+<script src="/js/Discoverer.js"></script>
 <script src="/js/DAO.js"></script>
 <script src="/js/workspace/Dialogs.js"></script>
 <script src="/js/workspace/workspace.js"></script>
@@ -79,6 +80,7 @@
 			</div>
 			<script>
 				(function($) {
+					var dao = new DAO({});
 					var workspace;
 					var repo;
 					var upload;
@@ -86,17 +88,20 @@
 					$(document).ready(function() {
 						// repo
 						repo = $('#ex-repo').repository({
+							dao : dao,
 							onAddToWorkspace : onAddToWorkspace,
 							onLoadToWorkspace : onLoadToWorkspace
 						});
-						
+
 						// workspace
 						workspace = $('#ex-workspace').workspace({
+							dao : dao,
 							onWorkflowSaved : refreshWorkflows
 						});
-						
+
 						// upload
 						upload = new Upload({
+							dao : dao,
 							onUploaded : refreshRepo
 						});
 
@@ -105,26 +110,26 @@
 
 						refresh();
 					});
-					
+
 					function onLoadToWorkspace(target) {
 						workspace.workspace('loadWorkflowFromPath', target.id);
 					}
-					
+
 					function onAddToWorkspace(target) {
 						var newNode = {
-								id : target.id,
-								text : target.text,
-								type : target.type,
-								xPosition : 20,
-								yPosition : 20
-							};
-							workspace.workspace('addNode', newNode);
+							id : target.id,
+							text : target.text,
+							type : target.type,
+							xPosition : 20,
+							yPosition : 20
+						};
+						workspace.workspace('addNode', newNode);
 					}
-					
+
 					function refreshRepo() {
 						repo.repository('refreshRepo');
 					}
-					
+
 					function refreshWorkflows() {
 						repo.repository('refreshWorkflows');
 					}

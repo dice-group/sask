@@ -14,11 +14,6 @@
 	var pluginName = 'workspace';
 
 	/**
-	 * Data access object.
-	 */
-	var dao = new DAO({});
-
-	/**
 	 * Dialogs.
 	 */
 	var dialogs = new Dialogs({});
@@ -28,7 +23,8 @@
 	_default.settings = {
 		forceFileEnding : true,
 		fileEnding : ".wf",
-		onWorkflowSaved : undefined
+		onWorkflowSaved : undefined,
+		dao : undefined
 	};
 
 	_default.options = {};
@@ -90,6 +86,11 @@
 		}
 
 		this.options = $.extend({}, _default.settings, options);
+
+		if (!this.options.dao) {
+			logError('dao is not defined.');
+			return;
+		}
 
 		this.initToolbar();
 		this.initWorkspace();
@@ -213,6 +214,11 @@
 				self.saveWorkflow();
 			}
 		}
+		
+		// execute
+		var onExecuteButtonClick = function() {
+			self.executeWorkflow();
+		}
 
 		/*
 		 * create
@@ -223,10 +229,28 @@
 			onNewButtonClick : onNewButtonClick,
 			onUndoButtonClick : onUndoButtonClick,
 			onRedoButtonClick : onRedoButtonClick,
-			onSaveButtonClick : onSaveButtonClick
+			onSaveButtonClick : onSaveButtonClick,
+			onExecuteButtonClick : onExecuteButtonClick
 		});
 	};
 
+	/**
+	 * Execute the workflow.
+	 */
+	Workspace.prototype.executeWorkflow = function() {
+		var self = this;
+		var success = function(data) {
+			console.log(data);
+		}
+
+		var error = function(data) {
+			logError(data);
+		}
+
+		var workflow = this.getWorkflow();
+		this.options.dao.executeWorkflow(success, error, workflow);
+	};
+	
 	/**
 	 * Save the workflow.
 	 */
@@ -246,7 +270,7 @@
 		}
 
 		var workflow = this.getWorkflow();
-		dao.saveWorkflow(success, error, workflowId, workflow);
+		this.options.dao.saveWorkflow(success, error, workflowId, workflow);
 
 		workflowStack.setSaved();
 
@@ -375,9 +399,9 @@
 	Workspace.prototype.loadWorkflowFromPath = function(path) {
 		var self = this;
 		var success = function(data) {
-			self.flowchart.flowchart('setData', data);
+			self.flowchart.flowchart('setData', jQuery.parseJSON(data));
 
-			self.changeWorkflowName(name);
+			self.changeWorkflowName(path);
 
 			workflowStack.clear();
 			workflowStack.setSaved();
@@ -388,7 +412,7 @@
 			logError(data);
 		};
 
-		dao.getWorkflow(success, error, path);
+		this.options.dao.getWorkflow(success, error, path);
 	};
 
 	/**

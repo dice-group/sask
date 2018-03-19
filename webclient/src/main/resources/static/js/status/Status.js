@@ -14,20 +14,17 @@
 	var pluginName = 'status';
 
 	/**
-	 * The Discoverer
-	 */
-	var discoverer = undefined;
-
-	/**
 	 * Contains the type lists.
 	 */
 	var lists = {};
-	
+
 	var _default = {};
 
 	_default.settings = {
+		dao : undefined,
 		knownTypes : {
-			'extractor' : 'Extractors', 
+			'extractor' : 'Extractors',
+			'executer' : 'Executer',
 			'webclient' : 'Webclient',
 			'repo' : 'Repository',
 			'db' : 'Database'
@@ -46,8 +43,8 @@
 				port : '<p class="mb-1"></p>',
 				host : '<p class="mb-1"></p>',
 				item : '<li class="list-group-item"></li>'
-				}
-			
+			}
+
 		}
 	};
 
@@ -60,11 +57,13 @@
 		this.styleId = this.elementId + '-style';
 
 		this.init(options);
-
+		var self = this;
 		return {
 			options : this.options,
 			init : $.proxy(this.init, this),
-			discover : $.proxy(this.discover, this)
+			discover : $.proxy(function() {
+				self.discover();
+			}, this)
 		};
 	}
 
@@ -78,24 +77,23 @@
 			return;
 		}
 
-		if (typeof Discoverer !== 'function') {
-			logError("'Discoverer' not initialized.");
+		this.options = $.extend({}, _default.settings, options);
+
+		if (!this.options.dao) {
+			logError('dao is not defined.');
 			return;
 		}
-
-		this.options = $.extend({}, _default.settings, options);
-		var self = this;
 
 		this.initDiscoverer();
 		this.initStructure();
 		this.discover();
 	};
-	
+
 	/**
 	 * Start discover.
 	 */
 	Status.prototype.discover = function() {
-		discoverer.discover();
+		this.options.dao.getDiscoverer().discover();
 	}
 
 	/**
@@ -103,46 +101,51 @@
 	 */
 	Status.prototype.initDiscoverer = function() {
 		var self = this;
-		discoverer = new Discoverer({
-			onRefreshed : function() {
-				self.onMSRefreshed();
-			},
-			onError : function() {
-				self.onRefreshError();
-			}
-		});
+		var discoverer = this.options.dao.getDiscoverer();
+		var settings = discoverer.settings;
+
+		settings.onRefreshed = function() {
+			self.onMSRefreshed();
+		};
+
+		settings.onError = function() {
+			self.onRefreshError();
+		};
 	}
 
 	/**
 	 * Init the structure.
 	 */
 	Status.prototype.initStructure = function() {
-		for(var type in this.options.knownTypes) {
+		var self = this;
+		for ( var type in this.options.knownTypes) {
 			// type headers
 			var typeHeader = $(this.options.templates.typeHeader);
 			typeHeader.text(this.options.knownTypes[type]);
 			this.$element.append(typeHeader);
-			
+
 			// type lists
 			var typeList = $(this.options.templates.typeList);
 			typeList.append(this.options.templates.emptyMessage);
 			this.$element.append(typeList);
-			
+
 			// add to lists
 			lists[type] = typeList;
 		}
-		
+
 		// refresh button
 		var refreshButton = $(this.options.templates.refreshButton);
-		refreshButton.click(this.discover);
+		refreshButton.click(function() {
+			self.options.dao.getDiscoverer().discover();
+		});
 		this.$element.append(refreshButton);
 	}
-	
+
 	/**
 	 * Clear the type lists.
 	 */
 	Status.prototype.clearLists = function() {
-		for(var type in lists) {
+		for ( var type in lists) {
 			lists[type].empty();
 		}
 	}
@@ -152,35 +155,36 @@
 	 */
 	Status.prototype.onMSRefreshed = function() {
 		this.clearLists();
-		var microservices = discoverer.getmicroservices();
-		
-		for (var type in microservices) {
-			for(var microservice in microservices[type]) {
-				console.log(microservices[type][microservice]);
+		var microservices = this.options.dao.getDiscoverer().getMicroservices();
+
+		for ( var type in microservices) {
+			for ( var microservice in microservices[type]) {
 				this.appendMicroservice(microservices[type][microservice]);
 			}
 		}
-		
+
 		// add empty messages
-		for(var type in lists) {
-			if(lists[type].children().length == 0) {
+		for ( var type in lists) {
+			if (lists[type].children().length == 0) {
 				lists[type].append(this.options.templates.emptyMessage);
 			}
 		}
 	}
-	
+
 	/**
 	 * Append the passed microservice to its list.
 	 */
 	Status.prototype.appendMicroservice = function(microservice) {
 		var type = microservice.type;
 		var list = lists[type];
-		
+
 		if (!list) {
-			logError("unsupported type for " + microservice.serviceId + ": " + microservice.type);
+			logError("unsupported type for " + microservice.serviceId + ": "
+					+ microservice.type);
 			return
+
 		}
-		
+
 		var type = $(this.options.templates.item.type);
 		var friendlyname = $(this.options.templates.item.friendlyname);
 		var serviceId = $(this.options.templates.item.serviceId);
@@ -206,7 +210,7 @@
 
 		list.append(item);
 	}
-	
+
 	/**
 	 * Will be called when there was a discover error.
 	 */

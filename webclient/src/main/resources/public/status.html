@@ -15,8 +15,8 @@
 <link rel="stylesheet"
 	href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css" />
 <!-- ~~~~~~ status ~~~~~~ -->
-<script src="/js/DAO.js"></script>
 <script src="/js/Discoverer.js"></script>
+<script src="/js/DAO.js"></script>
 <script src="/js/status/Status.js"></script>
 </head>
 <body>
@@ -58,7 +58,9 @@
 	<script>
 		(function($) {
 			$(document).ready(function() {
-				$("#ex-microserviceList").status({});
+				$("#ex-microserviceList").status({
+					dao : new DAO({})
+				});
 
 			});
 		}(jQuery));

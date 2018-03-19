@@ -39,5 +39,16 @@ zuul:
       path: /spotlight-ms/**
       serviceId: SPOTLIGHT-MS
     repo:
-      path: /repo-ms/**
+      path: /REPO-MS/**
       serviceId: REPO-MS
+    executer:
+      path: /EXECUTER-MS/**
+      serviceId: EXECUTER-MS
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          strategy: THREAD
+          thread:
+            timeoutInMilliseconds: 10000
