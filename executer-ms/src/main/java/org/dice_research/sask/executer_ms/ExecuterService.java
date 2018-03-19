@@ -4,6 +4,10 @@ import java.util.List;
 
 import org.dice_research.sask.executer_ms.workflow.Operator;
 import org.dice_research.sask.executer_ms.workflow.Workflow;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -47,14 +51,15 @@ public class ExecuterService {
 		String content = getFileContent(data);
 		String extractedData = extract(extractor, content);
 		writeInDb(extractedData);
-		// write in db
-
 		return extractedData;
 	}
 
 	private void writeInDb(String data) {
-		String uri = getDBURI();
-		this.restTemplate.getForObject(uri + "/updateGraph?input={data}", String.class, data);
+		String uri = getDBURI() + "/updateGraph";
+
+		HttpHeaders headers = new HttpHeaders();
+		HttpEntity<String> entity = new HttpEntity<String>(data, headers);
+		ResponseEntity<String> response = restTemplate.exchange(uri, HttpMethod.POST, entity, String.class);
 	}
 
 	private String extract(String extractor, String content) {
