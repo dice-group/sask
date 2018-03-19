@@ -1,4 +1,4 @@
-package org.dice_research.sask.OpenIE_ms;
+package org.dice_research.sask.open_ie_ms;
 
 import java.io.IOException;
 import java.io.StringWriter;

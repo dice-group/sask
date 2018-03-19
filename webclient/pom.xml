@@ -8,7 +8,7 @@
 	<version>0.0.1</version>
 	<packaging>jar</packaging>
 
-	<name>webclient-microservice-server</name>
+	<name>webclient</name>
 
 	<parent>
 		<groupId>org.dice-research</groupId>
