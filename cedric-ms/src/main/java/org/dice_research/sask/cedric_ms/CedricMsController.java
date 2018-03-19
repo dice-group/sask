@@ -9,15 +9,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
+ * The class provides the REST interface for the microservice.
  * 
  * @author Kevin Haack
  *
  */
 @RestController
 public class CedricMsController {
-	
+
+	/**
+	 * The logger.
+	 */
 	private Logger logger = Logger.getLogger(CedricMsController.class.getName());
-	
+
 	/**
 	 * Represent a simple version of extraction, without configuration.
 	 * 
