@@ -2,7 +2,7 @@
 # Service registers under this name
 spring:
   application:
-    name: OpenIE-ms
+    name: open-ie-ms
 
 # Discovery Server Access
 eureka:
