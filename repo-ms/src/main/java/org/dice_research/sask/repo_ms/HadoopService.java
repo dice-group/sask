@@ -37,11 +37,9 @@ public class HadoopService implements IHadoopService {
 	private RestTemplate restTemplate;
 	private Logger logger = Logger.getLogger(RepoMsController.class.getName());
 
-	
 	public HadoopService(RestTemplate restTemplate) {
 		this.restTemplate = restTemplate;
 	}
-
 
 	@Override
 	public boolean createFile(Location location, String path, String originalFileName, InputStream fis) {
@@ -51,7 +49,6 @@ public class HadoopService implements IHadoopService {
 			createFileURI = WebHDFSUriBuilder.getCreateURL(location, path, originalFileName);
 			logger.info(createFileURI);
 		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		ResponseEntity<String> response = restTemplate.exchange(createFileURI, HttpMethod.PUT, null, String.class);
@@ -81,7 +78,6 @@ public class HadoopService implements IHadoopService {
 		try {
 			readFileUri = WebHDFSUriBuilder.getOpenURL(location, path);
 		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		RequestCallback requestCallback = request -> request.getHeaders()
@@ -104,7 +100,6 @@ public class HadoopService implements IHadoopService {
 			logger.info(hdfsStructureURI);
 
 		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		ResponseEntity<String> response = restTemplate.exchange(hdfsStructureURI, HttpMethod.GET, null, String.class);
@@ -120,7 +115,6 @@ public class HadoopService implements IHadoopService {
 		try {
 			mkdirURI = WebHDFSUriBuilder.getMkdirURI(location, path);
 		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		ResponseEntity<String> response = restTemplate.exchange(mkdirURI, HttpMethod.PUT, null, String.class);
@@ -133,7 +127,6 @@ public class HadoopService implements IHadoopService {
 		try {
 			renameURI = WebHDFSUriBuilder.getRenameURI(location, from, to);
 		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		ResponseEntity<String> response = restTemplate.exchange(renameURI, HttpMethod.PUT, null, String.class);
@@ -146,7 +139,6 @@ public class HadoopService implements IHadoopService {
 		try {
 			deleteURI = WebHDFSUriBuilder.getDeleteURI(location, path);
 		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		ResponseEntity<String> response = restTemplate.exchange(deleteURI, HttpMethod.DELETE, null, String.class);
@@ -209,7 +201,6 @@ public class HadoopService implements IHadoopService {
 				try {
 					hdfsStructureURI = WebHDFSUriBuilder.getHDFSStructureURI(location, path + status.getPathSuffix());
 				} catch (URISyntaxException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				ResponseEntity<String> response = restTemplate.exchange(hdfsStructureURI, HttpMethod.GET, null,
