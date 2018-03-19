@@ -91,6 +91,9 @@ public class ExecuterService {
 		case "SPOTLIGHT-MS":
 			uri = "http://SPOTLIGHT-MS";
 			break;
+		case "OPEN-IE-MS":
+			uri = "http://OPEN-IE-MS";
+			break;
 		default:
 			throw new RuntimeException("Unsupported extractor '" + extractor + "'");
 		}
