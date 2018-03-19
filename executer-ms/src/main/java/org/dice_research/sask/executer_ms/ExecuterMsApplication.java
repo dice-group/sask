@@ -11,6 +11,12 @@ import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
+/**
+ * This class is responsible for launching the microservice.
+ * 
+ * @author Kevin Haack
+ *
+ */
 @SpringBootApplication
 @EnableDiscoveryClient
 public class ExecuterMsApplication {

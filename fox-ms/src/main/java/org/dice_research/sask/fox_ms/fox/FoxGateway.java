@@ -1,4 +1,4 @@
-package org.dice_research.sask.fred_ms.FOX;
+package org.dice_research.sask.fox_ms.fox;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;

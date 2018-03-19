@@ -10,17 +10,24 @@ import java.util.Map;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 /**
- * Represents the whole workflow.
+ * This class represents the whole workflow.
  * 
  * @author Kevin Haack
  *
  */
 @JsonDeserialize(using = WorkflowDeserializer.class)
 public class Workflow implements Serializable {
-
-	public static final String KEY_LINKS = "links";
-	public static final String KEY_OPERATORS = "operators";
+	
 	private static final long serialVersionUID = 1L;
+
+	/**
+	 * The JSON key for the links.
+	 */
+	public static final String KEY_LINKS = "links";
+	/**
+	 * The JSON key for the operators..
+	 */
+	public static final String KEY_OPERATORS = "operators";
 
 	/**
 	 * All links in the workflow.
@@ -56,11 +63,11 @@ public class Workflow implements Serializable {
 		LinkedList<Operator> queue = new LinkedList<>();
 
 		Operator start = getStart();
-		
-		if(null == start) {
+
+		if (null == start) {
 			throw new RuntimeException("No queue start found.");
 		}
-		
+
 		queue.add(start);
 		addNext(queue);
 
@@ -72,65 +79,74 @@ public class Workflow implements Serializable {
 	 */
 	private void addNext(LinkedList<Operator> queue) {
 		Operator prev = queue.getLast();
-		
-		if(prev.getOutputs().isEmpty()) {
+
+		if (prev.getOutputs()
+		        .isEmpty()) {
 			return;
 		}
-		
-		if(prev.getOutputs().size() > 1) {
+
+		if (prev.getOutputs()
+		        .size() > 1) {
 			throw new RuntimeException("More then one output not supported");
 		}
-		
+
 		Link link = getLinkWithFrom(prev);
-		
-		if(null == link) {
+
+		if (null == link) {
 			throw new RuntimeException("Link with the fromOperator '" + prev.getId() + "' not found.");
 		}
-		
+
 		Operator next = this.operators.get(link.getToOperator());
-		
-		if(null == next) {
+
+		if (null == next) {
 			throw new RuntimeException("Next operator (" + link.getToOperator() + ") not found.");
 		}
-		
-		if(next.getInputs().isEmpty()) {
+
+		if (next.getInputs()
+		        .isEmpty()) {
 			throw new RuntimeException("Next operator has no inputs.");
 		}
-		
-		if(next.getInputs().size() > 1) {
+
+		if (next.getInputs()
+		        .size() > 1) {
 			throw new RuntimeException("More then one inputs not supported.");
 		}
-		
-		String toKey = next.getInputs().keySet().iterator().next();
-		if(!toKey.equals(link.getToConnector())) {
+
+		String toKey = next.getInputs()
+		                   .keySet()
+		                   .iterator()
+		                   .next();
+		if (!toKey.equals(link.getToConnector())) {
 			throw new RuntimeException("The next operator does not have the input '" + toKey + "'");
 		}
-		
+
 		queue.add(next);
 		addNext(queue);
 	}
-	
+
 	/**
 	 * Returns the link with the passed from Operator.
+	 * 
 	 * @param key
 	 * @return The found link.
 	 */
 	private Link getLinkWithFrom(Operator from) {
 		Link link = null;
-		
-		for(Link l : this.links) {
-			if(l.getFromOperator().equals(from.getId())) {
-				if(null != link) {
+
+		for (Link l : this.links) {
+			if (l.getFromOperator()
+			     .equals(from.getId())) {
+				if (null != link) {
 					throw new RuntimeException("More then one connecting link (" + from.getId() + ") is not supported.");
 				}
-				
+
 				link = l;
 			}
 		}
-		
+
 		return link;
 	}
-	
+
 	/**
 	 * Returns the start of the queue.
 	 * 
@@ -142,10 +158,10 @@ public class Workflow implements Serializable {
 		for (Operator o : this.operators.values()) {
 			if (o.getInputs()
 			     .isEmpty()) {
-				if(null != start) {
+				if (null != start) {
 					throw new RuntimeException("More then one start is not supported.");
 				}
-				
+
 				start = o;
 			}
 		}
