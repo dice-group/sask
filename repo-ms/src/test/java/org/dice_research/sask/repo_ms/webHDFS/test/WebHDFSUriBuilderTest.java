@@ -13,39 +13,52 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
-
+/**
+ * 
+ * @author Andre
+ *
+ */
 public class WebHDFSUriBuilderTest {
 
-	Location loc = Location.repo;
-	String path = "/";
+	String pathWF = "/Test.wf";
+	String pathFile = "/Test.txt";
 	String fileName = "Test.txt";
 	String strCreateURL = "http://localhost:50070/webhdfs/v1/user/DICE/repo/Test.txt?op=CREATE&overwrite=true";
-	String stropenURL = "http://localhost:50070/webhdfs/v1/user/DICE/repo/repo?op=OPEN";
+	String strOpenURL = "http://localhost:50070/webhdfs/v1/user/DICE/workflow/Test.wf?op=OPEN";
+	String strRenameURL = "http://localhost:50070/webhdfs/v1/user/DICE/repo/Test.txt?op=RENAME&destination=/user/DICE/repo/Test01.txt";
+
 	
 	@Test
 	public void createURLTest() throws URISyntaxException {
-		URI createURL = WebHDFSUriBuilder.getCreateURL(loc, path, fileName);
-		assertEquals(strCreateURL,createURL.toString());
-	}
-	
-	@Test
-	public void createURLWithForwardSlashTest() throws URISyntaxException {
-		URI createURL = WebHDFSUriBuilder.getCreateURL(loc, "/"+path, "/"+fileName);
+		URI createURL = WebHDFSUriBuilder.getCreateURL(Location.repo, pathFile, fileName);
 		assertEquals(strCreateURL,createURL.toString());
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void nullParameterCreateURLTest() throws URISyntaxException {
-		WebHDFSUriBuilder.getCreateURL(null, path, fileName);
+		WebHDFSUriBuilder.getCreateURL(null, pathFile, fileName);
 	}
 	
-	@Ignore
 	@Test
-	public void openURLTest() throws IllegalArgumentException, URISyntaxException {
-		URI openURL = WebHDFSUriBuilder.getOpenURL(loc, path);
-		System.out.println(openURL.toString());
+	public void openURLTest() throws URISyntaxException {
+		URI openURL = WebHDFSUriBuilder.getOpenURL(Location.workflow, pathWF);
+		assertEquals(strOpenURL,openURL.toString());
 	}
 	
+	@Test(expected=IllegalArgumentException.class)
+	public void nullParameterOpenURLTest() throws URISyntaxException {
+		WebHDFSUriBuilder.getOpenURL(Location.workflow, null);
+	}
 	
+	@Test
+	public void renameURLTest() throws URISyntaxException{
+		URI renameURL = WebHDFSUriBuilder.getRenameURI(Location.repo, "/Test.txt", "/Test01.txt");
+		assertEquals(strRenameURL,renameURL.toString());
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void nullParameterRenameURLTest() throws URISyntaxException{
+		WebHDFSUriBuilder.getRenameURI(Location.repo, null, "/Test01.txt");
+	}
 
 }
