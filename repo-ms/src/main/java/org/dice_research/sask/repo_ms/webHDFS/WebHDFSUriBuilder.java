@@ -39,8 +39,16 @@ public class WebHDFSUriBuilder {
 	 * @throws URISyntaxException
 	 * 
 	 */
-	public static URI getCreateURL(Location location, String path, String fileName) throws URISyntaxException {
+	public static URI getCreateURL(Location location, String path, String fileName) throws URISyntaxException, IllegalArgumentException {
+		
+		if(location == null || path == null|| fileName == null) {
+			throw new IllegalArgumentException("Parameter is null");
+		}
+		
 		path = path.startsWith(FORWARDSLASH) ? path.substring(1) : path;
+		path = path.endsWith(FORWARDSLASH) ? path : path.substring(path.length());
+		fileName = path.startsWith(FORWARDSLASH) ? fileName.substring(1) : fileName;
+
 		
 		UriComponentsBuilder builder = UriComponentsBuilder.newInstance();
 		builder.scheme(SCHEME);
@@ -67,7 +75,12 @@ public class WebHDFSUriBuilder {
 	 * @throws URISyntaxException
 	 * 
 	 */
-	public static URI getOpenURL(Location location, String path) throws URISyntaxException {
+	public static URI getOpenURL(Location location, String path) throws URISyntaxException, IllegalArgumentException {
+		
+		if(location == null || path == null) {
+			throw new IllegalArgumentException("Parameter is null");
+		}
+		
 		path = path.startsWith(FORWARDSLASH) ? path.substring(1) : path;
 		
 		UriComponentsBuilder builder = UriComponentsBuilder.newInstance();
@@ -93,7 +106,12 @@ public class WebHDFSUriBuilder {
 	 * @throws URISyntaxException
 	 * 
 	 */
-	public static URI getHDFSStructureURI(Location location, String path) throws URISyntaxException {
+	public static URI getHDFSStructureURI(Location location, String path) throws URISyntaxException, IllegalArgumentException {
+		
+		if(location == null || path == null) {
+			throw new IllegalArgumentException("Parameter is null");
+		}
+		
 		path = path.startsWith(FORWARDSLASH) ? path : "/" + path;
 		
 		UriComponentsBuilder builder = UriComponentsBuilder.newInstance();
@@ -120,7 +138,12 @@ public class WebHDFSUriBuilder {
 	 * @throws URISyntaxException
 	 * 
 	 */
-	public static URI getDeleteURI(Location location, String path) throws URISyntaxException {
+	public static URI getDeleteURI(Location location, String path) throws URISyntaxException, IllegalArgumentException {
+		
+		if(location == null || path == null) {
+			throw new IllegalArgumentException("Parameter is null");
+		}
+		
 		path = path.startsWith(FORWARDSLASH) ? path.substring(1) : path;
 		
 		UriComponentsBuilder builder = UriComponentsBuilder.newInstance();
@@ -148,7 +171,12 @@ public class WebHDFSUriBuilder {
 	 * @throws URISyntaxException
 	 * 
 	 */
-	public static URI getMkdirURI(Location location, String path) throws URISyntaxException {
+	public static URI getMkdirURI(Location location, String path) throws URISyntaxException, IllegalArgumentException {
+		
+		if(location == null || path == null) {
+			throw new IllegalArgumentException("Parameter is null");
+		}
+		
 		path = path.startsWith(FORWARDSLASH) ? path.substring(1) : path;
 		
 		UriComponentsBuilder builder = UriComponentsBuilder.newInstance();
@@ -176,8 +204,12 @@ public class WebHDFSUriBuilder {
 	 * @throws URISyntaxException
 	 * 
 	 */
-	public static URI getRenameURI(Location location, String from, String to) throws URISyntaxException {
+	public static URI getRenameURI(Location location, String from, String to) throws URISyntaxException, IllegalArgumentException {
 
+		if(location == null || from == null || to == null) {
+			throw new IllegalArgumentException("Parameter is null");
+		}
+		
 		from = from.startsWith(FORWARDSLASH) ? from.substring(1) : from;
 		to = to.startsWith(FORWARDSLASH) ? to.substring(1) : to;
 		
