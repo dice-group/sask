@@ -12,7 +12,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 /**
  * The gateway to the dbpedia extractor.
  * 
- * @author Kevin Haack
+ * @author Suganya Kannan, Kevin Haack
  *
  */
 public class DBPediaSpotlightGateway {

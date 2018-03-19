@@ -12,6 +12,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * The class provides the REST interface for the microservice.
+ * 
+ * @author Suganya Kannan, Kevin Haack
+ *
+ */
 @RestController
 public class DBPediaMSController {
 	/**
@@ -32,8 +38,8 @@ public class DBPediaMSController {
 		logger.info("DBPedia-microservice extract invoked");
 
 		if (null == dbpedia || null == dbpedia.getText() || (dbpedia.getText()
-		                                                             .trim()
-		                                                             .isEmpty())) {
+		                                                            .trim()
+		                                                            .isEmpty())) {
 			throw new IllegalArgumentException("No input");
 		}
 
