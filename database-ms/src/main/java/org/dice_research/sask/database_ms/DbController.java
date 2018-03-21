@@ -45,8 +45,8 @@ public class DbController {
 	}
 
 	// represent all the RDF stored in default graph
-	@RequestMapping(value = "/queryGraph")
-	public String queryGraph() {
+	@RequestMapping(value = "/queryDefaultGraph")
+	public String queryDefaultGraph() {
 
 		logger.info("db-microservice is invoked");
 
@@ -60,6 +60,26 @@ public class DbController {
 			System.out.println(json);
 
 			return json;
+		}
+	}
+	
+	// represent all the RDF stored in specific named graph
+	@RequestMapping(value = "/queryGraph")
+	public String queryGraph(String graphName) {
+
+		logger.info("db-microservice is invoked");
+
+		try (QueryEngineHTTP qe = (QueryEngineHTTP) QueryExecutionFactory.sparqlService(
+				"http://localhost:3030/sask/query", "SELECT {?s ?p ?o} WHERE {GRAPH <"+graphName+"> {?s ?p ?o}}")){
+			ResultSet results = qe.execSelect();
+			ByteArrayOutputStream b = new ByteArrayOutputStream();
+			ResultSetFormatter.outputAsJSON(b, results);
+			String json = b.toString();
+
+			System.out.println(json);
+
+			return json;
+			
 		}
 	}
 
