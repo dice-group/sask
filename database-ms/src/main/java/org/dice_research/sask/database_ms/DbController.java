@@ -70,7 +70,7 @@ public class DbController {
 		logger.info("db-microservice is invoked");
 
 		try (QueryEngineHTTP qe = (QueryEngineHTTP) QueryExecutionFactory.sparqlService(
-				"http://localhost:3030/sask/query", "SELECT {?s ?p ?o} WHERE {GRAPH <"+graphName+"> {?s ?p ?o}}")){
+				"http://localhost:3030/sask/query", "SELECT * WHERE {GRAPH <"+graphName+"> {?s ?p ?o}}")){
 			ResultSet results = qe.execSelect();
 			ByteArrayOutputStream b = new ByteArrayOutputStream();
 			ResultSetFormatter.outputAsJSON(b, results);
