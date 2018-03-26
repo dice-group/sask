@@ -18,8 +18,8 @@ import org.apache.log4j.Logger;
 import org.dice_research.sask.database_ms.RDFTriples.TripleDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -29,7 +29,7 @@ public class DbController {
 
 	// storing the triples(@input) inside default graph
 	@RequestMapping(value = "/updateGraph")
-	public void updateGraph(String input) {
+	public void updateGraph(@RequestBody String input) {
 
 		logger.info("db-microservice is invoked");
 
