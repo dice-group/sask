@@ -2,6 +2,7 @@ package org.dice_research.sask.executer_ms;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.dice_research.sask.executer_ms.workflow.Operator;
 import org.dice_research.sask.executer_ms.workflow.Workflow;
 import org.springframework.http.HttpEntity;
@@ -19,9 +20,14 @@ import org.springframework.web.client.RestTemplate;
 public class ExecuterService {
 
 	/**
+	 * The logger.
+	 */
+	private final Logger logger = Logger.getLogger(ExecuterService.class.getName());
+
+	/**
 	 * The rest template.
 	 */
-	private RestTemplate restTemplate;
+	private final RestTemplate restTemplate;
 
 	public ExecuterService(RestTemplate restTemplate) {
 		this.restTemplate = restTemplate;
@@ -33,10 +39,7 @@ public class ExecuterService {
 	 * @param workflow
 	 * @return
 	 */
-	public String execute(Workflow workflow) {
-		/*
-		 * simple version only allow a queue length of 3.
-		 */
+	public String execute(final Workflow workflow) {
 		List<Operator> queue = workflow.createQueue();
 		String filePath = queue.get(0)
 		                       .getContent();
@@ -44,22 +47,57 @@ public class ExecuterService {
 		                                 .getContent();
 		String targetGraph = queue.get(2)
 		                          .getContent();
+
 		return execute(filePath, extractorServiceId, targetGraph);
 	}
 
-	public String execute(String data, String extractor, String targetgraph) {
-		String content = getFileContent(data);
-		String extractedData = extract(extractor, content);
-		writeInDb(extractedData);
-		return extractedData;
+	/**
+	 * Simple version to execute.
+	 * 
+	 * @param filePath
+	 * @param extractorServiceId
+	 * @param targetGraph
+	 * @return
+	 */
+	public String execute(String filePath, String extractorServiceId, String targetGraph) {
+		/*
+		 * start simple task for execution
+		 */
+		Runnable task = () -> {
+			logger.info("Task started...");
+			logger.info("Step 1/3");
+			String content = getFileContent(filePath);
+			
+			logger.info("Step 2/3");
+			String extractedData = extract(extractorServiceId, content);
+			
+			if(null != extractedData) {
+				logger.info(extractedData);
+			}
+			
+			logger.info("Step 3/3");
+			writeInDb(targetGraph, extractedData);
+
+			logger.info("Task done.");
+		};
+
+		Thread thread = new Thread(task);
+		thread.start();
+
+		return "done";
 	}
 
-	private void writeInDb(String data) {
+	private void writeInDb(String targetGraph, String data) {
 		String uri = getDBURI() + "/updateGraph";
 
 		HttpHeaders headers = new HttpHeaders();
 		HttpEntity<String> entity = new HttpEntity<String>(data, headers);
-		ResponseEntity<String> response = restTemplate.exchange(uri, HttpMethod.POST, entity, String.class);
+
+		try {
+			restTemplate.exchange(uri, HttpMethod.POST, entity, String.class);
+		} catch (Exception ex) {
+			logger.info("failed to write to database (" + ex.getMessage() + ")");
+		}
 	}
 
 	private String extract(String extractor, String content) {
@@ -92,6 +130,9 @@ public class ExecuterService {
 			break;
 		case "OPEN-IE-MS":
 			uri = "http://OPEN-IE-MS";
+			break;
+		case "SPOTLIGHT-MS":
+			uri = "http://SPOTLIGHT-MS";
 			break;
 		default:
 			throw new RuntimeException("Unsupported extractor '" + extractor + "'");
