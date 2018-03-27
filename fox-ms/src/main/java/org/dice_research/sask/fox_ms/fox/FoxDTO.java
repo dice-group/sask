@@ -14,18 +14,18 @@ public class FoxDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private String task = "ner";
-	private String type = "text";
-	private String input = "";
-	private String foxlight = "OFF";
-	private int nif = 0;
 	private int defaults = 0;
-	private String state = "sending";
-	private String output = "Turle";
+	private String foxlight = "OFF";
+	private String input = "";
 	private String lang = "en";
+	private int nif = 0;
+	private String output = "Turtle";
+	private String state = "sending";
+	private String task = "re";
+	private String type = "text";
 
 	public String getTask() {
-		return task;
+		return this.task;
 	}
 
 	public void setTask(String task) {
@@ -33,7 +33,7 @@ public class FoxDTO implements Serializable {
 	}
 
 	public String getType() {
-		return type;
+		return this.type;
 	}
 
 	public void setType(String type) {
@@ -41,7 +41,7 @@ public class FoxDTO implements Serializable {
 	}
 
 	public String getInput() {
-		return input;
+		return this.input;
 	}
 
 	public void setInput(String input) {
@@ -49,7 +49,7 @@ public class FoxDTO implements Serializable {
 	}
 
 	public String getFoxlight() {
-		return foxlight;
+		return this.foxlight;
 	}
 
 	public void setFoxlight(String foxlight) {
@@ -57,7 +57,7 @@ public class FoxDTO implements Serializable {
 	}
 
 	public int getNif() {
-		return nif;
+		return this.nif;
 	}
 
 	public void setNif(int nif) {
@@ -65,7 +65,7 @@ public class FoxDTO implements Serializable {
 	}
 
 	public int getDefaults() {
-		return defaults;
+		return this.defaults;
 	}
 
 	public void setDefaults(int defaults) {
@@ -73,7 +73,7 @@ public class FoxDTO implements Serializable {
 	}
 
 	public String getState() {
-		return state;
+		return this.state;
 	}
 
 	public void setState(String state) {
@@ -81,7 +81,7 @@ public class FoxDTO implements Serializable {
 	}
 
 	public String getOutput() {
-		return output;
+		return this.output;
 	}
 
 	public void setOutput(String output) {
@@ -89,14 +89,10 @@ public class FoxDTO implements Serializable {
 	}
 
 	public String getLang() {
-		return lang;
+		return this.lang;
 	}
 
 	public void setLang(String lang) {
 		this.lang = lang;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
 	}
 }
