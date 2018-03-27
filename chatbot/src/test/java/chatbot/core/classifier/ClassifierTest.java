@@ -48,7 +48,16 @@ public class ClassifierTest {
 	
 	@Test
 	public void testClassifyForQAHandler() {
-			
+		
+//		addingContent.setText("why ?");
+//		addingContent.setPayload("text");
+//		 
+//		List<RequestContent> messageData = 	new ArrayList<RequestContent>();
+//		messageData.add(addingContent);
+//		request.setRequestContent(messageData);
+//		Classifier helper = new Classifier();
+//		Object actualOutput =helper.classify(testVaribale);	
+		
 		IncomingRequest input = createInitialRequest("why ?");
 		Object actualOutput= classifyInput(input);
 		log.info("Executing QAHandle Test");
