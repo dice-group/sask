@@ -10,19 +10,19 @@ import java.io.Serializable;
  * @author Kevin Haack
  *
  */
-public class FoxDTO implements Serializable {
+public class FoxDTO implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-
-	private String task = "ner";
-	private String type = "text";
-	private String input = "";
-	private String foxlight = "OFF";
-	private int nif = 0;
+	
 	private int defaults = 0;
-	private String state = "sending";
-	private String output = "Turtle";
+	private String foxlight = "OFF";
+	private String input = "";
 	private String lang = "en";
+	private int nif = 0;
+	private String output = "Turtle";
+	private String state = "sending";
+	private String task = "re";
+	private String type = "text";
 
 	public String getTask() {
 		return this.task;
@@ -94,9 +94,5 @@ public class FoxDTO implements Serializable {
 
 	public void setLang(String lang) {
 		this.lang = lang;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
 	}
 }
