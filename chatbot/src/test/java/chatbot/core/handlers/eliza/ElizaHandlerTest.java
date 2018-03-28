@@ -59,7 +59,6 @@ public class ElizaHandlerTest {
 	public void testCheckInputWithIncorrectInput() throws JsonProcessingException, IOException {
 		
 		ResponseList responseListObject =  testElizaObject.search(createInitialRequest("Hello$?"));
-		MessageType actualType = responseListObject.getMessageType();
 		String actualOutput = responseListObject.getMessageData().get(0).getContent();
 		String expectedOutput = "I'm not sure I understand you fully.";
 		assertNotNull(actualOutput);
@@ -77,7 +76,7 @@ public class ElizaHandlerTest {
 		System.out.println(expectedOutput);
 		assertNotNull(actualOutput);
 		assertNotNull(expectedOutput);
-		assertEquals("Message when failed Message Type", expectedOutput, actualOutput );
+		assertEquals("Message when failed Message testCheckInputWithZeroInHello function", expectedOutput, actualOutput );
 	}
 	
 	@Test
