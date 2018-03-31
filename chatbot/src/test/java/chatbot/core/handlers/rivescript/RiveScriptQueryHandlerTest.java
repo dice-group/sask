@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -42,59 +43,62 @@ public class RiveScriptQueryHandlerTest {
 		return queryHandlerObject;
 	}
 	
-	public boolean queryFound(String query){
-		
-		RiveScriptQueryHandler queryObject = createInitialObject();
-		boolean actualQueryHandlerOutput = queryObject.isQueryFound(query);
-		return actualQueryHandlerOutput;
-	}	
 	/**
 	 * Test for checking query pass and fail scenario
 	 */
 	@Test
-	public void testIsQueryFound() {		
-		String queryTrue = "Hello";
-		String queryFalse= "Something Random";
-		boolean replyTrue = queryFound(queryTrue);
-		boolean replyFalse = queryFound(queryFalse);
-		log.info("Executing RiveScript");		
-		assertTrue(replyTrue);
-		assertFalse(replyFalse);
+	public void testSearchHi() throws IOException {
+		IncomingRequest input = createIncomingRequest("Hi");
+		RiveScriptQueryHandler queryObject = createInitialObject();
+		String actualOutput = queryObject.search(input).getMessageData().get(0).getContent();
+		List<String> expectedOutputs = Arrays.asList("Hi, how may I help you?", "Hello there", "Hi to you too!", "Hello, how may I help you?");
+		log.info("In Search Hello Test case");
+		assertNotNull(actualOutput);
+		boolean result = expectedOutputs.contains(actualOutput);
+		System.out.println(result);
+		assertTrue(result);			
+	}
+	
+	/**
+	 * Testing Day Greetings with Unicode of o
+	 */
+	@Test
+	public void testSearchDayGreetings() throws IOException {
+		IncomingRequest input = createIncomingRequest("Go\u006Fd Morning");
+		RiveScriptQueryHandler queryObject = createInitialObject();
+		String actualOutput = queryObject.search(input).getMessageData().get(0).getContent();
+		List<String> expectedOutputs = Arrays.asList("good morning to you too", "good evening to you too", "good night to you too");
+		log.info("In Search day greetings Test case");
+		assertNotNull(actualOutput);
+		System.out.println(actualOutput);
+		boolean result = expectedOutputs.contains(actualOutput);
+		System.out.println(result);
+		assertTrue(result);			
+	}
+	
+	@Test
+	public void testSearch() throws IOException {
+		IncomingRequest input = createIncomingRequest("how are you?");
+		RiveScriptQueryHandler queryObject = createInitialObject();
+		String actualOutput = queryObject.search(input).getMessageData().get(0).getContent();
+		List<String> expectedOutputs = Arrays.asList("Never been better", "I'm good, you?", "I am fine thanks for asking", "I'm fine, thanks for asking!", "I'm great, how are you?", "Good :) you?", "Great! You?");
+		log.info("In Search Test case");
+		assertNotNull(actualOutput);
+		System.out.println(actualOutput);
+		boolean result = expectedOutputs.contains(actualOutput);
+		assertTrue(result);
 		}
 
 	@Test
-	public void testSearch() throws IOException {
-		IncomingRequest input = createIncomingRequest("HELLO");
+	public void testSearchDbpedia() throws IOException {
+		IncomingRequest input = createIncomingRequest("who are you?");
 		RiveScriptQueryHandler queryObject = createInitialObject();
-		ResponseList actualOutput = queryObject.search(input);
-//		Array test = ["Hi, how may I help you?, "Hello there"];
-		String[] expcectedHelloOutput = {"Hi, how may I help you?", "Hello there", "Hi to you too!"};
-		System.out.println("In Search");
+		String actualOutput = queryObject.search(input).getMessageData().get(0).getContent();
+		String expectedHelloOutput = "I am the DBpedia Bot";
+		log.info("In Dbpedia Test case");
 		assertNotNull(actualOutput);
-		System.out.println(actualOutput.getMessageData().get(0).getContent());
-		for(int i=0; i < expcectedHelloOutput.length; i++) {
-			if(expcectedHelloOutput[i]== actualOutput.toString())
-				break;
-
-		}
-//		assertEquals(expcectedHelloOutput, actualOutput);
-		
-//		ResponseList testResponselist1 = new ResponseList();
-//      Returns the input text from the object
-//		String query = input.getRequestContent()
-//		                      .get(0)
-//		                      .getText()
-//		                      .toLowerCase();
-//		System.out.println(query);
-
-//		Checks incoming input in rivescript to find a matching response		
-//		String reply = CreateInitialRequest().reply("user", query);
-//		System.out.println("Test reply : "+reply);
-		
-//		String reply = obj.reply("user", query);
-//		RiveScriptOutputAnalyzer analyzer = new RiveScriptOutputAnalyzer();
-//		responselist = analyzer.HandleTextMessage(responselist , reply);
-//        assertTrue(actualOutput instanceof RiveScriptQueryHandler);
-
-	}
+		System.out.println(actualOutput);
+		log.info("test passed for dbpedia bot");
+		assertEquals(expectedHelloOutput, actualOutput);		
+	}	
 }
