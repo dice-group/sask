@@ -62,6 +62,14 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<executions>
+				<!--  ~~~~~ To support the packaging the war file as an executable via java -jar utility ~~~~ -->
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
 				<configuration>
 					<!-- ~~~~~~~ support java 9 ~~~~~~~ -->
 					<!-- https://blog.frankel.ch/migrating-to-java-9/1/ -->
