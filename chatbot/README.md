@@ -22,3 +22,13 @@ Release Notes:[Last update: 11.01.2018]
 5. UI needs to be smoothed and displayed with proper Indents and niceties.
 6. Support for Eliza. Currently all personal queries are re-directed to Eliza.
 7. Initial Base Intent classifier Support. Supports Request to HAWK and Eliza. Default would throw Exception due to pending support for Sessa, Personal Query Handling.
+
+* Optional : Dockerising and chatbot module
+
+Prerequisite : Ensure docker installed on your host machine
+
+Building the container : 
+	docker build -t <image-name> -f chatbot-Dockerfile .
+
+Running the container : 
+	docker run -e EUREKA_SERVICE_HOST=`hostname` -e EUREKA_SERVICE_PORT=1111 -p 9191:9191 -it <image-name>
