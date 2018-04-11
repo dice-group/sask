@@ -27,8 +27,10 @@ Release Notes:[Last update: 11.01.2018]
 
 Prerequisite : Ensure docker installed on your host machine
 
-Building the container
+Building the container:
+
 	docker build -t {Image-Name} -f chatbot-Dockerfile .
 
-Running the container
+Running the container:
+
 	docker run -e EUREKA_SERVICE_HOST=`hostname` -e EUREKA_SERVICE_PORT=1111 -p 9191:9191 -it {Image-Name}
