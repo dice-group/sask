@@ -5,10 +5,6 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.dice_research.sask.executer_ms.workflow.Operator;
 import org.dice_research.sask.executer_ms.workflow.Workflow;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -65,18 +61,23 @@ public class ExecuterService {
 		 */
 		Runnable task = () -> {
 			logger.info("Task started...");
-			logger.info("Step 1/3");
+			logger.info("Step 1/3 (get content)");
 			String content = getFileContent(filePath);
-			
-			logger.info("Step 2/3");
+			logger.info(content);
+
+			logger.info("Step 2/3 (extract)");
 			String extractedData = extract(extractorServiceId, content);
-			
-			if(null != extractedData) {
+
+			if (null != extractedData) {
 				logger.info(extractedData);
+			} else {
+				logger.info("no data extracted");
 			}
-			
-			logger.info("Step 3/3");
-			writeInDb(targetGraph, extractedData);
+
+			if (null != extractedData) {
+				logger.info("Step 3/3 (write to database)");
+				writeInDb(targetGraph, extractedData);
+			}
 
 			logger.info("Task done.");
 		};
@@ -90,11 +91,8 @@ public class ExecuterService {
 	private void writeInDb(String targetGraph, String data) {
 		String uri = getDBURI() + "/updateGraph";
 
-		HttpHeaders headers = new HttpHeaders();
-		HttpEntity<String> entity = new HttpEntity<String>(data, headers);
-
 		try {
-			restTemplate.exchange(uri, HttpMethod.POST, entity, String.class);
+			restTemplate.postForObject(uri, data, String.class);
 		} catch (Exception ex) {
 			logger.info("failed to write to database (" + ex.getMessage() + ")");
 		}
