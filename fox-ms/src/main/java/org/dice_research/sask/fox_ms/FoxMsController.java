@@ -5,8 +5,7 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
-import org.dice_research.sask.fox_ms.fox.FoxDTO;
-import org.dice_research.sask.fox_ms.fox.FoxGateway;
+import org.dice_research.sask.fox_ms.DTO.FoxDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -46,7 +45,7 @@ public class FoxMsController {
 			throw new IllegalArgumentException("No input");
 		}
 
-		FoxGateway gateway = new FoxGateway();
+		FoxService gateway = new FoxService();
 		return gateway.extract(fox);
 	}
 

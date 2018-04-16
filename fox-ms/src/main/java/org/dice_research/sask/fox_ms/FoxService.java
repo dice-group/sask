@@ -1,5 +1,6 @@
-package org.dice_research.sask.fox_ms.fox;
+package org.dice_research.sask.fox_ms;
 
+import org.dice_research.sask.fox_ms.DTO.FoxDTO;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -11,7 +12,7 @@ import org.springframework.web.client.RestTemplate;
  * @author Kevin Haack
  *
  */
-public class FoxGateway {
+public class FoxService {
 	/**
 	 * The service uri to the fox extractor. Online version:
 	 * http://fox-demo.aksw.org/fox University version:

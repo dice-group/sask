@@ -2,7 +2,7 @@ package org.dice_research.sask.dbpedia_ms;
 
 import java.util.Locale;
 
-import org.dice_research.sask.dbpedia_ms.DTO.DBPediaDTO;
+import org.dice_research.sask.dbpedia_ms.DTO.DBpediaDTO;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -16,7 +16,7 @@ import org.springframework.web.util.UriComponentsBuilder;
  * @author Suganya Kannan, Kevin Haack
  *
  */
-public class DBPediaSpotlightService {
+public class DBpediaService {
 
 	/**
 	 * The service url.
@@ -34,9 +34,9 @@ public class DBPediaSpotlightService {
 	 *            The data transfer object
 	 * @return The extraction result.
 	 */
-	public String extract(DBPediaDTO dbpedia) {
+	public String extract(DBpediaDTO dbpedia) {
 		// URI creating
-		String uri = DBPediaSpotlightService.createURI(dbpedia);
+		String uri = DBpediaService.createURI(dbpedia);
 
 		try {
 			HttpHeaders headers = new HttpHeaders();
@@ -56,7 +56,7 @@ public class DBPediaSpotlightService {
 	 *            The data transfer object
 	 * @return The uri.
 	 */
-	private static String createURI(DBPediaDTO dbpedia) {
+	private static String createURI(DBpediaDTO dbpedia) {
 		try {
 			String text = dbpedia.getText();
 			String confidence = String.format(Locale.ENGLISH, "%.2f", dbpedia.getConfidence());
@@ -80,7 +80,7 @@ public class DBPediaSpotlightService {
 			return builder.build()
 			              .toUriString();
 		} catch (Exception ex) {
-			throw new RuntimeException("Unable to build DBPedia uri (" + ex.getMessage() + ").", ex);
+			throw new RuntimeException("Unable to build DBpedia uri (" + ex.getMessage() + ").", ex);
 		}
 	}
 }

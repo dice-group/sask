@@ -6,7 +6,7 @@ package org.dice_research.sask.dbpedia_ms.DTO;
  * @author Kevin Haack
  *
  */
-public class DBPediaDTO {
+public class DBpediaDTO {
 	private String text = "";
 	private float confidence = 0.5f;
 	private int support = 0;
