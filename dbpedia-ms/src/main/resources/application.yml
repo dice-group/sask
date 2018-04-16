@@ -2,14 +2,14 @@
 # Service registers under this name
 spring:
   application:
-    name: spotlight-ms
+    name: dbpedia-ms
 
 # Discovery Server Access
 eureka:
   instance:
     metadataMap:
       type: extractor
-      friendlyname: Spotlight
+      friendlyname: DBpedia
   client:
     serviceUrl:
       defaultZone: http://localhost:1111/eureka/
