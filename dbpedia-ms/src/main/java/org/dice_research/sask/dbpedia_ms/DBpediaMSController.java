@@ -5,7 +5,7 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
-import org.dice_research.sask.dbpedia_ms.DTO.DBPediaDTO;
+import org.dice_research.sask.dbpedia_ms.DTO.DBpediaDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,22 +18,22 @@ import org.springframework.web.bind.annotation.RestController;
  *
  */
 @RestController
-public class DBPediaMSController {
+public class DBpediaMSController {
 	/**
 	 * The logger.
 	 */
-	protected Logger logger = Logger.getLogger(DBPediaMSController.class.getName());
+	private Logger logger = Logger.getLogger(DBpediaMSController.class.getName());
 
 	@RequestMapping("/extractSimple")
 	public String extractSimple(String input) {
 		this.logger.info("dbpedia-microservice extract() invoked");
 
-		DBPediaDTO dbpedia = new DBPediaDTO();
+		DBpediaDTO dbpedia = new DBpediaDTO();
 		dbpedia.setText(input);
 		return extract(dbpedia);
 	}
 
-	public String extract(DBPediaDTO dbpedia) {
+	public String extract(DBpediaDTO dbpedia) {
 		logger.info("DBPedia-microservice extract invoked");
 
 		if (null == dbpedia || null == dbpedia.getText() || (dbpedia.getText()
@@ -42,7 +42,7 @@ public class DBPediaMSController {
 			throw new IllegalArgumentException("No input");
 		}
 
-		DBPediaSpotlightService gateway = new DBPediaSpotlightService();
+		DBpediaService gateway = new DBpediaService();
 		return gateway.extract(dbpedia);
 	}
 
