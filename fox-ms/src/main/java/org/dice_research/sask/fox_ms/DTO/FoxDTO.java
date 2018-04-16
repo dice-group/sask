@@ -1,4 +1,4 @@
-package org.dice_research.sask.fox_ms.fox;
+package org.dice_research.sask.fox_ms.DTO;
 
 import java.io.Serializable;
 
