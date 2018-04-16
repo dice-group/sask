@@ -1,0 +1,52 @@
+---
+
+- name: "Build docker images and push it to the repository"
+  hosts: localhost
+  vars:
+    ansible_python_interpreter: "/usr/bin/env python"
+  tasks:
+
+    - name: "create a local temp directory which will have the dockerfiles"
+      command: mktemp -d "{{ lookup('env', 'TMPDIR') | default('/tmp', true) }}/ansible.XXXX"
+      register: mktemp_output
+      check_mode: no
+
+    - name: Create a copies of the Docker template file for each of the webservices
+      template:  
+        src: "{{ playbook_dir }}/templates/images-Dockerfile.j2"
+        dest: "{{ mktemp_output.stdout }}/{{ item }}-Dockerfile"
+      with_items:
+        - chatbot
+      check_mode: no
+      delegate_to: localhost
+
+
+    - name: Check if the executables exist, if not run maven build
+      shell: ls {{ project_home_dir }}/{{ item }}/target/*.war
+      register: result_war
+      ignore_errors: yes
+      failed_when : result_war == ""
+      with_items:
+        - chatbot
+
+    - name: Run maven build if there are no executable wars are found in target folder
+      command: mvn clean install -f {{ project_home_dir }}/{{ item }}/pom.xml
+      with_items:
+        - chatbot
+      when: '"No such file" in result_war'
+
+    - name: Move the needed executable files for each of the microservices to create a docker file
+      local_action: shell cp {{ project_home_dir }}/{{ item }}/target/*.war {{ mktemp_output.stdout }}/{{ item }}.war
+      with_items:
+        - chatbot
+      check_mode: no
+
+    - name : "Build docker images for each of the microservice and push it to the repository"
+      docker_image :
+        path : "{{ mktemp_output.stdout }}"
+        dockerfile: "{{ item }}-Dockerfile"
+        name : "guru/{{ item }}"
+        tag: test
+      with_items:
+        - chatbot
+        

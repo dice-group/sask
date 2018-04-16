@@ -1,0 +1,8 @@
+---
+
+project_home_dir : "{{ playbook_dir.split('/')[0:-1]|join('/') }}"
+
+docker_repository : "https://hub.docker.com"
+
+docker_repository_user : "guru5590"
+
