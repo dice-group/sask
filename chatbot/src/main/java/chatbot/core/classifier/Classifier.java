@@ -7,6 +7,8 @@ import chatbot.core.handlers.rivescript.*;
 import chatbot.core.handlers.qa.*;
 import chatbot.core.handlers.sessa.*;
 import chatbot.io.incomingrequest.IncomingRequest;
+import chatbot.utils.spellcheck.SpellCheck;
+import chatbot.utils.spellcheck.SpellCheck.LanguageList;
 import chatbot.core.handlers.*;
 import chatbot.core.handlers.eliza.ElizaHandler;
 import java.util.Arrays;
@@ -18,6 +20,7 @@ import org.apache.log4j.Logger;
  * @author Prashanth class to Classify the User Input as QA or KS or Normal
  *         emotion.
  */
+
 public class Classifier {
 	private static Logger log = Logger.getLogger(Classifier.class.getName());
 	public static final String[] questionTerms = { "what", "why", "how", "when", "where", "who", "which" };
@@ -31,14 +34,25 @@ public class Classifier {
 	public static boolean queryIsPersonal(String inputStr) {
 		return Classifier.hasCommonTerms(inputStr, personalTerms);
 	}
-
+	private String handlePreProcessing(String query) {
+		//Spell Check
+		String result = query;
+		SpellCheck spell = new SpellCheck(LanguageList.ENGLISH);
+		result = spell.correctSpelling(query);
+		log.info("Corrected Query:" + result); 
+		return result;
+	}
 	public Handler classify(IncomingRequest request) {
 		try {
 			String query = request.getRequestContent().get(0).getText().toLowerCase();
-			// check rivescript for existing questions and return the response, Add
-			// code here after Juzer is ready with his files.
+			//Preprocess User Input. Do not expect it to be perfect.
+			//Query may contain some basic spelling mistakes which require to be corrected.Currently Language is hardcoded. 
+			//It should also come from IncomingRequest class in future since it should ideally depend on browser language so that user queries can be answered efficiently.
+			query = handlePreProcessing(query);
+			//Set Query here to Request for now?
+			request.getRequestContent().get(0).setText(query); //Update Request class.
+			query = query.toLowerCase(); //Sometimes spell check returns caps.
 			RiveScriptQueryHandler basicText = new RiveScriptQueryHandler();
-			
 			// isQueryFound method is now moved to RiveScriptOutputAnalyzer class
 			// TODO: Do we need two classes for Rivescripts or can we merge of of them
 			boolean flag = RiveScriptOutputAnalyzer.isQueryFound(query);
@@ -77,4 +91,5 @@ public class Classifier {
 		terms.addAll(s2List);
 		return terms.size() < s1List.size() + s2List.size();
 	}
+
 }
