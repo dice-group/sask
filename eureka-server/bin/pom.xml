@@ -3,11 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>org.dice-research.sask</groupId>
-	<artifactId>sorookin-ms</artifactId>
+	<artifactId>eureka-server</artifactId>
 	<version>0.0.1</version>
 	<packaging>jar</packaging>
 
-	<name>sorookin-ms</name>
+	<name>eureka-server</name>
 
 	<parent>
 		<groupId>org.dice-research</groupId>
@@ -20,13 +20,7 @@
 		<!-- ~~~~~~~ spring eureka server ~~~~~~~ -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-eureka</artifactId>
+			<artifactId>spring-cloud-starter-eureka-server</artifactId>
 		</dependency>
-		
-	<!-- 	<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-			<scope>runtime</scope>
-		</dependency> -->
 	</dependencies>
 </project>

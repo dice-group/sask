@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+<title>SASK - Home</title>
+<!-- ~~~~~~ bootstrap ~~~~~~ -->
+<link rel="stylesheet" href="/bootstrap/3.3.7/css/bootstrap.min.css" />
+<!-- ~~~~~~  jquery ~~~~~~ -->
+<script src="/jquery-3.2.1/jquery-3.2.1.min.js" type="text/javascript"></script>
+<!-- ~~~~~~  jquery ui ~~~~~~ -->
+<script src="/jquery-ui-1.12.1/jquery-ui.js"></script>
+<script type="text/javascript" src="/js/chatbot/chatbot.js"></script>
+<link rel="stylesheet" href="/jquery-ui-1.12.1/jquery-ui.css">
+<link rel="stylesheet" href="/styles/chatbot/chatbot.css">
+<!-- ~~~~~~  file input ~~~~~~ -->
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.5/css/fileinput.min.css"
+	media="all" rel="stylesheet" type="text/css" />
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.5/js/plugins/piexif.min.js"
+	type="text/javascript"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.5/js/plugins/sortable.min.js"
+	type="text/javascript"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.5/js/plugins/purify.min.js"
+	type="text/javascript"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.5/js/fileinput.min.js"></script>
+<!-- ~~~~~~  jquery ~~~~~~ -->
+<script src="/js/exPrototype.js" type="text/javascript"></script>
+</head>
+<body>
+	<!-- navbar -->
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+					aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="./">SASK</a>
+			</div>
+
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="./">Home</a></li>
+					<li><a href="./status.html">Status</a></li>
+					<li><a href="./settings.html">Settings</a></li>
+					<li><a href="./uiprototype.html">UI prototype</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<!-- content -->
+	<div class="container">
+		<div class="row">
+			<div id="tabs">
+				<ul>
+					<li><a href="#tabExtraction">Extraction group</a></li>
+					<li><a href="#tabSearch">Search group</a></li>
+				</ul>
+
+				<div id="tabExtraction">
+					<!-- extraction -->
+					<h1>Extraction prototype</h1>
+					<div class="form-group">
+						<label for="email">File</label> <input id="ex-fileinput"
+							type="file" class="file form-control">
+					</div>
+					<div class="radio">
+						<label> <input type="radio" name="ex-extractor"
+							value="spotlight" checked>Spotlight
+						</label>
+					</div>
+					<div class="radio">
+						<label> <input type="radio" name="ex-extractor"
+							value="fred">RDF Fred
+						</label>
+					</div>
+					<div class="radio">
+						<label> <input type="radio" name="ex-extractor"
+							value="fox">FOX
+						</label>
+					</div>
+					<button onclick="ex_submitfile()" class="btn btn-default">Start</button>
+					<hr />
+					<div class="form-group">
+						<label>Result</label>
+						<textarea class="form-control" id="ex-result"></textarea>
+					</div>
+				</div>
+				<div id="tabSearch">
+					<div id="container"></div>
+					<div id="controls">
+						<textarea id="textbox" placeholder="Enter your query here..."></textarea>
+						<button id="send">SEND</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		$(document).ready(function() {
+			$("#tabs").tabs();
+		});
+	</script>
+</body>
+</html>

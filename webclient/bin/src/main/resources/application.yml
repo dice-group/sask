@@ -1,0 +1,36 @@
+# Service registers under this name
+# Control the InternalResourceViewResolver:
+spring:
+  application:
+    name: webclient
+
+# Discovery Server Access
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:1111/eureka/
+
+# Disable Spring Boot's "Whitelabel" default error page, so we can use our own
+error:
+  whitelabel:
+    enabled: false
+    
+#server port      
+server:
+  port: 9090
+
+#zuul route
+zuul:
+  routes:
+    chatbot:
+      path: /chatbot/**
+      serviceId: chatbot
+    fred:
+      path: /fred-ms/**
+      serviceId: FRED-MS
+    fox:
+      path: /fox-ms/**
+      serviceId: FOX-MS
+    spotlight:
+      path: /spotlight-ms/**
+      serviceId: SPOTLIGHT-MS
