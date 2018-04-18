@@ -63,7 +63,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<executions>
-				<!--  ~~~~~ To support the packaging the war file as an executable via java -jar utility ~~~~ -->
+				<!--  ~~~~~ To support the packaging the jar file as an executable via java -jar utility ~~~~ -->
 					<execution>
 						<goals>
 							<goal>repackage</goal>
