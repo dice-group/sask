@@ -13,12 +13,12 @@ RUN \
   mkdir /sask/ && \
   chown -R sask:sask /sask/
 
-COPY {{ item }}.war /sask/{{ item }}/{{ item }}.war
+COPY {{ microservice }}.jar /sask/{{ microservice }}/{{ microservice }}.jar
 
 ENV PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin
 
 USER sask
 
-WORKDIR /sask/{{ item }}/
+WORKDIR /sask/{{ microservice }}/
 
-CMD ["java","-jar","{{ item }}.war"]
+CMD ["java","-jar","{{ microservice }}.jar"]

@@ -11,35 +11,12 @@
       register: mktemp_output
       check_mode: no
 
-    - name: Create a copies of the Docker template file for each of the webservices
-      template:  
-        src: "{{ playbook_dir }}/templates/images-Dockerfile.j2"
-        dest: "{{ mktemp_output.stdout }}/{{ item }}-Dockerfile"
+    - name: "Prepare the docker files and artifacts needed for docker image build"
+      include_tasks: "includes/prepare-docker-artifacts.yml artifact_directory={{ mktemp_output.stdout }} microservice={{ item }}"
       with_items:
+        - eureka-server
         - chatbot
-      check_mode: no
-      delegate_to: localhost
-
-
-    - name: Check if the executables exist, if not run maven build
-      shell: ls {{ project_home_dir }}/{{ item }}/target/*.war
-      register: result_war
-      ignore_errors: yes
-      failed_when : result_war == ""
-      with_items:
-        - chatbot
-
-    - name: Run maven build if there are no executable wars are found in target folder
-      command: mvn clean install -f {{ project_home_dir }}/{{ item }}/pom.xml
-      with_items:
-        - chatbot
-      when: '"No such file" in result_war'
-
-    - name: Move the needed executable files for each of the microservices to create a docker file
-      local_action: shell cp {{ project_home_dir }}/{{ item }}/target/*.war {{ mktemp_output.stdout }}/{{ item }}.war
-      with_items:
-        - chatbot
-      check_mode: no
+        - webclient
 
     - name : "Build docker images for each of the microservice and push it to the repository"
       docker_image :
@@ -48,5 +25,11 @@
         name : "guru/{{ item }}"
         tag: test
       with_items:
+        - eureka-server
         - chatbot
-        
+        - webclient
+
+    - name: "Cleaning up the temp directory"
+      file:
+        path: "{{ mktemp_output.stdout }}/"
+        state: absent
