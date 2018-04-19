@@ -2,13 +2,13 @@
 
 template:
   data:
-    dbpedia :
-      - comment :How do I contribute?
-        uri :http://wiki.dbpedia.org/get-involved
+    dbpedia:
+      - comment: How do I contribute?
+        uri: http://wiki.dbpedia.org/get-involved
       
-      - comment :Is DBpedia down?
-        uri :http://wiki.dbpedia.org/get-involved
+      - comment: Is DBpedia down?
+        uri: http://wiki.dbpedia.org/get-involved
         
     fact:
-      - comment :Who is einstein?
-        uri :http://dbpedia.org/resource/Albert_Einstein
+      - comment: Who is einstein?
+        uri: http://dbpedia.org/resource/Albert_Einstein
