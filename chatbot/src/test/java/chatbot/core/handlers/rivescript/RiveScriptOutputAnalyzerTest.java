@@ -10,23 +10,23 @@ public class RiveScriptOutputAnalyzerTest {
 
 		Logger log = Logger.getLogger(RiveScriptOutputAnalyzerTest.class.getName());
 		
-		public Boolean checkJsonType(String textMessage) {
-				RiveScriptOutputAnalyzer analyseOutput = new RiveScriptOutputAnalyzer();
-				Boolean checkValue =  analyseOutput.isJSONObject(textMessage);
-				return checkValue;
-		}
+//		public Boolean checkJsonType(String textMessage) {
+//				RiveScriptOutputAnalyzer analyseOutput = new RiveScriptOutputAnalyzer();
+//				Boolean checkValue =  analyseOutput.isJSONObject(textMessage);
+//				return checkValue;
+//		}
 		
-		@Test
-		public void	testIsJSONObject() {
-			String inputMessage = "[{\"foo\": \"bar\"},{\"foo\": \"biz\"}]";
-			Boolean checkVal = checkJsonType("Hello"); //requestContent:[{text: "hello"}]
-			Boolean checkVal2 = checkJsonType(inputMessage); //requestContent:[{text: "hello"}]
-
-//			Method returns false when input has JSON object and not string
-//			assertFalse(checkVal);
-			assertTrue(checkVal2);
-
-		}
+//		@Test
+//		public void	testIsJSONObject() {
+//			String inputMessage = "[{\"foo\": \"bar\"},{\"foo\": \"biz\"}]";
+//			Boolean checkVal = checkJsonType("Hello"); //requestContent:[{text: "hello"}]
+//			Boolean checkVal2 = checkJsonType(inputMessage); //requestContent:[{text: "hello"}]
+//
+////			Method returns false when input has JSON object and not string
+////			assertFalse(checkVal);
+//			assertTrue(checkVal2);
+//
+//		}
 		
 //		@Test
 //		public void	testIsJSONHasType(String textMessage) {
