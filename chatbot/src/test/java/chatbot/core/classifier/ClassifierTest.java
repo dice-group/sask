@@ -64,12 +64,12 @@ public class ClassifierTest {
         assertTrue(actualOutput instanceof ElizaHandler);
 	}
 
-	@Test
-	public void testClassifyForSessaHandler() {
-		
-		IncomingRequest input = createInitialRequest("wq");
-		Object actualOutput= classifyInput(input);
-		log.info("Executing SessaHandler Test");
-        assertTrue(actualOutput instanceof SessaHandler);
-	}
+//	@Test
+//	public void testClassifyForSessaHandler() {
+//		
+//		IncomingRequest input = createInitialRequest("wq");
+//		Object actualOutput= classifyInput(input);
+//		log.info("Executing SessaHandler Test");
+//        assertTrue(actualOutput instanceof SessaHandler);
+//	}
 }
