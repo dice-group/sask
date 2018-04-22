@@ -55,7 +55,6 @@ public class RiveScriptQueryHandlerTest {
 		log.info("In Search Hello Test case");
 		assertNotNull(actualOutput);
 		boolean result = expectedOutputs.contains(actualOutput);
-		System.out.println(result);
 		assertTrue(result);			
 	}
 	
@@ -70,9 +69,7 @@ public class RiveScriptQueryHandlerTest {
 		List<String> expectedOutputs = Arrays.asList("good morning to you too", "good evening to you too", "good night to you too");
 		log.info("In Search day greetings Test case");
 		assertNotNull(actualOutput);
-		System.out.println(actualOutput);
 		boolean result = expectedOutputs.contains(actualOutput);
-		System.out.println(result);
 		assertTrue(result);			
 	}
 	
@@ -84,7 +81,6 @@ public class RiveScriptQueryHandlerTest {
 		List<String> expectedOutputs = Arrays.asList("Never been better", "I'm good, you?", "I am fine thanks for asking", "I'm fine, thanks for asking!", "I'm great, how are you?", "Good :) you?", "Great! You?");
 		log.info("In Search Test case");
 		assertNotNull(actualOutput);
-		System.out.println(actualOutput);
 		boolean result = expectedOutputs.contains(actualOutput);
 		assertTrue(result);
 		}
@@ -97,8 +93,6 @@ public class RiveScriptQueryHandlerTest {
 		String expectedHelloOutput = "I am the DBpedia Bot";
 		log.info("In Dbpedia Test case");
 		assertNotNull(actualOutput);
-		System.out.println(actualOutput);
-		log.info("test passed for dbpedia bot");
 		assertEquals(expectedHelloOutput, actualOutput);		
 	}	
 }

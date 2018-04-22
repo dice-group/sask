@@ -72,8 +72,6 @@ public class ElizaHandlerTest {
 		ResponseList responseListObject =  testElizaObject.search(createInitialRequest("Hell0"));
 		String actualOutput = responseListObject.getMessageData().get(0).getContent();
 		String expectedOutput = "I'm not sure I understand you fully.";
-		System.out.println(actualOutput);
-		System.out.println(expectedOutput);
 		assertNotNull(actualOutput);
 		assertNotNull(expectedOutput);
 		assertEquals("Message when failed Message testCheckInputWithZeroInHello function", expectedOutput, actualOutput );
@@ -94,7 +92,6 @@ public class ElizaHandlerTest {
 	public void testCheckMessageType() throws JsonProcessingException, IOException {
 		
 		ResponseList responseListObject =  testElizaObject.search(createInitialRequest("Hello"));
-		System.out.println(responseListObject.getMessageType());
 		MessageType actualType = responseListObject.getMessageType();
 		assertTrue("Message when failed", MessageType.TEXT_WITH_URL != actualType );
 		assertTrue("Message when failed", MessageType.PLAIN_TEXT == actualType );
