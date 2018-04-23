@@ -1,2 +1,22 @@
+[nodes]
+localhost ansible_ssh_host=localhost
+
+[eureka-server]
+localhost
+
+[webclient]
+localhost
+
+[chatbot]
+localhost
+
 [sask]
-localhost ansible_connection=local ansible_user=root
+eureka-server
+webclient
+chatbot
+nodes
+
+
+[all:vars]
+ansible_connection=local
+ansible_user=root

@@ -1,0 +1,91 @@
+---
+
+
+- name: "Run eureka Server"
+  hosts: eureka-server
+  vars:
+    ansible_python_interpreter: "/usr/bin/env python"
+  tasks:
+    - debug: msg={{ etc_hosts_all }}
+
+    - docker_container:
+        state : started
+        name: "eureka-server"
+        hostname: "eureka-server"
+        image: "{{ docker_repository }}/eureka-server:latest"
+        ports:
+          - "1111:1111"
+
+        etc_hosts: "{{ etc_hosts_all }}"
+
+        env:
+          EUREKA_SERVICE_HOST: "{{ ansible_hostname }}"
+          EUREKA_SERVICE_PORT: "1111"
+
+        restart_policy: "always"
+        memory: 2GB
+        log_driver: "json-file"
+        log_options:
+          max-size: "50m"
+          max-file: "1"
+        #volumes:
+        #  - /var/lib/docker/zookeeper:/var/lib/zookeeper/version-2
+
+- name: "Run Chatbot microservicer"
+  hosts: chatbot
+  vars:
+    ansible_python_interpreter: "/usr/bin/env python"
+  tasks:
+    - docker_container:
+        state : started
+        name: "chatbot"
+        hostname: "chatbot"
+        image: "{{ docker_repository }}/chatbot:latest"
+        ports:
+          - "9191:9191"
+
+        etc_hosts: "{{ etc_hosts_all }}"
+
+        env:
+          EUREKA_SERVICE_HOST: "{{ ansible_hostname }}"
+          EUREKA_SERVICE_PORT: "1111"
+          CHATBOT_PUBLISH_HOST: "{{ ansible_hostname }}"
+          CHATBOT_PUBLISH_PORT: "9191"
+
+        restart_policy: "always"
+        memory: 2GB
+        log_driver: "json-file"
+        log_options:
+          max-size: "50m"
+          max-file: "1"
+        #volumes:
+        #  - /var/lib/docker/zookeeper:/var/lib/zookeeper/version-2
+
+- name: "Run Webclient for the UI"
+  hosts: webclient
+  vars:
+    ansible_python_interpreter: "/usr/bin/env python"
+  tasks:
+    - docker_container:
+        state : started
+        name: "webclient"
+        hostname: "webclient"
+        image: "{{ docker_repository }}/webclient:latest"
+        ports:
+          - "9090:9090"
+
+        etc_hosts: "{{ etc_hosts_all }}"
+        env:
+          EUREKA_SERVICE_HOST: "{{ ansible_hostname }}"
+          EUREKA_SERVICE_PORT: "1111"
+          WEBCLIENT_PUBLISH_HOST: "{{ ansible_hostname }}"
+          WEBCLIENT_PUBLISH_PORT: "9090"
+
+        restart_policy: "always"
+        memory: 2GB
+        log_driver: "json-file"
+        log_options:
+          max-size: "50m"
+          max-file: "1"
+        #volumes:
+        #  - /var/lib/docker/zookeeper:/var/lib/zookeeper/version-2
