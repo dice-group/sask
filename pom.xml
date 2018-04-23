@@ -25,7 +25,7 @@
 		<module>open-ie-ms</module>
 		<module>repo-ms</module>
 		<module>webclient</module>
-		<module>Ensemble</module>
+		<module>ensemble-ms</module>
 	</modules>
 
 	<properties>
