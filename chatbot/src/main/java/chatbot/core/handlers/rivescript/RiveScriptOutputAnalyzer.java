@@ -70,6 +70,7 @@ public class RiveScriptOutputAnalyzer {
 
 	// Custom Function to check if Query is found in Rive Script.
 	public static boolean isQueryFound(String query) {
+		resourceLoader();
 		String reply = bot.reply("user", query);
 		if ("NOT FOUND".equals(reply)) {
 			return false;
