@@ -66,7 +66,7 @@ public class FredMsController {
 			                                                   .queryParam("wfd_profile", wfd)
 			                                                   .queryParam("textannotation", annotation)
 			                                                   .queryParam("format", format);
-
+			
 			uri = builder.build()
 			             .toUriString();
 		} catch (Exception ex) {
