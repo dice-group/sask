@@ -10,12 +10,13 @@ eureka:
     metadataMap:
       type: webclient
       friendlyname: Webclient
+      instance:
+    hostName: ${WEBCLIENT_PUBLISH_HOST:localhost} 
+    preferIpAddress: false    
   client:
     serviceUrl:
       defaultZone: http://${EUREKA_SERVICE_HOST:localhost}:${EUREKA_SERVICE_PORT:1111}/eureka/
-  instance:
-    hostName: ${WEBCLIENT_PUBLISH_HOST:localhost} 
-    preferIpAddress: false    
+
 
 # Disable Spring Boot's "Whitelabel" default error page, so we can use our own
 error:
