@@ -17,8 +17,6 @@ import chatbot.io.incomingrequest.RequestContent;
 
 public class ClassifierTest {
 	
-	Logger log = Logger.getLogger(ClassifierTest.class.getName());
-
 	public IncomingRequest createInitialRequest(String incomingText) {
 	
 		IncomingRequest request =new IncomingRequest() ;
@@ -42,7 +40,6 @@ public class ClassifierTest {
 
 		IncomingRequest input = createInitialRequest("Hello");
 		Object actualOutput= classifyInput(input);
-		log.info("Executing RiveScript Test");
         assertTrue(actualOutput instanceof RiveScriptQueryHandler);
 	}
 	
@@ -51,7 +48,6 @@ public class ClassifierTest {
 		
 		IncomingRequest input = createInitialRequest("why ?");
 		Object actualOutput= classifyInput(input);
-		log.info("Executing QAHandle Test");
         assertTrue(actualOutput instanceof QAHandler);
 	}
 	
@@ -60,16 +56,14 @@ public class ClassifierTest {
 
 		IncomingRequest input = createInitialRequest("Me");
 		Object actualOutput= classifyInput(input);
-		log.info("Executing Eliza Test");
         assertTrue(actualOutput instanceof ElizaHandler);
 	}
 
-//	@Test
-//	public void testClassifyForSessaHandler() {
-//		
-//		IncomingRequest input = createInitialRequest("wq");
-//		Object actualOutput= classifyInput(input);
-//		log.info("Executing SessaHandler Test");
-//        assertTrue(actualOutput instanceof SessaHandler);
-//	}
+	@Test
+	public void testClassifyForSessaHandler() {
+		
+		IncomingRequest input = createInitialRequest("obama");
+		Object actualOutput= classifyInput(input);
+        assertTrue(actualOutput instanceof SessaHandler);
+	}
 }
