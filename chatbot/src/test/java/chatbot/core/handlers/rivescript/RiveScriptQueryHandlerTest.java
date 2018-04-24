@@ -27,7 +27,7 @@ public class RiveScriptQueryHandlerTest {
 		return request;
 	}	
 	
-	public RiveScript CreateInitialRequest() {
+	public RiveScript createInitialRequest() {
 			RiveScript obj = new RiveScript();
 			obj.loadDirectory("src/main/resources/rivescript");
 			obj.sortReplies();
