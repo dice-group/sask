@@ -7,18 +7,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.junit.Test;
 
 import com.rivescript.RiveScript;
 
 import chatbot.io.incomingrequest.IncomingRequest;
 import chatbot.io.incomingrequest.RequestContent;
-import chatbot.io.response.ResponseList;
 
 public class RiveScriptQueryHandlerTest {
-
-	private static Logger log = Logger.getLogger(RiveScriptQueryHandlerTest.class.getName());
 
 	public IncomingRequest createIncomingRequest(String incomingText) {	
 		IncomingRequest request =new IncomingRequest() ;
@@ -52,7 +48,6 @@ public class RiveScriptQueryHandlerTest {
 		RiveScriptQueryHandler queryObject = createInitialObject();
 		String actualOutput = queryObject.search(input).getMessageData().get(0).getContent();
 		List<String> expectedOutputs = Arrays.asList("Hi, how may I help you?", "Hello there", "Hi to you too!", "Hello, how may I help you?");
-		log.info("In Search Hello Test case");
 		assertNotNull(actualOutput);
 		boolean result = expectedOutputs.contains(actualOutput);
 		assertTrue(result);			
@@ -67,7 +62,6 @@ public class RiveScriptQueryHandlerTest {
 		RiveScriptQueryHandler queryObject = createInitialObject();
 		String actualOutput = queryObject.search(input).getMessageData().get(0).getContent();
 		List<String> expectedOutputs = Arrays.asList("good morning to you too", "good evening to you too", "good night to you too");
-		log.info("In Search day greetings Test case");
 		assertNotNull(actualOutput);
 		boolean result = expectedOutputs.contains(actualOutput);
 		assertTrue(result);			
@@ -79,7 +73,6 @@ public class RiveScriptQueryHandlerTest {
 		RiveScriptQueryHandler queryObject = createInitialObject();
 		String actualOutput = queryObject.search(input).getMessageData().get(0).getContent();
 		List<String> expectedOutputs = Arrays.asList("Never been better", "I'm good, you?", "I am fine thanks for asking", "I'm fine, thanks for asking!", "I'm great, how are you?", "Good :) you?", "Great! You?");
-		log.info("In Search Test case");
 		assertNotNull(actualOutput);
 		boolean result = expectedOutputs.contains(actualOutput);
 		assertTrue(result);
@@ -91,7 +84,6 @@ public class RiveScriptQueryHandlerTest {
 		RiveScriptQueryHandler queryObject = createInitialObject();
 		String actualOutput = queryObject.search(input).getMessageData().get(0).getContent();
 		String expectedHelloOutput = "I am the DBpedia Bot";
-		log.info("In Dbpedia Test case");
 		assertNotNull(actualOutput);
 		assertEquals(expectedHelloOutput, actualOutput);		
 	}	

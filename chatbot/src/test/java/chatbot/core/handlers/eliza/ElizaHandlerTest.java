@@ -6,12 +6,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.junit.Test;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
-import ch.qos.logback.core.net.SyslogOutputStream;
 import chatbot.io.incomingrequest.IncomingRequest;
 import chatbot.io.incomingrequest.RequestContent;
 import chatbot.io.response.Response;
@@ -19,7 +17,6 @@ import chatbot.io.response.ResponseList;
 import chatbot.io.response.ResponseList.MessageType;
 
 public class ElizaHandlerTest {
-	private static Logger log = Logger.getLogger(ElizaHandler.class.getName());
 
 	ElizaHandler testElizaObject = new  ElizaHandler();
 	
