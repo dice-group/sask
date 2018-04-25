@@ -18,7 +18,7 @@ import chatbot.io.response.ResponseList.MessageType;
 
 public class ElizaHandlerTest {
 
-	ElizaHandler testElizaObject = new  ElizaHandler();
+	private ElizaHandler testElizaObject = new  ElizaHandler();
 	
 	public IncomingRequest createInitialRequest(String incomingText) {
 		
