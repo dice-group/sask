@@ -14,18 +14,20 @@ import java.util.stream.Stream;
 import org.apache.commons.lang.StringUtils;
 
 /**
- * This class obtain the special sentence from training data to be extracted later on
- * @author Sepide tari,  
+ * This class obtain sentences from training data to be extracted later on
+ * 
+ * @author Sepide tari,
  *
  */
 
 public class SentenceFinder {
+	
+	public List<String> obtainSentencefromFiles(String filesPath) {
 
-	public static void main(String[] args) {
-		
-		// After adding the files into repository and push to Github this has to be updated
-		File path = new File("C:\\Sepide Uni\\EclipseWorkSpace\\TDB-Connect-To-Fuseki-Container\\task3");
+		File path = new File(filesPath);
 		File[] files = path.listFiles();
+		List<String> sentences = new ArrayList<String>();
+
 		// sort the files in numerical order
 		Arrays.sort(files, new Comparator<File>() {
 			@Override
@@ -36,20 +38,16 @@ public class SentenceFinder {
 			}
 		});
 
-		List<String> sentences = new ArrayList<String>();
 		for (int i = 0; i < files.length; i++) {
 			if (files[i].isFile()) {
-				//to check output order
-				System.out.println(files[i]);
 				String sentence = readLineByLine(files[i].toString());
 				sentences.add(StringUtils.substringBetween(sentence, "nif:isString    \"", "\" ."));
-				//to check string extracted from training data files
-				System.out.println("sentence " + (i + 1) + ": " + sentences.get(i));
 			}
 		}
+		return sentences;
 	}
-	
-	private static String readLineByLine(String filePath) {
+
+	public String readLineByLine(String filePath) {
 		StringBuilder contentBuilder = new StringBuilder();
 		try (Stream<String> stream = Files.lines(Paths.get(filePath), StandardCharsets.UTF_8)) {
 			stream.forEach(s -> contentBuilder.append(s).append("\n"));
