@@ -3,7 +3,7 @@
    <modelVersion>4.0.0</modelVersion>
    <groupId>org.dice-research.sask</groupId>
    <artifactId>chatbot</artifactId>
-   <packaging>war</packaging>
+   <packaging>jar</packaging>
    <version>0.0.1-SNAPSHOT</version>
    <name>chatbot</name>
    <parent>
@@ -12,6 +12,18 @@
     <version>0.0.7</version>
     
    </parent>
+   
+   	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+		<junit.version>4.12</junit.version>
+		<org.slf4j.version>1.7.21</org.slf4j.version>
+		<logback.version>1.1.7</logback.version>
+		<jena.version>2.13.0</jena.version>
+		<jena-arq.version>2.10.0</jena-arq.version>
+	</properties>
+   
    <url>http://maven.apache.org</url>
    <dependencies>
    <dependency>
@@ -56,6 +68,11 @@
         <artifactId>jackson-dataformat-yaml</artifactId>
         <version>2.9.2</version>
     </dependency>
+      <dependency>
+      	<groupId>org.languagetool</groupId>
+      	<artifactId>language-all</artifactId>
+      	<version>4.0</version>
+      </dependency>
    </dependencies>
  
 </project>
