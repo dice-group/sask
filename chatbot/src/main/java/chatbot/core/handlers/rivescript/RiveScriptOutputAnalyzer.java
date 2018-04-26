@@ -13,6 +13,7 @@ import javax.annotation.PostConstruct;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
@@ -75,7 +76,7 @@ public class RiveScriptOutputAnalyzer  {
             bot.sortReplies();
             
             // deleting the temp directory post loading the data
-            temp.delete();
+            FileUtils.deleteDirectory(temp);
            
         } catch (Exception e) {
         		log.error("resourceLoader, Exception while loading the resouce files,Stack Trace=" + e.getMessage());
