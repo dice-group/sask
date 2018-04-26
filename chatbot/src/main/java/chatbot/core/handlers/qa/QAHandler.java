@@ -4,6 +4,10 @@
 package chatbot.core.handlers.qa;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Component;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -20,10 +24,14 @@ import chatbot.core.handlers.*;
  * @author Prashanth
  *
  */
+@Component
+@PropertySource("classpath:application.yml")
 public class QAHandler extends Handler {
 	// Handle Hawk Service.
 	private static Logger log = Logger.getLogger(QAHandler.class.getName());
-	private static final String URL = "http://localhost:8181/simple-search?query="; // URL
+	
+	@Value("${qa.hawk.url}")
+	private static String URL;
 
 	public QAHandler() {
 

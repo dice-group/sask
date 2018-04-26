@@ -21,4 +21,14 @@ error:
 # Changing default port 8080 to 9191
 server:
   port: ${CHATBOT_PUBLISH_PORT:9191}
+  
+# QA HAWK Service Endpoint
+qa:
+  hawq:
+    url: http://${QA_HAWK_SERVICE_HOST:localhost}:${QA_HAWQ_SERVICE_PORT:8181}/simple-search?query=
+
+# SESSA SEARCH Service Endpoint
+sessa:
+  search:
+    url: http://${SESSA_SEARCH_SERVICE_HOST:localhost}:${SESSA_SEARCH_SERVICE_HOST:7070}/search?query=
  
