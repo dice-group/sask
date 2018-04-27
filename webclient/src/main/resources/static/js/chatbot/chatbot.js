@@ -28,8 +28,8 @@ $(function() {
 			data: JSON.stringify(data),
 			contentType: "application/json",
 	         url: "/chatbot/chat", //Need to debug how to read data: in Spring. Passing as command param is not right.
-			timeout : 100000,
-			success : function(data) {
+			timeout : 100000 })
+			.done(function(data){ 
 				var prevMsg = $("#container").html();
 				if (prevMsg.length != 6) {
 					prevMsg = prevMsg + "<br>";
@@ -79,13 +79,11 @@ $(function() {
 				}
 				$("#container").html(prevMsg + displayText);
 				$("#container").scrollTop($("#container").prop("scrollHeight"));
-			},
-			error : function(e) {
+			})
+			.fail(function(data){
 				var displayText="<div class='card'>Internal Server error. Please contact your administrator<br></div>";
 				$("#container").html(prevMsg + displayText);
 				$("#container").scrollTop($("#container").prop("scrollHeight"));
-			
-			}
 		});
 		
 		$("#container").html(prevMsg + newMsg);
