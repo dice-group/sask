@@ -1,7 +1,6 @@
 /**
  * The IIFE for the status.
  */
-;
 (function($, window, document) {
 
 	/* global jQuery, console */
@@ -11,7 +10,7 @@
 	/**
 	 * The plugin name.
 	 */
-	var pluginName = 'status';
+	var pluginName = "status";
 
 	/**
 	 * Contains the type lists.
@@ -65,14 +64,14 @@
 				self.discover();
 			}, this)
 		};
-	}
+	};
 
 	/**
 	 * Init.
 	 */
 	Status.prototype.init = function(options) {
 		// check dependencies
-		if (typeof DAO !== 'function') {
+		if (typeof DAO !== "function") {
 			logError("'DAO' not initialized.");
 			return;
 		}
@@ -165,7 +164,7 @@
 
 		// add empty messages
 		for ( var type in lists) {
-			if (lists[type].children().length == 0) {
+			if (lists[type].children().length === 0) {
 				lists[type].append(this.options.templates.emptyMessage);
 			}
 		}

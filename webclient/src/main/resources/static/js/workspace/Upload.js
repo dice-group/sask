@@ -116,7 +116,7 @@ var Upload = function(options) {
 		});
 
 		inputFile.on("change", function() {
-			handleFileUpload('/', inputFile[0]);
+			handleFileUpload("/", inputFile[0]);
 		});
 
 		var close = function() {
@@ -199,7 +199,7 @@ var Upload = function(options) {
 		var status = row.find('span');
 
 		row.attr('data-status', 'success');
-		row.addClass('list-group-item-success');
+		row.addClass("list-group-item-success");
 		status.text('Success');
 	};
 
@@ -219,16 +219,16 @@ var Upload = function(options) {
 	 * Clear the uploadList.
 	 */
 	var clearUploadList = function() {
-		uploadList.find('a').each(function() {
+		uploadList.find("a").each(function() {
 			if ($(this).attr('data-status') !== 'uploading') {
 				$(this).remove();
 			}
 		});
 
-		if (uploadList.find('a').length == 0) {
+		if (uploadList.find('a').length === 0) {
 			selectFileMessage.show();
 		}
-	}
+	};
 
 	/**
 	 * Append the file row to the uploadList.

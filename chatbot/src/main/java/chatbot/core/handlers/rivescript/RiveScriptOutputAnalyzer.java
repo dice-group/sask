@@ -1,24 +1,18 @@
 package chatbot.core.handlers.rivescript;
 
 import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.rivescript.RiveScript;
 import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import chatbot.core.handlers.*;
 import chatbot.io.response.Response;
 import chatbot.io.response.ResponseList;
 import chatbot.io.response.ResponseList.MessageType;
-
 import java.lang.String;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.io.File;
 import java.io.IOException;
 import org.apache.log4j.Logger;
 

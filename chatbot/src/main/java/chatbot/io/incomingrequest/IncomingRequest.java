@@ -25,7 +25,7 @@ public class IncomingRequest {
 
 	public IncomingRequest(String id, String type, String platform) {
 		userId = id;
-		if (type == "text")
+		if (type.equals("text"))
 			messageType = MessageType.TEXT;
 		else
 			messageType = MessageType.OTHERS;
