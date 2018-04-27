@@ -1,8 +1,11 @@
 $(function() {
 	$("#textbox").keypress(function(event) {
 		if (event.which == 13) {
+		var newMsg = $("#textbox").val();
+		 if(newMsg){
 			$("#send").click();
 			event.preventDefault();
+		}
 		}
 	});
 	$("#send").click(function() {
@@ -38,10 +41,8 @@ $(function() {
 					prevMsg = prevMsg + "<br>";
 				}
 				var obj = JSON.parse(data);
-				console.log(obj);
 				
 				var displayText = "";
-				console.log(obj.messageType);
 				if(obj.error == true){
 					//Create a Internal Server Error card
 					displayText+="<div class='card'>Internal Server error. Please contact your administrator<br></div>";
@@ -71,8 +72,6 @@ $(function() {
 								if(entryobj[j].buttonType == "URL"){
 									var text = entryobj[j].displayText;
 									displayText +=text.link(entryobj[j].uri) + "-->For reference,URL=" + entryobj[j].uri + "<br>";
-									console.log(entryobj[j].uri);
-									//displayText +='<a href="' + entryobj[j].uri + '">' + text + '</a>';
 									
 								}
 								else{
@@ -82,29 +81,33 @@ $(function() {
 							displayText += "</div>";
 						}
 					}
-					else{
-						//Read and implement Feedback for Active Learning Intent classification TODO:
-						console.log("Not implemented yet");
-					}
+					
 				}
 				$("#container").html(prevMsg + displayText);
 				$("#container").scrollTop($("#container").prop("scrollHeight"));
 			},
 			error : function(e) {
-				console.log("ERROR: ", e);
 				var displayText="<div class='card'>Internal Server error. Please contact your administrator<br></div>";
 				$("#container").html(prevMsg + displayText);
 				$("#container").scrollTop($("#container").prop("scrollHeight"));
 			
-			},
-			done : function(e) {
-				//
-				console.log("DONE");
-				//window.alert("DONE");
 			}
 		});
 		
 		$("#container").html(prevMsg + newMsg);
 		$("#container").scrollTop($("#container").prop("scrollHeight"));
+		 $("#send").prop("disabled",true)
 	});
+});
+
+$(document).ready(function() {
+    $("#textbox").on("keyup", function() {
+    var textBoxContent = document.getElementById("textbox").value;
+    if(0 === textBoxContent.length){
+        $("#send").prop("disabled",true);}
+     else
+     	  $("#send").prop("disabled",false);
+    }).trigger("keyup");
+    
+
 });
