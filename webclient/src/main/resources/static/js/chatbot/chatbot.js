@@ -1,6 +1,6 @@
 $(function() {
 	$("#textbox").keypress(function(event) {
-		if (event.which == 13) {
+		if (event.which === 13) {
 		var newMsg = $("#textbox").val();
 		 if(newMsg){
 			$("#send").click();
@@ -12,7 +12,6 @@ $(function() {
 		var newMsg = $("#textbox").val();
 		$("#textbox").val("");
 		var prevMsg = $("#container").html();
-		console.log(prevMsg.length);
 		if (prevMsg.length != 6) {
 			prevMsg = prevMsg + "<br>";
 		}
@@ -37,7 +36,7 @@ $(function() {
 				var obj = JSON.parse(data);
 				
 				var displayText = "";
-				if(obj.error == true){
+				if(obj.error === true){
 					//Create a Internal Server Error card
 					displayText+="<div class='card'>Internal Server error. Please contact your administrator<br></div>";
 				}
