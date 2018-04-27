@@ -26,17 +26,11 @@ $(function() {
 			type : "POST",
 			dataType: 'text',
 			data: JSON.stringify(data),
-			 headers: {
-	                'Accept': 'application/json; charset=utf-8',
-	                'Content-Type': 'application/json; charset=utf-8'
-	         },
-	         url: '/chatbot/chat', //Need to debug how to read data: in Spring. Passing as command param is not right.
-			
+			contentType: "application/json",
+	         url: "/chatbot/chat", //Need to debug how to read data: in Spring. Passing as command param is not right.
 			timeout : 100000,
 			success : function(data) {
-				console.log("SUCCESS: ", data);
 				var prevMsg = $("#container").html();
-				console.log(prevMsg.length);
 				if (prevMsg.length != 6) {
 					prevMsg = prevMsg + "<br>";
 				}
@@ -50,13 +44,13 @@ $(function() {
 				else{
 					var newobj = obj.messageData;
 					var messageType= obj.messageType;
-					if(messageType== "PLAIN_TEXT"){
+					if(messageType=== "PLAIN_TEXT"){
 						displayText+="<div class='card'>";
 						displayText += newobj[0].content;
 						displayText += "</div>";
 						
 					}
-					else if (messageType == "TEXT_WITH_URL" || messageType == "URL"){
+					else if (messageType=== "TEXT_WITH_URL" || messageType === "URL"){
 						//Need to polish read Entry Information.
 						for(var i=0; i< newobj.length; i++){
 							displayText+="<div class='card'>";
