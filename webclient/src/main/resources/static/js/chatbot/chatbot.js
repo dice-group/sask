@@ -2,14 +2,18 @@ $(function() {
 	$("#textbox").keypress(function(event) {
 		if (event.which === 13) {
 		var newMsg = $("#textbox").val();
-		 if(newMsg){
+		newMsg = newMsg.trim();
+		if(newMsg.length > 0){
 			$("#send").click();
 			event.preventDefault();
 		}
+		else{
+			$("#textbox").val("");	
 		}
-	});
+	}});
 	$("#send").click(function() {
 		var newMsg = $("#textbox").val();
+		newMsg = newMsg.trim();//eliminate whitespace on either side
 		$("#textbox").val("");
 		var prevMsg = $("#container").html();
 		if (prevMsg.length != 6) {
@@ -87,18 +91,21 @@ $(function() {
 		
 		$("#container").html(prevMsg + newMsg);
 		$("#container").scrollTop($("#container").prop("scrollHeight"));
-		 $("#send").prop("disabled",true)
+		$("#send").prop("disabled",true);
 	});
 });
 
 $(document).ready(function() {
     $("#textbox").on("keyup", function() {
     var textBoxContent = document.getElementById("textbox").value;
+    textBoxContent = textBoxContent.trim();
     if(0 === textBoxContent.length){
         $("#send").prop("disabled",true);}
-     else
-     	  $("#send").prop("disabled",false);
+     else{
+     	$("#send").prop("disabled",false);
+     }
     }).trigger("keyup");
     
 
 });
+
