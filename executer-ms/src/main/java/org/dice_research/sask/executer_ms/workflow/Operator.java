@@ -19,7 +19,7 @@ public class Operator implements Serializable {
 	 */
 	public static final String KEY_PROPERTIES = "properties";
 	/**
-	 * The JSON key for the conent.
+	 * The JSON key for the content.
 	 */
 	public static final String KEY_CONTENT = "content";
 	/**
@@ -47,7 +47,7 @@ public class Operator implements Serializable {
 	 */
 	private String id;
 	/**
-	 * The conent of the operator.
+	 * The content of the operator.
 	 */
 	private String content;
 	/**

@@ -1,8 +1,17 @@
 package org.dice_research.sask.executer_ms;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 import org.apache.log4j.Logger;
+import org.dice_research.sask.executer_ms.threading.ExtractTask;
 import org.dice_research.sask.executer_ms.workflow.Operator;
 import org.dice_research.sask.executer_ms.workflow.Workflow;
 import org.springframework.web.client.RestTemplate;
@@ -36,25 +45,56 @@ public class ExecuterService {
 	 * @return
 	 */
 	public String execute(final Workflow workflow) {
-		List<Operator> queue = workflow.createQueue();
-		String filePath = queue.get(0)
-		                       .getContent();
-		String extractorServiceId = queue.get(1)
-		                                 .getContent();
-		String targetGraph = queue.get(2)
-		                          .getContent();
 
-		return execute(filePath, extractorServiceId, targetGraph);
+		Set<Operator> startOperators = workflow.getStartOperatorSet();
+		Set<Operator> nextOpSet = null;
+		
+		for (Operator op : startOperators) {
+			nextOpSet = workflow.getNextOperator(op);
+			execute(op.getContent(), nextOpSet);
+		}
+
+		return "";
+		/*
+		 * String filePath = queue.get(0) .getContent(); String extractorServiceId =
+		 * queue.get(1) .getContent(); String targetGraph = queue.get(2) .getContent();
+		 */
+		// return execute(filePath, extractorServiceId, targetGraph);
 	}
 
-	/**
-	 * Simple version to execute.
-	 * 
-	 * @param filePath
-	 * @param extractorServiceId
-	 * @param targetGraph
-	 * @return
-	 */
+	public HashMap<String, String> execute(String filePath, Set<Operator> extractorServiceIds) {
+
+		ExecutorService executorService = Executors.newFixedThreadPool(extractorServiceIds.size());
+		String fileContent = getFileContent(filePath);
+		HashMap<String, String> resultMap = new HashMap<>();
+		List<Callable<String[]>> tasksMap = new ArrayList<>();
+
+		for (Operator extractorServiceId : extractorServiceIds) {
+			tasksMap.add(new ExtractTask(this.restTemplate, fileContent, extractorServiceId.getContent(),
+					getExtractorURI(extractorServiceId.getContent())));
+		}
+
+		List<Future<String[]>> futureTaskList;
+		String[] extractedData;
+
+		try {
+			futureTaskList = executorService.invokeAll(tasksMap);
+			for (Future<String[]> f : futureTaskList) {
+				extractedData = f.get();
+				resultMap.put(extractedData[0], extractedData[1]);
+			}
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		} catch (ExecutionException e) {
+			e.printStackTrace();
+		}
+
+		executorService.shutdown();
+
+		return resultMap;
+	}
+
+	// not needed anymore
 	public String execute(String filePath, String extractorServiceId, String targetGraph) {
 		/*
 		 * start simple task for execution
@@ -98,6 +138,7 @@ public class ExecuterService {
 		}
 	}
 
+	// not needed anymore
 	private String extract(String extractor, String content) {
 		String uri = getExtractorURI(extractor);
 		return this.restTemplate.getForObject(uri + "/extractSimple?input={content}", String.class, content);
