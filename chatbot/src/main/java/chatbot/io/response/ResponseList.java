@@ -18,8 +18,8 @@ public class ResponseList {
 		PLAIN_TEXT,URL,TEXT_WITH_URL,FEEDBACK_REQUEST,OTHERS
 	}; //URL is temporary till we come up with reading and extracting heading from content.
 	
-	MessageType messageType=MessageType.PLAIN_TEXT;
-	boolean isError = false;
+	private MessageType messageType=MessageType.PLAIN_TEXT;
+	private boolean isError = false;
 	public ResponseList(){
 		isError=false;
 		messageType=MessageType.PLAIN_TEXT;
