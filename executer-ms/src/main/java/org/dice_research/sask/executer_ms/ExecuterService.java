@@ -22,6 +22,7 @@ import org.springframework.web.client.RestTemplate;
  * This class represents the executer functions.
  * 
  * @author Kevin Haack
+ * @author André Sonntag
  *
  */
 public class ExecuterService {

@@ -1,12 +1,17 @@
 package org.dice_research.sask.executer_ms.threading;
 
 import java.util.Set;
-import java.util.concurrent.Callable;
-
 import org.apache.log4j.Logger;
 import org.dice_research.sask.executer_ms.workflow.Operator;
 import org.dice_research.sask.executer_ms.workflow.Workflow;
 import org.springframework.web.client.RestTemplate;
+
+/**
+ * This class is a thread task and responsible for data extraction.
+ * 
+ * @author André Sonntag
+ *
+ */
 
 public class ExtractTask implements Runnable {
 

@@ -1,13 +1,17 @@
 package org.dice_research.sask.executer_ms.threading;
 
 import java.util.Set;
-
 import org.apache.log4j.Logger;
-import org.apache.log4j.Priority;
 import org.dice_research.sask.executer_ms.workflow.Operator;
 import org.dice_research.sask.executer_ms.workflow.Workflow;
 import org.springframework.web.client.RestTemplate;
 
+/**
+ * This class is a thread task and responsible to pull the data from the repository.
+ * 
+ * @author André Sonntag
+ *
+ */
 public class PullTask implements Runnable {
 
 	private final Logger logger = Logger.getLogger(PullTask.class.getName());

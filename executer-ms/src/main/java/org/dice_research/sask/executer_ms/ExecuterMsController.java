@@ -29,6 +29,7 @@ public class ExecuterMsController {
 
 	private Logger logger = Logger.getLogger(ExecuterMsController.class.getName());
 
+	/*
 	@RequestMapping("/executeSimple")
 	public String executeSimple(String data, String extractor, String targetgraph) {
 		ExecuterService service = new ExecuterService(restTemplate);
@@ -40,6 +41,7 @@ public class ExecuterMsController {
 		ExecuterService service = new ExecuterService(restTemplate);
 		return service.execute(workflow.getData(), workflow.getExtractor(), workflow.getTargetgraph());
 	}
+	*/
 
 	@RequestMapping("/executeWorkflow")
 	public String executeWorkflow(@RequestBody Workflow workflow) {

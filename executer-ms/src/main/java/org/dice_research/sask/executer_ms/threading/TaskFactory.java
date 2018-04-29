@@ -2,11 +2,16 @@ package org.dice_research.sask.executer_ms.threading;
 
 import java.util.HashSet;
 import java.util.Set;
-
 import org.dice_research.sask.executer_ms.workflow.Operator;
 import org.dice_research.sask.executer_ms.workflow.Workflow;
 import org.springframework.web.client.RestTemplate;
 
+/**
+ * This class is responsible to create the right tasks/threads.
+ * 
+ * @author André Sonntag
+ *
+ */
 public class TaskFactory {
 
 

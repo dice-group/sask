@@ -5,10 +5,16 @@ import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * This class is responsible to execute/run the threads.
+ * 
+ * @author André Sonntag
+ *
+ */
 public class TaskExecuter {
 
-	private ExecutorService executorService;
-	private Set<Runnable> taskSet;
+	private final ExecutorService executorService;
+	private final Set<Runnable> taskSet;
 	
 	public TaskExecuter(Runnable task) {
 		if(null == task) throw new IllegalArgumentException("task is null");
