@@ -1,0 +1,7 @@
+---
+# vars file for modules
+
+microservices:
+  - chatbot
+  - eureka-server
+  - webclient

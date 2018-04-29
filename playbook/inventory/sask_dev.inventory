@@ -2,6 +2,7 @@
 project-group-search-extraction  ansible_ssh_host=131.234.29.7
 
 [eureka-server]
+# Do not run the eureka server on more than one node, as HA for eureka is not enabled
 project-group-search-extraction
 
 [webclient]
@@ -20,3 +21,9 @@ chatbot
 [all:vars]
 ansible_connection=ssh
 ansible_user=pgadmin
+
+[chatbot:vars]
+chatbot_instances_per_node=1
+
+[webclient:vars]
+webclient_instances_per_node=1

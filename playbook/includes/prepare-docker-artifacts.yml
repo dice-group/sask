@@ -1,6 +1,6 @@
 - name: Create a copies of the Docker template file for each of the webservices
   template:  
-    src: "{{ playbook_dir }}/templates/images-Dockerfile.j2"
+    src: "{{ playbook_dir }}/roles/build-images/templates/images-Dockerfile.j2"
     dest: "{{ artifact_directory }}/{{ microservice }}-Dockerfile"
 
 - name: Check if the executables exist, if not run maven build

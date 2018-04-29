@@ -47,7 +47,7 @@ public class ElizaHandler extends Handler {
 			InputStream inputStream = resourceLoader.getResource("classpath:eliza/script").getInputStream();
 			
 			// Creating a temp script file which is loaded by Elisa
-    			File file = new File("./script");
+    			File file = new File("script");
 			OutputStream outputStream = new FileOutputStream(file);
     			IOUtils.copy(inputStream, outputStream);
     			outputStream.close();

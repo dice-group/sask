@@ -1,26 +1,22 @@
 ---
 
-
 - name: "Run eureka Server"
   hosts: eureka-server
   vars:
     ansible_python_interpreter: "/usr/bin/env python"
   tasks:
-    - debug: msg={{ etc_hosts_all }}
-
     - docker_container:
-        state : started
+        state : "{{ container_state | default('started') }}"
         name: "eureka-server"
         hostname: "eureka-server"
         image: "{{ docker_repository }}/eureka-server:latest"
         ports:
-          - "1111:1111"
+          - "{{ eureka_service_port }}:{{ eureka_service_port }}"
 
         etc_hosts: "{{ etc_hosts_all }}"
-
         env:
           EUREKA_SERVICE_HOST: "{{ ansible_hostname }}"
-          EUREKA_SERVICE_PORT: "1111"
+          EUREKA_SERVICE_PORT: "{{ eureka_service_port }}"
 
         restart_policy: "always"
         memory: 2GB
@@ -29,28 +25,33 @@
           max-size: "50m"
           max-file: "1"
         #volumes:
-        #  - /var/lib/docker/zookeeper:/var/lib/zookeeper/version-2
+        #  - /var/lib/docker/eureka-server:/sask/eureka-server/
+        #TODO this will be enabled post enabling the logging to a file in the sourcecode
 
-- name: "Run Chatbot microservicer"
+
+- name: "Run Chatbot microservice"
   hosts: chatbot
   vars:
     ansible_python_interpreter: "/usr/bin/env python"
   tasks:
     - docker_container:
-        state : started
+        state : "{{ container_state | default('started') }}"
         name: "chatbot"
         hostname: "chatbot"
         image: "{{ docker_repository }}/chatbot:latest"
         ports:
-          - "9191:9191"
+          - "{{ (chatbot_instance_base_port | int) + (item | int) }}:{{ (chatbot_instance_base_port | int) + (item | int) }}"
 
         etc_hosts: "{{ etc_hosts_all }}"
-
         env:
-          EUREKA_SERVICE_HOST: "{{ ansible_hostname }}"
-          EUREKA_SERVICE_PORT: "1111"
+          EUREKA_SERVICE_HOST: "{{ eureka_service_host }}"
+          EUREKA_SERVICE_PORT: "{{ eureka_service_port }}"
           CHATBOT_PUBLISH_HOST: "{{ ansible_hostname }}"
-          CHATBOT_PUBLISH_PORT: "9191"
+          CHATBOT_PUBLISH_PORT: "{{ (chatbot_instance_base_port | int) + (item | int) }}"
+          QA_HAWK_SERVICE_HOST: "{{ qa_hawk_service_host }}"
+          QA_HAWK_SERVICE_PORT: "{{ qa_hawk_service_port }}"
+          SESSA_SEARCH_SERVICE_HOST: "{{ sessa_search_service_host }}"
+          SESSA_SEARCH_SERVICE_PORT: "{{ sessa_search_service_port }}"
 
         restart_policy: "always"
         memory: 2GB
@@ -59,27 +60,35 @@
           max-size: "50m"
           max-file: "1"
         #volumes:
-        #  - /var/lib/docker/zookeeper:/var/lib/zookeeper/version-2
+        #  - /var/lib/docker/chatbot:/sask/chatbot/
+      with_sequence: start=0 end="{{ (chatbot_instances_per_node | int) - 1 }}"
 
-- name: "Run Webclient for the UI"
+
+- name: "Run Webclient, which would be the user interface for the service"
   hosts: webclient
   vars:
     ansible_python_interpreter: "/usr/bin/env python"
   tasks:
+    
+      #TODO : Currently there is a bug where in the webclient doesn't refresh itself to find the new microservices, we need to fix this
+    - name: "Pause the webclient for a minute for all the other services to startup"
+      pause:
+        seconds: 20
+
     - docker_container:
-        state : started
+        state : "{{ container_state | default('started') }}"
         name: "webclient"
         hostname: "webclient"
         image: "{{ docker_repository }}/webclient:latest"
         ports:
-          - "9090:9090"
+          - "{{ (webclient_instance_base_port | int) + (item | int) }}:{{ (webclient_instance_base_port | int) + (item | int) }}"
 
         etc_hosts: "{{ etc_hosts_all }}"
         env:
-          EUREKA_SERVICE_HOST: "{{ ansible_hostname }}"
-          EUREKA_SERVICE_PORT: "1111"
+          EUREKA_SERVICE_HOST: "{{ eureka_service_host }}"
+          EUREKA_SERVICE_PORT: "{{ eureka_service_port }}"
           WEBCLIENT_PUBLISH_HOST: "{{ ansible_hostname }}"
-          WEBCLIENT_PUBLISH_PORT: "9090"
+          WEBCLIENT_PUBLISH_PORT: "{{ (webclient_instance_base_port | int) + (item | int) }}"
 
         restart_policy: "always"
         memory: 2GB
@@ -88,4 +97,5 @@
           max-size: "50m"
           max-file: "1"
         #volumes:
-        #  - /var/lib/docker/zookeeper:/var/lib/zookeeper/version-2
+        #  - /var/lib/docker/webclient:/sask/webclient/
+      with_sequence: start=0 end="{{ (webclient_instances_per_node | int) - 1 }}"

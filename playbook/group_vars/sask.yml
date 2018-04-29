@@ -1,0 +1,34 @@
+---
+## File defines the sask microservices details
+
+
+## Eureka Service Related properties -- START
+
+eureka_service_port: 1111
+
+eureka_service_host: "{{ groups['eureka-server']| join(',') }}"
+
+## Eureka Service Related properties -- END
+
+
+## Chatbot Service Related properties -- START
+chatbot_instance_base_port: 9191
+
+#TODO: This value should be updated to the correct HAWK endpoint
+qa_hawk_service_host: "{{ ansible_hostname }}"
+
+qa_hawk_service_port: 8181
+
+#TODO: This value should be updated to the correct SESS endpoint
+sessa_search_service_host: "{{ ansible_hostname }}"
+
+sessa_search_service_port: 7070
+
+## Chatbot Service Related properties -- END
+
+
+## WebClient Service Related properties -- START
+webclient_instance_base_port: 9090
+
+
+## WebClient Service Related properties -- END 

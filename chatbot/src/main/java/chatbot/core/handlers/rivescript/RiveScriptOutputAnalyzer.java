@@ -58,7 +58,7 @@ public class RiveScriptOutputAnalyzer  {
         		bot = new RiveScript(); 
 
             // Create a directory to store the rive files which will be used by RiveScript loader
-            File temp = new File("./rivefiles/");
+            File temp = new File("rivefiles/");
             temp.delete();
             temp.mkdir();
             
