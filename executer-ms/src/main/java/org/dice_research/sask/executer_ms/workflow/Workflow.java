@@ -39,7 +39,7 @@ public class Workflow implements Serializable {
 	 */
 	private Map<String, Operator> operators = new HashMap<>();
 
-	public Set<Operator> getNextOperator(Operator op) {
+	public Set<Operator> getNextOperators(Operator op) {
 
 		if (null == op)
 			throw new IllegalArgumentException();
