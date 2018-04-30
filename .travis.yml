@@ -10,3 +10,8 @@ matrix:
 
      script:
        - mvn clean install -DSkiptests
+    
+    - language: python
+      install:
+        - pip install ansible==2.2.2.0
+      script: pytest
