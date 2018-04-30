@@ -1,0 +1,8 @@
+---
+
+- name: "Build docker images and push it to the repository"
+  hosts: localhost
+  vars:
+    ansible_python_interpreter: "/usr/bin/env python"
+  roles:
+    - build-images
