@@ -15,7 +15,7 @@ import org.springframework.web.client.RestTemplate;
 public class TaskFactory {
 
 
-	public static Runnable createTask(RestTemplate restTemplate, Workflow wf, Operator op, String... operatorInput) {
+	private static Runnable createTask(RestTemplate restTemplate, Workflow wf, Operator op, String... operatorInput) {
 		
 		if(null == restTemplate || null == wf || null == op) {
 			throw new IllegalArgumentException("At least one parameter is null");
@@ -54,5 +54,9 @@ public class TaskFactory {
 			taskSet.add(createTask(restTemplate,wf,op, operatorInput));
 		}
 		return taskSet;
+	}
+	
+	public static Set<Runnable> createTasks(RestTemplate restTemplate, Workflow wf, Set<Operator> opSet) {
+		return createTasks(restTemplate,wf,opSet);
 	}
 }
