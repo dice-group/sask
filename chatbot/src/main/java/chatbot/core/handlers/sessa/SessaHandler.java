@@ -31,9 +31,6 @@ public class SessaHandler extends Handler {
 	@Value("${sessa.search.url}")
 	private static String URL;
 
-	public SessaHandler() {
-
-	}
 
 	private Response generateResponse(String incomingResponse) throws JsonProcessingException, IOException {
 		Response obj=new Response();

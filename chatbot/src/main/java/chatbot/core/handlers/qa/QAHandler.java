@@ -33,9 +33,6 @@ public class QAHandler extends Handler {
 	@Value("${qa.hawk.url}")
 	private static String URL;
 
-	public QAHandler() {
-
-	}
 	
 	private Response generateResponse(String incomingResponse) throws JsonProcessingException, IOException {
 		ObjectMapper mapper = new ObjectMapper();
