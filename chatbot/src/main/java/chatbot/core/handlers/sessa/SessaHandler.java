@@ -4,10 +4,6 @@
 package chatbot.core.handlers.sessa;
 //import org.apache.catalina.connector.Response;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.stereotype.Component;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import java.io.IOException;
 import chatbot.io.incomingrequest.IncomingRequest;
@@ -22,14 +18,10 @@ import java.net.URLEncoder;
  * @author Prashanth
  *
  */
-@Component
-@PropertySource("classpath:application.yml")
 public class SessaHandler extends Handler {
 	// Handle Hawk Service.
 	private static Logger log = Logger.getLogger(SessaHandler.class.getName());
-	
-	@Value("${sessa.search.url}")
-	private static String URL;
+	private static final String URL = "http://localhost:7070/search?query="; // URL
 
 
 	private Response generateResponse(String incomingResponse) throws JsonProcessingException, IOException {

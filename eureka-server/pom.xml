@@ -21,16 +21,5 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-eureka-server</artifactId>
 		</dependency>
-		<!-- ~~~~~~ Adding these to support starting embedded tomcat, when run using java -jar  ~~~~~~ -->
-		<dependency>
-         	<groupId>javax.xml.bind</groupId>
-         	<artifactId>jaxb-api</artifactId>
-         	<version>2.3.0</version>
-     	</dependency>
-     	<dependency>
-         	<groupId>javax.xml.ws</groupId>
-         	<artifactId>jaxws-api</artifactId>
-         	<version>2.2.6</version>
-     	</dependency>
 	</dependencies>
 </project>
