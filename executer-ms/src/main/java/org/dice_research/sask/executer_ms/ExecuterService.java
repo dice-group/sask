@@ -52,7 +52,7 @@ public class ExecuterService {
 		Set<Operator> startOperators = workflow.getStartOperatorSet();
 		Set<Runnable> taskSet = TaskFactory.createTasks(restTemplate, workflow, startOperators);
 		TaskExecuter executer = new TaskExecuter(taskSet);
-		
+		executer.execute();
 		return "";
 	}
 
