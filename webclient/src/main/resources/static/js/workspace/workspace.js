@@ -285,45 +285,45 @@
 		toolbar.toolbar('disableUndo', workflowStack.hasLast());
 		toolbar.toolbar('disableSave', !workflowStack.isSaved());
 	};
+	
+	/**
+	 * Create a uuid with the passed prefix.
+	 */
+	Workspace.prototype.createUuid = function(prefix) {
+		return prefix + "" + Math.random().toString(36).substr(2, 16);
+	};
 
 	/**
 	 * Add a file to the workspace
 	 */
 	Workspace.prototype.addNode = function(properties) {
+		var inputs = {};
+		var outputs = {};
+		
 		switch (properties.type) {
 		case 'file':
-			var inputs = {};
-			var outputs = {
-				output_1 : {
+			outputs[this.createUuid("output_")] = {
 					label : 'NL'
-				}
-			};
+				};
 			break;
 		case 'extractor':
-			var inputs = {
-				input_1 : {
+			inputs[this.createUuid("input_")] = {
 					label : 'NL'
-				}
-			};
-			var outputs = {
-				output_1 : {
+				};
+			outputs[this.createUuid("output_")] = {
 					label : 'RDF'
-				}
-			};
+				};
 			break;
 		case 'db':
-			var inputs = {
-				input_1 : {
+			inputs[this.createUuid("input_")] = {
 					label : 'RDF'
-				}
-			};
-			var outputs = {};
+				};
+			
 			break;
 		}
 
-		// create unique id
-		var uuid = Math.random().toString(36).substr(2, 16);
-		var id = "node-" + uuid;
+		// create unique node id
+		var id = this.createUuid("node_");
 
 		// create data
 		var newData = {
