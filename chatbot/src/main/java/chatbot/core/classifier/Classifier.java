@@ -48,6 +48,11 @@ public class Classifier {
 			//Preprocess User Input. Do not expect it to be perfect.
 			//Query may contain some basic spelling mistakes which require to be corrected.Currently Language is hardcoded. 
 			//It should also come from IncomingRequest class in future since it should ideally depend on browser language so that user queries can be answered efficiently.
+			//Check Input. It should not contain bad inputs.
+			if(query.isEmpty()) {
+				log.warn("Handle Null inputs, Throwing Exception here");
+				throw new IllegalArgumentException("Null Input");
+			}
 			query = handlePreProcessing(query);
 			//Set Query here to Request for now?
 			request.getRequestContent().get(0).setText(query); //Update Request class.
