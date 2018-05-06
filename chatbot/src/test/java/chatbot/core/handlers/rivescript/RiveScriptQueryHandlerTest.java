@@ -87,4 +87,15 @@ public class RiveScriptQueryHandlerTest {
 		assertNotNull(actualOutput);
 		assertEquals(expectedHelloOutput, actualOutput);		
 	}	
+	
+	@Test
+	public void testSearchBye() throws IOException {
+		IncomingRequest input = createIncomingRequest("Bye");
+		RiveScriptQueryHandler queryObject = createInitialObject();
+		String actualOutput = queryObject.search(input).getMessageData().get(0).getContent();
+		List<String> expectedOutputs = Arrays.asList("See ya!", "Good Bye");
+		assertNotNull(actualOutput);
+		boolean result = expectedOutputs.contains(actualOutput);
+		assertTrue(result);			
+	}
 }
