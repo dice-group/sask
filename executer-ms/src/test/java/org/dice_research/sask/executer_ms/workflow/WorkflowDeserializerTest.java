@@ -224,11 +224,7 @@ public class WorkflowDeserializerTest {
 		/*
 		 * test
 		 */
-		List<Operator> queue = workflow.createQueue();
-		assertEquals(3, queue.size());
-		assertEquals("id1", queue.get(0).getId());
-		assertEquals("id2", queue.get(1).getId());
-		assertEquals("id3", queue.get(2).getId());
+
 		
 	}
 }

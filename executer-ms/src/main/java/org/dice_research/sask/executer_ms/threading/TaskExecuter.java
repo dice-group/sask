@@ -19,7 +19,7 @@ public class TaskExecuter {
 	public TaskExecuter(Runnable task) {
 		if(null == task) throw new IllegalArgumentException("task is null");
 
-		this.executorService = Executors.newCachedThreadPool();
+		this.executorService = Executors.newSingleThreadExecutor();
 		this.taskSet = new HashSet<>();
 		this.taskSet.add(task);
 	}

@@ -14,49 +14,45 @@ import org.springframework.web.client.RestTemplate;
  */
 public class TaskFactory {
 
-
 	private static Runnable createTask(RestTemplate restTemplate, Workflow wf, Operator op, String... operatorInput) {
-		
-		if(null == restTemplate || null == wf || null == op) {
-			throw new IllegalArgumentException("At least one parameter is null");
-		}
-		
+
 		if (op.getType().equalsIgnoreCase("file")) {
 			return new PullTask(restTemplate, wf, op);
 
 		} else if (op.getType().equalsIgnoreCase("extractor")) {
-			
-			if(null == operatorInput || operatorInput.length == 0) {
+
+			if (null == operatorInput || operatorInput.length == 0) {
 				throw new IllegalArgumentException("operatorInput parameter is null or emthy");
 			}
-			return new ExtractTask(restTemplate, wf, op,operatorInput[0]);
+			return new ExtractTask(restTemplate, wf, op, operatorInput[0]);
 
 		} else if (op.getType().equalsIgnoreCase("database")) {
-			
-			if(null == operatorInput || operatorInput.length == 0) {
+
+			if (null == operatorInput || operatorInput.length == 0) {
 				throw new IllegalArgumentException("operatorInput parameter is null or emthy");
 			}
-			return new StoreTask(restTemplate, wf, op,operatorInput[0]);
+			return new StoreTask(restTemplate, wf, op, operatorInput[0]);
 		} else {
 			throw new IllegalArgumentException("Operator is wrong or not listed");
 		}
 	}
 
-	public static Set<Runnable> createTasks(RestTemplate restTemplate, Workflow wf, Set<Operator> opSet, String... operatorInput) {
+	public static Set<Runnable> createTasks(RestTemplate restTemplate, Workflow wf, Set<Operator> opSet,
+			String... operatorInput) {
 
-		if(null == restTemplate || null == wf || null == opSet) {
+		if (null == restTemplate || null == wf || null == opSet) {
 			throw new IllegalArgumentException("At least one parameter is null");
 		}
-		
+
 		Set<Runnable> taskSet = new HashSet<>();
 
 		for (Operator op : opSet) {
-			taskSet.add(createTask(restTemplate,wf,op, operatorInput));
+			taskSet.add(createTask(restTemplate, wf, op, operatorInput));
 		}
 		return taskSet;
 	}
-	
+
 	public static Set<Runnable> createTasks(RestTemplate restTemplate, Workflow wf, Set<Operator> opSet) {
-		return createTasks(restTemplate,wf,opSet);
+		return createTasks(restTemplate, wf, opSet, null);
 	}
 }

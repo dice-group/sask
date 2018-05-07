@@ -13,9 +13,8 @@ public class StoreTask implements Runnable{
 	private final RestTemplate restTemplate;
 	private final Operator op;
 	private final Workflow wf;
-	private final String targetGraph;
 	private final String data;
-	
+	//private final String targetGraph;
 	
 	public StoreTask(RestTemplate restTemplate, Workflow wf, Operator op, String data) {
 		this.restTemplate = restTemplate;
@@ -26,17 +25,12 @@ public class StoreTask implements Runnable{
 	
 	@Override
 	public void run() {
-
 		String uri = "http://DATABASE-MS/updateGraph";
-
 		try {
 			restTemplate.postForObject(uri, data, String.class);
 		} catch (Exception ex) {
 			logger.info("failed to write to database (" + ex.getMessage() + ")");
 		}
-
-		
-		
 	}
 	
 	private String getTargetGrapName() {
