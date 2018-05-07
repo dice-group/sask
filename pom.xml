@@ -24,6 +24,7 @@
 		<module>fred-ms</module>
 		<module>open-ie-ms</module>
 		<module>repo-ms</module>
+		<module>taipan-ms</module>
 		<module>webclient</module>
 	</modules>
 
