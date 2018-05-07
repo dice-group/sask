@@ -7,42 +7,29 @@ import java.util.Properties;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.http.impl.client.HttpClients;
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.client.ClientHttpRequestFactory;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.util.UriComponentsBuilder;
-import java.io.IOException;
-import javax.servlet.http.HttpServletResponse;
-import org.apache.log4j.Logger;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponentsBuilder;
-
-
 
 /**
  * 
- * @author
+ * @author Suganya, Kevin Haack
  *
  */
 @RestController
 public class SorookinMsController {
 
+	private static final String URI = "http://semanticparsing.ukp.informatik.tu-darmstadt.de:5000/relation-extraction/parse/";
+	
 	private Logger logger = Logger.getLogger(SorookinMsController.class.getName());
-	private RestTemplate restTemplate = new RestTemplate();
-
 
 	/**
 	 * Represent a simple version of extraction, without configuration.
@@ -54,50 +41,40 @@ public class SorookinMsController {
 	@RequestMapping("/extractSimple")
 	public String extractSimple(String input) {
 		this.logger.info("Sorookin-microservice extract() invoked");
-		SorookinDTO Sorookin = new SorookinDTO();
-		Sorookin.setText(input);
-		return extract("Obama was born in usa");	
-		}
-	public String extract(String Sorookin) {
-		logger.info("Sorookin-microservice extract invoked");
+		SorookinDTO dto = new SorookinDTO();
+		dto.setInputtext(input);
+		return extract(dto);
+	}
 
-		if (Sorookin == null || Sorookin== null || (Sorookin
-                .trim()
-                .isEmpty())) {
+	public String extract(SorookinDTO dto) {
+		logger.info("Sorookin-microservice extract invoked");
+		String input = dto.getInputtext();
+		
+		if (null == input || input == null || (input.trim().isEmpty())) {
 			throw new IllegalArgumentException("No input");
 		}
-		String uri;
+
 		try {
-			//String host="https://soundcloud.com/oembed";
-			String host = "http://semanticparsing.ukp.informatik.tu-darmstadt.de:5000/relation-extraction/parse/";
-			UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(host)
-			                                                   .queryParam("inputtext", "Obama was born in USA");
-			                                                   
-//System.out.println(Sorookin.getText());
-			uri = builder.build()
-			             .toUriString();
-			System.out.println(uri);
-		} catch (Exception ex) {
-			throw new RuntimeException("Unable to build Sorookin uri (" + ex.getMessage() + Sorookin+").", ex);
-		}
-		try {
+			logger.info("extract via " + URI);
+			logger.info("extract " + input);
+			
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Content-Type", "application/json");
 			headers.set("Accept", "application/json, text/javascript, */*; q=0.01");
-			HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
-			//ResponseEntity<String> result = restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
-			HttpEntity<String> result = restTemplate.exchange(uri, HttpMethod.POST, entity, String.class);
-			//HttpEntity<String> result = restTemplate.postForEntity(uri, entity, String.class);
-			//return result.getBody();
-			return result.toString()+result.hasBody();
+			
+			HttpEntity<SorookinDTO> entity = new HttpEntity<SorookinDTO>(dto, headers);
+			
+			ClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory(HttpClients.createDefault());
+			RestTemplate restTemplate = new RestTemplate(requestFactory);
+			HttpEntity<SorookinResult> result = restTemplate.postForEntity(URI, entity, SorookinResult.class);
+			
+			return result.toString();
 
 		} catch (Exception ex) {
-			throw new RuntimeException("Failed to send input to Sorrokin (" + ex.getMessage()+Sorookin + ").", ex);
+			throw new RuntimeException("Failed to send input to Sorrokin (" + ex.getMessage() + " " + input + ").", ex);
 		}
 
-		
 	}
-	
 
 	@ExceptionHandler
 	void handleIllegalArgumentException(IllegalArgumentException e, HttpServletResponse response) throws IOException {
