@@ -75,7 +75,7 @@ public class RiveScriptOutputAnalyzer {
 
 		String responseHandleText = null;
 
-		if (isJSONValid(textMessage) && (textMessage.length() > 0 && textMessage.split("\\s+").length!=1) ) {
+		if (isJSONValid(textMessage) && textMessage.length() > 0 && textMessage.split("\\s+").length!=1 )  {
 			JsonObject jsonInputText = new JsonObject().getAsJsonObject(textMessage);
 			if (jsonInputText.has("type")) {
 				String typeValue = jsonInputText.get("name").getAsString();
