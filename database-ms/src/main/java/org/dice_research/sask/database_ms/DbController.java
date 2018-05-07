@@ -3,10 +3,17 @@ package org.dice_research.sask.database_ms;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
+
+import org.apache.jena.query.QuerySolution;
+
+
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.jena.query.QueryExecutionFactory;
+import org.apache.jena.query.QueryExecution;
 import org.apache.jena.query.ResultSet;
 import org.apache.jena.query.ResultSetFormatter;
 import org.apache.jena.sparql.engine.http.QueryEngineHTTP;
@@ -31,7 +38,7 @@ public class DbController {
 	@RequestMapping(method = RequestMethod.POST, value = "/updateGraph")
 	public void updateGraph(String input) {
 
-		logger.info("db-microservice is invoked");
+		logger.info("db-microservice updateGraph() is invoked");
 
 		TripleDTO tripleDTO = new TripleDTO();
 		tripleDTO.setTriple(input);
@@ -48,7 +55,7 @@ public class DbController {
 	@RequestMapping(value = "/queryDefaultGraph")
 	public String queryDefaultGraph() {
 
-		logger.info("db-microservice is invoked");
+		logger.info("db-microservice queryDefaultGraph() is invoked");
 
 		try (QueryEngineHTTP qe = (QueryEngineHTTP) QueryExecutionFactory.sparqlService(
 				"http://localhost:3030/sask/query", "SELECT * { {?s ?p ?o} UNION { GRAPH <default> { ?s ?p ?o } } }")) {
@@ -67,7 +74,7 @@ public class DbController {
 	@RequestMapping(value = "/queryGraph")
 	public String queryGraph(String graphName) {
 
-		logger.info("db-microservice is invoked");
+		logger.info("db-microservice queryGraph() is invoked");
 
 		try (QueryEngineHTTP qe = (QueryEngineHTTP) QueryExecutionFactory.sparqlService(
 				"http://localhost:3030/sask/query", "SELECT * WHERE {GRAPH <"+graphName+"> {?s ?p ?o}}")){
@@ -82,7 +89,28 @@ public class DbController {
 			
 		}
 	}
+	// Querying Graph Names from dataset
+	@RequestMapping(value = "/getNamedGraphs")
+	public  Set<String> getNamedGraphs(String dataSet) {
 
+		logger.info("db-microservice getNamedGraphs() is invoked");
+        Set<String> GraphNames = new HashSet<String>();
+
+		try (QueryEngineHTTP qe = (QueryEngineHTTP) QueryExecutionFactory.sparqlService(
+				"http://localhost:3030/"+dataSet+"/query", "SELECT (strafter(str(?g), \"data/\") AS ?GraphName) WHERE { GRAPH ?g { }}")){
+			ResultSet results = qe.execSelect();
+			  
+	        for (; results.hasNext();) {
+		        QuerySolution soln = results.nextSolution();
+
+		        String gn = soln.get("GraphName").toString();
+		        GraphNames.add(gn);
+		        }
+               return GraphNames;
+		}
+		
+	}
+	
 	@ExceptionHandler
 	void handleIllegalArgumentException(IllegalArgumentException e, HttpServletResponse response) throws IOException {
 		logger.error("database-microservice IllegalArgumentException: " + e.getMessage());
