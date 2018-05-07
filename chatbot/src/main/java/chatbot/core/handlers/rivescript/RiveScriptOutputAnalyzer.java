@@ -41,11 +41,8 @@ public class RiveScriptOutputAnalyzer {
 		} catch (IOException e) {
 			log.error("resourceLoader, IO Exception while parsing YAML template,Stack Trace=" + e.getMessage());
 			e.printStackTrace();
-		}
-		
+		}		
 	}
-
-
 
 	public ResponseList riveHandler(String query) {
 
