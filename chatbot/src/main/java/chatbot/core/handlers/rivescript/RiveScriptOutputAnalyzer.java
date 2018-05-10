@@ -74,6 +74,7 @@ public class RiveScriptOutputAnalyzer {
 	private ResponseList handleTextMessage(ResponseList responselist, String textMessage) {
 
 		String responseHandleText = null;
+		
 		if (isJSONValid(textMessage))  {
 			JsonObject jsonInputText = new JsonObject().getAsJsonObject(textMessage);
 			if (jsonInputText.has("type")) {
@@ -92,12 +93,10 @@ public class RiveScriptOutputAnalyzer {
 		} else {
 			responseHandleText = responseFromRive(textMessage);
 			// Response will be of the form {"comment":"Great! You?"}
-
 			log.debug("Response message from Rive = " + textMessage);
 			responselist.setMessageType(MessageType.PLAIN_TEXT);
 			responselist.addMessage(createPlainTextResponse(textMessage));
 		}
-
 		return responselist;
 	}
 
@@ -116,7 +115,6 @@ public class RiveScriptOutputAnalyzer {
 
 		String responseForTemplate = null;
 		if (!templateValue.equalsIgnoreCase("help")) {
-
 			responseForTemplate = convertYamlToJsonString(yamlTemplateContents);
 		}
 		return responseForTemplate;
