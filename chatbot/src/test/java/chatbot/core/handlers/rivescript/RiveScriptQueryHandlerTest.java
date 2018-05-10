@@ -93,7 +93,7 @@ public class RiveScriptQueryHandlerTest {
 		IncomingRequest input = createIncomingRequest("Bye");
 		RiveScriptQueryHandler queryObject = createInitialObject();
 		String actualOutput = queryObject.search(input).getMessageData().get(0).getContent();
-		List<String> expectedOutputs = Arrays.asList("See ya!", "Good Bye");
+		List<String> expectedOutputs = Arrays.asList("See ya!", "Bye","Good Bye");
 		assertNotNull(actualOutput);
 		boolean result = expectedOutputs.contains(actualOutput);
 		assertTrue(result);			

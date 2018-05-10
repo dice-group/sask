@@ -74,8 +74,7 @@ public class RiveScriptOutputAnalyzer {
 	private ResponseList handleTextMessage(ResponseList responselist, String textMessage) {
 
 		String responseHandleText = null;
-
-		if (isJSONValid(textMessage) && textMessage.length() > 0 && textMessage.split("\\s+").length!=1 )  {
+		if (isJSONValid(textMessage))  {
 			JsonObject jsonInputText = new JsonObject().getAsJsonObject(textMessage);
 			if (jsonInputText.has("type")) {
 				String typeValue = jsonInputText.get("name").getAsString();
@@ -126,8 +125,12 @@ public class RiveScriptOutputAnalyzer {
 	private static boolean isJSONValid(String jsonInString) {
 		Gson gson = new Gson();
 		try {
-			gson.fromJson(jsonInString, Object.class);
-			return true;
+			if(jsonInString.length() > 0 && jsonInString.split("\\s+").length==1) {
+				return false;
+			} else{
+				gson.fromJson(jsonInString, Object.class);
+				return true;
+			}
 		} catch (com.google.gson.JsonSyntaxException ex) {
 			return false;
 		}
