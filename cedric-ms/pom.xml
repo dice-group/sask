@@ -30,6 +30,7 @@
 			<version>1.01</version>
 		</dependency>
 
+
 		<!-- ~~~~~~~ spring eureka server ~~~~~~~ -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
