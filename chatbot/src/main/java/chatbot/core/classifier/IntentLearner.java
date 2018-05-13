@@ -1,18 +1,28 @@
+package chatbot.core.classifier;
 
 import weka.core.Attribute;
 import weka.core.DenseInstance;
 import weka.core.Instances;
 import weka.filters.Filter;
 import weka.filters.unsupervised.attribute.Standardize;
+import weka.filters.unsupervised.attribute.StringToNominal;
 import weka.filters.unsupervised.attribute.StringToWordVector;
 import weka.classifiers.Evaluation;
 
 import java.util.ArrayList;
 import java.util.Random;
-import weka.classifiers.bayes.NaiveBayes;
 
+import chatbot.core.handlers.Handler;
+import chatbot.core.handlers.eliza.ElizaHandler;
+import chatbot.core.handlers.qa.QAHandler;
+import chatbot.core.handlers.sessa.SessaHandler;
+import chatbot.io.incomingrequest.IncomingRequest;
+import weka.classifiers.bayes.NaiveBayes;
+import weka.classifiers.functions.SMO;
 import weka.classifiers.meta.FilteredClassifier;
 import weka.classifiers.rules.ZeroR;
+import weka.classifiers.trees.J48;
+import weka.classifiers.trees.RandomForest;
 import weka.core.converters.ArffLoader.ArffReader;
 import weka.core.stemmers.LovinsStemmer;
 
@@ -37,7 +47,7 @@ public class IntentLearner {
 	/**
 	 * Object that stores the filter
 	 */
-	StringToWordVector filter;
+	StringToNominal filter;
 	Standardize sfilter;
 	/**
 	 * Object that stores the classifier
@@ -72,12 +82,16 @@ public class IntentLearner {
 	public void evaluate() {
 		try {
 			trainData.setClassIndex(trainData.numAttributes() - 1);
-			filter = new StringToWordVector();
+			filter = new StringToNominal();
 			sfilter = new Standardize();
-			filter.setAttributeIndices("first");
+			//filter.setAttributeIndices("first");
+			String[] options = new String[2];
+			options[0] = "-R"; // "range"
+			options[1] =  Integer.toString(trainData.classIndex());;
 			classifier = new FilteredClassifier();
-			classifier.setFilter(sfilter);
-			classifier.setClassifier(new ZeroR());
+			filter.setOptions(options);
+			classifier.setFilter(filter);
+			classifier.setClassifier(new SMO());
 			Evaluation eval = new Evaluation(trainData);
 			eval.crossValidateModel(classifier, trainData, 4, new Random(1));
 			System.out.println(eval.toSummaryString());
@@ -96,22 +110,20 @@ public class IntentLearner {
 	public void learn() {
 		try {
 			trainData.setClassIndex(trainData.numAttributes() - 1);
-			filter = new StringToWordVector();
-			filter.setAttributeIndices("first");
+			filter = new StringToNominal();
+			String[] options = new String[2];
+			options[0] = "-R"; // "range"
+			options[1] =  Integer.toString(trainData.classIndex());
 			classifier = new FilteredClassifier();
-			
+			filter.setOptions(options);
 			filter.setInputFormat(trainData);
 			sfilter.setInputFormat(trainData);
-			 filter.setIDFTransform(true);
-			    LovinsStemmer stemmer = new LovinsStemmer();
-			    filter.setStemmer(stemmer);
-			    filter.setLowerCaseTokens(true);
-			trainData = Filter.useFilter(trainData, sfilter);
-			classifier.setFilter(sfilter);
-			classifier.setClassifier(new ZeroR());
+		
+			trainData = Filter.useFilter(trainData, filter);
+			classifier.setFilter(filter);
+			classifier.setClassifier(new SMO());
 			classifier.buildClassifier(trainData);
 			// Uncomment to see the classifier
-			// System.out.println(classifier);
 			System.out.println("===== Training on filtered (training) dataset done =====");
 		}
 		catch (Exception e) {
@@ -137,10 +149,53 @@ public class IntentLearner {
 			System.out.println("Problem found when writing: " + fileName);
 		}
 	}
+	
+	/**
+	 * Next steps after obtaining the prediction from classifier.
+	 * 
+	 * @param  prediction
+	 */
+	public Handler usePrediction(IncomingRequest request,String query,String prediction) {
+		Classifier deterministicClassifier = new Classifier();
+		String detPrediction = deterministicClassifier.classify(request);
+		try {
+           if(prediction.equalsIgnoreCase("hawk")) {
+        	   if(detPrediction.equals("hawk")) {
+        		   saveNewInstance("\'"+query+"\',"+prediction);
+        	   }else {
+        		   saveNewInstance("\'"+query+"\',"+detPrediction);
+        	   }
+        		return new QAHandler();
+           }
+           else if(prediction.equalsIgnoreCase("sessa")) {
+        	   if(detPrediction.equals("sessa")) {
+        		   saveNewInstance("\'"+query+"\',"+prediction);
+        	   }
+        	   else {
+        		   saveNewInstance("\'"+query+"\',"+detPrediction);
+        	   }
+        	   return new SessaHandler();
+           }
+           else if(prediction.equalsIgnoreCase("eliza")) {
+        	   if(detPrediction.equals("eliza")) {
+        		   saveNewInstance("\'"+query+"\',"+prediction);
+        	   }
+        	   else {
+        		   saveNewInstance("\'"+query+"\',"+detPrediction);
+        	   }
+        	   return new ElizaHandler();
+           }
+        	   
+        } 
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 	/**
 	 * This method creates the instance to be classified, from the text that has been read.
 	 */
-	public void makeInstance(String query) {
+	public void makeTestInstance(String query) {
 		// Create the attributes, class and text
 		ArrayList<String> fvNominalVal = new ArrayList<String>(3);
 		fvNominalVal.add("eliza");
@@ -166,7 +221,7 @@ public class IntentLearner {
 		testInstance.add(instance);
 		
 			try {
-				testInstance = Filter.useFilter(testInstance, sfilter);
+				testInstance = Filter.useFilter(testInstance, filter);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -188,16 +243,62 @@ public class IntentLearner {
  		System.out.println("===== Instance created with reference dataset =====");
 		System.out.println(testInstance);
 	}
-	
+	/**
+	 * This method creates the new instance to be saved.
+	 */
+	public void saveNewInstance(String query) {
+		// Create the attributes, class and text
+		BufferedWriter bw = null;
+		FileWriter fw = null;
+
+		try {
+
+
+			File file = new File("C:\\Users\\Divya\\Documents\\try\\intentdata.arff");
+
+			// if file doesnt exists, then create it
+			if (!file.exists()) {
+				file.createNewFile();
+			}
+
+			// true = append file
+			fw = new FileWriter(file.getAbsoluteFile(), true);
+			bw = new BufferedWriter(fw);
+			bw.write(System.lineSeparator());
+			bw.write(query);
+
+
+		} catch (IOException e) {
+
+			e.printStackTrace();
+
+		} finally {
+
+			try {
+
+				if (bw != null)
+					bw.close();
+
+				if (fw != null)
+					fw.close();
+
+			} catch (IOException ex) {
+
+				ex.printStackTrace();
+
+			}
+		}
+	}	
 	/**
 	 * This method performs the classification of the instance.
 	 * Output is done at the command-line.
 	 */
-	public void classify() {
+	public void classify(String query) {
 		try {
 			double pred = classifier.classifyInstance(testInstance.instance(0));
 			System.out.println("===== Classified instance =====");
 			System.out.println("Class predicted: " + testInstance.classAttribute().value((int) pred));
+			saveNewInstance("\'"+query+"\',"+ testInstance.classAttribute().value((int) pred));
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -219,8 +320,9 @@ public class IntentLearner {
 			learner.evaluate();
 			learner.learn();
 			learner.saveModel("C:\\Users\\Divya\\Documents\\try\\intentdata.model");
-			learner.makeInstance("where can i find the best burgers");
-			learner.classify();
+			learner.makeTestInstance("randomized rounding");
+			learner.classify("randomized rounding");
+			//learner.usePrediction(request, "what would it mean to you", testInstance.classAttribute().value((int) pred));
 		
 	}
 }	
