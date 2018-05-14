@@ -149,7 +149,7 @@
 			}
 		};
 
-		// validate link create
+		// onLinkCreate
 		var onLinkCreate = function(linkId, linkData) {
 			var fromOperator = self.flowchart.flowchart("getOperatorData",
 					linkData.fromOperator);
@@ -198,7 +198,7 @@
 		// add connector if less then one free connector
 		var outputs = fromOperator.properties.outputs;
 		var currentConnectorCount = Object.keys(outputs).length;
-		if(inUse <= currentConnectorCount - 1) {
+		if(currentConnectorCount - inUse === 1) {
 			outputs[this.createUuid("output_")] = {
 					label : fromConnector.label
 				};
@@ -217,7 +217,7 @@
 		// add connector if less then one free connector
 		var inputs = toOperator.properties.inputs;
 		currentConnectorCount = Object.keys(inputs).length;
-		if(inUse <= currentConnectorCount - 1) {
+		if(currentConnectorCount - inUse === 1) {
 			inputs[this.createUuid("input_")] = {
 					label : toConnector.label
 				};
@@ -226,7 +226,7 @@
 		preventStacking = true;
 		this.loadWorkflow(workflow);
 		preventStacking = false;
-	}
+	};
 
 	/**
 	 * Init the toolbar.
