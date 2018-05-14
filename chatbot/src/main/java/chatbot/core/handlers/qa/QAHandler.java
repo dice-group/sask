@@ -25,9 +25,6 @@ public class QAHandler extends Handler {
 	private static Logger log = Logger.getLogger(QAHandler.class.getName());
 	private static final String URL = "http://localhost:8181/simple-search?query="; // URL
 
-	public QAHandler() {
-
-	}
 	
 	private Response generateResponse(String incomingResponse) throws JsonProcessingException, IOException {
 		ObjectMapper mapper = new ObjectMapper();

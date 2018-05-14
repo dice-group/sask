@@ -105,7 +105,7 @@ var WorkflowStack = function(options) {
 	 * Is saved.
 	 */
 	this.isSaved = function() {
-		return index == lastSaved;
+		return index === lastSaved;
 	};
 
 	/**
@@ -113,7 +113,7 @@ var WorkflowStack = function(options) {
 	 */
 	this.setSaved = function() {
 		lastSaved = index;
-	}
+	};
 
 	/**
 	 * Has a next workflow.
