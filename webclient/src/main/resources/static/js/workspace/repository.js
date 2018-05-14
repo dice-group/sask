@@ -230,6 +230,11 @@
 	 * Refresh the repo.
 	 */
 	Repository.prototype.refreshRepo = function() {
+		if(!this.options.dao.getDiscoverer().getRepo()) {
+			logError("repo not discovered");
+			return;
+		}
+		
 		var self = this;
 		var success = function(data) {
 			data = self.orderNode(data);
@@ -252,6 +257,11 @@
 	 * Refresh the workflows
 	 */
 	Repository.prototype.refreshWorkflows = function() {
+		if(!this.options.dao.getDiscoverer().getRepo()) {
+			logError("repo not discovered");
+			return;
+		}
+		
 		var self = this;
 		var success = function(data) {
 			structureTemplate[3].id = data.id;
