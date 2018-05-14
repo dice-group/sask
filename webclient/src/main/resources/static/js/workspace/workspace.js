@@ -37,7 +37,7 @@
 	/**
 	 * Indicates whether the current operation is a stack operation.
 	 */
-	var doingStackOperation = false;
+	var preventStacking = false;
 
 	/**
 	 * The toolbar.
@@ -143,7 +143,7 @@
 
 		// change
 		var onAfterChange = function(changeType) {
-			if (!doingStackOperation) {
+			if (!preventStacking) {
 				workflowStack.saveWorkflow(self.getWorkflow());
 				self.syncWorkflowStack();
 			}
@@ -223,9 +223,9 @@
 				};
 		}
 		
-		doingStackOperation = true;
+		preventStacking = true;
 		this.loadWorkflow(workflow);
-		doingStackOperation = false;
+		preventStacking = false;
 	}
 
 	/**
@@ -236,33 +236,31 @@
 
 		// new
 		var onNewButtonClick = function() {
-			doingStackOperation = true;
-
+			preventStacking = true;
 			self.clearWorkflow();
-
-			doingStackOperation = false;
+			preventStacking = false;
+			
 			workflowStack.clear();
 			self.syncWorkflowStack();
 		}
 
 		// undo
 		var onUndoButtonClick = function() {
-			doingStackOperation = true;
-
+			preventStacking = true;
 			var workflow = workflowStack.getLastWorkflow();
 			self.loadWorkflow(workflow);
-
-			doingStackOperation = false;
+			preventStacking = false;
+			
 			self.syncWorkflowStack();
 		}
 
 		// redo
 		var onRedoButtonClick = function() {
-			doingStackOperation = true;
+			preventStacking = true;
 			var workflow = workflowStack.getNextWorkflow();
 			self.loadWorkflow(workflow);
-
-			doingStackOperation = false;
+			preventStacking = false;
+			
 			self.syncWorkflowStack();
 		}
 
