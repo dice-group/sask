@@ -144,13 +144,26 @@
 		// change
 		var onAfterChange = function(changeType) {
 			if (!preventStacking) {
-				workflowStack.saveWorkflow(self.getWorkflow());
+				var workflow = self.getWorkflow();
+				self.balanceConnectors(workflow);
+				
+				// load changed
+				preventStacking = true;
+				self.loadWorkflow(workflow);
+				preventStacking = false;
+				
+				// save changes
+				workflowStack.saveWorkflow(workflow);
 				self.syncWorkflowStack();
 			}
 		};
 
 		// onLinkCreate
 		var onLinkCreate = function(linkId, linkData) {
+			if(preventStacking) {
+				return true;
+			}
+			
 			var fromOperator = self.flowchart.flowchart("getOperatorData",
 					linkData.fromOperator);
 			var toOperator = self.flowchart.flowchart("getOperatorData",
@@ -159,13 +172,7 @@
 			var fromConnector = fromOperator.properties.outputs[linkData.fromConnector];
 			var toConnector = toOperator.properties.inputs[linkData.toConnector];
 
-			var newLinkValid = fromConnector.label === toConnector.label;
-
-			if (newLinkValid) {
-				self.addConnectors(linkData);
-			}
-
-			return newLinkValid;
+			return fromConnector.label === toConnector.label;
 		};
 
 		this.flowchart = this.$element.children().eq(1).flowchart({
@@ -173,59 +180,99 @@
 			onLinkCreate : onLinkCreate
 		});
 	};
+	
+	/**
+	 * Balance connectors if necessary to all operators.
+	 */
+	Workspace.prototype.balanceConnectors = function(workflow) {
+		for(var op in workflow.operators) {
+			this.balanceOutputs(workflow, workflow.operators[op]);
+			this.balanceInputs(workflow, workflow.operators[op]);
+		}
+	}
 
 	/**
-	 * Creates new connectors if necessary.
+	 * Balance the output connectors if necessary.
 	 */
-	Workspace.prototype.addConnectors = function(linkData) {
-		var workflow = this.getWorkflow();
+	Workspace.prototype.balanceOutputs = function(workflow, operator) {
+		var connectors = operator.properties.outputs;
+		var keys = Object.keys(connectors);
+		var currentConnectorCount = keys.length;
 		
-		var fromOperator = workflow.operators[linkData.fromOperator];
-		var fromConnector = fromOperator.properties.outputs[linkData.fromConnector];
-		var toOperator = workflow.operators[linkData.toOperator];
-		var toConnector = toOperator.properties.inputs[linkData.toConnector];
+		if(currentConnectorCount === 0) {
+			return;
+		}
 
-		/*
-		 * fromOperator
-		 */
-		var inUse = 0;
-		for(var link in workflow.links) {
-			if(link.fromOperator === linkData.fromOperator) {
-				inUse++;
+		var used = [];
+		var unused = [];
+		for(var connector in connectors) {
+			var isLinked = false;
+			
+			for(var l in workflow.links) {
+				var link = workflow.links[l];
+				if(link.fromOperator === operator.properties.id
+						&& link.fromConnector === connector) {
+					isLinked = true;
+				}
 			}
-		}
-
-		// add connector if less then one free connector
-		var outputs = fromOperator.properties.outputs;
-		var currentConnectorCount = Object.keys(outputs).length;
-		if(currentConnectorCount - inUse === 1) {
-			outputs[this.createUuid("output_")] = {
-					label : fromConnector.label
-				};
-		}
-		
-		/*
-		 * toOperator
-		 */
-		inUse = 0;
-		for(var link in workflow.links) {
-			if(link.toOperator === linkData.toOperator) {
-				inUse++;
+			
+			if(isLinked) {
+				used.push(connector);
+			} else {
+				unused.push(connector);
 			}
 		}
 		
 		// add connector if less then one free connector
-		var inputs = toOperator.properties.inputs;
-		currentConnectorCount = Object.keys(inputs).length;
-		if(currentConnectorCount - inUse === 1) {
-			inputs[this.createUuid("input_")] = {
-					label : toConnector.label
+		if(currentConnectorCount - used.length === 0) {
+			connectors[this.createUuid("output_")] = {
+					label : connectors[keys[0]].label
 				};
 		}
 		
-		preventStacking = true;
-		this.loadWorkflow(workflow);
-		preventStacking = false;
+		// delete unnecessary connectors
+		if(currentConnectorCount - used.length >= 2) {
+			console.log(unused);
+			console.log("delete " + unused[unused.length - 1]);
+			delete connectors[unused[unused.length - 1]]
+		}
+	};
+	
+	/**
+	 * Balance the input connectors if necessary.
+	 */
+	Workspace.prototype.balanceInputs = function(workflow, operator) {
+		var connectors = operator.properties.inputs;
+		var keys = Object.keys(connectors);
+		var currentConnectorCount = keys.length;
+		
+		if(currentConnectorCount === 0) {
+			return;
+		}
+
+		var used = [];
+		for(var connector in connectors) {
+			var isLinked = false;
+			
+			for(var l in workflow.links) {
+				var link = workflow.links[l];
+				if(link.toOperator === operator.properties.id
+						&& link.toConnector === connector) {
+					isLinked = true;
+				}
+			}
+			
+			if(isLinked) {
+				used.push(connectors[connector]);
+			}
+		}
+		
+		// add connector if less then one free connector
+		if(currentConnectorCount - used.length === 0) {
+			connectors[this.createUuid("input_")] = {
+					label : connectors[keys[0]].label
+				};
+		}
 	};
 
 	/**
