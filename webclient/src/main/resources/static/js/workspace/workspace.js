@@ -159,7 +159,13 @@
 			var fromConnector = fromOperator.properties.outputs[linkData.fromConnector];
 			var toConnector = toOperator.properties.inputs[linkData.toConnector];
 
-			return fromConnector.label === toConnector.label;
+			var newLinkValid = fromConnector.label === toConnector.label;
+
+			if (newLinkValid) {
+				self.addConnectors(linkData);
+			}
+
+			return newLinkValid;
 		};
 
 		this.flowchart = this.$element.children().eq(1).flowchart({
@@ -167,6 +173,60 @@
 			onLinkCreate : onLinkCreate
 		});
 	};
+
+	/**
+	 * Creates new connectors if necessary.
+	 */
+	Workspace.prototype.addConnectors = function(linkData) {
+		var workflow = this.getWorkflow();
+		
+		var fromOperator = workflow.operators[linkData.fromOperator];
+		var fromConnector = fromOperator.properties.outputs[linkData.fromConnector];
+		var toOperator = workflow.operators[linkData.toOperator];
+		var toConnector = toOperator.properties.inputs[linkData.toConnector];
+
+		/*
+		 * fromOperator
+		 */
+		var inUse = 0;
+		for(var link in workflow.links) {
+			if(link.fromOperator === linkData.fromOperator) {
+				inUse++;
+			}
+		}
+
+		// add connector if less then one free connector
+		var outputs = fromOperator.properties.outputs;
+		var currentConnectorCount = Object.keys(outputs).length;
+		if(inUse <= currentConnectorCount - 1) {
+			outputs[this.createUuid("output_")] = {
+					label : fromConnector.label
+				};
+		}
+		
+		/*
+		 * toOperator
+		 */
+		inUse = 0;
+		for(var link in workflow.links) {
+			if(link.toOperator === linkData.toOperator) {
+				inUse++;
+			}
+		}
+		
+		// add connector if less then one free connector
+		var inputs = toOperator.properties.inputs;
+		currentConnectorCount = Object.keys(inputs).length;
+		if(inUse <= currentConnectorCount - 1) {
+			inputs[this.createUuid("input_")] = {
+					label : toConnector.label
+				};
+		}
+		
+		doingStackOperation = true;
+		this.loadWorkflow(workflow);
+		doingStackOperation = false;
+	}
 
 	/**
 	 * Init the toolbar.
@@ -214,7 +274,7 @@
 				self.saveWorkflow();
 			}
 		}
-		
+
 		// execute
 		var onExecuteButtonClick = function() {
 			self.executeWorkflow();
@@ -250,7 +310,7 @@
 		var workflow = this.getWorkflow();
 		this.options.dao.executeWorkflow(success, error, workflow);
 	};
-	
+
 	/**
 	 * Save the workflow.
 	 */
@@ -285,7 +345,7 @@
 		toolbar.toolbar('disableUndo', workflowStack.hasLast());
 		toolbar.toolbar('disableSave', !workflowStack.isSaved());
 	};
-	
+
 	/**
 	 * Create a uuid with the passed prefix.
 	 */
@@ -299,26 +359,26 @@
 	Workspace.prototype.addNode = function(properties) {
 		var inputs = {};
 		var outputs = {};
-		
+
 		switch (properties.type) {
 		case 'file':
 			outputs[this.createUuid("output_")] = {
-					label : 'NL'
-				};
+				label : 'NL'
+			};
 			break;
 		case 'extractor':
 			inputs[this.createUuid("input_")] = {
-					label : 'NL'
-				};
+				label : 'NL'
+			};
 			outputs[this.createUuid("output_")] = {
-					label : 'RDF'
-				};
+				label : 'RDF'
+			};
 			break;
 		case 'db':
 			inputs[this.createUuid("input_")] = {
-					label : 'RDF'
-				};
-			
+				label : 'RDF'
+			};
+
 			break;
 		}
 
