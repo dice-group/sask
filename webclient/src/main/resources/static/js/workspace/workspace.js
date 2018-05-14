@@ -146,12 +146,12 @@
 			if (!preventStacking) {
 				var workflow = self.getWorkflow();
 				self.balanceConnectors(workflow);
-				
+
 				// load changed
 				preventStacking = true;
 				self.loadWorkflow(workflow);
 				preventStacking = false;
-				
+
 				// save changes
 				workflowStack.saveWorkflow(workflow);
 				self.syncWorkflowStack();
@@ -160,10 +160,10 @@
 
 		// onLinkCreate
 		var onLinkCreate = function(linkId, linkData) {
-			if(preventStacking) {
+			if (preventStacking) {
 				return true;
 			}
-			
+
 			var fromOperator = self.flowchart.flowchart("getOperatorData",
 					linkData.fromOperator);
 			var toOperator = self.flowchart.flowchart("getOperatorData",
@@ -180,12 +180,12 @@
 			onLinkCreate : onLinkCreate
 		});
 	};
-	
+
 	/**
 	 * Balance connectors if necessary to all operators.
 	 */
 	Workspace.prototype.balanceConnectors = function(workflow) {
-		for(var op in workflow.operators) {
+		for ( var op in workflow.operators) {
 			this.balanceOutputs(workflow, workflow.operators[op]);
 			this.balanceInputs(workflow, workflow.operators[op]);
 		}
@@ -198,46 +198,44 @@
 		var connectors = operator.properties.outputs;
 		var keys = Object.keys(connectors);
 		var currentConnectorCount = keys.length;
-		
-		if(currentConnectorCount === 0) {
+
+		if (currentConnectorCount === 0) {
 			return;
 		}
 
 		var used = [];
 		var unused = [];
-		for(var connector in connectors) {
+		for ( var connector in connectors) {
 			var isLinked = false;
-			
-			for(var l in workflow.links) {
+
+			for ( var l in workflow.links) {
 				var link = workflow.links[l];
-				if(link.fromOperator === operator.properties.id
+				if (link.fromOperator === operator.properties.id
 						&& link.fromConnector === connector) {
 					isLinked = true;
 				}
 			}
-			
-			if(isLinked) {
+
+			if (isLinked) {
 				used.push(connector);
 			} else {
 				unused.push(connector);
 			}
 		}
-		
+
 		// add connector if less then one free connector
-		if(currentConnectorCount - used.length === 0) {
+		if (currentConnectorCount - used.length === 0) {
 			connectors[this.createUuid("output_")] = {
-					label : connectors[keys[0]].label
-				};
+				label : connectors[keys[0]].label
+			};
 		}
-		
+
 		// delete unnecessary connectors
-		if(currentConnectorCount - used.length >= 2) {
-			console.log(unused);
-			console.log("delete " + unused[unused.length - 1]);
+		if (currentConnectorCount - used.length >= 2) {
 			delete connectors[unused[unused.length - 1]]
 		}
 	};
-	
+
 	/**
 	 * Balance the input connectors if necessary.
 	 */
@@ -245,33 +243,33 @@
 		var connectors = operator.properties.inputs;
 		var keys = Object.keys(connectors);
 		var currentConnectorCount = keys.length;
-		
-		if(currentConnectorCount === 0) {
+
+		if (currentConnectorCount === 0) {
 			return;
 		}
 
 		var used = [];
-		for(var connector in connectors) {
+		for ( var connector in connectors) {
 			var isLinked = false;
-			
-			for(var l in workflow.links) {
+
+			for ( var l in workflow.links) {
 				var link = workflow.links[l];
-				if(link.toOperator === operator.properties.id
+				if (link.toOperator === operator.properties.id
 						&& link.toConnector === connector) {
 					isLinked = true;
 				}
 			}
-			
-			if(isLinked) {
+
+			if (isLinked) {
 				used.push(connectors[connector]);
 			}
 		}
-		
+
 		// add connector if less then one free connector
-		if(currentConnectorCount - used.length === 0) {
+		if (currentConnectorCount - used.length === 0) {
 			connectors[this.createUuid("input_")] = {
-					label : connectors[keys[0]].label
-				};
+				label : connectors[keys[0]].label
+			};
 		}
 	};
 
@@ -286,7 +284,7 @@
 			preventStacking = true;
 			self.clearWorkflow();
 			preventStacking = false;
-			
+
 			workflowStack.clear();
 			self.syncWorkflowStack();
 		}
@@ -297,7 +295,7 @@
 			var workflow = workflowStack.getLastWorkflow();
 			self.loadWorkflow(workflow);
 			preventStacking = false;
-			
+
 			self.syncWorkflowStack();
 		}
 
@@ -307,7 +305,7 @@
 			var workflow = workflowStack.getNextWorkflow();
 			self.loadWorkflow(workflow);
 			preventStacking = false;
-			
+
 			self.syncWorkflowStack();
 		}
 
@@ -398,10 +396,31 @@
 		return prefix + "" + Math.random().toString(36).substr(2, 16);
 	};
 
+	Workspace.prototype.nodeAlreadyExist = function(type, id) {
+		var exist = false;
+		var workflow = this.getWorkflow();
+
+		for ( var o in workflow.operators) {
+			var operator = workflow.operators[o];
+
+			if (operator.properties.content === id
+					&& operator.properties.type === type) {
+				exist = true;
+			}
+		}
+
+		return exist;
+	};
+
 	/**
 	 * Add a file to the workspace
 	 */
 	Workspace.prototype.addNode = function(properties) {
+		if (this.nodeAlreadyExist(properties.type, properties.id)) {
+			logError("node already exist on workspace");
+			return;
+		}
+
 		var inputs = {};
 		var outputs = {};
 
