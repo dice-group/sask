@@ -1,4 +1,4 @@
-package org.dice_reserach.sask.ensemble_ms;
+package org.dice_research.sask.ensemble_ms;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
