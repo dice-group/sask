@@ -276,6 +276,7 @@
 		}
 
 		var used = [];
+		var unused = [];
 		for ( var connector in connectors) {
 			var isLinked = false;
 
@@ -289,6 +290,8 @@
 
 			if (isLinked) {
 				used.push(connectors[connector]);
+			} else {
+				unused.push(connector);
 			}
 		}
 
@@ -297,6 +300,11 @@
 			connectors[this.createUuid("input_")] = {
 				label : connectors[keys[0]].label
 			};
+		}
+		
+		// delete unnecessary connectors
+		if (currentConnectorCount - used.length >= 2) {
+			delete connectors[unused[unused.length - 1]]
 		}
 	};
 
