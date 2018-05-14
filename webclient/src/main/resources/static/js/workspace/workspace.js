@@ -164,6 +164,7 @@
 				return true;
 			}
 
+			var workflow = self.getWorkflow();
 			var fromOperator = self.flowchart.flowchart("getOperatorData",
 					linkData.fromOperator);
 			var toOperator = self.flowchart.flowchart("getOperatorData",
@@ -172,7 +173,17 @@
 			var fromConnector = fromOperator.properties.outputs[linkData.fromConnector];
 			var toConnector = toOperator.properties.inputs[linkData.toConnector];
 
-			return fromConnector.label === toConnector.label;
+			if (fromConnector.label !== toConnector.label) {
+				logError("connector type not match");
+				return false;
+			}
+
+			if (self.linkExists(workflow, linkData.fromOperator, linkData.toOperator)) {
+				logError("link already exists");
+				return false;
+			}
+
+			return true;
 		};
 
 		this.flowchart = this.$element.children().eq(1).flowchart({
@@ -180,6 +191,22 @@
 			onLinkCreate : onLinkCreate
 		});
 	};
+
+	/**
+	 * Returns true if there is already a link between this operators.
+	 */
+	Workspace.prototype.linkExists = function(workflow, from, to) {
+		var exists = false;
+
+		for ( var l in workflow.links) {
+			var link = workflow.links[l];
+			if(link.fromOperator === from && link.toOperator === to) {
+				exists = true;
+			}
+		}
+
+		return exists;
+	}
 
 	/**
 	 * Balance connectors if necessary to all operators.
