@@ -32,6 +32,7 @@ public class SorookinResultParser {
 		} catch (JSONException e) {
 			throw new RuntimeException("Failed to parse result.", e);
 		}
+		
 
 		return result;
 	}

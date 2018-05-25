@@ -15,14 +15,5 @@ public class SorookinMsApplication {
 		SpringApplication.run(SorookinMsApplication.class, args);
 	}
 	
-//	@Bean
-//	public ObjectMapper objectMapper() {
-//		ObjectMapper objectMapper = new ObjectMapper();
-//
-//		SimpleModule simpleModule = new SimpleModule();
-//		simpleModule.addDeserializer(Object.class, new TripleDeserializer());
-//		objectMapper.registerModule(simpleModule);
-//
-//		return objectMapper;
-//	}
+
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+import org.dice_research.sask.sorookin_ms.sorookin.RDFTriples;
 import org.dice_research.sask.sorookin_ms.sorookin.SorookinDTO;
 import org.dice_research.sask.sorookin_ms.sorookin.SorookinResult;
 import org.dice_research.sask.sorookin_ms.sorookin.Triple;
@@ -75,8 +76,9 @@ public class SorookinMsController {
 			System.out.println(sorookin);
 			
 			List<Triple> triples = TripleFactory.create(sorookin.getRelation_graph());
+
 			
-			return triples.toString();
+			return RDFTriples.generateRDFTriples(triples).toString();
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
