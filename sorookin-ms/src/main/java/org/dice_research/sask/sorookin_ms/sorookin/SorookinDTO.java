@@ -1,4 +1,4 @@
-package org.dice_research.sask.sorookin_ms;
+package org.dice_research.sask.sorookin_ms.sorookin;
 
 /**
  * The Sorookin data transfer object.

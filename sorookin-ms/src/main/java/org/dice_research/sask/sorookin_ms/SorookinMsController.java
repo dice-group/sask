@@ -1,22 +1,22 @@
 package org.dice_research.sask.sorookin_ms;
 
 import java.io.IOException;
-import java.io.StringWriter;
-import java.util.Collection;
-import java.util.Properties;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.http.impl.client.HttpClients;
 import org.apache.log4j.Logger;
+import org.dice_research.sask.sorookin_ms.sorookin.SorookinDTO;
+import org.dice_research.sask.sorookin_ms.sorookin.SorookinResult;
+import org.dice_research.sask.sorookin_ms.sorookin.Triple;
+import org.json.JSONObject;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.client.ClientHttpRequestFactory;
-import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -28,7 +28,8 @@ import org.springframework.web.client.RestTemplate;
 public class SorookinMsController {
 
 	private static final String URI = "http://semanticparsing.ukp.informatik.tu-darmstadt.de:5000/relation-extraction/parse/";
-	
+	String NS = "http://example.org/";
+
 	private Logger logger = Logger.getLogger(SorookinMsController.class.getName());
 
 	/**
@@ -46,10 +47,9 @@ public class SorookinMsController {
 		return extract(dto);
 	}
 
-	public String extract(SorookinDTO dto) {
-		logger.info("Sorookin-microservice extract invoked");
+	private String extract(SorookinDTO dto) {
 		String input = dto.getInputtext();
-		
+
 		if (null == input || input == null || (input.trim().isEmpty())) {
 			throw new IllegalArgumentException("No input");
 		}
@@ -57,21 +57,30 @@ public class SorookinMsController {
 		try {
 			logger.info("extract via " + URI);
 			logger.info("extract " + input);
-			
+
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Content-Type", "application/json");
+			headers.setContentType(MediaType.APPLICATION_JSON);
 			headers.set("Accept", "application/json, text/javascript, */*; q=0.01");
-			
+
 			HttpEntity<SorookinDTO> entity = new HttpEntity<SorookinDTO>(dto, headers);
+
+			RestTemplate restTemplate = new RestTemplate();
 			
-			ClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory(HttpClients.createDefault());
-			RestTemplate restTemplate = new RestTemplate(requestFactory);
-			HttpEntity<SorookinResult> result = restTemplate.postForEntity(URI, entity, SorookinResult.class);
+			String result = restTemplate.postForObject(URI, entity, String.class);
 			
-			return result.toString();
+			JSONObject jsonObject = new JSONObject(result);
+			SorookinResult sorookin = SorookinResultParser.parse(jsonObject);
+			
+			System.out.println(sorookin.getRelation_graph().getTokens());
+			System.out.println(sorookin);
+			
+			List<Triple> triples = TripleFactory.create(sorookin.getRelation_graph());
+			
+			return triples.toString();
 
 		} catch (Exception ex) {
-			throw new RuntimeException("Failed to send input to Sorrokin (" + ex.getMessage() + " " + input + ").", ex);
+			ex.printStackTrace();
+			return "fail";
 		}
 
 	}
