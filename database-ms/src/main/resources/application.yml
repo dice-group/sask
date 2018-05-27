@@ -22,3 +22,14 @@ server:
 error:
   whitelabel:
     enabled: false
+    
+
+    
+logging:
+  level:
+    ROOT: INFO
+    org.springframework: INFO
+    org.springframework.data: INFO
+    com.mkyong: INFO
+    org.mongodb: ERROR
+  file: logging/database-ms.log
