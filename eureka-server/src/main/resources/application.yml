@@ -9,3 +9,12 @@ eureka:
 # HTTP (Tomcat) port
 server:
   port: 1111   
+
+logging:
+  level:
+    ROOT: INFO
+    org.springframework: INFO
+    org.springframework.data: INFO
+    com.mkyong: INFO
+    org.mongodb: ERROR
+  file: logging/eureka-server.log 
