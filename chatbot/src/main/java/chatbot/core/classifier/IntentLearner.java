@@ -1,32 +1,31 @@
 package chatbot.core.classifier;
 
-import weka.core.Attribute;
-import weka.core.DenseInstance;
-import weka.core.Instances;
-import weka.filters.Filter;
-import weka.filters.unsupervised.attribute.Standardize;
-import weka.filters.unsupervised.attribute.StringToNominal;
-import weka.filters.unsupervised.attribute.StringToWordVector;
-import weka.classifiers.Evaluation;
-
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Random;
 
-import chatbot.core.handlers.Handler;
-import chatbot.core.handlers.eliza.ElizaHandler;
-import chatbot.core.handlers.qa.QAHandler;
-import chatbot.core.handlers.sessa.SessaHandler;
-import chatbot.io.incomingrequest.IncomingRequest;
-import weka.classifiers.bayes.NaiveBayes;
-import weka.classifiers.functions.SMO;
+import weka.classifiers.Evaluation;
+import weka.classifiers.functions.LibSVM;
+import weka.classifiers.lazy.IBk;
 import weka.classifiers.meta.FilteredClassifier;
-import weka.classifiers.rules.ZeroR;
 import weka.classifiers.trees.J48;
-import weka.classifiers.trees.RandomForest;
+import weka.core.Attribute;
+import weka.core.DenseInstance;
+import weka.core.Instances;
+import weka.core.SelectedTag;
 import weka.core.converters.ArffLoader.ArffReader;
-import weka.core.stemmers.LovinsStemmer;
-
-import java.io.*;
+import weka.core.tokenizers.NGramTokenizer;
+import weka.filters.Filter;
+import weka.filters.unsupervised.attribute.Standardize;
+import weka.filters.unsupervised.attribute.StringToWordVector;
 
 /**
  * This class implements a simple text learner in Java using WEKA.
@@ -74,6 +73,24 @@ public class IntentLearner {
 		}
 	}
 	
+	public LibSVM createClassifierModel() {
+		LibSVM svm = new LibSVM();
+		svm.setKernelType(new SelectedTag(0, LibSVM.TAGS_KERNELTYPE));
+		svm.setSVMType(new SelectedTag(0, LibSVM.TAGS_SVMTYPE));
+		svm.setProbabilityEstimates(true);
+		return svm;
+	}
+	
+	public StringToWordVector createFilter() throws Exception {
+		filter = new StringToWordVector();
+		/*NGramTokenizer tokenizer = new NGramTokenizer();
+		tokenizer.setNGramMaxSize(3);
+		filter.setTokenizer(tokenizer);
+		filter.setTFTransform(true);
+		filter.setIDFTransform(true);
+		filter.setInputFormat(trainData);*/
+		return filter;
+	}
 	/**
 	 * This method evaluates the classifier. As recommended by WEKA documentation,
 	 * the classifier is defined but not trained yet. Evaluation of previously
@@ -82,16 +99,10 @@ public class IntentLearner {
 	public void evaluate() {
 		try {
 			trainData.setClassIndex(trainData.numAttributes() - 1);
-			filter = new StringToWordVector();
-			sfilter = new Standardize();
-			//filter.setAttributeIndices("first");
-			String[] options = new String[2];
-			options[0] = "-R"; // "range"
-			options[1] =  Integer.toString(trainData.classIndex());;
 			classifier = new FilteredClassifier();
-			filter.setOptions(options);
-			classifier.setFilter(filter);
-			classifier.setClassifier(new J48());
+			classifier.setFilter(createFilter());
+			classifier.setClassifier(createClassifierModel());
+			//classifier.setClassifier(new J48());
 			Evaluation eval = new Evaluation(trainData);
 			eval.crossValidateModel(classifier, trainData, 4, new Random(1));
 			System.out.println(eval.toSummaryString());
@@ -110,18 +121,15 @@ public class IntentLearner {
 	public void learn() {
 		try {
 			trainData.setClassIndex(trainData.numAttributes() - 1);
-			filter = new StringToWordVector();
-			String[] options = new String[2];
-			options[0] = "-R"; // "range"
-			options[1] =  Integer.toString(trainData.classIndex());
-			classifier = new FilteredClassifier();
-			filter.setOptions(options);
+			filter = createFilter();
 			
-			sfilter.setInputFormat(trainData);
+			classifier = new FilteredClassifier();
+			//sfilter.setInputFormat(trainData);
 			filter.setInputFormat(trainData);
 			trainData = Filter.useFilter(trainData, filter);
+			System.out.println("Number of attributes in train=" + trainData.numAttributes());
 			classifier.setFilter(filter);
-			classifier.setClassifier(new J48());
+			classifier.setClassifier(createClassifierModel());
 			classifier.buildClassifier(trainData);
 			// Uncomment to see the classifier
 			System.out.println("===== Training on filtered (training) dataset done =====");
@@ -142,7 +150,7 @@ public class IntentLearner {
             ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(fileName/*"resources/classifier/intentdata.model"*/));
             out.writeObject(classifier);
             out.close();
- 			System.out.println("===== Saved model: " + fileName + " =====");
+ 			System.out.println("===== Saved model: " + fileName + " =====");	
         } 
 		catch (IOException e) {
 			e.printStackTrace();
@@ -155,7 +163,7 @@ public class IntentLearner {
 	 * 
 	 * @param  prediction
 	 */
-	public Handler usePrediction(IncomingRequest request,String query,String prediction) {
+	/*public Handler usePrediction(IncomingRequest request,String query,String prediction) {
 		Classifier deterministicClassifier = new Classifier();
 		String detPrediction = deterministicClassifier.classify(request);
 		try {
@@ -191,11 +199,11 @@ public class IntentLearner {
 			e.printStackTrace();
 		}
 		return null;
-	}
+	}*/
 	/**
 	 * This method creates the instance to be classified, from the text that has been read.
 	 */
-	public void makeTestInstance(String query) {
+	public Instances makeTestInstance(String query) {
 		// Create the attributes, class and text
 		ArrayList<String> fvNominalVal = new ArrayList<String>(3);
 		fvNominalVal.add("eliza");
@@ -210,12 +218,15 @@ public class IntentLearner {
 		fvWekaAttributes.add(attribute2);
 		testInstance = new Instances("intent", fvWekaAttributes, 1);           
 		// Set class index
-		testInstance.setClassIndex(testInstance.numAttributes() - 1);
+		//testInstance.setClassIndex(trainData.numAttributes() - 1);
 		// Create and add the instance
 		DenseInstance instance = new DenseInstance(2);
-		instance.setValue(attribute1, query);
 		instance.setDataset(trainData);
+		instance.setValue(fvWekaAttributes.get(0), query);
+		//instance.setClassMissing();
 		instance.classIsMissing();
+		//instance.setClassValue(1);
+
 		// Another way to do it:
 		// instance.setValue((Attribute)fvWekaAttributes.elementAt(1), text);
 		testInstance.add(instance);
@@ -242,6 +253,7 @@ public class IntentLearner {
 		}
  		System.out.println("===== Instance created with reference dataset =====");
 		System.out.println(testInstance);
+		return testInstance;
 	}
 	/**
 	 * This method creates the new instance to be saved.
@@ -289,16 +301,23 @@ public class IntentLearner {
 			}
 		}
 	}	
+	
 	/**
 	 * This method performs the classification of the instance.
 	 * Output is done at the command-line.
 	 */
 	public void classify(String query) {
 		try {
-			double pred = classifier.classifyInstance(testInstance.instance(0));
-			System.out.println("===== Classified instance =====");
-			System.out.println("Class predicted: " + testInstance.classAttribute().value((int) pred));
-			saveNewInstance("\'"+query+"\',"+ testInstance.classAttribute().value((int) pred));
+			Instances instances = makeTestInstance(query);
+			System.out.println("OK till here");
+			//Instances newTest2 = Filter.useFilter(test2, filter); 
+			//for (int i = 0; i < instances.numInstances(); i ++){
+				System.out.println("OK till here1");
+				double pred = classifier.classifyInstance(instances.get(0));
+				System.out.println("===== Classified instance =====");
+				System.out.println("Class predicted: " + testInstance.classAttribute().value((int) pred));
+				saveNewInstance("\'"+query+"\',"+ testInstance.classAttribute().value((int) pred));
+			//}
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -314,14 +333,15 @@ public class IntentLearner {
 	
 		IntentLearner learner;
 		
-			learner = new IntentLearner();
-			learner.loadDataset("C:\\Users\\Divya\\Documents\\try\\intentdata.arff");
+		learner = new IntentLearner();
+		learner.loadDataset("C:\\Users\\Divya\\Documents\\try\\intentdata.arff");
 		
-			learner.evaluate();
-			learner.learn();
-			learner.saveModel("C:\\Users\\Divya\\Documents\\try\\intentdata.model");
-			learner.makeTestInstance("prince of persia");
-			learner.classify("prince of persia");
+		learner.evaluate();
+		learner.learn();
+		//
+		learner.saveModel("C:\\Users\\Divya\\Documents\\try\\intentdata.model");
+		//learner.makeTestInstance("prince of persia");
+		learner.classify("prince of persia");
 			//learner.usePrediction(request, "what would it mean to you", testInstance.classAttribute().value((int) pred));
 		
 	}

@@ -5,13 +5,17 @@
 
 @data
 'What is the capital of Germany ?',hawk
+'best beaches',sessa
 'who is the mayor of berlin ?',hawk
+'mayor munich',sessa
 'what do i do now ?',eliza
 'mayor berlin',sessa
 'capital india',sessa
 'is this true',eliza
 'was michael jackson prodigal',hawk
+'mozart compositions',sessa
 'is rome the capital of italy',hawk
+'capital India',sessa
 'does pope live in the vatican?',hawk
 'pope',sessa
 'are you saying',eliza
@@ -29,12 +33,26 @@
 'what the different kinds of wine',hawk
 'why is the sky blue',hawk
 'which is the best retaurant in town',hawk
+'vegas murder',sessa
 'when is the best time to visit france?',hawk
 'paderborn weather',sessa
 'good for me',eliza
 'whats up',eliza
+'paderborn',sessa
 'Hi',eliza
 'hello',eliza
 'where is trump travelling to this quarter',hawk
 'which is the most terrifying movie ever',hawk
 'italian food',sessa
+'panama papers',sessa
+'Do you want anything to eat?',eliza
+'vegan foods',sessa
+'what are you doing',eliza
+'who are you',eliza
+'Donald trump',sessa
+'what would it mean to you',eliza
+'recent terror attacks',sessa
+'Who is the richest man in the world',hawk
+'what is randomized rounding',hawk
+'randomized rounding',sessa
+'prince of persia',sessa
