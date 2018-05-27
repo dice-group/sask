@@ -47,7 +47,7 @@ public class IntentLearner {
 	/**
 	 * Object that stores the filter
 	 */
-	StringToNominal filter;
+	StringToWordVector filter;
 	Standardize sfilter;
 	/**
 	 * Object that stores the classifier
@@ -82,7 +82,7 @@ public class IntentLearner {
 	public void evaluate() {
 		try {
 			trainData.setClassIndex(trainData.numAttributes() - 1);
-			filter = new StringToNominal();
+			filter = new StringToWordVector();
 			sfilter = new Standardize();
 			//filter.setAttributeIndices("first");
 			String[] options = new String[2];
@@ -91,7 +91,7 @@ public class IntentLearner {
 			classifier = new FilteredClassifier();
 			filter.setOptions(options);
 			classifier.setFilter(filter);
-			classifier.setClassifier(new SMO());
+			classifier.setClassifier(new J48());
 			Evaluation eval = new Evaluation(trainData);
 			eval.crossValidateModel(classifier, trainData, 4, new Random(1));
 			System.out.println(eval.toSummaryString());
@@ -110,18 +110,18 @@ public class IntentLearner {
 	public void learn() {
 		try {
 			trainData.setClassIndex(trainData.numAttributes() - 1);
-			filter = new StringToNominal();
+			filter = new StringToWordVector();
 			String[] options = new String[2];
 			options[0] = "-R"; // "range"
 			options[1] =  Integer.toString(trainData.classIndex());
 			classifier = new FilteredClassifier();
 			filter.setOptions(options);
-			filter.setInputFormat(trainData);
+			
 			sfilter.setInputFormat(trainData);
-		
+			filter.setInputFormat(trainData);
 			trainData = Filter.useFilter(trainData, filter);
 			classifier.setFilter(filter);
-			classifier.setClassifier(new SMO());
+			classifier.setClassifier(new J48());
 			classifier.buildClassifier(trainData);
 			// Uncomment to see the classifier
 			System.out.println("===== Training on filtered (training) dataset done =====");
@@ -320,8 +320,8 @@ public class IntentLearner {
 			learner.evaluate();
 			learner.learn();
 			learner.saveModel("C:\\Users\\Divya\\Documents\\try\\intentdata.model");
-			learner.makeTestInstance("randomized rounding");
-			learner.classify("randomized rounding");
+			learner.makeTestInstance("prince of persia");
+			learner.classify("prince of persia");
 			//learner.usePrediction(request, "what would it mean to you", testInstance.classAttribute().value((int) pred));
 		
 	}
