@@ -34,7 +34,7 @@ public class RelationGraph {
 	public void setEdgeSet(List<Edge> edgeSet) {
 		this.edgeSet = edgeSet;
 	}
-	
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();

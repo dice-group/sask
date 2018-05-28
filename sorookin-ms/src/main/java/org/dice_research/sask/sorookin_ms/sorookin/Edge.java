@@ -2,7 +2,20 @@ package org.dice_research.sask.sorookin_ms.sorookin;
 
 import java.util.List;
 
+/**
+ * Represents relation_graph in form of tokens, subject nodes, object nodes and
+ * predicate
+ * 
+ * @author Suganya, Kevin Haack
+ *
+ */
+
 public class Edge {
+	public static final String KEY_TOKENS = "tokens";
+	public static final String KEY_LEFT_NODES = "left";
+	public static final String KEY_RIGHT_NODES = "right";
+	public static final String KEY_LEXICAL_INPUT = "lexicalInput";
+
 	private List<Integer> left;
 	private List<Integer> right;
 	private String lexicalInput;

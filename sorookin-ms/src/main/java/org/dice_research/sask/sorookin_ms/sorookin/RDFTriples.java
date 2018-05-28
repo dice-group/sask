@@ -12,20 +12,24 @@ import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFDataMgr;
 
 public class RDFTriples {
-
-	public static StringWriter generateRDFTriples(List<Triple> triples)
-	{
+	/**
+	 * Creates NTRIPLES from the list of natural language triples.
+	 * 
+	 * @param A
+	 *            list of triples..
+	 * @return Jena model containing the RDF data in N-Triples format.
+	 */
+	public static StringWriter generateRDFTriples(List<Triple> triples) {
 		String NS = "http://example.org/";
 		StringWriter modelAsString = new StringWriter();
 		Model model = ModelFactory.createDefaultModel();
-		for(Triple t:triples)
-		{
-		Property subject = model.createProperty(NS + URIref.encode(t.getSubject()));
-		Property predicate = model.createProperty(NS + URIref.encode(t.getPredicate()));
-		Property object = model.createProperty(NS + URIref.encode(t.getObject()));
-		model.add(subject, predicate, object);
+		for (Triple t : triples) {
+			Property subject = model.createProperty(NS + URIref.encode(t.getSubject()));
+			Property predicate = model.createProperty(NS + URIref.encode(t.getPredicate()));
+			Property object = model.createProperty(NS + URIref.encode(t.getObject()));
+			model.add(subject, predicate, object);
 		}
-	
+
 		RDFDataMgr.write(modelAsString, model, Lang.NTRIPLES);
 		return modelAsString;
 	}

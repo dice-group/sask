@@ -17,10 +17,17 @@ import org.json.JSONObject;
  *
  */
 public class SorookinResultParser {
-	private SorookinResultParser() {
+	public SorookinResultParser() {
 
 	}
 
+	/**
+	 * Method to parse the relation_graph obtained from the Sorookin
+	 * 
+	 * @param root
+	 * 
+	 * @return The corresponding java object of the relation graph.
+	 */
 	public static SorookinResult parse(JSONObject root) {
 		SorookinResult result = new SorookinResult();
 
@@ -32,56 +39,52 @@ public class SorookinResultParser {
 		} catch (JSONException e) {
 			throw new RuntimeException("Failed to parse result.", e);
 		}
-		
 
 		return result;
 	}
 
 	private static RelationGraph parseRelationGraph(JSONObject node) {
 		RelationGraph relationGraph = new RelationGraph();
-		
-		// tokens
+
 		relationGraph.setTokens(parseTokens(node.getJSONArray(RelationGraph.KEY_TOKENS)));
 
 		JSONArray jsonEdges = node.getJSONArray(RelationGraph.KEY_EDGES);
 
-		// edges
 		for (int i = 0; i < jsonEdges.length(); i++) {
 			relationGraph.getEdgeSet().add(parseEdge(jsonEdges.getJSONObject(i)));
 		}
 
 		return relationGraph;
 	}
-	
+
 	private static Edge parseEdge(JSONObject o) {
 		Edge edge = new Edge();
-		
+
 		edge.setLeft(parseIntArray(o.getJSONArray(RelationGraph.KEY_LEFT_NODES)));
 		edge.setRight(parseIntArray(o.getJSONArray(RelationGraph.KEY_RIGHT_NODES)));
 		edge.setLexicalInput(o.getString(RelationGraph.KEY_LEXICAL_INPUT));
-		
+
 		return edge;
 	}
-	
+
 	private static List<Integer> parseIntArray(JSONArray array) {
 		List<Integer> list = new LinkedList<>();
-		
+
 		for (int i = 0; i < array.length(); i++) {
 			list.add(array.getInt(i));
 		}
-		
+
 		return list;
 	}
 
 	private static List<String> parseTokens(JSONArray array) {
 		List<String> list = new ArrayList<>();
-		
+
 		for (int i = 0; i < array.length(); i++) {
 			list.add(array.getString(i));
 		}
-		
+
 		return list;
 	}
-	
-	
+
 }

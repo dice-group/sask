@@ -19,6 +19,14 @@ public class TripleFactory {
 
 	}
 
+	/**
+	 * forming the subject and predicate by choosing the words from the tokens
+	 * 
+	 * @param graph,
+	 *            list of integers representing the nodes. Left nodes represent
+	 *            subject and right nodes represent object .
+	 * @return the final subject or the object depending on the nodes.
+	 */
 	private static String createStringFromTokens(RelationGraph graph, List<Integer> list) {
 		StringBuilder builder = new StringBuilder();
 
@@ -35,22 +43,21 @@ public class TripleFactory {
 
 	/**
 	 * Creates a list of triples from the passed graph.
-	 * @param graph The graph.
+	 * 
+	 * @param graph
+	 * 
 	 * @return A list of triples.
 	 */
+
 	public static List<Triple> create(RelationGraph graph) {
 		List<Triple> list = new LinkedList<>();
- 
+
 		for (Edge edge : graph.getEdgeSet()) {
 			Triple tri = new Triple();
-			
+
 			tri.setSubject(createStringFromTokens(graph, edge.getLeft()));
 			tri.setPredicate(edge.getLexicalInput());
 			tri.setObject(createStringFromTokens(graph, edge.getRight()));
-			
-			// String NS = "http://example.org/";
-			// System.out.println(tri.getPredicate());
-			
 			list.add(tri);
 		}
 

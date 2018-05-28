@@ -1,7 +1,7 @@
 package org.dice_research.sask.sorookin_ms.sorookin;
 
 /**
- * Represents a tripple of subject, predicate and object.
+ * Represents a triple of subject, predicate and object.
  * 
  * @author Suganya, Kevin Haack
  *

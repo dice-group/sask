@@ -34,7 +34,7 @@ public class SorookinMsController {
 	private Logger logger = Logger.getLogger(SorookinMsController.class.getName());
 
 	/**
-	 * Represent a simple version of extraction, without configuration.
+	 * Represent extraction.
 	 * 
 	 * @param input
 	 *            The input to extract.
@@ -66,20 +66,23 @@ public class SorookinMsController {
 			HttpEntity<SorookinDTO> entity = new HttpEntity<SorookinDTO>(dto, headers);
 
 			RestTemplate restTemplate = new RestTemplate();
-			
+
 			String result = restTemplate.postForObject(URI, entity, String.class);
-			
+
 			JSONObject jsonObject = new JSONObject(result);
+
 			SorookinResult sorookin = SorookinResultParser.parse(jsonObject);
-			
+
 			System.out.println(sorookin.getRelation_graph().getTokens());
 			System.out.println(sorookin);
-			
+
 			List<Triple> triples = TripleFactory.create(sorookin.getRelation_graph());
 
-			
 			return RDFTriples.generateRDFTriples(triples).toString();
 
+		} catch (NullPointerException ex) {
+			ex.printStackTrace();
+			return "fail null pointer exception";
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			return "fail";
