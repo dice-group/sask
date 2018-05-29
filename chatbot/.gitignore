@@ -28,3 +28,4 @@ hs_err_pid*
 .wtpmodules
 .DS_Store
 target
+logging
