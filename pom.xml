@@ -26,7 +26,11 @@
 		<module>open-ie-ms</module>
 		<module>repo-ms</module>
 		<module>webclient</module>
+<<<<<<< HEAD
 		<module>logging-ms</module>
+=======
+		<module>ensemble-ms</module>
+>>>>>>> refs/remotes/origin/Ensemble
 	</modules>
 
 
