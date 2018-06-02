@@ -10,7 +10,7 @@
     </appender>
 
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${DEV_HOME}/eureka-server</file>
+        <file>${DEV_HOME}/eureka-server.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- daily rollover. -->
             <fileNamePattern>${DEV_HOME}/archived/eureka-server.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
