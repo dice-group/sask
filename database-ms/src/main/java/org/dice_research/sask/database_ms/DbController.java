@@ -110,6 +110,26 @@ public class DbController {
 		}
 		
 	}
+	@RequestMapping(value = "/processSparqlQuery")
+	public String processSparqlQuery(String sparqlQuery) {
+
+		logger.info("db-microservice queryGraph() is invoked");
+
+		try (QueryEngineHTTP qe = (QueryEngineHTTP) QueryExecutionFactory.sparqlService(
+				"http://localhost:3030/sask/query", sparqlQuery)){
+			ResultSet results = qe.execSelect();
+			ByteArrayOutputStream b = new ByteArrayOutputStream();
+			ResultSetFormatter.outputAsJSON(b, results);
+			String json = b.toString();
+
+			System.out.println(json);
+
+			return json;
+			
+		}
+	}
+	
+	
 	
 	@ExceptionHandler
 	void handleIllegalArgumentException(IllegalArgumentException e, HttpServletResponse response) throws IOException {
