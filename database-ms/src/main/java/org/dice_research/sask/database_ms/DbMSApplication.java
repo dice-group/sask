@@ -6,11 +6,19 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication
 @EnableDiscoveryClient
+/**
+ * 
+ *
+ * @author Sepide Tari
+ * @author Suganya Kannan
+ *
+ *
+ **/
 public class DbMSApplication {
-	
-		public static void main(String[] args) {
-			
-			SpringApplication.run(DbMSApplication.class,args);
-			}
+
+	public static void main(String[] args) {
+
+		SpringApplication.run(DbMSApplication.class, args);
+	}
 
 }

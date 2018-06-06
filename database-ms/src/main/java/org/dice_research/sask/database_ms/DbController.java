@@ -8,8 +8,6 @@ import java.util.Set;
 
 import org.apache.jena.query.QuerySolution;
 
-
-
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.jena.query.QueryExecutionFactory;
@@ -29,12 +27,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * 
+ *
+ * @author Sepide Tari
+ * @author Suganya Kannan
+ *
+ * Contains all the methods to interact with the fuseki server through Jena API
+ **/
+
 @RestController
 public class DbController {
 
 	protected Logger logger = Logger.getLogger(DbController.class);
 
-	// storing the triples(@input) inside default graph
+	/**
+	 * method to store triples inside the default graph
+	 * 
+	 * @param input
+	 *           The triples which are to be stored.
+	 * 
+	 * 
+	 */
 	@RequestMapping(method = RequestMethod.POST, value = "/updateGraph")
 	public void updateGraph(String input) {
 
@@ -51,7 +65,13 @@ public class DbController {
 
 	}
 
-	// represent all the RDF stored in default graph
+	/**
+	 * Method to query the default graph.
+	 * 
+	 * 
+	 * @return The query results in json format
+	 * 
+	 */
 	@RequestMapping(value = "/queryDefaultGraph")
 	public String queryDefaultGraph() {
 
@@ -64,20 +84,26 @@ public class DbController {
 			ResultSetFormatter.outputAsJSON(b, results);
 			String json = b.toString();
 
-			System.out.println(json);
+			// System.out.println(json);
 
 			return json;
 		}
 	}
-	
-	// represent all the RDF stored in specific named graph
+
+	/**
+	 * Method to query the named graph inside the SASK dataset.
+	 * 
+	 * @param graphName
+	 *            The name of the graph
+	 * @return The query result in the form of JSON.
+	 */
 	@RequestMapping(value = "/queryGraph")
 	public String queryGraph(String graphName) {
 
 		logger.info("db-microservice queryGraph() is invoked");
 
 		try (QueryEngineHTTP qe = (QueryEngineHTTP) QueryExecutionFactory.sparqlService(
-				"http://localhost:3030/sask/query", "SELECT * WHERE {GRAPH <"+graphName+"> {?s ?p ?o}}")){
+				"http://localhost:3030/sask/query", "SELECT * WHERE {GRAPH <" + graphName + "> {?s ?p ?o}}")) {
 			ResultSet results = qe.execSelect();
 			ByteArrayOutputStream b = new ByteArrayOutputStream();
 			ResultSetFormatter.outputAsJSON(b, results);
@@ -86,37 +112,54 @@ public class DbController {
 			System.out.println(json);
 
 			return json;
-			
+
 		}
 	}
-	// Querying Graph Names from dataset
+
+	/**
+	 * Method to return all the named graphs from a dataset.
+	 * 
+	 * @param dataSet
+	 *            The name of the dataset.
+	 * @return all the graph names present in the given dataset.
+	 */
+
 	@RequestMapping(value = "/getNamedGraphs")
-	public  Set<String> getNamedGraphs(String dataSet) {
+	public Set<String> getNamedGraphs(String dataSet) {
 
 		logger.info("db-microservice getNamedGraphs() is invoked");
-        Set<String> GraphNames = new HashSet<String>();
+		Set<String> GraphNames = new HashSet<String>();
 
 		try (QueryEngineHTTP qe = (QueryEngineHTTP) QueryExecutionFactory.sparqlService(
-				"http://localhost:3030/"+dataSet+"/query", "SELECT (strafter(str(?g), \"data/\") AS ?GraphName) WHERE { GRAPH ?g { }}")){
+				"http://localhost:3030/" + dataSet + "/query",
+				"SELECT (strafter(str(?g), \"data/\") AS ?GraphName) WHERE { GRAPH ?g { }}")) {
 			ResultSet results = qe.execSelect();
-			  
-	        for (; results.hasNext();) {
-		        QuerySolution soln = results.nextSolution();
 
-		        String gn = soln.get("GraphName").toString();
-		        GraphNames.add(gn);
-		        }
-               return GraphNames;
+			for (; results.hasNext();) {
+				QuerySolution soln = results.nextSolution();
+
+				String gn = soln.get("GraphName").toString();
+				GraphNames.add(gn);
+			}
+			return GraphNames;
 		}
-		
+
 	}
+
+	/**
+	 * Method to process the given Sparql Query and return the output.
+	 * 
+	 * @param sparqlQuery
+	 *            The query to be processed.
+	 * @return The query result in the form of JSON.
+	 */
 	@RequestMapping(value = "/processSparqlQuery")
 	public String processSparqlQuery(String sparqlQuery) {
 
 		logger.info("db-microservice queryGraph() is invoked");
 
-		try (QueryEngineHTTP qe = (QueryEngineHTTP) QueryExecutionFactory.sparqlService(
-				"http://localhost:3030/sask/query", sparqlQuery)){
+		try (QueryEngineHTTP qe = (QueryEngineHTTP) QueryExecutionFactory
+				.sparqlService("http://localhost:3030/sask/query", sparqlQuery)) {
 			ResultSet results = qe.execSelect();
 			ByteArrayOutputStream b = new ByteArrayOutputStream();
 			ResultSetFormatter.outputAsJSON(b, results);
@@ -125,12 +168,10 @@ public class DbController {
 			System.out.println(json);
 
 			return json;
-			
+
 		}
 	}
-	
-	
-	
+
 	@ExceptionHandler
 	void handleIllegalArgumentException(IllegalArgumentException e, HttpServletResponse response) throws IOException {
 		logger.error("database-microservice IllegalArgumentException: " + e.getMessage());
