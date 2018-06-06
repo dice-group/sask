@@ -12,6 +12,17 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Random;
 
+import org.apache.log4j.Logger;
+
+import chatbot.core.handlers.Handler;
+import chatbot.core.handlers.eliza.ElizaHandler;
+import chatbot.core.handlers.qa.QAHandler;
+import chatbot.core.handlers.rivescript.RiveScriptOutputAnalyzer;
+import chatbot.core.handlers.rivescript.RiveScriptQueryHandler;
+import chatbot.core.handlers.sessa.SessaHandler;
+import chatbot.io.incomingrequest.IncomingRequest;
+import chatbot.utils.spellcheck.SpellCheck;
+import chatbot.utils.spellcheck.SpellCheck.LanguageList;
 import weka.classifiers.Evaluation;
 import weka.classifiers.functions.LibSVM;
 import weka.classifiers.lazy.IBk;
@@ -35,6 +46,9 @@ import weka.filters.unsupervised.attribute.StringToWordVector;
  * @see MyFilteredClassifier
  */
 public class IntentLearner {
+	
+	private static Logger log = Logger.getLogger(IntentLearner.class.getName());
+
 	/**
 	 * Object that stores the instance.
 	 */
@@ -104,7 +118,7 @@ public class IntentLearner {
 			classifier.setClassifier(createClassifierModel());
 			//classifier.setClassifier(new J48());
 			Evaluation eval = new Evaluation(trainData);
-			eval.crossValidateModel(classifier, trainData, 4, new Random(1));
+			eval.crossValidateModel(classifier, trainData, 10, new Random(1));
 			System.out.println(eval.toSummaryString());
 			System.out.println(eval.toClassDetailsString());
 			System.out.println("===== Evaluating on filtered (training) dataset done =====");
@@ -125,8 +139,8 @@ public class IntentLearner {
 			
 			classifier = new FilteredClassifier();
 			//sfilter.setInputFormat(trainData);
-			filter.setInputFormat(trainData);
-			trainData = Filter.useFilter(trainData, filter);
+//			filter.setInputFormat(trainData);
+//			trainData = Filter.useFilter(trainData, filter);
 			System.out.println("Number of attributes in train=" + trainData.numAttributes());
 			classifier.setFilter(filter);
 			classifier.setClassifier(createClassifierModel());
@@ -163,34 +177,19 @@ public class IntentLearner {
 	 * 
 	 * @param  prediction
 	 */
-	/*public Handler usePrediction(IncomingRequest request,String query,String prediction) {
-		Classifier deterministicClassifier = new Classifier();
-		String detPrediction = deterministicClassifier.classify(request);
+	public Handler usePrediction(String prediction) {
+		
 		try {
            if(prediction.equalsIgnoreCase("hawk")) {
-        	   if(detPrediction.equals("hawk")) {
-        		   saveNewInstance("\'"+query+"\',"+prediction);
-        	   }else {
-        		   saveNewInstance("\'"+query+"\',"+detPrediction);
-        	   }
+        	  
         		return new QAHandler();
            }
            else if(prediction.equalsIgnoreCase("sessa")) {
-        	   if(detPrediction.equals("sessa")) {
-        		   saveNewInstance("\'"+query+"\',"+prediction);
-        	   }
-        	   else {
-        		   saveNewInstance("\'"+query+"\',"+detPrediction);
-        	   }
+        	 
         	   return new SessaHandler();
            }
            else if(prediction.equalsIgnoreCase("eliza")) {
-        	   if(detPrediction.equals("eliza")) {
-        		   saveNewInstance("\'"+query+"\',"+prediction);
-        	   }
-        	   else {
-        		   saveNewInstance("\'"+query+"\',"+detPrediction);
-        	   }
+        	  
         	   return new ElizaHandler();
            }
         	   
@@ -199,7 +198,7 @@ public class IntentLearner {
 			e.printStackTrace();
 		}
 		return null;
-	}*/
+	}
 	/**
 	 * This method creates the instance to be classified, from the text that has been read.
 	 */
@@ -209,30 +208,35 @@ public class IntentLearner {
 		fvNominalVal.add("eliza");
 		fvNominalVal.add("hawk");
 		fvNominalVal.add("sessa");
+		ArrayList<String> queryVal=new  ArrayList<String>();
+		queryVal.add(query);
 		Attribute attribute1 = new Attribute("query",(ArrayList<String>) null);
+//		Attribute attribute1 = new Attribute("query",queryVal);
 		Attribute attribute2 = new Attribute("queryIntent", fvNominalVal);
 		
 		// Create list of instances with one element
 		ArrayList<Attribute> fvWekaAttributes = new ArrayList<Attribute>(2);
 		fvWekaAttributes.add(attribute1);
 		fvWekaAttributes.add(attribute2);
-		testInstance = new Instances("intent", fvWekaAttributes, 1);           
+		testInstance = new Instances("intent", fvWekaAttributes, 1);  
+		testInstance.setClass(attribute2);
 		// Set class index
 		//testInstance.setClassIndex(trainData.numAttributes() - 1);
 		// Create and add the instance
 		DenseInstance instance = new DenseInstance(2);
 		instance.setDataset(trainData);
-		instance.setValue(fvWekaAttributes.get(0), query);
-		//instance.setClassMissing();
+		instance.setValue((Attribute)fvWekaAttributes.get(0), query);
+		instance.setClassMissing();
 		instance.classIsMissing();
 		//instance.setClassValue(1);
 
 		// Another way to do it:
 		// instance.setValue((Attribute)fvWekaAttributes.elementAt(1), text);
-		testInstance.add(instance);
+		//testInstance.add(instance);
 		
 			try {
-				testInstance = Filter.useFilter(testInstance, filter);
+//				testInstance = Filter.useFilter(testInstance, filter);
+				testInstance.add(instance);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -306,25 +310,86 @@ public class IntentLearner {
 	 * This method performs the classification of the instance.
 	 * Output is done at the command-line.
 	 */
-	public void classify(String query) {
+	public String classify(String query) {
 		try {
 			Instances instances = makeTestInstance(query);
-			System.out.println("OK till here");
 			//Instances newTest2 = Filter.useFilter(test2, filter); 
 			//for (int i = 0; i < instances.numInstances(); i ++){
-				System.out.println("OK till here1");
-				double pred = classifier.classifyInstance(instances.get(0));
+				double pred = classifier.classifyInstance(instances.get(instances.numInstances()-1));
 				System.out.println("===== Classified instance =====");
-				System.out.println("Class predicted: " + testInstance.classAttribute().value((int) pred));
-				saveNewInstance("\'"+query+"\',"+ testInstance.classAttribute().value((int) pred));
+				String prediction =testInstance.classAttribute().value((int) pred);
+				System.out.println("Class predicted: " + prediction);
+				saveNewInstance("\'"+query+"\',"+ prediction);
+				return prediction;
 			//}
 		}
 		catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Problem found when classifying the text");
-		}		
+		}
+		return null;		
 	}
-	
+	/**
+	 * check rivescript first
+	 * @return 
+	 */
+	public RiveScriptQueryHandler checkRiveScript(IncomingRequest request) {
+		try {
+			String query = request.getRequestContent().get(0).getText().toLowerCase();
+			//Preprocess User Input. Do not expect it to be perfect.
+			//Query may contain some basic spelling mistakes which require to be corrected.Currently Language is hardcoded. 
+			//It should also come from IncomingRequest class in future since it should ideally depend on browser language so that user queries can be answered efficiently.
+			//Check Input. It should not contain bad inputs.
+			if(query.isEmpty()) {
+				log.warn("Handle Null inputs, Throwing Exception here");
+				throw new IllegalArgumentException("Null Input");
+			}
+			query = handlePreProcessing(query);
+			//Set Query here to Request for now?
+			request.getRequestContent().get(0).setText(query); //Update Request class.
+			query = query.toLowerCase(); //Sometimes spell check returns caps.
+			RiveScriptQueryHandler basicText = new RiveScriptQueryHandler();
+			// isQueryFound method is now moved to RiveScriptOutputAnalyzer class
+			// TODO: Do we need two classes for Rivescripts or can we merge of of them
+			boolean flag = RiveScriptOutputAnalyzer.isQueryFound(query);
+			log.debug("query is :: "+ query);
+			if (flag) {
+				log.info("basicText execution");
+				return basicText;
+			}
+			else {
+				handleIntentClassification(request);
+			}
+		} catch (Exception e) {
+			log.info(e.getMessage());
+		}
+		return null;
+	}
+	private String handlePreProcessing(String query) {
+		//Spell Check
+		String result = query;
+		SpellCheck spell = new SpellCheck(LanguageList.ENGLISH);
+		result = spell.correctSpelling(query);
+		log.info("Corrected Query:" + result); 
+		return result;
+	}
+	/**
+	 * Handle intent classification
+	 */
+	public void handleIntentClassification(IncomingRequest request) {
+		IntentLearner learner;
+		String query = request.getRequestContent().get(0).getText().toLowerCase();
+		learner = new IntentLearner();
+		learner.loadDataset("C:\\Users\\Divya\\Documents\\try\\intentdata.arff");
+		
+		learner.evaluate();
+		learner.learn();
+		//
+		learner.saveModel("C:\\Users\\Divya\\Documents\\try\\intentdata.model");
+		String prediction=learner.classify(query);
+		learner.usePrediction(prediction);
+		
+	}
 	/**
 	 * Main method. It is an example of the usage of this class.
 	 * @param args Command-line arguments: fileData and fileModel.
@@ -341,8 +406,8 @@ public class IntentLearner {
 		//
 		learner.saveModel("C:\\Users\\Divya\\Documents\\try\\intentdata.model");
 		//learner.makeTestInstance("prince of persia");
-		learner.classify("prince of persia");
-			//learner.usePrediction(request, "what would it mean to you", testInstance.classAttribute().value((int) pred));
+		learner.classify("how do you feel about that");
+		//learner.usePrediction(request, "what would it mean to you", testInstance.classAttribute().value((int) pred));
 		
 	}
 }	
