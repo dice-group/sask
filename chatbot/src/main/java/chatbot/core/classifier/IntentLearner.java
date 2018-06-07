@@ -42,6 +42,9 @@ import weka.filters.unsupervised.attribute.StringToWordVector;
  */
 public class IntentLearner {
 	
+	private static final String resourcePath = "src/main/resources/classifier/";
+	private static final String trainingData = "intentdata.arff";
+	private static final String model = "intentdata.model";
 	private static Logger log = Logger.getLogger(IntentLearner.class.getName());
 
 	/**
@@ -235,10 +238,10 @@ public class IntentLearner {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		 try {
+		/* try {
 			 ObjectOutputStream out;
 		
-			out = new ObjectOutputStream(new FileOutputStream("C:\\Users\\Divya\\Documents\\test.txt"));
+			out = new ObjectOutputStream(new FileOutputStream("classifier/test.txt"));
 		
          out.writeObject(testInstance.toString());
          out.close();
@@ -248,7 +251,7 @@ public class IntentLearner {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
  		log.info("===== Instance created with reference dataset =====");
 		log.info(testInstance);
 		return testInstance;
@@ -259,12 +262,12 @@ public class IntentLearner {
 	public void saveNewInstance(String query) {
 		// Create the attributes, class and text
 		BufferedWriter bw = null;
-		FileWriter fw = null;
+		//FileWriter fw = null;
 
 		try {
 
 
-			File file = new File("classifier/intentdata.arff");
+			File file = new File(resourcePath + trainingData);
 
 			// if file doesnt exists, then create it
 			if (!file.exists()) {
@@ -272,8 +275,8 @@ public class IntentLearner {
 			}
 
 			// true = append file
-			fw = new FileWriter(file.getAbsoluteFile(), true);
-			bw = new BufferedWriter(fw);
+			//fw = new FileWriter(file.getAbsoluteFile(), true);
+			bw = new BufferedWriter(new FileWriter(resourcePath + trainingData , true));
 			bw.write(System.lineSeparator());
 			bw.write(query);
 
@@ -286,11 +289,13 @@ public class IntentLearner {
 
 			try {
 
-				if (bw != null)
+				if (bw != null) {
+					bw.flush();
 					bw.close();
+				}
 
-				if (fw != null)
-					fw.close();
+				/*if (fw != null)
+					fw.close();*/
 
 			} catch (IOException ex) {
 
@@ -327,7 +332,7 @@ public class IntentLearner {
 	 * check rivescript first
 	 * @return 
 	 */
-	public RiveScriptQueryHandler checkRiveScript(IncomingRequest request) {
+	public Handler classify(IncomingRequest request) {
 		try {
 			String query = request.getRequestContent().get(0).getText().toLowerCase();
 			//Preprocess User Input. Do not expect it to be perfect.
@@ -352,13 +357,14 @@ public class IntentLearner {
 				return basicText;
 			}
 			else {
-				handleIntentClassification(request);
+				return handleIntentClassification(request);
 			}
 		} catch (Exception e) {
 			log.info(e.getMessage());
 		}
 		return null;
 	}
+	
 	private String handlePreProcessing(String query) {
 		//Spell Check
 		String result = query;
@@ -370,18 +376,18 @@ public class IntentLearner {
 	/**
 	 * Handle intent classification
 	 */
-	public void handleIntentClassification(IncomingRequest request) {
+	public Handler handleIntentClassification(IncomingRequest request) {
 		IntentLearner learner;
 		String query = request.getRequestContent().get(0).getText().toLowerCase();
 		learner = new IntentLearner();
-		learner.loadDataset("classifier/intentdata.arff");
+		learner.loadDataset(resourcePath + trainingData);
 		
 		learner.evaluate();
 		learner.learn();
 		//
-		learner.saveModel("classifier/intentdata.model");
+		learner.saveModel(resourcePath + model);
 		String prediction=learner.classify(query);
-		learner.usePrediction(prediction);
+		return learner.usePrediction(prediction);
 		
 	}
 	/**
