@@ -25,17 +25,12 @@ import chatbot.utils.spellcheck.SpellCheck;
 import chatbot.utils.spellcheck.SpellCheck.LanguageList;
 import weka.classifiers.Evaluation;
 import weka.classifiers.functions.LibSVM;
-import weka.classifiers.lazy.IBk;
 import weka.classifiers.meta.FilteredClassifier;
-import weka.classifiers.trees.J48;
 import weka.core.Attribute;
 import weka.core.DenseInstance;
 import weka.core.Instances;
 import weka.core.SelectedTag;
 import weka.core.converters.ArffLoader.ArffReader;
-import weka.core.tokenizers.NGramTokenizer;
-import weka.filters.Filter;
-import weka.filters.unsupervised.attribute.Standardize;
 import weka.filters.unsupervised.attribute.StringToWordVector;
 
 /**
@@ -56,16 +51,15 @@ public class IntentLearner {
 	/**
 	 * Object that stores training data.
 	 */
-	Instances trainData;
+	private Instances trainData;
 	/**
 	 * Object that stores the filter
 	 */
-	StringToWordVector filter;
-	Standardize sfilter;
+	private StringToWordVector filter;
 	/**
 	 * Object that stores the classifier
 	 */
-	FilteredClassifier classifier;
+	private FilteredClassifier classifier;
 		
 	/**
 	 * This method loads a dataset in ARFF format. If the file does not exist, or
@@ -78,12 +72,12 @@ public class IntentLearner {
 			ArffReader arff = new ArffReader(reader);
 			trainData = arff.getData();
 			
-			System.out.println("===== Loaded dataset: " + fileName + " =====");
+			log.debug("===== Loaded dataset: " + fileName + " =====");
 			reader.close();
 		}
 		catch (IOException e) {
 			e.printStackTrace();
-			System.out.println("Problem found when reading: " + fileName);
+			log.warn("Problem found when reading: " + fileName);
 		}
 	}
 	
@@ -119,13 +113,13 @@ public class IntentLearner {
 			//classifier.setClassifier(new J48());
 			Evaluation eval = new Evaluation(trainData);
 			eval.crossValidateModel(classifier, trainData, 10, new Random(1));
-			System.out.println(eval.toSummaryString());
-			System.out.println(eval.toClassDetailsString());
-			System.out.println("===== Evaluating on filtered (training) dataset done =====");
+			log.debug(eval.toSummaryString());
+			log.debug(eval.toClassDetailsString());
+			log.debug("===== Evaluating on filtered (training) dataset done =====");
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("Problem found when evaluating");
+			log.warn("Problem found when evaluating");
 		}
 	}
 	
@@ -141,16 +135,16 @@ public class IntentLearner {
 			//sfilter.setInputFormat(trainData);
 //			filter.setInputFormat(trainData);
 //			trainData = Filter.useFilter(trainData, filter);
-			System.out.println("Number of attributes in train=" + trainData.numAttributes());
+			log.debug("Number of attributes in train=" + trainData.numAttributes());
 			classifier.setFilter(filter);
 			classifier.setClassifier(createClassifierModel());
 			classifier.buildClassifier(trainData);
 			// Uncomment to see the classifier
-			System.out.println("===== Training on filtered (training) dataset done =====");
+			log.debug("===== Training on filtered (training) dataset done =====");
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("Problem found when training");
+			log.warn("Problem found when training");
 		}
 	}
 	
@@ -164,11 +158,11 @@ public class IntentLearner {
             ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(fileName/*"resources/classifier/intentdata.model"*/));
             out.writeObject(classifier);
             out.close();
- 			System.out.println("===== Saved model: " + fileName + " =====");	
+ 			log.info("===== Saved model: " + fileName + " =====");	
         } 
 		catch (IOException e) {
 			e.printStackTrace();
-			System.out.println("Problem found when writing: " + fileName);
+			log.warn("Problem found when writing: " + fileName);
 		}
 	}
 	
@@ -255,8 +249,8 @@ public class IntentLearner {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
- 		System.out.println("===== Instance created with reference dataset =====");
-		System.out.println(testInstance);
+ 		log.info("===== Instance created with reference dataset =====");
+		log.info(testInstance);
 		return testInstance;
 	}
 	/**
@@ -270,7 +264,7 @@ public class IntentLearner {
 		try {
 
 
-			File file = new File("C:\\Users\\Divya\\Documents\\try\\intentdata.arff");
+			File file = new File("classifier/intentdata.arff");
 
 			// if file doesnt exists, then create it
 			if (!file.exists()) {
@@ -316,16 +310,16 @@ public class IntentLearner {
 			//Instances newTest2 = Filter.useFilter(test2, filter); 
 			//for (int i = 0; i < instances.numInstances(); i ++){
 				double pred = classifier.classifyInstance(instances.get(instances.numInstances()-1));
-				System.out.println("===== Classified instance =====");
+				log.debug("===== Classified instance =====");
 				String prediction =testInstance.classAttribute().value((int) pred);
-				System.out.println("Class predicted: " + prediction);
+				log.warn("Query= " + query + ",Class predicted: " + prediction);
 				saveNewInstance("\'"+query+"\',"+ prediction);
 				return prediction;
 			//}
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("Problem found when classifying the text");
+			log.warn("Problem found when classifying the text");
 		}
 		return null;		
 	}
@@ -380,12 +374,12 @@ public class IntentLearner {
 		IntentLearner learner;
 		String query = request.getRequestContent().get(0).getText().toLowerCase();
 		learner = new IntentLearner();
-		learner.loadDataset("C:\\Users\\Divya\\Documents\\try\\intentdata.arff");
+		learner.loadDataset("classifier/intentdata.arff");
 		
 		learner.evaluate();
 		learner.learn();
 		//
-		learner.saveModel("C:\\Users\\Divya\\Documents\\try\\intentdata.model");
+		learner.saveModel("classifier/intentdata.model");
 		String prediction=learner.classify(query);
 		learner.usePrediction(prediction);
 		
@@ -394,7 +388,7 @@ public class IntentLearner {
 	 * Main method. It is an example of the usage of this class.
 	 * @param args Command-line arguments: fileData and fileModel.
 	 */
-	public static void main (String[] args) {
+	/*public static void main (String[] args) {
 	
 		IntentLearner learner;
 		
@@ -409,5 +403,5 @@ public class IntentLearner {
 		learner.classify("how do you feel about that");
 		//learner.usePrediction(request, "what would it mean to you", testInstance.classAttribute().value((int) pred));
 		
-	}
+	}*/
 }	
