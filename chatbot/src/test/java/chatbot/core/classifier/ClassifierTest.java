@@ -29,7 +29,7 @@ public class ClassifierTest {
 	}
 	
 	public Object classifyInput(IncomingRequest input) {
-		Classifier helper = new Classifier();
+		Classifier helper = new Classifier(null);
 		Object actualOutput =helper.classify(input);	
 		return actualOutput;
 	}

@@ -1,0 +1,24 @@
+### Spring properties
+# Service registers under this name
+spring:
+  application:
+    name: intelligentDataAssistant
+
+# Discovery Server Access
+eureka:
+  instance:
+    metadataMap:
+      type: intelligentDataAssistant
+      friendlyname: IntelligentDataAssistant
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:1111/eureka/
+
+# HTTP Server (Tomcat) Port
+server: 
+  port: 3303
+
+# Disable Spring Boot's "Whitelabel" default error page, so we can use our own
+error:
+  whitelabel:
+    enabled: false
