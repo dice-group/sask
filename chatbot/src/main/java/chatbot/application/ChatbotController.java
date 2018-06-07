@@ -22,11 +22,6 @@ import org.springframework.web.client.RestTemplate;
  *
  */
 @RestController
-//@RequestMapping("/chat")
-//@Configuration
-//@EnableAutoConfiguration
-//@EnableEurekaClient
-//public class Application {
 public class ChatbotController {
 
 	@Autowired

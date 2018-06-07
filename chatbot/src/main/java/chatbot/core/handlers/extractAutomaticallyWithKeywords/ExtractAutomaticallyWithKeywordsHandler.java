@@ -18,26 +18,23 @@ public class ExtractAutomaticallyWithKeywordsHandler extends Handler{
 	private final RestTemplate restTemplate;
 
 	public ExtractAutomaticallyWithKeywordsHandler (RestTemplate restTemplate) {
-		log.info("Return from Constructor");
 		this.restTemplate = restTemplate;
 }
 
 	public ResponseList search(IncomingRequest request) throws IOException {
 		try {
-			log.info("In Search REQUEST");
-//		  	String uri = "http://REPO-MS/getHdfsStructure?location=repo";
+			log.info("In Search Request of Extract Automatically");
 			String uri = "http://INTELLIGENTDATAASSISTANT/executeIntelligentDataAssistant";
-		  	log.info("Before search rest call");
 	  		String response = restTemplate.getForObject(uri, String.class);	
 	  		log.info("RESPONSE:"+response);
-	  		log.info("After search rest call");
-
+//			All the responses will be in the form of responseList object.
+//			At the moment nothing is returned. Future task
 			ResponseList responselist = new ResponseList();	
 			return responselist;
 
 		} catch (Exception e) {
 			// Check if we can create a logger.
-			log.error("EXTRACT AUTOMATICALLY, Exception in handling AUTOMATIC EXTRACTION Queries");
+			log.error("Extract Automatically, Exception in handling Automatic Extraction Queries");
 			ResponseList responselist = new ResponseList();
 			responselist.setError();
 			log.info(e.getMessage());
@@ -45,34 +42,3 @@ public class ExtractAutomaticallyWithKeywordsHandler extends Handler{
 		}
 	}
 }
-
-//public String extractFileNames() {
-////	{"suffix":"","path":"","type":"DIRECTORY","fileList":[{"suffix":"OutputAnalyzerTest.txt","path":"/OutputAnalyzerTest.txt","type":"FILE","fileList":[]},{"suffix":"test.txt","path":"/test.txt","type":"FILE","fileList":[]},{"suffix":"testData.txt","path":"/testData.txt","type":"FILE","fileList":[]}]}	  		
-//
-////	 {"path":"","suffix":"","type":"DIRECTORY","fileList":[{"path":"/OutputAnalyzerTest.txt","suffix":"OutputAnalyzerTest.txt","type":"FILE","fileList":"[]"}]}
-//	try {
-//		log.info("IN EXC FUNC");
-//
-//		JSONObject json = new JSONObject();
-//		json.put("suffix", "");
-//		json.put("path", "");
-//		json.put("type", "DIRECTORY");
-//	
-//		JSONArray array = new JSONArray();
-//		JSONObject item = new JSONObject();
-//		item.put("suffix", "OutputAnalyzerTest.txt");
-//		item.put("path","/OutputAnalyzerTest.txt");
-//		item.put("type", "FILE"); 
-//		item.put("fileList", "[]");
-//		array.put(item);
-//		json.put("fileList", array);
-//		
-//		String message = json.toString();
-//		return message;
-//	}
-//	 catch (JSONException e) {
-//		// TODO Auto-generated catch block
-//		e.printStackTrace();
-//	 	}
-//	return null;
-//	}

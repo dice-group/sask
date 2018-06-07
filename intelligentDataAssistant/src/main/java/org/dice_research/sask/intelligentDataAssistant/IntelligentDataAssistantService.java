@@ -23,10 +23,8 @@ public class IntelligentDataAssistantService {
 	public String makeRestCall() {
 		  
 	  	String uri = "http://REPO-MS/getHdfsStructure?location=repo";
-	  	logger.info("Before Make rest call");
   		String response = this.restTemplate.getForObject(uri, String.class);	
   		logger.info(response);
-  		logger.info("After Make rest call");
   		return response;						
 	 }
 }

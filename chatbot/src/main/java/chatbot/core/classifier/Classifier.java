@@ -64,7 +64,6 @@ public class Classifier {
 
 	public Handler classify(IncomingRequest request) {
 		try {
-//			String originalQuery = request.getRequestContent().get(0).getText().toLowerCase();
 
 			String query = request.getRequestContent().get(0).getText().toLowerCase();
 			//Preprocess User Input. Do not expect it to be perfect.
