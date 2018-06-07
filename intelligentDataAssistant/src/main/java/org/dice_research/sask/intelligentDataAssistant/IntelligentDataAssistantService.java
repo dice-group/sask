@@ -16,12 +16,11 @@ public class IntelligentDataAssistantService {
 	private final RestTemplate restTemplate;
 
 	public IntelligentDataAssistantService(RestTemplate restTemplate) {
-		logger.info("IntelligentDataAssistantService Object Created");
 		this.restTemplate = restTemplate;
 	}
-
+	// Rest call to get HDFS File List from Repo-ms
 	public String makeRestCall() {
-		  
+		
 	  	String uri = "http://REPO-MS/getHdfsStructure?location=repo";
   		String response = this.restTemplate.getForObject(uri, String.class);	
   		logger.info(response);

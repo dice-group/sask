@@ -24,8 +24,9 @@ public class ExtractAutomaticallyWithKeywordsHandler extends Handler{
 	public ResponseList search(IncomingRequest request) throws IOException {
 		try {
 			log.info("In Search Request of Extract Automatically");
+
 			String uri = "http://INTELLIGENTDATAASSISTANT/executeIntelligentDataAssistant";
-	  		String response = restTemplate.getForObject(uri, String.class);	
+	  		String response = this.restTemplate.getForObject(uri, String.class);	
 	  		log.info("RESPONSE:"+response);
 //			All the responses will be in the form of responseList object.
 //			At the moment nothing is returned. Future task
