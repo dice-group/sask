@@ -14,17 +14,18 @@
 	</parent>
 
 	<modules>
-		<module>eureka-server</module>
-		<module>discoveryclient</module>
-		<module>webclient</module>
-		<module>fox-ms</module>
-		<module>fred-ms</module>
 		<module>cedric-ms</module>
 		<module>chatbot</module>
 		<module>database-ms</module>
-		<module>OpenIE-ms</module>
 		<module>sorookin-ms</module>
-
+		<module>dbpedia-ms</module>
+		<module>eureka-server</module>
+		<module>executer-ms</module>
+		<module>fox-ms</module>
+		<module>fred-ms</module>
+		<module>open-ie-ms</module>
+		<module>repo-ms</module>
+		<module>webclient</module>
 	</modules>
 
 	<properties>
@@ -32,6 +33,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+		<junit.version>4.12</junit.version>
 
 		<!-- ~~~~~~~ spring ~~~~~~~ -->
 		<spring.test.version>1.5.8.RELEASE</spring.test.version>
@@ -58,6 +60,19 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 			<version>${spring.boot.version}</version>
+		</dependency>
+		<!-- ~~~~~~~ junit ~~~~~~~ -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- ~~~~~~~ sask commons ~~~~~~~ -->
+		<dependency>
+			<groupId>com.github.dice-group</groupId>
+			<artifactId>sask-commons</artifactId>
+			<version>0.0.7.5</version>
 		</dependency>
 	</dependencies>
 
@@ -87,4 +102,11 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+
+	<repositories>
+		<repository>
+			<id>jitpack.io</id>
+			<url>https://jitpack.io</url>
+		</repository>
+	</repositories>
 </project>

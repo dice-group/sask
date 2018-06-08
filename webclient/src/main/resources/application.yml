@@ -41,6 +41,9 @@ zuul:
     repo:
       path: /REPO-MS/**
       serviceId: REPO-MS
+    executer:
+      path: /EXECUTER-MS/**
+      serviceId: EXECUTER-MS
 hystrix:
   command:
     default:

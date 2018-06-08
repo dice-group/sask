@@ -6,10 +6,17 @@ import org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfigurat
 import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
-@SpringBootApplication(exclude = {MongoAutoConfiguration.class, MongoDataAutoConfiguration.class})
+/**
+ * This class is responsible for launching the microservice.
+ * 
+ * @author Kevin Haack
+ *
+ */
+@SpringBootApplication(exclude = { MongoAutoConfiguration.class, MongoDataAutoConfiguration.class })
 @EnableDiscoveryClient
 public class CedricMsApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(CedricMsApplication.class, args);
+		CedricMsService.getInstance();
 	}
 }

@@ -58,7 +58,7 @@ var DAO = function(options) {
 			icon : icon
 		};
 
-		if (type == 'folder') {
+		if (type === 'folder') {
 			node.nodes = nodes;
 		}
 
@@ -74,6 +74,17 @@ var DAO = function(options) {
 		}
 
 		return "./" + discoverer.getRepo().serviceId + "/";
+	};
+	
+	/**
+	 * Return the executer service id.
+	 */
+	var getExecuterServiceUri = function() {
+		if (!discoverer.getExecuter()) {
+			return;
+		}
+
+		return "./" + discoverer.getExecuter().serviceId + "/";
 	}
 
 	/**
@@ -139,6 +150,22 @@ var DAO = function(options) {
 
 		$.ajax({
 			type : "GET",
+			url : uri,
+			success : success,
+			error : error
+		});
+	};
+	
+	/**
+	 * Send the passed workflow to the executer.
+	 */
+	this.executeWorkflow = function(success, error, workflow) {
+		var uri = getExecuterServiceUri() + "executeWorkflow";
+
+		$.ajax({
+			type : "POST",
+			data : JSON.stringify(workflow),
+			contentType: "application/json",
 			url : uri,
 			success : success,
 			error : error
@@ -211,7 +238,7 @@ var DAO = function(options) {
 	this.renameRepo = function(success, error, from, to) {
 		var uri = getRepoServiceUri() + "rename";
 		var data = {
-			location : 'repo',
+			location : "repo",
 			from : from,
 			to : to
 		};
@@ -335,10 +362,10 @@ var DAO = function(options) {
 		}
 
 		var formData = new FormData();
-		formData.append('path', '/');
-		formData.append('location', 'workflow');
-		formData.append('filename', target);
-		formData.append('file', JSON.stringify(workflow));
+		formData.append("path", "/");
+		formData.append("location", "workflow");
+		formData.append("filename", target);
+		formData.append("file", JSON.stringify(workflow));
 
 		var uri = getRepoServiceUri() + "storeContentInFile";
 		$.ajax({
@@ -357,8 +384,6 @@ var DAO = function(options) {
 	 * Return all target graphs.
 	 */
 	this.getTargetGraphs = function(success, error) {
-		console.log("(MOCK) get target graphs");
-
 		var graphs = [];
 		graphs.push({
 			text : 'sask',

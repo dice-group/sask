@@ -7,7 +7,7 @@
 	<version>0.0.1</version>
 	<packaging>jar</packaging>
 
-	<name>discovery-client</name>
+	<name>dbpedia-ms</name>
 
 	<parent>
 		<groupId>org.dice-research</groupId>

@@ -15,15 +15,18 @@
 	var _default = {};
 
 	_default.settings = {
+		buttongroupTemplate : '<div class="btn-group" role="group"></div>',
 		newButtonTemplate : '<button type="button" class="btn btn-default"><a href="#"><span class="glyphicon glyphicon glyphicon-file"></span> New</a></button>',
 		undoButtonTemplate : '<button type="button" class="btn btn-default"><a href="#"><span class="glyphicon glyphicon-arrow-left"></span> Undo</a></button>',
 		redoButtonTemplate : '<button type="button" class="btn btn-default"><a href="#">Redo <span class="glyphicon glyphicon-arrow-right"></span></a></button>',
 		saveButtonTemplate : '<button type="button" class="btn btn-default"><a href="#"><span class="glyphicon glyphicon-floppy-disk"></span> Save</a></button>',
+		executeButtonTemplate : '<button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-play"></span> Execute</button>',
 		workflownameFieldTemplate : '<span class="pull-right"></span>',
 		onNewButtonClick : undefined,
 		onUndoButtonClick : undefined,
 		onRedoButtonClick : undefined,
-		onSaveButtonClick : undefined
+		onSaveButtonClick : undefined,
+		onExecuteButtonClick : undefined
 	};
 
 	_default.options = {};
@@ -47,6 +50,11 @@
 	 * The save button.
 	 */
 	var saveButton = undefined;
+	
+	/**
+	 * The execute button.
+	 */
+	var executeButton = undefined;
 
 	/**
 	 * The workflow name.
@@ -66,7 +74,7 @@
 
 		this.$element = $(element);
 		this.elementId = element.id;
-		this.styleId = this.elementId + '-style';
+		this.styleId = this.elementId + "-style";
 
 		this.init(options);
 
@@ -78,7 +86,7 @@
 			disableSave : $.proxy(this.disableSave, this),
 			setWorkflowName : $.proxy(this.setWorkflowName, this)
 		};
-	}
+	};
 
 	/**
 	 * Init.
@@ -94,16 +102,25 @@
 	 * Init the buttons.
 	 */
 	Toolbar.prototype.initButtons = function() {
+		// buttons
 		newButton = $(this.options.newButtonTemplate);
 		undoButton = $(this.options.undoButtonTemplate);
 		redoButton = $(this.options.redoButtonTemplate);
 		saveButton = $(this.options.saveButtonTemplate);
+		executeButton = $(this.options.executeButtonTemplate);
+		
+		var buttongroup = $(this.options.buttongroupTemplate);
+		
+		buttongroup.append(newButton);
+		buttongroup.append(undoButton);
+		buttongroup.append(redoButton);
+		buttongroup.append(saveButton);
+		buttongroup.append(executeButton);
+		
+		this.$element.append(buttongroup);
+		
+		// name
 		workflownameField = $(this.options.workflownameFieldTemplate);
-
-		this.$element.append(newButton);
-		this.$element.append(undoButton);
-		this.$element.append(redoButton);
-		this.$element.append(saveButton);
 		this.$element.append(workflownameField);
 	};
 
@@ -140,6 +157,13 @@
 				self.options.onSaveButtonClick();
 			}
 		});
+		
+		// execute
+		executeButton.click(function() {
+			if (self.options.onExecuteButtonClick) {
+				self.options.onExecuteButtonClick();
+			}
+		});
 	};
 
 	/**
@@ -149,7 +173,7 @@
 		if (disable) {
 			redoButton.removeAttr('disabled');
 		} else {
-			redoButton.attr('disabled', 'disabled');
+			redoButton.attr("disabled", "disabled");
 		}
 	};
 
@@ -158,7 +182,7 @@
 	 */
 	Toolbar.prototype.disableUndo = function(disable) {
 		if (disable) {
-			undoButton.removeAttr('disabled');
+			undoButton.removeAttr("disabled");
 		} else {
 			undoButton.attr('disabled', 'disabled');
 		}
@@ -199,7 +223,7 @@
 							+ options);
 				} else if (!$.isFunction(_this[options])
 						|| options.charAt(0) === '_') {
-					logError('No such method : ' + options);
+					logError("No such method : " + options);
 				} else {
 					if (!(args instanceof Array)) {
 						args = [ args ];
@@ -218,4 +242,3 @@
 	};
 
 })(jQuery, window, document);
-0

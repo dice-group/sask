@@ -1,15 +1,21 @@
 $(function() {
 	$("#textbox").keypress(function(event) {
-		if (event.which == 13) {
+		if (event.which === 13) {
+		var newMsg = $("#textbox").val();
+		newMsg = newMsg.trim();
+		if(newMsg.length > 0){
 			$("#send").click();
 			event.preventDefault();
 		}
-	});
+		else{
+			$("#textbox").val("");	
+		}
+	}});
 	$("#send").click(function() {
 		var newMsg = $("#textbox").val();
+		newMsg = newMsg.trim();//eliminate whitespace on either side
 		$("#textbox").val("");
 		var prevMsg = $("#container").html();
-		console.log(prevMsg.length);
 		if (prevMsg.length != 6) {
 			prevMsg = prevMsg + "<br>";
 		}
@@ -23,39 +29,31 @@ $(function() {
 			type : "POST",
 			dataType: 'text',
 			data: JSON.stringify(data),
-			 headers: {
-	                'Accept': 'application/json; charset=utf-8',
-	                'Content-Type': 'application/json; charset=utf-8'
-	         },
-	         url: '/chatbot/chat', //Need to debug how to read data: in Spring. Passing as command param is not right.
-			
-			timeout : 100000,
-			success : function(data) {
-				console.log("SUCCESS: ", data);
+			contentType: "application/json",
+	         url: "/chatbot/chat", //Need to debug how to read data: in Spring. Passing as command param is not right.
+			timeout : 100000 })
+			.done(function(data){ 
 				var prevMsg = $("#container").html();
-				console.log(prevMsg.length);
 				if (prevMsg.length != 6) {
 					prevMsg = prevMsg + "<br>";
 				}
 				var obj = JSON.parse(data);
-				console.log(obj);
 				
 				var displayText = "";
-				console.log(obj.messageType);
-				if(obj.error == true){
+				if(obj.error === true){
 					//Create a Internal Server Error card
 					displayText+="<div class='card'>Internal Server error. Please contact your administrator<br></div>";
 				}
 				else{
 					var newobj = obj.messageData;
 					var messageType= obj.messageType;
-					if(messageType== "PLAIN_TEXT"){
+					if(messageType=== "PLAIN_TEXT"){
 						displayText+="<div class='card'>";
 						displayText += newobj[0].content;
 						displayText += "</div>";
 						
 					}
-					else if (messageType == "TEXT_WITH_URL" || messageType == "URL"){
+					else if (messageType=== "TEXT_WITH_URL" || messageType === "URL"){
 						//Need to polish read Entry Information.
 						for(var i=0; i< newobj.length; i++){
 							displayText+="<div class='card'>";
@@ -71,8 +69,6 @@ $(function() {
 								if(entryobj[j].buttonType == "URL"){
 									var text = entryobj[j].displayText;
 									displayText +=text.link(entryobj[j].uri) + "-->For reference,URL=" + entryobj[j].uri + "<br>";
-									console.log(entryobj[j].uri);
-									//displayText +='<a href="' + entryobj[j].uri + '">' + text + '</a>';
 									
 								}
 								else{
@@ -82,29 +78,34 @@ $(function() {
 							displayText += "</div>";
 						}
 					}
-					else{
-						//Read and implement Feedback for Active Learning Intent classification TODO:
-						console.log("Not implemented yet");
-					}
+					
 				}
 				$("#container").html(prevMsg + displayText);
 				$("#container").scrollTop($("#container").prop("scrollHeight"));
-			},
-			error : function(e) {
-				console.log("ERROR: ", e);
+			})
+			.fail(function(data){
 				var displayText="<div class='card'>Internal Server error. Please contact your administrator<br></div>";
 				$("#container").html(prevMsg + displayText);
 				$("#container").scrollTop($("#container").prop("scrollHeight"));
-			
-			},
-			done : function(e) {
-				//
-				console.log("DONE");
-				//window.alert("DONE");
-			}
 		});
 		
 		$("#container").html(prevMsg + newMsg);
 		$("#container").scrollTop($("#container").prop("scrollHeight"));
+		$("#send").prop("disabled",true);
 	});
 });
+
+$(document).ready(function() {
+    $("#textbox").on("keyup", function() {
+    var textBoxContent = document.getElementById("textbox").value;
+    textBoxContent = textBoxContent.trim();
+    if(0 === textBoxContent.length){
+        $("#send").prop("disabled",true);}
+     else{
+     	$("#send").prop("disabled",false);
+     }
+    }).trigger("keyup");
+    
+
+});
+

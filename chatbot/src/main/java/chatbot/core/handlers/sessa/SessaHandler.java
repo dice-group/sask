@@ -23,9 +23,6 @@ public class SessaHandler extends Handler {
 	private static Logger log = Logger.getLogger(SessaHandler.class.getName());
 	private static final String URL = "http://localhost:7070/search?query="; // URL
 
-	public SessaHandler() {
-
-	}
 
 	private Response generateResponse(String incomingResponse) throws JsonProcessingException, IOException {
 		Response obj=new Response();
