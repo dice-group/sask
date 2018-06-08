@@ -3,7 +3,6 @@ package chatbot.core.classifier;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -69,7 +68,7 @@ public class IntentLearner {
 	 * it has a wrong format, the attribute trainData is null.
 	 * @param fileName The name of the file that stores the dataset.
 	 */
-	public void loadDataset(String fileName) {
+	public synchronized void loadDataset(String fileName) {
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(fileName));
 			ArffReader arff = new ArffReader(reader);
@@ -156,7 +155,7 @@ public class IntentLearner {
 	 * simple serialization of the classifier object.
 	 * @param fileName The name of the file that will store the trained model.
 	 */
-	public void saveModel(String fileName) {
+	public synchronized void saveModel(String fileName) {
 		try {
             ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(fileName/*"resources/classifier/intentdata.model"*/));
             out.writeObject(classifier);
@@ -259,7 +258,7 @@ public class IntentLearner {
 	/**
 	 * This method creates the new instance to be saved.
 	 */
-	public void saveNewInstance(String query) {
+	public synchronized void saveNewInstance(String query) {
 		// Create the attributes, class and text
 		BufferedWriter bw = null;
 		//FileWriter fw = null;
