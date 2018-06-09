@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -41,11 +42,10 @@ import weka.filters.unsupervised.attribute.StringToWordVector;
  */
 public class IntentLearner {
 	
-	private static final String resourcePath = "src/main/resources/classifier/";
+	private static final String resourcePath = "classifier/";
 	private static final String trainingData = "intentdata.arff";
 	private static final String model = "intentdata.model";
 	private static Logger log = Logger.getLogger(IntentLearner.class.getName());
-
 	/**
 	 * Object that stores the instance.
 	 */
@@ -70,6 +70,8 @@ public class IntentLearner {
 	 */
 	public synchronized void loadDataset(String fileName) {
 		try {
+			//fileName = "classifier/intentdata.arff";
+			//URL resource = this.getClass().getResource(fileName);
 			BufferedReader reader = new BufferedReader(new FileReader(fileName));
 			ArffReader arff = new ArffReader(reader);
 			trainData = arff.getData();
@@ -258,7 +260,7 @@ public class IntentLearner {
 	/**
 	 * This method creates the new instance to be saved.
 	 */
-	public synchronized void saveNewInstance(String query) {
+	public synchronized void saveNewInstance(String filePath , String query) {
 		// Create the attributes, class and text
 		BufferedWriter bw = null;
 		//FileWriter fw = null;
@@ -266,7 +268,7 @@ public class IntentLearner {
 		try {
 
 
-			File file = new File(resourcePath + trainingData);
+			File file = new File(filePath);
 
 			// if file doesnt exists, then create it
 			if (!file.exists()) {
@@ -275,7 +277,7 @@ public class IntentLearner {
 
 			// true = append file
 			//fw = new FileWriter(file.getAbsoluteFile(), true);
-			bw = new BufferedWriter(new FileWriter(resourcePath + trainingData , true));
+			bw = new BufferedWriter(new FileWriter(filePath , true));
 			bw.write(System.lineSeparator());
 			bw.write(query);
 
@@ -307,8 +309,9 @@ public class IntentLearner {
 	/**
 	 * This method performs the classification of the instance.
 	 * Output is done at the command-line.
+	 * @param  
 	 */
-	public String classify(String query) {
+	public String classify(String filePath , String query) {
 		try {
 			Instances instances = makeTestInstance(query);
 			//Instances newTest2 = Filter.useFilter(test2, filter); 
@@ -317,7 +320,7 @@ public class IntentLearner {
 				log.debug("===== Classified instance =====");
 				String prediction =testInstance.classAttribute().value((int) pred);
 				log.warn("Query= " + query + ",Class predicted: " + prediction);
-				saveNewInstance("\'"+query+"\',"+ prediction);
+				saveNewInstance(filePath , "\'"+query+"\',"+ prediction);
 				return prediction;
 			//}
 		}
@@ -379,13 +382,16 @@ public class IntentLearner {
 		//IntentLearner learner;
 		String query = request.getRequestContent().get(0).getText().toLowerCase();
 		//learner = new IntentLearner();
-		this.loadDataset(resourcePath + trainingData);
+		ClassLoader classLoader = this.getClass().getClassLoader();
+		URL urlTrainingData = classLoader.getResource(resourcePath+ trainingData);
+		String trainingDataFile = urlTrainingData.getFile();
+		this.loadDataset(trainingDataFile);
 		
 		this.evaluate();
 		this.learn();
-		//
-		this.saveModel(resourcePath + model);
-		String prediction=this.classify(query);
+		URL urlModel = classLoader.getResource(resourcePath + model);
+		this.saveModel(urlModel.getFile());
+		String prediction=this.classify(trainingDataFile , query);
 		return this.usePrediction(prediction);
 		
 	}
