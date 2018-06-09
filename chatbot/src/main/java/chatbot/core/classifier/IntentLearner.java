@@ -115,8 +115,8 @@ public class IntentLearner {
 			//classifier.setClassifier(new J48());
 			Evaluation eval = new Evaluation(trainData);
 			eval.crossValidateModel(classifier, trainData, 10, new Random(1));
-			log.debug(eval.toSummaryString());
-			log.debug(eval.toClassDetailsString());
+			log.info(eval.toSummaryString());
+			log.info(eval.toClassDetailsString());
 			log.debug("===== Evaluating on filtered (training) dataset done =====");
 		}
 		catch (Exception e) {
@@ -376,17 +376,17 @@ public class IntentLearner {
 	 * Handle intent classification
 	 */
 	public Handler handleIntentClassification(IncomingRequest request) {
-		IntentLearner learner;
+		//IntentLearner learner;
 		String query = request.getRequestContent().get(0).getText().toLowerCase();
-		learner = new IntentLearner();
-		learner.loadDataset(resourcePath + trainingData);
+		//learner = new IntentLearner();
+		this.loadDataset(resourcePath + trainingData);
 		
-		learner.evaluate();
-		learner.learn();
+		this.evaluate();
+		this.learn();
 		//
-		learner.saveModel(resourcePath + model);
-		String prediction=learner.classify(query);
-		return learner.usePrediction(prediction);
+		this.saveModel(resourcePath + model);
+		String prediction=this.classify(query);
+		return this.usePrediction(prediction);
 		
 	}
 	/**

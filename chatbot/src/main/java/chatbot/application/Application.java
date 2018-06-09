@@ -1,6 +1,5 @@
 package chatbot.application;
 
-import chatbot.core.classifier.Classifier;
 import chatbot.core.classifier.IntentLearner;
 import chatbot.core.handlers.Handler;
 import chatbot.io.incomingrequest.IncomingRequest;
