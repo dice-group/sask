@@ -4,6 +4,12 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 import org.dice_research.sask.executer_ms.workflow.Operator;
 import org.dice_research.sask.executer_ms.workflow.Workflow;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -16,7 +22,7 @@ import org.springframework.web.client.RestTemplate;
 public class ExtractTask implements Runnable {
 
 
-	private final Logger logger = Logger.getLogger(PullTask.class.getName());
+	private final Logger logger = Logger.getLogger(ExtractTask.class.getName());
 	private final RestTemplate restTemplate;
 	private final Operator op;
 	private final Workflow wf;
@@ -31,10 +37,20 @@ public class ExtractTask implements Runnable {
 
 	@Override
 	public void run() {
-		logger.info("Start Thread: "+ExtractTask.class.getName()+ "with Extractor: "+getOperatorName());	
+		logger.info("Start Thread: "+ExtractTask.class.getName()+ "with Extractor: "+getOperatorName());
+		logger.info("Extractor input: "+extractorInput);
 		String uri = this.getExtractorURI(this.getOperatorName());
-		String extractorOutput =  this.restTemplate.getForObject(uri + "/extractSimple?input={content}", String.class, this.extractorInput);
 		
+		HttpHeaders headers = new HttpHeaders();
+		//headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+
+		MultiValueMap<String, String> map= new LinkedMultiValueMap<String, String>();
+		map.add("input", extractorInput);
+		HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, headers);
+		ResponseEntity<String> response = restTemplate.postForEntity( uri+"/extractSimple?", request , String.class );
+		
+		String extractorOutput = response.getBody();
+		//String extractorOutput =  this.restTemplate.getForObject(uri + "/extractSimple?input={content}", String.class, this.extractorInput);
 
 		if (null != extractorOutput) {
 			logger.info(extractorOutput);
@@ -42,7 +58,9 @@ public class ExtractTask implements Runnable {
 			logger.info("no data extracted");
 		}
 		
-		Set<Runnable> nextOperatorList = TaskFactory.createTasks(this.restTemplate, this.wf,this.getNextOperatorList(),new String[] {extractorOutput});
+		Set<Runnable> nextOperatorList = TaskFactory.createTasks(this.restTemplate, this.wf,this.getNextOperatorList(),new String[] {extractorOutput});		
+		logger.info("Next Task: "+ nextOperatorList.iterator().next().toString());
+
 		TaskExecuter executer = new TaskExecuter(nextOperatorList);
 		executer.execute();
 	}

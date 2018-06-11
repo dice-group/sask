@@ -45,6 +45,7 @@ public class ExecuterMsController {
 
 	@RequestMapping("/executeWorkflow")
 	public String executeWorkflow(@RequestBody Workflow workflow) {
+		logger.info("executer-microservice executeWorkflow(@RequestBody Workflow workflow)");
 		ExecuterService service = new ExecuterService(restTemplate);
 		return service.execute(workflow);
 	}

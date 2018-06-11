@@ -62,7 +62,7 @@ public class Workflow implements Serializable {
 
 		if (startOperators.size() == 0)
 			throw new RuntimeException("No queue start found.");
-
+		
 		return startOperators;
 	}
 
