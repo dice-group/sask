@@ -305,7 +305,60 @@ public class IntentLearner {
 			}
 		}
 	}	
-	
+	public synchronized void deleteFromInstanceFile(String query) {
+		// Create the attributes, class and text
+		BufferedWriter bw = null;
+		//FileWriter fw = null;
+
+		try {
+			ClassLoader classLoader = this.getClass().getClassLoader();
+			URL urlTrainingData = classLoader.getResource(resourcePath+ trainingData);
+			String trainingDataFile = urlTrainingData.getFile();
+			File trainFile = new File(trainingDataFile);
+			URL urlTempData = classLoader.getResource(resourcePath+ "temp.arff");
+			String tempDataFile = urlTempData.getFile();
+			File tempFile = new File(tempDataFile);
+			BufferedReader reader = new BufferedReader(new FileReader(trainFile));
+			BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
+
+			String sCurrentLine;
+
+			while ((sCurrentLine = reader.readLine()) != null) {
+				if(sCurrentLine.trim().contains(query)) {
+					continue;
+				}else {
+					 writer.write(sCurrentLine + System.getProperty("line.separator"));
+				}
+			}
+			writer.flush();
+			writer.close();
+			reader.close();
+			tempFile.renameTo(trainFile);
+			
+
+		} catch (IOException e) {
+
+			e.printStackTrace();
+
+		} finally {
+
+			try {
+
+				if (bw != null) {
+					bw.flush();
+					bw.close();
+				}
+
+				/*if (fw != null)
+					fw.close();*/
+
+			} catch (IOException ex) {
+
+				ex.printStackTrace();
+
+			}
+		}
+	}
 	/**
 	 * This method performs the classification of the instance.
 	 * Output is done at the command-line.
@@ -396,6 +449,19 @@ public class IntentLearner {
 		
 	}
 	/**
+	 * process user feedback and delete entries that get negative feedback
+	 * @param request
+	 */
+	public void processFeedback(IncomingRequest request) {
+		// TODO Auto-generated method stub
+		String[] userFeedback = request.getRequestContent().get(0).getText().toLowerCase().split("##");
+		String query = userFeedback[0];
+		String fb = userFeedback[1];
+		if(fb.equals("negative")) {
+			deleteFromInstanceFile(query);
+		}
+	}
+	/**
 	 * Main method. It is an example of the usage of this class.
 	 * @param args Command-line arguments: fileData and fileModel.
 	 */
@@ -415,4 +481,6 @@ public class IntentLearner {
 		//learner.usePrediction(request, "what would it mean to you", testInstance.classAttribute().value((int) pred));
 		
 	}*/
+
+
 }	

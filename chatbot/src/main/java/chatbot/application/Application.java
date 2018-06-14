@@ -18,11 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
  *
  */
 @RestController
-@RequestMapping("/chat")
 public class Application {
 
 	
-	@RequestMapping(method = RequestMethod.POST, produces = "application/json")
+	@RequestMapping(value = "/chat", method = RequestMethod.POST, produces = "application/json")
 	public @ResponseBody ResponseList route(@RequestBody final IncomingRequest request) throws Exception {
 		try {
 
@@ -43,6 +42,20 @@ public class Application {
 			ResponseList responselist = new ResponseList();
 			responselist.setError();
 			return responselist;
+		}
+		
+	}
+	@RequestMapping(value = "/feedback", method = RequestMethod.POST, produces = "application/json")
+	public void feedback(@RequestBody final IncomingRequest request) throws Exception {
+		try {
+
+			//Classifier obj = new Classifier();
+			IntentLearner intentLearner = new IntentLearner();
+			intentLearner.processFeedback(request);
+			
+		}
+		catch (Exception e) {
+			
 		}
 		
 	}
