@@ -22,10 +22,10 @@
 	_default.settings = {
 		dao : undefined,
 		knownTypes : {
-			'extractor' : "Extractors",
+			"extractor" : "Extractors",
 			"executer" : "Executer",
 			"webclient" : "Webclient",
-			'repo' : "Repository",
+			"repo" : "Repository",
 			"db" : "Database"
 		},
 		templates : {
@@ -237,13 +237,13 @@
 		this.each(function() {
 			var _this = $.data(this, pluginName);
 
-			if (typeof options === 'string') {
+			if (typeof options === "string") {
 				if (!_this) {
 					logError("Not initialized, can not call method : "
 							+ options);
 				} else if (!$.isFunction(_this[options])
 						|| options.charAt(0) === "_") {
-					logError('No such method : ' + options);
+					logError("No such method : " + options);
 				} else {
 					if (!(args instanceof Array)) {
 						args = [ args ];

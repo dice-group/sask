@@ -426,7 +426,7 @@
 	 * Extract the link from the context menu target
 	 */
 	Workspace.prototype.getNameFromTarget = function(target) {
-		return target.attr('id');
+		return target.attr("id");
 	};
 
 	/**
@@ -436,7 +436,7 @@
 		var self = this;
 
 		var onRemove = function(target) {
-			self.flowchart.flowchart('deleteOperator', target);
+			self.flowchart.flowchart("deleteOperator", target);
 		};
 
 		new BootstrapMenu('#' + this.elementId + ' div.flowchart-operator', {

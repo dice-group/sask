@@ -278,7 +278,7 @@ var DAO = function(options) {
 	this.renameWorkflow = function(success, error, from, to) {
 		var uri = getRepoServiceUri() + "rename";
 		var data = {
-			location : 'workflow',
+			location : "workflow",
 			from : from,
 			to : to
 		};
