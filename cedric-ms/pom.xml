@@ -27,7 +27,7 @@
 		<dependency>
 			<groupId>com.github.dice-group</groupId>
 			<artifactId>cedric-extraction</artifactId>
-			<version>1.01</version>
+			<version>1.02</version>
 		</dependency>
 
 
