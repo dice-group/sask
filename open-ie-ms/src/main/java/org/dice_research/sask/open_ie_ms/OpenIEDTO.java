@@ -8,7 +8,6 @@ package org.dice_research.sask.open_ie_ms;
  */
 public class OpenIEDTO {
 	private String text = "";
-	
 
 	public String getText() {
 		return text;
