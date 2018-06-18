@@ -80,6 +80,8 @@ $(function() {
 					}
 					
 				}
+				//Add div for feedback
+				displayText += "<br><br><div>Was this helpful?<br><button name=\""+ newMsg + "\" onClick=\"onYesClick(this)\" border-style=\"solid\" type=\"button\" class=\"btn btn-primary\">Yes</button>&nbsp;&nbsp;<button name=\""+ newMsg + "\" onClick=\"onNoClick(this)\" type=\"button\" class=\"btn btn-primary\">No</button></div>";
 				$("#container").html(prevMsg + displayText);
 				$("#container").scrollTop($("#container").prop("scrollHeight"));
 			})
@@ -94,6 +96,17 @@ $(function() {
 		$("#send").prop("disabled",true);
 	});
 });
+
+function onYesClick(obj){
+	var closestDiv=$(obj).closest("div");
+	closestDiv.html("Thank you for your feedback");	
+};
+
+function onNoClick(){
+	var closestDiv=$(obj).closest("div");
+	closestDiv.html("Thank you for your feedback");
+	//TODO:Send Ajax to Server on Negative feedback
+};
 
 $(document).ready(function() {
     $("#textbox").on("keyup", function() {
