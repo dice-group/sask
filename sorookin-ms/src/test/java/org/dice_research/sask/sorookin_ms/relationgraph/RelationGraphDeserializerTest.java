@@ -1,16 +1,9 @@
 package org.dice_research.sask.sorookin_ms.relationgraph;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import org.dice_research.sask.sorookin_ms.SorookinResultParser;
 import org.dice_research.sask.sorookin_ms.TripleFactory;
-import org.dice_research.sask.sorookin_ms.sorookin.Edge;
 import org.dice_research.sask.sorookin_ms.sorookin.RelationGraph;
 import org.dice_research.sask.sorookin_ms.sorookin.SorookinResult;
 import org.dice_research.sask.sorookin_ms.sorookin.Triple;
@@ -19,11 +12,6 @@ import org.json.JSONObject;
 import org.junit.Test;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.JsonNodeFactory;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class RelationGraphDeserializerTest {
 

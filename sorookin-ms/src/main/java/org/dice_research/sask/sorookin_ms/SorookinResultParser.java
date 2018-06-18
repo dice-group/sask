@@ -17,10 +17,7 @@ import org.json.JSONObject;
  *
  */
 public class SorookinResultParser {
-	public SorookinResultParser() {
-
-	}
-
+	
 	/**
 	 * Method to parse the relation_graph obtained from the Sorookin
 	 * 

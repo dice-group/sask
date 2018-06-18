@@ -13,10 +13,7 @@ public class SorookinResult {
 	 */
 	public static final String KEY_RELATION_GRAPH = "relation_graph";
 
-	public SorookinResult() {
-
-	}
-
+	
 	private RelationGraph relation_graph;
 
 	public RelationGraph getRelation_graph() {

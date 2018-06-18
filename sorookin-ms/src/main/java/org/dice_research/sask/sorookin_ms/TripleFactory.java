@@ -15,9 +15,7 @@ import org.dice_research.sask.sorookin_ms.sorookin.Triple;
  */
 public class TripleFactory {
 
-	private TripleFactory() {
-
-	}
+	
 
 	/**
 	 * forming the subject and predicate by choosing the words from the tokens
