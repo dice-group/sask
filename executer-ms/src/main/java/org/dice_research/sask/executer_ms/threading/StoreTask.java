@@ -1,7 +1,13 @@
 package org.dice_research.sask.executer_ms.threading;
 
+import java.io.ByteArrayInputStream;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.Set;
 
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.riot.RIOT;
 import org.apache.log4j.Logger;
 import org.dice_research.sask.executer_ms.workflow.Operator;
 import org.dice_research.sask.executer_ms.workflow.Workflow;
@@ -25,6 +31,8 @@ public class StoreTask implements Runnable{
 	
 	@Override
 	public void run() {
+		
+		logger.info("Start Thread: " + StoreTask.class.getName()+"\n\n");
 		String uri = "http://DATABASE-MS/updateGraph";
 		try {
 			restTemplate.postForObject(uri, data, String.class);

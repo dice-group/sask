@@ -26,7 +26,7 @@ public class TaskFactory {
 			}
 			return new ExtractTask(restTemplate, wf, op, operatorInput[0]);
 
-		} else if (op.getType().equalsIgnoreCase("database")) {
+		} else if (op.getType().equalsIgnoreCase("db")) {
 
 			if (null == operatorInput || operatorInput.length == 0) {
 				throw new IllegalArgumentException("operatorInput parameter is null or emthy");
