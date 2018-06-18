@@ -47,7 +47,7 @@ var Discoverer = function(options) {
 		$.extend(this.settings, options);
 
 		if (!this.settings.dao) {
-			logError('dao is not defined.');
+			logError("dao is not defined.");
 			return;
 		}
 	};
@@ -68,7 +68,7 @@ var Discoverer = function(options) {
 	 * Is true, if a microservice with the type 'executer' is discovered.
 	 */
 	this.isExecuterDiscovered = function() {
-		if (!('executer' in microservices)) {
+		if (!("executer" in microservices)) {
 			return false;
 		}
 		return microservices.executer.length > 0;

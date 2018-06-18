@@ -11,7 +11,7 @@
 	/**
 	 * The plugin name.
 	 */
-	var pluginName = 'repository';
+	var pluginName = "repository";
 
 	/**
 	 * Dialogs.
@@ -32,9 +32,9 @@
 	 * The structure template.
 	 */
 	var structureTemplate = [ {
-		text : 'Data',
+		text : "Data",
 		id : '#data',
-		type : 'root',
+		type : "root",
 		nodes : []
 	}, {
 		text : 'Extractors',
@@ -47,8 +47,8 @@
 		type : 'root',
 		nodes : []
 	}, {
-		text : 'Workflows',
-		id : '#parent4',
+		text : "Workflows",
+		id : "#parent4",
 		type : 'root',
 		nodes : []
 	} ];
@@ -57,7 +57,7 @@
 
 		this.$element = $(element);
 		this.elementId = element.id;
-		this.styleId = this.elementId + '-style';
+		this.styleId = this.elementId + "-style";
 
 		this.init(options);
 
@@ -81,7 +81,7 @@
 			return;
 		}
 
-		if (typeof BootstrapMenu !== 'function') {
+		if (typeof BootstrapMenu !== "function") {
 			logError("'BootstrapMenu' plugin not initialized.");
 			return;
 		}
@@ -130,8 +130,8 @@
 	 */
 	Repository.prototype.initClasses = function() {
 		var self = this;
-		this.$element.find('li').each(function() {
-			var nodeId = $(this).attr('data-nodeid');
+		this.$element.find("li").each(function() {
+			var nodeId = $(this).attr("data-nodeid");
 			var node = self.treeview.treeview("getNode", nodeId);
 
 			if (node.type) {
@@ -145,11 +145,11 @@
 	 */
 	Repository.prototype.initDragNDrop = function() {
 		var self = this;
-		this.$element.find('li.file, li.extractor, li.db').draggable({
+		this.$element.find("li.file, li.extractor, li.db").draggable({
 			helper : "clone",
 			start : function(event, ui) {
 				var node = self.getNodeFromTarget(this);
-				ui.helper.data('node', node);
+				ui.helper.data("node", node);
 				ui.helper.width(this.clientWidth);
 			}
 		});
@@ -181,15 +181,15 @@
 	Repository.prototype.remove = function() {
 		this.destroy();
 		$.removeData(this, pluginName);
-		$('#' + this.styleId).remove();
+		$("#" + this.styleId).remove();
 	};
 
 	/**
 	 * Extract the link from the context menu target
 	 */
 	Repository.prototype.getNodeFromTarget = function(target) {
-		var nodeId = $(target).attr('data-nodeid');
-		var node = this.treeview.treeview('getNode', nodeId);
+		var nodeId = $(target).attr("data-nodeid");
+		var node = this.treeview.treeview("getNode", nodeId);
 		return node;
 	};
 
@@ -282,7 +282,7 @@
 				structureTemplate[1].nodes.push({
 					text : microservice.friendlyname,
 					id : microservice.serviceId,
-					type : 'extractor',
+					type : "extractor",
 					icon : 'glyphicon glyphicon-wrench'
 				});
 			}
@@ -344,7 +344,7 @@
 		});
 
 		// db
-		new BootstrapMenu('#' + this.elementId + ' li.db', {
+		new BootstrapMenu("#" + this.elementId + " li.db", {
 			fetchElementData : function(target) {
 				return self.getNodeFromTarget(target);
 			},

@@ -11,7 +11,7 @@
 	/**
 	 * The plugin name.
 	 */
-	var pluginName = 'workspace';
+	var pluginName = "workspace";
 
 	/**
 	 * Dialogs.
@@ -53,7 +53,7 @@
 
 		this.$element = $(element);
 		this.elementId = element.id;
-		this.styleId = this.elementId + '-style';
+		this.styleId = this.elementId + "-style";
 
 		this.init(options);
 
@@ -80,7 +80,7 @@
 			return;
 		}
 
-		if (typeof BootstrapMenu !== 'function') {
+		if (typeof BootstrapMenu !== "function") {
 			logError("'BootstrapMenu' plugin not initialized.");
 			return;
 		}
@@ -108,9 +108,9 @@
 		var self = this;
 		var flowchart = this.flowchart;
 		this.flowchart.droppable({
-			accept : 'li.extractor, li.file, li.db',
+			accept : "li.extractor, li.file, li.db",
 			drop : function(ev, ui) {
-				var node = ui.helper.data('node');
+				var node = ui.helper.data("node");
 
 				// get position
 				var pos = ui.offset;
@@ -281,9 +281,9 @@
 	 * Sync the workflow stack with the ui buttons.
 	 */
 	Workspace.prototype.syncWorkflowStack = function() {
-		toolbar.toolbar('disableRedo', workflowStack.hasNext());
-		toolbar.toolbar('disableUndo', workflowStack.hasLast());
-		toolbar.toolbar('disableSave', !workflowStack.isSaved());
+		toolbar.toolbar("disableRedo", workflowStack.hasNext());
+		toolbar.toolbar("disableUndo", workflowStack.hasLast());
+		toolbar.toolbar("disableSave", !workflowStack.isSaved());
 	};
 
 	/**
@@ -339,7 +339,7 @@
 			}
 		};
 
-		this.flowchart.flowchart('createOperator', id, newData);
+		this.flowchart.flowchart("createOperator", id, newData);
 	};
 
 	/**
