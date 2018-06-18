@@ -359,14 +359,14 @@
 
 			self.changeWorkflowName(name);
 			self.saveWorkflow();
-			$(this).dialog('close');
+			$(this).dialog("close");
 		};
 
 		var negativ = function() {
 			$(this).dialog("close");
 		};
 
-		dialogs.dialogNewWorkflow(positiv, negativ).dialog('open');
+		dialogs.dialogNewWorkflow(positiv, negativ).dialog("open");
 	};
 
 	/**
@@ -374,14 +374,14 @@
 	 */
 	Workspace.prototype.changeWorkflowName = function(name) {
 		workflowId = name;
-		toolbar.toolbar('setWorkflowName', name);
+		toolbar.toolbar("setWorkflowName", name);
 	}
 
 	/**
 	 * Load the passed workspace
 	 */
 	Workspace.prototype.loadWorkflow = function(workspace) {
-		this.flowchart.flowchart('setData', workspace);
+		this.flowchart.flowchart("setData", workspace);
 	};
 
 	/**
@@ -390,7 +390,7 @@
 	Workspace.prototype.clearWorkflow = function(workspace) {
 		this.changeWorkflowName("");
 		workflowId = undefined;
-		this.flowchart.flowchart('setData', "");
+		this.flowchart.flowchart("setData", "");
 	};
 
 	/**
@@ -399,7 +399,7 @@
 	Workspace.prototype.loadWorkflowFromPath = function(path) {
 		var self = this;
 		var success = function(data) {
-			self.flowchart.flowchart('setData', jQuery.parseJSON(data));
+			self.flowchart.flowchart("setData", jQuery.parseJSON(data));
 
 			self.changeWorkflowName(path);
 
@@ -419,7 +419,7 @@
 	 * Returns the current workflow
 	 */
 	Workspace.prototype.getWorkflow = function() {
-		return this.flowchart.flowchart('getData');
+		return this.flowchart.flowchart("getData");
 	};
 
 	/**

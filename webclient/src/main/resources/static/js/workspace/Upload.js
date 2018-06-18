@@ -208,7 +208,7 @@ var Upload = function(options) {
 	 */
 	var onUploadError = function(path, filename) {
 		var row = getFileRow(path, filename);
-		var status = row.find('span');
+		var status = row.find("span");
 
 		row.attr("data-status", "error");
 		row.addClass("list-group-item-danger");

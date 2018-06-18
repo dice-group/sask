@@ -33,23 +33,23 @@
 	 */
 	var structureTemplate = [ {
 		text : "Data",
-		id : '#data',
+		id : "#data",
 		type : "root",
 		nodes : []
 	}, {
-		text : 'Extractors',
-		id : '#parent2',
-		type : 'root',
+		text : "Extractors",
+		id : "#parent2",
+		type : "root",
 		nodes : []
 	}, {
-		text : 'Target graphs',
+		text : "Target graphs",
 		id : '#parent3',
-		type : 'root',
+		type : "root",
 		nodes : []
 	}, {
 		text : "Workflows",
 		id : "#parent4",
-		type : 'root',
+		type : "root",
 		nodes : []
 	} ];
 
@@ -332,7 +332,7 @@
 				return self.getNodeFromTarget(target);
 			},
 			actions : [ {
-				name : 'New folder',
+				name : "New folder",
 				onClick : function(target) {
 					if (target == "#data") {
 						target = "";
@@ -344,7 +344,7 @@
 		});
 
 		// db
-		new BootstrapMenu("#" + this.elementId + " li.db", {
+		new BootstrapMenu('#' + this.elementId + ' li.db', {
 			fetchElementData : function(target) {
 				return self.getNodeFromTarget(target);
 			},
@@ -385,7 +385,7 @@
 					self.openRenameWorkflowDialog(target);
 				}
 			}, {
-				name : 'Remove',
+				name : "Remove",
 				onClick : function(target) {
 					self.openRemoveFromWorkflowsDialog(target);
 				}

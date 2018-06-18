@@ -18,7 +18,7 @@ var DAO = function(options) {
 		icons : {
 			folder : "glyphicon glyphicon-folder-open",
 			file : "glyphicon glyphicon-file",
-			workflow : 'glyphicon glyphicon-play-circle'
+			workflow : "glyphicon glyphicon-play-circle"
 		}
 	};
 
@@ -93,10 +93,10 @@ var DAO = function(options) {
 	var parseWorkflowStructure = function(hdfsData) {
 		var type;
 		var icon;
-		if (hdfsData.type === 'DIRECTORY') {
-			type = 'folder';
+		if (hdfsData.type === "DIRECTORY") {
+			type = "folder";
 			icon = settings.icons.folder;
-		} else if (hdfsData.type === 'FILE') {
+		} else if (hdfsData.type === "FILE") {
 			type = "workflow";
 			icon = settings.icons.workflow;
 		}
@@ -258,7 +258,7 @@ var DAO = function(options) {
 	this.renameWorkflow = function(success, error, from, to) {
 		var uri = getRepoServiceUri() + "rename";
 		var data = {
-			location : 'workflow',
+			location : "workflow",
 			from : from,
 			to : to
 		};
@@ -298,7 +298,7 @@ var DAO = function(options) {
 	this.removeFromRepo = function(success, error, target) {
 		var uri = getRepoServiceUri() + "delete";
 		var data = {
-			location : 'repo',
+			location : "repo",
 			path : target
 		};
 
@@ -374,7 +374,7 @@ var DAO = function(options) {
 			contentType : false,
 			processData : false,
 			data : formData,
-			type : 'post',
+			type : "post",
 			success : success,
 			error : error
 		});

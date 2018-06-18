@@ -58,7 +58,7 @@ var Discoverer = function(options) {
 	 * Is true, if a microservice with the type 'repo' is discovered.
 	 */
 	this.isRepoDiscovered = function() {
-		if (!('repo' in microservices)) {
+		if (!("repo" in microservices)) {
 			return false;
 		}
 		return microservices.repo.length > 0;
