@@ -10,7 +10,8 @@ import org.springframework.web.client.RestTemplate;
 import com.google.common.collect.Lists;
 
 /**
- * This class is a thread task and responsible to pull the data from the repository.
+ * This class is a thread task and responsible to pull the data from the
+ * repository.
  * 
  * @author André Sonntag
  *
@@ -31,16 +32,14 @@ public class PullTask implements Runnable {
 	@Override
 	public void run() {
 
-		logger.info("Start Thread: " + PullTask.class.getName() +" File: "+this.getFilePath());
+		logger.info("Start Thread: " + PullTask.class.getName() + " File: " + this.getFilePath());
 
 		String filePath = this.getFilePath();
 		String content = this.restTemplate.getForObject("http://REPO-MS/readFile?location=repo&path={file}",
 				String.class, filePath);
 		Set<Runnable> nextOperatorList = TaskFactory.createTasks(this.restTemplate, this.wf, this.getNextOperatorList(),
-				new String[] { content });			
-		
-		logger.info("Next Task: "+ nextOperatorList.iterator().next().toString());
-		
+				new String[] { content });
+
 		TaskExecuter executer = new TaskExecuter(nextOperatorList);
 		executer.execute();
 	}

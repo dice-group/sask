@@ -16,11 +16,22 @@
 		<relativePath>..</relativePath>
 	</parent>
 
+
+
 	<dependencies>
 		<!-- ~~~~~~~ spring eureka server ~~~~~~~ -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-eureka</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.jena</groupId>
+			<artifactId>apache-jena-libs</artifactId>
+			<version>3.7.0</version>
+			<type>pom</type>
+		</dependency>
+
 	</dependencies>
+
+
 </project>
