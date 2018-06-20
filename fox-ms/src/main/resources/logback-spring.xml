@@ -1,36 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true">
 
-    <appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <charset>UTF-8</charset>
-            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] "fox_ms" [%C] %logger{36} - %msg%n</Pattern>
-        </encoder>
-    </appender>
+	<appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<charset>UTF-8</charset>
+			<Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] "fox_ms" [%C]
+				%logger{36} - %msg%n</Pattern>
+		</encoder>
+	</appender>
 
-    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>C:/logs/fox-ms.log</file>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <!-- daily rollover. -->
-            <fileNamePattern>C:/logs/archived/fox-ms.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+	<appender name="FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>C:/logs/fox-ms.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover. -->
+			<fileNamePattern>C:/logs/archived/fox-ms.%d{yyyy-MM-dd}.%i.log
+			</fileNamePattern>
 
-            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <maxFileSize>10MB</maxFileSize>
-            </timeBasedFileNamingAndTriggeringPolicy>
-            <!-- keep 7 days' worth of history -->
-            <maxHistory>7</maxHistory>
-        </rollingPolicy>
+			<timeBasedFileNamingAndTriggeringPolicy
+				class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>10MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+			<!-- keep 7 days' worth of history -->
+			<maxHistory>7</maxHistory>
+		</rollingPolicy>
 
-        <encoder>
-            <charset>UTF-8</charset>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] "fox_ms" [%C] %logger{36} - %msg%n</pattern>
-        </encoder>
-    </appender>
+		<encoder>
+			<charset>UTF-8</charset>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] "fox_ms" [%C]
+				%logger{36} - %msg%n</pattern>
+		</encoder>
+	</appender>
 
-    <root level="WARN">
-        <appender-ref ref="FILE"/>
-    </root>
-    <root level="WARN">
-        <appender-ref ref="consoleAppender" />
-    </root>
+	<root level="WARN">
+		<appender-ref ref="FILE" />
+	</root>
+	<root level="WARN">
+		<appender-ref ref="consoleAppender" />
+	</root>
 </configuration>
