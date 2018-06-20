@@ -26,6 +26,5 @@ hs_err_pid*
 .classpath
 .settings
 .wtpmodules
-bin
 target
 bin

@@ -1,7 +1,5 @@
 package chatbot.codeanticode.eliza;
-
 import java.lang.Math;
-
 /**
  * Eliza decomposition rule
  */

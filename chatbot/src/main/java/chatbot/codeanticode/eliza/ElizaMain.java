@@ -13,10 +13,10 @@ import java.net.URLConnection;
  * transformations.
  */
 public class ElizaMain {
-
+	TextArea textarea;
+	TextField textfield;
 	final boolean echoInput = false;
 	final boolean printData = false;
-
 	final boolean printKeys = false;
 	final boolean printSyns = false;
 	final boolean printPrePost = false;
@@ -273,10 +273,6 @@ public class ElizaMain {
 		}
 		return work;
 	}
-
-	TextArea textarea;
-	TextField textfield;
-
 	public void response(String str) {
 		textarea.appendText(str);
 		textarea.appendText("\n");
@@ -376,7 +372,6 @@ public class ElizaMain {
 				textfield.setText("");
 				response(">> " + input);
 				response(reply);
-
 				return true;
 			}
 		}

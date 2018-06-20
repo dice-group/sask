@@ -3,8 +3,8 @@ package org.dice_research.sask.webclient;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.dice_research.sask.webclient.Microservice.Discoverer;
-import org.dice_research.sask.webclient.Microservice.Microservice;
+import org.dice_research.sask_commons.microservice.Discoverer;
+import org.dice_research.sask_commons.microservice.Microservice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

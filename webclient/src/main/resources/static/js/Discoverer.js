@@ -38,7 +38,7 @@ var Discoverer = function(options) {
 
 			microservices[microservice.type].push(microservice);
 		});
-	}
+	};
 
 	/**
 	 * Constructor
@@ -61,7 +61,7 @@ var Discoverer = function(options) {
 		if (!('repo' in microservices)) {
 			return false;
 		}
-		return microservices.repo.length > 0
+		return microservices.repo.length > 0;
 	}
 	
 	/**
@@ -71,7 +71,7 @@ var Discoverer = function(options) {
 		if (!('executer' in microservices)) {
 			return false;
 		}
-		return microservices.executer.length > 0
+		return microservices.executer.length > 0;
 	}
 
 	/**

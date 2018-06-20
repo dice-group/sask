@@ -69,7 +69,7 @@
 			refreshWorkflows : $.proxy(this.refreshWorkflows, this),
 			refreshRepo : $.proxy(this.refreshRepo, this)
 		};
-	}
+	};
 
 	/**
 	 * Init.
@@ -89,7 +89,7 @@
 		this.options = $.extend({}, _default.settings, options);
 
 		if (!this.options.dao) {
-			logError('dao is not defined.');
+			logError("dao is not defined.");
 			return;
 		}
 
@@ -132,7 +132,7 @@
 		var self = this;
 		this.$element.find('li').each(function() {
 			var nodeId = $(this).attr('data-nodeid');
-			var node = self.treeview.treeview('getNode', nodeId);
+			var node = self.treeview.treeview("getNode", nodeId);
 
 			if (node.type) {
 				$(this).addClass(node.type);
@@ -209,14 +209,16 @@
 					return -1;
 				}
 
-				if (a.type != "folder" && b.type == "folder") {
+				if (a.type !== "folder" && b.type == "folder") {
 					return 1;
 				}
 
-				if (node.text < node.text)
+				if (node.text < node.text){
 					return -1;
-				if (node.text > node.text)
+				}
+				if (node.text > node.text){
 					return 1;
+				}
 				return 0;
 			});
 		}
@@ -274,7 +276,7 @@
 		var discoverer = this.options.dao.getDiscoverer();
 		var microservices = discoverer.getMicroservices();
 
-		if (microservices['extractor']) {
+		if (microservices["extractor"]) {
 			for (var i = 0; i < microservices.extractor.length; i++) {
 				var microservice = microservices.extractor[i];
 				structureTemplate[1].nodes.push({

@@ -63,7 +63,7 @@
 			addNode : $.proxy(this.addNode, this),
 			loadWorkflowFromPath : $.proxy(this.loadWorkflowFromPath, this)
 		};
-	}
+	};
 
 	/**
 	 * Init.
@@ -88,7 +88,7 @@
 		this.options = $.extend({}, _default.settings, options);
 
 		if (!this.options.dao) {
-			logError('dao is not defined.');
+			logError("dao is not defined.");
 			return;
 		}
 
@@ -151,9 +151,9 @@
 
 		// validate link create
 		var onLinkCreate = function(linkId, linkData) {
-			var fromOperator = self.flowchart.flowchart('getOperatorData',
+			var fromOperator = self.flowchart.flowchart("getOperatorData",
 					linkData.fromOperator);
-			var toOperator = self.flowchart.flowchart('getOperatorData',
+			var toOperator = self.flowchart.flowchart("getOperatorData",
 					linkData.toOperator);
 
 			var fromConnector = fromOperator.properties.outputs[linkData.fromConnector];
@@ -291,7 +291,7 @@
 	 */
 	Workspace.prototype.addNode = function(properties) {
 		switch (properties.type) {
-		case 'file':
+		case "file":
 			var inputs = {};
 			var outputs = {
 				output_1 : {
@@ -299,7 +299,7 @@
 				}
 			};
 			break;
-		case 'extractor':
+		case "extractor":
 			var inputs = {
 				input_1 : {
 					label : 'NL'
@@ -311,7 +311,7 @@
 				}
 			};
 			break;
-		case 'db':
+		case "db":
 			var inputs = {
 				input_1 : {
 					label : 'RDF'

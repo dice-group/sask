@@ -130,7 +130,7 @@ var Dialogs = function(options) {
 		});
 
 		return dialog;
-	}
+	};
 
 	/**
 	 * New folder dialog.
