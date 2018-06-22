@@ -123,12 +123,17 @@ public class ExecuterService {
 		case "CEDRIC-MS":
 			uri = "http://CEDRIC-MS";
 			break;
-		case "FRED-MS":
-			throw new RuntimeException("Unsupported extractor '" + extractor + "'");
 		case "OPEN-IE-MS":
+			uri = "http://OPEN-IE-MS";
+			break;
+		case "SOROOKIN-MS":
+			uri = "http://SOROOKIN-MS";
+			break;
+		case "FRED-MS":
 			throw new RuntimeException("Unsupported extractor '" + extractor + "'");
 		case "SPOTLIGHT-MS":
 			throw new RuntimeException("Unsupported extractor '" + extractor + "'");
+			
 		default:
 			throw new RuntimeException("Unsupported extractor '" + extractor + "'");
 		}

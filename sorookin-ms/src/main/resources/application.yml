@@ -2,17 +2,21 @@
 # Service registers under this name
 spring:
   application:
-    name: database-ms
+    name: sorookin-ms
 
 # Discovery Server Access
 eureka:
-    client:
-      serviceUrl:
-        defaultZone: http://localhost:1111/eureka/
+  instance:
+    metadataMap:
+      type: extractor
+      friendlyname: Sorookin
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:1111/eureka/
 
 # HTTP Server (Tomcat) Port
 server: 
-  port: 3031
+  port: 2227
 
 # Disable Spring Boot's "Whitelabel" default error page, so we can use our own
 error:
