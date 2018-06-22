@@ -1,9 +1,12 @@
-#container {
+.chat-smallView {
 	width: 400px;
 	position: fixed;
 	left: 200;
 	right: 0;
 	bottom: 0;
+}
+
+.chat-bigView {
 }
 
 .chat {
@@ -62,3 +65,50 @@
 	border-bottom-right-radius: 3px;
 	border-bottom-left-radius: 3px;
 }
+
+.smlbtn{
+	
+	width: 56px;
+    height: 22px;
+    position: absolute; 
+    right: 24px;
+    top:2px;
+}
+
+#send{
+	width: 56px;
+    height: 22px;
+    position: absolute; 
+    left: 138px;
+    bottom:2px;
+	
+}
+
+.input-group .form-control {
+
+    position: relative;
+    z-index: 2;
+    float: left;
+    width: 180%;
+    margin-bottom: 0;
+
+}
+
+.slide-down {
+	width: 56px;
+    height: 22px;
+    position: absolute; 
+    right: 138px;
+    top:2px;
+	
+}
+
+
+
+
+
+
+
+
+
+

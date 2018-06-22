@@ -86,11 +86,11 @@
 							</button>
 						</div>
 						<div class="col-sm-9">
-							>
 							<h4>Workspace</h4>
+							<div id="chat-big"></div>
 							<div id="ex-workspace"></div>
 						</div>
-						<div id="container">
+						<div id="chatWindow" class="chat-smallView">
 							<div class="panel panel-primary">
 								<div id="accordion" class="panel-handling">
 									<span class="glyphicon glyphicon-comment"></span> chat
@@ -103,23 +103,30 @@
 									<div id="collapseOne" class="panel-collapse collapse in"
 										style="">
 										<div class="panel-body">
-											<ul class="chat">
-											</ul> 
+											<div>
+												<button id="chat-switch" class="smlbtn">Switch</button>
+												<button id="chat-slideDown" class="slide-down">Slide down</button>
+												<ul class="chat">
 
-											<div class="input-group">
-												<input id="textbox" class="form-control input-sm"
-													placeholder="Type your message here..." type="text">
-												<span class="input-group-btn">
-													<button class="btn btn-warning btn-sm" id="send">
-														Send</button>
-												</span>
+												</ul>
+
+												<div class="input-group" style="margin-top: 55%;">
+													<input id="textbox" class="form-control input-sm"
+														placeholder="Type your message here..." type="text">
+													<span class="input-group-btn">
+														<button class="btn btn-warning btn-sm" id="send">
+															Send</button>
+
+
+													</span>
+												</div>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-						</div>
 
+						</div>
 					</div>
 				</div>
 			</div>
