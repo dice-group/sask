@@ -33,7 +33,8 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Sepide Tari
  * @author Suganya Kannan
  *
- * Contains all the methods to interact with the fuseki server through Jena API
+ *         Contains all the methods to interact with the fuseki server through
+ *         Jena API
  **/
 
 @RestController
@@ -45,11 +46,12 @@ public class DbController {
 	 * method to store triples inside the default graph
 	 * 
 	 * @param input
-	 *           The triples which are to be stored.
+	 *            The triples which are to be stored.
 	 * 
 	 * 
 	 */
-	@RequestMapping(method = RequestMethod.POST, value = "/updateGraph")
+	@RequestMapping(value = "/updateGraph")
+
 	public void updateGraph(String input) {
 
 		logger.info("db-microservice updateGraph() is invoked");
@@ -60,6 +62,33 @@ public class DbController {
 		String string_triples = tripleDTO.getTriple();
 
 		UpdateRequest update = UpdateFactory.create("INSERT DATA { " + string_triples + "}");
+		UpdateProcessor processor = UpdateExecutionFactory.createRemote(update, "http://localhost:3030/sask/update");
+		processor.execute();
+
+	}
+
+	/**
+	 * method to store triples inside the named graph If the name of the graph does
+	 * not exists it creates a new graph with the given name and stores the triples
+	 * in the sask dataset.
+	 * 
+	 * @param input
+	 *            The triples which are to be stored.
+	 * 
+	 * @param graphName
+	 */
+	@RequestMapping(value = "/updateNamedGraph")
+	public void updateNamedGraph(String input, String graphName) {
+
+		logger.info("db-microservice updateGraph() is invoked");
+
+		TripleDTO tripleDTO = new TripleDTO();
+		tripleDTO.setTriple(input);
+
+		String string_triples = tripleDTO.getTriple();
+
+		UpdateRequest update = UpdateFactory
+				.create("INSERT DATA { graph <http://graph/" + graphName + ">{ " + string_triples + "}}");
 		UpdateProcessor processor = UpdateExecutionFactory.createRemote(update, "http://localhost:3030/sask/update");
 		processor.execute();
 
