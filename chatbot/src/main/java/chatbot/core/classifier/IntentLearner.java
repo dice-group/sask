@@ -20,6 +20,8 @@ import chatbot.core.handlers.qa.QAHandler;
 import chatbot.core.handlers.rivescript.RiveScriptOutputAnalyzer;
 import chatbot.core.handlers.rivescript.RiveScriptQueryHandler;
 import chatbot.core.handlers.sessa.SessaHandler;
+import chatbot.io.incomingrequest.FeedbackRequest;
+import chatbot.io.incomingrequest.FeedbackRequest.Feedback;
 import chatbot.io.incomingrequest.IncomingRequest;
 import chatbot.utils.spellcheck.SpellCheck;
 import chatbot.utils.spellcheck.SpellCheck.LanguageList;
@@ -452,12 +454,11 @@ public class IntentLearner {
 	 * process user feedback and delete entries that get negative feedback
 	 * @param request
 	 */
-	public void processFeedback(IncomingRequest request) {
+	public void processFeedback(FeedbackRequest request) {
 		// TODO Auto-generated method stub
-		String[] userFeedback = request.getRequestContent().get(0).getText().toLowerCase().split("##");
-		String query = userFeedback[0];
-		String fb = userFeedback[1];
-		if(fb.equals("negative")) {
+		String query=request.getQuery();
+		Feedback feedback = request.getFeedback();
+		if(feedback.equals(Feedback.NEGATIVE)) {
 			deleteFromInstanceFile(query);
 		}
 	}
