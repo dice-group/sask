@@ -18,6 +18,7 @@
 		<module>cedric-ms</module>
 		<module>chatbot</module>
 		<module>database-ms</module>
+		<module>sorookin-ms</module>
 		<module>dbpedia-ms</module>
 		<module>eureka-server</module>
 		<module>executer-ms</module>
@@ -26,7 +27,6 @@
 		<module>open-ie-ms</module>
 		<module>repo-ms</module>
 		<module>webclient</module>
-		<module>ensemble-ms</module>
 	</modules>
 
 

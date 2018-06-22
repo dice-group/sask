@@ -35,6 +35,7 @@ public class FredMsController {
 	 *            The input to extract.
 	 * @return The extraction result.
 	 */
+	
 	@RequestMapping("/extractSimple")
 	public String extractSimple(String input) {
 		FredDTO fred = new FredDTO();
