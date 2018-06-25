@@ -32,6 +32,7 @@ import weka.core.Attribute;
 import weka.core.DenseInstance;
 import weka.core.Instances;
 import weka.core.SelectedTag;
+import weka.core.Utils;
 import weka.core.converters.ArffLoader.ArffReader;
 import weka.filters.unsupervised.attribute.StringToWordVector;
 
@@ -203,6 +204,7 @@ public class IntentLearner {
 	 * This method creates the instance to be classified, from the text that has been read.
 	 */
 	public Instances makeTestInstance(String query) {
+		
 		// Create the attributes, class and text
 		ArrayList<String> fvNominalVal = new ArrayList<String>(3);
 		fvNominalVal.add("eliza");
@@ -311,15 +313,16 @@ public class IntentLearner {
 		// Create the attributes, class and text
 		BufferedWriter bw = null;
 		//FileWriter fw = null;
-
+		query = query.replace("'", "");
 		try {
 			ClassLoader classLoader = this.getClass().getClassLoader();
 			URL urlTrainingData = classLoader.getResource(resourcePath+ trainingData);
 			String trainingDataFile = urlTrainingData.getFile();
 			File trainFile = new File(trainingDataFile);
-			URL urlTempData = classLoader.getResource(resourcePath+ "temp.arff");
+			URL urlTempData = classLoader.getResource(resourcePath); 	
 			String tempDataFile = urlTempData.getFile();
-			File tempFile = new File(tempDataFile);
+			File tempFile = new File(tempDataFile+ "temp.arff");
+			tempFile.createNewFile();
 			BufferedReader reader = new BufferedReader(new FileReader(trainFile));
 			BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
 
@@ -436,6 +439,7 @@ public class IntentLearner {
 	public Handler handleIntentClassification(IncomingRequest request) {
 		//IntentLearner learner;
 		String query = request.getRequestContent().get(0).getText().toLowerCase();
+		query = query.replace("'", "");
 		//learner = new IntentLearner();
 		ClassLoader classLoader = this.getClass().getClassLoader();
 		URL urlTrainingData = classLoader.getResource(resourcePath+ trainingData);
@@ -466,7 +470,7 @@ public class IntentLearner {
 	 * Main method. It is an example of the usage of this class.
 	 * @param args Command-line arguments: fileData and fileModel.
 	 */
-	/*public static void main (String[] args) {
+/*	public static void main (String[] args) {
 	
 		IntentLearner learner;
 		
@@ -475,11 +479,13 @@ public class IntentLearner {
 		
 		learner.evaluate();
 		learner.learn();
+		learner.deleteFromInstanceFile("obama");
 		//
 		learner.saveModel("C:\\Users\\Divya\\Documents\\try\\intentdata.model");
 		//learner.makeTestInstance("prince of persia");
 		learner.classify("how do you feel about that");
 		//learner.usePrediction(request, "what would it mean to you", testInstance.classAttribute().value((int) pred));
+		
 		
 	}*/
 
