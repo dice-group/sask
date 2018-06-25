@@ -3,8 +3,7 @@ package org.dice_research.sask.executer_ms;
 import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
-import org.dice_research.sask.executer_ms.workflow.SimpleWorkflow;
-import org.dice_research.sask.executer_ms.workflow.Workflow;
+import org.dice_research.sask_commons.workflow.Workflow;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.http.HttpStatus;
@@ -28,20 +27,6 @@ public class ExecuterMsController {
 	protected RestTemplate restTemplate;
 
 	private Logger logger = Logger.getLogger(ExecuterMsController.class.getName());
-
-	/*
-	@RequestMapping("/executeSimple")
-	public String executeSimple(String data, String extractor, String targetgraph) {
-		ExecuterService service = new ExecuterService(restTemplate);
-		return service.execute(data, extractor, targetgraph);
-	}
-
-	@RequestMapping("/executeSimpleWorkflow")
-	public String executeSimpleWorkflow(SimpleWorkflow workflow) {
-		ExecuterService service = new ExecuterService(restTemplate);
-		return service.execute(workflow.getData(), workflow.getExtractor(), workflow.getTargetgraph());
-	}
-	*/
 
 	@RequestMapping("/executeWorkflow")
 	public String executeWorkflow(@RequestBody Workflow workflow) {

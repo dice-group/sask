@@ -9,8 +9,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import org.dice_research.sask.executer_ms.workflow.Operator;
-import org.dice_research.sask.executer_ms.workflow.Workflow;
+import org.dice_research.sask_commons.workflow.Operator;
+import org.dice_research.sask_commons.workflow.Workflow;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

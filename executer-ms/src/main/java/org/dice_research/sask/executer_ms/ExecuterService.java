@@ -5,8 +5,8 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 import org.dice_research.sask.executer_ms.threading.TaskExecuter;
 import org.dice_research.sask.executer_ms.threading.TaskFactory;
-import org.dice_research.sask.executer_ms.workflow.Operator;
-import org.dice_research.sask.executer_ms.workflow.Workflow;
+import org.dice_research.sask_commons.workflow.Operator;
+import org.dice_research.sask_commons.workflow.Workflow;
 import org.springframework.web.client.RestTemplate;
 
 /**

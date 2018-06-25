@@ -1,5 +1,8 @@
 package org.dice_research.sask.executer_ms.workflow;
 
+import org.dice_research.sask_commons.workflow.Link;
+import org.dice_research.sask_commons.workflow.Operator;
+import org.dice_research.sask_commons.workflow.Workflow;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

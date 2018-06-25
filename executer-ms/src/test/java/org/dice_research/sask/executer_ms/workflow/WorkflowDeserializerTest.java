@@ -4,6 +4,11 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 import java.util.Map;
+
+import org.dice_research.sask_commons.workflow.Link;
+import org.dice_research.sask_commons.workflow.Operator;
+import org.dice_research.sask_commons.workflow.Workflow;
+import org.dice_research.sask_commons.workflow.WorkflowDeserializer;
 import org.junit.Test;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
