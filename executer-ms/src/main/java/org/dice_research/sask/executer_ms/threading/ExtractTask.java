@@ -54,8 +54,10 @@ public class ExtractTask implements Runnable {
 		ResponseEntity<String> response = restTemplate.postForEntity(uri + "/extractSimple?", request, String.class);
 		String extractorOutput = response.getBody();
 		
+		/*
+		 * Just a temporary solution
+		 */
 		if (this.getOperatorName().equalsIgnoreCase("FOX-MS")) {
-
 			InputStream in = new ByteArrayInputStream(extractorOutput.getBytes());
 			RIOT.init();
 			Model model = ModelFactory.createDefaultModel();
@@ -104,7 +106,8 @@ public class ExtractTask implements Runnable {
 			uri = "http://FOX-MS";
 			break;
 		case "FRED-MS":
-			uri = "http://FRED-MS";
+			//uri = "http://FRED-MS";
+			throw new RuntimeException("Unsupported extractor '" + extractor + "'");
 		case "OPEN-IE-MS":
 			throw new RuntimeException("Unsupported extractor '" + extractor + "'");
 		case "SPOTLIGHT-MS":
