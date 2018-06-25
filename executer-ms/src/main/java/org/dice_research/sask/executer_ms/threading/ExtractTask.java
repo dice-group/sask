@@ -15,7 +15,6 @@ import org.dice_research.sask.executer_ms.workflow.Operator;
 import org.dice_research.sask.executer_ms.workflow.Workflow;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -45,23 +44,18 @@ public class ExtractTask implements Runnable {
 
 	@Override
 	public void run() {
-		logger.info("******* Start Thread: " + ExtractTask.class.getName() + " with Extractor: " + getOperatorName());
+		logger.info("Start Thread: " + ExtractTask.class.getName() + " with Extractor: " + getOperatorName());
 		String uri = this.getExtractorURI(this.getOperatorName());
 
 		HttpHeaders headers = new HttpHeaders();
-		// headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-
-		logger.info("******* Prepare request");
 		MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
 		map.add("input", extractorInput);
 		HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, headers);
-		logger.info("******* call restTemplate.postForEntity");
 		ResponseEntity<String> response = restTemplate.postForEntity(uri + "/extractSimple?", request, String.class);
-		logger.info("******* got a response");
 		String extractorOutput = response.getBody();
+		
 		if (this.getOperatorName().equalsIgnoreCase("FOX-MS")) {
 
-			logger.info("Extract Thread: start parsing");
 			InputStream in = new ByteArrayInputStream(extractorOutput.getBytes());
 			RIOT.init();
 			Model model = ModelFactory.createDefaultModel();
@@ -81,13 +75,14 @@ public class ExtractTask implements Runnable {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			logger.info("Extract Thread: end parsing");
 		}
 
+		if (this.getNextOperatorList().size() != 0) {
 		Set<Runnable> nextOperatorList = TaskFactory.createTasks(this.restTemplate, this.wf, this.getNextOperatorList(),
 				new String[] { extractorOutput });
 		TaskExecuter executer = new TaskExecuter(nextOperatorList);
 		executer.execute();
+		}
 	}
 
 	private String getOperatorName() {

@@ -22,6 +22,7 @@ public class PullTask implements Runnable {
 	private final RestTemplate restTemplate;
 	private final Operator op;
 	private final Workflow wf;
+	private String content;
 
 	public PullTask(RestTemplate restTemplate, Workflow wf, Operator op) {
 		this.restTemplate = restTemplate;
@@ -35,13 +36,17 @@ public class PullTask implements Runnable {
 		logger.info("Start Thread: " + PullTask.class.getName() + " File: " + this.getFilePath());
 
 		String filePath = this.getFilePath();
-		String content = this.restTemplate.getForObject("http://REPO-MS/readFile?location=repo&path={file}",
-				String.class, filePath);
-		Set<Runnable> nextOperatorList = TaskFactory.createTasks(this.restTemplate, this.wf, this.getNextOperatorList(),
-				new String[] { content });
+		content = this.restTemplate.getForObject("http://REPO-MS/readFile?location=repo&path={file}", String.class,
+				filePath);
 
-		TaskExecuter executer = new TaskExecuter(nextOperatorList);
-		executer.execute();
+		if (this.getNextOperatorList().size() != 0) {
+			Set<Runnable> nextOperatorList = TaskFactory.createTasks(this.restTemplate, this.wf,
+					this.getNextOperatorList(), new String[] { content });
+
+			TaskExecuter executer = new TaskExecuter(nextOperatorList);
+			executer.execute();
+		}
+
 	}
 
 	private Set<Operator> getNextOperatorList() {
@@ -50,5 +55,9 @@ public class PullTask implements Runnable {
 
 	private String getFilePath() {
 		return this.op.getContent();
+	}
+
+	public String getResponse() {
+		return this.content;
 	}
 }

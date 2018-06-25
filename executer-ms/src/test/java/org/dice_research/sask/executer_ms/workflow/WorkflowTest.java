@@ -7,15 +7,11 @@ import static org.junit.Assert.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class WorkflowTest {
 	@Test
-	public void testCreateQueue() {
-		/*
-		 * pre
-		 */
-		System.out.println("test simple queue");
-		
+	public void testCreateQueue() {		
 		/*
 		 * create
 		 */
@@ -78,11 +74,16 @@ public class WorkflowTest {
 		/*
 		 * test
 		 */
-		/*List<Operator> queue = w.createQueue();
+		Set<Operator> queue = w.getStartOperatorSet();
+		assertEquals(1, queue.size());
+		assertEquals("id1",queue.iterator().next().getId());
 		
-		assertEquals(3, queue.size());
-		assertEquals("id1", queue.get(0).getId());
-		assertEquals("id2", queue.get(1).getId());
-		assertEquals("id3", queue.get(2).getId());*/
+		queue = w.getNextOperators(queue.iterator().next());
+		assertEquals(1, queue.size());
+		assertEquals("id2",queue.iterator().next().getId());
+		
+		queue = w.getNextOperators(queue.iterator().next());
+		assertEquals(1, queue.size());
+		assertEquals("id3",queue.iterator().next().getId());
 	}
 }
