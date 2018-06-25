@@ -9,6 +9,8 @@
 
 // Goodbye
 + (goodbye|good bye|bye) [*]
+- Good Bye
+- See ya!
 - Bye
 
 // Thanks

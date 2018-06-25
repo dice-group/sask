@@ -1,6 +1,6 @@
 package chatbot.application;
 
-import chatbot.core.classifier.Classifier;
+import chatbot.core.classifier.IntentLearner;
 import chatbot.core.handlers.Handler;
 import chatbot.io.incomingrequest.IncomingRequest;
 import chatbot.io.response.ResponseList;
@@ -21,13 +21,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/chat")
 public class Application {
 
+	
 	@RequestMapping(method = RequestMethod.POST, produces = "application/json")
 	public @ResponseBody ResponseList route(@RequestBody final IncomingRequest request) throws Exception {
 		try {
 
-			Classifier obj = new Classifier();
-			Handler newobj = obj.classify(request);
-			ResponseList answer = newobj.search(request);	
+			//Classifier obj = new Classifier();
+			IntentLearner intentLearner = new IntentLearner();
+			Handler handler = intentLearner.classify(request);
+			//Handler newobj = obj.classify(request);
+			ResponseList answer = handler.search(request);	
 			/*if ("error".equals(answer)) {
 				//String responseJSON = "[{ \"comment\":\"Internal Server Error.Contact your administrator.\"}]";
 				responselist.setError();

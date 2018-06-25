@@ -14,7 +14,7 @@ import chatbot.core.handlers.sessa.SessaHandler;
 import chatbot.io.incomingrequest.IncomingRequest;
 import chatbot.io.incomingrequest.RequestContent;
 
-public class ClassifierTest {
+public class IntentLearnerTest {
 	
 	public IncomingRequest createInitialRequest(String incomingText) {
 	
@@ -29,8 +29,8 @@ public class ClassifierTest {
 	}
 	
 	public Object classifyInput(IncomingRequest input) {
-		Classifier helper = new Classifier();
-		Object actualOutput =helper.classify(input);	
+		IntentLearner intentLeaner = new IntentLearner();
+		Object actualOutput =intentLeaner.classify(input);	
 		return actualOutput;
 	}
 
@@ -45,7 +45,7 @@ public class ClassifierTest {
 	@Test
 	public void testClassifyForQAHandler() {
 		
-		IncomingRequest input = createInitialRequest("why ?");
+		IncomingRequest input = createInitialRequest("what is the birthplace of Obama");
 		Object actualOutput= classifyInput(input);
         assertTrue(actualOutput instanceof QAHandler);
 	}
@@ -53,7 +53,7 @@ public class ClassifierTest {
 	@Test
 	public void testClassifyForElizaHandler() {
 
-		IncomingRequest input = createInitialRequest("Me");
+		IncomingRequest input = createInitialRequest("I want to know something");
 		Object actualOutput= classifyInput(input);
         assertTrue(actualOutput instanceof ElizaHandler);
 	}
@@ -61,7 +61,7 @@ public class ClassifierTest {
 	@Test
 	public void testClassifyForSessaHandler() {
 		
-		IncomingRequest input = createInitialRequest("obama");
+		IncomingRequest input = createInitialRequest("obama wife");
 		Object actualOutput= classifyInput(input);
         assertTrue(actualOutput instanceof SessaHandler);
 	}
