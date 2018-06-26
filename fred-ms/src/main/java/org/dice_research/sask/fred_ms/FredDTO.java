@@ -23,7 +23,7 @@ public class FredDTO implements Serializable {
 	private boolean roles = false;
 	private String textannotation = "EARMARK";
 	private boolean subgraph = false;
-	private String format = "text/rdf+n3";
+	private String format = "text/turtle";
 
 	public FredDTO() {
 	}

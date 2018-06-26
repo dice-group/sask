@@ -589,6 +589,16 @@ $(function () {
             fullElement.operator.css({top: operatorData.top, left: operatorData.left});
             fullElement.operator.data('operator_id', operatorId);
 
+            // add type class
+            if(operatorData.properties.type) {
+            	fullElement.operator.addClass(operatorData.properties.type);
+            }
+            
+            // add id
+            if(operatorData.properties.id) {
+            	fullElement.operator.attr('id', operatorData.properties.id);
+            }
+            
             this.data.operators[operatorId] = operatorData;
             this.data.operators[operatorId].internal.els = fullElement;
 

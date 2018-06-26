@@ -35,6 +35,7 @@ public class FredMsController {
 	 *            The input to extract.
 	 * @return The extraction result.
 	 */
+	
 	@RequestMapping("/extractSimple")
 	public String extractSimple(String input) {
 		FredDTO fred = new FredDTO();
@@ -66,7 +67,7 @@ public class FredMsController {
 			                                                   .queryParam("wfd_profile", wfd)
 			                                                   .queryParam("textannotation", annotation)
 			                                                   .queryParam("format", format);
-
+			
 			uri = builder.build()
 			             .toUriString();
 		} catch (Exception ex) {
