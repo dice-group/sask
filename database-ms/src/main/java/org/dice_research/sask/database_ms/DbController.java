@@ -228,7 +228,7 @@ public class DbController {
 
 			restTemplate.postForObject(URI, entity, String.class);
 		} catch (Exception ex) {
-			logger.info("failed to write to database (" + ex.getMessage() + ")");
+			logger.info("failed to update autoindex (" + ex.getMessage() + ")");
 		}
 
 	}
