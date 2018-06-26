@@ -102,15 +102,6 @@ public class DbController {
 
 	}
 
-	@RequestMapping(value = "/test")
-
-	private String test(String data) {
-		String uri = "http://OPEN-IE-MS-ms";
-		String content = data;
-		String result = restTemplate.getForObject(uri + "/extractSimple?input={content}", String.class, content);
-		return result;
-	}
-
 	/**
 	 * Method to query the default graph.
 	 * 
