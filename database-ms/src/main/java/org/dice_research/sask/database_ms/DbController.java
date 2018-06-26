@@ -11,7 +11,6 @@ import org.apache.jena.query.QuerySolution;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.jena.query.QueryExecutionFactory;
-import org.apache.jena.query.QueryExecution;
 import org.apache.jena.query.ResultSet;
 import org.apache.jena.query.ResultSetFormatter;
 import org.apache.jena.sparql.engine.http.QueryEngineHTTP;
@@ -20,12 +19,18 @@ import org.apache.jena.update.UpdateFactory;
 import org.apache.jena.update.UpdateProcessor;
 import org.apache.jena.update.UpdateRequest;
 import org.apache.log4j.Logger;
+import org.dice_research.sask.database_ms.RDFTriples.AutoIndexDTO;
 import org.dice_research.sask.database_ms.RDFTriples.TripleDTO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 /**
  * 
@@ -39,7 +44,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class DbController {
-
+	@Autowired
+	@LoadBalanced
+	protected RestTemplate restTemplate;
 	protected Logger logger = Logger.getLogger(DbController.class);
 
 	/**
@@ -64,7 +71,7 @@ public class DbController {
 		UpdateRequest update = UpdateFactory.create("INSERT DATA { " + string_triples + "}");
 		UpdateProcessor processor = UpdateExecutionFactory.createRemote(update, "http://localhost:3030/sask/update");
 		processor.execute();
-
+		updateAutoIndex();
 	}
 
 	/**
@@ -91,7 +98,17 @@ public class DbController {
 				.create("INSERT DATA { graph <http://graph/" + graphName + ">{ " + string_triples + "}}");
 		UpdateProcessor processor = UpdateExecutionFactory.createRemote(update, "http://localhost:3030/sask/update");
 		processor.execute();
+		updateAutoIndex();
 
+	}
+
+	@RequestMapping(value = "/test")
+
+	private String test(String data) {
+		String uri = "http://OPEN-IE-MS-ms";
+		String content = data;
+		String result = restTemplate.getForObject(uri + "/extractSimple?input={content}", String.class, content);
+		return result;
 	}
 
 	/**
@@ -199,6 +216,36 @@ public class DbController {
 			return json;
 
 		}
+	}
+
+	/**
+	 * Method to update the AutoIndex after data is inserted into DB
+	 * 
+	 */
+	private void updateAutoIndex() {
+		String URI = getAutoIndexURI() + "/index/create";
+		AutoIndexDTO dto = new AutoIndexDTO();
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		// have to replace with the required values
+		dto.setUrl("http://localhost:3030/sask/query");
+		dto.setEntitySelectQuery("SELECT ?subject ?object WHERE { ?subject ?predicate ?object }");
+		dto.setUseLocalDataSource(true);
+		HttpEntity<AutoIndexDTO> entity = new HttpEntity<AutoIndexDTO>(dto, headers);
+
+		try {
+
+			restTemplate.postForObject(URI, entity, String.class);
+		} catch (Exception ex) {
+			logger.info("failed to write to database (" + ex.getMessage() + ")");
+		}
+
+	}
+
+	private String getAutoIndexURI() {
+
+		return "http://AUTOINDEX";
+
 	}
 
 	@ExceptionHandler
