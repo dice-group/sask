@@ -5,6 +5,8 @@
 <head>
 <meta charset="utf-8" />
 <title>SASK - Home</title>
+<!-- ~~~~~~ global ~~~~~~ -->
+<link rel="stylesheet" href="/styles/global.css">
 <!-- ~~~~~~ jquery ~~~~~~ -->
 <script src="/webjars/jquery/3.2.1/jquery.min.js"></script>
 <!-- ~~~~~~ bootstrap ~~~~~~ -->
@@ -65,65 +67,62 @@
 	<!-- content -->
 	<div class="container">
 		<div class="row">
-			<div id="tabs">
-				<ul>
-					<li><a href="#tabExtraction">Extraction group</a></li>
-					<li><a href="#tabSearch">Search group</a></li>
-				</ul>
-
-				<div id="tabExtraction">
-					<!-- extraction -->
-					<div class="row">
-						<div class="col-sm-3">
-							<h4>Repository</h4>
-							<div id="ex-repo"></div>
-							<button class="btn btn-primary" id="ex-refreshRepo">
-								<span class="glyphicon glyphicon-refresh"></span> Refresh
-							</button>
-							<button class="btn btn-primary" id="ex-uploadFile">
-								<span class="glyphicon glyphicon-cloud-upload"></span> Upload
-								file...
-							</button>
-						</div>
-						<div class="col-sm-9">
-							>
-							<h4>Workspace</h4>
-							<div id="ex-workspace"></div>
-						</div>
-						<div id="container">
-							<div class="panel panel-primary">
-								<div id="accordion" class="panel-handling">
-									<span class="glyphicon glyphicon-comment"></span> chat
-									<div class="btn-group pull-right">
-										<a type="button" class="btn btn-default btn-xs"
-											data-toggle="collapse" data-parent="#accordion"
-											href="#collapseOne"> </a>
-									</div>
-									<span class="glyphicon glyphicon-chevron-down"></span>
-									<div id="collapseOne" class="panel-collapse collapse in"
-										style="">
-										<div class="panel-body">
-											<ul class="chat">
-											</ul> 
-
-											<div class="input-group">
-												<input id="textbox" class="form-control input-sm"
-													placeholder="Type your message here..." type="text">
-												<span class="input-group-btn">
-													<button class="btn btn-warning btn-sm" id="send">
-														Send</button>
-												</span>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-
-					</div>
-				</div>
+			<div class="col-lg-3">
+				<h4>Repository</h4>
+				<div id="ex-repo"></div>
+				<button class="btn btn-primary" id="ex-refreshRepo">
+					<span class="glyphicon glyphicon-refresh"></span> Refresh
+				</button>
+				<button class="btn btn-primary" id="ex-uploadFile">
+					<span class="glyphicon glyphicon-cloud-upload"></span> Upload
+					file...
+				</button>
+			</div>
+			<div class="col-lg-6">
+				<h4>Workspace</h4>
+				<div id="ex-workspace" class="sask-border"></div>
+			</div>
+			<div class="col-lg-3">
+				<h4>Chatbot</h4>
+				<div id="chat-chatbot" class="sask-border"></div>
 			</div>
 		</div>
+
+
+
+
+
+
+
+
+
+		<!-- 						<div id="container"> -->
+		<!-- 							<div class="panel panel-primary"> -->
+		<!-- 								<div id="accordion" class="panel-handling"> -->
+		<!-- 									<span class="glyphicon glyphicon-comment"></span> Chatbot -->
+		<!-- 									<div class="btn-group pull-right"> -->
+		<!-- 										<a type="button" class="btn btn-default btn-xs" -->
+		<!-- 											data-toggle="collapse" data-parent="#accordion" -->
+		<!-- 											href="#collapseOne"> </a> -->
+		<!-- 									</div> -->
+		<!-- 									<span class="glyphicon glyphicon-chevron-down"></span> -->
+		<!-- 									<div id="collapseOne" class="panel-collapse collapse in"> -->
+		<!-- 										<div class="panel-body"> -->
+		<!-- 											<ul class="chat"> -->
+		<!-- 											</ul>  -->
+		<!-- 											<div class="input-group"> -->
+		<!-- 												<input id="textbox" class="form-control input-sm" -->
+		<!-- 													placeholder="Type your message here..." type="text"> -->
+		<!-- 												<span class="input-group-btn"> -->
+		<!-- 													<button class="btn btn-warning btn-sm" id="send">Send</button> -->
+		<!-- 												</span> -->
+		<!-- 											</div> -->
+		<!-- 										</div> -->
+		<!-- 									</div> -->
+		<!-- 								</div> -->
+		<!-- 							</div> -->
+		<!-- 						</div> -->
+
 	</div>
 	<footer class="footer">
 		<div class="container">
@@ -132,25 +131,23 @@
 		</div>
 	</footer>
 	<script>
-		$(document).ready(function() {
-			$("#tabs").tabs();
-		});
 		(function($) {
 			var dao = new DAO({});
+			var chatbot;
 			var workspace;
 			var repo;
 			var upload;
 
 			$(document).ready(function() {
 				// repo
-				repo = $('#ex-repo').repository({
+				repo = $("#ex-repo").repository({
 					dao : dao,
 					onAddToWorkspace : onAddToWorkspace,
 					onLoadToWorkspace : onLoadToWorkspace
 				});
 
 				// workspace
-				workspace = $('#ex-workspace').workspace({
+				workspace = $("#ex-workspace").workspace({
 					dao : dao,
 					onWorkflowSaved : refreshWorkflows
 				});
@@ -161,6 +158,9 @@
 					onUploaded : refreshRepo
 				});
 
+				// chatbot
+				chatbot = $("#chat-chatbot").chatbot({});
+
 				$("#ex-refreshRepo").click(refresh);
 				$("#ex-uploadFile").click(upload.open);
 
@@ -168,7 +168,7 @@
 			});
 
 			function onLoadToWorkspace(target) {
-				workspace.workspace('loadWorkflowFromPath', target.id);
+				workspace.workspace("loadWorkflowFromPath", target.id);
 			}
 
 			function onAddToWorkspace(target) {
@@ -179,19 +179,19 @@
 					xPosition : 20,
 					yPosition : 20
 				};
-				workspace.workspace('addNode', newNode);
+				workspace.workspace("addNode", newNode);
 			}
 
 			function refreshRepo() {
-				repo.repository('refreshRepo');
+				repo.repository("refreshRepo");
 			}
 
 			function refreshWorkflows() {
-				repo.repository('refreshWorkflows');
+				repo.repository("refreshWorkflows");
 			}
 
 			function refresh() {
-				repo.repository('refresh');
+				repo.repository("refresh");
 			}
 		}(jQuery));
 	</script>
