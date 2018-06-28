@@ -2,11 +2,13 @@ package org.diceresearch.sask;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication
-public class SaskApplication {
+@EnableDiscoveryClient
+public class QaApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SaskApplication.class, args);
+		SpringApplication.run(QaApplication.class, args);
 	}
 }
