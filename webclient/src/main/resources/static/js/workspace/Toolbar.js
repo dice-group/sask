@@ -7,7 +7,7 @@
 	/**
 	 * The plugin name.
 	 */
-	var pluginName = 'toolbar';
+	var pluginName = "toolbar";
 
 	/**
 	 * Default settings.
@@ -171,7 +171,7 @@
 	 */
 	Toolbar.prototype.disableRedo = function(disable) {
 		if (disable) {
-			redoButton.removeAttr('disabled');
+			redoButton.removeAttr("disabled");
 		} else {
 			redoButton.attr("disabled", "disabled");
 		}
@@ -184,7 +184,7 @@
 		if (disable) {
 			undoButton.removeAttr("disabled");
 		} else {
-			undoButton.attr('disabled', 'disabled');
+			undoButton.attr("disabled", "disabled");
 		}
 	};
 
@@ -193,9 +193,9 @@
 	 */
 	Toolbar.prototype.disableSave = function(disable) {
 		if (disable) {
-			saveButton.removeAttr('disabled');
+			saveButton.removeAttr("disabled");
 		} else {
-			saveButton.attr('disabled', 'disabled');
+			saveButton.attr("disabled", "disabled");
 		}
 	};
 
@@ -217,12 +217,12 @@
 		this.each(function() {
 			var _this = $.data(this, pluginName);
 
-			if (typeof options === 'string') {
+			if (typeof options === "string") {
 				if (!_this) {
-					logError('Not initialized, can not call method : '
+					logError("Not initialized, can not call method : "
 							+ options);
 				} else if (!$.isFunction(_this[options])
-						|| options.charAt(0) === '_') {
+						|| options.charAt(0) === "_") {
 					logError("No such method : " + options);
 				} else {
 					if (!(args instanceof Array)) {
@@ -230,7 +230,7 @@
 					}
 					result = _this[options].apply(_this, args);
 				}
-			} else if (typeof options === 'boolean') {
+			} else if (typeof options === "boolean") {
 				result = _this;
 			} else {
 				$.data(this, pluginName, new Toolbar(this, $.extend(true, {},

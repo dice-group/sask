@@ -5,16 +5,18 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.AfterClass;
 import org.junit.Test;
 
 import chatbot.core.handlers.eliza.ElizaHandler;
 import chatbot.core.handlers.qa.QAHandler;
 import chatbot.core.handlers.rivescript.RiveScriptQueryHandler;
 import chatbot.core.handlers.sessa.SessaHandler;
+import chatbot.io.incomingrequest.FeedbackRequest;
 import chatbot.io.incomingrequest.IncomingRequest;
 import chatbot.io.incomingrequest.RequestContent;
 
-public class ClassifierTest {
+public class IntentLearnerTest {
 	
 	public IncomingRequest createInitialRequest(String incomingText) {
 	
@@ -29,8 +31,8 @@ public class ClassifierTest {
 	}
 	
 	public Object classifyInput(IncomingRequest input) {
-		Classifier helper = new Classifier();
-		Object actualOutput =helper.classify(input);	
+		IntentLearner intentLeaner = new IntentLearner();
+		Object actualOutput =intentLeaner.classify(input);	
 		return actualOutput;
 	}
 
@@ -45,7 +47,7 @@ public class ClassifierTest {
 	@Test
 	public void testClassifyForQAHandler() {
 		
-		IncomingRequest input = createInitialRequest("why ?");
+		IncomingRequest input = createInitialRequest("what is Obama's birthplace");
 		Object actualOutput= classifyInput(input);
         assertTrue(actualOutput instanceof QAHandler);
 	}
@@ -53,7 +55,7 @@ public class ClassifierTest {
 	@Test
 	public void testClassifyForElizaHandler() {
 
-		IncomingRequest input = createInitialRequest("Me");
+		IncomingRequest input = createInitialRequest("I want to know something");
 		Object actualOutput= classifyInput(input);
         assertTrue(actualOutput instanceof ElizaHandler);
 	}
@@ -61,8 +63,17 @@ public class ClassifierTest {
 	@Test
 	public void testClassifyForSessaHandler() {
 		
-		IncomingRequest input = createInitialRequest("obama");
+		IncomingRequest input = createInitialRequest("obama wife");
 		Object actualOutput= classifyInput(input);
         assertTrue(actualOutput instanceof SessaHandler);
+	}
+	
+	@AfterClass
+	public static void tearDown() {
+		FeedbackRequest feedback = new FeedbackRequest();
+		feedback.setFeedback("negative");
+		feedback.setQuery("obama wife");
+		IntentLearner intentLeaner = new IntentLearner();
+		intentLeaner.processFeedback(feedback);
 	}
 }

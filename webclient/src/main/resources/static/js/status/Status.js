@@ -22,11 +22,11 @@
 	_default.settings = {
 		dao : undefined,
 		knownTypes : {
-			'extractor' : 'Extractors',
-			'executer' : 'Executer',
-			'webclient' : 'Webclient',
-			'repo' : 'Repository',
-			'db' : 'Database'
+			"extractor" : "Extractors",
+			"executer" : "Executer",
+			"webclient" : "Webclient",
+			"repo" : "Repository",
+			"db" : "Database"
 		},
 		templates : {
 			typeHeader : '<h2></h2>',
@@ -53,7 +53,7 @@
 
 		this.$element = $(element);
 		this.elementId = element.id;
-		this.styleId = this.elementId + '-style';
+		this.styleId = this.elementId + "-style";
 
 		this.init(options);
 		var self = this;
@@ -79,7 +79,7 @@
 		this.options = $.extend({}, _default.settings, options);
 
 		if (!this.options.dao) {
-			logError('dao is not defined.');
+			logError("dao is not defined.");
 			return;
 		}
 
@@ -196,8 +196,8 @@
 		friendlyname.text(microservice.friendlyname);
 		serviceId.text(" (" + microservice.serviceId + ")");
 		type.text(microservice.type);
-		port.text('Port: ' + microservice.port);
-		host.text('Host: ' + microservice.host);
+		port.text("Port: " + microservice.port);
+		host.text("Host: " + microservice.host);
 
 		head.append(friendlyname);
 		head.append(serviceId);
@@ -237,13 +237,13 @@
 		this.each(function() {
 			var _this = $.data(this, pluginName);
 
-			if (typeof options === 'string') {
+			if (typeof options === "string") {
 				if (!_this) {
-					logError('Not initialized, can not call method : '
+					logError("Not initialized, can not call method : "
 							+ options);
 				} else if (!$.isFunction(_this[options])
-						|| options.charAt(0) === '_') {
-					logError('No such method : ' + options);
+						|| options.charAt(0) === "_") {
+					logError("No such method : " + options);
 				} else {
 					if (!(args instanceof Array)) {
 						args = [ args ];

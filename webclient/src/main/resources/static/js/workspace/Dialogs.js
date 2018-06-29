@@ -81,7 +81,7 @@ var Dialogs = function(options) {
 			Cancel : negativ
 		};
 
-		var dialog = createDialog('remove', buttons);
+		var dialog = createDialog("remove", buttons);
 		dialog.find('input[name="target"]').val(target.id);
 
 		// positiv on enter
@@ -102,7 +102,7 @@ var Dialogs = function(options) {
 			Cancel : negativ
 		};
 
-		var dialog = createDialog('rename', buttons);
+		var dialog = createDialog("rename", buttons);
 		dialog.find('input[name="name"]').val(target.text);
 		dialog.find('input[name="target"]').val(target.id);
 
@@ -121,7 +121,7 @@ var Dialogs = function(options) {
 			Cancel : negativ
 		};
 
-		var dialog = createDialog('newWorkflow', buttons);
+		var dialog = createDialog("newWorkflow", buttons);
 
 		// positiv on enter
 		dialog.submit(function(e) {
@@ -141,7 +141,7 @@ var Dialogs = function(options) {
 			Cancel : negativ
 		};
 
-		var dialog = createDialog('newFolder', buttons);
+		var dialog = createDialog("newFolder", buttons);
 		dialog.find('input[name="target"]').val(target.id);
 
 		// positiv on enter
@@ -162,7 +162,7 @@ var Dialogs = function(options) {
 			Cancel : negativ
 		};
 
-		var dialog = createDialog('upload', buttons);
+		var dialog = createDialog("upload", buttons);
 
 		// positiv on enter
 		dialog.submit(function(e) {
