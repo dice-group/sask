@@ -20,6 +20,8 @@ import chatbot.core.handlers.qa.QAHandler;
 import chatbot.core.handlers.rivescript.RiveScriptOutputAnalyzer;
 import chatbot.core.handlers.rivescript.RiveScriptQueryHandler;
 import chatbot.core.handlers.sessa.SessaHandler;
+import chatbot.io.incomingrequest.FeedbackRequest;
+import chatbot.io.incomingrequest.FeedbackRequest.Feedback;
 import chatbot.io.incomingrequest.IncomingRequest;
 import chatbot.utils.spellcheck.SpellCheck;
 import chatbot.utils.spellcheck.SpellCheck.LanguageList;
@@ -30,6 +32,7 @@ import weka.core.Attribute;
 import weka.core.DenseInstance;
 import weka.core.Instances;
 import weka.core.SelectedTag;
+import weka.core.Utils;
 import weka.core.converters.ArffLoader.ArffReader;
 import weka.filters.unsupervised.attribute.StringToWordVector;
 
@@ -201,6 +204,7 @@ public class IntentLearner {
 	 * This method creates the instance to be classified, from the text that has been read.
 	 */
 	public Instances makeTestInstance(String query) {
+		
 		// Create the attributes, class and text
 		ArrayList<String> fvNominalVal = new ArrayList<String>(3);
 		fvNominalVal.add("eliza");
@@ -305,7 +309,61 @@ public class IntentLearner {
 			}
 		}
 	}	
-	
+	public synchronized void deleteFromInstanceFile(String query) {
+		// Create the attributes, class and text
+		BufferedWriter bw = null;
+		//FileWriter fw = null;
+		query = query.replace("'", "");
+		try {
+			ClassLoader classLoader = this.getClass().getClassLoader();
+			URL urlTrainingData = classLoader.getResource(resourcePath+ trainingData);
+			String trainingDataFile = urlTrainingData.getFile();
+			File trainFile = new File(trainingDataFile);
+			URL urlTempData = classLoader.getResource(resourcePath); 	
+			String tempDataFile = urlTempData.getFile();
+			File tempFile = new File(tempDataFile+ "temp.arff");
+			tempFile.createNewFile();
+			BufferedReader reader = new BufferedReader(new FileReader(trainFile));
+			BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
+
+			String sCurrentLine;
+
+			while ((sCurrentLine = reader.readLine()) != null) {
+				if(sCurrentLine.trim().contains(query)) {
+					continue;
+				}else {
+					 writer.write(sCurrentLine + System.getProperty("line.separator"));
+				}
+			}
+			writer.flush();
+			writer.close();
+			reader.close();
+			tempFile.renameTo(trainFile);
+			
+
+		} catch (IOException e) {
+
+			e.printStackTrace();
+
+		} finally {
+
+			try {
+
+				if (bw != null) {
+					bw.flush();
+					bw.close();
+				}
+
+				/*if (fw != null)
+					fw.close();*/
+
+			} catch (IOException ex) {
+
+				ex.printStackTrace();
+
+			}
+		}
+	}
 	/**
 	 * This method performs the classification of the instance.
 	 * Output is done at the command-line.
@@ -381,6 +439,7 @@ public class IntentLearner {
 	public Handler handleIntentClassification(IncomingRequest request) {
 		//IntentLearner learner;
 		String query = request.getRequestContent().get(0).getText().toLowerCase();
+		query = query.replace("'", "");
 		//learner = new IntentLearner();
 		ClassLoader classLoader = this.getClass().getClassLoader();
 		URL urlTrainingData = classLoader.getResource(resourcePath+ trainingData);
@@ -396,10 +455,22 @@ public class IntentLearner {
 		
 	}
 	/**
+	 * process user feedback and delete entries that get negative feedback
+	 * @param request
+	 */
+	public void processFeedback(FeedbackRequest request) {
+		// TODO Auto-generated method stub
+		String query=request.getQuery();
+		Feedback feedback = request.getFeedback();
+		if(feedback.equals(Feedback.NEGATIVE)) {
+			deleteFromInstanceFile(query);
+		}
+	}
+	/**
 	 * Main method. It is an example of the usage of this class.
 	 * @param args Command-line arguments: fileData and fileModel.
 	 */
-	/*public static void main (String[] args) {
+/*	public static void main (String[] args) {
 	
 		IntentLearner learner;
 		
@@ -408,11 +479,15 @@ public class IntentLearner {
 		
 		learner.evaluate();
 		learner.learn();
+		learner.deleteFromInstanceFile("obama");
 		//
 		learner.saveModel("C:\\Users\\Divya\\Documents\\try\\intentdata.model");
 		//learner.makeTestInstance("prince of persia");
 		learner.classify("how do you feel about that");
 		//learner.usePrediction(request, "what would it mean to you", testInstance.classAttribute().value((int) pred));
 		
+		
 	}*/
+
+
 }	

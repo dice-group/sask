@@ -5,12 +5,14 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.AfterClass;
 import org.junit.Test;
 
 import chatbot.core.handlers.eliza.ElizaHandler;
 import chatbot.core.handlers.qa.QAHandler;
 import chatbot.core.handlers.rivescript.RiveScriptQueryHandler;
 import chatbot.core.handlers.sessa.SessaHandler;
+import chatbot.io.incomingrequest.FeedbackRequest;
 import chatbot.io.incomingrequest.IncomingRequest;
 import chatbot.io.incomingrequest.RequestContent;
 
@@ -45,7 +47,7 @@ public class IntentLearnerTest {
 	@Test
 	public void testClassifyForQAHandler() {
 		
-		IncomingRequest input = createInitialRequest("what is the birthplace of Obama");
+		IncomingRequest input = createInitialRequest("what is Obama's birthplace");
 		Object actualOutput= classifyInput(input);
         assertTrue(actualOutput instanceof QAHandler);
 	}
@@ -64,5 +66,14 @@ public class IntentLearnerTest {
 		IncomingRequest input = createInitialRequest("obama wife");
 		Object actualOutput= classifyInput(input);
         assertTrue(actualOutput instanceof SessaHandler);
+	}
+	
+	@AfterClass
+	public static void tearDown() {
+		FeedbackRequest feedback = new FeedbackRequest();
+		feedback.setFeedback("negative");
+		feedback.setQuery("obama wife");
+		IntentLearner intentLeaner = new IntentLearner();
+		intentLeaner.processFeedback(feedback);
 	}
 }
