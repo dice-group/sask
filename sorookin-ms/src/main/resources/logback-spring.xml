@@ -11,10 +11,10 @@
 
 	<appender name="FILE"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>C:/logs/sorookin-ms.log</file>
+		<file>/logs/sorookin-ms.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<!-- daily rollover. -->
-			<fileNamePattern>C:/logs/archived/sorookin-ms.%d{yyyy-MM-dd}.%i.log
+			<fileNamePattern>/logs/archived/sorookin-ms.%d{yyyy-MM-dd}.%i.log
 			</fileNamePattern>
 
 			<timeBasedFileNamingAndTriggeringPolicy

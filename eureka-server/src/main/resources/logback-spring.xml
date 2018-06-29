@@ -10,10 +10,10 @@
 
 	<appender name="FILE"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>C:/logs/eureka-server.log</file>
+		<file>/logs/eureka-server.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<!-- daily rollover. -->
-			<fileNamePattern>C:/logs/archived/eureka-server.%d{yyyy-MM-dd}.%i.log
+			<fileNamePattern>/logs/archived/eureka-server.%d{yyyy-MM-dd}.%i.log
 			</fileNamePattern>
 
 			<timeBasedFileNamingAndTriggeringPolicy

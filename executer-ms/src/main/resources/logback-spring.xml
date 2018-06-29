@@ -10,10 +10,10 @@
 
 	<appender name="FILE"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>C:/logs/executer-ms.log</file>
+		<file>/logs/executer-ms.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<!-- daily rollover. -->
-			<fileNamePattern>C:/logs/archived/executer-ms.%d{yyyy-MM-dd}.%i.log
+			<fileNamePattern>/logs/archived/executer-ms.%d{yyyy-MM-dd}.%i.log
 			</fileNamePattern>
 
 			<timeBasedFileNamingAndTriggeringPolicy

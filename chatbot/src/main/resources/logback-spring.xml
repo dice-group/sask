@@ -10,10 +10,10 @@
 
 	<appender name="FILE"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>C:/logs/chatbot.log</file>
+		<file>/logs/chatbot.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<!-- daily rollover. -->
-			<fileNamePattern>C:/logs/archived/chatbot.%d{yyyy-MM-dd}.%i.log
+			<fileNamePattern>/logs/archived/chatbot.%d{yyyy-MM-dd}.%i.log
 			</fileNamePattern>
 
 			<timeBasedFileNamingAndTriggeringPolicy
