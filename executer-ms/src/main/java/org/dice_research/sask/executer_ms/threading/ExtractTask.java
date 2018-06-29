@@ -1,15 +1,7 @@
 package org.dice_research.sask.executer_ms.threading;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.Set;
 
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.ModelFactory;
-import org.apache.jena.riot.RIOT;
+import java.util.Set;
 import org.apache.log4j.Logger;
 import org.dice_research.sask_commons.workflow.Operator;
 import org.dice_research.sask_commons.workflow.Workflow;
@@ -24,7 +16,6 @@ import org.springframework.web.client.RestTemplate;
  * This class is a thread task and responsible for data extraction.
  * 
  * @author André Sonntag
- *
  */
 
 public class ExtractTask implements Runnable {
@@ -53,32 +44,8 @@ public class ExtractTask implements Runnable {
 		HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, headers);
 		ResponseEntity<String> response = restTemplate.postForEntity(uri + "/extractSimple?", request, String.class);
 		String extractorOutput = response.getBody();
-		
-		/*
-		 * Just a temporary solution
-		 */
-		if (this.getOperatorName().equalsIgnoreCase("FOX-MS")) {
-			InputStream in = new ByteArrayInputStream(extractorOutput.getBytes());
-			RIOT.init();
-			Model model = ModelFactory.createDefaultModel();
-			model.read(in, null, "TURTLE");
-			try {
-				in.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			OutputStream baos = new ByteArrayOutputStream();
-			model.write(baos, "N-TRIPLES");
-			extractorOutput = baos.toString();
-			try {
-				baos.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
 
+	
 		if (this.getNextOperatorList().size() != 0) {
 		Set<Runnable> nextOperatorList = TaskFactory.createTasks(this.restTemplate, this.wf, this.getNextOperatorList(),
 				new String[] { extractorOutput });
@@ -109,7 +76,8 @@ public class ExtractTask implements Runnable {
 			//uri = "http://FRED-MS";
 			throw new RuntimeException("Unsupported extractor '" + extractor + "'");
 		case "OPEN-IE-MS":
-			throw new RuntimeException("Unsupported extractor '" + extractor + "'");
+			uri = "http://OPEN-IE-MS";
+			break;
 		case "SPOTLIGHT-MS":
 			throw new RuntimeException("Unsupported extractor '" + extractor + "'");
 		default:
@@ -117,5 +85,4 @@ public class ExtractTask implements Runnable {
 		}
 		return uri;
 	}
-
 }

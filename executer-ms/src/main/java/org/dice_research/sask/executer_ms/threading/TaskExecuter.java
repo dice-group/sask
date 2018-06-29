@@ -9,7 +9,6 @@ import java.util.concurrent.Executors;
  * This class is responsible to execute/run the threads.
  * 
  * @author André Sonntag
- *
  */
 public class TaskExecuter {
 
@@ -32,6 +31,9 @@ public class TaskExecuter {
 		this.taskSet = taskSet;
 	}
 	
+	/**
+	 * This method execute the task/threads
+	 */
 	public void execute() {
 
 		for(Runnable task : taskSet) {

@@ -15,7 +15,6 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
  * This class is responsible for launching the microservice.
  * 
  * @author Kevin Haack
- *
  */
 @SpringBootApplication
 @EnableDiscoveryClient

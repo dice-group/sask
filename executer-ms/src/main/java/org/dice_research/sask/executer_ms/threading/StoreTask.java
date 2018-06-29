@@ -25,7 +25,7 @@ public class StoreTask implements Runnable {
 
 	@Override
 	public void run() {
-			logger.info("Start Thread: " + StoreTask.class.getName());
+			logger.info("Start Thread: " + StoreTask.class.getName());			
 			String uri = "http://DATABASE-MS/updateGraph";
 			restTemplate.postForObject(uri, data, String.class);
 	}

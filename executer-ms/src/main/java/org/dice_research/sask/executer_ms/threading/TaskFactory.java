@@ -11,10 +11,17 @@ import org.springframework.web.client.RestTemplate;
  * This class is responsible to create the right tasks/threads.
  * 
  * @author André Sonntag
- *
  */
 public class TaskFactory {
 
+	/**
+	 * This method create the right task for the right operator
+	 * @param restTemplate
+	 * @param wf
+	 * @param op
+	 * @param operatorInput
+	 * @return
+	 */
 	private static Runnable createTask(RestTemplate restTemplate, Workflow wf, Operator op, String... operatorInput) {
 
 		if (op.getType().equalsIgnoreCase("file")) {
@@ -38,6 +45,14 @@ public class TaskFactory {
 		}
 	}
 
+	/**
+	 * This method creates a set of tasks for a operator set
+	 * @param restTemplate
+	 * @param wf
+	 * @param opSet
+	 * @param operatorInput
+	 * @return
+	 */
 	public static Set<Runnable> createTasks(RestTemplate restTemplate, Workflow wf, Set<Operator> opSet,
 			String... operatorInput) {
 
@@ -53,6 +68,13 @@ public class TaskFactory {
 		return taskSet;
 	}
 
+	/**
+	 * This method creates a set of tasks for a operator set
+	 * @param restTemplate
+	 * @param wf
+	 * @param opSet
+	 * @return
+	 */
 	public static Set<Runnable> createTasks(RestTemplate restTemplate, Workflow wf, Set<Operator> opSet) {
 		return createTasks(restTemplate, wf, opSet, null);
 	}
