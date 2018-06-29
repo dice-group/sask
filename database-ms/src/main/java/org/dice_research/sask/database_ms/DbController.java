@@ -20,6 +20,7 @@ import org.apache.jena.update.UpdateProcessor;
 import org.apache.jena.update.UpdateRequest;
 import org.apache.log4j.Logger;
 import org.dice_research.sask.database_ms.RDFTriples.AutoIndexDTO;
+import org.dice_research.sask.database_ms.RDFTriples.EndPointParameters;
 import org.dice_research.sask.database_ms.RDFTriples.TripleDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
@@ -219,8 +220,10 @@ public class DbController {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		// have to replace with the required values
-		dto.setUrl("http://localhost:3030/sask/query");
-		dto.setEntitySelectQuery("SELECT ?subject ?object WHERE { ?subject ?predicate ?object }");
+		EndPointParameters endPointParameters = dto.getEndPointParameters();
+		endPointParameters.setUrl("http://localhost:3030/sask/query");
+		endPointParameters.setEntitySelectQuery("SELECT ?subject ?object WHERE { ?subject ?predicate ?object }");
+		endPointParameters.setIsEntityCustomized(true);
 		dto.setUseLocalDataSource(true);
 		HttpEntity<AutoIndexDTO> entity = new HttpEntity<AutoIndexDTO>(dto, headers);
 

@@ -1,25 +1,14 @@
 package org.dice_research.sask.database_ms.RDFTriples;
 
 public class AutoIndexDTO {
-	private String url = "";
-
-	private String entitySelectQuery = "";
+	private EndPointParameters endPointParameters;
 	private boolean useLocalDataSource = true;
 
-	public String getUrl() {
-		return url;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
-	}
-
-	public String getEntitySelectQuery() {
-		return entitySelectQuery;
-	}
-
-	public void setEntitySelectQuery(String entitySelectQuery) {
-		this.entitySelectQuery = entitySelectQuery;
+	public EndPointParameters getEndPointParameters() {
+		if(this.endPointParameters == null) {
+			endPointParameters = new EndPointParameters();
+		}
+		return this.endPointParameters;
 	}
 
 	public boolean isUseLocalDataSource() {
