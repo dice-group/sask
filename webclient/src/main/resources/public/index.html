@@ -108,7 +108,7 @@
 
 			$(document).ready(function() {
 				// columns
-				repo = $("#sask-container").columnOrganizer({});
+				columnOrganizer = $("#sask-container").columnOrganizer({});
 
 				// repo
 				repo = $("#ex-repo").repository({
@@ -130,13 +130,21 @@
 				});
 
 				// chatbot
-				chatbot = $("#chat-chatbot").chatbot({});
+				chatbot = $("#chat-chatbot").chatbot({
+					onBigMessage : onBigMessage
+				});
 
 				$("#ex-refreshRepo").click(refresh);
 				$("#ex-uploadFile").click(upload.open);
 
 				refresh();
 			});
+
+			function onBigMessage() {
+				var column = $(chatbot).parent();
+				columnOrganizer.columnOrganizer("maximizeColumn", column);
+
+			}
 
 			function onLoadToWorkspace(target) {
 				workspace.workspace("loadWorkflowFromPath", target.id);

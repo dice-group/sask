@@ -39,7 +39,8 @@
 		textfieldTemplate : "<input type=\"text\" class=\"form-control chat-textfield\"/>",
 		sendTemplate : "<input type=\"submit\" class=\"btn btn-primary chat-send\" value=\"Send\"/>",
 		errorClass : "error",
-		messageClass : "message"
+		messageClass : "message",
+		onBigMessage : undefined
 	};
 
 	var Chatbot = function(element, options) {
@@ -94,7 +95,7 @@
 			scrollTop : chatBody.height()
 		}, 'slow');
 	};
-	
+
 	/**
 	 * Create a right card.
 	 */
@@ -104,7 +105,7 @@
 		this.addCard(card);
 		return card;
 	}
-	
+
 	/**
 	 * Create a left card.
 	 */
@@ -128,7 +129,7 @@
 
 		// add card
 		this.addRightCard(message);
-		
+
 		// create data to send
 		var data = {}
 		data["userId"] = "1104ea5f-ce7b-4211-8675-e880b9bd0ec7";
@@ -146,7 +147,8 @@
 	 * Addd a new error message from the passed data.
 	 */
 	Chatbot.prototype.addErrorMessage = function(data) {
-		var card = this.addLeftCard("Internal Server error. Please contact your administrator");
+		var card = this
+				.addLeftCard("Internal Server error. Please contact your administrator");
 		card.addClass(this.options.errorClass);
 	};
 
@@ -170,6 +172,10 @@
 		}
 
 		if (messageType === "TEXT_WITH_URL" || messageType === "URL") {
+			if (this.options.onBigMessage) {
+				this.options.onBigMessage();
+			}
+
 			// Need to polish read Entry
 			// Information.
 			var displayText = "";

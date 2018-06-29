@@ -34,7 +34,8 @@
 
 		return {
 			options : this.options,
-			init : $.proxy(this.init, this)
+			init : $.proxy(this.init, this),
+			maximizeColumn : $.proxy(this.maximizeColumn, this)
 		};
 	};
 
