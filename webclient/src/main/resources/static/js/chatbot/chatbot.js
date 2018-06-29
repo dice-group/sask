@@ -70,9 +70,9 @@
 	 */
 	Chatbot.prototype.initChat = function() {
 		var self = this;
-		
-		textfield.on('keypress', function (e) {
-	         if(e.which === 13 && textfield.val().trim()) {
+
+		textfield.on('keypress', function(e) {
+			if (e.which === 13 && textfield.val().trim()) {
 				self.onSendMessage();
 			}
 		});

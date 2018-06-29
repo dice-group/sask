@@ -5,8 +5,6 @@
 <head>
 <meta charset="utf-8" />
 <title>SASK - Home</title>
-<!-- ~~~~~~ global ~~~~~~ -->
-<link rel="stylesheet" href="/styles/global.css">
 <!-- ~~~~~~ jquery ~~~~~~ -->
 <script src="/webjars/jquery/3.2.1/jquery.min.js"></script>
 <!-- ~~~~~~ bootstrap ~~~~~~ -->
@@ -38,6 +36,9 @@
 <!-- ~~~~~~ chatbot ~~~~~~ -->
 <script type="text/javascript" src="/js/chatbot/chatbot.js"></script>
 <link rel="stylesheet" href="/styles/chatbot/chatbot.css">
+<!-- ~~~~~~ layout ~~~~~~ -->
+<link rel="stylesheet" href="/styles/global.css">
+<script src="/js/workspace/ColumnOrganizer.js"></script>
 </head>
 <body>
 	<!-- navbar -->
@@ -65,9 +66,9 @@
 		</div>
 	</nav>
 	<!-- content -->
-	<div class="container">
+	<div class="container" id="sask-container">
 		<div class="row">
-			<div class="col-lg-3">
+			<div class="col-lg-3 sask-column">
 				<h4>Repository</h4>
 				<div id="ex-repo"></div>
 				<button class="btn btn-primary" id="ex-refreshRepo">
@@ -78,11 +79,13 @@
 					file...
 				</button>
 			</div>
-			<div class="col-lg-6">
+			<div class="col-lg-6 sask-column resizable" data-sizeMin="col-lg-6"
+				data-sizeMax="col-lg-9">
 				<h4>Workspace</h4>
 				<div id="ex-workspace" class="sask-border"></div>
 			</div>
-			<div class="col-lg-3">
+			<div class="col-lg-3 sask-column resizable" data-sizeMin="col-lg-3"
+				data-sizeMax="col-lg-12">
 				<h4>Chatbot</h4>
 				<div id="chat-chatbot" class="sask-border"></div>
 			</div>
@@ -97,12 +100,16 @@
 	<script>
 		(function($) {
 			var dao = new DAO({});
+			var columnOrganizer;
 			var chatbot;
 			var workspace;
 			var repo;
 			var upload;
 
 			$(document).ready(function() {
+				// columns
+				repo = $("#sask-container").columnOrganizer({});
+
 				// repo
 				repo = $("#ex-repo").repository({
 					dao : dao,
