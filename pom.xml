@@ -80,7 +80,7 @@
 		<dependency>
 			<groupId>com.github.dice-group</groupId>
 			<artifactId>sask-commons</artifactId>
-			<version>0.0.7.9</version>
+			<version>0.0.8.1</version>
 		</dependency>
 	</dependencies>
 

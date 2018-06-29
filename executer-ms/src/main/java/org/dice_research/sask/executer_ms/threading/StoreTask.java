@@ -16,8 +16,8 @@ public class StoreTask implements Runnable {
 	private final String data;
 	// private final String targetGraph;
 
-	public StoreTask(RestOperations restTemplate, Workflow wf, Operator op, String data) {
-		this.restTemplate = (RestTemplate) restTemplate;
+	public StoreTask(RestTemplate restTemplate, Workflow wf, Operator op, String data) {
+		this.restTemplate = restTemplate;
 		this.wf = wf;
 		this.op = op;
 		this.data = data;
@@ -25,7 +25,7 @@ public class StoreTask implements Runnable {
 
 	@Override
 	public void run() {
-			logger.info("Start Thread: " + StoreTask.class.getName());			
+			logger.info("Start Thread: " + StoreTask.class.getName());	
 			String uri = "http://DATABASE-MS/updateGraph";
 			restTemplate.postForObject(uri, data, String.class);
 	}

@@ -1,6 +1,5 @@
 package org.dice_research.sask.executer_ms.threading;
 
-
 import java.util.Set;
 import org.apache.log4j.Logger;
 import org.dice_research.sask_commons.workflow.Operator;
@@ -45,12 +44,11 @@ public class ExtractTask implements Runnable {
 		ResponseEntity<String> response = restTemplate.postForEntity(uri + "/extractSimple?", request, String.class);
 		String extractorOutput = response.getBody();
 
-	
 		if (this.getNextOperatorList().size() != 0) {
-		Set<Runnable> nextOperatorList = TaskFactory.createTasks(this.restTemplate, this.wf, this.getNextOperatorList(),
-				new String[] { extractorOutput });
-		TaskExecuter executer = new TaskExecuter(nextOperatorList);
-		executer.execute();
+			Set<Runnable> nextOperatorList = TaskFactory.createTasks(this.restTemplate, this.wf,
+					this.getNextOperatorList(), new String[] { extractorOutput });
+			TaskExecuter executer = new TaskExecuter(nextOperatorList);
+			executer.execute();
 		}
 	}
 
@@ -73,7 +71,7 @@ public class ExtractTask implements Runnable {
 			uri = "http://FOX-MS";
 			break;
 		case "FRED-MS":
-			//uri = "http://FRED-MS";
+			// uri = "http://FRED-MS";
 			throw new RuntimeException("Unsupported extractor '" + extractor + "'");
 		case "OPEN-IE-MS":
 			uri = "http://OPEN-IE-MS";
