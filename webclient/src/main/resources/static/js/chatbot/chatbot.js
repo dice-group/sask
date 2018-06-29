@@ -31,14 +31,15 @@
 	var chatBody = undefined;
 
 	_default.settings = {
-		chatListTemplate : "<ul class=\"chat\"></ul>",
-		rightTemplate : "<li class=\"right\"><p>You</p></li>",
-		leftTemplate : "<li class=\"left\"><p>Chatbot</p></li>",
+		chatListTemplate : "<div class=\"chat\"></div>",
+		rightTemplate : "<div class=\"card right\"><div class=\"messageHead\"><span class=\"pull-right\">You</span></div><div class=\"message\"></div></div>",
+		leftTemplate : "<div class=\"card left\"><div class=\"messageHead\"><span>Chatbot</span></div><div class=\"message\"></div></div>",
 		footerTemplate : "<div class=\"chat-footer form-group\"></div>",
 		bodyTemplate : "<div class=\"chat-body\"></div>",
 		textfieldTemplate : "<input type=\"text\" class=\"form-control chat-textfield\"/>",
 		sendTemplate : "<input type=\"submit\" class=\"btn btn-primary chat-send\" value=\"Send\"/>",
-		errorClass : "error"
+		errorClass : "error",
+		messageClass : "message"
 	};
 
 	var Chatbot = function(element, options) {
@@ -93,6 +94,26 @@
 			scrollTop : chatBody.height()
 		}, 'slow');
 	};
+	
+	/**
+	 * Create a right card.
+	 */
+	Chatbot.prototype.addRightCard = function(message) {
+		var card = $(this.options.rightTemplate);
+		card.find("." + this.options.messageClass).text(message);
+		this.addCard(card);
+		return card;
+	}
+	
+	/**
+	 * Create a left card.
+	 */
+	Chatbot.prototype.addLeftCard = function(message) {
+		var card = $(this.options.leftTemplate);
+		card.find("." + this.options.messageClass).text(message);
+		this.addCard(card);
+		return card;
+	}
 
 	/**
 	 * Method called on message send.
@@ -106,10 +127,8 @@
 		textfield.val("");
 
 		// add card
-		var card = $(this.options.rightTemplate);
-		card.append(message);
-		this.addCard(card);
-
+		this.addRightCard(message);
+		
 		// create data to send
 		var data = {}
 		data["userId"] = "1104ea5f-ce7b-4211-8675-e880b9bd0ec7";
@@ -127,10 +146,8 @@
 	 * Addd a new error message from the passed data.
 	 */
 	Chatbot.prototype.addErrorMessage = function(data) {
-		var card = $(this.options.leftTemplate);
-		card.append("Internal Server error. Please contact your administrator");
+		var card = this.addLeftCard("Internal Server error. Please contact your administrator");
 		card.addClass(this.options.errorClass);
-		this.addCard(card);
 	};
 
 	/**
@@ -148,9 +165,7 @@
 		var messageType = dataObject.messageType;
 
 		if (messageType === "PLAIN_TEXT") {
-			var card = $(this.options.leftTemplate);
-			card.append(messageData[0].content);
-			this.addCard(card);
+			this.addLeftCard(messageData[0].content);
 			return;
 		}
 

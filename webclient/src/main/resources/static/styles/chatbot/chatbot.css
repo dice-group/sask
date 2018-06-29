@@ -26,7 +26,6 @@
 }
 
 #chat-chatbot .chat {
-	list-style: none;
 	margin-left: 5px;
 	margin-right: 5px;
 	margin-top: 5px;
@@ -34,31 +33,31 @@
 	padding: 0;
 }
 
-#chat-chatbot .chat-body .chat li {
+#chat-chatbot .chat-body .chat .card {
 	margin-bottom: 10px;
 	padding-bottom: 5px;
 	border-bottom: 1px dotted #B3A9A9;
 }
 
-#chat-chatbot .chat-body .chat li {
+#chat-chatbot .chat-body .chat .card {
 	margin-bottom: 10px;
 	padding-bottom: 5px;
 	border-bottom: 1px dotted #B3A9A9;
 }
 
-#chat-chatbot .chat-body .chat li.left {
+#chat-chatbot .chat-body .chat .card.left {
 	
 }
 
-#chat-chatbot .chat-body .chat li.right {
-	
+#chat-chatbot .chat-body .chat .card .messageHead {
+	height: 1.5em;
 }
 
-#chat-chatbot .chat-body .chat li.error {
+#chat-chatbot .chat-body .chat .card.error {
 	background-color: #FF7F50;
 }
 
-#chat-chatbot .chat li p {
+#chat-chatbot .chat-body .chat .card .messageHead {
 	margin: 0;
 	color: #777777;
 }
