@@ -230,11 +230,11 @@
 		var self = this;
 		var onSuccess = function(result) {
 			self.addMessage(result);
-		}
+		};
 
 		var onError = function(result) {
 			self.addErrorMessage(result);
-		}
+		};
 
 		this.options.dao.sendChatMessage(data, onSuccess, onError);
 	};

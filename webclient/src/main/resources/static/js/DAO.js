@@ -102,7 +102,7 @@ var DAO = function(options) {
 		}
 
 		return "./" + discoverer.getChatbot().serviceId + "/";
-	}
+	};
 
 	/**
 	 * Parse the hdfs workflows structure to the ui structure.
@@ -143,7 +143,7 @@ var DAO = function(options) {
 	 */
 	this.getDiscoverer = function() {
 		return discoverer;
-	}
+	};
 
 	/**
 	 * Constructor
@@ -193,7 +193,7 @@ var DAO = function(options) {
 			success,
 			error
 		});
-	}
+	};
 
 	/**
 	 * Send the passed workflow to the executer.
@@ -224,7 +224,7 @@ var DAO = function(options) {
 			data,
 			url,
 			error,
-			success : function(data) {
+			success(data) {
 				var structure = parseRepoStructure(data);
 				success(structure);
 			}
@@ -245,7 +245,7 @@ var DAO = function(options) {
 			url,
 			data,
 			error,
-			success : function(data) {
+			success(data) {
 				var structure = parseWorkflowStructure(data);
 				success(structure);
 			}
@@ -289,7 +289,7 @@ var DAO = function(options) {
 			success,
 			error
 		});
-	}
+	};
 
 	/**
 	 * Rename the passed workflow.
@@ -309,7 +309,7 @@ var DAO = function(options) {
 			success,
 			error
 		});
-	}
+	};
 
 	/**
 	 * Rename the passed target.
@@ -329,7 +329,7 @@ var DAO = function(options) {
 			success,
 			error
 		});
-	}
+	};
 
 	/**
 	 * Remove the passed target from the repo.
@@ -348,7 +348,7 @@ var DAO = function(options) {
 			success,
 			error
 		});
-	}
+	};
 
 	/**
 	 * Remove the passed target from the workflows.
@@ -367,7 +367,7 @@ var DAO = function(options) {
 			success,
 			error
 		});
-	}
+	};
 
 	/**
 	 * Creates a new folder in the passed target.
@@ -390,7 +390,7 @@ var DAO = function(options) {
 			success,
 			error
 		});
-	}
+	};
 
 	/**
 	 * Save workflow.
@@ -417,7 +417,7 @@ var DAO = function(options) {
 			success,
 			error
 		});
-	}
+	};
 
 	/**
 	 * Return all target graphs.
@@ -432,7 +432,7 @@ var DAO = function(options) {
 		});
 
 		success(graphs);
-	}
+	};
 
 	/**
 	 * Upload file.
@@ -451,12 +451,12 @@ var DAO = function(options) {
 			processData : false,
 			data,
 			type : "post",
-			success : function() {
+			success() {
 				if (success) {
 					success(path, file);
 				}
 			},
-			error : function(data) {
+			error(data) {
 				if (error) {
 					error(data, path, file);
 				}

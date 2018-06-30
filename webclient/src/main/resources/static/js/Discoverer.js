@@ -145,13 +145,13 @@ var Discoverer = function(options) {
 			if (typeof self.settings.onRefreshed !== "undefined") {
 				self.settings.onRefreshed();
 			}
-		}
+		};
 
 		var error = function(data) {
 			if (typeof self.settings.onError !== "undefined") {
 				self.settings.onError(data);
 			}
-		}
+		};
 
 		this.settings.dao.discoverMicroservices(success, error);
 	};

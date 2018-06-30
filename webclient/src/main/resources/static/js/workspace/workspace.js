@@ -111,7 +111,7 @@
 		var flowchart = this.flowchart;
 		this.flowchart.droppable({
 			accept : "li.extractor, li.file, li.db",
-			drop : function(ev, ui) {
+			drop(ev, ui) {
 				var node = ui.helper.data("node");
 
 				// get position
@@ -133,7 +133,7 @@
 				self.addNode(newNode);
 			}
 		});
-	}
+	};
 
 	/**
 	 * Init the workspace.
@@ -190,8 +190,8 @@
 		};
 
 		this.flowchart = this.$element.children().eq(1).flowchart({
-			onAfterChange : onAfterChange,
-			onLinkCreate : onLinkCreate
+			onAfterChange,
+			onLinkCreate
 		});
 	};
 
@@ -209,7 +209,7 @@
 		}
 
 		return exists;
-	}
+	};
 
 	/**
 	 * Balance connectors if necessary to all operators.
@@ -219,7 +219,7 @@
 			this.balanceOutputs(workflow, workflow.operators[op]);
 			this.balanceInputs(workflow, workflow.operators[op]);
 		}
-	}
+	};
 
 	/**
 	 * Balance the output connectors if necessary.
@@ -262,7 +262,7 @@
 
 		// delete unnecessary connectors
 		if (currentConnectorCount - used.length >= 2) {
-			delete connectors[unused[unused.length - 1]]
+			delete connectors[unused[unused.length - 1]];
 		}
 	};
 
@@ -381,7 +381,7 @@
 	Workspace.prototype.executeWorkflow = function() {
 		var self = this;
 		var success = function(data) {
-			console.log(data);
+			
 		}
 
 		var error = function(data) {
@@ -496,11 +496,11 @@
 			left : properties.xPosition,
 			properties : {
 				type : properties.type,
-				id : id,
+				id,
 				content : properties.id,
 				title : properties.text,
-				inputs : inputs,
-				outputs : outputs
+				inputs,
+				outputs
 			}
 		};
 		
@@ -540,7 +540,7 @@
 	Workspace.prototype.changeWorkflowName = function(name) {
 		workflowId = name;
 		toolbar.toolbar("setWorkflowName", name);
-	}
+	};
 
 	/**
 	 * Load the passed workspace

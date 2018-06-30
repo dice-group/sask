@@ -72,7 +72,7 @@ var Dialogs = function(options) {
 			height : "auto",
 			width : "auto",
 			modal : true,
-			buttons : buttons
+			buttons
 		});
 
 		return dialog;

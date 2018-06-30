@@ -125,7 +125,7 @@
 			self.initClasses();
 			self.initDragNDrop();
 		});
-	}
+	};
 
 	/**
 	 * Set the css classes of the nodes.
@@ -149,7 +149,7 @@
 		var self = this;
 		this.$element.find("li.file, li.extractor, li.db").draggable({
 			helper : "clone",
-			start : function(event, ui) {
+			start(event, ui) {
 				var node = self.getNodeFromTarget(this);
 				ui.helper.data("node", node);
 				ui.helper.width(this.clientWidth);
@@ -175,7 +175,7 @@
 		settings.onError = function() {
 			logError("Discover failed.");
 		};
-	}
+	};
 
 	/**
 	 * Remove.
@@ -226,7 +226,7 @@
 		}
 
 		return node;
-	}
+	};
 
 	/**
 	 * Refresh the repo.
@@ -340,12 +340,12 @@
 
 		// data root
 		new BootstrapMenu("#" + this.elementId + " li.root[data-nodeid=\"0\"]", {
-			fetchElementData : function(target) {
+			fetchElementData(target) {
 				return self.getNodeFromTarget(target);
 			},
 			actions : [ {
 				name : "New folder",
-				onClick : function(target) {
+				onClick(target) {
 					if (target == "#data") {
 						target = "";
 					}
@@ -357,12 +357,12 @@
 
 		// db
 		new BootstrapMenu("#" + this.elementId + " li.db", {
-			fetchElementData : function(target) {
+			fetchElementData(target) {
 				return self.getNodeFromTarget(target);
 			},
 			actions : [ {
 				name : "Add to Workspace",
-				onClick : function(target) {
+				onClick(target) {
 					self.options.onAddToWorkspace(target);
 				}
 			} ]
@@ -370,12 +370,12 @@
 
 		// extractor
 		new BootstrapMenu("#" + this.elementId + " li.extractor", {
-			fetchElementData : function(target) {
+			fetchElementData(target) {
 				return self.getNodeFromTarget(target);
 			},
 			actions : [ {
 				name : "Add to Workspace",
-				onClick : function(target) {
+				onClick(target) {
 					self.options.onAddToWorkspace(target);
 				}
 			} ]
@@ -383,22 +383,22 @@
 
 		// workflow
 		new BootstrapMenu("#" + this.elementId + " li.workflow", {
-			fetchElementData : function(target) {
+			fetchElementData(target) {
 				return self.getNodeFromTarget(target);
 			},
 			actions : [ {
 				name : "Load to workspace",
-				onClick : function(target) {
+				onClick(target) {
 					self.options.onLoadToWorkspace(target);
 				}
 			}, {
 				name : "Rename",
-				onClick : function(target) {
+				onClick(target) {
 					self.openRenameWorkflowDialog(target);
 				}
 			}, {
 				name : "Remove",
-				onClick : function(target) {
+				onClick(target) {
 					self.openRemoveFromWorkflowsDialog(target);
 				}
 			} ]
@@ -406,22 +406,22 @@
 
 		// file
 		new BootstrapMenu("#" + this.elementId + " li.file", {
-			fetchElementData : function(target) {
+			fetchElementData(target) {
 				return self.getNodeFromTarget(target);
 			},
 			actions : [ {
 				name : "Add to Workspace",
-				onClick : function(target) {
+				onClick(target) {
 					self.options.onAddToWorkspace(target);
 				}
 			}, {
 				name : "Rename",
-				onClick : function(target) {
+				onClick(target) {
 					self.openRenameRepoDialog(target);
 				}
 			}, {
 				name : "Remove",
-				onClick : function(target) {
+				onClick(target) {
 					self.openRemoveFromRepoDialog(target);
 				}
 			} ]
@@ -429,22 +429,22 @@
 
 		// folder
 		new BootstrapMenu("#" + this.elementId + " li.folder", {
-			fetchElementData : function(target) {
+			fetchElementData(target) {
 				return self.getNodeFromTarget(target);
 			},
 			actions : [ {
 				name : "New folder",
-				onClick : function(target) {
+				onClick(target) {
 					self.openNewFolderDialog(target);
 				}
 			}, {
 				name : "Rename",
-				onClick : function(target) {
+				onClick(target) {
 					self.openRenameRepoDialog(target);
 				}
 			}, {
 				name : "Remove",
-				onClick : function(target) {
+				onClick(target) {
 					self.openRemoveFromRepoDialog(target);
 				}
 			} ]

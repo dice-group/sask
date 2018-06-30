@@ -242,7 +242,7 @@ var Upload = function(options) {
 	var appendFileRow = function(row) {
 		selectFileMessage.hide();
 		uploadList.append(row);
-	}
+	};
 
 	/**
 	 * Create the file row.

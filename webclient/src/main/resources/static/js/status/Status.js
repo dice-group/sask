@@ -97,7 +97,7 @@
 	 */
 	Status.prototype.discover = function() {
 		this.options.dao.getDiscoverer().discover();
-	}
+	};
 
 	/**
 	 * Init the discoverer.
@@ -114,7 +114,7 @@
 		settings.onError = function() {
 			self.onRefreshError();
 		};
-	}
+	};
 
 	/**
 	 * Init the structure.
@@ -142,7 +142,7 @@
 			self.options.dao.getDiscoverer().discover();
 		});
 		this.$element.append(refreshButton);
-	}
+	};
 
 	/**
 	 * Clear the type lists.
@@ -151,7 +151,7 @@
 		for ( var type in lists) {
 			lists[type].empty();
 		}
-	}
+	};
 
 	/**
 	 * Will be called, when the ms discovered.
@@ -172,7 +172,7 @@
 				lists[type].append(this.options.templates.emptyMessage);
 			}
 		}
-	}
+	};
 
 	/**
 	 * Append the passed microservice to its list.
@@ -211,14 +211,14 @@
 		head.append(type);
 
 		list.append(item);
-	}
+	};
 
 	/**
 	 * Will be called when there was a discover error.
 	 */
 	Status.prototype.onRefreshError = function(data) {
 		logError(data);
-	}
+	};
 
 	/**
 	 * logging function

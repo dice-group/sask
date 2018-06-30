@@ -152,7 +152,7 @@
 		selector += " span";
 
 		new BootstrapMenu(selector, {
-			fetchElementData : function(target) {
+			fetchElementData(target) {
 				var head = $(target.parent());
 				var column = $(head.parent());
 				return column;
@@ -160,12 +160,12 @@
 			menuEvent : "click",
 			actions : [ {
 				name : "Maximize",
-				onClick : function(column) {
+				onClick(column) {
 					self.maximizeColumn(column);
 				}
 			}, {
 				name : "Minimize",
-				onClick : function(column) {
+				onClick(column) {
 					self.minimizeColumn(column);
 				}
 			} ]
