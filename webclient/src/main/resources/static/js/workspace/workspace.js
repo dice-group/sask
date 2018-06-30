@@ -26,6 +26,7 @@
 		forceFileEnding : true,
 		fileEnding : ".wf",
 		onWorkflowSaved : undefined,
+		
 		dao : undefined
 	};
 
@@ -139,7 +140,7 @@
 	 * Init the workspace.
 	 */
 	Workspace.prototype.initWorkspace = function() {
-		this.$element.append('<div style="height: 92%"></div>');
+		this.$element.append('<div></div>');
 
 		var self = this;
 
@@ -489,7 +490,7 @@
 
 		// create unique node id
 		var id = this.createUuid("node_");
-
+		
 		// create data
 		var newData = {
 			top : properties.yPosition,
@@ -503,7 +504,7 @@
 				outputs : outputs
 			}
 		};
-
+		
 		this.flowchart.flowchart("createOperator", id, newData);
 	};
 
