@@ -307,7 +307,7 @@
 
 		// delete unnecessary connectors
 		if (currentConnectorCount - used.length >= 2) {
-			delete connectors[unused[unused.length - 1]]
+			delete connectors[unused[unused.length - 1]];
 		}
 	};
 
@@ -325,7 +325,7 @@
 
 			workflowStack.clear();
 			self.syncWorkflowStack();
-		}
+		};
 
 		// undo
 		var onUndoButtonClick = function() {
@@ -335,7 +335,7 @@
 			preventStacking = false;
 
 			self.syncWorkflowStack();
-		}
+		};
 
 		// redo
 		var onRedoButtonClick = function() {
@@ -345,7 +345,7 @@
 			preventStacking = false;
 
 			self.syncWorkflowStack();
-		}
+		};
 
 		// save
 		var onSaveButtonClick = function() {
@@ -354,12 +354,12 @@
 			} else {
 				self.saveWorkflow();
 			}
-		}
+		};
 
 		// execute
 		var onExecuteButtonClick = function() {
 			self.executeWorkflow();
-		}
+		};
 
 		/*
 		 * create
@@ -382,11 +382,11 @@
 		var self = this;
 		var success = function(data) {
 			
-		}
+		};
 
 		var error = function(data) {
 			logError(data);
-		}
+		};
 
 		var workflow = this.getWorkflow();
 		this.options.dao.executeWorkflow(success, error, workflow);
@@ -404,11 +404,11 @@
 		var self = this;
 		var success = function(data) {
 			self.options.onWorkflowSaved();
-		}
+		};
 
 		var error = function(data) {
 			logError(data);
-		}
+		};
 
 		var workflow = this.getWorkflow();
 		this.options.dao.saveWorkflow(success, error, workflowId, workflow);

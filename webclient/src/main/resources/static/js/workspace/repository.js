@@ -246,11 +246,11 @@
 			self.options.data = structureTemplate;
 
 			self.init(self.options);
-		}
+		};
 
 		var error = function(data) {
 			logError(data);
-		}
+		};
 
 		this.options.dao.getRepoStructure(success, error);
 	};
@@ -271,11 +271,11 @@
 			self.options.data = structureTemplate;
 
 			self.init(self.options);
-		}
+		};
 
 		var error = function(data) {
 			logError(data);
-		}
+		};
 
 		this.options.dao.getWorkflows(success, error);
 	};
@@ -315,11 +315,11 @@
 			structureTemplate[2].nodes = data;
 			self.options.data = structureTemplate;
 			self.init(self.options);
-		}
+		};
 
 		var error = function(data) {
 			logError(data);
-		}
+		};
 
 		this.options.dao.getTargetGraphs(success, error);
 	};
@@ -458,11 +458,11 @@
 		var self = this;
 		var success = function(data) {
 			self.refreshRepo();
-		}
+		};
 
 		var error = function(data) {
 			logError(data);
-		}
+		};
 
 		var positiv = function() {
 			var target = $(this).find("input[name=\"target\"]").val();
@@ -486,11 +486,11 @@
 		var self = this;
 		var success = function(data) {
 			self.refreshWorkflows();
-		}
+		};
 
 		var error = function(data) {
 			logError(data);
-		}
+		};
 
 		var positiv = function() {
 			var target = $(this).find("input[name=\"target\"]").val();
@@ -515,11 +515,11 @@
 		var positiv = function() {
 			var success = function(data) {
 				self.refreshRepo();
-			}
+			};
 
 			var error = function(data) {
 				logError(data);
-			}
+			};
 
 			var target = $(this).find("input[name=\"target\"]").val();
 			var name = $(this).find("input[name=\"name\"]").val();
@@ -542,11 +542,11 @@
 		var self = this;
 		var success = function(data) {
 			self.refreshRepo();
-		}
+		};
 
 		var error = function(data) {
 			logError(data);
-		}
+		};
 
 		var positiv = function() {
 			var target = $(this).find("input[name=\"target\"]").val();
@@ -569,11 +569,11 @@
 		var self = this;
 		var success = function(data) {
 			self.refreshWorkflows();
-		}
+		};
 
 		var error = function(data) {
 			logError(data);
-		}
+		};
 
 		var positiv = function() {
 			var target = $(this).find("input[name=\"target\"]").val();

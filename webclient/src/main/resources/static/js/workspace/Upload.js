@@ -264,14 +264,14 @@ var Upload = function(options) {
 	var getFileRow = function(path, filename) {
 		return uploadList.find("a[data-file=\"" + filename + "\"][data-path=\""
 				+ path + "\"]");
-	}
+	};
 
 	/**
 	 * Open the dialog.
 	 */
 	this.open = function() {
 		dialog.dialog("open");
-	}
+	};
 
 	/**
 	 * Run the constructor.
