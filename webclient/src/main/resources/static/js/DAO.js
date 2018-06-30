@@ -60,8 +60,8 @@ var DAO = function(options) {
 		var node = {
 			text : hdfsData.suffix,
 			id : hdfsData.path,
-			type : type,
-			icon : icon
+			type,
+			icon
 		};
 
 		if (type === "folder") {
@@ -91,7 +91,7 @@ var DAO = function(options) {
 		}
 
 		return "./" + discoverer.getExecuter().serviceId + "/";
-	}
+	};
 	
 	/**
 	 * Return the chatbot service id.
@@ -181,7 +181,7 @@ var DAO = function(options) {
 		
 		$.ajax({
 			type : "POST",
-			dataType : 'text',
+			dataType : "text",
 			data : JSON.stringify(data),
 			contentType : "application/json",
 			url : uri, // Need to debug how
@@ -237,7 +237,7 @@ var DAO = function(options) {
 	this.getWorkflows = function(success, error) {
 		var uri = getRepoServiceUri() + "getHdfsStructure";
 		var data = {
-			location : 'workflow'
+			location : "workflow"
 		};
 
 		$.ajax({
@@ -278,16 +278,16 @@ var DAO = function(options) {
 		var uri = getRepoServiceUri() + "rename";
 		var data = {
 			location : "repo",
-			from : from,
-			to : to
+			from,
+			to
 		};
 
 		$.ajax({
 			type : "POST",
 			url : uri,
-			data : data,
-			success : success,
-			error : error
+			data,
+			success,
+			error
 		});
 	}
 
@@ -356,7 +356,7 @@ var DAO = function(options) {
 	this.removeFromWorkflows = function(success, error, target) {
 		var uri = getRepoServiceUri() + "delete";
 		var data = {
-			location : 'workflow',
+			location : "workflow",
 			path : target
 		};
 
@@ -379,7 +379,7 @@ var DAO = function(options) {
 
 		var uri = getRepoServiceUri() + "createDirectory";
 		var data = {
-			location : 'repo',
+			location : "repo",
 			path : target + name
 		};
 
@@ -425,10 +425,10 @@ var DAO = function(options) {
 	this.getTargetGraphs = function(success, error) {
 		var graphs = [];
 		graphs.push({
-			text : 'sask',
-			id : 'sask',
-			type : 'db',
-			icon : 'glyphicon glyphicon-hdd'
+			text : "sask",
+			id : "sask",
+			type : "db",
+			icon : "glyphicon glyphicon-hdd"
 		});
 
 		success(graphs);
@@ -450,7 +450,7 @@ var DAO = function(options) {
 			contentType : false,
 			processData : false,
 			data : formData,
-			type : 'post',
+			type : "post",
 			success : function() {
 				if (success) {
 					success(path, file);

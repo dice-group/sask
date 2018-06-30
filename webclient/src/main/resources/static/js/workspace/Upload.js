@@ -88,26 +88,26 @@ var Upload = function(options) {
 		/*
 		 * HTML
 		 */
-		selectButton = $('<button type="button" class="btn btn-primary">Select file...</button>');
-		clearButton = $('<button type="button" class="btn btn-warning">Clear list</button>');
+		selectButton = $("<button type=\"button\" class=\"btn btn-primary\">Select file...</button>");
+		clearButton = $("<button type=\"button\" class=\"btn btn-warning\">Clear list</button>");
 
-		var buttonGroup = $('<div class="btn-group" role="group"></div>');
+		var buttonGroup = $("<div class=\"btn-group\" role=\"group\"></div>");
 		buttonGroup.append(selectButton);
 		buttonGroup.append(clearButton);
 
-		inputFile = $('<input type="file" name="file" required="required" multiple/>');
+		inputFile = $("<input type=\"file\" name=\"file\" required=\"required\" multiple/>");
 
-		form = $('<form></form>');
+		form = $("<form></form>");
 		form.prepend(inputFile);
 		form.prepend(buttonGroup);
 		inputFile.hide();
 
-		selectFileMessage = $('<p class="text-muted text-center">Select files to upload.</p>');
+		selectFileMessage = $("<p class=\"text-muted text-center\">Select files to upload.</p>");
 
-		uploadList = $('<div class="list-group" style="overflow-y: auto; height: 200px"></div>');
+		uploadList = $("<div class=\"list-group\" style=\"overflow-y: auto; height: 200px\"></div>");
 		uploadList.append(selectFileMessage);
 
-		var html = $('<div title="Upload" style="overflow:hidden;"></div>');
+		var html = $("<div title=\"Upload\" style=\"overflow:hidden;\"></div>");
 		html.append(form);
 		html.append("<hr />");
 		html.append(uploadList);
@@ -248,8 +248,8 @@ var Upload = function(options) {
 	 * Create the file row.
 	 */
 	var createFileRow = function(path, file) {
-		var status = $('<span class="pull-right">Uploading...</span>');
-		var row = $('<a href="#" class="list-group-item">' + file.name + '</a>');
+		var status = $("<span class=\"pull-right\">Uploading...</span>");
+		var row = $("<a href=\"#\" class=\"list-group-item\">" + file.name + "</a>");
 		row.append(status);
 		row.attr("data-file", file.name);
 		row.attr("data-path", path);
@@ -262,8 +262,8 @@ var Upload = function(options) {
 	 * Returns the row of the file in the uploadList.
 	 */
 	var getFileRow = function(path, filename) {
-		return uploadList.find('a[data-file="' + filename + '"][data-path="'
-				+ path + '"]');
+		return uploadList.find("a[data-file=\"" + filename + "\"][data-path=\""
+				+ path + "\"]");
 	}
 
 	/**

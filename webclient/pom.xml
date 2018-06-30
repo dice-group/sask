@@ -96,9 +96,9 @@
 					</preloadSources>
 					<jsSrcDir>${basedir}/src/main/resources/static/js</jsSrcDir>
 					<sourceIncludes>
-	                    <include>workspace/**/*.js</include>
-	                </sourceIncludes>
-	                <jsTestSrcDir>${basedir}/src/test/resources/static/js/</jsTestSrcDir>
+						<include>workspace/**/*.js</include>
+					</sourceIncludes>
+					<jsTestSrcDir>${basedir}/src/test/resources/static/js/</jsTestSrcDir>
 					<specIncludes>
 						<include>workspace/**/*.spec.js</include>
 					</specIncludes>

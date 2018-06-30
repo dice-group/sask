@@ -8,7 +8,7 @@
 
 	/* global jQuery, console */
 
-	'use strict';
+	"use strict";
 
 	/**
 	 * The plugin name.
@@ -45,7 +45,7 @@
 		nodes : []
 	}, {
 		text : "Target graphs",
-		id : '#parent3',
+		id : "#parent3",
 		type : "root",
 		nodes : []
 	}, {
@@ -295,7 +295,7 @@
 					text : microservice.friendlyname,
 					id : microservice.serviceId,
 					type : "extractor",
-					icon : 'glyphicon glyphicon-wrench'
+					icon : "glyphicon glyphicon-wrench"
 				});
 			}
 		} else {
@@ -339,7 +339,7 @@
 		var self = this;
 
 		// data root
-		new BootstrapMenu('#' + this.elementId + ' li.root[data-nodeid="0"]', {
+		new BootstrapMenu("#" + this.elementId + " li.root[data-nodeid=\"0\"]", {
 			fetchElementData : function(target) {
 				return self.getNodeFromTarget(target);
 			},
@@ -356,12 +356,12 @@
 		});
 
 		// db
-		new BootstrapMenu('#' + this.elementId + ' li.db', {
+		new BootstrapMenu("#" + this.elementId + " li.db", {
 			fetchElementData : function(target) {
 				return self.getNodeFromTarget(target);
 			},
 			actions : [ {
-				name : 'Add to Workspace',
+				name : "Add to Workspace",
 				onClick : function(target) {
 					self.options.onAddToWorkspace(target);
 				}
@@ -369,12 +369,12 @@
 		});
 
 		// extractor
-		new BootstrapMenu('#' + this.elementId + ' li.extractor', {
+		new BootstrapMenu("#" + this.elementId + " li.extractor", {
 			fetchElementData : function(target) {
 				return self.getNodeFromTarget(target);
 			},
 			actions : [ {
-				name : 'Add to Workspace',
+				name : "Add to Workspace",
 				onClick : function(target) {
 					self.options.onAddToWorkspace(target);
 				}
@@ -382,17 +382,17 @@
 		});
 
 		// workflow
-		new BootstrapMenu('#' + this.elementId + ' li.workflow', {
+		new BootstrapMenu("#" + this.elementId + " li.workflow", {
 			fetchElementData : function(target) {
 				return self.getNodeFromTarget(target);
 			},
 			actions : [ {
-				name : 'Load to workspace',
+				name : "Load to workspace",
 				onClick : function(target) {
 					self.options.onLoadToWorkspace(target);
 				}
 			}, {
-				name : 'Rename',
+				name : "Rename",
 				onClick : function(target) {
 					self.openRenameWorkflowDialog(target);
 				}
@@ -405,22 +405,22 @@
 		});
 
 		// file
-		new BootstrapMenu('#' + this.elementId + ' li.file', {
+		new BootstrapMenu("#" + this.elementId + " li.file", {
 			fetchElementData : function(target) {
 				return self.getNodeFromTarget(target);
 			},
 			actions : [ {
-				name : 'Add to Workspace',
+				name : "Add to Workspace",
 				onClick : function(target) {
 					self.options.onAddToWorkspace(target);
 				}
 			}, {
-				name : 'Rename',
+				name : "Rename",
 				onClick : function(target) {
 					self.openRenameRepoDialog(target);
 				}
 			}, {
-				name : 'Remove',
+				name : "Remove",
 				onClick : function(target) {
 					self.openRemoveFromRepoDialog(target);
 				}
@@ -428,22 +428,22 @@
 		});
 
 		// folder
-		new BootstrapMenu('#' + this.elementId + ' li.folder', {
+		new BootstrapMenu("#" + this.elementId + " li.folder", {
 			fetchElementData : function(target) {
 				return self.getNodeFromTarget(target);
 			},
 			actions : [ {
-				name : 'New folder',
+				name : "New folder",
 				onClick : function(target) {
 					self.openNewFolderDialog(target);
 				}
 			}, {
-				name : 'Rename',
+				name : "Rename",
 				onClick : function(target) {
 					self.openRenameRepoDialog(target);
 				}
 			}, {
-				name : 'Remove',
+				name : "Remove",
 				onClick : function(target) {
 					self.openRemoveFromRepoDialog(target);
 				}
@@ -465,18 +465,18 @@
 		}
 
 		var positiv = function() {
-			var target = $(this).find('input[name="target"]').val();
-			var name = $(this).find('input[name="name"]').val();
+			var target = $(this).find("input[name=\"target\"]").val();
+			var name = $(this).find("input[name=\"name\"]").val();
 
 			self.options.dao.renameRepo(success, error, target, name);
-			$(this).dialog('close');
+			$(this).dialog("close");
 		};
 
 		var negativ = function() {
 			$(this).dialog("close");
 		};
 
-		dialogs.dialogRename(positiv, negativ, target).dialog('open');
+		dialogs.dialogRename(positiv, negativ, target).dialog("open");
 	};
 
 	/**
@@ -493,18 +493,18 @@
 		}
 
 		var positiv = function() {
-			var target = $(this).find('input[name="target"]').val();
-			var name = $(this).find('input[name="name"]').val();
+			var target = $(this).find("input[name=\"target\"]").val();
+			var name = $(this).find("input[name=\"name\"]").val();
 
 			self.options.dao.renameWorkflow(success, error, target, name);
-			$(this).dialog('close');
+			$(this).dialog("close");
 		};
 
 		var negativ = function() {
 			$(this).dialog("close");
 		};
 
-		dialogs.dialogRename(positiv, negativ, target).dialog('open');
+		dialogs.dialogRename(positiv, negativ, target).dialog("open");
 	};
 
 	/**
@@ -521,18 +521,18 @@
 				logError(data);
 			}
 
-			var target = $(this).find('input[name="target"]').val();
-			var name = $(this).find('input[name="name"]').val();
+			var target = $(this).find("input[name=\"target\"]").val();
+			var name = $(this).find("input[name=\"name\"]").val();
 
 			self.options.dao.createDirectory(success, error, target, name);
-			$(this).dialog('close');
+			$(this).dialog("close");
 		};
 
 		var negativ = function() {
 			$(this).dialog("close");
 		};
 
-		dialogs.dialogNewFolder(positiv, negativ, target).dialog('open');
+		dialogs.dialogNewFolder(positiv, negativ, target).dialog("open");
 	};
 
 	/**
@@ -549,7 +549,7 @@
 		}
 
 		var positiv = function() {
-			var target = $(this).find('input[name="target"]').val();
+			var target = $(this).find("input[name=\"target\"]").val();
 
 			self.options.dao.removeFromRepo(success, error, target);
 			$(this).dialog("close");
@@ -559,7 +559,7 @@
 			$(this).dialog("close");
 		};
 
-		dialogs.dialogRemove(positiv, negativ, target).dialog('open');
+		dialogs.dialogRemove(positiv, negativ, target).dialog("open");
 	};
 
 	/**
@@ -576,7 +576,7 @@
 		}
 
 		var positiv = function() {
-			var target = $(this).find('input[name="target"]').val();
+			var target = $(this).find("input[name=\"target\"]").val();
 
 			self.options.dao.removeFromWorkflows(success, error, target);
 			$(this).dialog("close");
@@ -586,7 +586,7 @@
 			$(this).dialog("close");
 		};
 
-		dialogs.dialogRemove(positiv, negativ, target).dialog('open');
+		dialogs.dialogRemove(positiv, negativ, target).dialog("open");
 	};
 
 	/**
@@ -609,20 +609,20 @@
 		this.each(function() {
 			var _this = $.data(this, pluginName);
 
-			if (typeof options === 'string') {
+			if (typeof options === "string") {
 				if (!_this) {
-					logError('Not initialized, can not call method : '
+					logError("Not initialized, can not call method : "
 							+ options);
 				} else if (!$.isFunction(_this[options])
-						|| options.charAt(0) === '_') {
-					logError('No such method : ' + options);
+						|| options.charAt(0) === "_") {
+					logError("No such method : " + options);
 				} else {
 					if (!(args instanceof Array)) {
 						args = [ args ];
 					}
 					result = _this[options].apply(_this, args);
 				}
-			} else if (typeof options === 'boolean') {
+			} else if (typeof options === "boolean") {
 				result = _this;
 			} else {
 				$.data(this, pluginName, new Repository(this, $.extend(true,

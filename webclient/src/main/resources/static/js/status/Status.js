@@ -1,11 +1,14 @@
 /**
- * The IIFE for the status.
+ * Javascript class to provide the microservice status.
+ * 
+ * @author Kevin Haack
  */
+;
 (function($, window, document) {
 
 	/* global jQuery, console */
 
-	'use strict';
+	"use strict";
 
 	/**
 	 * The plugin name.
@@ -30,19 +33,19 @@
 			"chatbot" : "Chatbot"
 		},
 		templates : {
-			typeHeader : '<h2></h2>',
-			typeList : '<ul class="list-group"></ul>',
-			emptyMessage : '<li class="list-group-item"><p class="text-muted text-center">No microservices of this type registered.</p></li>',
-			refreshButton : '<button class="btn btn-primary"><span class="glyphicon glyphicon-refresh"></span> Refresh</button>',
+			typeHeader : "<h2></h2>",
+			typeList : "<ul class=\"list-group\"></ul>",
+			emptyMessage : "<li class=\"list-group-item\"><p class=\"text-muted text-center\">No microservices of this type registered.</p></li>",
+			refreshButton : "<button class=\"btn btn-primary\"><span class=\"glyphicon glyphicon-refresh\"></span> Refresh</button>",
 			item : {
-				type : '<small class="text-muted pull-right"></small>',
-				friendlyname : '<span></span>',
-				serviceId : '<small class="text-muted"></small>',
-				head : '<h4 class="mb-1"></h4>',
-				wrapper : '<div class="d-flex w-100 justify-content-between">',
-				port : '<p class="mb-1"></p>',
-				host : '<p class="mb-1"></p>',
-				item : '<li class="list-group-item"></li>'
+				type : "<small class=\"text-muted pull-right\"></small>",
+				friendlyname : "<span></span>",
+				serviceId : "<small class=\"text-muted\"></small>",
+				head : "<h4 class=\"mb-1\"></h4>",
+				wrapper : "<div class=\"d-flex w-100 justify-content-between\">",
+				port : "<p class=\"mb-1\"></p>",
+				host : "<p class=\"mb-1\"></p>",
+				item : "<li class=\"list-group-item\"></li>"
 			}
 
 		}
@@ -251,7 +254,7 @@
 					}
 					result = _this[options].apply(_this, args);
 				}
-			} else if (typeof options === 'boolean') {
+			} else if (typeof options === "boolean") {
 				result = _this;
 			} else {
 				$.data(this, pluginName, new Status(this, $.extend(true, {},

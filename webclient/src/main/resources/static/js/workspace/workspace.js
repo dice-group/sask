@@ -8,7 +8,7 @@
 
 	/* global jQuery, console */
 
-	'use strict';
+	"use strict";
 
 	/**
 	 * The plugin name.
@@ -139,7 +139,7 @@
 	 * Init the workspace.
 	 */
 	Workspace.prototype.initWorkspace = function() {
-		this.$element.append('<div></div>');
+		this.$element.append("<div></div>");
 
 		var self = this;
 
@@ -364,14 +364,14 @@
 		/*
 		 * create
 		 */
-		toolbar = $('<div></div>');
+		toolbar = $("<div></div>");
 		this.$element.append(toolbar);
 		toolbar.toolbar({
-			onNewButtonClick : onNewButtonClick,
-			onUndoButtonClick : onUndoButtonClick,
-			onRedoButtonClick : onRedoButtonClick,
-			onSaveButtonClick : onSaveButtonClick,
-			onExecuteButtonClick : onExecuteButtonClick
+			onNewButtonClick,
+			onUndoButtonClick,
+			onRedoButtonClick,
+			onSaveButtonClick,
+			onExecuteButtonClick
 		});
 	};
 
@@ -466,22 +466,22 @@
 		var outputs = {};
 
 		switch (properties.type) {
-		case 'file':
+		case "file":
 			outputs[this.createUuid("output_")] = {
-				label : 'NL'
+				label : "NL"
 			};
 			break;
-		case 'extractor':
+		case "extractor":
 			inputs[this.createUuid("input_")] = {
-				label : 'NL'
+				label : "NL"
 			};
 			outputs[this.createUuid("output_")] = {
-				label : 'RDF'
+				label : "RDF"
 			};
 			break;
-		case 'db':
+		case "db":
 			inputs[this.createUuid("input_")] = {
-				label : 'RDF'
+				label : "RDF"
 			};
 
 			break;
@@ -514,7 +514,7 @@
 		var self = this;
 		var options = this.options;
 		var positiv = function() {
-			var name = $(this).find('input[name="name"]').val();
+			var name = $(this).find("input[name=\"name\"]").val();
 
 			if (options.forceFileEnding) {
 				if (!name.endsWith(options.fileEnding)) {
@@ -604,10 +604,10 @@
 			self.flowchart.flowchart("deleteOperator", target);
 		};
 
-		new BootstrapMenu('#' + this.elementId + ' div.flowchart-operator', {
+		new BootstrapMenu("#" + this.elementId + " div.flowchart-operator", {
 			fetchElementData : this.getNameFromTarget,
 			actions : [ {
-				name : 'Remove',
+				name : "Remove",
 				onClick : onRemove
 			} ]
 		});
@@ -633,20 +633,20 @@
 		this.each(function() {
 			var _this = $.data(this, pluginName);
 
-			if (typeof options === 'string') {
+			if (typeof options === "string") {
 				if (!_this) {
-					logError('Not initialized, can not call method : '
+					logError("Not initialized, can not call method : "
 							+ options);
 				} else if (!$.isFunction(_this[options])
-						|| options.charAt(0) === '_') {
-					logError('No such method : ' + options);
+						|| options.charAt(0) === "_") {
+					logError("No such method : " + options);
 				} else {
 					if (!(args instanceof Array)) {
 						args = [ args ];
 					}
 					result = _this[options].apply(_this, args);
 				}
-			} else if (typeof options === 'boolean') {
+			} else if (typeof options === "boolean") {
 				result = _this;
 			} else {
 				$.data(this, pluginName, new Workspace(this, $.extend(true, {},

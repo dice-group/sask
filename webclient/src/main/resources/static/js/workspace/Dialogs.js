@@ -37,29 +37,29 @@ var Dialogs = function(options) {
 	 * Dialog templates.
 	 */
 	var dialogTemplates = {
-		remove : '<div title="Delete item">'
-				+ '<input type="hidden" name="target" />'
-				+ '<p>'
-				+ 'This item will be permanently deleted and cannot be recovered. Are you sure?'
-				+ '</p>' + '</div>',
-		rename : '<div title="Rename">'
-				+ '<form>'
-				+ '<fieldset>'
-				+ '<input type="hidden" name="target" />'
-				+ '<label for="name">Name</label>'
-				+ '<input type="text" name="name" required="required" class="text ui-widget-content ui-corner-all" />'
-				+ '</fieldset>' + '</form>' + '</div>',
-		newFolder : '<div title="New folder">'
-				+ '<form>'
-				+ '<fieldset>'
-				+ '<input type="hidden" name="target" />'
-				+ '<label for="name">Name</label> <input type="text" name="name" required="required" class="text ui-widget-content ui-corner-all" />'
-				+ '</fieldset>' + '</form>' + '</div>',
-		newWorkflow : '<div title="New workflow">'
-				+ '<form>'
-				+ '<fieldset>'
-				+ '<label for="name">Name</label> <input type="text" name="name" required="required" class="text ui-widget-content ui-corner-all" />'
-				+ '</fieldset>' + '</form>' + '</div>'
+		remove : "<div title=\"Delete item\">"
+				+ "<input type=\"hidden\" name=\"target\" />"
+				+ "<p>"
+				+ "This item will be permanently deleted and cannot be recovered. Are you sure?"
+				+ "</p></div>",
+		rename : "<div title=\"Rename\">"
+				+ "<form>"
+				+ "<fieldset>"
+				+ "<input type=\"hidden\" name=\"target\" />"
+				+ "<label for=\"name\">Name</label>"
+				+ "<input type=\"text\" name=\"name\" required=\"required\" class=\"text ui-widget-content ui-corner-all\" />"
+				+ "</fieldset></form></div>",
+		newFolder : "<div title=\"New folder\">"
+				+ "<form>"
+				+ "<fieldset>"
+				+ "<input type=\"hidden\" name=\"target\" />"
+				+ "<label for=\"name\">Name</label> <input type=\"text\" name=\"name\" required=\"required\" class=\"text ui-widget-content ui-corner-all\" />"
+				+ "</fieldset></form></div>",
+		newWorkflow : "<div title=\"New workflow\">"
+				+ "<form>"
+				+ "<fieldset>"
+				+ "<label for=\"name\">Name</label> <input type=\"text\" name=\"name\" required=\"required\" class=\"text ui-widget-content ui-corner-all\" />"
+				+ "</fieldset></form></div>"
 	};
 
 	/**
@@ -88,7 +88,7 @@ var Dialogs = function(options) {
 		};
 
 		var dialog = createDialog("remove", buttons);
-		dialog.find('input[name="target"]').val(target.id);
+		dialog.find("input[name=\"target\"]").val(target.id);
 
 		// positiv on enter
 		dialog.submit(function(e) {
@@ -109,8 +109,8 @@ var Dialogs = function(options) {
 		};
 
 		var dialog = createDialog("rename", buttons);
-		dialog.find('input[name="name"]').val(target.text);
-		dialog.find('input[name="target"]').val(target.id);
+		dialog.find("input[name=\"name\"]").val(target.text);
+		dialog.find("input[name=\"target\"]").val(target.id);
 
 		// positiv on enter
 		dialog.submit(function(e) {
@@ -148,7 +148,7 @@ var Dialogs = function(options) {
 		};
 
 		var dialog = createDialog("newFolder", buttons);
-		dialog.find('input[name="target"]').val(target.id);
+		dialog.find("input[name=\"target\"]").val(target.id);
 
 		// positiv on enter
 		dialog.submit(function(e) {

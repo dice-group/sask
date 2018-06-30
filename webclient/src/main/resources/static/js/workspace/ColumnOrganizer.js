@@ -8,12 +8,12 @@
 (function($, window, document) {
 
 	/* global jQuery, console */
-	'use strict';
+	"use strict";
 
 	/**
 	 * The plugin name.
 	 */
-	var pluginName = 'columnOrganizer';
+	var pluginName = "columnOrganizer";
 
 	/**
 	 * The column start order.
@@ -35,7 +35,7 @@
 	var ColumnOrganizer = function(element, options) {
 		this.$element = $(element);
 		this.elementId = element.id;
-		this.styleId = this.elementId + '-style';
+		this.styleId = this.elementId + "-style";
 
 		this.init(options);
 
@@ -53,7 +53,7 @@
 		this.options = $.extend({}, _default.settings, options);
 
 		// check dependencies
-		if (typeof BootstrapMenu !== 'function') {
+		if (typeof BootstrapMenu !== "function") {
 			logError("'BootstrapMenu' plugin not initialized.");
 			return;
 		}
@@ -101,7 +101,7 @@
 		var self = this;
 		var sizeClass;
 
-		var classList = column.attr('class').split(/\s+/);
+		var classList = column.attr("class").split(/\s+/);
 		$.each(classList, function(index, item) {
 			if (item.startsWith(self.options.columnClassPrefix)) {
 				sizeClass = item;
@@ -116,7 +116,7 @@
 	 */
 	ColumnOrganizer.prototype.scrollTo = function(column) {
 		$(document).scrollTop(column.offset().top);
-	}
+	};
 
 	/**
 	 * Maximize the passed column
@@ -192,20 +192,20 @@
 		this.each(function() {
 			var _this = $.data(this, pluginName);
 
-			if (typeof options === 'string') {
+			if (typeof options === "string") {
 				if (!_this) {
-					logError('Not initialized, can not call method : '
+					logError("Not initialized, can not call method : "
 							+ options);
 				} else if (!$.isFunction(_this[options])
-						|| options.charAt(0) === '_') {
-					logError('No such method : ' + options);
+						|| options.charAt(0) === "_") {
+					logError("No such method : " + options);
 				} else {
 					if (!(args instanceof Array)) {
 						args = [ args ];
 					}
 					result = _this[options].apply(_this, args);
 				}
-			} else if (typeof options === 'boolean') {
+			} else if (typeof options === "boolean") {
 				result = _this;
 			} else {
 				$.data(this, pluginName, new ColumnOrganizer(this, $.extend(

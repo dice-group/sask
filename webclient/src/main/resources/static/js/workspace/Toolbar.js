@@ -7,7 +7,7 @@
 (function($, window, document) {
 
 	/* global jQuery, console */
-	'use strict';
+	"use strict";
 
 	/**
 	 * The plugin name.
@@ -20,13 +20,13 @@
 	var _default = {};
 
 	_default.settings = {
-		buttongroupTemplate : '<div class="btn-group" role="group"></div>',
-		newButtonTemplate : '<button type="button" class="btn btn-default"><a href="#"><span class="glyphicon glyphicon glyphicon-file"></span> New</a></button>',
-		undoButtonTemplate : '<button type="button" class="btn btn-default"><a href="#"><span class="glyphicon glyphicon-arrow-left"></span> Undo</a></button>',
-		redoButtonTemplate : '<button type="button" class="btn btn-default"><a href="#">Redo <span class="glyphicon glyphicon-arrow-right"></span></a></button>',
-		saveButtonTemplate : '<button type="button" class="btn btn-default"><a href="#"><span class="glyphicon glyphicon-floppy-disk"></span> Save</a></button>',
-		executeButtonTemplate : '<button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-play"></span> Execute</button>',
-		workflownameFieldTemplate : '<span class="pull-right"></span>',
+		buttongroupTemplate : "<div class=\"btn-group\" role=\"group\"></div>",
+		newButtonTemplate : "<button type=\"button\" class=\"btn btn-default\"><a href=\"#\"><span class=\"glyphicon glyphicon glyphicon-file\"></span> New</a></button>",
+		undoButtonTemplate : "<button type=\"button\" class=\"btn btn-default\"><a href=\"#\"><span class=\"glyphicon glyphicon-arrow-left\"></span> Undo</a></button>",
+		redoButtonTemplate : "<button type=\"button\" class=\"btn btn-default\"><a href=\"#\">Redo <span class=\"glyphicon glyphicon-arrow-right\"></span></a></button>",
+		saveButtonTemplate : "<button type=\"button\" class=\"btn btn-default\"><a href=\"#\"><span class=\"glyphicon glyphicon-floppy-disk\"></span> Save</a></button>",
+		executeButtonTemplate : "<button type=\"button\" class=\"btn btn-primary\"><span class=\"glyphicon glyphicon-play\"></span> Execute</button>",
+		workflownameFieldTemplate : "<span class=\"pull-right\"></span>",
 		onNewButtonClick : null,
 		onUndoButtonClick : null,
 		onRedoButtonClick : null,
