@@ -14,44 +14,44 @@ var Upload = function(options) {
 	 * Plugin settings.
 	 */
 	var settings = {
-		onUploaded : undefined,
-		dao : undefined
+		onUploaded : null,
+		dao : null
 	};
 
 	/**
 	 * The dialog.
 	 */
-	var dialog = undefined;
+	var dialog;
 
 	/**
 	 * The form.
 	 */
-	var form = undefined;
+	var form;
 
 	/**
 	 * The Input.
 	 */
-	var inputFile = undefined;
+	var inputFile;
 
 	/**
 	 * The select button.
 	 */
-	var selectButton = undefined;
+	var selectButton;
 
 	/**
 	 * The clear button.
 	 */
-	var clearButton = undefined;
+	var clearButton;
 
 	/**
 	 * The list of uploaded/uploading files.
 	 */
-	var uploadList = undefined;
+	var uploadList;
 
 	/**
 	 * The select file message.
 	 */
-	var selectFileMessage = undefined;
+	var selectFileMessage;
 
 	/**
 	 * The currently uploading files.

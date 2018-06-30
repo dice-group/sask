@@ -25,9 +25,8 @@
 	_default.settings = {
 		forceFileEnding : true,
 		fileEnding : ".wf",
-		onWorkflowSaved : undefined,
-		
-		dao : undefined
+		onWorkflowSaved : null,
+		dao : null
 	};
 
 	_default.options = {};
@@ -45,12 +44,12 @@
 	/**
 	 * The toolbar.
 	 */
-	var toolbar = undefined;
+	var toolbar;
 
 	/**
 	 * The workflow id of the current loaded workflow.
 	 */
-	var workflowId = undefined;
+	var workflowId = null;
 
 	var Workspace = function(element, options) {
 
@@ -350,7 +349,7 @@
 
 		// save
 		var onSaveButtonClick = function() {
-			if (workflowId === undefined) {
+			if (workflowId === null) {
 				self.openNewWorkflowDialog();
 			} else {
 				self.saveWorkflow();
@@ -397,7 +396,7 @@
 	 * Save the workflow.
 	 */
 	Workspace.prototype.saveWorkflow = function() {
-		if (workflowId === undefined) {
+		if (workflowId === null) {
 			logError("workflowId not set.");
 			return;
 		}
@@ -555,7 +554,7 @@
 	 */
 	Workspace.prototype.clearWorkflow = function(workspace) {
 		this.changeWorkflowName("");
-		workflowId = undefined;
+		workflowId = null;
 		this.flowchart.flowchart("setData", "");
 	};
 

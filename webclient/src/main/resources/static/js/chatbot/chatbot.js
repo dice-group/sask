@@ -19,22 +19,22 @@
 	/**
 	 * The send button.
 	 */
-	var sendButton = undefined;
+	var sendButton;
 
 	/**
 	 * The textfield.
 	 */
-	var textfield = undefined;
+	var textfield;
 
 	/**
 	 * The chat list.
 	 */
-	var chatList = undefined;
+	var chatList;
 
 	/**
 	 * The chat body.
 	 */
-	var chatBody = undefined;
+	var chatBody;
 
 	_default.settings = {
 		chatListTemplate : "<div class=\"chat\"></div>",
@@ -46,8 +46,8 @@
 		sendTemplate : "<input type=\"submit\" class=\"btn btn-primary chat-send\" value=\"Send\"/>",
 		errorClass : "error",
 		messageClass : "message",
-		onBigMessage : undefined,
-		dao : undefined
+		onBigMessage : null,
+		dao : null
 	};
 
 	var Chatbot = function(element, options) {

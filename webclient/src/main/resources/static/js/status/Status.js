@@ -20,7 +20,7 @@
 	var _default = {};
 
 	_default.settings = {
-		dao : undefined,
+		dao : null,
 		knownTypes : {
 			"extractor" : "Extractors",
 			"executer" : "Executer",

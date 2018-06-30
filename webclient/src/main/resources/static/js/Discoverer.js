@@ -19,9 +19,9 @@ var Discoverer = function(options) {
 	 * Plugin settings.
 	 */
 	this.settings = {
-		dao : undefined,
-		onRefreshed : undefined,
-		onError : undefined
+		dao : null,
+		onRefreshed : null,
+		onError : null
 	};
 
 	/**

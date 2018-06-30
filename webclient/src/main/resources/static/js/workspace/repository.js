@@ -23,9 +23,9 @@
 	var _default = {};
 
 	_default.settings = {
-		onAddToWorkspace : undefined,
-		onLoadToWorkspace : undefined,
-		dao : undefined
+		onAddToWorkspace : null,
+		onLoadToWorkspace : null,
+		dao : null
 	};
 
 	_default.options = {};

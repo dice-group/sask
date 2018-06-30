@@ -27,11 +27,11 @@
 		saveButtonTemplate : '<button type="button" class="btn btn-default"><a href="#"><span class="glyphicon glyphicon-floppy-disk"></span> Save</a></button>',
 		executeButtonTemplate : '<button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-play"></span> Execute</button>',
 		workflownameFieldTemplate : '<span class="pull-right"></span>',
-		onNewButtonClick : undefined,
-		onUndoButtonClick : undefined,
-		onRedoButtonClick : undefined,
-		onSaveButtonClick : undefined,
-		onExecuteButtonClick : undefined
+		onNewButtonClick : null,
+		onUndoButtonClick : null,
+		onRedoButtonClick : null,
+		onSaveButtonClick : null,
+		onExecuteButtonClick : null
 	};
 
 	_default.options = {};
@@ -39,32 +39,32 @@
 	/**
 	 * The new button.
 	 */
-	var newButton = undefined;
+	var newButton;
 
 	/**
 	 * The undo button.
 	 */
-	var undoButton = undefined;
+	var undoButton;
 
 	/**
 	 * The redo button.
 	 */
-	var redoButton = undefined;
+	var redoButton;
 
 	/**
 	 * The save button.
 	 */
-	var saveButton = undefined;
+	var saveButton;
 	
 	/**
 	 * The execute button.
 	 */
-	var executeButton = undefined;
+	var executeButton;
 
 	/**
 	 * The workflow name.
 	 */
-	var workflownameField = undefined;
+	var workflownameField;
 
 	/**
 	 * logging function

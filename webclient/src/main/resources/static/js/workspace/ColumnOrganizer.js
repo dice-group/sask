@@ -99,7 +99,7 @@
 	 */
 	ColumnOrganizer.prototype.getSizeClass = function(column) {
 		var self = this;
-		var sizeClass = undefined;
+		var sizeClass;
 
 		var classList = column.attr('class').split(/\s+/);
 		$.each(classList, function(index, item) {
