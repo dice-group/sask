@@ -68,7 +68,7 @@ var Upload = function(options) {
 		$.extend(settings, options);
 
 		if (!settings.dao) {
-			logError('dao is not defined.');
+			logError("dao is not defined.");
 			return;
 		}
 
@@ -103,7 +103,7 @@ var Upload = function(options) {
 
 		var html = $('<div title="Upload" style="overflow:hidden;"></div>');
 		html.append(form);
-		html.append('<hr />');
+		html.append("<hr />");
 		html.append(uploadList);
 
 		/*
@@ -133,7 +133,7 @@ var Upload = function(options) {
 			width : 600,
 			modal : true,
 			buttons : {
-				'Close' : close
+				"Close" : close
 			}
 		});
 	};
@@ -145,7 +145,7 @@ var Upload = function(options) {
 
 		if (!window.File || !window.FileReader || !window.FileList
 				|| !window.Blob) {
-			logError('The File APIs are not fully supported in this browser.');
+			logError("The File APIs are not fully supported in this browser.");
 			return;
 		}
 
@@ -196,11 +196,11 @@ var Upload = function(options) {
 	 */
 	var onUploadSuccess = function(path, filename) {
 		var row = getFileRow(path, filename);
-		var status = row.find('span');
+		var status = row.find("span");
 
-		row.attr('data-status', 'success');
+		row.attr("data-status", "success");
 		row.addClass("list-group-item-success");
-		status.text('Success');
+		status.text("Success");
 	};
 
 	/**
@@ -208,11 +208,11 @@ var Upload = function(options) {
 	 */
 	var onUploadError = function(path, filename) {
 		var row = getFileRow(path, filename);
-		var status = row.find('span');
+		var status = row.find("span");
 
-		row.attr('data-status', 'error');
-		row.addClass('list-group-item-danger');
-		status.text('Error');
+		row.attr("data-status", "error");
+		row.addClass("list-group-item-danger");
+		status.text("Error");
 	};
 
 	/**
@@ -220,12 +220,12 @@ var Upload = function(options) {
 	 */
 	var clearUploadList = function() {
 		uploadList.find("a").each(function() {
-			if ($(this).attr('data-status') !== 'uploading') {
+			if ($(this).attr("data-status") !== "uploading") {
 				$(this).remove();
 			}
 		});
 
-		if (uploadList.find('a').length === 0) {
+		if (uploadList.find("a").length === 0) {
 			selectFileMessage.show();
 		}
 	};
@@ -245,9 +245,9 @@ var Upload = function(options) {
 		var status = $('<span class="pull-right">Uploading...</span>');
 		var row = $('<a href="#" class="list-group-item">' + file.name + '</a>');
 		row.append(status);
-		row.attr('data-file', file.name);
-		row.attr('data-path', path);
-		row.attr('data-status', 'uploading');
+		row.attr("data-file", file.name);
+		row.attr("data-path", path);
+		row.attr("data-status", "uploading");
 
 		return row;
 	};
@@ -264,7 +264,7 @@ var Upload = function(options) {
 	 * Open the dialog.
 	 */
 	this.open = function() {
-		dialog.dialog('open');
+		dialog.dialog("open");
 	}
 
 	/**

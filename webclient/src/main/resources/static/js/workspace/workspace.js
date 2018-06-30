@@ -11,7 +11,7 @@
 	/**
 	 * The plugin name.
 	 */
-	var pluginName = 'workspace';
+	var pluginName = "workspace";
 
 	/**
 	 * Dialogs.
@@ -37,7 +37,7 @@
 	/**
 	 * Indicates whether the current operation is a stack operation.
 	 */
-	var doingStackOperation = false;
+	var preventStacking = false;
 
 	/**
 	 * The toolbar.
@@ -53,7 +53,7 @@
 
 		this.$element = $(element);
 		this.elementId = element.id;
-		this.styleId = this.elementId + '-style';
+		this.styleId = this.elementId + "-style";
 
 		this.init(options);
 
@@ -80,7 +80,7 @@
 			return;
 		}
 
-		if (typeof BootstrapMenu !== 'function') {
+		if (typeof BootstrapMenu !== "function") {
 			logError("'BootstrapMenu' plugin not initialized.");
 			return;
 		}
@@ -108,9 +108,9 @@
 		var self = this;
 		var flowchart = this.flowchart;
 		this.flowchart.droppable({
-			accept : 'li.extractor, li.file, li.db',
+			accept : "li.extractor, li.file, li.db",
 			drop : function(ev, ui) {
-				var node = ui.helper.data('node');
+				var node = ui.helper.data("node");
 
 				// get position
 				var pos = ui.offset;
@@ -143,14 +143,28 @@
 
 		// change
 		var onAfterChange = function(changeType) {
-			if (!doingStackOperation) {
-				workflowStack.saveWorkflow(self.getWorkflow());
+			if (!preventStacking) {
+				var workflow = self.getWorkflow();
+				self.balanceConnectors(workflow);
+
+				// load changed
+				preventStacking = true;
+				self.loadWorkflow(workflow);
+				preventStacking = false;
+
+				// save changes
+				workflowStack.saveWorkflow(workflow);
 				self.syncWorkflowStack();
 			}
 		};
 
-		// validate link create
+		// onLinkCreate
 		var onLinkCreate = function(linkId, linkData) {
+			if (preventStacking) {
+				return true;
+			}
+
+			var workflow = self.getWorkflow();
 			var fromOperator = self.flowchart.flowchart("getOperatorData",
 					linkData.fromOperator);
 			var toOperator = self.flowchart.flowchart("getOperatorData",
@@ -159,13 +173,139 @@
 			var fromConnector = fromOperator.properties.outputs[linkData.fromConnector];
 			var toConnector = toOperator.properties.inputs[linkData.toConnector];
 
-			return fromConnector.label === toConnector.label;
+			if (fromConnector.label !== toConnector.label) {
+				logError("connector type not match");
+				return false;
+			}
+
+			if (self.linkExists(workflow, linkData.fromOperator, linkData.toOperator)) {
+				logError("link already exists");
+				return false;
+			}
+
+			return true;
 		};
 
 		this.flowchart = this.$element.children().eq(1).flowchart({
 			onAfterChange : onAfterChange,
 			onLinkCreate : onLinkCreate
 		});
+	};
+
+	/**
+	 * Returns true if there is already a link between this operators.
+	 */
+	Workspace.prototype.linkExists = function(workflow, from, to) {
+		var exists = false;
+
+		for ( var l in workflow.links) {
+			var link = workflow.links[l];
+			if(link.fromOperator === from && link.toOperator === to) {
+				exists = true;
+			}
+		}
+
+		return exists;
+	}
+
+	/**
+	 * Balance connectors if necessary to all operators.
+	 */
+	Workspace.prototype.balanceConnectors = function(workflow) {
+		for ( var op in workflow.operators) {
+			this.balanceOutputs(workflow, workflow.operators[op]);
+			this.balanceInputs(workflow, workflow.operators[op]);
+		}
+	}
+
+	/**
+	 * Balance the output connectors if necessary.
+	 */
+	Workspace.prototype.balanceOutputs = function(workflow, operator) {
+		var connectors = operator.properties.outputs;
+		var keys = Object.keys(connectors);
+		var currentConnectorCount = keys.length;
+
+		if (currentConnectorCount === 0) {
+			return;
+		}
+
+		var used = [];
+		var unused = [];
+		for ( var connector in connectors) {
+			var isLinked = false;
+
+			for ( var l in workflow.links) {
+				var link = workflow.links[l];
+				if (link.fromOperator === operator.properties.id
+						&& link.fromConnector === connector) {
+					isLinked = true;
+				}
+			}
+
+			if (isLinked) {
+				used.push(connector);
+			} else {
+				unused.push(connector);
+			}
+		}
+
+		// add connector if less then one free connector
+		if (currentConnectorCount - used.length === 0) {
+			connectors[this.createUuid("output_")] = {
+				label : connectors[keys[0]].label
+			};
+		}
+
+		// delete unnecessary connectors
+		if (currentConnectorCount - used.length >= 2) {
+			delete connectors[unused[unused.length - 1]]
+		}
+	};
+
+	/**
+	 * Balance the input connectors if necessary.
+	 */
+	Workspace.prototype.balanceInputs = function(workflow, operator) {
+		var connectors = operator.properties.inputs;
+		var keys = Object.keys(connectors);
+		var currentConnectorCount = keys.length;
+
+		if (currentConnectorCount === 0) {
+			return;
+		}
+
+		var used = [];
+		var unused = [];
+		for ( var connector in connectors) {
+			var isLinked = false;
+
+			for ( var l in workflow.links) {
+				var link = workflow.links[l];
+				if (link.toOperator === operator.properties.id
+						&& link.toConnector === connector) {
+					isLinked = true;
+				}
+			}
+
+			if (isLinked) {
+				used.push(connectors[connector]);
+			} else {
+				unused.push(connector);
+			}
+		}
+
+		// add connector if less then one free connector
+		if (currentConnectorCount - used.length === 0) {
+			connectors[this.createUuid("input_")] = {
+				label : connectors[keys[0]].label
+			};
+		}
+		
+		// delete unnecessary connectors
+		if (currentConnectorCount - used.length >= 2) {
+			delete connectors[unused[unused.length - 1]]
+		}
 	};
 
 	/**
@@ -176,33 +316,31 @@
 
 		// new
 		var onNewButtonClick = function() {
-			doingStackOperation = true;
-
+			preventStacking = true;
 			self.clearWorkflow();
+			preventStacking = false;
 
-			doingStackOperation = false;
 			workflowStack.clear();
 			self.syncWorkflowStack();
 		}
 
 		// undo
 		var onUndoButtonClick = function() {
-			doingStackOperation = true;
-
+			preventStacking = true;
 			var workflow = workflowStack.getLastWorkflow();
 			self.loadWorkflow(workflow);
+			preventStacking = false;
 
-			doingStackOperation = false;
 			self.syncWorkflowStack();
 		}
 
 		// redo
 		var onRedoButtonClick = function() {
-			doingStackOperation = true;
+			preventStacking = true;
 			var workflow = workflowStack.getNextWorkflow();
 			self.loadWorkflow(workflow);
+			preventStacking = false;
 
-			doingStackOperation = false;
 			self.syncWorkflowStack();
 		}
 
@@ -214,7 +352,7 @@
 				self.saveWorkflow();
 			}
 		}
-		
+
 		// execute
 		var onExecuteButtonClick = function() {
 			self.executeWorkflow();
@@ -250,7 +388,7 @@
 		var workflow = this.getWorkflow();
 		this.options.dao.executeWorkflow(success, error, workflow);
 	};
-	
+
 	/**
 	 * Save the workflow.
 	 */
@@ -281,49 +419,70 @@
 	 * Sync the workflow stack with the ui buttons.
 	 */
 	Workspace.prototype.syncWorkflowStack = function() {
-		toolbar.toolbar('disableRedo', workflowStack.hasNext());
-		toolbar.toolbar('disableUndo', workflowStack.hasLast());
-		toolbar.toolbar('disableSave', !workflowStack.isSaved());
+		toolbar.toolbar("disableRedo", workflowStack.hasNext());
+		toolbar.toolbar("disableUndo", workflowStack.hasLast());
+		toolbar.toolbar("disableSave", !workflowStack.isSaved());
+	};
+
+	/**
+	 * Create a uuid with the passed prefix.
+	 */
+	Workspace.prototype.createUuid = function(prefix) {
+		return prefix + "" + Math.random().toString(36).substr(2, 16);
+	};
+
+	Workspace.prototype.nodeAlreadyExist = function(type, id) {
+		var exist = false;
+		var workflow = this.getWorkflow();
+
+		for ( var o in workflow.operators) {
+			var operator = workflow.operators[o];
+
+			if (operator.properties.content === id
+					&& operator.properties.type === type) {
+				exist = true;
+			}
+		}
+
+		return exist;
 	};
 
 	/**
 	 * Add a file to the workspace
 	 */
 	Workspace.prototype.addNode = function(properties) {
+		if (this.nodeAlreadyExist(properties.type, properties.id)) {
+			logError("node already exist on workspace");
+			return;
+		}
+
+		var inputs = {};
+		var outputs = {};
+
 		switch (properties.type) {
-		case "file":
-			var inputs = {};
-			var outputs = {
-				output_1 : {
-					label : 'NL'
-				}
+		case 'file':
+			outputs[this.createUuid("output_")] = {
+				label : 'NL'
 			};
 			break;
-		case "extractor":
-			var inputs = {
-				input_1 : {
-					label : 'NL'
-				}
+		case 'extractor':
+			inputs[this.createUuid("input_")] = {
+				label : 'NL'
 			};
-			var outputs = {
-				output_1 : {
-					label : 'RDF'
-				}
+			outputs[this.createUuid("output_")] = {
+				label : 'RDF'
 			};
 			break;
-		case "db":
-			var inputs = {
-				input_1 : {
-					label : 'RDF'
-				}
+		case 'db':
+			inputs[this.createUuid("input_")] = {
+				label : 'RDF'
 			};
-			var outputs = {};
+
 			break;
 		}
 
-		// create unique id
-		var uuid = Math.random().toString(36).substr(2, 16);
-		var id = "node-" + uuid;
+		// create unique node id
+		var id = this.createUuid("node_");
 
 		// create data
 		var newData = {
@@ -339,7 +498,7 @@
 			}
 		};
 
-		this.flowchart.flowchart('createOperator', id, newData);
+		this.flowchart.flowchart("createOperator", id, newData);
 	};
 
 	/**
@@ -359,14 +518,14 @@
 
 			self.changeWorkflowName(name);
 			self.saveWorkflow();
-			$(this).dialog('close');
+			$(this).dialog("close");
 		};
 
 		var negativ = function() {
 			$(this).dialog("close");
 		};
 
-		dialogs.dialogNewWorkflow(positiv, negativ).dialog('open');
+		dialogs.dialogNewWorkflow(positiv, negativ).dialog("open");
 	};
 
 	/**
@@ -374,14 +533,14 @@
 	 */
 	Workspace.prototype.changeWorkflowName = function(name) {
 		workflowId = name;
-		toolbar.toolbar('setWorkflowName', name);
+		toolbar.toolbar("setWorkflowName", name);
 	}
 
 	/**
 	 * Load the passed workspace
 	 */
 	Workspace.prototype.loadWorkflow = function(workspace) {
-		this.flowchart.flowchart('setData', workspace);
+		this.flowchart.flowchart("setData", workspace);
 	};
 
 	/**
@@ -390,7 +549,7 @@
 	Workspace.prototype.clearWorkflow = function(workspace) {
 		this.changeWorkflowName("");
 		workflowId = undefined;
-		this.flowchart.flowchart('setData', "");
+		this.flowchart.flowchart("setData", "");
 	};
 
 	/**
@@ -399,7 +558,7 @@
 	Workspace.prototype.loadWorkflowFromPath = function(path) {
 		var self = this;
 		var success = function(data) {
-			self.flowchart.flowchart('setData', jQuery.parseJSON(data));
+			self.flowchart.flowchart("setData", jQuery.parseJSON(data));
 
 			self.changeWorkflowName(path);
 
@@ -419,14 +578,14 @@
 	 * Returns the current workflow
 	 */
 	Workspace.prototype.getWorkflow = function() {
-		return this.flowchart.flowchart('getData');
+		return this.flowchart.flowchart("getData");
 	};
 
 	/**
 	 * Extract the link from the context menu target
 	 */
 	Workspace.prototype.getNameFromTarget = function(target) {
-		return target.attr('id');
+		return target.attr("id");
 	};
 
 	/**
@@ -436,7 +595,7 @@
 		var self = this;
 
 		var onRemove = function(target) {
-			self.flowchart.flowchart('deleteOperator', target);
+			self.flowchart.flowchart("deleteOperator", target);
 		};
 
 		new BootstrapMenu('#' + this.elementId + ' div.flowchart-operator', {

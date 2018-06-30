@@ -68,7 +68,7 @@ $(function() {
 							for(var j=0 ; j< entryobj.length; j++){
 								if(entryobj[j].buttonType == "URL"){
 									var text = entryobj[j].displayText;
-									displayText +=text.link(entryobj[j].uri) + "-->For reference,URL=" + entryobj[j].uri + "<br>";
+									displayText +=text.link(entryobj[j].uri) + "<br>";
 									
 								}
 								else{
@@ -80,6 +80,8 @@ $(function() {
 					}
 					
 				}
+				//Add div for feedback
+				displayText += "<br><br><div>Was this helpful?<br><button name=\""+ newMsg + "\" onClick=\"onYesClick(this)\" border-style=\"solid\" type=\"button\" class=\"btn btn-primary\">Yes</button>&nbsp;&nbsp;<button name=\""+ newMsg + "\" onClick=\"onNoClick(this)\" type=\"button\" class=\"btn btn-primary\">No</button></div>";
 				$("#container").html(prevMsg + displayText);
 				$("#container").scrollTop($("#container").prop("scrollHeight"));
 			})
@@ -94,6 +96,36 @@ $(function() {
 		$("#send").prop("disabled",true);
 	});
 });
+
+function sendRequest(query,feedback){
+	var data={};
+	data["query"] = query;
+	data["feedback"] = feedback;
+	$.ajax({
+		type : "POST",
+		dataType: "text",
+		data: JSON.stringify(data),
+		url: "/chatbot/feedback",
+		timeout: 100000,
+		contentType: "application/json",
+		async: true,		
+	});
+	
+};
+function onYesClick(obj){
+	var closestDiv=$(obj).closest("div");
+	closestDiv.html("Thank you for your feedback");
+	var query= $(obj).attr("name");
+	sendRequest(query, "positive");
+};
+
+function onNoClick(obj){
+	var closestDiv=$(obj).closest("div");
+	closestDiv.html("Thank you for your feedback");
+	//TODO:Send Ajax to Server on Negative feedback
+	var query= $(obj).attr("name");
+	sendRequest(query, "negative");
+};
 
 $(document).ready(function() {
     $("#textbox").on("keyup", function() {
