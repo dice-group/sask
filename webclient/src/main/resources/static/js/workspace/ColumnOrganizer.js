@@ -112,23 +112,32 @@
 	};
 
 	/**
+	 * Scroll to the of the passed column.
+	 */
+	ColumnOrganizer.prototype.scrollTo = function(column) {
+		$(document).scrollTop(column.offset().top);
+	}
+
+	/**
 	 * Maximize the passed column
 	 */
 	ColumnOrganizer.prototype.maximizeColumn = function(column) {
-		var self = this;
-		var currentSizeClass = self.getSizeClass(column);
+		var currentSizeClass = this.getSizeClass(column);
 		column.removeClass(currentSizeClass);
-		column.addClass(column.attr(self.options.sizeMaxAttribute));
+		column.addClass(column.attr(this.options.sizeMaxAttribute));
+
+		this.scrollTo(column);
 	};
 
 	/**
 	 * Minimize the passed column
 	 */
 	ColumnOrganizer.prototype.minimizeColumn = function(column) {
-		var self = this;
-		var currentSizeClass = self.getSizeClass(column);
+		var currentSizeClass = this.getSizeClass(column);
 		column.removeClass(currentSizeClass);
-		column.addClass(column.attr(self.options.sizeMinAttribute));
+		column.addClass(column.attr(this.options.sizeMinAttribute));
+
+		this.scrollTo(column);
 	};
 
 	/**

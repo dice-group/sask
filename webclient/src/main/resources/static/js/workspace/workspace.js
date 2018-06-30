@@ -434,6 +434,9 @@
 		return prefix + "" + Math.random().toString(36).substr(2, 16);
 	};
 
+	/**
+	 * Checks if a node of the passed type and id already exists.
+	 */
 	Workspace.prototype.nodeAlreadyExist = function(type, id) {
 		var exist = false;
 		var workflow = this.getWorkflow();
