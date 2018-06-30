@@ -4,8 +4,10 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.jena.riot.Lang;
 import org.apache.log4j.Logger;
 import org.dice_research.sask.fox_ms.DTO.FoxDTO;
+import org.dice_research.sask_commons.parser.FormatParser;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -62,7 +64,9 @@ public class FoxMsController {
 
 		FoxDTO fox = new FoxDTO();
 		fox.setInput(input);
-		return extract(fox);
+		String turtle = extract(fox);
+		String extractorOutput = FormatParser.parse(turtle, Lang.TURTLE, Lang.NTRIPLES);
+		return extractorOutput;
 	}
 
 	@ExceptionHandler
