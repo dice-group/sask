@@ -92,6 +92,17 @@ var DAO = function(options) {
 
 		return "./" + discoverer.getExecuter().serviceId + "/";
 	}
+	
+	/**
+	 * Return the chatbot service id.
+	 */
+	var getChatbotServiceUri = function() {
+		if (!discoverer.isChatbotDiscovered()) {
+			return;
+		}
+
+		return "./" + discoverer.getChatbot().serviceId + "/";
+	}
 
 	/**
 	 * Parse the hdfs workflows structure to the ui structure.
@@ -166,14 +177,14 @@ var DAO = function(options) {
 	 * Send the passed data to the chatbot.
 	 */
 	this.sendChatMessage = function(data, onSuccess, onError) {
-		var uri = "chatbot/" + "chat";
+		var uri = getChatbotServiceUri() + "chat";
 		
 		$.ajax({
 			type : "POST",
 			dataType : 'text',
 			data : JSON.stringify(data),
 			contentType : "application/json",
-			url : "/chatbot/chat", // Need to debug how
+			url : uri, // Need to debug how
 			// to read data: in
 			// Spring. Passing
 			// as command param

@@ -26,7 +26,8 @@
 			"executer" : "Executer",
 			"webclient" : "Webclient",
 			"repo" : "Repository",
-			"db" : "Database"
+			"db" : "Database",
+			"chatbot" : "Chatbot"
 		},
 		templates : {
 			typeHeader : '<h2></h2>',
