@@ -1,3 +1,9 @@
+/**
+ * JQuery plugin for the chatbot.
+ * 
+ * @author Kevin Haack, Divya
+ */
+;
 (function($, window, document) {
 
 	/* global jQuery, console */
@@ -194,17 +200,20 @@
 				for (var j = 0; j < entryobj.length; j++) {
 					if (entryobj[j].buttonType == "URL") {
 						var text = entryobj[j].displayText;
-						displayText += text.link(entryobj[j].uri)
-								+ "<br>";
+						displayText += text.link(entryobj[j].uri) + "<br>";
 
 					} else {
 						displayText += entryobj[j].displayText + "<br>";
 					}
 				}
-				
-				//Add div for feedback
+
+				// Add div for feedback
 				var sendedMessage = data["requestContent"][0]["text"];
-				displayText += "<br><br><div>Was this helpful?<br><button name=\""+ sendedMessage + "\" onClick=\"onYesClick(this)\" border-style=\"solid\" type=\"button\" class=\"btn btn-primary\">Yes</button>&nbsp;&nbsp;<button name=\""+ sendedMessage + "\" onClick=\"onNoClick(this)\" type=\"button\" class=\"btn btn-primary\">No</button></div>";
+				displayText += "<br><br><div>Was this helpful?<br><button name=\""
+						+ sendedMessage
+						+ "\" onClick=\"onYesClick(this)\" border-style=\"solid\" type=\"button\" class=\"btn btn-primary\">Yes</button>&nbsp;&nbsp;<button name=\""
+						+ sendedMessage
+						+ "\" onClick=\"onNoClick(this)\" type=\"button\" class=\"btn btn-primary\">No</button></div>";
 				displayText += "</div>";
 			}
 

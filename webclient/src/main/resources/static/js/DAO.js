@@ -1,3 +1,9 @@
+/**
+ * Data access object for the REST interfaces.
+ * 
+ * @author Kevin Haack
+ */
+;
 var DAO = function(options) {
 	/**
 	 * this.
@@ -75,7 +81,7 @@ var DAO = function(options) {
 
 		return "./" + discoverer.getRepo().serviceId + "/";
 	};
-	
+
 	/**
 	 * Return the executer service id.
 	 */
@@ -155,7 +161,7 @@ var DAO = function(options) {
 			error : error
 		});
 	};
-	
+
 	/**
 	 * Send the passed workflow to the executer.
 	 */
@@ -165,7 +171,7 @@ var DAO = function(options) {
 		$.ajax({
 			type : "POST",
 			data : JSON.stringify(workflow),
-			contentType: "application/json",
+			contentType : "application/json",
 			url : uri,
 			success : success,
 			error : error

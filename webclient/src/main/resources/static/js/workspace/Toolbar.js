@@ -1,3 +1,8 @@
+/**
+ * JQuery plugin for the workspace toolbar.
+ * 
+ * @author Kevin Haack
+ */
 ;
 (function($, window, document) {
 

@@ -1,3 +1,9 @@
+/**
+ * Javascript class to provide ui dialogs.
+ * 
+ * @author Kevin Haack
+ */
+;
 var Dialogs = function(options) {
 	/**
 	 * this.

@@ -1,5 +1,7 @@
 /**
- * The IIFE for the repository.
+ * JQuery plugin for the workspace.
+ * 
+ * @author Kevin Haack
  */
 ;
 (function($, window, document) {
@@ -178,7 +180,8 @@
 				return false;
 			}
 
-			if (self.linkExists(workflow, linkData.fromOperator, linkData.toOperator)) {
+			if (self.linkExists(workflow, linkData.fromOperator,
+					linkData.toOperator)) {
 				logError("link already exists");
 				return false;
 			}
@@ -200,7 +203,7 @@
 
 		for ( var l in workflow.links) {
 			var link = workflow.links[l];
-			if(link.fromOperator === from && link.toOperator === to) {
+			if (link.fromOperator === from && link.toOperator === to) {
 				exists = true;
 			}
 		}
@@ -301,7 +304,7 @@
 				label : connectors[keys[0]].label
 			};
 		}
-		
+
 		// delete unnecessary connectors
 		if (currentConnectorCount - used.length >= 2) {
 			delete connectors[unused[unused.length - 1]]

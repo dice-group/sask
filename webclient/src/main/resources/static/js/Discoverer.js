@@ -1,3 +1,9 @@
+/**
+ * Javascript class for the discovery of microservices and the types.
+ * 
+ * @author Kevin Haack
+ */
+;
 var Discoverer = function(options) {
 	/**
 	 * this.
@@ -63,7 +69,7 @@ var Discoverer = function(options) {
 		}
 		return microservices.repo.length > 0;
 	}
-	
+
 	/**
 	 * Is true, if a microservice with the type 'executer' is discovered.
 	 */
@@ -85,7 +91,7 @@ var Discoverer = function(options) {
 
 		return microservices["repo"][0];
 	}
-	
+
 	/**
 	 * Return the discovered microservice with the type 'executer'.
 	 */

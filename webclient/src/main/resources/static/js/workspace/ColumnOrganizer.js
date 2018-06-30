@@ -1,3 +1,10 @@
+/**
+ * JQuery plugin for the column organizer. Organizer the order and size of
+ * columns in a row.
+ * 
+ * @author Kevin Haack
+ */
+;
 (function($, window, document) {
 
 	/* global jQuery, console */

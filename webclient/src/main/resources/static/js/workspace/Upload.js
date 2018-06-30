@@ -1,3 +1,9 @@
+/**
+ * Javascript class the file upload.
+ * 
+ * @author Kevin Haack
+ */
+;
 var Upload = function(options) {
 	/**
 	 * this.

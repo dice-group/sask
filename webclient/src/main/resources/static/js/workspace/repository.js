@@ -1,5 +1,7 @@
 /**
- * The IIFE for the repository.
+ * JQuery plugin for the repository.
+ * 
+ * @author Kevin Haack
  */
 ;
 (function($, window, document) {
