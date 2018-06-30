@@ -46,7 +46,8 @@
 		sendTemplate : "<input type=\"submit\" class=\"btn btn-primary chat-send\" value=\"Send\"/>",
 		errorClass : "error",
 		messageClass : "message",
-		onBigMessage : undefined
+		onBigMessage : undefined,
+		dao : undefined
 	};
 
 	var Chatbot = function(element, options) {
@@ -235,20 +236,7 @@
 			self.addErrorMessage(result);
 		}
 
-		$.ajax({
-			type : "POST",
-			dataType : 'text',
-			data : JSON.stringify(data),
-			contentType : "application/json",
-			url : "/chatbot/chat", // Need to debug how
-			// to read data: in
-			// Spring. Passing
-			// as command param
-			// is not right.
-			timeout : 100000,
-			success : onSuccess,
-			error : onError
-		})
+		this.options.dao.sendChatMessage(data, onSuccess, onError);
 	}
 
 	/**

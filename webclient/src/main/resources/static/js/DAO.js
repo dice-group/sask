@@ -161,6 +161,28 @@ var DAO = function(options) {
 			error : error
 		});
 	};
+	
+	/**
+	 * Send the passed data to the chatbot.
+	 */
+	this.sendChatMessage = function(data, onSuccess, onError) {
+		var uri = "chatbot/" + "chat";
+		
+		$.ajax({
+			type : "POST",
+			dataType : 'text',
+			data : JSON.stringify(data),
+			contentType : "application/json",
+			url : "/chatbot/chat", // Need to debug how
+			// to read data: in
+			// Spring. Passing
+			// as command param
+			// is not right.
+			timeout : 100000,
+			success : onSuccess,
+			error : onError
+		});
+	}
 
 	/**
 	 * Send the passed workflow to the executer.
