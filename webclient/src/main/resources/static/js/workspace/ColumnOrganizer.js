@@ -31,6 +31,15 @@
 		sizeMaxAttribute : "data-sizeMax",
 		sizeMinAttribute : "data-sizeMin"
 	};
+	
+	/**
+	 * logging function
+	 */
+	var logError = function(message) {
+		if (window.console) {
+			window.console.error(pluginName + ": " + message);
+		}
+	};
 
 	var ColumnOrganizer = function(element, options) {
 		this.$element = $(element);
@@ -170,15 +179,6 @@
 				}
 			} ]
 		});
-	};
-
-	/**
-	 * logging function
-	 */
-	var logError = function(message) {
-		if (window.console) {
-			window.console.error(pluginName + ": " + message);
-		}
 	};
 
 	/**

@@ -49,6 +49,15 @@
 		onBigMessage : null,
 		dao : null
 	};
+	
+	/**
+	 * logging function
+	 */
+	var logError = function(message) {
+		if (window.console) {
+			window.console.error(pluginName + ": " + message);
+		}
+	};
 
 	var Chatbot = function(element, options) {
 		this.$element = $(element);
@@ -266,15 +275,6 @@
 		footer.append(sendButton);
 
 		this.$element.append(footer);
-	};
-
-	/**
-	 * logging function
-	 */
-	var logError = function(message) {
-		if (window.console) {
-			window.console.error(pluginName + ": " + message);
-		}
 	};
 
 	/**

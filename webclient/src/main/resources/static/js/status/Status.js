@@ -52,6 +52,15 @@
 	};
 
 	_default.options = {};
+	
+	/**
+	 * logging function
+	 */
+	var logError = function(message) {
+		if (window.console) {
+			window.console.error(pluginName + ": " + message);
+		}
+	};
 
 	var Status = function(element, options) {
 
@@ -218,15 +227,6 @@
 	 */
 	Status.prototype.onRefreshError = function(data) {
 		logError(data);
-	};
-
-	/**
-	 * logging function
-	 */
-	var logError = function(message) {
-		if (window.console) {
-			window.console.error(pluginName + ": " + message);
-		}
 	};
 
 	/**

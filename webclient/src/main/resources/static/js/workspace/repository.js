@@ -54,6 +54,15 @@
 		type : "root",
 		nodes : []
 	} ];
+	
+	/**
+	 * logging function
+	 */
+	var logError = function(message) {
+		if (window.console) {
+			window.console.error(pluginName + ": " + message);
+		}
+	};
 
 	var Repository = function(element, options) {
 
@@ -587,15 +596,6 @@
 		};
 
 		dialogs.dialogRemove(positiv, negativ, target).dialog("open");
-	};
-
-	/**
-	 * logging function
-	 */
-	var logError = function(message) {
-		if (window.console) {
-			window.console.error(pluginName + ": " + message);
-		}
 	};
 
 	/**

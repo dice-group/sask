@@ -50,6 +50,15 @@
 	 * The workflow id of the current loaded workflow.
 	 */
 	var workflowId = null;
+	
+	/**
+	 * logging function
+	 */
+	var logError = function(message) {
+		if (window.console) {
+			window.console.error(pluginName + ": " + message);
+		}
+	};
 
 	var Workspace = function(element, options) {
 
@@ -611,15 +620,6 @@
 				onClick : onRemove
 			} ]
 		});
-	};
-
-	/**
-	 * logging function
-	 */
-	var logError = function(message) {
-		if (window.console) {
-			window.console.error(pluginName + ": " + message);
-		}
 	};
 
 	/**
