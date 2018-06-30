@@ -68,7 +68,7 @@ var Discoverer = function(options) {
 			return false;
 		}
 		return microservices.repo.length > 0;
-	}
+	};
 	
 	/**
 	 * Is true, if a microservice with the type 'chatbot' is discovered.
@@ -78,7 +78,7 @@ var Discoverer = function(options) {
 			return false;
 		}
 		return microservices.chatbot.length > 0;
-	}
+	};
 
 	/**
 	 * Is true, if a microservice with the type 'executer' is discovered.
@@ -88,7 +88,7 @@ var Discoverer = function(options) {
 			return false;
 		}
 		return microservices.executer.length > 0;
-	}
+	};
 
 	/**
 	 * Return the discovered microservice with the type 'repo'.
@@ -100,7 +100,7 @@ var Discoverer = function(options) {
 		}
 
 		return microservices["repo"][0];
-	}
+	};
 	
 	/**
 	 * Return the discovered microservice with the type 'chatbot'.
@@ -112,7 +112,7 @@ var Discoverer = function(options) {
 		}
 
 		return microservices["chatbot"][0];
-	}
+	};
 
 	/**
 	 * Return the discovered microservice with the type 'executer'.
@@ -124,14 +124,14 @@ var Discoverer = function(options) {
 		}
 
 		return microservices["executer"][0];
-	}
+	};
 
 	/**
 	 * Returns the discovered microservices.
 	 */
 	this.getMicroservices = function() {
 		return microservices;
-	}
+	};
 
 	/**
 	 * Discover the microservices.

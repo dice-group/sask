@@ -184,8 +184,7 @@
 		if (!list) {
 			logError("unsupported type for " + microservice.serviceId + ": "
 					+ microservice.type);
-			return
-
+			return;
 		}
 
 		var type = $(this.options.templates.item.type);

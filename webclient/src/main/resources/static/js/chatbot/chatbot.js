@@ -7,12 +7,12 @@
 (function($, window, document) {
 
 	/* global jQuery, console */
-	'use strict';
+	"use strict";
 
 	/**
 	 * The plugin name.
 	 */
-	var pluginName = 'chatbot';
+	var pluginName = "chatbot";
 
 	var _default = {};
 
@@ -53,7 +53,7 @@
 	var Chatbot = function(element, options) {
 		this.$element = $(element);
 		this.elementId = element.id;
-		this.styleId = this.elementId + '-style';
+		this.styleId = this.elementId + "-style";
 
 		this.init(options);
 
@@ -80,7 +80,7 @@
 	Chatbot.prototype.initChat = function() {
 		var self = this;
 
-		textfield.on('keypress', function(e) {
+		textfield.on("keypress", function(e) {
 			if (e.which === 13 && textfield.val().trim()) {
 				self.onSendMessage();
 			}
@@ -100,7 +100,7 @@
 		chatList.append(card);
 		chatBody.animate({
 			scrollTop : chatBody.height()
-		}, 'slow');
+		}, "slow");
 	};
 
 	/**
@@ -111,7 +111,7 @@
 		card.find("." + this.options.messageClass).text(message);
 		this.addCard(card);
 		return card;
-	}
+	};
 
 	/**
 	 * Create a left card.
@@ -121,7 +121,7 @@
 		card.find("." + this.options.messageClass).text(message);
 		this.addCard(card);
 		return card;
-	}
+	};
 
 	/**
 	 * Method called on message send.
@@ -138,7 +138,7 @@
 		this.addRightCard(message);
 
 		// create data to send
-		var data = {}
+		var data = {};
 		data["userId"] = "1104ea5f-ce7b-4211-8675-e880b9bd0ec7";
 
 		// Need need to generate some ID for Uniqueness.
@@ -187,14 +187,14 @@
 			// Information.
 			var displayText = "";
 			for (var i = 0; i < messageData.length; i++) {
-				displayText += "<div class='card'>";
+				displayText += "<div class=\"card\">";
 				if (messageData[i].content != "") {
 					displayText += messageData[0].content + "<br>";
 					// why this <br> getting added?
 				}
 				if (messageData[i].image != "" && messageData[i].image != null) {
-					displayText += "<img src=" + newobj[i].image
-							+ " height='200' width='200'/><br>";
+					displayText += "<img src=" + messageData[i].image
+							+ " height=\"200\" width=\"200\"/><br>";
 				}
 				// Read Entry List
 				var entryobj = messageData[i].entryList;
@@ -221,7 +221,7 @@
 			chatList.append(displayText);
 			return;
 		}
-	}
+	};
 
 	/**
 	 * Send the passed data.
@@ -237,7 +237,7 @@
 		}
 
 		this.options.dao.sendChatMessage(data, onSuccess, onError);
-	}
+	};
 
 	/**
 	 * Init the body
@@ -266,7 +266,7 @@
 		footer.append(sendButton);
 
 		this.$element.append(footer);
-	}
+	};
 
 	/**
 	 * logging function
@@ -288,20 +288,20 @@
 		this.each(function() {
 			var _this = $.data(this, pluginName);
 
-			if (typeof options === 'string') {
+			if (typeof options === "string") {
 				if (!_this) {
-					logError('Not initialized, can not call method : '
+					logError("Not initialized, can not call method : "
 							+ options);
 				} else if (!$.isFunction(_this[options])
-						|| options.charAt(0) === '_') {
-					logError('No such method : ' + options);
+						|| options.charAt(0) === "_") {
+					logError("No such method : " + options);
 				} else {
 					if (!(args instanceof Array)) {
 						args = [ args ];
 					}
 					result = _this[options].apply(_this, args);
 				}
-			} else if (typeof options === 'boolean') {
+			} else if (typeof options === "boolean") {
 				result = _this;
 			} else {
 				$.data(this, pluginName, new Chatbot(this, $.extend(true, {},
