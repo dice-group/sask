@@ -1,4 +1,3 @@
-;
 (function($, window, document) {
 
 	/* global jQuery, console */

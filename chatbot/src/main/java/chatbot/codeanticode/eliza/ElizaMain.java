@@ -13,40 +13,39 @@ import java.net.URLConnection;
  * transformations.
  */
 public class ElizaMain {
-	TextArea textarea;
-	TextField textfield;
-	final boolean echoInput = false;
-	final boolean printData = false;
-	final boolean printKeys = false;
-	final boolean printSyns = false;
-	final boolean printPrePost = false;
-	final boolean printInitialFinal = false;
+	private TextArea textarea;
+	private TextField textfield;
+	private final boolean echoInput = false;
+	private final boolean printData = false;
+	private final boolean printKeys = false;
+	private final boolean printSyns = false;
+	private final boolean printPrePost = false;
+	private final boolean printInitialFinal = false;
 
 	/** The key list */
-	KeyList keys = new KeyList();
+	private KeyList keys = new KeyList();
 	/** The syn list */
-	SynList syns = new SynList();
+	private SynList syns = new SynList();
 	/** The pre list */
-	PrePostList pre = new PrePostList();
+	private PrePostList pre = new PrePostList();
 	/** The post list */
-	PrePostList post = new PrePostList();
+	private PrePostList post = new PrePostList();
 	/** Initial string */
-	String initial = "Hello.";
+	private String initial = "Hello.";
 	/** Final string */
-	String finl = "Goodbye.";
+	private String finl = "Goodbye.";
 	/** Quit list */
-	WordList quit = new WordList();
+	private WordList quit = new WordList();
 
 	/** Key stack */
-	KeyStack keyStack = new KeyStack();
+	private KeyStack keyStack = new KeyStack();
 
 	/** Memory */
-	Mem mem = new Mem();
+	private Mem mem = new Mem();
 
-	DecompList lastDecomp;
-	ReasembList lastReasemb;
-	boolean finished = false;
-
+	private DecompList lastDecomp;
+	private ReasembList lastReasemb;
+	private boolean finished = false;
 	static final int success = 0;
 	static final int failure = 1;
 	static final int gotoRule = 2;

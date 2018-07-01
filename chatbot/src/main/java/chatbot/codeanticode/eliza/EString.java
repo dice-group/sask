@@ -6,7 +6,7 @@ package chatbot.codeanticode.eliza;
 public class EString {
 
 	/** The digits. */
-	static final String num = "0123456789";
+	private static final String num = "0123456789";
 
 	/**
 	 * Look for a match between the string and the pattern. Return count of

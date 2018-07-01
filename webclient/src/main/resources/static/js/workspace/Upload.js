@@ -236,7 +236,7 @@ var Upload = function(options) {
 	var appendFileRow = function(row) {
 		selectFileMessage.hide();
 		uploadList.append(row);
-	}
+	};
 
 	/**
 	 * Create the file row.
@@ -258,7 +258,7 @@ var Upload = function(options) {
 	var getFileRow = function(path, filename) {
 		return uploadList.find('a[data-file="' + filename + '"][data-path="'
 				+ path + '"]');
-	}
+	};
 
 	/**
 	 * Open the dialog.

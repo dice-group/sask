@@ -1,7 +1,6 @@
 /**
  * The IIFE for the repository.
  */
-;
 (function($, window, document) {
 
 	/* global jQuery, console */
@@ -43,7 +42,7 @@
 		nodes : []
 	}, {
 		text : "Target graphs",
-		id : '#parent3',
+		id : "#parent3",
 		type : "root",
 		nodes : []
 	}, {
@@ -123,7 +122,7 @@
 			self.initClasses();
 			self.initDragNDrop();
 		});
-	}
+	};
 
 	/**
 	 * Set the css classes of the nodes.
@@ -173,7 +172,7 @@
 		settings.onError = function() {
 			logError("Discover failed.");
 		};
-	}
+	};
 
 	/**
 	 * Remove.
@@ -205,11 +204,11 @@
 			}
 
 			node.nodes.sort(function(a, b) {
-				if (a.type == "folder" && b.type != "folder") {
+				if (a.type === "folder" && b.type !== "folder") {
 					return -1;
 				}
 
-				if (a.type !== "folder" && b.type == "folder") {
+				if (a.type !== "folder" && b.type === "folder") {
 					return 1;
 				}
 
@@ -293,7 +292,7 @@
 					text : microservice.friendlyname,
 					id : microservice.serviceId,
 					type : "extractor",
-					icon : 'glyphicon glyphicon-wrench'
+					icon : "glyphicon glyphicon-wrench"
 				});
 			}
 		} else {
@@ -344,7 +343,7 @@
 			actions : [ {
 				name : "New folder",
 				onClick : function(target) {
-					if (target == "#data") {
+					if (target === "#data") {
 						target = "";
 					}
 
@@ -359,7 +358,7 @@
 				return self.getNodeFromTarget(target);
 			},
 			actions : [ {
-				name : 'Add to Workspace',
+				name : "Add to Workspace",
 				onClick : function(target) {
 					self.options.onAddToWorkspace(target);
 				}
@@ -372,7 +371,7 @@
 				return self.getNodeFromTarget(target);
 			},
 			actions : [ {
-				name : 'Add to Workspace',
+				name : "Add to Workspace",
 				onClick : function(target) {
 					self.options.onAddToWorkspace(target);
 				}
@@ -385,12 +384,12 @@
 				return self.getNodeFromTarget(target);
 			},
 			actions : [ {
-				name : 'Load to workspace',
+				name : "Load to workspace",
 				onClick : function(target) {
 					self.options.onLoadToWorkspace(target);
 				}
 			}, {
-				name : 'Rename',
+				name : "Rename",
 				onClick : function(target) {
 					self.openRenameWorkflowDialog(target);
 				}
@@ -413,12 +412,12 @@
 					self.options.onAddToWorkspace(target);
 				}
 			}, {
-				name : 'Rename',
+				name : "Rename",
 				onClick : function(target) {
 					self.openRenameRepoDialog(target);
 				}
 			}, {
-				name : 'Remove',
+				name : "Remove",
 				onClick : function(target) {
 					self.openRemoveFromRepoDialog(target);
 				}
@@ -431,7 +430,7 @@
 				return self.getNodeFromTarget(target);
 			},
 			actions : [ {
-				name : 'New folder',
+				name : "New folder",
 				onClick : function(target) {
 					self.openNewFolderDialog(target);
 				}
@@ -441,7 +440,7 @@
 					self.openRenameRepoDialog(target);
 				}
 			}, {
-				name : 'Remove',
+				name : "Remove",
 				onClick : function(target) {
 					self.openRemoveFromRepoDialog(target);
 				}
@@ -467,14 +466,14 @@
 			var name = $(this).find('input[name="name"]').val();
 
 			self.options.dao.renameRepo(success, error, target, name);
-			$(this).dialog('close');
+			$(this).dialog("close");
 		};
 
 		var negativ = function() {
 			$(this).dialog("close");
 		};
 
-		dialogs.dialogRename(positiv, negativ, target).dialog('open');
+		dialogs.dialogRename(positiv, negativ, target).dialog("open");
 	};
 
 	/**
@@ -530,7 +529,7 @@
 			$(this).dialog("close");
 		};
 
-		dialogs.dialogNewFolder(positiv, negativ, target).dialog('open');
+		dialogs.dialogNewFolder(positiv, negativ, target).dialog("open");
 	};
 
 	/**
@@ -557,7 +556,7 @@
 			$(this).dialog("close");
 		};
 
-		dialogs.dialogRemove(positiv, negativ, target).dialog('open');
+		dialogs.dialogRemove(positiv, negativ, target).dialog("open");
 	};
 
 	/**

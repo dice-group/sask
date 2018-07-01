@@ -93,7 +93,7 @@
 	 */
 	Status.prototype.discover = function() {
 		this.options.dao.getDiscoverer().discover();
-	}
+	};
 
 	/**
 	 * Init the discoverer.
@@ -110,7 +110,7 @@
 		settings.onError = function() {
 			self.onRefreshError();
 		};
-	}
+	};
 
 	/**
 	 * Init the structure.
@@ -180,7 +180,7 @@
 		if (!list) {
 			logError("unsupported type for " + microservice.serviceId + ": "
 					+ microservice.type);
-			return
+			return;
 
 		}
 
@@ -250,7 +250,7 @@
 					}
 					result = _this[options].apply(_this, args);
 				}
-			} else if (typeof options === 'boolean') {
+			} else if (typeof options === "boolean") {
 				result = _this;
 			} else {
 				$.data(this, pluginName, new Status(this, $.extend(true, {},
@@ -261,4 +261,4 @@
 		return result || this;
 	};
 })(jQuery, window, document);
-0
+0;
