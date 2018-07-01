@@ -35,7 +35,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -68,8 +67,8 @@ public class DbController {
 	@RequestMapping(value = "/updateGraph")
 
 	public void updateGraph(String input) {
-		logger.info("db-microservice updateGraph() is invoked" + input);
-
+		logger.info("db-microservice updateGraph() is invoked: " + input);
+		logger.info(input);
 		TripleDTO tripleDTO = new TripleDTO();
 		tripleDTO.setTriple(input);
 
@@ -78,9 +77,8 @@ public class DbController {
 		// upload the resulting model
 		Model model = ModelFactory.createDefaultModel();
 		InputStream inputstm = new ByteArrayInputStream(string_triples.getBytes());
-
-		model.read(inputstm, null, "TTL");
-
+		model.read(inputstm, null, "TTL");	     
+		
 		DatasetAccessor accessor = DatasetAccessorFactory.createHTTP(serviceURI);
 		accessor.putModel(model);
 
