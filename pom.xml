@@ -40,6 +40,9 @@
 		<spring.test.version>1.5.8.RELEASE</spring.test.version>
 		<spring.cloud.version>1.3.0.RELEASE</spring.cloud.version>
 		<spring.boot.version>1.5.8.RELEASE</spring.boot.version>
+
+		<!-- ~~~~~~~ docker ~~~~~~~ -->
+		<docker.image.prefix>org.dice-research</docker.image.prefix>
 	</properties>
 
 	<dependencies>
@@ -95,6 +98,24 @@
 					<!-- https://blog.frankel.ch/migrating-to-java-9/1/ -->
 					<jvmArguments>--add-modules java.xml.bind</jvmArguments>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>dockerfile-maven-plugin</artifactId>
+				<version>1.3.6</version>
+				<configuration>
+					<repository>${docker.image.prefix}/${project.artifactId}</repository>
+					<buildArgs>
+					    <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+					</buildArgs>
+				    </configuration>
+				<dependencies>
+				    <dependency>
+				        <groupId>javax.activation</groupId>
+				        <artifactId>activation</artifactId>
+				        <version>1.1.1</version>
+				    </dependency>
+				</dependencies>
 			</plugin>
 		</plugins>
 	</build>
