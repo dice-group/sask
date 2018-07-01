@@ -1,8 +1,10 @@
 
 package org.dice_research.sask.database_ms;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -10,9 +12,13 @@ import org.apache.jena.query.QuerySolution;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.jena.query.DatasetAccessor;
+import org.apache.jena.query.DatasetAccessorFactory;
 import org.apache.jena.query.QueryExecutionFactory;
 import org.apache.jena.query.ResultSet;
 import org.apache.jena.query.ResultSetFormatter;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.sparql.engine.http.QueryEngineHTTP;
 import org.apache.jena.update.UpdateExecutionFactory;
 import org.apache.jena.update.UpdateFactory;
@@ -62,16 +68,22 @@ public class DbController {
 	@RequestMapping(value = "/updateGraph")
 
 	public void updateGraph(String input) {
-		logger.info("db-microservice updateGraph() is invoked");
+		logger.info("db-microservice updateGraph() is invoked" + input);
 
 		TripleDTO tripleDTO = new TripleDTO();
 		tripleDTO.setTriple(input);
 
 		String string_triples = tripleDTO.getTriple();
+		String serviceURI = "http://localhost:3030/sask";
+		// upload the resulting model
+		Model model = ModelFactory.createDefaultModel();
+		InputStream inputstm = new ByteArrayInputStream(string_triples.getBytes());
 
-		UpdateRequest update = UpdateFactory.create("INSERT DATA { " + string_triples + "}");
-		UpdateProcessor processor = UpdateExecutionFactory.createRemote(update, "http://localhost:3030/sask/update");
-		processor.execute();
+		model.read(inputstm, null, "TTL");
+
+		DatasetAccessor accessor = DatasetAccessorFactory.createHTTP(serviceURI);
+		accessor.putModel(model);
+
 		updateAutoIndex();
 	}
 
