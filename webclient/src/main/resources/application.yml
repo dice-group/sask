@@ -12,7 +12,7 @@ eureka:
       friendlyname: Webclient
   client:
     serviceUrl:
-      defaultZone: http://eureka:1111/eureka/
+      defaultZone: http://@eureka.hostname@:1111/eureka/
 
 # Disable Spring Boot's "Whitelabel" default error page, so we can use our own
 error:

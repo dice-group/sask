@@ -27,6 +27,23 @@
 		<module>repo-ms</module>
 		<module>webclient</module>
 	</modules>
+	
+    <profiles>
+    	<profile>
+    		<!-- ~~~~~~~ for local usage ~~~~~~~ -->
+      		<id>local</id>
+      		<properties>
+				<eureka.hostname>localhost</eureka.hostname>
+      		</properties>
+    	</profile>
+    	<profile>
+        	<!-- ~~~~~~~ for docker usage ~~~~~~~ -->
+      		<id>docker</id>
+      		<properties>
+				<eureka.hostname>eureka</eureka.hostname>
+      		</properties>
+    	</profile>
+  	</profiles>
 
 	<properties>
 		<!-- ~~~~~~~ general ~~~~~~~ -->
@@ -88,6 +105,13 @@
 	</dependencies>
 
 	<build>
+		<!-- ~~~~~~~ resource filtering ~~~~~~~ -->
+		<resources>
+	        <resource>
+	            <directory>src/main/resources</directory>
+	            <filtering>true</filtering>
+	        </resource>
+	    </resources>
 		<plugins>
 			<!-- ~~~~~~~ spring boot ~~~~~~~ -->
 			<plugin>

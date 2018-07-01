@@ -1,7 +1,7 @@
 # Configure this Discovery Server
 eureka:
   instance:
-    hostname: eureka
+    hostname: @eureka.hostname@
   client: #Not a client
     registerWithEureka: false
     fetchRegistry: false

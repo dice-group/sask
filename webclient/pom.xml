@@ -84,11 +84,11 @@
 				<artifactId>phantomjs-maven-plugin</artifactId>
 			      	<version>${phantomjs-maven-plugin.version}</version>
 			      	<executions>
-					<execution>
-				  		<goals>
-				    			<goal>install</goal>
-				  		</goals>
-					</execution>
+						<execution>
+					  		<goals>
+					    			<goal>install</goal>
+					  		</goals>
+						</execution>
 			      	</executions>
 			      	<configuration>
 					<version>1.9.2</version>
@@ -133,6 +133,7 @@
 				<filtering>true</filtering>
 				<includes>
 					<include>**/*.html</include>
+					<include>**/*.yml</include>
 				</includes>
 			</resource>
 			<resource>
