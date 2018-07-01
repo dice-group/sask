@@ -12,6 +12,8 @@ import org.apache.jena.query.QuerySolution;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.jena.graph.Node;
+import org.apache.jena.graph.Triple;
 import org.apache.jena.query.DatasetAccessor;
 import org.apache.jena.query.DatasetAccessorFactory;
 import org.apache.jena.query.QueryExecutionFactory;
@@ -19,11 +21,17 @@ import org.apache.jena.query.ResultSet;
 import org.apache.jena.query.ResultSetFormatter;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.rdf.model.Property;
+import org.apache.jena.rdf.model.RDFNode;
+import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.rdf.model.Statement;
+import org.apache.jena.rdf.model.StmtIterator;
 import org.apache.jena.sparql.engine.http.QueryEngineHTTP;
 import org.apache.jena.update.UpdateExecutionFactory;
 import org.apache.jena.update.UpdateFactory;
 import org.apache.jena.update.UpdateProcessor;
 import org.apache.jena.update.UpdateRequest;
+import org.apache.jena.vocabulary.RDF;
 import org.apache.log4j.Logger;
 import org.dice_research.sask.database_ms.RDFTriples.AutoIndexDTO;
 import org.dice_research.sask.database_ms.RDFTriples.EndPointParameters;
@@ -68,7 +76,6 @@ public class DbController {
 
 	public void updateGraph(String input) {
 		logger.info("db-microservice updateGraph() is invoked: " + input);
-		logger.info(input);
 		TripleDTO tripleDTO = new TripleDTO();
 		tripleDTO.setTriple(input);
 
@@ -77,14 +84,34 @@ public class DbController {
 		// upload the resulting model
 		Model model = ModelFactory.createDefaultModel();
 		InputStream inputstm = new ByteArrayInputStream(string_triples.getBytes());
-		model.read(inputstm, null, "TTL");	     
-		
+		model.read(inputstm, null, "TTL");		
 		DatasetAccessor accessor = DatasetAccessorFactory.createHTTP(serviceURI);
 		accessor.putModel(model);
-
+		test(model);
+		
 		updateAutoIndex();
 	}
 
+	public void test(Model model){
+		/* rdf:object     dbr:Hawaii ;
+	        rdf:predicate  foxo:stanford_livein ;
+	        rdf:subject    dbr:Barack_Obama ;
+*/
+		// print out the predicate, subject and object of each statement
+		StmtIterator iter = model.listStatements();
+
+		while (iter.hasNext()) {
+		    Statement stmt      = iter.nextStatement();  // get next statement
+		    Resource  subject   = stmt.getSubject();     // get the subject
+		    Property  predicate = stmt.getPredicate();   // get the predicate
+		    RDFNode   object    = stmt.getObject();      // get the object
+
+		    System.out.println(subject.toString()+" "+predicate.toString()+" "+object.toString());
+	
+		    
+		}
+	}
+	
 	/**
 	 * method to store triples inside the named graph If the name of the graph does
 	 * not exists it creates a new graph with the given name and stores the triples

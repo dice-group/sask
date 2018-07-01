@@ -36,6 +36,7 @@ public class StoreTask implements Runnable {
 			map.add("input", data);
 			HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, headers);
 			ResponseEntity<String> response = restTemplate.postForEntity(uri + "/updateGraph?", request, String.class);
+			logger.info(response.getStatusCode());
 	}
 
 	private String getTargetGrapName() {
