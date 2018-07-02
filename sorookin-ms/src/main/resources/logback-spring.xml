@@ -31,10 +31,10 @@
 		</encoder>
 	</appender>
 
-	<root level="WARN">
+	<root level="INFO">
 		<appender-ref ref="FILE" />
 	</root>
-	<root level="WARN">
+	<root level="INFO">
 		<appender-ref ref="consoleAppender" />
 	</root>
 </configuration>

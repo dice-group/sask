@@ -12,7 +12,7 @@ eureka:
       friendlyname: Fred
   client:
     serviceUrl:
-      defaultZone: http://localhost:1111/eureka/
+      defaultZone: http://@eureka.hostname@:1111/eureka/
 
 # HTTP Server (Tomcat) Port
 server: 
