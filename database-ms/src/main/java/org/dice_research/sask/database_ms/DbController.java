@@ -259,7 +259,10 @@ public class DbController {
 		// have to replace with the required values
 		EndPointParameters endPointParameters = dto.getEndPointParameters();
 		endPointParameters.setUrl("http://localhost:3030/sask/query");
-		endPointParameters.setEntitySelectQuery("SELECT ?subject ?object WHERE { ?subject ?predicate ?object }");
+		endPointParameters.setEntitySelectQuery("PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n" + 
+				"SELECT DISTINCT ?key1 ?key2 \n" + 
+				"WHERE{\n" + 
+				"?key1 rdfs:label ?key2 .}");
 		endPointParameters.setIsEntityCustomized(true);
 		dto.setUseLocalDataSource(true);
 		HttpEntity<AutoIndexDTO> entity = new HttpEntity<AutoIndexDTO>(dto, headers);
