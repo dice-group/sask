@@ -15,7 +15,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class WebHDFSUriBuilder {
 
 	private static final String SCHEME = "http";
-	private static final String HADOOP_HOSTSERVER = "localhost";
+	private static final String HADOOP_HOSTSERVER = "hadoop";
 	private static final int HADOOP_NAMENODE_PORT = 50070;
 	private static final String PROTOCOL = "webhdfs";
 	private static final String VERSION = "v1";
