@@ -13,6 +13,7 @@
 		<version>1.5.8.RELEASE</version>
 	</parent>
 
+
 	<modules>
 		<module>cedric-ms</module>
 		<module>chatbot</module>
@@ -27,6 +28,7 @@
 		<module>repo-ms</module>
 		<module>webclient</module>
 	</modules>
+
 
 	<properties>
 		<!-- ~~~~~~~ general ~~~~~~~ -->

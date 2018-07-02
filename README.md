@@ -25,7 +25,7 @@ You will find example data for the extraction in the wiki: https://github.com/di
 
 ## Necessary components
 - hadoop docker container [see here](https://github.com/dice-group/sask/wiki/Hadoop)
-- jena docker container [see here](https://github.com/dice-group/sask/wiki/Jena-DB-On-Fuseki-Server)
+- fuseki docker container [see here](https://github.com/dice-group/sask/wiki/Jena-DB-On-Fuseki-Server)
 - eureka ms
 - webclient ms
 - executer ms
