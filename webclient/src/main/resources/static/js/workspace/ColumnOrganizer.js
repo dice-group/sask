@@ -119,12 +119,31 @@
 
 		return sizeClass;
 	};
-
+	
 	/**
-	 * Scroll to the of the passed column.
+	 * Hide others
 	 */
-	ColumnOrganizer.prototype.scrollTo = function(column) {
-		$(document).scrollTop(column.offset().top);
+	ColumnOrganizer.prototype.hideOthers = function(column) {
+		$.each(order, function(index, o) {
+			var other = $(o);
+			
+			if(!other.is(column)) {
+				other.hide();
+			}
+		});
+	};
+	
+	/**
+	 * Show others
+	 */
+	ColumnOrganizer.prototype.showAll = function(column) {
+		$.each(order, function(index, o) {
+			var other = $(o);
+			
+			if(!other.is(column)) {
+				other.show();
+			}
+		});
 	};
 
 	/**
@@ -135,7 +154,7 @@
 		column.removeClass(currentSizeClass);
 		column.addClass(column.attr(this.options.sizeMaxAttribute));
 
-		this.scrollTo(column);
+		this.hideOthers(column);
 	};
 
 	/**
@@ -146,7 +165,7 @@
 		column.removeClass(currentSizeClass);
 		column.addClass(column.attr(this.options.sizeMinAttribute));
 
-		this.scrollTo(column);
+		this.showAll(column);
 	};
 
 	/**
