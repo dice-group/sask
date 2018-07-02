@@ -2,8 +2,12 @@ package org.dice_research.sask.executer_ms.workflow;
 
 import static org.junit.Assert.*;
 
-import java.util.List;
 import java.util.Map;
+
+import org.dice_research.sask_commons.workflow.Link;
+import org.dice_research.sask_commons.workflow.Operator;
+import org.dice_research.sask_commons.workflow.Workflow;
+import org.dice_research.sask_commons.workflow.WorkflowDeserializer;
 import org.junit.Test;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
@@ -17,8 +21,6 @@ public class WorkflowDeserializerTest {
 		 * pre
 		 */
 		ObjectNode root = JsonNodeFactory.instance.objectNode();
-		System.out.println("Parse: empty");
-		System.out.println(root.toString());
 
 		/*
 		 * create
@@ -29,10 +31,8 @@ public class WorkflowDeserializerTest {
 		/*
 		 * test
 		 */
-		assertEquals(0, workflow.getLinks()
-		                        .size());
-		assertEquals(0, workflow.getOperators()
-		                        .size());
+		assertEquals(0, workflow.getLinks().size());
+		assertEquals(0, workflow.getOperators().size());
 	}
 
 	@Test
@@ -67,9 +67,6 @@ public class WorkflowDeserializerTest {
 		root.set(Workflow.KEY_LINKS, links);
 		root.set(Workflow.KEY_OPERATORS, operators);
 
-		System.out.println("Parse: links");
-		System.out.println(root.toString());
-
 		/*
 		 * create
 		 */
@@ -80,36 +77,18 @@ public class WorkflowDeserializerTest {
 		 * test
 		 */
 		// links
-		assertEquals(2, workflow.getLinks()
-		                        .size());
-		assertEquals("A", workflow.getLinks()
-		                          .get(0)
-		                          .getFromConnector());
-		assertEquals("B", workflow.getLinks()
-		                          .get(0)
-		                          .getToConnector());
-		assertEquals("A_a", workflow.getLinks()
-		                            .get(0)
-		                            .getFromOperator());
-		assertEquals("B_a", workflow.getLinks()
-		                            .get(0)
-		                            .getToOperator());
-		assertEquals("C", workflow.getLinks()
-		                          .get(1)
-		                          .getFromConnector());
-		assertEquals("D", workflow.getLinks()
-		                          .get(1)
-		                          .getToConnector());
-		assertEquals("C_a", workflow.getLinks()
-		                            .get(1)
-		                            .getFromOperator());
-		assertEquals("D_a", workflow.getLinks()
-		                            .get(1)
-		                            .getToOperator());
+		assertEquals(2, workflow.getLinks().size());
+		assertEquals("A", workflow.getLinks().get(0).getFromConnector());
+		assertEquals("B", workflow.getLinks().get(0).getToConnector());
+		assertEquals("A_a", workflow.getLinks().get(0).getFromOperator());
+		assertEquals("B_a", workflow.getLinks().get(0).getToOperator());
+		assertEquals("C", workflow.getLinks().get(1).getFromConnector());
+		assertEquals("D", workflow.getLinks().get(1).getToConnector());
+		assertEquals("C_a", workflow.getLinks().get(1).getFromOperator());
+		assertEquals("D_a", workflow.getLinks().get(1).getToOperator());
 
 		// operators
-		assertEquals(0, workflow.getOperators()
-		                        .size());
+		assertEquals(0, workflow.getOperators().size());
 	}
 
 	@Test
@@ -144,9 +123,6 @@ public class WorkflowDeserializerTest {
 		root.set(Workflow.KEY_LINKS, links);
 		root.set(Workflow.KEY_OPERATORS, operators);
 
-		System.out.println("Parse: one operator");
-		System.out.println(root.toString());
-
 		/*
 		 * create
 		 */
@@ -157,78 +133,15 @@ public class WorkflowDeserializerTest {
 		 * test
 		 */
 		// links
-		assertEquals(0, workflow.getLinks()
-		                        .size());
+		assertEquals(0, workflow.getLinks().size());
 		// operators
 		Map<String, Operator> os = workflow.getOperators();
 		assertEquals(1, os.size());
-		assertEquals("id1", os.get("id1")
-		                      .getId());
-		assertEquals("/text.txt", os.get("id1")
-		                            .getContent());
-		assertEquals("file", os.get("id1")
-		                       .getType());
-		assertEquals(1, os.get("id1")
-		                  .getOutputs()
-		                  .size());
-		assertEquals("NL", os.get("id1")
-		                     .getOutputs()
-		                     .get("out1"));
+		assertEquals("id1", os.get("id1").getId());
+		assertEquals("/text.txt", os.get("id1").getContent());
+		assertEquals("file", os.get("id1").getType());
+		assertEquals(1, os.get("id1").getOutputs().size());
+		assertEquals("NL", os.get("id1").getOutputs().get("out1"));
 	}
-	
-	@Test
-	public void testCreateQueue() {
-		System.out.println("Create queue");
-		
-		/*
-		 * pre
-		 */
-		Operator start = new Operator();
-		start.setContent("/text.txt");
-		start.setType("file");
-		start.setId("id1");
-		start.getOutputs().put("out1", "NL");
-		
-		Operator extractor = new Operator();
-		extractor.setContent("CEDRIC-MS");
-		extractor.setType("extractor");
-		extractor.setId("id2");
-		extractor.getInputs().put("in2", "NL");
-		extractor.getOutputs().put("out2", "RDF");
-		
-		Operator db = new Operator();
-		db.setContent("sask");
-		db.setType("db");
-		db.setId("id3");
-		db.getInputs().put("in3", "RDF");
-		
-		Link link1 = new Link();
-		link1.setFromOperator("id1");
-		link1.setToOperator("id2");
-		link1.setFromConnector("out1");
-		link1.setToConnector("in2");
-		
-		Link link2 = new Link();
-		link2.setFromOperator("id2");
-		link2.setToOperator("id3");
-		link2.setFromConnector("out2");
-		link2.setToConnector("in3");
-		
-		Workflow workflow = new Workflow();
-		workflow.getOperators().put(start.getId(), start);
-		workflow.getOperators().put(extractor.getId(), extractor);
-		workflow.getOperators().put(db.getId(), db);
-		workflow.getLinks().add(link1);
-		workflow.getLinks().add(link2);
-		
-		/*
-		 * test
-		 */
-		List<Operator> queue = workflow.createQueue();
-		assertEquals(3, queue.size());
-		assertEquals("id1", queue.get(0).getId());
-		assertEquals("id2", queue.get(1).getId());
-		assertEquals("id3", queue.get(2).getId());
-		
-	}
+
 }

@@ -16,9 +16,9 @@ var DAO = function(options) {
 	 */
 	var settings = {
 		icons : {
-			folder : 'glyphicon glyphicon-folder-open',
-			file : 'glyphicon glyphicon-file',
-			workflow : 'glyphicon glyphicon-play-circle'
+			folder : "glyphicon glyphicon-folder-open",
+			file : "glyphicon glyphicon-file",
+			workflow : "glyphicon glyphicon-play-circle"
 		}
 	};
 
@@ -37,11 +37,11 @@ var DAO = function(options) {
 	var parseRepoStructure = function(hdfsData) {
 		var type;
 		var icon;
-		if (hdfsData.type === 'DIRECTORY') {
-			type = 'folder';
+		if (hdfsData.type === "DIRECTORY") {
+			type = "folder";
 			icon = settings.icons.folder;
-		} else if (hdfsData.type === 'FILE') {
-			type = 'file';
+		} else if (hdfsData.type === "FILE") {
+			type = "file";
 			icon = settings.icons.file;
 		}
 
@@ -58,7 +58,7 @@ var DAO = function(options) {
 			icon : icon
 		};
 
-		if (type === 'folder') {
+		if (type === "folder") {
 			node.nodes = nodes;
 		}
 
@@ -93,11 +93,11 @@ var DAO = function(options) {
 	var parseWorkflowStructure = function(hdfsData) {
 		var type;
 		var icon;
-		if (hdfsData.type === 'DIRECTORY') {
-			type = 'folder';
+		if (hdfsData.type === "DIRECTORY") {
+			type = "folder";
 			icon = settings.icons.folder;
-		} else if (hdfsData.type === 'FILE') {
-			type = 'workflow';
+		} else if (hdfsData.type === "FILE") {
+			type = "workflow";
 			icon = settings.icons.workflow;
 		}
 
@@ -134,7 +134,7 @@ var DAO = function(options) {
 	this.construct = function(options) {
 		$.extend(settings, options);
 
-		if (typeof Discoverer !== 'function') {
+		if (typeof Discoverer !== "function") {
 			logError("'Discoverer' not initialized.");
 			return;
 		}
@@ -178,7 +178,7 @@ var DAO = function(options) {
 	this.getRepoStructure = function(success, error) {
 		var uri = getRepoServiceUri() + "getHdfsStructure";
 		var data = {
-			location : 'repo'
+			location : "repo"
 		};
 		$.ajax({
 			type : "POST",
@@ -219,7 +219,7 @@ var DAO = function(options) {
 	this.getWorkflow = function(success, error, target) {
 		var uri = getRepoServiceUri() + "readFile";
 		var data = {
-			location : 'workflow',
+			location : "workflow",
 			path : target
 		};
 
@@ -258,7 +258,7 @@ var DAO = function(options) {
 	this.renameWorkflow = function(success, error, from, to) {
 		var uri = getRepoServiceUri() + "rename";
 		var data = {
-			location : 'workflow',
+			location : "workflow",
 			from : from,
 			to : to
 		};
@@ -278,7 +278,7 @@ var DAO = function(options) {
 	this.renameWorkflow = function(success, error, from, to) {
 		var uri = getRepoServiceUri() + "rename";
 		var data = {
-			location : 'workflow',
+			location : "workflow",
 			from : from,
 			to : to
 		};
@@ -298,7 +298,7 @@ var DAO = function(options) {
 	this.removeFromRepo = function(success, error, target) {
 		var uri = getRepoServiceUri() + "delete";
 		var data = {
-			location : 'repo',
+			location : "repo",
 			path : target
 		};
 
@@ -357,7 +357,7 @@ var DAO = function(options) {
 	 * Save workflow.
 	 */
 	this.saveWorkflow = function(success, error, target, workflow) {
-		if (target.startsWith('/')) {
+		if (target.startsWith("/")) {
 			target = target.substring(1);
 		}
 
@@ -374,7 +374,7 @@ var DAO = function(options) {
 			contentType : false,
 			processData : false,
 			data : formData,
-			type : 'post',
+			type : "post",
 			success : success,
 			error : error
 		});
@@ -400,9 +400,9 @@ var DAO = function(options) {
 	 */
 	this.uploadFile = function(success, error, path, file) {
 		var formData = new FormData();
-		formData.append('path', path);
-		formData.append('location', "repo");
-		formData.append('file', file);
+		formData.append("path", path);
+		formData.append("location", "repo");
+		formData.append("file", file);
 
 		var uri = getRepoServiceUri() + "storeFile";
 		$.ajax({

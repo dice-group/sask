@@ -11,7 +11,7 @@
 	/**
 	 * The plugin name.
 	 */
-	var pluginName = 'repository';
+	var pluginName = "repository";
 
 	/**
 	 * Dialogs.
@@ -32,24 +32,24 @@
 	 * The structure template.
 	 */
 	var structureTemplate = [ {
-		text : 'Data',
-		id : '#data',
-		type : 'root',
+		text : "Data",
+		id : "#data",
+		type : "root",
 		nodes : []
 	}, {
-		text : 'Extractors',
-		id : '#parent2',
-		type : 'root',
+		text : "Extractors",
+		id : "#parent2",
+		type : "root",
 		nodes : []
 	}, {
-		text : 'Target graphs',
+		text : "Target graphs",
 		id : '#parent3',
-		type : 'root',
+		type : "root",
 		nodes : []
 	}, {
-		text : 'Workflows',
-		id : '#parent4',
-		type : 'root',
+		text : "Workflows",
+		id : "#parent4",
+		type : "root",
 		nodes : []
 	} ];
 
@@ -57,7 +57,7 @@
 
 		this.$element = $(element);
 		this.elementId = element.id;
-		this.styleId = this.elementId + '-style';
+		this.styleId = this.elementId + "-style";
 
 		this.init(options);
 
@@ -81,7 +81,7 @@
 			return;
 		}
 
-		if (typeof BootstrapMenu !== 'function') {
+		if (typeof BootstrapMenu !== "function") {
 			logError("'BootstrapMenu' plugin not initialized.");
 			return;
 		}
@@ -130,8 +130,8 @@
 	 */
 	Repository.prototype.initClasses = function() {
 		var self = this;
-		this.$element.find('li').each(function() {
-			var nodeId = $(this).attr('data-nodeid');
+		this.$element.find("li").each(function() {
+			var nodeId = $(this).attr("data-nodeid");
 			var node = self.treeview.treeview("getNode", nodeId);
 
 			if (node.type) {
@@ -145,11 +145,11 @@
 	 */
 	Repository.prototype.initDragNDrop = function() {
 		var self = this;
-		this.$element.find('li.file, li.extractor, li.db').draggable({
+		this.$element.find("li.file, li.extractor, li.db").draggable({
 			helper : "clone",
 			start : function(event, ui) {
 				var node = self.getNodeFromTarget(this);
-				ui.helper.data('node', node);
+				ui.helper.data("node", node);
 				ui.helper.width(this.clientWidth);
 			}
 		});
@@ -181,15 +181,15 @@
 	Repository.prototype.remove = function() {
 		this.destroy();
 		$.removeData(this, pluginName);
-		$('#' + this.styleId).remove();
+		$("#" + this.styleId).remove();
 	};
 
 	/**
 	 * Extract the link from the context menu target
 	 */
 	Repository.prototype.getNodeFromTarget = function(target) {
-		var nodeId = $(target).attr('data-nodeid');
-		var node = this.treeview.treeview('getNode', nodeId);
+		var nodeId = $(target).attr("data-nodeid");
+		var node = this.treeview.treeview("getNode", nodeId);
 		return node;
 	};
 
@@ -230,6 +230,11 @@
 	 * Refresh the repo.
 	 */
 	Repository.prototype.refreshRepo = function() {
+		if(!this.options.dao.getDiscoverer().getRepo()) {
+			logError("repo not discovered");
+			return;
+		}
+		
 		var self = this;
 		var success = function(data) {
 			data = self.orderNode(data);
@@ -252,6 +257,11 @@
 	 * Refresh the workflows
 	 */
 	Repository.prototype.refreshWorkflows = function() {
+		if(!this.options.dao.getDiscoverer().getRepo()) {
+			logError("repo not discovered");
+			return;
+		}
+		
 		var self = this;
 		var success = function(data) {
 			structureTemplate[3].id = data.id;
@@ -282,7 +292,7 @@
 				structureTemplate[1].nodes.push({
 					text : microservice.friendlyname,
 					id : microservice.serviceId,
-					type : 'extractor',
+					type : "extractor",
 					icon : 'glyphicon glyphicon-wrench'
 				});
 			}
@@ -332,7 +342,7 @@
 				return self.getNodeFromTarget(target);
 			},
 			actions : [ {
-				name : 'New folder',
+				name : "New folder",
 				onClick : function(target) {
 					if (target == "#data") {
 						target = "";
@@ -385,7 +395,7 @@
 					self.openRenameWorkflowDialog(target);
 				}
 			}, {
-				name : 'Remove',
+				name : "Remove",
 				onClick : function(target) {
 					self.openRemoveFromWorkflowsDialog(target);
 				}
