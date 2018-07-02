@@ -34,14 +34,16 @@
     		<!-- ~~~~~~~ for local usage ~~~~~~~ -->
       		<id>local</id>
       		<properties>
-				<eureka.hostname>localhost</eureka.hostname>
+			<eureka.hostname>localhost</eureka.hostname>
+			<eureka.port>8761</eureka.port>
       		</properties>
     	</profile>
     	<profile>
         	<!-- ~~~~~~~ for docker usage ~~~~~~~ -->
       		<id>docker</id>
       		<properties>
-				<eureka.hostname>eureka</eureka.hostname>
+			<eureka.hostname>eureka</eureka.hostname>
+			<eureka.port>8761</eureka.port>
       		</properties>
     	</profile>
   	</profiles>
