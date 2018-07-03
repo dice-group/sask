@@ -3,6 +3,7 @@ package org.dice_research.sask.fox_ms;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.StringWriter;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -38,6 +39,7 @@ public class FoxMsController {
 	 * The logger.
 	 */
 	private Logger logger = Logger.getLogger(FoxMsController.class.getName());
+	static StringWriter modelAsString = new StringWriter();
 
 	/**
 	 * Extract the passed dto.
@@ -114,7 +116,8 @@ public class FoxMsController {
 		Query secondQuery = QueryFactory.create(secondModifyQuery);
 		QueryExecution secondQexec = QueryExecutionFactory.create(secondQuery, model);
 		result.add(secondQexec.execConstruct());
-		return result.toString();
+		result.write(modelAsString, "TTL");
+		return modelAsString.toString();
 
 	}
 
