@@ -5,7 +5,7 @@ public class AutoIndexDTO {
 	private boolean useLocalDataSource = true;
 
 	public EndPointParameters getEndPointParameters() {
-		if(this.endPointParameters == null) {
+		if (this.endPointParameters == null) {
 			endPointParameters = new EndPointParameters();
 		}
 		return this.endPointParameters;

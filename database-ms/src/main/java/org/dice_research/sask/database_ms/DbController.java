@@ -103,9 +103,7 @@ public class DbController {
 		    Property  predicate = stmt.getPredicate();   // get the predicate
 		    RDFNode   object    = stmt.getObject();      // get the object
 
-		    System.out.println(subject.toString()+" "+predicate.toString()+" "+object.toString());
-	
-		    
+		    System.out.println(subject.toString()+" "+predicate.toString()+" "+object.toString());		    
 		}
 	}
 	
@@ -213,6 +211,7 @@ public class DbController {
 				String gn = soln.get("GraphName").toString();
 				GraphNames.add(gn);
 			}
+			
 			return GraphNames;
 		}
 
