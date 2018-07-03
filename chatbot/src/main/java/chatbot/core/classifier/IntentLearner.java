@@ -13,8 +13,10 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import org.apache.log4j.Logger;
+import org.springframework.web.client.RestTemplate;
 
 import chatbot.core.handlers.Handler;
+import chatbot.core.handlers.automaticworkflow.AutomaticWorkflow;
 import chatbot.core.handlers.eliza.ElizaHandler;
 import chatbot.core.handlers.qa.QAHandler;
 import chatbot.core.handlers.rivescript.RiveScriptOutputAnalyzer;
@@ -48,6 +50,7 @@ public class IntentLearner {
 	private static final String resourcePath = "classifier/";
 	private static final String trainingData = "intentdata.arff";
 	private static final String model = "intentdata.model";
+	public static final String[] automaticTerms = { "extract", "load" };
 	private static Logger log = Logger.getLogger(IntentLearner.class.getName());
 	/**
 	 * Object that stores the instance.
@@ -66,6 +69,11 @@ public class IntentLearner {
 	 */
 	private FilteredClassifier classifier;
 		
+	private final RestTemplate restTemplate;
+	public IntentLearner(RestTemplate restTemplate) {
+		this.restTemplate = restTemplate;
+	}
+
 	/**
 	 * This method loads a dataset in ARFF format. If the file does not exist, or
 	 * it has a wrong format, the attribute trainData is null.
@@ -394,6 +402,7 @@ public class IntentLearner {
 	 */
 	public Handler classify(IncomingRequest request) {
 		try {
+			log.warn("In IntnetLearner Classify");
 			String query = request.getRequestContent().get(0).getText().toLowerCase();
 			//Preprocess User Input. Do not expect it to be perfect.
 			//Query may contain some basic spelling mistakes which require to be corrected.Currently Language is hardcoded. 
@@ -402,6 +411,16 @@ public class IntentLearner {
 			if(query.isEmpty()) {
 				log.warn("Handle Null inputs, Throwing Exception here");
 				throw new IllegalArgumentException("Null Input");
+			}
+			
+			for (String string : automaticTerms) {
+				if (query.contains(string)) {
+					log.warn("IN FOR EACH");
+					log.warn("Query::"+query);
+					AutomaticWorkflow automaticWorflowObject = new AutomaticWorkflow(restTemplate);
+					return automaticWorflowObject;
+				}
+				
 			}
 			query = handlePreProcessing(query);
 			//Set Query here to Request for now?

@@ -31,7 +31,7 @@ public class IntentLearnerTest {
 	}
 	
 	public Object classifyInput(IncomingRequest input) {
-		IntentLearner intentLeaner = new IntentLearner();
+		IntentLearner intentLeaner = new IntentLearner(null);
 		Object actualOutput =intentLeaner.classify(input);	
 		return actualOutput;
 	}
@@ -73,7 +73,7 @@ public class IntentLearnerTest {
 		FeedbackRequest feedback = new FeedbackRequest();
 		feedback.setFeedback("negative");
 		feedback.setQuery("obama wife");
-		IntentLearner intentLeaner = new IntentLearner();
+		IntentLearner intentLeaner = new IntentLearner(null);
 		intentLeaner.processFeedback(feedback);
 	}
 }

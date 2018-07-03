@@ -39,10 +39,10 @@ public class AutomaticWorkflow extends Handler {
 			                      .get(0)
 			                      .getText();
 			                      
-			log.info("IN AutomaticWorkflow SEARCH:::"+query);
+			log.warn("IN AutomaticWorkflow SEARCH:::"+query);
 			
 			responselist = startFunction(query);
-			log.info("RESPONSE LIST SEARCH::"+responselist);
+			log.warn("RESPONSE LIST SEARCH::"+responselist);
 			return responselist;
 
 		} catch (Exception e) {
@@ -58,14 +58,14 @@ public class AutomaticWorkflow extends Handler {
 	public ResponseList startFunction(String query) {
 
 		int queryLength = query.trim().split("\\s+").length;
-		log.info("Start Func Query:"+query);
-		log.info("Start Func Query Length:"+query.trim().split("\\s+").length);
+		log.warn("Start Func Query:"+query);
+		log.warn("Start Func Query Length:"+query.trim().split("\\s+").length);
 
 		String[] splitQuery = query.trim().split(" ");
-		log.info("Start Func Query Equals:"+splitQuery[0].toLowerCase().equals("extract"));
+		log.warn("Start Func Query Equals:"+splitQuery[0].toLowerCase().equals("extract"));
 		
 		ResponseList returnValue =  new ResponseList();
-		log.info("splitQuery.length::"+(splitQuery.length==1));
+		log.warn("splitQuery.length::"+(splitQuery.length==1));
 		Response responseData = new Response();
 		String keyword = null;
 		String extractor = null;
@@ -81,24 +81,24 @@ public class AutomaticWorkflow extends Handler {
 //			returnValue.addMessage(responseData);
 //		}else 
 			if (splitQuery[0].toLowerCase().equals("extract") ) {
-				log.info("QUERY EXTRACT");
-				if(splitQuery.length==3) {
+				log.warn("QUERY EXTRACT::"+splitQuery.length);
+				if(splitQuery.length==5) {
 					keyword = splitQuery[0];
-					extractor = splitQuery[1];
 					fileName = splitQuery[2];
-					log.info("keyword"+keyword);
-					log.info("extractor"+extractor);
-					log.info("fileName"+fileName);
+					extractor = splitQuery[4];
+					log.warn("keyword"+keyword);
+					log.warn("extractor"+extractor);
+					log.warn("fileName"+fileName);
 				}else {
-					responseData.setContent("The query should be \"extract extractor filename\"");
+					responseData.setContent("The query should be \"extract From filename using extractor\"");
 					returnValue.addMessage(responseData);
 					return returnValue;
 				}
 				
 				if( !extractor.isEmpty() && !fileName.isEmpty()) {
-					returnValue = extractWorkFlow(extractor, fileName);
+					returnValue = checkFilePresent(extractor, fileName);
 				} else {
-					log.info("QUERY EXTRACT STRING IN ELSE");
+					log.warn("QUERY EXTRACT STRING IN ELSE");
 					responseData.setContent("UNKNOWN EXCEPTION");
 					returnValue.addMessage(responseData);
 				}
@@ -110,23 +110,23 @@ public class AutomaticWorkflow extends Handler {
 		
 	}
 
-	public ResponseList extractWorkFlow(String extractor, String fileName) {
+	public ResponseList checkFilePresent(String extractor, String fileName) {
 		ResponseList fileInfo =  new ResponseList();
 		Response responseData = new Response();
-		log.info("In extractWF");
-		log.info("extractor:::"+extractor);	
-		log.info("fileName:::"+fileName);
+		log.warn("In extractWF");
+		log.warn("extractor:::"+extractor);	
+		log.warn("fileName:::"+fileName);
 		
 		String uri = "http://REPO-MS/getHdfsStructure?location=repo";
   		String response = restTemplate.getForObject(uri, String.class);
   		
   		JsonElement jelement = new JsonParser().parse(response);
 		JsonObject jsonInputText = jelement.getAsJsonObject();
-  		log.info("jsonInputText:"+jsonInputText);
+  		log.warn("jsonInputText:"+jsonInputText);
 
 		JsonArray typeValue = jsonInputText.getAsJsonArray("fileList");
-  		log.info("typeValue:"+typeValue);
-  		log.info("typeValueSize:"+typeValue.size());
+  		log.warn("typeValue:"+typeValue);
+  		log.warn("typeValueSize:"+typeValue.size());
   		List<String> fileList = new ArrayList<String>();
 
   		for(int i = 0; i<typeValue.size(); i++) {
@@ -134,16 +134,16 @@ public class AutomaticWorkflow extends Handler {
   			 String receivedFileName = objectTest.get("suffix").getAsString();
   			fileList.add(receivedFileName);
   		}
-			 log.info("filename:"+fileList);
+			 log.warn("filename:"+fileList);
 			 if(fileList.contains(fileName)) {
-				 log.info("FILE PRESENT");	 
+				 log.warn("FILE PRESENT");	 
 				 fileInfo= constructWorkFlow(extractor,fileName);
 			 } else {
-				 log.info("FILE NOT PRESENT");
+				 log.warn("FILE NOT PRESENT");
 				 responseData.setContent("Please enter the correct file name");
 				 fileInfo.addMessage(responseData);
 			 }
-  		log.info("After search rest call");
+  		log.warn("After search rest call");
 
 		return fileInfo; 
 	}
@@ -152,10 +152,10 @@ public class AutomaticWorkflow extends Handler {
 		ResponseList fileInfo =  new ResponseList();
 		Response responseData = new Response();
 		responseData.setContent("RETURN CONSTRUCTWF FUNC");
-		log.info("IN CONSTRUCT WORKFLOW");
+		log.warn("IN CONSTRUCT WORKFLOW");
 		String uri = "http://EXECUTER-MS/executeSimple?data=%2FtestData.txt&extractor=OPEN-IE-MS&targetGraph=sask";
 		String response = restTemplate.getForObject(uri, String.class);
-		log.info("CONSTRUCT WORKFLOW RESPONSE::"+response );
+		log.warn("CONSTRUCT WORKFLOW RESPONSE::"+response );
 		responseData.setContent(response);
 		fileInfo.addMessage(responseData);
 	return fileInfo;
@@ -165,10 +165,10 @@ public class AutomaticWorkflow extends Handler {
 		ResponseList fileInfo =  new ResponseList();
 		Response responseData = new Response();
 		responseData.setContent("RETURN UPLOADWF FUNC");
-		log.info("IN CONSTRUCT WORKFLOW");
+		log.warn("IN CONSTRUCT WORKFLOW");
 		String uri = "http://REPO-MS/storeFile";
 		String response = restTemplate.getForObject(uri, String.class);
-		log.info("Upload WF::"+response );
+		log.warn("Upload WF::"+response );
 		responseData.setContent(response);
 		fileInfo.addMessage(responseData);
 	return fileInfo;
