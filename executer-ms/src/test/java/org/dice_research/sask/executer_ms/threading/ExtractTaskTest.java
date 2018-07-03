@@ -27,9 +27,6 @@ public class ExtractTaskTest {
 
 	@Mock
 	private RestTemplate restTemplate;
-
-	private Operator op = new Operator();
-	private Workflow wf = null;
 	private ExtractTask task = null;
 	private ExecutorService executorService = null;
 	Map<String, String> inputs = null;
@@ -57,7 +54,8 @@ public class ExtractTaskTest {
 	
 	@Before
 	public void setUp() throws Exception {
-
+		Operator op = new Operator();
+		Workflow wf = null;
 		op = new Operator();
 		op.setContent("FRED-MS");
 		op.setId("id2");

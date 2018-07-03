@@ -243,7 +243,7 @@
 			self.options.data = structureTemplate;
 
 			self.init(self.options);
-		}
+		};
 
 		var error = function(data) {
 			logError(data);
@@ -522,7 +522,7 @@
 			var name = $(this).find('input[name="name"]').val();
 
 			self.options.dao.createDirectory(success, error, target, name);
-			$(this).dialog('close');
+			$(this).dialog("close");
 		};
 
 		var negativ = function() {
@@ -611,15 +611,15 @@
 					logError("Not initialized, can not call method : "
 							+ options);
 				} else if (!$.isFunction(_this[options])
-						|| options.charAt(0) === '_') {
-					logError('No such method : ' + options);
+						|| options.charAt(0) === "_") {
+					logError("No such method : " + options);
 				} else {
 					if (!(args instanceof Array)) {
 						args = [ args ];
 					}
 					result = _this[options].apply(_this, args);
 				}
-			} else if (typeof options === 'boolean') {
+			} else if (typeof options === "boolean") {
 				result = _this;
 			} else {
 				$.data(this, pluginName, new Repository(this, $.extend(true,
@@ -631,4 +631,4 @@
 	};
 
 })(jQuery, window, document);
-0
+0;
