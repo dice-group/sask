@@ -250,7 +250,7 @@ var DAO = function(options) {
 			success : success,
 			error : error
 		});
-	}
+	};
 
 	/**
 	 * Rename the passed workflow.

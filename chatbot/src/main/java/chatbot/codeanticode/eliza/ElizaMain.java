@@ -184,7 +184,7 @@ public class ElizaMain {
 	 * word. (3) Scan sentence for keys, build key stack. (4) Try decompositions
 	 * for each key.
 	 */
-	String sentence(String s) {
+	public String sentence(String s) {
 		s = pre.translate(s);
 		s = EString.pad(s);
 		if (quit.find(s)) {

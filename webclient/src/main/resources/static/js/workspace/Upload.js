@@ -267,7 +267,7 @@ var Upload = function(options) {
 	 */
 	this.open = function() {
 		dialog.dialog("open");
-	}
+	};
 
 	/**
 	 * Run the constructor.

@@ -84,7 +84,7 @@ var Discoverer = function(options) {
 		}
 
 		return microservices["repo"][0];
-	}
+	};
 	
 	/**
 	 * Return the discovered microservice with the type 'executer'.

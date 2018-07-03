@@ -125,7 +125,7 @@ function onNoClick(obj){
 	//TODO:Send Ajax to Server on Negative feedback
 	var query= $(obj).attr("name");
 	sendRequest(query, "negative");
-};
+}
 
 $(document).ready(function() {
     $("#textbox").on("keyup", function() {

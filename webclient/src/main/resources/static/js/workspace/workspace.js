@@ -5,7 +5,7 @@
 
 	/* global jQuery, console */
 
-	'use strict';
+	"use strict";
 
 	/**
 	 * The plugin name.
@@ -205,7 +205,7 @@
 		}
 
 		return exists;
-	}
+	};
 
 	/**
 	 * Balance connectors if necessary to all operators.
@@ -258,7 +258,7 @@
 
 		// delete unnecessary connectors
 		if (currentConnectorCount - used.length >= 2) {
-			delete connectors[unused[unused.length - 1]]
+			delete connectors[unused[unused.length - 1]];
 		}
 	};
 

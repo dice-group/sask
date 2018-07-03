@@ -5,7 +5,7 @@
 
 	/* global jQuery, console */
 
-	'use strict';
+	"use strict";
 
 	/**
 	 * The plugin name.
@@ -223,7 +223,7 @@
 		}
 
 		return node;
-	}
+	};
 
 	/**
 	 * Refresh the repo.
@@ -407,7 +407,7 @@
 				return self.getNodeFromTarget(target);
 			},
 			actions : [ {
-				name : 'Add to Workspace',
+				name : "Add to Workspace",
 				onClick : function(target) {
 					self.options.onAddToWorkspace(target);
 				}
@@ -435,7 +435,7 @@
 					self.openNewFolderDialog(target);
 				}
 			}, {
-				name : 'Rename',
+				name : "Rename",
 				onClick : function(target) {
 					self.openRenameRepoDialog(target);
 				}
@@ -494,14 +494,14 @@
 			var name = $(this).find('input[name="name"]').val();
 
 			self.options.dao.renameWorkflow(success, error, target, name);
-			$(this).dialog('close');
+			$(this).dialog("close");
 		};
 
 		var negativ = function() {
 			$(this).dialog("close");
 		};
 
-		dialogs.dialogRename(positiv, negativ, target).dialog('open');
+		dialogs.dialogRename(positiv, negativ, target).dialog("open");
 	};
 
 	/**
@@ -583,7 +583,7 @@
 			$(this).dialog("close");
 		};
 
-		dialogs.dialogRemove(positiv, negativ, target).dialog('open');
+		dialogs.dialogRemove(positiv, negativ, target).dialog("open");
 	};
 
 	/**
@@ -606,9 +606,9 @@
 		this.each(function() {
 			var _this = $.data(this, pluginName);
 
-			if (typeof options === 'string') {
+			if (typeof options === "string") {
 				if (!_this) {
-					logError('Not initialized, can not call method : '
+					logError("Not initialized, can not call method : "
 							+ options);
 				} else if (!$.isFunction(_this[options])
 						|| options.charAt(0) === '_') {
