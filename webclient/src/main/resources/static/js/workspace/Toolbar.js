@@ -1,7 +1,7 @@
 (function($, window, document) {
 
 	/* global jQuery, console */
-	'use strict';
+	"use strict";
 
 	/**
 	 * The plugin name.

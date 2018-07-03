@@ -27,12 +27,12 @@ public class PullTaskTest {
 	RestTemplate restTemplate;
 
 	Map<String, String> outputs1 = null;
-	Operator o1 = new Operator();
+	private Operator o1 = new Operator();
 	Set<Runnable> taskSet = null;
-	Workflow wf = null;
+	private Workflow wf = null;
 	Set<Operator> opSet = null;
-	PullTask task = null;
-	ExecutorService executorService = null;
+	private PullTask task = null;
+	private ExecutorService executorService = null;
 
 	@Before
 	public void setUp() throws Exception {

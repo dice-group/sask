@@ -213,7 +213,7 @@ public class ElizaMain {
 	 * fails, try another decomposition rule. If assembly is a goto rule, return
 	 * null and give the key. If assembly succeeds, return the reply;
 	 */
-	String decompose(Key key, String s, Key gotoKey) {
+	public String decompose(Key key, String s, Key gotoKey) {
 		String reply[] = new String[10];
 		for (int i = 0; i < key.decomp()
 		                       .size(); i++) {
@@ -236,7 +236,7 @@ public class ElizaMain {
 	 * is goto, return null and give the gotoKey to use. Otherwise return the
 	 * response.
 	 */
-	String assemble(Decomp d, String reply[], Key gotoKey) {
+	public String assemble(Decomp d, String reply[], Key gotoKey) {
 		String lines[] = new String[3];
 		d.stepRule();
 		String rule = d.nextRule();
@@ -314,7 +314,7 @@ public class ElizaMain {
 		return 0;
 	}
 
-	int runProgram(String test, Panel w) {
+	public int runProgram(String test, Panel w) {
 		DataInputStream in;
 
 		if (w != null) {
@@ -373,6 +373,8 @@ public class ElizaMain {
 				response(reply);
 				return true;
 			}
+		default: // do nothing;
+	         break;
 		}
 		return false;
 	}

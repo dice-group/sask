@@ -117,7 +117,7 @@ function onYesClick(obj){
 	closestDiv.html("Thank you for your feedback");
 	var query= $(obj).attr("name");
 	sendRequest(query, "positive");
-};
+}
 
 function onNoClick(obj){
 	var closestDiv=$(obj).closest("div");
