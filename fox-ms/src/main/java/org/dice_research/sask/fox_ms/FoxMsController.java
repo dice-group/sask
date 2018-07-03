@@ -39,7 +39,7 @@ public class FoxMsController {
 	 * The logger.
 	 */
 	private Logger logger = Logger.getLogger(FoxMsController.class.getName());
-	static StringWriter modelAsString = new StringWriter();
+	private static StringWriter modelAsString = new StringWriter();
 
 	/**
 	 * Extract the passed dto.

@@ -1,4 +1,4 @@
-package org.dice_research.sask.database_ms.RDFTriples;
+package org.dice_research.sask.database_ms.rdftriples;
 
 public class AutoIndexDTO {
 	private EndPointParameters endPointParameters;

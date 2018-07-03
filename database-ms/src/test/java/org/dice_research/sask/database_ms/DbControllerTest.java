@@ -12,7 +12,7 @@ import org.junit.Test;
 
 public class DbControllerTest {
 
-	String string_triples = "<http://scms.eu/tony_hall> <http://dbpedia.org/ontology/president> <http://scms.eu/bbc>.\r\n";
+	private String string_triples = "<http://scms.eu/tony_hall> <http://dbpedia.org/ontology/president> <http://scms.eu/bbc>.\r\n";
 
 	@Before
 	public void createGraph() {
@@ -27,7 +27,8 @@ public class DbControllerTest {
 	public void testQueryGraph() throws Exception {
 
 		DbController mockController = new DbController();
-		String realOutput = mockController.queryGraph("http://localhost:3030/sask/data/graph1").replace("\n", "\r\n").trim();
+		String realOutput = mockController.queryGraph("http://localhost:3030/sask/data/graph1").replace("\n", "\r\n")
+				.trim();
 
 		System.out.println(realOutput);
 
