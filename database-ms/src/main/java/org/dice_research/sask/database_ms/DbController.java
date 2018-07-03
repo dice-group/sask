@@ -19,11 +19,6 @@ import org.apache.jena.query.ResultSet;
 import org.apache.jena.query.ResultSetFormatter;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
-import org.apache.jena.rdf.model.Property;
-import org.apache.jena.rdf.model.RDFNode;
-import org.apache.jena.rdf.model.Resource;
-import org.apache.jena.rdf.model.Statement;
-import org.apache.jena.rdf.model.StmtIterator;
 import org.apache.jena.sparql.engine.http.QueryEngineHTTP;
 import org.apache.jena.update.UpdateExecutionFactory;
 import org.apache.jena.update.UpdateFactory;
@@ -50,7 +45,7 @@ import org.springframework.web.client.RestTemplate;
  * @author Sepide Tari
  * @author Suganya Kannan
  *
- *         Contains all the methods to interact with the fuseki server through
+ *         Contains all the methods to interact with the Fuseki server through
  *         Jena API
  **/
 
@@ -65,7 +60,7 @@ public class DbController {
 	 * method to store triples inside the default graph
 	 * 
 	 * @param input
-	 *            The triples which are to be stored.
+	 *            The triples which are to be stored in the form of TTL.
 	 * 
 	 * 
 	 */
@@ -81,36 +76,18 @@ public class DbController {
 		// upload the resulting model
 		Model model = ModelFactory.createDefaultModel();
 		InputStream inputstm = new ByteArrayInputStream(string_triples.getBytes());
-		model.read(inputstm, null, "TTL");		
+		model.read(inputstm, null, "TTL");
 		DatasetAccessor accessor = DatasetAccessorFactory.createHTTP(serviceURI);
 		accessor.putModel(model);
-		test(model);
-		
+
 		updateAutoIndex();
 	}
 
-	public void test(Model model){
-		/* rdf:object     dbr:Hawaii ;
-	        rdf:predicate  foxo:stanford_livein ;
-	        rdf:subject    dbr:Barack_Obama ;
-*/
-		// print out the predicate, subject and object of each statement
-		StmtIterator iter = model.listStatements();
-
-		while (iter.hasNext()) {
-		    Statement stmt      = iter.nextStatement();  // get next statement
-		    Resource  subject   = stmt.getSubject();     // get the subject
-		    Property  predicate = stmt.getPredicate();   // get the predicate
-		    RDFNode   object    = stmt.getObject();      // get the object
-
-		    System.out.println(subject.toString()+" "+predicate.toString()+" "+object.toString());		    
-		}
-	}
-	
 	/**
 	 * method to store triples inside the named graph If the name of the graph does
 	 * not exists it creates a new graph with the given name and stores the triples
-	 * in the sask dataset.
+	 * in the sask dataset. Now it accepts triples in N-Triples format it can be
+	 * changed to TTL later.
 	 * 
 	 * @param input
 	 *            The triples which are to be stored.
@@ -154,8 +131,6 @@ public class DbController {
 			ResultSetFormatter.outputAsJSON(b, results);
 			String json = b.toString();
 
-			// System.out.println(json);
-
 			return json;
 		}
 	}
@@ -178,8 +153,6 @@ public class DbController {
 			ByteArrayOutputStream b = new ByteArrayOutputStream();
 			ResultSetFormatter.outputAsJSON(b, results);
 			String json = b.toString();
-
-			System.out.println(json);
 
 			return json;
 
@@ -211,7 +184,7 @@ public class DbController {
 				String gn = soln.get("GraphName").toString();
 				GraphNames.add(gn);
 			}
-			
+
 			return GraphNames;
 		}
 
@@ -236,8 +209,6 @@ public class DbController {
 			ResultSetFormatter.outputAsJSON(b, results);
 			String json = b.toString();
 
-			System.out.println(json);
-
 			return json;
 
 		}
@@ -252,13 +223,10 @@ public class DbController {
 		AutoIndexDTO dto = new AutoIndexDTO();
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
-		// have to replace with the required values
 		EndPointParameters endPointParameters = dto.getEndPointParameters();
 		endPointParameters.setUrl("http://localhost:3030/sask/query");
-		endPointParameters.setEntitySelectQuery("PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n" + 
-				"SELECT DISTINCT ?key1 ?key2 \n" + 
-				"WHERE{\n" + 
-				"?key1 rdfs:label ?key2 .}");
+		endPointParameters.setEntitySelectQuery("PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n"
+				+ "SELECT DISTINCT ?key1 ?key2 \n" + "WHERE{\n" + "?key1 rdfs:label ?key2 .}");
 		endPointParameters.setIsEntityCustomized(true);
 		dto.setUseLocalDataSource(true);
 		HttpEntity<AutoIndexDTO> entity = new HttpEntity<AutoIndexDTO>(dto, headers);
