@@ -12,8 +12,6 @@ import org.apache.jena.query.QuerySolution;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.jena.graph.Node;
-import org.apache.jena.graph.Triple;
 import org.apache.jena.query.DatasetAccessor;
 import org.apache.jena.query.DatasetAccessorFactory;
 import org.apache.jena.query.QueryExecutionFactory;
@@ -31,7 +29,6 @@ import org.apache.jena.update.UpdateExecutionFactory;
 import org.apache.jena.update.UpdateFactory;
 import org.apache.jena.update.UpdateProcessor;
 import org.apache.jena.update.UpdateRequest;
-import org.apache.jena.vocabulary.RDF;
 import org.apache.log4j.Logger;
 import org.dice_research.sask.database_ms.RDFTriples.AutoIndexDTO;
 import org.dice_research.sask.database_ms.RDFTriples.EndPointParameters;
