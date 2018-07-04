@@ -197,18 +197,18 @@
 			var displayText = "";
 			for (var i = 0; i < messageData.length; i++) {
 				displayText += "<div class=\"card\">";
-				if (messageData[i].content != "") {
+				if (messageData[i].content !== "") {
 					displayText += messageData[0].content + "<br>";
 					// why this <br> getting added?
 				}
-				if (messageData[i].image != "" && messageData[i].image != null) {
+				if (messageData[i].image !== "" && messageData[i].image !== null) {
 					displayText += "<img src=" + messageData[i].image
 							+ " height=\"200\" width=\"200\"/><br>";
 				}
 				// Read Entry List
 				var entryobj = messageData[i].entryList;
 				for (var j = 0; j < entryobj.length; j++) {
-					if (entryobj[j].buttonType == "URL") {
+					if (entryobj[j].buttonType === "URL") {
 						var text = entryobj[j].displayText;
 						displayText += text.link(entryobj[j].uri) + "<br>";
 

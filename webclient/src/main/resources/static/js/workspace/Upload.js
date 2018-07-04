@@ -66,21 +66,22 @@ var Upload = function(options) {
 			window.console.error(message);
 		}
 	};
-
+	
 	/**
-	 * Constructor
+	 * Clear the uploadList.
 	 */
-	this.construct = function(options) {
-		$.extend(settings, options);
+	var clearUploadList = function() {
+		uploadList.find("a").each(function() {
+			if ($(this).attr("data-status") !== "uploading") {
+				$(this).remove();
+			}
+		});
 
-		if (!settings.dao) {
-			logError("dao is not defined.");
-			return;
+		if (uploadList.find("a").length === 0) {
+			selectFileMessage.show();
 		}
-
-		initDialog();
 	};
-
+	
 	/**
 	 * Init the dialog.
 	 */
@@ -145,6 +146,74 @@ var Upload = function(options) {
 	};
 
 	/**
+	 * Constructor
+	 */
+	this.construct = function(options) {
+		$.extend(settings, options);
+
+		if (!settings.dao) {
+			logError("dao is not defined.");
+			return;
+		}
+
+		initDialog();
+	};
+	
+	/**
+	 * Create the file row.
+	 */
+	var createFileRow = function(path, file) {
+		var status = $("<span class=\"pull-right\">Uploading...</span>");
+		var row = $("<a href=\"#\" class=\"list-group-item\">" + file.name + "</a>");
+		row.append(status);
+		row.attr("data-file", file.name);
+		row.attr("data-path", path);
+		row.attr("data-status", "uploading");
+
+		return row;
+	};
+	
+	/**
+	 * Returns the row of the file in the uploadList.
+	 */
+	var getFileRow = function(path, filename) {
+		return uploadList.find("a[data-file=\"" + filename + "\"][data-path=\""
+				+ path + "\"]");
+	};
+	
+	/**
+	 * Function to be called, when the upload was failed.
+	 */
+	var onUploadError = function(path, filename) {
+		var row = getFileRow(path, filename);
+		var status = row.find("span");
+
+		row.attr("data-status", "error");
+		row.addClass("list-group-item-danger");
+		status.text("Error");
+	};
+	
+	/**
+	 * Append the file row to the uploadList.
+	 */
+	var appendFileRow = function(row) {
+		selectFileMessage.hide();
+		uploadList.append(row);
+	};
+	
+	/**
+	 * Function to be called, when the upload was successful.
+	 */
+	var onUploadSuccess = function(path, filename) {
+		var row = getFileRow(path, filename);
+		var status = row.find("span");
+
+		row.attr("data-status", "success");
+		row.addClass("list-group-item-success");
+		status.text("Success");
+	};
+
+	/**
 	 * Handle the file upload.
 	 */
 	var handleFileUpload = function(path, input) {
@@ -195,75 +264,6 @@ var Upload = function(options) {
 
 			settings.dao.uploadFile(success, error, path, file);
 		}
-	};
-
-	/**
-	 * Function to be called, when the upload was successful.
-	 */
-	var onUploadSuccess = function(path, filename) {
-		var row = getFileRow(path, filename);
-		var status = row.find("span");
-
-		row.attr("data-status", "success");
-		row.addClass("list-group-item-success");
-		status.text("Success");
-	};
-
-	/**
-	 * Function to be called, when the upload was failed.
-	 */
-	var onUploadError = function(path, filename) {
-		var row = getFileRow(path, filename);
-		var status = row.find("span");
-
-		row.attr("data-status", "error");
-		row.addClass("list-group-item-danger");
-		status.text("Error");
-	};
-
-	/**
-	 * Clear the uploadList.
-	 */
-	var clearUploadList = function() {
-		uploadList.find("a").each(function() {
-			if ($(this).attr("data-status") !== "uploading") {
-				$(this).remove();
-			}
-		});
-
-		if (uploadList.find("a").length === 0) {
-			selectFileMessage.show();
-		}
-	};
-
-	/**
-	 * Append the file row to the uploadList.
-	 */
-	var appendFileRow = function(row) {
-		selectFileMessage.hide();
-		uploadList.append(row);
-	};
-
-	/**
-	 * Create the file row.
-	 */
-	var createFileRow = function(path, file) {
-		var status = $("<span class=\"pull-right\">Uploading...</span>");
-		var row = $("<a href=\"#\" class=\"list-group-item\">" + file.name + "</a>");
-		row.append(status);
-		row.attr("data-file", file.name);
-		row.attr("data-path", path);
-		row.attr("data-status", "uploading");
-
-		return row;
-	};
-
-	/**
-	 * Returns the row of the file in the uploadList.
-	 */
-	var getFileRow = function(path, filename) {
-		return uploadList.find("a[data-file=\"" + filename + "\"][data-path=\""
-				+ path + "\"]");
 	};
 
 	/**

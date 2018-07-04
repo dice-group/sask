@@ -216,11 +216,11 @@
 			}
 
 			node.nodes.sort(function(a, b) {
-				if (a.type == "folder" && b.type != "folder") {
+				if (a.type === "folder" && b.type !== "folder") {
 					return -1;
 				}
 
-				if (a.type !== "folder" && b.type == "folder") {
+				if (a.type !== "folder" && b.type === "folder") {
 					return 1;
 				}
 
@@ -355,7 +355,7 @@
 			actions : [ {
 				name : "New folder",
 				onClick(target) {
-					if (target == "#data") {
+					if (target === "#data") {
 						target = "";
 					}
 

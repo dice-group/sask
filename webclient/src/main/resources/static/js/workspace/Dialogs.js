@@ -66,7 +66,7 @@ var Dialogs = function(options) {
 	 * Creates a dialog.
 	 */
 	var createDialog = function(dialog, buttons) {
-		var dialog = $(dialogTemplates[dialog]).dialog({
+		var d = $(dialogTemplates[dialog]).dialog({
 			autoOpen : false,
 			resizable : false,
 			height : "auto",
@@ -75,7 +75,7 @@ var Dialogs = function(options) {
 			buttons
 		});
 
-		return dialog;
+		return d;
 	};
 
 	/**
