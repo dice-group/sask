@@ -26,16 +26,13 @@ import org.springframework.web.client.RestTemplate;
 public class ExtractTaskTest {
 
 	@Mock
-	RestTemplate restTemplate;
-
-	Operator op = new Operator();
-	Workflow wf = null;
-	ExtractTask task = null;
-	ExecutorService executorService = null;
+	private RestTemplate restTemplate;
+	private ExtractTask task = null;
+	private ExecutorService executorService = null;
 	Map<String, String> inputs = null;
 	Map<String, String> outputs = null;
 	ResponseEntity<String> response = null;
-	String turtle = "@prefix dbo:   <http://dbpedia.org/ontology/> .\r\n" + 
+	private String turtle = "@prefix dbo:   <http://dbpedia.org/ontology/> .\r\n" + 
 			"@prefix foxo:  <http://ns.aksw.org/fox/ontology#> .\r\n" + 
 			"@prefix schema: <http://schema.org/> .\r\n" + 
 			"@prefix oa:    <http://www.w3.org/ns/oa#> .\r\n" + 
@@ -57,7 +54,8 @@ public class ExtractTaskTest {
 	
 	@Before
 	public void setUp() throws Exception {
-
+		Operator op = new Operator();
+		Workflow wf = null;
 		op = new Operator();
 		op.setContent("FRED-MS");
 		op.setId("id2");

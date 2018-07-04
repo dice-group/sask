@@ -33,27 +33,27 @@ var Dialogs = function(options) {
 	var dialogTemplates = {
 		remove : '<div title="Delete item">'
 				+ '<input type="hidden" name="target" />'
-				+ '<p>'
-				+ 'This item will be permanently deleted and cannot be recovered. Are you sure?'
-				+ '</p>' + '</div>',
+				+ "<p>"
+				+ "This item will be permanently deleted and cannot be recovered. Are you sure?"
+				+ "</p>" + "</div>",
 		rename : '<div title="Rename">'
-				+ '<form>'
-				+ '<fieldset>'
+				+ "<form>"
+				+ "<fieldset>"
 				+ '<input type="hidden" name="target" />'
 				+ '<label for="name">Name</label>'
 				+ '<input type="text" name="name" required="required" class="text ui-widget-content ui-corner-all" />'
-				+ '</fieldset>' + '</form>' + '</div>',
+				+ "</fieldset>" + "</form>" + "</div>",
 		newFolder : '<div title="New folder">'
-				+ '<form>'
-				+ '<fieldset>'
+				+ "<form>"
+				+ "<fieldset>"
 				+ '<input type="hidden" name="target" />'
 				+ '<label for="name">Name</label> <input type="text" name="name" required="required" class="text ui-widget-content ui-corner-all" />'
-				+ '</fieldset>' + '</form>' + '</div>',
+				+ "</fieldset>" + "</form>" + "</div>",
 		newWorkflow : '<div title="New workflow">'
-				+ '<form>'
-				+ '<fieldset>'
+				+ "<form>"
+				+ "<fieldset>"
 				+ '<label for="name">Name</label> <input type="text" name="name" required="required" class="text ui-widget-content ui-corner-all" />'
-				+ '</fieldset>' + '</form>' + '</div>'
+				+ "</fieldset>" + "</form>" + "</div>"
 	};
 
 	/**
