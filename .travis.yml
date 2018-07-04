@@ -4,7 +4,18 @@ jdk:
   - oraclejdk9
   - openjdk8
 
+sudo: required
+
+
+services:
+  - docker
+
 install: true
 
 script:
-- mvn clean install
+  - mvn clean install -q
+
+after_success:
+  - cd eureka-server
+  - mvn clean install dockerfile:build -q -P docker
+
