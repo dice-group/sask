@@ -81,6 +81,59 @@ var Upload = function(options) {
 			selectFileMessage.show();
 		}
 	};
+	
+	/**
+	 * Handle the file upload.
+	 */
+	var handleFileUpload = function(path, input) {
+
+		if (!window.File || !window.FileReader || !window.FileList
+				|| !window.Blob) {
+			logError("The File APIs are not fully supported in this browser.");
+			return;
+		}
+
+		if (!input) {
+			logError("Unable to find the fileinput element.");
+			return false;
+		}
+
+		if (!input.files) {
+			logError("This browser does not to support the 'files' property.");
+			return;
+		}
+
+		if (!input.files[0]) {
+			logError("No file selected");
+			return;
+		}
+
+		/*
+		 * upload
+		 */
+		for (var i = 0; i < input.files.length; i++) {
+			var file = input.files[i];
+			var row = createFileRow(path, file);
+
+			uploadingFiles.push(file);
+			appendFileRow(row);
+
+			var success = function(path, file) {
+				onUploadSuccess(path, file.name);
+
+				if (settings.onUploaded) {
+					settings.onUploaded();
+				}
+			};
+
+			var error = function(data, path, file) {
+				logError(data);
+				onUploadError(path, file.name);
+			};
+
+			settings.dao.uploadFile(success, error, path, file);
+		}
+	};
 
 	/**
 	 * Init the dialog.
@@ -212,59 +265,6 @@ var Upload = function(options) {
 		row.attr("data-status", "success");
 		row.addClass("list-group-item-success");
 		status.text("Success");
-	};
-
-	/**
-	 * Handle the file upload.
-	 */
-	var handleFileUpload = function(path, input) {
-
-		if (!window.File || !window.FileReader || !window.FileList
-				|| !window.Blob) {
-			logError("The File APIs are not fully supported in this browser.");
-			return;
-		}
-
-		if (!input) {
-			logError("Unable to find the fileinput element.");
-			return false;
-		}
-
-		if (!input.files) {
-			logError("This browser does not to support the 'files' property.");
-			return;
-		}
-
-		if (!input.files[0]) {
-			logError("No file selected");
-			return;
-		}
-
-		/*
-		 * upload
-		 */
-		for (var i = 0; i < input.files.length; i++) {
-			var file = input.files[i];
-			var row = createFileRow(path, file);
-
-			uploadingFiles.push(file);
-			appendFileRow(row);
-
-			var success = function(path, file) {
-				onUploadSuccess(path, file.name);
-
-				if (settings.onUploaded) {
-					settings.onUploaded();
-				}
-			};
-
-			var error = function(data, path, file) {
-				logError(data);
-				onUploadError(path, file.name);
-			};
-
-			settings.dao.uploadFile(success, error, path, file);
-		}
 	};
 
 	/**

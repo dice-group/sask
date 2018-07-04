@@ -4,7 +4,7 @@
  * @author Kevin Haack, Divya
  */
 ;
-(function($, window, document) {
+((function($, window, document) {
 
 	/* global jQuery, console */
 	"use strict";
@@ -312,4 +312,4 @@
 
 		return result || this;
 	};
-})(jQuery, window, document);
+})(jQuery, window, document));
