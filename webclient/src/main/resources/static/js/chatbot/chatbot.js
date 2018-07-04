@@ -16,25 +16,25 @@ $(function() {
 		newMsg = newMsg.trim();//eliminate whitespace on either side
 		$("#textbox").val("");
 		var prevMsg = $("#container").html();
-		if (prevMsg.length != 6) {
+		if (prevMsg.length !== 6) {
 			prevMsg = prevMsg + "<br>";
 		}
 		//searchViaAjax();
-		var data = {}
+		var data = {};
 		data["userId"] = "1104ea5f-ce7b-4211-8675-e880b9bd0ec7"; //Need to geenrate some ID for Uniqueness.
 		data["messageType"] = "text";
 		data["requestContent"]=[{"text":newMsg}];
 		
 		$.ajax({
 			type : "POST",
-			dataType: 'text',
+			dataType: "text",
 			data: JSON.stringify(data),
 			contentType: "application/json",
-	         url: "/chatbot/chat", //Need to debug how to read data: in Spring. Passing as command param is not right.
+			url: "/chatbot/chat", //Need to debug how to read data: in Spring. Passing as command param is not right.
 			timeout : 100000 })
 			.done(function(data){ 
 				var prevMsg = $("#container").html();
-				if (prevMsg.length != 6) {
+				if (prevMsg.length !== 6) {
 					prevMsg = prevMsg + "<br>";
 				}
 				var obj = JSON.parse(data);
@@ -57,16 +57,16 @@ $(function() {
 						//Need to polish read Entry Information.
 						for(var i=0; i< newobj.length; i++){
 							displayText+="<div class='card'>";
-							if(newobj[i].content != ""){
+							if(newobj[i].content !== ""){
 								displayText += newobj[0].content + "<br>";
 							}
-							if(newobj[i].image != "" && newobj[i].image != null ){
+							if(newobj[i].image !== "" && newobj[i].image !== null ){
 								displayText += "<img src=" +  newobj[i].image +" height='200' width='200'/><br>";
 							}
 							//Read Entry List
 							var entryobj = newobj[i].entryList;
 							for(var j=0 ; j< entryobj.length; j++){
-								if(entryobj[j].buttonType == "URL"){
+								if(entryobj[j].buttonType === "URL"){
 									var text = entryobj[j].displayText;
 									displayText +=text.link(entryobj[j].uri) + "<br>";
 									
@@ -111,13 +111,13 @@ function sendRequest(query,feedback){
 		async: true,		
 	});
 	
-};
+}
 function onYesClick(obj){
 	var closestDiv=$(obj).closest("div");
 	closestDiv.html("Thank you for your feedback");
 	var query= $(obj).attr("name");
 	sendRequest(query, "positive");
-};
+}
 
 function onNoClick(obj){
 	var closestDiv=$(obj).closest("div");
@@ -125,7 +125,7 @@ function onNoClick(obj){
 	//TODO:Send Ajax to Server on Negative feedback
 	var query= $(obj).attr("name");
 	sendRequest(query, "negative");
-};
+}
 
 $(document).ready(function() {
     $("#textbox").on("keyup", function() {
@@ -134,7 +134,7 @@ $(document).ready(function() {
     if(0 === textBoxContent.length){
         $("#send").prop("disabled",true);}
      else{
-     	$("#send").prop("disabled",false);
+    	 $("#send").prop("disabled",false);
      }
     }).trigger("keyup");
     

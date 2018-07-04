@@ -27,16 +27,15 @@ public class PullTaskTest {
 	RestTemplate restTemplate;
 
 	Map<String, String> outputs1 = null;
-	Operator o1 = new Operator();
+	private Operator o1 = new Operator();
 	Set<Runnable> taskSet = null;
-	Workflow wf = null;
 	Set<Operator> opSet = null;
-	PullTask task = null;
-	ExecutorService executorService = null;
+	private PullTask task = null;
+	private ExecutorService executorService = null;
 
 	@Before
 	public void setUp() throws Exception {
-
+		Workflow wf = null;
 		outputs1 = new HashMap<>();
 		outputs1.put("id1_1", "NL");
 		o1.setContent("/text.txt");

@@ -85,7 +85,7 @@ var DAO = function(options) {
 		}
 
 		return "./" + discoverer.getExecuter().serviceId + "/";
-	}
+	};
 
 	/**
 	 * Parse the hdfs workflows structure to the ui structure.
@@ -126,7 +126,7 @@ var DAO = function(options) {
 	 */
 	this.getDiscoverer = function() {
 		return discoverer;
-	}
+	};
 
 	/**
 	 * Constructor
@@ -198,7 +198,7 @@ var DAO = function(options) {
 	this.getWorkflows = function(success, error) {
 		var uri = getRepoServiceUri() + "getHdfsStructure";
 		var data = {
-			location : 'workflow'
+			location : "workflow"
 		};
 
 		$.ajax({
@@ -250,7 +250,7 @@ var DAO = function(options) {
 			success : success,
 			error : error
 		});
-	}
+	};
 
 	/**
 	 * Rename the passed workflow.
@@ -317,7 +317,7 @@ var DAO = function(options) {
 	this.removeFromWorkflows = function(success, error, target) {
 		var uri = getRepoServiceUri() + "delete";
 		var data = {
-			location : 'workflow',
+			location : "workflow",
 			path : target
 		};
 
@@ -340,7 +340,7 @@ var DAO = function(options) {
 
 		var uri = getRepoServiceUri() + "createDirectory";
 		var data = {
-			location : 'repo',
+			location : "repo",
 			path : target + name
 		};
 
@@ -386,10 +386,10 @@ var DAO = function(options) {
 	this.getTargetGraphs = function(success, error) {
 		var graphs = [];
 		graphs.push({
-			text : 'sask',
-			id : 'sask',
-			type : 'db',
-			icon : 'glyphicon glyphicon-hdd'
+			text : "sask",
+			id : "sask",
+			type : "db",
+			icon : "glyphicon glyphicon-hdd"
 		});
 
 		success(graphs);
@@ -411,7 +411,7 @@ var DAO = function(options) {
 			contentType : false,
 			processData : false,
 			data : formData,
-			type : 'post',
+			type : "post",
 			success : function() {
 				if (success) {
 					success(path, file);

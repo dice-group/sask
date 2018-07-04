@@ -5,7 +5,7 @@
 
 	/* global jQuery, console */
 
-	'use strict';
+	"use strict";
 
 	/**
 	 * The plugin name.
@@ -29,13 +29,13 @@
 			"db" : "Database"
 		},
 		templates : {
-			typeHeader : '<h2></h2>',
+			typeHeader : "<h2></h2>",
 			typeList : '<ul class="list-group"></ul>',
 			emptyMessage : '<li class="list-group-item"><p class="text-muted text-center">No microservices of this type registered.</p></li>',
 			refreshButton : '<button class="btn btn-primary"><span class="glyphicon glyphicon-refresh"></span> Refresh</button>',
 			item : {
 				type : '<small class="text-muted pull-right"></small>',
-				friendlyname : '<span></span>',
+				friendlyname : "<span></span>",
 				serviceId : '<small class="text-muted"></small>',
 				head : '<h4 class="mb-1"></h4>',
 				wrapper : '<div class="d-flex w-100 justify-content-between">',
@@ -93,7 +93,7 @@
 	 */
 	Status.prototype.discover = function() {
 		this.options.dao.getDiscoverer().discover();
-	}
+	};
 
 	/**
 	 * Init the discoverer.
@@ -110,7 +110,7 @@
 		settings.onError = function() {
 			self.onRefreshError();
 		};
-	}
+	};
 
 	/**
 	 * Init the structure.
@@ -138,7 +138,7 @@
 			self.options.dao.getDiscoverer().discover();
 		});
 		this.$element.append(refreshButton);
-	}
+	};
 
 	/**
 	 * Clear the type lists.
@@ -180,7 +180,7 @@
 		if (!list) {
 			logError("unsupported type for " + microservice.serviceId + ": "
 					+ microservice.type);
-			return
+			return;
 
 		}
 
@@ -250,7 +250,7 @@
 					}
 					result = _this[options].apply(_this, args);
 				}
-			} else if (typeof options === 'boolean') {
+			} else if (typeof options === "boolean") {
 				result = _this;
 			} else {
 				$.data(this, pluginName, new Status(this, $.extend(true, {},
@@ -261,4 +261,4 @@
 		return result || this;
 	};
 })(jQuery, window, document);
-0
+0;

@@ -192,6 +192,14 @@ var Upload = function(options) {
 	};
 
 	/**
+	 * Returns the row of the file in the uploadList.
+	 */
+	var getFileRow = function(path, filename) {
+		return uploadList.find('a[data-file="' + filename + '"][data-path="'
+				+ path + '"]');
+	};
+	
+	/**
 	 * Function to be called, when the upload was successful.
 	 */
 	var onUploadSuccess = function(path, filename) {
@@ -236,7 +244,7 @@ var Upload = function(options) {
 	var appendFileRow = function(row) {
 		selectFileMessage.hide();
 		uploadList.append(row);
-	}
+	};
 
 	/**
 	 * Create the file row.
@@ -252,20 +260,14 @@ var Upload = function(options) {
 		return row;
 	};
 
-	/**
-	 * Returns the row of the file in the uploadList.
-	 */
-	var getFileRow = function(path, filename) {
-		return uploadList.find('a[data-file="' + filename + '"][data-path="'
-				+ path + '"]');
-	}
+	
 
 	/**
 	 * Open the dialog.
 	 */
 	this.open = function() {
 		dialog.dialog("open");
-	}
+	};
 
 	/**
 	 * Run the constructor.
