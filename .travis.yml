@@ -4,6 +4,10 @@ jdk:
   - oraclejdk9
   - openjdk8
 
+env:
+  - DOCKER_USERNAME=KHaack
+  - DOCKER_PASSWORD=securePassword
+
 sudo: required
 
 
@@ -16,6 +20,10 @@ script:
   - mvn clean install -q
 
 after_success:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - cd eureka-server
+  - docker pull
   - mvn clean install dockerfile:build -q -P docker
+  - docker push khaack/eureka-server:latest
+
 

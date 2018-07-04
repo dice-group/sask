@@ -63,7 +63,7 @@
 		<spring.boot.version>1.5.8.RELEASE</spring.boot.version>
 
 		<!-- ~~~~~~~ docker ~~~~~~~ -->
-		<docker.image.prefix>org.dice-research</docker.image.prefix>
+		<docker.image.prefix>khaack</docker.image.prefix>
 	</properties>
 
 	<dependencies>
