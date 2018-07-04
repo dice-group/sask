@@ -79,22 +79,6 @@
 
 	<build>
 		<plugins>
-			<!-- ~~~~~~~ jasmine js test ~~~~~~~ -->
-			<plugin>
-				<groupId>com.github.klieber</groupId>
-				<artifactId>phantomjs-maven-plugin</artifactId>
-				<version>${phantomjs-maven-plugin.version}</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>install</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<version>1.9.2</version>
-				</configuration>
-			</plugin>
 			<plugin>
 				<groupId>com.github.searls</groupId>
 				<artifactId>jasmine-maven-plugin</artifactId>
@@ -107,19 +91,12 @@
 					</execution>
 				</executions>
 				<configuration>
-					<webDriverClassName>org.openqa.selenium.phantomjs.PhantomJSDriver</webDriverClassName>
-					<webDriverCapabilities>
-						<capability>
-							<name>phantomjs.binary.path</name>
-							<value>${phantomjs.binary}</value>
-						</capability>
-					</webDriverCapabilities>
 					<preloadSources>
 						<source>/webjars/jquery/3.2.1/jquery.min.js</source>
 					</preloadSources>
 					<jsSrcDir>${basedir}/src/main/resources/static/js</jsSrcDir>
 					<sourceIncludes>
-						<include>workspace/**/*.js</include>
+						<include>workspace/WorkflowStack.js</include>
 					</sourceIncludes>
 					<jsTestSrcDir>${basedir}/src/test/resources/static/js/</jsTestSrcDir>
 					<specIncludes>
