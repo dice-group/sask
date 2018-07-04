@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.dice_research.sask_commons.workflow.Link;
+import org.dice_research.sask_commons.workflow.Operator;
+import org.dice_research.sask_commons.workflow.Workflow;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
@@ -153,8 +156,47 @@ public class AutomaticWorkflow extends Handler {
 		Response responseData = new Response();
 		responseData.setContent("RETURN CONSTRUCTWF FUNC");
 		log.warn("IN CONSTRUCT WORKFLOW");
-		String uri = "http://EXECUTER-MS/executeSimple?data=%2FtestData.txt&extractor=OPEN-IE-MS&targetGraph=sask";
-		String response = restTemplate.getForObject(uri, String.class);
+		log.warn("EXTRACTOR::"+extractor);
+		log.warn("FILENAME::"+fileName);
+
+		Workflow workflow = new Workflow();
+		
+		Link link = new Link();
+		link.setFromConnector("A");
+		link.setToConnector("B");
+		link.setFromOperator("id_1");
+		link.setFromConnector("id_2");
+		
+		workflow.getLinks().add(link);
+		
+		Operator id_1 = new Operator();
+		id_1.setId("id_1");
+		id_1.setContent(fileName);
+		id_1.setType("file");
+		id_1.getOutputs().put("A", "NL");
+		workflow.getOperators().put("id_1", id_1);
+		
+		log.warn("1::"+workflow.getLinks().get(0).getFromConnector());
+		log.warn("2::"+workflow.getOperators().get("id_1").getId());
+		log.warn("3::"+workflow.getOperators().get("id_1").getOutputs().get("A"));
+		
+		Operator id_2 = new Operator();
+		id_2.setId("id_2");
+		id_2.setContent(extractor);
+		id_2.setType("extractor");
+		id_2.getInputs().put("B", "RDF");
+		workflow.getOperators().put("id_2", id_2);
+		
+		
+		log.warn("4::"+workflow.getLinks().get(0).getFromConnector());
+		log.warn("5::"+workflow.getOperators().get("id_2").getId());
+		log.warn("6::"+workflow.getOperators().get("id_2").getContent());
+		log.warn("7::"+workflow.getOperators().get("id_2").getInputs().get("B"));
+		
+//		String uri = "http://EXECUTER-MS/executeSimple?data=%2FtestData.txt&extractor=OPEN-IE-MS&targetGraph=sask";
+		String uri = "http://EXECUTER-MS/executeSimple";
+		log.warn("Before rest call");
+		String response = restTemplate.getForObject(uri, String.class, workflow);
 		log.warn("CONSTRUCT WORKFLOW RESPONSE::"+response );
 		responseData.setContent(response);
 		fileInfo.addMessage(responseData);
