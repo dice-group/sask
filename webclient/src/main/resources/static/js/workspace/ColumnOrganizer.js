@@ -78,10 +78,9 @@
 	ColumnOrganizer.prototype.saveOrder = function() {
 		var self = this;
 
-		this.$element.find("." + this.options.columnClass).each(
-				function(index) {
+		this.$element.find("." + this.options.columnClass)
+			.each(function(index) {
 					var c = $(this);
-					// save order
 					order.push(c);
 				});
 	};
@@ -235,4 +234,3 @@
 		return result || this;
 	};
 })(jQuery, window, document);
-0

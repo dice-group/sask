@@ -634,4 +634,3 @@
 	};
 
 })(jQuery, window, document);
-0
