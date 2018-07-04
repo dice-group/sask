@@ -20,8 +20,8 @@ import org.springframework.web.client.RestTemplate;
  */
 public class TaskFactoryTest {
 	
-	RestTemplate restTemplate;
-	Workflow wf;
+	private RestTemplate restTemplate;
+	private Workflow wf;
 	Set<Operator> opSet;
 	Operator fredOp;
 	

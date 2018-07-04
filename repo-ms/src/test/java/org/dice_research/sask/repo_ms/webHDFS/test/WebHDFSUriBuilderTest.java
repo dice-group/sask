@@ -15,12 +15,12 @@ import org.junit.Test;
  */
 public class WebHDFSUriBuilderTest {
 
-	String pathWF = "/Test.wf";
-	String pathFile = "/Test.txt";
-	String fileName = "Test.txt";
-	String strCreateURL = "http://localhost:50070/webhdfs/v1/user/DICE/repo/Test.txt?op=CREATE&overwrite=true";
-	String strOpenURL = "http://localhost:50070/webhdfs/v1/user/DICE/workflow/Test.wf?op=OPEN";
-	String strRenameURL = "http://localhost:50070/webhdfs/v1/user/DICE/repo/Test.txt?op=RENAME&destination=/user/DICE/repo/Test01.txt";
+	private String pathWF = "/Test.wf";
+	private String pathFile = "/Test.txt";
+	private String fileName = "Test.txt";
+	private String strCreateURL = "http://localhost:50070/webhdfs/v1/user/DICE/repo/Test.txt?op=CREATE&overwrite=true";
+	private String strOpenURL = "http://localhost:50070/webhdfs/v1/user/DICE/workflow/Test.wf?op=OPEN";
+	private String strRenameURL = "http://localhost:50070/webhdfs/v1/user/DICE/repo/Test.txt?op=RENAME&destination=/user/DICE/repo/Test01.txt";
 
 	
 	@Test

@@ -52,7 +52,7 @@
 	};
 
 	_default.options = {};
-	
+
 	/**
 	 * logging function
 	 */
@@ -264,4 +264,3 @@
 		return result || this;
 	};
 })(jQuery, window, document);
-0

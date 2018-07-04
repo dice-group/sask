@@ -49,7 +49,7 @@
 		onBigMessage : null,
 		dao : null
 	};
-	
+
 	/**
 	 * logging function
 	 */
@@ -201,7 +201,8 @@
 					displayText += messageData[0].content + "<br>";
 					// why this <br> getting added?
 				}
-				if (messageData[i].image !== "" && messageData[i].image !== null) {
+				if (messageData[i].image !== ""
+						&& messageData[i].image !== null) {
 					displayText += "<img src=" + messageData[i].image
 							+ " height=\"200\" width=\"200\"/><br>";
 				}
@@ -312,4 +313,3 @@
 		return result || this;
 	};
 })(jQuery, window, document);
-0

@@ -55,7 +55,7 @@
 	 * The save button.
 	 */
 	var saveButton;
-	
+
 	/**
 	 * The execute button.
 	 */
@@ -113,17 +113,17 @@
 		redoButton = $(this.options.redoButtonTemplate);
 		saveButton = $(this.options.saveButtonTemplate);
 		executeButton = $(this.options.executeButtonTemplate);
-		
+
 		var buttongroup = $(this.options.buttongroupTemplate);
-		
+
 		buttongroup.append(newButton);
 		buttongroup.append(undoButton);
 		buttongroup.append(redoButton);
 		buttongroup.append(saveButton);
 		buttongroup.append(executeButton);
-		
+
 		this.$element.append(buttongroup);
-		
+
 		// name
 		workflownameField = $(this.options.workflownameFieldTemplate);
 		this.$element.append(workflownameField);
@@ -162,7 +162,7 @@
 				self.options.onSaveButtonClick();
 			}
 		});
-		
+
 		// execute
 		executeButton.click(function() {
 			if (self.options.onExecuteButtonClick) {

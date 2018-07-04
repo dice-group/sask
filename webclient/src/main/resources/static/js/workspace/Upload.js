@@ -66,7 +66,7 @@ var Upload = function(options) {
 			window.console.error(message);
 		}
 	};
-	
+
 	/**
 	 * Clear the uploadList.
 	 */
@@ -81,7 +81,7 @@ var Upload = function(options) {
 			selectFileMessage.show();
 		}
 	};
-	
+
 	/**
 	 * Init the dialog.
 	 */
@@ -158,13 +158,14 @@ var Upload = function(options) {
 
 		initDialog();
 	};
-	
+
 	/**
 	 * Create the file row.
 	 */
 	var createFileRow = function(path, file) {
 		var status = $("<span class=\"pull-right\">Uploading...</span>");
-		var row = $("<a href=\"#\" class=\"list-group-item\">" + file.name + "</a>");
+		var row = $("<a href=\"#\" class=\"list-group-item\">" + file.name
+				+ "</a>");
 		row.append(status);
 		row.attr("data-file", file.name);
 		row.attr("data-path", path);
@@ -172,7 +173,7 @@ var Upload = function(options) {
 
 		return row;
 	};
-	
+
 	/**
 	 * Returns the row of the file in the uploadList.
 	 */
@@ -180,7 +181,7 @@ var Upload = function(options) {
 		return uploadList.find("a[data-file=\"" + filename + "\"][data-path=\""
 				+ path + "\"]");
 	};
-	
+
 	/**
 	 * Function to be called, when the upload was failed.
 	 */
@@ -192,7 +193,7 @@ var Upload = function(options) {
 		row.addClass("list-group-item-danger");
 		status.text("Error");
 	};
-	
+
 	/**
 	 * Append the file row to the uploadList.
 	 */
@@ -200,7 +201,7 @@ var Upload = function(options) {
 		selectFileMessage.hide();
 		uploadList.append(row);
 	};
-	
+
 	/**
 	 * Function to be called, when the upload was successful.
 	 */

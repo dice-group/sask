@@ -7,7 +7,6 @@
 (function($, window, document) {
 
 	/* global jQuery, console */
-
 	"use strict";
 
 	/**
