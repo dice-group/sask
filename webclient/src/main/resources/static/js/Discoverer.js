@@ -62,7 +62,7 @@ var Discoverer = function(options) {
 			return false;
 		}
 		return microservices.repo.length > 0;
-	}
+	};
 	
 	/**
 	 * Is true, if a microservice with the type 'executer' is discovered.
@@ -72,7 +72,7 @@ var Discoverer = function(options) {
 			return false;
 		}
 		return microservices.executer.length > 0;
-	}
+	};
 
 	/**
 	 * Return the discovered microservice with the type 'repo'.
@@ -84,7 +84,7 @@ var Discoverer = function(options) {
 		}
 
 		return microservices["repo"][0];
-	}
+	};
 	
 	/**
 	 * Return the discovered microservice with the type 'executer'.

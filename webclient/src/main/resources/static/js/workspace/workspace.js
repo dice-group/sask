@@ -1,12 +1,11 @@
 /**
  * The IIFE for the repository.
  */
-;
 (function($, window, document) {
 
 	/* global jQuery, console */
 
-	'use strict';
+	"use strict";
 
 	/**
 	 * The plugin name.
@@ -131,7 +130,7 @@
 				self.addNode(newNode);
 			}
 		});
-	}
+	};
 
 	/**
 	 * Init the workspace.
@@ -206,7 +205,7 @@
 		}
 
 		return exists;
-	}
+	};
 
 	/**
 	 * Balance connectors if necessary to all operators.
@@ -259,7 +258,7 @@
 
 		// delete unnecessary connectors
 		if (currentConnectorCount - used.length >= 2) {
-			delete connectors[unused[unused.length - 1]]
+			delete connectors[unused[unused.length - 1]];
 		}
 	};
 
@@ -322,7 +321,7 @@
 
 			workflowStack.clear();
 			self.syncWorkflowStack();
-		}
+		};
 
 		// undo
 		var onUndoButtonClick = function() {
@@ -352,7 +351,7 @@
 				self.saveWorkflow();
 			}
 		}
-
+		
 		// execute
 		var onExecuteButtonClick = function() {
 			self.executeWorkflow();
@@ -378,7 +377,6 @@
 	Workspace.prototype.executeWorkflow = function() {
 		var self = this;
 		var success = function(data) {
-			console.log(data);
 		}
 
 		var error = function(data) {
@@ -388,7 +386,7 @@
 		var workflow = this.getWorkflow();
 		this.options.dao.executeWorkflow(success, error, workflow);
 	};
-
+	
 	/**
 	 * Save the workflow.
 	 */
@@ -460,22 +458,22 @@
 		var outputs = {};
 
 		switch (properties.type) {
-		case 'file':
+		case "file":
 			outputs[this.createUuid("output_")] = {
-				label : 'NL'
+				label : "NL"
 			};
 			break;
-		case 'extractor':
+		case "extractor":
 			inputs[this.createUuid("input_")] = {
-				label : 'NL'
+				label : "NL"
 			};
 			outputs[this.createUuid("output_")] = {
-				label : 'RDF'
+				label : "RDF"
 			};
 			break;
-		case 'db':
+		case "db":
 			inputs[this.createUuid("input_")] = {
-				label : 'RDF'
+				label : "RDF"
 			};
 
 			break;
@@ -601,7 +599,7 @@
 		new BootstrapMenu('#' + this.elementId + ' div.flowchart-operator', {
 			fetchElementData : this.getNameFromTarget,
 			actions : [ {
-				name : 'Remove',
+				name : "Remove",
 				onClick : onRemove
 			} ]
 		});
@@ -627,13 +625,13 @@
 		this.each(function() {
 			var _this = $.data(this, pluginName);
 
-			if (typeof options === 'string') {
+			if (typeof options === "string") {
 				if (!_this) {
-					logError('Not initialized, can not call method : '
+					logError("Not initialized, can not call method : "
 							+ options);
 				} else if (!$.isFunction(_this[options])
-						|| options.charAt(0) === '_') {
-					logError('No such method : ' + options);
+						|| options.charAt(0) === "_") {
+					logError("No such method : " + options);
 				} else {
 					if (!(args instanceof Array)) {
 						args = [ args ];

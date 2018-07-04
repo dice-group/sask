@@ -6,8 +6,8 @@ package chatbot.codeanticode.eliza;
  */
 public class PrePost {
 	/** The words */
-	String src;
-	String dest;
+	private String src;
+	private String dest;
 
 	/**
 	 * Initialize the pre-post entry.
