@@ -8,6 +8,8 @@ import org.apache.jena.update.UpdateProcessor;
 import org.apache.jena.update.UpdateRequest;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
+
 import org.junit.Test;
 
 public class DbControllerTest {
@@ -22,7 +24,7 @@ public class DbControllerTest {
 		UpdateProcessor processor = UpdateExecutionFactory.createRemote(update, "http://localhost:3030/sask/update");
 		processor.execute();
 	}
-
+    @Ignore
 	@Test
 	public void testQueryGraph() throws Exception {
 
