@@ -5,8 +5,9 @@ jdk:
   - openjdk8
 
 env:
-  - DOCKER_USERNAME=KHaack
-  - DOCKER_PASSWORD=securePassword
+  docker:
+    - DOCKER_USERNAME=KHaack
+    - DOCKER_PASSWORD=securePassword
 
 sudo: required
 
