@@ -6,6 +6,7 @@ package chatbot.core.handlers.qa;
 import java.io.IOException;
 import java.net.URLEncoder;
 
+import org.apache.commons.io.FilenameUtils;
 import org.apache.log4j.Logger;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -41,8 +42,9 @@ public class QAHandler extends Handler {
 			 for (final JsonNode objNode : answers) {
 				 EntryInformation entry = new EntryInformation();
 				 entry.setUri(objNode.asText());
-				  
-				 entry.setDisplayText("Open with DBpedia");
+				 String fileName = FilenameUtils.getName(objNode.asText());
+				 fileName = fileName.replaceAll("_", " ");
+				 entry.setDisplayText(fileName);
 				 entry.setButtonType(Type.URL);
 				 obj.addEntry(entry);
 				 
