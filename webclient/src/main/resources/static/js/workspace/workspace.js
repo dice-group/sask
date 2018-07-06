@@ -1,7 +1,10 @@
 /**
- * The IIFE for the repository.
+ * JQuery plugin for the workspace.
+ * 
+ * @author Kevin Haack
  */
-(function($, window, document) {
+;
+((function($, window, document) {
 
 	/* global jQuery, console */
 
@@ -22,8 +25,8 @@
 	_default.settings = {
 		forceFileEnding : true,
 		fileEnding : ".wf",
-		onWorkflowSaved : undefined,
-		dao : undefined
+		onWorkflowSaved : null,
+		dao : null
 	};
 
 	_default.options = {};
@@ -41,12 +44,21 @@
 	/**
 	 * The toolbar.
 	 */
-	var toolbar = undefined;
+	var toolbar;
 
 	/**
 	 * The workflow id of the current loaded workflow.
 	 */
-	var workflowId = undefined;
+	var workflowId = null;
+	
+	/**
+	 * logging function
+	 */
+	var logError = function(message) {
+		if (window.console) {
+			window.console.error(pluginName + ": " + message);
+		}
+	};
 
 	var Workspace = function(element, options) {
 
@@ -108,7 +120,7 @@
 		var flowchart = this.flowchart;
 		this.flowchart.droppable({
 			accept : "li.extractor, li.file, li.db",
-			drop : function(ev, ui) {
+			drop(ev, ui) {
 				var node = ui.helper.data("node");
 
 				// get position
@@ -136,7 +148,7 @@
 	 * Init the workspace.
 	 */
 	Workspace.prototype.initWorkspace = function() {
-		this.$element.append('<div style="height: 92%"></div>');
+		this.$element.append("<div></div>");
 
 		var self = this;
 
@@ -177,7 +189,8 @@
 				return false;
 			}
 
-			if (self.linkExists(workflow, linkData.fromOperator, linkData.toOperator)) {
+			if (self.linkExists(workflow, linkData.fromOperator,
+					linkData.toOperator)) {
 				logError("link already exists");
 				return false;
 			}
@@ -186,8 +199,8 @@
 		};
 
 		this.flowchart = this.$element.children().eq(1).flowchart({
-			onAfterChange : onAfterChange,
-			onLinkCreate : onLinkCreate
+			onAfterChange,
+			onLinkCreate
 		});
 	};
 
@@ -199,7 +212,7 @@
 
 		for ( var l in workflow.links) {
 			var link = workflow.links[l];
-			if(link.fromOperator === from && link.toOperator === to) {
+			if (link.fromOperator === from && link.toOperator === to) {
 				exists = true;
 			}
 		}
@@ -215,7 +228,7 @@
 			this.balanceOutputs(workflow, workflow.operators[op]);
 			this.balanceInputs(workflow, workflow.operators[op]);
 		}
-	}
+	};
 
 	/**
 	 * Balance the output connectors if necessary.
@@ -300,10 +313,10 @@
 				label : connectors[keys[0]].label
 			};
 		}
-		
+
 		// delete unnecessary connectors
 		if (currentConnectorCount - used.length >= 2) {
-			delete connectors[unused[unused.length - 1]]
+			delete connectors[unused[unused.length - 1]];
 		}
 	};
 
@@ -331,7 +344,7 @@
 			preventStacking = false;
 
 			self.syncWorkflowStack();
-		}
+		};
 
 		// redo
 		var onRedoButtonClick = function() {
@@ -341,33 +354,33 @@
 			preventStacking = false;
 
 			self.syncWorkflowStack();
-		}
+		};
 
 		// save
 		var onSaveButtonClick = function() {
-			if (workflowId === undefined) {
+			if (workflowId === null) {
 				self.openNewWorkflowDialog();
 			} else {
 				self.saveWorkflow();
 			}
-		}
-		
+		};
+
 		// execute
 		var onExecuteButtonClick = function() {
 			self.executeWorkflow();
-		}
+		};
 
 		/*
 		 * create
 		 */
-		toolbar = $('<div></div>');
+		toolbar = $("<div></div>");
 		this.$element.append(toolbar);
 		toolbar.toolbar({
-			onNewButtonClick : onNewButtonClick,
-			onUndoButtonClick : onUndoButtonClick,
-			onRedoButtonClick : onRedoButtonClick,
-			onSaveButtonClick : onSaveButtonClick,
-			onExecuteButtonClick : onExecuteButtonClick
+			onNewButtonClick,
+			onUndoButtonClick,
+			onRedoButtonClick,
+			onSaveButtonClick,
+			onExecuteButtonClick
 		});
 	};
 
@@ -377,21 +390,22 @@
 	Workspace.prototype.executeWorkflow = function() {
 		var self = this;
 		var success = function(data) {
-		}
+			
+		};
 
 		var error = function(data) {
 			logError(data);
-		}
+		};
 
 		var workflow = this.getWorkflow();
 		this.options.dao.executeWorkflow(success, error, workflow);
 	};
-	
+
 	/**
 	 * Save the workflow.
 	 */
 	Workspace.prototype.saveWorkflow = function() {
-		if (workflowId === undefined) {
+		if (workflowId === null) {
 			logError("workflowId not set.");
 			return;
 		}
@@ -399,11 +413,11 @@
 		var self = this;
 		var success = function(data) {
 			self.options.onWorkflowSaved();
-		}
+		};
 
 		var error = function(data) {
 			logError(data);
-		}
+		};
 
 		var workflow = this.getWorkflow();
 		this.options.dao.saveWorkflow(success, error, workflowId, workflow);
@@ -429,6 +443,9 @@
 		return prefix + "" + Math.random().toString(36).substr(2, 16);
 	};
 
+	/**
+	 * Checks if a node of the passed type and id already exists.
+	 */
 	Workspace.prototype.nodeAlreadyExist = function(type, id) {
 		var exist = false;
 		var workflow = this.getWorkflow();
@@ -481,21 +498,21 @@
 
 		// create unique node id
 		var id = this.createUuid("node_");
-
+		
 		// create data
 		var newData = {
 			top : properties.yPosition,
 			left : properties.xPosition,
 			properties : {
 				type : properties.type,
-				id : id,
+				id,
 				content : properties.id,
 				title : properties.text,
-				inputs : inputs,
-				outputs : outputs
+				inputs,
+				outputs
 			}
 		};
-
+		
 		this.flowchart.flowchart("createOperator", id, newData);
 	};
 
@@ -506,7 +523,7 @@
 		var self = this;
 		var options = this.options;
 		var positiv = function() {
-			var name = $(this).find('input[name="name"]').val();
+			var name = $(this).find("input[name=\"name\"]").val();
 
 			if (options.forceFileEnding) {
 				if (!name.endsWith(options.fileEnding)) {
@@ -532,7 +549,7 @@
 	Workspace.prototype.changeWorkflowName = function(name) {
 		workflowId = name;
 		toolbar.toolbar("setWorkflowName", name);
-	}
+	};
 
 	/**
 	 * Load the passed workspace
@@ -546,7 +563,7 @@
 	 */
 	Workspace.prototype.clearWorkflow = function(workspace) {
 		this.changeWorkflowName("");
-		workflowId = undefined;
+		workflowId = null;
 		this.flowchart.flowchart("setData", "");
 	};
 
@@ -596,22 +613,13 @@
 			self.flowchart.flowchart("deleteOperator", target);
 		};
 
-		new BootstrapMenu('#' + this.elementId + ' div.flowchart-operator', {
+		new BootstrapMenu("#" + this.elementId + " div.flowchart-operator", {
 			fetchElementData : this.getNameFromTarget,
 			actions : [ {
 				name : "Remove",
 				onClick : onRemove
 			} ]
 		});
-	};
-
-	/**
-	 * logging function
-	 */
-	var logError = function(message) {
-		if (window.console) {
-			window.console.error(pluginName + ": " + message);
-		}
 	};
 
 	/**
@@ -638,7 +646,7 @@
 					}
 					result = _this[options].apply(_this, args);
 				}
-			} else if (typeof options === 'boolean') {
+			} else if (typeof options === "boolean") {
 				result = _this;
 			} else {
 				$.data(this, pluginName, new Workspace(this, $.extend(true, {},
@@ -649,5 +657,4 @@
 		return result || this;
 	};
 
-})(jQuery, window, document);
-0
+})(jQuery, window, document));

@@ -4,16 +4,16 @@
 	<appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>
 			<charset>UTF-8</charset>
-			<Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] "dbpedia_ms" [%C] %logger{36} - %msg%n</Pattern>
+			<Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] "@project.artifactId@" [%C] %logger{36} - %msg%n</Pattern> 
 		</encoder>
 	</appender>
 
 	<appender name="FILE"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>/logs/dbpedia-ms.log</file>
+		<file>@logback.dir@@project.artifactId@.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<!-- daily rollover. -->
-			<fileNamePattern>/logs/archived/dbpedia-ms.%d{yyyy-MM-dd}.%i.log
+			<fileNamePattern>@logback.archive@@project.artifactId@.%d{yyyy-MM-dd}.%i.log
 			</fileNamePattern>
 
 			<timeBasedFileNamingAndTriggeringPolicy
@@ -26,14 +26,14 @@
 
 		<encoder>
 			<charset>UTF-8</charset>
-			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] "dbpedia_ms" [%C] %logger{36} - %msg%n</pattern>
+			<Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] "@project.artifactId@" [%C] %logger{36} - %msg%n</Pattern> 
 		</encoder>
 	</appender>
 
-	<root level="WARN">
+	<root level="@logback.level.file@">
 		<appender-ref ref="FILE" />
 	</root>
-	<root level="WARN">
+	<root level="@logback.level.console@">
 		<appender-ref ref="consoleAppender" />
 	</root>
 </configuration>

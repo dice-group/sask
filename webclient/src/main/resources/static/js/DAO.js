@@ -1,3 +1,9 @@
+/**
+ * Data access object for the REST interfaces.
+ * 
+ * @author Kevin Haack
+ */
+;
 var DAO = function(options) {
 	/**
 	 * this.
@@ -54,8 +60,8 @@ var DAO = function(options) {
 		var node = {
 			text : hdfsData.suffix,
 			id : hdfsData.path,
-			type : type,
-			icon : icon
+			type,
+			icon
 		};
 
 		if (type === "folder") {
@@ -75,7 +81,7 @@ var DAO = function(options) {
 
 		return "./" + discoverer.getRepo().serviceId + "/";
 	};
-	
+
 	/**
 	 * Return the executer service id.
 	 */
@@ -85,6 +91,17 @@ var DAO = function(options) {
 		}
 
 		return "./" + discoverer.getExecuter().serviceId + "/";
+	};
+	
+	/**
+	 * Return the chatbot service id.
+	 */
+	var getChatbotServiceUri = function() {
+		if (!discoverer.isChatbotDiscovered()) {
+			return;
+		}
+
+		return "./" + discoverer.getChatbot().serviceId + "/";
 	};
 
 	/**
@@ -110,8 +127,8 @@ var DAO = function(options) {
 		var node = {
 			text : hdfsData.suffix,
 			id : hdfsData.path,
-			type : type,
-			icon : icon
+			type,
+			icon
 		};
 
 		if (nodes.length > 0) {
@@ -146,29 +163,71 @@ var DAO = function(options) {
 	 * Discover the registered microservices.
 	 */
 	this.discoverMicroservices = function(success, error) {
-		var uri = "./discoverMicroservices";
+		var url = "./discoverMicroservices";
 
 		$.ajax({
 			type : "GET",
-			url : uri,
-			success : success,
-			error : error
+			url,
+			success,
+			error
 		});
 	};
 	
 	/**
+	 * Send the feedback to the chatbot.
+	 */
+	this.sendChatFeedback = function(message, feedback) {
+		var data = {};
+		data["query"] = message;
+		data["feedback"] = feedback;
+		
+		$.ajax({
+			type : "POST",
+			dataType: "text",
+			data: JSON.stringify(data),
+			url: "/chatbot/feedback",
+			timeout: 100000,
+			contentType: "application/json",
+			async: true		
+		});
+	};
+	
+	/**
+	 * Send the passed data to the chatbot.
+	 */
+	this.sendChatMessage = function(data, success, error) {
+		var url = getChatbotServiceUri() + "chat";
+		
+		$.ajax({
+			type : "POST",
+			dataType : "text",
+			data : JSON.stringify(data),
+			contentType : "application/json",
+			url, // Need to debug how
+			// to read data: in
+			// Spring. Passing
+			// as command param
+			// is not right.
+			timeout : 100000,
+			success,
+			error,
+			async : false
+		});
+	};
+
+	/**
 	 * Send the passed workflow to the executer.
 	 */
 	this.executeWorkflow = function(success, error, workflow) {
-		var uri = getExecuterServiceUri() + "executeWorkflow";
+		var url = getExecuterServiceUri() + "executeWorkflow";
 
 		$.ajax({
 			type : "POST",
 			data : JSON.stringify(workflow),
-			contentType: "application/json",
-			url : uri,
-			success : success,
-			error : error
+			contentType : "application/json",
+			url,
+			success,
+			error
 		});
 	};
 
@@ -176,19 +235,19 @@ var DAO = function(options) {
 	 * Get the repo file structure
 	 */
 	this.getRepoStructure = function(success, error) {
-		var uri = getRepoServiceUri() + "getHdfsStructure";
+		var url = getRepoServiceUri() + "getHdfsStructure";
 		var data = {
 			location : "repo"
 		};
 		$.ajax({
 			type : "POST",
-			data : data,
-			url : uri,
-			success : function(data) {
+			data,
+			url,
+			error,
+			success(data) {
 				var structure = parseRepoStructure(data);
 				success(structure);
-			},
-			error : error
+			}
 		});
 	};
 
@@ -196,20 +255,20 @@ var DAO = function(options) {
 	 * Get all workflows.
 	 */
 	this.getWorkflows = function(success, error) {
-		var uri = getRepoServiceUri() + "getHdfsStructure";
+		var url = getRepoServiceUri() + "getHdfsStructure";
 		var data = {
 			location : "workflow"
 		};
 
 		$.ajax({
 			type : "POST",
-			url : uri,
-			data : data,
-			success : function(data) {
+			url,
+			data,
+			error,
+			success(data) {
 				var structure = parseWorkflowStructure(data);
 				success(structure);
-			},
-			error : error
+			}
 		});
 	};
 
@@ -217,7 +276,7 @@ var DAO = function(options) {
 	 * Get the workflow.
 	 */
 	this.getWorkflow = function(success, error, target) {
-		var uri = getRepoServiceUri() + "readFile";
+		var url = getRepoServiceUri() + "readFile";
 		var data = {
 			location : "workflow",
 			path : target
@@ -225,10 +284,10 @@ var DAO = function(options) {
 
 		$.ajax({
 			type : "POST",
-			url : uri,
-			data : data,
-			success : success,
-			error : error
+			url,
+			data,
+			success,
+			error
 		});
 	};
 
@@ -239,16 +298,16 @@ var DAO = function(options) {
 		var uri = getRepoServiceUri() + "rename";
 		var data = {
 			location : "repo",
-			from : from,
-			to : to
+			from,
+			to
 		};
 
 		$.ajax({
 			type : "POST",
 			url : uri,
-			data : data,
-			success : success,
-			error : error
+			data,
+			success,
+			error
 		});
 	};
 
@@ -256,47 +315,47 @@ var DAO = function(options) {
 	 * Rename the passed workflow.
 	 */
 	this.renameWorkflow = function(success, error, from, to) {
-		var uri = getRepoServiceUri() + "rename";
+		var url = getRepoServiceUri() + "rename";
 		var data = {
 			location : "workflow",
-			from : from,
-			to : to
+			from,
+			to
 		};
 
 		$.ajax({
 			type : "POST",
-			url : uri,
-			data : data,
-			success : success,
-			error : error
+			url,
+			data,
+			success,
+			error
 		});
-	}
+	};
 
 	/**
 	 * Rename the passed target.
 	 */
 	this.renameWorkflow = function(success, error, from, to) {
-		var uri = getRepoServiceUri() + "rename";
+		var url = getRepoServiceUri() + "rename";
 		var data = {
 			location : "workflow",
-			from : from,
-			to : to
+			from,
+			to
 		};
 
 		$.ajax({
 			type : "POST",
-			url : uri,
-			data : data,
-			success : success,
-			error : error
+			url,
+			data,
+			success,
+			error
 		});
-	}
+	};
 
 	/**
 	 * Remove the passed target from the repo.
 	 */
 	this.removeFromRepo = function(success, error, target) {
-		var uri = getRepoServiceUri() + "delete";
+		var url = getRepoServiceUri() + "delete";
 		var data = {
 			location : "repo",
 			path : target
@@ -304,18 +363,18 @@ var DAO = function(options) {
 
 		$.ajax({
 			type : "POST",
-			url : uri,
-			data : data,
-			success : success,
-			error : error
+			url,
+			data,
+			success,
+			error
 		});
-	}
+	};
 
 	/**
 	 * Remove the passed target from the workflows.
 	 */
 	this.removeFromWorkflows = function(success, error, target) {
-		var uri = getRepoServiceUri() + "delete";
+		var url = getRepoServiceUri() + "delete";
 		var data = {
 			location : "workflow",
 			path : target
@@ -323,12 +382,12 @@ var DAO = function(options) {
 
 		$.ajax({
 			type : "POST",
-			url : uri,
-			data : data,
-			success : success,
-			error : error
+			url,
+			data,
+			success,
+			error
 		});
-	}
+	};
 
 	/**
 	 * Creates a new folder in the passed target.
@@ -338,7 +397,7 @@ var DAO = function(options) {
 			target = target + "/";
 		}
 
-		var uri = getRepoServiceUri() + "createDirectory";
+		var url = getRepoServiceUri() + "createDirectory";
 		var data = {
 			location : "repo",
 			path : target + name
@@ -346,12 +405,12 @@ var DAO = function(options) {
 
 		$.ajax({
 			type : "POST",
-			url : uri,
-			data : data,
-			success : success,
-			error : error
+			url,
+			data,
+			success,
+			error
 		});
-	}
+	};
 
 	/**
 	 * Save workflow.
@@ -361,24 +420,24 @@ var DAO = function(options) {
 			target = target.substring(1);
 		}
 
-		var formData = new FormData();
-		formData.append("path", "/");
-		formData.append("location", "workflow");
-		formData.append("filename", target);
-		formData.append("file", JSON.stringify(workflow));
+		var data = new FormData();
+		data.append("path", "/");
+		data.append("location", "workflow");
+		data.append("filename", target);
+		data.append("file", JSON.stringify(workflow));
 
-		var uri = getRepoServiceUri() + "storeContentInFile";
+		var url = getRepoServiceUri() + "storeContentInFile";
 		$.ajax({
-			url : uri,
+			url,
 			cache : false,
 			contentType : false,
 			processData : false,
-			data : formData,
+			data,
 			type : "post",
-			success : success,
-			error : error
+			success,
+			error
 		});
-	}
+	};
 
 	/**
 	 * Return all target graphs.
@@ -393,31 +452,31 @@ var DAO = function(options) {
 		});
 
 		success(graphs);
-	}
+	};
 
 	/**
 	 * Upload file.
 	 */
 	this.uploadFile = function(success, error, path, file) {
-		var formData = new FormData();
-		formData.append("path", path);
-		formData.append("location", "repo");
-		formData.append("file", file);
+		var data = new FormData();
+		data.append("path", path);
+		data.append("location", "repo");
+		data.append("file", file);
 
-		var uri = getRepoServiceUri() + "storeFile";
+		var url = getRepoServiceUri() + "storeFile";
 		$.ajax({
-			url : uri,
+			url,
 			cache : false,
 			contentType : false,
 			processData : false,
-			data : formData,
+			data,
 			type : "post",
-			success : function() {
+			success() {
 				if (success) {
 					success(path, file);
 				}
 			},
-			error : function(data) {
+			error(data) {
 				if (error) {
 					error(data, path, file);
 				}
