@@ -1,4 +1,4 @@
-package org.dice_research.sask.fred_ms;
+package org.dice_research.sask.fred_ms.DTO;
 
 import java.io.Serializable;
 import org.apache.log4j.Logger;
@@ -18,7 +18,7 @@ public class FredDTO implements Serializable {
 	private String namespace = "http://www.ontologydesignpatterns.org/ont/fred/domain.owl#";
 	private boolean wsd = false;
 	private boolean wfd = false;
-	private String wfd_profile = "b";
+	private String wfdprofile = "b";
 	private boolean tense = false;
 	private boolean roles = false;
 	private String textannotation = "EARMARK";
@@ -52,8 +52,8 @@ public class FredDTO implements Serializable {
 		return wfd;
 	}
 
-	public String getWfd_profile() {
-		return wfd_profile;
+	public String getWfdprofile() {
+		return wfdprofile;
 	}
 
 	public boolean isTense() {
@@ -79,7 +79,7 @@ public class FredDTO implements Serializable {
 	@Override
 	public String toString() {
 		return "FredDTO [input=" + input + ", prefix=" + prefix + ", namespace=" + namespace + ", wsd=" + wsd + ", wfd="
-				+ wfd + ", wfd_profile=" + wfd_profile + ", tense=" + tense + ", roles=" + roles + ", textannotation="
+				+ wfd + ", wfd_profile=" + wfdprofile + ", tense=" + tense + ", roles=" + roles + ", textannotation="
 				+ textannotation + ", subgraph=" + subgraph + ", format=" + format + "]";
 	}
 

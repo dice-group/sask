@@ -22,8 +22,8 @@ public class TaskFactoryTest {
 	
 	private RestTemplate restTemplate;
 	private Workflow wf;
-	Set<Operator> opSet;
-	Operator fredOp;
+	private Set<Operator> opSet;
+	private Operator fredOp;
 	
 	@Before
 	public void setUp() {

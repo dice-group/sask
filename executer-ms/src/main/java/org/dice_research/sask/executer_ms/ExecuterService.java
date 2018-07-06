@@ -19,11 +19,6 @@ import org.springframework.web.client.RestTemplate;
 public class ExecuterService {
 
 	/**
-	 * The logger.
-	 */
-	private final Logger logger = Logger.getLogger(ExecuterService.class.getName());
-
-	/**
 	 * The rest template.
 	 */
 	private final RestTemplate restTemplate;

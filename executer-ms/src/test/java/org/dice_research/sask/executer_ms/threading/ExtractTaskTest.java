@@ -29,9 +29,9 @@ public class ExtractTaskTest {
 	private RestTemplate restTemplate;
 	private ExtractTask task = null;
 	private ExecutorService executorService = null;
-	Map<String, String> inputs = null;
-	Map<String, String> outputs = null;
-	ResponseEntity<String> response = null;
+	private Map<String, String> inputs = null;
+	private Map<String, String> outputs = null;
+	private ResponseEntity<String> response = null;
 	private String turtle = "@prefix dbo:   <http://dbpedia.org/ontology/> .\r\n" + 
 			"@prefix foxo:  <http://ns.aksw.org/fox/ontology#> .\r\n" + 
 			"@prefix schema: <http://schema.org/> .\r\n" + 

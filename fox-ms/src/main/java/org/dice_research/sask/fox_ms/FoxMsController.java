@@ -47,8 +47,8 @@ public class FoxMsController {
 			throw new IllegalArgumentException("No input");
 		}
 
-		FoxService gateway = new FoxService();
-		return gateway.extract(fox);
+		FoxService service = new FoxService();
+		return service.extract(fox);
 	}
 
 	/**

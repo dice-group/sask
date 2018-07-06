@@ -64,13 +64,13 @@ public class DbController {
 	}
 
 	@ExceptionHandler
-	void handleIllegalArgumentException(IllegalArgumentException e, HttpServletResponse response) throws IOException {
+	public void handleIllegalArgumentException(IllegalArgumentException e, HttpServletResponse response) throws IOException {
 		logger.error("database-microservice IllegalArgumentException: " + e.getMessage());
 		response.sendError(HttpStatus.BAD_REQUEST.value());
 	}
 
 	@ExceptionHandler
-	void handleRuntimeException(RuntimeException e, HttpServletResponse response) throws IOException {
+	public void handleRuntimeException(RuntimeException e, HttpServletResponse response) throws IOException {
 		logger.error("database-microservice RuntimeException: " + e.getMessage());
 		response.sendError(HttpStatus.BAD_REQUEST.value());
 	}
