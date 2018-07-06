@@ -128,7 +128,14 @@ var Upload = function(options) {
 		row.addClass("list-group-item-success");
 		status.text("Success");
 	};
-
+	
+	/**
+	 * Append the file row to the uploadList.
+	 */
+	var appendFileRow = function(row) {
+		selectFileMessage.hide();
+		uploadList.append(row);
+	};
 	
 	/**
 	 * Handle the file upload.
@@ -258,14 +265,6 @@ var Upload = function(options) {
 		}
 
 		initDialog();
-	};
-
-	/**
-	 * Append the file row to the uploadList.
-	 */
-	var appendFileRow = function(row) {
-		selectFileMessage.hide();
-		uploadList.append(row);
 	};
 
 	/**

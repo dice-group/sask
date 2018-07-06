@@ -215,12 +215,14 @@
 			return 1;
 		}
 
-		if (node.text < node.text){
+		if (a.text < b.text){
 			return -1;
 		}
-		if (node.text > node.text){
+		
+		if (a.text > a.text){
 			return 1;
 		}
+		
 		return 0;
 	};
 
