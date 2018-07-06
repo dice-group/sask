@@ -75,8 +75,7 @@ public class FoxMsController {
 		FoxDTO fox = new FoxDTO();
 		fox.setInput(input);
 		String turtle = extract(fox);
-		String extractorOutput = FormatParser.parse(turtle, Lang.TURTLE, Lang.NTRIPLES);
-		return transformTtl(extractorOutput);
+		return transformTtl(turtle);
 	}
 
 	/**
