@@ -188,7 +188,7 @@ var DAO = function(options) {
 			url: "/chatbot/feedback",
 			timeout: 100000,
 			contentType: "application/json",
-			async: true,		
+			async: true		
 		});
 	};
 	
@@ -210,7 +210,8 @@ var DAO = function(options) {
 			// is not right.
 			timeout : 100000,
 			success,
-			error
+			error,
+			async : false
 		});
 	};
 

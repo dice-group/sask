@@ -182,7 +182,7 @@
 	/**
 	 * Add a new big message.
 	 */
-	Chatbot.prototype.addBigMessage = function(data) {
+	Chatbot.prototype.addBigMessage = function(messageData) {
 		var card = $(this.options.leftTemplate);
 		var messageDiv = card.find("." + this.options.messageClass);
 
