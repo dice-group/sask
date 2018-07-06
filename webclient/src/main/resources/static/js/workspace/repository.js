@@ -202,6 +202,27 @@
 		var node = this.treeview.treeview("getNode", nodeId);
 		return node;
 	};
+	
+	/**
+	 * Compare the passed nodes
+	 */
+	Repository.prototype.compareNodes = function(a, b) {
+		if (a.type === "folder" && b.type !== "folder") {
+			return -1;
+		}
+
+		if (a.type !== "folder" && b.type === "folder") {
+			return 1;
+		}
+
+		if (node.text < node.text){
+			return -1;
+		}
+		if (node.text > node.text){
+			return 1;
+		}
+		return 0;
+	};
 
 	/**
 	 * Order the passed node by type and text.
@@ -214,23 +235,7 @@
 				i++;
 			}
 
-			node.nodes.sort(function(a, b) {
-				if (a.type === "folder" && b.type !== "folder") {
-					return -1;
-				}
-
-				if (a.type !== "folder" && b.type === "folder") {
-					return 1;
-				}
-
-				if (node.text < node.text){
-					return -1;
-				}
-				if (node.text > node.text){
-					return 1;
-				}
-				return 0;
-			});
+			node.nodes.sort(this.compareNodes);
 		}
 
 		return node;

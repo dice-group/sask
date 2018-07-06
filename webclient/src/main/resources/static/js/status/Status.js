@@ -163,27 +163,6 @@
 	};
 
 	/**
-	 * Will be called, when the ms discovered.
-	 */
-	Status.prototype.onMSRefreshed = function() {
-		this.clearLists();
-		var microservices = this.options.dao.getDiscoverer().getMicroservices();
-
-		for ( var type in microservices) {
-			for ( var microservice in microservices[type]) {
-				this.appendMicroservice(microservices[type][microservice]);
-			}
-		}
-
-		// add empty messages
-		for ( var type in lists) {
-			if (lists[type].children().length === 0) {
-				lists[type].append(this.options.templates.emptyMessage);
-			}
-		}
-	};
-
-	/**
 	 * Append the passed microservice to its list.
 	 */
 	Status.prototype.appendMicroservice = function(microservice) {
@@ -220,6 +199,38 @@
 		head.append(type);
 
 		list.append(item);
+	};
+
+	/**
+	 * Append the passed microservices to its list.
+	 */
+	Status.prototype.appendMicroservices = function() {
+		var microservices = this.options.dao.getDiscoverer().getMicroservices();
+		for ( var type in microservices) {
+			for ( var microservice in microservices[type]) {
+				this.appendMicroservice(microservices[type][microservice]);
+			}
+		}
+	};
+
+	/**
+	 * Append empty microservces messages.
+	 */
+	Status.prototype.appendEmptyMessages = function(microservices) {
+		for ( var type in lists) {
+			if (lists[type].children().length === 0) {
+				lists[type].append(this.options.templates.emptyMessage);
+			}
+		}
+	};
+
+	/**
+	 * Will be called, when the ms discovered.
+	 */
+	Status.prototype.onMSRefreshed = function() {
+		this.clearLists();
+		this.appendMicroservices();
+		this.appendEmptyMessages();
 	};
 
 	/**
