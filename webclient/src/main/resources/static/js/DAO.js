@@ -174,6 +174,25 @@ var DAO = function(options) {
 	};
 	
 	/**
+	 * Send the feedback to the chatbot.
+	 */
+	this.sendChatFeedback = function(message, feedback) {
+		var data = {};
+		data["query"] = message;
+		data["feedback"] = feedback;
+		
+		$.ajax({
+			type : "POST",
+			dataType: "text",
+			data: JSON.stringify(data),
+			url: "/chatbot/feedback",
+			timeout: 100000,
+			contentType: "application/json",
+			async: true,		
+		});
+	};
+	
+	/**
 	 * Send the passed data to the chatbot.
 	 */
 	this.sendChatMessage = function(data, success, error) {

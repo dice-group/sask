@@ -38,12 +38,18 @@
 
 	_default.settings = {
 		chatListTemplate : "<div class=\"chat\"></div>",
+		feedbackTemplate : "<div class=\"card left text-center\"><div><span>Was this helpful?</span></div><div class=\"message\"></div></div>",
+		feedbackButtonYesTemplate : "<button border-style=\"solid\" type=\"button\" class=\"btn btn-primary\">Yes</button>",
+		feedbackButtonNoTemplate : "<button border-style=\"solid\" type=\"button\" class=\"btn btn-primary\">No</button>",
 		rightTemplate : "<div class=\"card right\"><div class=\"messageHead\"><span class=\"pull-right\">You</span></div><div class=\"message\"></div></div>",
 		leftTemplate : "<div class=\"card left\"><div class=\"messageHead\"><span>Chatbot</span></div><div class=\"message\"></div></div>",
 		footerTemplate : "<div class=\"chat-footer form-group\"></div>",
 		bodyTemplate : "<div class=\"chat-body\"></div>",
 		textfieldTemplate : "<input type=\"text\" class=\"form-control chat-textfield\"/>",
 		sendTemplate : "<input type=\"submit\" class=\"btn btn-primary chat-send\" value=\"Send\"/>",
+		messageInternalError : "Internal Server error. Please contact your administrator",
+		messageNotOnline : "Sorry, I'm not online now.",
+		messageFeedbackThanks : "Thank you for your feedback",
 		errorClass : "error",
 		messageClass : "message",
 		onBigMessage : null,
@@ -146,6 +152,12 @@
 		// add card
 		this.addRightCard(message);
 
+		// is chatbot registered
+		if (!this.options.dao.getDiscoverer().isChatbotDiscovered()) {
+			this.addErrorMessage(this.options.messageNotOnline);
+			return;
+		}
+
 		// create data to send
 		var data = {};
 		data["userId"] = "1104ea5f-ce7b-4211-8675-e880b9bd0ec7";
@@ -156,26 +168,99 @@
 			"text" : message
 		} ];
 
-		this.sendData(data);
+		this.sendData(data, message);
 	};
 
 	/**
-	 * Addd a new error message from the passed data.
+	 * Add a new error message from the passed data.
 	 */
-	Chatbot.prototype.addErrorMessage = function(data) {
-		var card = this
-				.addLeftCard("Internal Server error. Please contact your administrator");
+	Chatbot.prototype.addErrorMessage = function(text) {
+		var card = this.addLeftCard(text);
 		card.addClass(this.options.errorClass);
+	};
+
+	/**
+	 * Add a new big message.
+	 */
+	Chatbot.prototype.addBigMessage = function(data) {
+		var card = $(this.options.leftTemplate);
+		var messageDiv = card.find("." + this.options.messageClass);
+
+		for (var i = 0; i < messageData.length; i++) {
+			if (messageData[i].content !== "") {
+				messageDiv.append(messageData[0].content + "<br />");
+			}
+
+			if (messageData[i].image !== "" && messageData[i].image !== null) {
+				messageDiv.append("<img src=" + messageData[i].image
+						+ " height=\"200\" width=\"200\"/><br>");
+			}
+
+			// Read Entry List
+			var entryobj = messageData[i].entryList;
+			for (var j = 0; j < entryobj.length; j++) {
+				if (entryobj[j].buttonType === "URL") {
+					var text = entryobj[j].displayText;
+					messageDiv.append(text.link(entryobj[j].uri) + "<br>");
+
+				} else {
+					messageDiv(entryobj[j].displayText + "<br>");
+				}
+			}
+
+		}
+
+		this.addCard(card);
+	};
+
+	/**
+	 * On feedback click.
+	 */
+	Chatbot.prototype.onFeedbackClick = function(feedback, button) {
+		this.addLeftCard(this.options.messageFeedbackThanks);
+		var message = button.attr("name");
+
+		this.options.dao.sendChatFeedback(message, feedback);
+		button.parent().remove();
+	};
+
+	/**
+	 * Add a new feedback message
+	 */
+	Chatbot.prototype.addFeedback = function(requestText) {
+		var self = this;
+		var card = $(this.options.feedbackTemplate);
+		var yes = $(this.options.feedbackButtonYesTemplate);
+		var no = $(this.options.feedbackButtonNoTemplate);
+
+		yes.attr("name", requestText);
+		yes.click(function() {
+			self.onFeedbackClick("positive", yes);
+		});
+
+		no.attr("name", requestText);
+		no.click(function() {
+			self.onFeedbackClick("negative", no);
+		});
+
+		card.append(yes);
+		card.append("&nbsp;&nbsp;");
+		card.append(no);
+
+		chatList.append(card);
+		chatBody.animate({
+			scrollTop : chatBody.height()
+		}, "slow");
 	};
 
 	/**
 	 * Add a new messages from the passed data.
 	 */
-	Chatbot.prototype.addMessage = function(data) {
+	Chatbot.prototype.addMessage = function(data, requestMessage) {
 		var dataObject = JSON.parse(data);
 
 		if (dataObject.error === true) {
-			this.addErrorMessage(data);
+			this.addErrorMessage(this.options.messageInternalError);
 			return;
 		}
 
@@ -184,66 +269,28 @@
 
 		if (messageType === "PLAIN_TEXT") {
 			this.addLeftCard(messageData[0].content);
-			return;
-		}
-
-		if (messageType === "TEXT_WITH_URL" || messageType === "URL") {
+		} else if (messageType === "TEXT_WITH_URL" || messageType === "URL") {
 			if (this.options.onBigMessage) {
 				this.options.onBigMessage();
 			}
 
-			// Need to polish read Entry
-			// Information.
-			var displayText = "";
-			for (var i = 0; i < messageData.length; i++) {
-				displayText += "<div class=\"card\">";
-				if (messageData[i].content !== "") {
-					displayText += messageData[0].content + "<br>";
-					// why this <br> getting added?
-				}
-				if (messageData[i].image !== ""
-						&& messageData[i].image !== null) {
-					displayText += "<img src=" + messageData[i].image
-							+ " height=\"200\" width=\"200\"/><br>";
-				}
-				// Read Entry List
-				var entryobj = messageData[i].entryList;
-				for (var j = 0; j < entryobj.length; j++) {
-					if (entryobj[j].buttonType === "URL") {
-						var text = entryobj[j].displayText;
-						displayText += text.link(entryobj[j].uri) + "<br>";
-
-					} else {
-						displayText += entryobj[j].displayText + "<br>";
-					}
-				}
-
-				// Add div for feedback
-				var sendedMessage = data["requestContent"][0]["text"];
-				displayText += "<br><br><div>Was this helpful?<br><button name=\""
-						+ sendedMessage
-						+ "\" onClick=\"onYesClick(this)\" border-style=\"solid\" type=\"button\" class=\"btn btn-primary\">Yes</button>&nbsp;&nbsp;<button name=\""
-						+ sendedMessage
-						+ "\" onClick=\"onNoClick(this)\" type=\"button\" class=\"btn btn-primary\">No</button></div>";
-				displayText += "</div>";
-			}
-
-			chatList.append(displayText);
-			return;
+			this.addBigMessage(messageData);
 		}
+
+		this.addFeedback(requestMessage);
 	};
 
 	/**
 	 * Send the passed data.
 	 */
-	Chatbot.prototype.sendData = function(data) {
+	Chatbot.prototype.sendData = function(data, message) {
 		var self = this;
 		var onSuccess = function(result) {
-			self.addMessage(result);
+			self.addMessage(result, message);
 		};
 
 		var onError = function(result) {
-			self.addErrorMessage(result);
+			self.addErrorMessage(self.options.messageInternalError);
 		};
 
 		this.options.dao.sendChatMessage(data, onSuccess, onError);
