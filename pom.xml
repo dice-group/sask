@@ -38,6 +38,8 @@
 			<eureka.port>8761</eureka.port>
 			<hadoop.hostserver>localhost</hadoop.hostserver>
 			<hadoop.port>50070</hadoop.port>
+			<fuseki.hostserver>localhost</fuseki.hostserver>
+			<fuseki.port>3030</fuseki.port>
       		</properties>
     	</profile>
     	<profile>
@@ -48,6 +50,8 @@
 			<eureka.port>8761</eureka.port>
 			<hadoop.hostserver>hadoop</hadoop.hostserver>
 			<hadoop.port>50070</hadoop.port>
+			<fuseki.hostserver>fuseki</fuseki.hostserver>
+			<fuseki.port>3030</fuseki.port>
       		</properties>
     	</profile>
   	</profiles>

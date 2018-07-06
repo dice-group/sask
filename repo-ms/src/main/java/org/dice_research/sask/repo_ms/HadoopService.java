@@ -36,9 +36,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 public class HadoopService implements IHadoopService {
 	
-	
-	
-	
 	private RestTemplate restTemplate;
 	private Logger logger = Logger.getLogger(RepoMsController.class.getName());
 	private WebHDFSUriBuilder uriBuilder;

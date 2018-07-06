@@ -23,3 +23,6 @@ error:
   whitelabel:
     enabled: false
     
+fuseki:    
+  hostserver: @fuseki.hostserver@
+  port: @fuseki.port@

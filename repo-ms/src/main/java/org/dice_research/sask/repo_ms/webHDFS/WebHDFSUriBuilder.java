@@ -16,8 +16,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class WebHDFSUriBuilder {
 	
 	private final String scheme;
-	private final String hadoop_hostserver;
-	private final int hadoop_namenode_port;
+	private final String hadoopHostserver;
+	private final int hadoopNamenodePort;
 	private final String protocol;
 	private final String version;
 	private final String forwardslash;
@@ -26,8 +26,8 @@ public class WebHDFSUriBuilder {
 
 	public WebHDFSUriBuilder(String server, int port) {
 		this.scheme = "http";
-		hadoop_hostserver = server;
-		hadoop_namenode_port = port;
+		hadoopHostserver = server;
+		hadoopNamenodePort = port;
 		protocol = "webhdfs";
 		version = "v1";
 		forwardslash = "/";
@@ -65,8 +65,8 @@ public class WebHDFSUriBuilder {
 		
 		UriComponentsBuilder builder = UriComponentsBuilder.newInstance();
 		builder.scheme(scheme);
-		builder.host(hadoop_hostserver);
-		builder.port(hadoop_namenode_port);
+		builder.host(hadoopHostserver);
+		builder.port(hadoopNamenodePort);
 		builder.path(protocol + "/" + version + "/" + hdfsdiruserpath + "/" + location + "/" + path + fileName);
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
 		params.add(operation, WebHDFSOperation.CREATE.name());
@@ -98,8 +98,8 @@ public class WebHDFSUriBuilder {
 		
 		UriComponentsBuilder builder = UriComponentsBuilder.newInstance();
 		builder.scheme(scheme);
-		builder.host(hadoop_hostserver);
-		builder.port(hadoop_namenode_port);
+		builder.host(hadoopHostserver);
+		builder.port(hadoopNamenodePort);
 		builder.path(protocol + "/" + version + "/" + hdfsdiruserpath + "/" + location + "/" + path);		
 		builder.queryParam(operation, WebHDFSOperation.OPEN.name());
 		
@@ -129,8 +129,8 @@ public class WebHDFSUriBuilder {
 		
 		UriComponentsBuilder builder = UriComponentsBuilder.newInstance();
 		builder.scheme(scheme);
-		builder.host(hadoop_hostserver);
-		builder.port(hadoop_namenode_port);
+		builder.host(hadoopHostserver);
+		builder.port(hadoopNamenodePort);
 		builder.path(protocol + "/" + version + "/" + hdfsdiruserpath + "/" + location + path);
 		builder.queryParam(operation, WebHDFSOperation.LISTSTATUS.name());
 		
@@ -161,8 +161,8 @@ public class WebHDFSUriBuilder {
 		
 		UriComponentsBuilder builder = UriComponentsBuilder.newInstance();
 		builder.scheme(scheme);
-		builder.host(hadoop_hostserver);
-		builder.port(hadoop_namenode_port);
+		builder.host(hadoopHostserver);
+		builder.port(hadoopNamenodePort);
 		builder.path(protocol + "/" + version + "/" + hdfsdiruserpath + "/" + location + "/" + path);
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
 		params.add(operation, WebHDFSOperation.DELETE.name());
@@ -194,8 +194,8 @@ public class WebHDFSUriBuilder {
 		
 		UriComponentsBuilder builder = UriComponentsBuilder.newInstance();
 		builder.scheme(scheme);
-		builder.host(hadoop_hostserver);
-		builder.port(hadoop_namenode_port);
+		builder.host(hadoopHostserver);
+		builder.port(hadoopNamenodePort);
 		builder.path(protocol + "/" + version + "/" + hdfsdiruserpath + "/" + location + "/" + path);
 		builder.queryParam(operation, WebHDFSOperation.MKDIRS.name());
 		
@@ -228,8 +228,8 @@ public class WebHDFSUriBuilder {
 		
 		UriComponentsBuilder builder = UriComponentsBuilder.newInstance();
 		builder.scheme(scheme);
-		builder.host(hadoop_hostserver);
-		builder.port(hadoop_namenode_port);
+		builder.host(hadoopHostserver);
+		builder.port(hadoopNamenodePort);
 		builder.path(protocol + "/" + version + "/" + hdfsdiruserpath + "/" + location + "/" + from);
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
 		params.add(operation, WebHDFSOperation.RENAME.name());
