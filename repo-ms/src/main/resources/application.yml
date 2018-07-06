@@ -22,3 +22,7 @@ server:
 error:
   whitelabel:
     enabled: false
+    
+hadoop:    
+  hostserver: @hadoop.hostserver@
+  port: @hadoop.port@

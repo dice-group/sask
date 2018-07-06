@@ -21,7 +21,7 @@ public class WebHDFSUriBuilderTest {
 	String strCreateURL = "http://hadoop:50070/webhdfs/v1/user/DICE/repo/Test.txt?op=CREATE&overwrite=true";
 	String strOpenURL = "http://hadoop:50070/webhdfs/v1/user/DICE/workflow/Test.wf?op=OPEN";
 	String strRenameURL = "http://hadoop:50070/webhdfs/v1/user/DICE/repo/Test.txt?op=RENAME&destination=/user/DICE/repo/Test01.txt";
-
+	/*
 	
 	@Test
 	public void createURLTest() throws URISyntaxException {
@@ -56,4 +56,5 @@ public class WebHDFSUriBuilderTest {
 		WebHDFSUriBuilder.getRenameURI(Location.repo, null, "/Test01.txt");
 	}
 
+*/
 }

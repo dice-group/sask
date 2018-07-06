@@ -36,6 +36,8 @@
       		<properties>
 			<eureka.hostname>localhost</eureka.hostname>
 			<eureka.port>8761</eureka.port>
+			<hadoop.hostserver>localhost</hadoop.hostserver>
+			<hadoop.port>50070</hadoop.port>
       		</properties>
     	</profile>
     	<profile>
@@ -44,6 +46,8 @@
       		<properties>
 			<eureka.hostname>eureka</eureka.hostname>
 			<eureka.port>8761</eureka.port>
+			<hadoop.hostserver>hadoop</hadoop.hostserver>
+			<hadoop.port>50070</hadoop.port>
       		</properties>
     	</profile>
   	</profiles>
