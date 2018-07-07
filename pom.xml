@@ -46,7 +46,7 @@
         	<!-- ~~~~~~~ for docker usage ~~~~~~~ -->
       		<id>docker</id>
       		<properties>
-			<eureka.hostname>eureka</eureka.hostname>
+			<eureka.hostname>eureka-server</eureka.hostname>
 			<eureka.port>8761</eureka.port>
 			<hadoop.hostserver>hadoop</hadoop.hostserver>
 			<hadoop.port>50070</hadoop.port>
