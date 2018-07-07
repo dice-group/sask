@@ -1,4 +1,10 @@
-(function($, window, document) {
+/**
+ * JQuery plugin for the workspace toolbar.
+ * 
+ * @author Kevin Haack
+ */
+;
+((function($, window, document) {
 
 	/* global jQuery, console */
 	"use strict";
@@ -14,18 +20,18 @@
 	var _default = {};
 
 	_default.settings = {
-		buttongroupTemplate : '<div class="btn-group" role="group"></div>',
-		newButtonTemplate : '<button type="button" class="btn btn-default"><a href="#"><span class="glyphicon glyphicon glyphicon-file"></span> New</a></button>',
-		undoButtonTemplate : '<button type="button" class="btn btn-default"><a href="#"><span class="glyphicon glyphicon-arrow-left"></span> Undo</a></button>',
-		redoButtonTemplate : '<button type="button" class="btn btn-default"><a href="#">Redo <span class="glyphicon glyphicon-arrow-right"></span></a></button>',
-		saveButtonTemplate : '<button type="button" class="btn btn-default"><a href="#"><span class="glyphicon glyphicon-floppy-disk"></span> Save</a></button>',
-		executeButtonTemplate : '<button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-play"></span> Execute</button>',
-		workflownameFieldTemplate : '<span class="pull-right"></span>',
-		onNewButtonClick : undefined,
-		onUndoButtonClick : undefined,
-		onRedoButtonClick : undefined,
-		onSaveButtonClick : undefined,
-		onExecuteButtonClick : undefined
+		buttongroupTemplate : "<div class=\"btn-group\" role=\"group\"></div>",
+		newButtonTemplate : "<button type=\"button\" class=\"btn btn-default\"><a href=\"#\"><span class=\"glyphicon glyphicon glyphicon-file\"></span> New</a></button>",
+		undoButtonTemplate : "<button type=\"button\" class=\"btn btn-default\"><a href=\"#\"><span class=\"glyphicon glyphicon-arrow-left\"></span> Undo</a></button>",
+		redoButtonTemplate : "<button type=\"button\" class=\"btn btn-default\"><a href=\"#\">Redo <span class=\"glyphicon glyphicon-arrow-right\"></span></a></button>",
+		saveButtonTemplate : "<button type=\"button\" class=\"btn btn-default\"><a href=\"#\"><span class=\"glyphicon glyphicon-floppy-disk\"></span> Save</a></button>",
+		executeButtonTemplate : "<button type=\"button\" class=\"btn btn-primary\"><span class=\"glyphicon glyphicon-play\"></span> Execute</button>",
+		workflownameFieldTemplate : "<span class=\"pull-right\"></span>",
+		onNewButtonClick : null,
+		onUndoButtonClick : null,
+		onRedoButtonClick : null,
+		onSaveButtonClick : null,
+		onExecuteButtonClick : null
 	};
 
 	_default.options = {};
@@ -33,32 +39,32 @@
 	/**
 	 * The new button.
 	 */
-	var newButton = undefined;
+	var newButton;
 
 	/**
 	 * The undo button.
 	 */
-	var undoButton = undefined;
+	var undoButton;
 
 	/**
 	 * The redo button.
 	 */
-	var redoButton = undefined;
+	var redoButton;
 
 	/**
 	 * The save button.
 	 */
-	var saveButton = undefined;
-	
+	var saveButton;
+
 	/**
 	 * The execute button.
 	 */
-	var executeButton = undefined;
+	var executeButton;
 
 	/**
 	 * The workflow name.
 	 */
-	var workflownameField = undefined;
+	var workflownameField;
 
 	/**
 	 * logging function
@@ -107,17 +113,17 @@
 		redoButton = $(this.options.redoButtonTemplate);
 		saveButton = $(this.options.saveButtonTemplate);
 		executeButton = $(this.options.executeButtonTemplate);
-		
+
 		var buttongroup = $(this.options.buttongroupTemplate);
-		
+
 		buttongroup.append(newButton);
 		buttongroup.append(undoButton);
 		buttongroup.append(redoButton);
 		buttongroup.append(saveButton);
 		buttongroup.append(executeButton);
-		
+
 		this.$element.append(buttongroup);
-		
+
 		// name
 		workflownameField = $(this.options.workflownameFieldTemplate);
 		this.$element.append(workflownameField);
@@ -156,7 +162,7 @@
 				self.options.onSaveButtonClick();
 			}
 		});
-		
+
 		// execute
 		executeButton.click(function() {
 			if (self.options.onExecuteButtonClick) {
@@ -240,4 +246,4 @@
 		return result || this;
 	};
 
-})(jQuery, window, document);
+})(jQuery, window, document));

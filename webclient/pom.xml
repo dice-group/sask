@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
@@ -78,7 +79,6 @@
 
 	<build>
 		<plugins>
-			<!-- ~~~~~~~ jasmine js test ~~~~~~~ -->
 			<plugin>
 				<groupId>com.github.klieber</groupId>
 				<artifactId>phantomjs-maven-plugin</artifactId>
@@ -118,9 +118,9 @@
 					</preloadSources>
 					<jsSrcDir>${basedir}/src/main/resources/static/js</jsSrcDir>
 					<sourceIncludes>
-	                    <include>workspace/**/*.js</include>
-	                </sourceIncludes>
-	                <jsTestSrcDir>${basedir}/src/test/resources/static/js/</jsTestSrcDir>
+						<include>workspace/WorkflowStack.js</include>
+					</sourceIncludes>
+					<jsTestSrcDir>${basedir}/src/test/resources/static/js/</jsTestSrcDir>
 					<specIncludes>
 						<include>workspace/**/*.spec.js</include>
 					</specIncludes>

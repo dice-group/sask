@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
@@ -12,7 +13,6 @@
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>1.5.8.RELEASE</version>
 	</parent>
-
 
 	<modules>
 		<module>cedric-ms</module>
@@ -54,8 +54,23 @@
 			<fuseki.port>3030</fuseki.port>
       		</properties>
     	</profile>
+		<profile>
+			<!-- ~~~~~~~ for windows ~~~~~~~ -->
+			<id>windows</id>
+			<properties>
+				<logback.dir>C:/logs/</logback.dir>
+				<logback.archive>C:/logs/archived/</logback.archive>
+			</properties>
+		</profile>
+		<profile>
+			<!-- ~~~~~~~ for linux ~~~~~~~ -->
+			<id>linux</id>
+			<properties>
+				<logback.dir>/logs/</logback.dir>
+				<logback.archive>/logs/archived/</logback.archive>
+			</properties>
+		</profile>
   	</profiles>
-
 
 	<properties>
 		<!-- ~~~~~~~ general ~~~~~~~ -->
@@ -71,7 +86,11 @@
 		<spring.boot.version>1.5.8.RELEASE</spring.boot.version>
 
 		<!-- ~~~~~~~ docker ~~~~~~~ -->
-		<docker.image.prefix>khaack</docker.image.prefix>
+		<docker.image.prefix>dicegroup</docker.image.prefix>
+
+		<!-- ~~~~~~~ logback ~~~~~~~ -->
+		<logback.level.file>WARN</logback.level.file>
+		<logback.level.console>WARN</logback.level.console>
 	</properties>
 
 	<dependencies>

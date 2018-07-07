@@ -1,3 +1,9 @@
+/**
+ * Javascript class for the discovery of microservices and the types.
+ * 
+ * @author Kevin Haack
+ */
+;
 var Discoverer = function(options) {
 	/**
 	 * this.
@@ -13,9 +19,9 @@ var Discoverer = function(options) {
 	 * Plugin settings.
 	 */
 	this.settings = {
-		dao : undefined,
-		onRefreshed : undefined,
-		onError : undefined
+		dao : null,
+		onRefreshed : null,
+		onError : null
 	};
 
 	/**
@@ -65,6 +71,16 @@ var Discoverer = function(options) {
 	};
 	
 	/**
+	 * Is true, if a microservice with the type 'chatbot' is discovered.
+	 */
+	this.isChatbotDiscovered = function() {
+		if (!("chatbot" in microservices)) {
+			return false;
+		}
+		return microservices.chatbot.length > 0;
+	};
+
+	/**
 	 * Is true, if a microservice with the type 'executer' is discovered.
 	 */
 	this.isExecuterDiscovered = function() {
@@ -87,6 +103,18 @@ var Discoverer = function(options) {
 	};
 	
 	/**
+	 * Return the discovered microservice with the type 'chatbot'.
+	 */
+	this.getChatbot = function() {
+		if (!this.isChatbotDiscovered()) {
+			logError("no microservice with the type 'chatbot' discovered.");
+			return;
+		}
+
+		return microservices["chatbot"][0];
+	};
+
+	/**
 	 * Return the discovered microservice with the type 'executer'.
 	 */
 	this.getExecuter = function() {
@@ -96,14 +124,14 @@ var Discoverer = function(options) {
 		}
 
 		return microservices["executer"][0];
-	}
+	};
 
 	/**
 	 * Returns the discovered microservices.
 	 */
 	this.getMicroservices = function() {
 		return microservices;
-	}
+	};
 
 	/**
 	 * Discover the microservices.
@@ -117,13 +145,13 @@ var Discoverer = function(options) {
 			if (typeof self.settings.onRefreshed !== "undefined") {
 				self.settings.onRefreshed();
 			}
-		}
+		};
 
 		var error = function(data) {
 			if (typeof self.settings.onError !== "undefined") {
 				self.settings.onError(data);
 			}
-		}
+		};
 
 		this.settings.dao.discoverMicroservices(success, error);
 	};

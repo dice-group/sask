@@ -1,10 +1,12 @@
 /**
- * The IIFE for the repository.
+ * JQuery plugin for the repository.
+ * 
+ * @author Kevin Haack
  */
-(function($, window, document) {
+;
+((function($, window, document) {
 
 	/* global jQuery, console */
-
 	"use strict";
 
 	/**
@@ -20,9 +22,9 @@
 	var _default = {};
 
 	_default.settings = {
-		onAddToWorkspace : undefined,
-		onLoadToWorkspace : undefined,
-		dao : undefined
+		onAddToWorkspace : null,
+		onLoadToWorkspace : null,
+		dao : null
 	};
 
 	_default.options = {};
@@ -51,6 +53,15 @@
 		type : "root",
 		nodes : []
 	} ];
+	
+	/**
+	 * logging function
+	 */
+	var logError = function(message) {
+		if (window.console) {
+			window.console.error(pluginName + ": " + message);
+		}
+	};
 
 	var Repository = function(element, options) {
 
@@ -146,7 +157,7 @@
 		var self = this;
 		this.$element.find("li.file, li.extractor, li.db").draggable({
 			helper : "clone",
-			start : function(event, ui) {
+			start(event, ui) {
 				var node = self.getNodeFromTarget(this);
 				ui.helper.data("node", node);
 				ui.helper.width(this.clientWidth);
@@ -191,6 +202,29 @@
 		var node = this.treeview.treeview("getNode", nodeId);
 		return node;
 	};
+	
+	/**
+	 * Compare the passed nodes
+	 */
+	Repository.prototype.compareNodes = function(a, b) {
+		if (a.type === "folder" && b.type !== "folder") {
+			return -1;
+		}
+
+		if (a.type !== "folder" && b.type === "folder") {
+			return 1;
+		}
+
+		if (a.text < b.text){
+			return -1;
+		}
+		
+		if (a.text > a.text){
+			return 1;
+		}
+		
+		return 0;
+	};
 
 	/**
 	 * Order the passed node by type and text.
@@ -203,23 +237,7 @@
 				i++;
 			}
 
-			node.nodes.sort(function(a, b) {
-				if (a.type === "folder" && b.type !== "folder") {
-					return -1;
-				}
-
-				if (a.type !== "folder" && b.type === "folder") {
-					return 1;
-				}
-
-				if (node.text < node.text){
-					return -1;
-				}
-				if (node.text > node.text){
-					return 1;
-				}
-				return 0;
-			});
+			node.nodes.sort(this.compareNodes);
 		}
 
 		return node;
@@ -247,7 +265,7 @@
 
 		var error = function(data) {
 			logError(data);
-		}
+		};
 
 		this.options.dao.getRepoStructure(success, error);
 	};
@@ -268,11 +286,11 @@
 			self.options.data = structureTemplate;
 
 			self.init(self.options);
-		}
+		};
 
 		var error = function(data) {
 			logError(data);
-		}
+		};
 
 		this.options.dao.getWorkflows(success, error);
 	};
@@ -312,11 +330,11 @@
 			structureTemplate[2].nodes = data;
 			self.options.data = structureTemplate;
 			self.init(self.options);
-		}
+		};
 
 		var error = function(data) {
 			logError(data);
-		}
+		};
 
 		this.options.dao.getTargetGraphs(success, error);
 	};
@@ -336,13 +354,13 @@
 		var self = this;
 
 		// data root
-		new BootstrapMenu('#' + this.elementId + ' li.root[data-nodeid="0"]', {
-			fetchElementData : function(target) {
+		new BootstrapMenu("#" + this.elementId + " li.root[data-nodeid=\"0\"]", {
+			fetchElementData(target) {
 				return self.getNodeFromTarget(target);
 			},
 			actions : [ {
 				name : "New folder",
-				onClick : function(target) {
+				onClick(target) {
 					if (target === "#data") {
 						target = "";
 					}
@@ -353,95 +371,95 @@
 		});
 
 		// db
-		new BootstrapMenu('#' + this.elementId + ' li.db', {
-			fetchElementData : function(target) {
+		new BootstrapMenu("#" + this.elementId + " li.db", {
+			fetchElementData(target) {
 				return self.getNodeFromTarget(target);
 			},
 			actions : [ {
 				name : "Add to Workspace",
-				onClick : function(target) {
+				onClick(target) {
 					self.options.onAddToWorkspace(target);
 				}
 			} ]
 		});
 
 		// extractor
-		new BootstrapMenu('#' + this.elementId + ' li.extractor', {
-			fetchElementData : function(target) {
+		new BootstrapMenu("#" + this.elementId + " li.extractor", {
+			fetchElementData(target) {
 				return self.getNodeFromTarget(target);
 			},
 			actions : [ {
 				name : "Add to Workspace",
-				onClick : function(target) {
+				onClick(target) {
 					self.options.onAddToWorkspace(target);
 				}
 			} ]
 		});
 
 		// workflow
-		new BootstrapMenu('#' + this.elementId + ' li.workflow', {
-			fetchElementData : function(target) {
+		new BootstrapMenu("#" + this.elementId + " li.workflow", {
+			fetchElementData(target) {
 				return self.getNodeFromTarget(target);
 			},
 			actions : [ {
 				name : "Load to workspace",
-				onClick : function(target) {
+				onClick(target) {
 					self.options.onLoadToWorkspace(target);
 				}
 			}, {
 				name : "Rename",
-				onClick : function(target) {
+				onClick(target) {
 					self.openRenameWorkflowDialog(target);
 				}
 			}, {
 				name : "Remove",
-				onClick : function(target) {
+				onClick(target) {
 					self.openRemoveFromWorkflowsDialog(target);
 				}
 			} ]
 		});
 
 		// file
-		new BootstrapMenu('#' + this.elementId + ' li.file', {
-			fetchElementData : function(target) {
+		new BootstrapMenu("#" + this.elementId + " li.file", {
+			fetchElementData(target) {
 				return self.getNodeFromTarget(target);
 			},
 			actions : [ {
 				name : "Add to Workspace",
-				onClick : function(target) {
+				onClick(target) {
 					self.options.onAddToWorkspace(target);
 				}
 			}, {
 				name : "Rename",
-				onClick : function(target) {
+				onClick(target) {
 					self.openRenameRepoDialog(target);
 				}
 			}, {
 				name : "Remove",
-				onClick : function(target) {
+				onClick(target) {
 					self.openRemoveFromRepoDialog(target);
 				}
 			} ]
 		});
 
 		// folder
-		new BootstrapMenu('#' + this.elementId + ' li.folder', {
-			fetchElementData : function(target) {
+		new BootstrapMenu("#" + this.elementId + " li.folder", {
+			fetchElementData(target) {
 				return self.getNodeFromTarget(target);
 			},
 			actions : [ {
 				name : "New folder",
-				onClick : function(target) {
+				onClick(target) {
 					self.openNewFolderDialog(target);
 				}
 			}, {
 				name : "Rename",
-				onClick : function(target) {
+				onClick(target) {
 					self.openRenameRepoDialog(target);
 				}
 			}, {
 				name : "Remove",
-				onClick : function(target) {
+				onClick(target) {
 					self.openRemoveFromRepoDialog(target);
 				}
 			} ]
@@ -455,15 +473,15 @@
 		var self = this;
 		var success = function(data) {
 			self.refreshRepo();
-		}
+		};
 
 		var error = function(data) {
 			logError(data);
-		}
+		};
 
 		var positiv = function() {
-			var target = $(this).find('input[name="target"]').val();
-			var name = $(this).find('input[name="name"]').val();
+			var target = $(this).find("input[name=\"target\"]").val();
+			var name = $(this).find("input[name=\"name\"]").val();
 
 			self.options.dao.renameRepo(success, error, target, name);
 			$(this).dialog("close");
@@ -483,15 +501,15 @@
 		var self = this;
 		var success = function(data) {
 			self.refreshWorkflows();
-		}
+		};
 
 		var error = function(data) {
 			logError(data);
-		}
+		};
 
 		var positiv = function() {
-			var target = $(this).find('input[name="target"]').val();
-			var name = $(this).find('input[name="name"]').val();
+			var target = $(this).find("input[name=\"target\"]").val();
+			var name = $(this).find("input[name=\"name\"]").val();
 
 			self.options.dao.renameWorkflow(success, error, target, name);
 			$(this).dialog("close");
@@ -512,14 +530,14 @@
 		var positiv = function() {
 			var success = function(data) {
 				self.refreshRepo();
-			}
+			};
 
 			var error = function(data) {
 				logError(data);
-			}
+			};
 
-			var target = $(this).find('input[name="target"]').val();
-			var name = $(this).find('input[name="name"]').val();
+			var target = $(this).find("input[name=\"target\"]").val();
+			var name = $(this).find("input[name=\"name\"]").val();
 
 			self.options.dao.createDirectory(success, error, target, name);
 			$(this).dialog("close");
@@ -539,14 +557,14 @@
 		var self = this;
 		var success = function(data) {
 			self.refreshRepo();
-		}
+		};
 
 		var error = function(data) {
 			logError(data);
-		}
+		};
 
 		var positiv = function() {
-			var target = $(this).find('input[name="target"]').val();
+			var target = $(this).find("input[name=\"target\"]").val();
 
 			self.options.dao.removeFromRepo(success, error, target);
 			$(this).dialog("close");
@@ -566,14 +584,14 @@
 		var self = this;
 		var success = function(data) {
 			self.refreshWorkflows();
-		}
+		};
 
 		var error = function(data) {
 			logError(data);
-		}
+		};
 
 		var positiv = function() {
-			var target = $(this).find('input[name="target"]').val();
+			var target = $(this).find("input[name=\"target\"]").val();
 
 			self.options.dao.removeFromWorkflows(success, error, target);
 			$(this).dialog("close");
@@ -584,15 +602,6 @@
 		};
 
 		dialogs.dialogRemove(positiv, negativ, target).dialog("open");
-	};
-
-	/**
-	 * logging function
-	 */
-	var logError = function(message) {
-		if (window.console) {
-			window.console.error(pluginName + ": " + message);
-		}
 	};
 
 	/**
@@ -630,5 +639,4 @@
 		return result || this;
 	};
 
-})(jQuery, window, document);
-0;
+})(jQuery, window, document));

@@ -4,14 +4,8 @@ jdk:
   - oraclejdk9
   - openjdk8
 
-sudo: required
-
-
-services:
-  - docker
-
 install: true
 
 script:
-  - mvn clean install -q
+  - mvn clean install -q -P linux, local
 
