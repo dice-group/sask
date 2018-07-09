@@ -3,6 +3,16 @@
 	height: 500px;
 }
 
+#ex-query {
+	min-height: 500px;
+	height: 500px;
+}
+
+#ex-query div {
+	overflow: auto;
+	height: 94%;
+}
+
 #ex-workspace>div:nth-child(1) {
 	height: 9%;
 	background-color: #f8f8f8;
