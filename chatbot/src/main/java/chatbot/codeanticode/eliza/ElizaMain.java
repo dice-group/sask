@@ -13,40 +13,39 @@ import java.net.URLConnection;
  * transformations.
  */
 public class ElizaMain {
-
-	final boolean echoInput = false;
-	final boolean printData = false;
-
-	final boolean printKeys = false;
-	final boolean printSyns = false;
-	final boolean printPrePost = false;
-	final boolean printInitialFinal = false;
+	private TextArea textarea;
+	private TextField textfield;
+	private final boolean echoInput = false;
+	private final boolean printData = false;
+	private final boolean printKeys = false;
+	private final boolean printSyns = false;
+	private final boolean printPrePost = false;
+	private final boolean printInitialFinal = false;
 
 	/** The key list */
-	KeyList keys = new KeyList();
+	private KeyList keys = new KeyList();
 	/** The syn list */
-	SynList syns = new SynList();
+	private SynList syns = new SynList();
 	/** The pre list */
-	PrePostList pre = new PrePostList();
+	private PrePostList pre = new PrePostList();
 	/** The post list */
-	PrePostList post = new PrePostList();
+	private PrePostList post = new PrePostList();
 	/** Initial string */
-	String initial = "Hello.";
+	private String initial = "Hello.";
 	/** Final string */
-	String finl = "Goodbye.";
+	private String finl = "Goodbye.";
 	/** Quit list */
-	WordList quit = new WordList();
+	private WordList quit = new WordList();
 
 	/** Key stack */
-	KeyStack keyStack = new KeyStack();
+	private KeyStack keyStack = new KeyStack();
 
 	/** Memory */
-	Mem mem = new Mem();
+	private Mem mem = new Mem();
 
-	DecompList lastDecomp;
-	ReasembList lastReasemb;
-	boolean finished = false;
-
+	private DecompList lastDecomp;
+	private ReasembList lastReasemb;
+	private boolean finished = false;
 	static final int success = 0;
 	static final int failure = 1;
 	static final int gotoRule = 2;
@@ -185,7 +184,8 @@ public class ElizaMain {
 	 * word. (3) Scan sentence for keys, build key stack. (4) Try decompositions
 	 * for each key.
 	 */
-	String sentence(String s) {
+	public String sentence(String str) {
+		String s = str;
 		s = pre.translate(s);
 		s = EString.pad(s);
 		if (quit.find(s)) {
@@ -214,7 +214,7 @@ public class ElizaMain {
 	 * fails, try another decomposition rule. If assembly is a goto rule, return
 	 * null and give the key. If assembly succeeds, return the reply;
 	 */
-	String decompose(Key key, String s, Key gotoKey) {
+	public String decompose(Key key, String s, Key gotoKey) {
 		String reply[] = new String[10];
 		for (int i = 0; i < key.decomp()
 		                       .size(); i++) {
@@ -237,7 +237,7 @@ public class ElizaMain {
 	 * is goto, return null and give the gotoKey to use. Otherwise return the
 	 * response.
 	 */
-	String assemble(Decomp d, String reply[], Key gotoKey) {
+	public String assemble(Decomp d, String reply[], Key gotoKey) {
 		String lines[] = new String[3];
 		d.stepRule();
 		String rule = d.nextRule();
@@ -273,10 +273,6 @@ public class ElizaMain {
 		}
 		return work;
 	}
-
-	TextArea textarea;
-	TextField textfield;
-
 	public void response(String str) {
 		textarea.appendText(str);
 		textarea.appendText("\n");
@@ -319,7 +315,7 @@ public class ElizaMain {
 		return 0;
 	}
 
-	int runProgram(String test, Panel w) {
+	public int runProgram(String test, Panel w) {
 		DataInputStream in;
 
 		if (w != null) {
@@ -376,9 +372,10 @@ public class ElizaMain {
 				textfield.setText("");
 				response(">> " + input);
 				response(reply);
-
 				return true;
 			}
+		default: // do nothing;
+	         break;
 		}
 		return false;
 	}

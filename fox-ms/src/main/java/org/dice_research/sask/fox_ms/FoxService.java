@@ -18,7 +18,7 @@ public class FoxService {
 	 * http://fox-demo.aksw.org/fox University version:
 	 * http://fox.cs.uni-paderborn.de:4444/fox
 	 */
-	private static final String SERVICE_URI = "http://fox-demo.aksw.org/fox";
+	private static final String SERVICE_URI = "http://fox.cs.uni-paderborn.de:4444/fox";
 	/**
 	 * The spring restTemplate.
 	 */

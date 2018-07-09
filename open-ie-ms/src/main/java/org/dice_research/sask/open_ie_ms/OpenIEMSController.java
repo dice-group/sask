@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import edu.stanford.nlp.ie.util.RelationTriple;
 import edu.stanford.nlp.ling.CoreAnnotations;
 import edu.stanford.nlp.pipeline.Annotation;
@@ -27,10 +26,16 @@ import org.apache.jena.riot.RDFDataMgr;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Property;
-import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.util.URIref;
 import com.hp.hpl.jena.vocabulary.RDF;
-import com.hp.hpl.jena.vocabulary.RDFS;
+
+import org.dice_research.sask.open_ie_ms.OpenIEDTO;
+/**
+ * 
+ * 
+ * @author Suganya Kannan
+ *
+ */
 
 @RestController
 public class OpenIEMSController {
@@ -46,59 +51,50 @@ public class OpenIEMSController {
 		openIE.setText(input);
 		return extract(openIE);
 	}
-	
-	
 
 	public String extract(OpenIEDTO openIE) {
 		logger.info("OpenIE-microservice extract invoked");
 
-		if (openIE == null || openIE.getText() == null || (openIE.getText()
-                .trim()
-                .isEmpty())) {
+		if (openIE == null || openIE.getText() == null || (openIE.getText().trim().isEmpty())) {
 			throw new IllegalArgumentException("No input");
 		}
 
 		// Create the Stanford CoreNLP pipeline
-	    Properties props = new Properties();
-	    props.setProperty("annotators", "tokenize,ssplit,pos,lemma,depparse,natlog,openie");
-	    StringWriter modelAsString = new StringWriter();
+		Properties props = new Properties();
+		props.setProperty("annotators", "tokenize,ssplit,pos,lemma,depparse,natlog,openie");
+		StringWriter modelAsString = new StringWriter();
 
-	    StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
-	    String NS = "http://example.org/";
+		StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
+		String NS = "http://example.org/";
 
-	    Model model = ModelFactory.createDefaultModel();
-	    model.setNsPrefix( "", NS );
-	    model.setNsPrefix( "rdf", RDF.getURI() );
+		Model model = ModelFactory.createDefaultModel();
+		model.setNsPrefix("", NS);
+		model.setNsPrefix("rdf", RDF.getURI());
 
-	    // Annotate an example document.
-	    
-	    Annotation doc = new Annotation(openIE.getText()); 
-	    pipeline.annotate(doc);
-	    Collection<RelationTriple> triples;
-	    // Loop over sentences in the document
-	    for (CoreMap sentence : doc.get(CoreAnnotations.SentencesAnnotation.class)) {
-	      // Get the OpenIE triples for the sentence
-	      triples = sentence.get(NaturalLogicAnnotations.RelationTriplesAnnotation.class);
-	    
-	      
-	     for (RelationTriple triple : triples) {
-		
-	   	  Resource statement = model.createResource();
-	         Resource subject = model.createResource().addProperty( RDFS.label, triple.subjectLemmaGloss() );
-	          Property predicate = model.createProperty( NS+URIref.encode( triple.relationLemmaGloss() ));
-	         Resource object = model.createResource().addProperty( RDFS.label, triple.objectLemmaGloss() );
-              statement.addProperty( RDF.subject, subject );
-	          statement.addProperty( RDF.predicate, predicate );
-	          statement.addProperty( RDF.object, object );
+		// Annotate an example document.
 
-	      }
-	     
-	    }
+		Annotation doc = new Annotation(openIE.getText());
+		pipeline.annotate(doc);
+		Collection<RelationTriple> triples;
+		// Loop over sentences in the document
+		for (CoreMap sentence : doc.get(CoreAnnotations.SentencesAnnotation.class)) {
+			// Get the OpenIE triples for the sentence
+			triples = sentence.get(NaturalLogicAnnotations.RelationTriplesAnnotation.class);
 
-	    RDFDataMgr.write( modelAsString, model, Lang.NTRIPLES );
+			for (RelationTriple triple : triples) {
+
+				Property subject = model.createProperty(NS + URIref.encode(triple.subjectLemmaGloss()));
+				Property predicate = model.createProperty(NS + URIref.encode(triple.relationLemmaGloss()));
+				Property object = model.createProperty(NS + URIref.encode(triple.objectLemmaGloss()));
+				model.add(subject, predicate, object);
+
+			}
+
+		}
+
+		RDFDataMgr.write(modelAsString, model, Lang.TURTLE);
 		return modelAsString.toString();
 	}
-	
 
 	@ExceptionHandler
 	void handleIllegalArgumentException(IllegalArgumentException e, HttpServletResponse response) throws IOException {

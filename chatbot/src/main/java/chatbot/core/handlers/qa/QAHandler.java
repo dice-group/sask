@@ -3,18 +3,23 @@
  */
 package chatbot.core.handlers.qa;
 
+import java.io.IOException;
+import java.net.URLEncoder;
+
+import org.apache.commons.io.FilenameUtils;
 import org.apache.log4j.Logger;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.io.IOException;
 
+import chatbot.core.handlers.Handler;
 import chatbot.io.incomingrequest.IncomingRequest;
 import chatbot.io.response.EntryInformation;
+import chatbot.io.response.EntryInformation.Type;
 import chatbot.io.response.Response;
 import chatbot.io.response.ResponseList;
 import chatbot.io.response.ResponseList.MessageType;
-import chatbot.core.handlers.*;
 
 /**
  * @author Prashanth
@@ -23,18 +28,30 @@ import chatbot.core.handlers.*;
 public class QAHandler extends Handler {
 	// Handle Hawk Service.
 	private static Logger log = Logger.getLogger(QAHandler.class.getName());
-	private static final String URL = "http://localhost:8181/simple-search?query="; // URL
+	private static final String URL = "http://185.2.103.92:8081/tebaqa/qa-simple?query="; // URL for TebaQA
 
 	
 	private Response generateResponse(String incomingResponse) throws JsonProcessingException, IOException {
 		ObjectMapper mapper = new ObjectMapper();
 		JsonNode rootNode = mapper.readTree(incomingResponse);
-		//String text = rootNode.path("answer")
-		//                      .toString();
 		Response obj=new Response();
-		EntryInformation entry = new EntryInformation();
-		JsonNode middleNode = rootNode.path("answer").get(0);
-		if(middleNode.has("URI")) { //Prashanth:Check to prevent code crash, only if JSON Node exists below code must be executed.
+		
+		//JsonNode middleNode = rootNode.path("answers").get(0);
+		JsonNode answers = rootNode.get("answers");
+		if(answers.isArray()) {
+			 for (final JsonNode objNode : answers) {
+				 EntryInformation entry = new EntryInformation();
+				 entry.setUri(objNode.asText());
+				 String fileName = FilenameUtils.getName(objNode.asText());
+				 fileName = fileName.replaceAll("_", " ");
+				 entry.setDisplayText(fileName);
+				 entry.setButtonType(Type.URL);
+				 obj.addEntry(entry);
+				 
+			 }
+		}
+		
+		/*if(middleNode.has("URI")) { //Prashanth:Check to prevent code crash, only if JSON Node exists below code must be executed.
 			entry.setUri(middleNode.get("URI").toString());
 			entry.setButtonType(EntryInformation.Type.URL);
 			entry.setDisplayText("Open with DBpedia"); // DBpedia links are returned right now so hardcode.
@@ -45,23 +62,9 @@ public class QAHandler extends Handler {
 		}
 		if(middleNode.has("thumbnail")) {
 			obj.setImage(middleNode.get("thumbnail").toString());
-		}
-		obj.addEntry(entry);
+		}*/
+		//obj.addEntry(entry);
 		return obj;
-	}
-
-	private String generateHTTPQuery(String question) {
-		String[] strgs = question.split(" "); // Remove and create words instead
-		                                      // of passing complete sentences.
-		                                      // Follow format specified in
-		                                      // gitthub rdocumentation
-		String query = "";
-		for (int j = 0; j < strgs.length; j++) {
-			query += strgs[j] + "+";
-		}
-		query = query.substring(0, query.length() - 1);
-		String URLText = URL + query;
-		return URLText;
 	}
 
 	public ResponseList search(IncomingRequest request) throws JsonProcessingException, IOException {
@@ -71,7 +74,7 @@ public class QAHandler extends Handler {
 			String query = request.getRequestContent()
 			                      .get(0)
 			                      .getText();
-			String sendText = generateHTTPQuery(query);
+			String sendText = URL + URLEncoder.encode(query, "UTF-8");
 			String response = sendHTTPRequest(sendText);
 			//If in future, multiple answers need to be returned, then split it into n*1 and call below functions in a loop
 			Response output = generateResponse(response); 
