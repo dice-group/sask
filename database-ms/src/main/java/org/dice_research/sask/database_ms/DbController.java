@@ -36,6 +36,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
@@ -120,12 +121,13 @@ public class DbController {
 	 * 
 	 */
 	@RequestMapping(value = "/queryDefaultGraph")
-	public String queryDefaultGraph() {
+	public String queryDefaultGraph(@RequestParam(required = false, defaultValue = "10") Integer limit) {
 
 		logger.info("db-microservice queryDefaultGraph() is invoked");
+		String query = "SELECT * { {?s ?p ?o} UNION { GRAPH <default> { ?s ?p ?o } } }" + "LIMIT " + limit;
 
-		try (QueryEngineHTTP qe = (QueryEngineHTTP) QueryExecutionFactory.sparqlService(
-				"http://localhost:3030/sask/query", "SELECT * { {?s ?p ?o} UNION { GRAPH <default> { ?s ?p ?o } } }")) {
+		try (QueryEngineHTTP qe = (QueryEngineHTTP) QueryExecutionFactory
+				.sparqlService("http://localhost:3030/sask/query", query)) {
 			ResultSet results = qe.execSelect();
 			ByteArrayOutputStream b = new ByteArrayOutputStream();
 			ResultSetFormatter.outputAsJSON(b, results);
@@ -144,16 +146,13 @@ public class DbController {
 	 */
 	@RequestMapping(value = "/queryGraph")
 	public String queryGraph(String graphName) {
-
 		logger.info("db-microservice queryGraph() is invoked");
-
 		try (QueryEngineHTTP qe = (QueryEngineHTTP) QueryExecutionFactory.sparqlService(
 				"http://localhost:3030/sask/query", "SELECT * WHERE {GRAPH <" + graphName + "> {?s ?p ?o}}")) {
 			ResultSet results = qe.execSelect();
 			ByteArrayOutputStream b = new ByteArrayOutputStream();
 			ResultSetFormatter.outputAsJSON(b, results);
 			String json = b.toString();
-
 			return json;
 
 		}
