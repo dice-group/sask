@@ -40,6 +40,8 @@
 			<hadoop.port>50070</hadoop.port>
 			<fuseki.hostserver>localhost</fuseki.hostserver>
 			<fuseki.port>3030</fuseki.port>
+			<taipan.hostserver>localhost</taipan.hostserver>
+			<taipan.port>5000</taipan.port>
       		</properties>
     	</profile>
     	<profile>
@@ -52,6 +54,8 @@
 			<hadoop.port>50070</hadoop.port>
 			<fuseki.hostserver>fuseki</fuseki.hostserver>
 			<fuseki.port>3030</fuseki.port>
+			<taipan.hostserver>taipan</taipan.hostserver>
+			<taipan.port>5000</taipan.port>
       		</properties>
     	</profile>
 		<profile>
