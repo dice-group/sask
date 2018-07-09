@@ -116,6 +116,8 @@ public class DbController {
 	/**
 	 * Method to query the default graph.
 	 * 
+	 * @param limit
+	 *            Optional parameter to limit the results; has the default value 10.
 	 * 
 	 * @return The query results in json format
 	 * 
@@ -142,13 +144,17 @@ public class DbController {
 	 * 
 	 * @param graphName
 	 *            The name of the graph
+	 * @param limit
+	 *            Optional parameter to limit the results; has the default value 10.
 	 * @return The query result in the form of JSON.
 	 */
 	@RequestMapping(value = "/queryGraph")
-	public String queryGraph(String graphName) {
+	public String queryGraph(@RequestParam(required = false, defaultValue = "10") Integer limit,
+			@RequestParam String graphName) {
 		logger.info("db-microservice queryGraph() is invoked");
-		try (QueryEngineHTTP qe = (QueryEngineHTTP) QueryExecutionFactory.sparqlService(
-				"http://localhost:3030/sask/query", "SELECT * WHERE {GRAPH <" + graphName + "> {?s ?p ?o}}")) {
+		String query = "SELECT * WHERE {GRAPH <" + graphName + "> {?s ?p ?o}}" + "LIMIT " + limit;
+		try (QueryEngineHTTP qe = (QueryEngineHTTP) QueryExecutionFactory
+				.sparqlService("http://localhost:3030/sask/query", query)) {
 			ResultSet results = qe.execSelect();
 			ByteArrayOutputStream b = new ByteArrayOutputStream();
 			ResultSetFormatter.outputAsJSON(b, results);
