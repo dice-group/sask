@@ -32,9 +32,6 @@ import org.springframework.web.client.RestTemplate;
  */
 public class TaipanMsService {
 
-	/**
-	 * The rest template.
-	 */
 	private final RestTemplate restTemplate;
 	private final String taipanHostserver;
 	private final int taipanPort;
@@ -44,10 +41,17 @@ public class TaipanMsService {
 		this.taipanHostserver = config.getHostserver();
 		this.taipanPort = config.getPort();
 	}
-	
+
+	/**
+	 * To generate SML for a given CSV file
+	 * 
+	 * @param csvContent
+	 * @return SML mapping
+	 * @throws IOException
+	 */
 	public String generateSMLMapping(String csvContent) throws IOException {
 
-		InputStream contentStream = new ByteArrayInputStream(csvContent.getBytes());		
+		InputStream contentStream = new ByteArrayInputStream(csvContent.getBytes());
 		final RequestCallback requestCallback = new RequestCallback() {
 			@Override
 			public void doWithRequest(ClientHttpRequest request) throws IOException {
@@ -61,16 +65,23 @@ public class TaipanMsService {
 		SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
 		requestFactory.setBufferRequestBody(true);
 		restTemplate.setRequestFactory(requestFactory);
-		HttpMessageConverterExtractor<String> responseExtractor = new HttpMessageConverterExtractor<String>(String.class, restTemplate.getMessageConverters());
-		String url = "http://"+taipanHostserver+":"+taipanPort+"/table/api/v1.0/generate_sml_mapping";
-		String result = restTemplate.execute(url, HttpMethod.POST, requestCallback, responseExtractor);	
+		HttpMessageConverterExtractor<String> responseExtractor = new HttpMessageConverterExtractor<String>(
+				String.class, restTemplate.getMessageConverters());
+		String url = "http://" + taipanHostserver + ":" + taipanPort + "/table/api/v1.0/generate_sml_mapping";
+		String result = restTemplate.execute(url, HttpMethod.POST, requestCallback, responseExtractor);
 		return result.toString();
 	}
-	
+
+	/**
+	 * To identify the Subject columns
+	 * 
+	 * @param csvContent
+	 * @return
+	 * @throws IOException
+	 */
 	public String identifySubjectColumn(String csvContent) throws IOException {
 
-		InputStream contentStream = new ByteArrayInputStream(csvContent.getBytes());	
-		
+		InputStream contentStream = new ByteArrayInputStream(csvContent.getBytes());
 		final RequestCallback requestCallback = new RequestCallback() {
 			@Override
 			public void doWithRequest(ClientHttpRequest request) throws IOException {
@@ -83,15 +94,23 @@ public class TaipanMsService {
 		SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
 		requestFactory.setBufferRequestBody(true);
 		restTemplate.setRequestFactory(requestFactory);
-		HttpMessageConverterExtractor<String> responseExtractor = new HttpMessageConverterExtractor<String>(String.class, restTemplate.getMessageConverters());
-		String url = "http://"+taipanHostserver+":"+taipanPort+"/table/api/v1.0/identify_subject_column";
-		String result = restTemplate.execute(url, HttpMethod.POST, requestCallback, responseExtractor);	
+		HttpMessageConverterExtractor<String> responseExtractor = new HttpMessageConverterExtractor<String>(
+				String.class, restTemplate.getMessageConverters());
+		String url = "http://" + taipanHostserver + ":" + taipanPort + "/table/api/v1.0/identify_subject_column";
+		String result = restTemplate.execute(url, HttpMethod.POST, requestCallback, responseExtractor);
 		return result.toString();
 	}
-	
+
+	/**
+	 * To recommend properties
+	 * 
+	 * @param csvContent
+	 * @return
+	 * @throws IOException
+	 */
 	public String propertyRecommender(String csvContent) throws IOException {
 
-		InputStream contentStream = new ByteArrayInputStream(csvContent.getBytes());		
+		InputStream contentStream = new ByteArrayInputStream(csvContent.getBytes());
 		final RequestCallback requestCallback = new RequestCallback() {
 			@Override
 			public void doWithRequest(ClientHttpRequest request) throws IOException {
@@ -104,9 +123,10 @@ public class TaipanMsService {
 		SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
 		requestFactory.setBufferRequestBody(true);
 		restTemplate.setRequestFactory(requestFactory);
-		HttpMessageConverterExtractor<String> responseExtractor = new HttpMessageConverterExtractor<String>(String.class, restTemplate.getMessageConverters());
-		String url = "http://"+taipanHostserver+":"+taipanPort+"/table/api/v1.0/recommend_properties";
-		String result = restTemplate.execute(url, HttpMethod.POST, requestCallback, responseExtractor);	
+		HttpMessageConverterExtractor<String> responseExtractor = new HttpMessageConverterExtractor<String>(
+				String.class, restTemplate.getMessageConverters());
+		String url = "http://" + taipanHostserver + ":" + taipanPort + "/table/api/v1.0/recommend_properties";
+		String result = restTemplate.execute(url, HttpMethod.POST, requestCallback, responseExtractor);
 		return result;
 	}
 

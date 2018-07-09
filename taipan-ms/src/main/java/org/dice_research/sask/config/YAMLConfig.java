@@ -15,18 +15,21 @@ public class YAMLConfig {
 
 	private String hostserver;
 	private int port;
-		
+
 	public String getHostserver() {
 		return hostserver;
 	}
+
 	public void setHostserver(String hostserver) {
 		this.hostserver = hostserver;
 	}
+
 	public int getPort() {
 		return port;
 	}
+
 	public void setPort(int port) {
 		this.port = port;
 	}
-	
+
 }

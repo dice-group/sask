@@ -18,7 +18,7 @@ public class TaipanMsApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TaipanMsApplication.class, args);
 	}
-	
+
 	@Bean
 	YAMLConfig yamlConfig() {
 		return new YAMLConfig();
