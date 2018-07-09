@@ -23,6 +23,7 @@
 
 	_default.settings = {
 		onAddToWorkspace : null,
+		onAddToWorkspaceTable: null,
 		onLoadToWorkspace : null,
 		dao : null
 	};
@@ -380,7 +381,12 @@
 				onClick(target) {
 					self.options.onAddToWorkspace(target);
 				}
-			} ]
+			},{
+				name : 'Query graph',
+				onClick : function(target) {
+				self.options.onAddToWorkspaceTable(target);
+				}
+			}  ]
 		});
 
 		// extractor

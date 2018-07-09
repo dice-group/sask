@@ -79,6 +79,13 @@ var Discoverer = function(options) {
 		}
 		return microservices.chatbot.length > 0;
 	};
+	
+	this.isDatabaseDiscovered = function() {
+		if (!("db" in microservices)) {
+			return false;
+		}
+		return microservices.db.length > 0;
+	};
 
 	/**
 	 * Is true, if a microservice with the type 'executer' is discovered.
@@ -100,6 +107,15 @@ var Discoverer = function(options) {
 		}
 
 		return microservices["repo"][0];
+	};
+	
+	this.getDatabase = function() {
+		if (!this.isDatabaseDiscovered()) {
+			logError("no microservice with the type 'db' discovered.");
+			return;
+		}
+
+		return microservices["db"][0];
 	};
 	
 	/**

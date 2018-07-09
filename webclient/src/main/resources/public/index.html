@@ -79,15 +79,25 @@
 					file...
 				</button>
 			</div>
-			<div class="col-lg-6 sask-column resizable" data-sizeMin="col-lg-6"
+			<div class="col-lg-6 sask-column resizable withouttable" data-sizeMin="col-lg-6"
 				data-sizeMax="col-lg-9">
 				<h4>Workspace</h4>
 				<div id="ex-workspace" class="sask-border"></div>
 			</div>
-			<div class="col-lg-3 sask-column resizable" data-sizeMin="col-lg-3"
+			<div class="col-lg-3 sask-column resizable withouttable" data-sizeMin="col-lg-3"
 				data-sizeMax="col-lg-12">
 				<h4>Chatbot</h4>
 				<div id="chat-chatbot" class="sask-border"></div>
+			</div>
+			<div class="col-sm-9 withtable">
+				<h4>Table</h4>
+				<table class="table table-striped" id="querytable" width="50%">
+					<tr>
+						<th>Subject</th>
+						<th>Predicate</th>
+						<th>Object</th>
+					</tr>
+				</table>
 			</div>
 		</div>
 	</div>
@@ -114,6 +124,7 @@
 				repo = $("#ex-repo").repository({
 					dao : dao,
 					onAddToWorkspace : onAddToWorkspace,
+					onAddToWorkspaceTable : onAddToWorkspaceTable,
 					onLoadToWorkspace : onLoadToWorkspace
 				});
 
@@ -140,6 +151,12 @@
 
 				refresh();
 			});
+			
+			function onAddToWorkspaceTable(target) {
+				$('.withouttable').hide();
+				$('.withtable').show();
+				dao.queryGraph();
+			}
 
 			function onBigMessage() {
 				var column = $(chatbot).parent();

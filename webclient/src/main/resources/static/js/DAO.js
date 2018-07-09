@@ -81,6 +81,14 @@ var DAO = function(options) {
 
 		return "./" + discoverer.getRepo().serviceId + "/";
 	};
+	
+	var getDatabaseServiceId = function() {
+		if (!discoverer.isDatabaseDiscovered()) {
+			return;
+		}
+
+		return "./" + discoverer.getDatabase().serviceId + "/";
+	};
 
 	/**
 	 * Return the executer service id.
@@ -103,6 +111,36 @@ var DAO = function(options) {
 
 		return "./" + discoverer.getChatbot().serviceId + "/";
 	};
+	
+/** fetch data from Query graph to display in table* */
+	
+	this.queryGraph = function()
+	{
+		
+		$.ajax({
+			type: "GET",
+			url: getDatabaseServiceId() + "queryGraph",
+			success: function(data){
+				var parsedData = JSON.parse(data)
+				var bindingsArray = parsedData.results.bindings
+				console.log(parsedData)
+				bindingsArray.forEach(function(element) {
+					var bindingObj = element
+				$(element).each(function(id,val){
+					// var header = "<tr> <th>Subject</th> <th>Predicate</th>
+					// <th>Object</th></tr>";
+					var s = bindingObj.s.value;
+					var p = bindingObj.p.value;
+					var o = bindingObj.o.value;
+					var record_data = "<tr><td>"+s+"</td><td>"+p+"</td><td>"+o+"</td></tr>";
+	                $("#querytable").append(record_data);
+	                console.log(record_data);
+				});
+				}); 
+					
+		}
+	});
+  };
 
 	/**
 	 * Parse the hdfs workflows structure to the ui structure.
