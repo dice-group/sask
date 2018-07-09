@@ -3,7 +3,11 @@ package org.dice_research.sask.taipan_ms;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import javax.annotation.PostConstruct;
+
 import org.apache.log4j.Logger;
+import org.dice_research.sask.config.YAMLConfig;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -17,28 +21,33 @@ import org.springframework.web.client.RestTemplate;
 @RestController
 public class TaipanMsController {
 
-	private RestTemplate restTemplate = new RestTemplate();
+	@Autowired
+	private YAMLConfig config;
 
+	private RestTemplate restTemplate = new RestTemplate();
 	private Logger logger = Logger.getLogger(TaipanMsController.class.getName());
+	private TaipanMsService service;
+
+	@PostConstruct
+	public void init() {
+		service = new TaipanMsService(restTemplate, config);
+	}
 
 	@RequestMapping("/identify")
-	public String executeSimple() throws IOException {
-		TaipanMsService service = new TaipanMsService(restTemplate);
-		String result = service.identifySubjectColumn();
-		return result;
+	public String identify(String csvContent) throws IOException {
+		this.logger.info("TAIPAN-microservice identify() invoked");
+		return service.identifySubjectColumn(csvContent);
 	}
 
 	@RequestMapping("/smlmapping")
-	public String executeSimple1() throws IOException {
-		TaipanMsService service = new TaipanMsService(restTemplate);
-		String result = service.generateSMLMapping();
-		return result;
+	public String smlmapping(String csvContent) throws IOException {
+		this.logger.info("TAIPAN-microservice smlmapping() invoked");
+		return service.generateSMLMapping(csvContent);
 	}
 
 	@RequestMapping("/property")
-	public String executeSimple2() throws IOException {
-		TaipanMsService service = new TaipanMsService(restTemplate);
-		String result = service.propertyRecommender();
-		return result;
+	public String property(String csvContent) throws IOException {
+		this.logger.info("TAIPAN-microservice propertyRecommender() invoked");
+		return service.propertyRecommender(csvContent);
 	}
 }

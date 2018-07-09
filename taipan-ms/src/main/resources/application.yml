@@ -22,3 +22,8 @@ server:
 error:
   whitelabel:
     enabled: false
+    
+taipan:
+  hostserver: @taipan.hostserver@
+  port: @taipan.port@
+  

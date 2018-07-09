@@ -1,5 +1,6 @@
 package org.dice_research.sask.taipan_ms;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import org.apache.tomcat.util.http.fileupload.IOUtils;
+import org.dice_research.sask.config.YAMLConfig;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -31,31 +33,28 @@ import org.springframework.web.client.RestTemplate;
 public class TaipanMsService {
 
 	/**
-	 * The logger.
-	 */
-	private final Logger logger = Logger.getLogger(TaipanMsService.class.getName());
-
-	/**
 	 * The rest template.
 	 */
 	private final RestTemplate restTemplate;
+	private final String taipanHostserver;
+	private final int taipanPort;
 
-	public TaipanMsService(RestTemplate restTemplate) {
+	public TaipanMsService(RestTemplate restTemplate, YAMLConfig config) {
 		this.restTemplate = restTemplate;
+		this.taipanHostserver = config.getHostserver();
+		this.taipanPort = config.getPort();
 	}
 	
-	public String generateSMLMapping() throws IOException {
+	public String generateSMLMapping(String csvContent) throws IOException {
 
-		File csvFile = new File("C:\\Users\\Andre\\Desktop\\file2.csv");
-		InputStream fileStream = new FileInputStream(csvFile);
-		
+		InputStream contentStream = new ByteArrayInputStream(csvContent.getBytes());		
 		final RequestCallback requestCallback = new RequestCallback() {
 			@Override
 			public void doWithRequest(ClientHttpRequest request) throws IOException {
 				request.getHeaders().add("Content-type", "text/csv");
 				request.getHeaders().add("Charset", "UTF-8");
 				request.getHeaders().add("X-Subject-Namespace", "http://example.org/");
-				IOUtils.copy(fileStream, request.getBody());
+				IOUtils.copy(contentStream, request.getBody());
 			}
 		};
 
@@ -63,24 +62,21 @@ public class TaipanMsService {
 		requestFactory.setBufferRequestBody(true);
 		restTemplate.setRequestFactory(requestFactory);
 		HttpMessageConverterExtractor<String> responseExtractor = new HttpMessageConverterExtractor<String>(String.class, restTemplate.getMessageConverters());
-		String url = "http://127.0.0.1:5000/table/api/v1.0/generate_sml_mapping";
-		logger.info(url);
+		String url = "http://"+taipanHostserver+":"+taipanPort+"/table/api/v1.0/generate_sml_mapping";
 		String result = restTemplate.execute(url, HttpMethod.POST, requestCallback, responseExtractor);	
-		logger.info(result.toString());
-		return "done";
+		return result.toString();
 	}
 	
-	public String identifySubjectColumn() throws IOException {
+	public String identifySubjectColumn(String csvContent) throws IOException {
 
-		File csvFile = new File("C:\\Users\\Andre\\Desktop\\file2.csv");
-		InputStream fileStream = new FileInputStream(csvFile);
+		InputStream contentStream = new ByteArrayInputStream(csvContent.getBytes());	
 		
 		final RequestCallback requestCallback = new RequestCallback() {
 			@Override
 			public void doWithRequest(ClientHttpRequest request) throws IOException {
 				request.getHeaders().add("Content-type", "text/csv");
 				request.getHeaders().add("Charset", "UTF-8");
-				IOUtils.copy(fileStream, request.getBody());
+				IOUtils.copy(contentStream, request.getBody());
 			}
 		};
 
@@ -88,24 +84,20 @@ public class TaipanMsService {
 		requestFactory.setBufferRequestBody(true);
 		restTemplate.setRequestFactory(requestFactory);
 		HttpMessageConverterExtractor<String> responseExtractor = new HttpMessageConverterExtractor<String>(String.class, restTemplate.getMessageConverters());
-		String url = "http://127.0.0.1:5000/table/api/v1.0/identify_subject_column";
-		logger.info(url);
+		String url = "http://"+taipanHostserver+":"+taipanPort+"/table/api/v1.0/identify_subject_column";
 		String result = restTemplate.execute(url, HttpMethod.POST, requestCallback, responseExtractor);	
-		logger.info(result.toString());
-		return "done";
+		return result.toString();
 	}
 	
-	public String propertyRecommender() throws IOException {
+	public String propertyRecommender(String csvContent) throws IOException {
 
-		File csvFile = new File("C:\\Users\\Andre\\Desktop\\file2.csv");
-		InputStream fileStream = new FileInputStream(csvFile);
-		
+		InputStream contentStream = new ByteArrayInputStream(csvContent.getBytes());		
 		final RequestCallback requestCallback = new RequestCallback() {
 			@Override
 			public void doWithRequest(ClientHttpRequest request) throws IOException {
 				request.getHeaders().add("Content-type", "text/csv");
 				request.getHeaders().add("Charset", "UTF-8");
-				IOUtils.copy(fileStream, request.getBody());
+				IOUtils.copy(contentStream, request.getBody());
 			}
 		};
 
@@ -113,11 +105,9 @@ public class TaipanMsService {
 		requestFactory.setBufferRequestBody(true);
 		restTemplate.setRequestFactory(requestFactory);
 		HttpMessageConverterExtractor<String> responseExtractor = new HttpMessageConverterExtractor<String>(String.class, restTemplate.getMessageConverters());
-		String url = "http://127.0.0.1:5000/table/api/v1.0/recommend_properties";
-		logger.info(url);
+		String url = "http://"+taipanHostserver+":"+taipanPort+"/table/api/v1.0/recommend_properties";
 		String result = restTemplate.execute(url, HttpMethod.POST, requestCallback, responseExtractor);	
-		logger.info(result.toString());
-		return "done";
+		return result;
 	}
 
 }
