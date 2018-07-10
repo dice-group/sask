@@ -13,13 +13,14 @@ Projectgroups Search and Extraction
 To get started with the application, you need to run the individual microservices and Docker containers. The following command can be executed in every module folder to start and register the microservices in eureka. The Eureka server should be started first.
 
 ```
-mvn clean spring-boot:run
+mvn clean spring-boot:run -P local,windows
+mvn clean spring-boot:run -P local,linux
 ```
 
 If all microservices are running, but are not available in the application: Wait, till the webclient pulled a refreshed list.
 
 - Currently discovered microservices by the UI: http://localhost:9090/status.html
-- Currently registered microservices by eureka: http://localhost:1111/
+- Currently registered microservices by eureka: http://localhost:8761/
 
 You will find example data for the extraction in the wiki: https://github.com/dice-group/sask/wiki/Example-Data
 
