@@ -8,8 +8,8 @@ spring:
 eureka:
   instance:
     metadataMap:
-      type: executer
-      friendlyname: Executer
+      type: extractor
+      friendlyname: TAIPAN
   client:
     serviceUrl:
       defaultZone: http://localhost:1111/eureka/

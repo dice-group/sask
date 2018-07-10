@@ -20,7 +20,7 @@ public class TaipanMsApplication {
 	}
 
 	@Bean
-	YAMLConfig yamlConfig() {
+	public YAMLConfig yamlConfig() {
 		return new YAMLConfig();
 	}
 

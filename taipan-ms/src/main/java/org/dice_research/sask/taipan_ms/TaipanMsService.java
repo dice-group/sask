@@ -1,23 +1,11 @@
 package org.dice_research.sask.taipan_ms;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.List;
-import java.util.logging.Logger;
-
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.dice_research.sask.config.YAMLConfig;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
 import org.springframework.http.client.ClientHttpRequest;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.web.client.HttpMessageConverterExtractor;
@@ -69,7 +57,7 @@ public class TaipanMsService {
 				String.class, restTemplate.getMessageConverters());
 		String url = "http://" + taipanHostserver + ":" + taipanPort + "/table/api/v1.0/generate_sml_mapping";
 		String result = restTemplate.execute(url, HttpMethod.POST, requestCallback, responseExtractor);
-		return result.toString();
+		return result;
 	}
 
 	/**
@@ -98,7 +86,7 @@ public class TaipanMsService {
 				String.class, restTemplate.getMessageConverters());
 		String url = "http://" + taipanHostserver + ":" + taipanPort + "/table/api/v1.0/identify_subject_column";
 		String result = restTemplate.execute(url, HttpMethod.POST, requestCallback, responseExtractor);
-		return result.toString();
+		return result;
 	}
 
 	/**
