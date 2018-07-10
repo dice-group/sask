@@ -23,14 +23,10 @@ eureka_service_host: "{{ groups['eureka-server']| join(',') }}"
 chatbot_instance_base_port: 9191
 
 #TODO: This value should be updated to the correct HAWK endpoint
-qa_hawk_service_host: "{{ ansible_hostname }}"
-
-qa_hawk_service_port: 8181
+qa_hawk_url: "http://185.2.103.92:8081/tebaqa/qa-simple?query="
 
 #TODO: This value should be updated to the correct SESS endpoint
-sessa_search_service_host: "{{ ansible_hostname }}"
-
-sessa_search_service_port: 7070
+sessa_search_url: "http://localhost:7070/search?query="
 
 ## Chatbot Service Related properties -- END
 

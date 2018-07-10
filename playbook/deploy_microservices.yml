@@ -83,10 +83,8 @@
           EUREKA_SERVICE_PORT: "{{ eureka_service_port }}"
           CHATBOT_PUBLISH_HOST: "{{ ansible_hostname }}"
           CHATBOT_PUBLISH_PORT: "{{ (chatbot_instance_base_port | int) + (item | int) }}"
-          QA_HAWK_SERVICE_HOST: "{{ qa_hawk_service_host }}"
-          QA_HAWK_SERVICE_PORT: "{{ qa_hawk_service_port }}"
-          SESSA_SEARCH_SERVICE_HOST: "{{ sessa_search_service_host }}"
-          SESSA_SEARCH_SERVICE_PORT: "{{ sessa_search_service_port }}"
+          QA_HAWK_URL: "{{ qa_hawk_url }}"
+          SESSA_SEARCH_URL: "{{ sessa_search_url }}"
 
         restart_policy: "always"
         memory: 2GB
