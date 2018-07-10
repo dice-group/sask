@@ -26,10 +26,10 @@ public class PullTaskTest {
 	@Mock
 	RestTemplate restTemplate;
 
-	Map<String, String> outputs1 = null;
+	private Map<String, String> outputs1 = null;
 	private Operator o1 = new Operator();
-	Set<Runnable> taskSet = null;
-	Set<Operator> opSet = null;
+	private	Set<Runnable> taskSet = null;
+	private Set<Operator> opSet = null;
 	private PullTask task = null;
 	private ExecutorService executorService = null;
 
