@@ -13,8 +13,8 @@ Projectgroups Search and Extraction
 To get started with the application, you need to run the individual microservices and Docker containers. The following command can be executed in every module folder to start and register the microservices in eureka. The Eureka server should be started first.
 
 ```
-mvn clean spring-boot:run -P local,windows
-mvn clean spring-boot:run -P local,linux
+mvn clean spring-boot:run -P windows
+mvn clean spring-boot:run -P linux
 ```
 
 If all microservices are running, but are not available in the application: Wait, till the webclient pulled a refreshed list.
