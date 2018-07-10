@@ -1,0 +1,16 @@
+---
+
+project_home_dir : "{{ playbook_dir.split('/')[0:-1]|join('/') }}"
+
+docker_repository : "guru5590"
+
+docker_repository_user : "guru5590"
+
+docker_repository_user_password : "****"
+
+etc_hosts_all: >
+ {% set hosts_dict = {} -%}
+ {% for hostname in groups['all'] -%}
+   {{ hosts_dict.update({ hostname: hostvars[hostname]['ansible_default_ipv4']['address'] }) -}}
+ {% endfor -%}
+ {{ hosts_dict }}
