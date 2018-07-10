@@ -6,7 +6,7 @@
  *
  *
  **/
-package org.dice_research.sask.database_ms.RDFTriples;
+package org.dice_research.sask.database_ms.rdftriples;
 
 public class TripleDTO {
 	private String triple = "";

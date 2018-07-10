@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
@@ -20,6 +21,7 @@
 	<properties>
 		<timestamp>${maven.build.timestamp}</timestamp>
 		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
+		<phantomjs-maven-plugin.version>0.7</phantomjs-maven-plugin.version>
 	</properties>
 
 	<dependencies>
@@ -77,7 +79,21 @@
 
 	<build>
 		<plugins>
-			<!-- ~~~~~~~ jasmine js test ~~~~~~~ -->
+			<plugin>
+				<groupId>com.github.klieber</groupId>
+				<artifactId>phantomjs-maven-plugin</artifactId>
+			      	<version>${phantomjs-maven-plugin.version}</version>
+			      	<executions>
+						<execution>
+					  		<goals>
+					    			<goal>install</goal>
+					  		</goals>
+						</execution>
+			      	</executions>
+			      	<configuration>
+					<version>1.9.2</version>
+			      	</configuration>
+			</plugin>
 			<plugin>
 				<groupId>com.github.searls</groupId>
 				<artifactId>jasmine-maven-plugin</artifactId>
@@ -90,14 +106,21 @@
 					</execution>
 				</executions>
 				<configuration>
+					<webDriverClassName>org.openqa.selenium.phantomjs.PhantomJSDriver</webDriverClassName>
+					<webDriverCapabilities>
+              					<capability>
+               						<name>phantomjs.binary.path</name>
+                					<value>${phantomjs.binary}</value>
+              					</capability>
+            				</webDriverCapabilities>
 					<preloadSources>
 						<source>/webjars/jquery/3.2.1/jquery.min.js</source>
 					</preloadSources>
 					<jsSrcDir>${basedir}/src/main/resources/static/js</jsSrcDir>
 					<sourceIncludes>
-	                    <include>workspace/**/*.js</include>
-	                </sourceIncludes>
-	                <jsTestSrcDir>${basedir}/src/test/resources/static/js/</jsTestSrcDir>
+						<include>workspace/WorkflowStack.js</include>
+					</sourceIncludes>
+					<jsTestSrcDir>${basedir}/src/test/resources/static/js/</jsTestSrcDir>
 					<specIncludes>
 						<include>workspace/**/*.spec.js</include>
 					</specIncludes>
@@ -110,6 +133,7 @@
 				<filtering>true</filtering>
 				<includes>
 					<include>**/*.html</include>
+					<include>**/*.yml</include>
 				</includes>
 			</resource>
 			<resource>

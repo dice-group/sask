@@ -35,13 +35,13 @@ public class ExecuterMsController {
 	}
 
 	@ExceptionHandler
-	void handleIllegalArgumentException(IllegalArgumentException e, HttpServletResponse response) throws IOException {
+	public void handleIllegalArgumentException(IllegalArgumentException e, HttpServletResponse response) throws IOException {
 		this.logger.error("EXECUTER-microservice IllegalArgumentException: " + e.getMessage());
 		response.sendError(HttpStatus.BAD_REQUEST.value());
 	}
 
 	@ExceptionHandler
-	void handleRuntimeException(RuntimeException e, HttpServletResponse response) throws IOException {
+	public void handleRuntimeException(RuntimeException e, HttpServletResponse response) throws IOException {
 		this.logger.error(e);
 		response.sendError(HttpStatus.BAD_REQUEST.value());
 	}

@@ -12,7 +12,7 @@ eureka:
       friendlyname: OpenIE
   client:
     serviceUrl:
-      defaultZone: http://localhost:1111/eureka/
+      defaultZone: http://@eureka.hostname@:@eureka.port@/eureka/
 
 # HTTP Server (Tomcat) Port
 server: 
