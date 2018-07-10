@@ -2,26 +2,35 @@
  * 
  */
 package chatbot.core.handlers.sessa;
-//import org.apache.catalina.connector.Response;
-import org.apache.log4j.Logger;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import java.io.IOException;
+import java.net.URLEncoder;
+
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+
+import chatbot.core.handlers.Handler;
 import chatbot.io.incomingrequest.IncomingRequest;
 import chatbot.io.response.EntryInformation;
 import chatbot.io.response.EntryInformation.Type;
 import chatbot.io.response.Response;
 import chatbot.io.response.ResponseList;
 import chatbot.io.response.ResponseList.MessageType;
-import chatbot.core.handlers.*;
-import java.net.URLEncoder;
 /**
  * @author Prashanth
  *
  */
+@Component
+@PropertySource("classpath:application.yml")
 public class SessaHandler extends Handler {
 	// Handle Hawk Service.
 	private static Logger log = Logger.getLogger(SessaHandler.class.getName());
-	private static final String URL = "http://localhost:7070/search?query="; // URL
+	
+	@Value("${sessa.search.url}")
+	private static String URL;
 
 
 	private Response generateResponse(String incomingResponse) throws JsonProcessingException, IOException {

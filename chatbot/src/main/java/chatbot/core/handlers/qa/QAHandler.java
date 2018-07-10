@@ -8,6 +8,9 @@ import java.net.URLEncoder;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -25,10 +28,14 @@ import chatbot.io.response.ResponseList.MessageType;
  * @author Prashanth
  *
  */
+@Component
+@PropertySource("classpath:application.yml")
 public class QAHandler extends Handler {
 	// Handle Hawk Service.
 	private static Logger log = Logger.getLogger(QAHandler.class.getName());
-	private static final String URL = "http://185.2.103.92:8081/tebaqa/qa-simple?query="; // URL for TebaQA
+	
+	@Value("${qa.hawk.url}")
+	private static String URL;
 
 	
 	private Response generateResponse(String incomingResponse) throws JsonProcessingException, IOException {

@@ -10,13 +10,15 @@ eureka:
     metadataMap:
       type: extractor
       friendlyname: TAIPAN
+    hostName: ${TAIPAN_PUBLISH_HOST:localhost} 
+    preferIpAddress: false 
   client:
     serviceUrl:
-      defaultZone: http://localhost:1111/eureka/
+      defaultZone: http://${EUREKA_SERVICE_HOST:localhost}:${EUREKA_SERVICE_PORT:8761}/eureka/
 
 # HTTP Server (Tomcat) Port
 server: 
-  port: 2228
+  port: ${TAIPAN_PUBLISH_PORT:2228}
 
 # Disable Spring Boot's "Whitelabel" default error page, so we can use our own
 error:
@@ -24,6 +26,5 @@ error:
     enabled: false
     
 taipan:
-  hostserver: @taipan.hostserver@
-  port: @taipan.port@
-  
+  hostserver: ${TAIPAN_HOSTSERVER:localhost} 
+  port: ${TAIPAN_PORT:5000} 

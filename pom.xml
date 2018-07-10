@@ -31,34 +31,6 @@
 	</modules>
 	
     <profiles>
-    	<profile>
-    		<!-- ~~~~~~~ for local usage ~~~~~~~ -->
-      		<id>local</id>
-      		<properties>
-			<eureka.hostname>localhost</eureka.hostname>
-			<eureka.port>8761</eureka.port>
-			<hadoop.hostserver>localhost</hadoop.hostserver>
-			<hadoop.port>50070</hadoop.port>
-			<fuseki.hostserver>localhost</fuseki.hostserver>
-			<fuseki.port>3030</fuseki.port>
-			<taipan.hostserver>localhost</taipan.hostserver>
-			<taipan.port>5000</taipan.port>
-      		</properties>
-    	</profile>
-    	<profile>
-        	<!-- ~~~~~~~ for docker usage ~~~~~~~ -->
-      		<id>docker</id>
-      		<properties>
-			<eureka.hostname>eureka-server</eureka.hostname>
-			<eureka.port>8761</eureka.port>
-			<hadoop.hostserver>hadoop</hadoop.hostserver>
-			<hadoop.port>50070</hadoop.port>
-			<fuseki.hostserver>fuseki</fuseki.hostserver>
-			<fuseki.port>3030</fuseki.port>
-			<taipan.hostserver>taipan</taipan.hostserver>
-			<taipan.port>5000</taipan.port>
-      		</properties>
-    	</profile>
 		<profile>
 			<!-- ~~~~~~~ for windows ~~~~~~~ -->
 			<id>windows</id>
