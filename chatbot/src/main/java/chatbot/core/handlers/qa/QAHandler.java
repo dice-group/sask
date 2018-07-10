@@ -35,7 +35,7 @@ public class QAHandler extends Handler {
 	private static Logger log = Logger.getLogger(QAHandler.class.getName());
 	
 	@Value("${qa.hawk.url}")
-	private static String URL;
+	private String URL;
 
 	
 	private Response generateResponse(String incomingResponse) throws JsonProcessingException, IOException {

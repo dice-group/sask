@@ -30,7 +30,7 @@ public class SessaHandler extends Handler {
 	private static Logger log = Logger.getLogger(SessaHandler.class.getName());
 	
 	@Value("${sessa.search.url}")
-	private static String URL;
+	private String URL;
 
 
 	private Response generateResponse(String incomingResponse) throws JsonProcessingException, IOException {
