@@ -1,5 +1,40 @@
 ---
 
+- name: "Prepare the directory on the host system where the SASK are stored"
+  hosts: sask
+  vars:
+    ansible_python_interpreter: "/usr/bin/env python"
+  tasks:
+    - name: "Ensure SASK group is present"
+      group:
+        name: "sask"
+        gid: "1111"
+        state: present
+      become: true
+
+    - name: "Ensure SASK user is present"
+      user:
+        name: "sask"
+        comment: "This is the user under which sask runs and that owns the directory"
+        uid: "2222"
+        group: "sask"
+        createhome: no
+        state: present
+      become: true
+
+    - name: "Prepare SASK directory on the physical hosts"
+      file:
+        path: "{{ item }}"
+        state: directory
+        owner: "sask"
+        group: "sask"
+        mode: 0775
+      with_items:
+        - /logs/
+        - /sask/
+      become: true
+
+
 - name: "Run eureka Server"
   hosts: eureka-server
   vars:
@@ -9,7 +44,7 @@
         state : "{{ container_state | default('started') }}"
         name: "eureka-server"
         hostname: "eureka-server"
-        image: "{{ docker_repository }}/eureka-server:latest"
+        image: "{{ docker_repository }}/eureka-server:{{ image_tag }}"
         ports:
           - "{{ eureka_service_port }}:{{ eureka_service_port }}"
 
@@ -38,7 +73,7 @@
         state : "{{ container_state | default('started') }}"
         name: "chatbot-instance-{{ item }}"
         hostname: "chatbot-instance-{{ item }}"
-        image: "{{ docker_repository }}/chatbot:latest"
+        image: "{{ docker_repository }}/chatbot:{{ image_tag }}"
         ports:
           - "{{ (chatbot_instance_base_port | int) + (item | int) }}:{{ (chatbot_instance_base_port | int) + (item | int) }}"
 
@@ -79,7 +114,7 @@
         state : "{{ container_state | default('started') }}"
         name: "webclient-instance-{{ item }}"
         hostname: "webclient-instance-{{ item }}"
-        image: "{{ docker_repository }}/webclient:latest"
+        image: "{{ docker_repository }}/webclient:{{ image_tag }}"
         ports:
           - "{{ (webclient_instance_base_port | int) + (item | int) }}:{{ (webclient_instance_base_port | int) + (item | int) }}"
 

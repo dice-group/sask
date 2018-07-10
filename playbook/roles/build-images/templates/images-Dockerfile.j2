@@ -10,8 +10,9 @@ RUN \
     sask
 
 RUN \
-  mkdir /sask/ && \
-  chown -R sask:sask /sask/
+  mkdir /sask/ /logs/ && \
+  chown -R sask:sask /sask/ && \
+  chown -R sask:sask /logs/
 
 COPY {{ microservice }}.jar /sask/{{ microservice }}/{{ microservice }}.jar
 
@@ -25,4 +26,4 @@ USER sask
 
 WORKDIR /sask/{{ microservice }}/
 
-CMD ["java","-jar","{{ microservice }}.jar"]
+CMD ["java", "--add-modules=java.xml.bind", "-Djava.security.egd=file:/dev/./urandom", "-jar","{{ microservice }}.jar"]

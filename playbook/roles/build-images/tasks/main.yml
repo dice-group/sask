@@ -21,7 +21,7 @@
     path : "{{ mktemp_output.stdout }}"
     dockerfile: "{{ item }}-Dockerfile"
     name : "{{ docker_repository }}/{{ item }}"
-    tag: latest
+    tag: "{{ image_tag }}"
     push: true
   with_list: "{{ microservices }}"
 

@@ -1,10 +1,18 @@
 ---
 ## File defines the sask microservices details
 
+# vars file for modules
+
+microservices:
+  - chatbot
+  - eureka-server
+  - webclient
+
+image_tag: "latest"
 
 ## Eureka Service Related properties -- START
 
-eureka_service_port: 1111
+eureka_service_port: 8761
 
 eureka_service_host: "{{ groups['eureka-server']| join(',') }}"
 

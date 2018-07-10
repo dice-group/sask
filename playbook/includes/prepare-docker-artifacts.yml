@@ -10,7 +10,7 @@
   failed_when : result_war == ""
 
 - name: Run maven build if there are no executable wars are found in target folder
-  command: mvn clean install -f {{ project_home_dir }}/{{ microservice }}/pom.xml
+  command: mvn clean install -f {{ project_home_dir }}/{{ microservice }}/pom.xml -P linux
   when: 'result_war.stderr != ""'
 
 - name: Move the needed executable files for each of the microservices to create a docker file
