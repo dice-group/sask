@@ -1,4 +1,4 @@
-package chatbot.application;
+package chatbot.web;
 
 import chatbot.core.classifier.IntentLearner;
 import chatbot.core.handlers.Handler;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  */
 @RestController
-public class ChatbotController {
+public class WebController {
 
 	
 	@RequestMapping(value = "/chat", method = RequestMethod.POST, produces = "application/json")

@@ -5,9 +5,11 @@ import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Arrays;
+
 import javax.servlet.ServletOutputStream;
 import org.apache.log4j.Logger;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
+import org.dice_research.sask.config.YAMLConfig;
 import org.dice_research.sask.repo_ms.hdfs.FileStatus;
 import org.dice_research.sask.repo_ms.hdfs.FileStatuses;
 import org.dice_research.sask.repo_ms.hdfs.HDFSFile;
@@ -33,20 +35,22 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * @author André Sonntag
  */
 public class HadoopService implements IHadoopService {
-
+	
 	private RestTemplate restTemplate;
 	private Logger logger = Logger.getLogger(RepoMsController.class.getName());
+	private WebHDFSUriBuilder uriBuilder;
 
-	public HadoopService(RestTemplate restTemplate) {
+	public HadoopService(RestTemplate restTemplate, YAMLConfig config) {
 		this.restTemplate = restTemplate;
+		this.uriBuilder = new WebHDFSUriBuilder(config.getHostserver(), config.getPort());		
 	}
-
+	
 	@Override
 	public boolean createFile(Location location, String path, String originalFileName, InputStream fis) {
 
 		URI createFileURI = null;
 		try {
-			createFileURI = WebHDFSUriBuilder.getCreateURL(location, path, originalFileName);
+			createFileURI = uriBuilder.getCreateURL(location, path, originalFileName);
 			logger.info(createFileURI);
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
@@ -76,7 +80,7 @@ public class HadoopService implements IHadoopService {
 
 		URI readFileUri = null;
 		try {
-			readFileUri = WebHDFSUriBuilder.getOpenURL(location, path);
+			readFileUri = uriBuilder.getOpenURL(location, path);
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
@@ -96,7 +100,7 @@ public class HadoopService implements IHadoopService {
 		String path = "";
 		URI hdfsStructureURI = null;
 		try {
-			hdfsStructureURI = WebHDFSUriBuilder.getHDFSStructureURI(location, path);
+			hdfsStructureURI = uriBuilder.getHDFSStructureURI(location, path);
 			logger.info(hdfsStructureURI);
 
 		} catch (URISyntaxException e) {
@@ -113,7 +117,7 @@ public class HadoopService implements IHadoopService {
 	public boolean createDirectory(Location location, String path) {
 		URI mkdirURI = null;
 		try {
-			mkdirURI = WebHDFSUriBuilder.getMkdirURI(location, path);
+			mkdirURI = uriBuilder.getMkdirURI(location, path);
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
@@ -125,7 +129,7 @@ public class HadoopService implements IHadoopService {
 	public boolean rename(Location location, String from, String to) {
 		URI renameURI = null;
 		try {
-			renameURI = WebHDFSUriBuilder.getRenameURI(location, from, to);
+			renameURI = uriBuilder.getRenameURI(location, from, to);
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
@@ -137,7 +141,7 @@ public class HadoopService implements IHadoopService {
 	public boolean delete(Location location, String path) {
 		URI deleteURI = null;
 		try {
-			deleteURI = WebHDFSUriBuilder.getDeleteURI(location, path);
+			deleteURI = uriBuilder.getDeleteURI(location, path);
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
@@ -199,7 +203,7 @@ public class HadoopService implements IHadoopService {
 
 				URI hdfsStructureURI = null;
 				try {
-					hdfsStructureURI = WebHDFSUriBuilder.getHDFSStructureURI(location, path + status.getPathSuffix());
+					hdfsStructureURI = uriBuilder.getHDFSStructureURI(location, path + status.getPathSuffix());
 				} catch (URISyntaxException e) {
 					e.printStackTrace();
 				}

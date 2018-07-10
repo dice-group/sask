@@ -2,6 +2,7 @@ package org.dice_research.sask.repo_ms.webHDFS;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+
 import org.dice_research.sask.repo_ms.Location;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -13,16 +14,28 @@ import org.springframework.web.util.UriComponentsBuilder;
  * @author André Sonntag
  */
 public class WebHDFSUriBuilder {
+	
+	private final String scheme;
+	private final String hadoopHostserver;
+	private final int hadoopNamenodePort;
+	private final String protocol;
+	private final String version;
+	private final String forwardslash;
+	private final String hdfsdiruserpath;
+	private final String operation;
 
-	private static final String SCHEME = "http";
-	private static final String HADOOP_HOSTSERVER = "localhost";
-	private static final int HADOOP_NAMENODE_PORT = 50070;
-	private static final String PROTOCOL = "webhdfs";
-	private static final String VERSION = "v1";
-	private static final String FORWARDSLASH = "/";
-	private static final String HDFSDIRUSERPATH = "user/DICE";
-	private static final String OPERATION = "op";
-
+	public WebHDFSUriBuilder(String server, int port) {
+		this.scheme = "http";
+		hadoopHostserver = server;
+		hadoopNamenodePort = port;
+		protocol = "webhdfs";
+		version = "v1";
+		forwardslash = "/";
+		hdfsdiruserpath = "user/DICE";
+		operation = "op";
+	}
+	
+	
 	/**
 	 * This method creates a URI to create a new file without file data on the
 	 * Hadoop System. <br>
@@ -39,24 +52,24 @@ public class WebHDFSUriBuilder {
 	 * @throws URISyntaxException
 	 * 
 	 */
-	public static URI getCreateURL(Location location, String path, String fileName) throws URISyntaxException, IllegalArgumentException {
+	public URI getCreateURL(Location location, String path, String fileName) throws URISyntaxException, IllegalArgumentException {
 		
 		if(location == null || path == null|| fileName == null) {
 			throw new IllegalArgumentException("Parameter is null");
 		}
 		
-		path = path.startsWith(FORWARDSLASH) ? path.substring(1) : path;
-		path = path.endsWith(FORWARDSLASH) ? path : path.substring(path.length());
-		fileName = path.startsWith(FORWARDSLASH) ? fileName.substring(1) : fileName;
+		path = path.startsWith(forwardslash) ? path.substring(1) : path;
+		path = path.endsWith(forwardslash) ? path : path.substring(path.length());
+		fileName = path.startsWith(forwardslash) ? fileName.substring(1) : fileName;
 
 		
 		UriComponentsBuilder builder = UriComponentsBuilder.newInstance();
-		builder.scheme(SCHEME);
-		builder.host(HADOOP_HOSTSERVER);
-		builder.port(HADOOP_NAMENODE_PORT);
-		builder.path(PROTOCOL + "/" + VERSION + "/" + HDFSDIRUSERPATH + "/" + location + "/" + path + fileName);
+		builder.scheme(scheme);
+		builder.host(hadoopHostserver);
+		builder.port(hadoopNamenodePort);
+		builder.path(protocol + "/" + version + "/" + hdfsdiruserpath + "/" + location + "/" + path + fileName);
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-		params.add(OPERATION, WebHDFSOperation.CREATE.name());
+		params.add(operation, WebHDFSOperation.CREATE.name());
 		params.add(WebHDFSParameter.overwrite.name(), "true");
 		builder.queryParams(params);
 		
@@ -75,20 +88,20 @@ public class WebHDFSUriBuilder {
 	 * @throws URISyntaxException
 	 * 
 	 */
-	public static URI getOpenURL(Location location, String path) throws URISyntaxException, IllegalArgumentException {
+	public URI getOpenURL(Location location, String path) throws URISyntaxException, IllegalArgumentException {
 		
 		if(location == null || path == null) {
 			throw new IllegalArgumentException("Parameter is null");
 		}
 		
-		path = path.startsWith(FORWARDSLASH) ? path.substring(1) : path;
+		path = path.startsWith(forwardslash) ? path.substring(1) : path;
 		
 		UriComponentsBuilder builder = UriComponentsBuilder.newInstance();
-		builder.scheme(SCHEME);
-		builder.host(HADOOP_HOSTSERVER);
-		builder.port(HADOOP_NAMENODE_PORT);
-		builder.path(PROTOCOL + "/" + VERSION + "/" + HDFSDIRUSERPATH + "/" + location + "/" + path);		
-		builder.queryParam(OPERATION, WebHDFSOperation.OPEN.name());
+		builder.scheme(scheme);
+		builder.host(hadoopHostserver);
+		builder.port(hadoopNamenodePort);
+		builder.path(protocol + "/" + version + "/" + hdfsdiruserpath + "/" + location + "/" + path);		
+		builder.queryParam(operation, WebHDFSOperation.OPEN.name());
 		
 		return new URI(builder.toUriString());
 	}
@@ -106,20 +119,20 @@ public class WebHDFSUriBuilder {
 	 * @throws URISyntaxException
 	 * 
 	 */
-	public static URI getHDFSStructureURI(Location location, String path) throws URISyntaxException, IllegalArgumentException {
+	public URI getHDFSStructureURI(Location location, String path) throws URISyntaxException, IllegalArgumentException {
 		
 		if(location == null || path == null) {
 			throw new IllegalArgumentException("Parameter is null");
 		}
 		
-		path = path.startsWith(FORWARDSLASH) ? path : "/" + path;
+		path = path.startsWith(forwardslash) ? path : "/" + path;
 		
 		UriComponentsBuilder builder = UriComponentsBuilder.newInstance();
-		builder.scheme(SCHEME);
-		builder.host(HADOOP_HOSTSERVER);
-		builder.port(HADOOP_NAMENODE_PORT);
-		builder.path(PROTOCOL + "/" + VERSION + "/" + HDFSDIRUSERPATH + "/" + location + path);
-		builder.queryParam(OPERATION, WebHDFSOperation.LISTSTATUS.name());
+		builder.scheme(scheme);
+		builder.host(hadoopHostserver);
+		builder.port(hadoopNamenodePort);
+		builder.path(protocol + "/" + version + "/" + hdfsdiruserpath + "/" + location + path);
+		builder.queryParam(operation, WebHDFSOperation.LISTSTATUS.name());
 		
 		return new URI(builder.toUriString());
 	}
@@ -138,21 +151,21 @@ public class WebHDFSUriBuilder {
 	 * @throws URISyntaxException
 	 * 
 	 */
-	public static URI getDeleteURI(Location location, String path) throws URISyntaxException, IllegalArgumentException {
+	public URI getDeleteURI(Location location, String path) throws URISyntaxException, IllegalArgumentException {
 		
 		if(location == null || path == null) {
 			throw new IllegalArgumentException("Parameter is null");
 		}
 		
-		path = path.startsWith(FORWARDSLASH) ? path.substring(1) : path;
+		path = path.startsWith(forwardslash) ? path.substring(1) : path;
 		
 		UriComponentsBuilder builder = UriComponentsBuilder.newInstance();
-		builder.scheme(SCHEME);
-		builder.host(HADOOP_HOSTSERVER);
-		builder.port(HADOOP_NAMENODE_PORT);
-		builder.path(PROTOCOL + "/" + VERSION + "/" + HDFSDIRUSERPATH + "/" + location + "/" + path);
+		builder.scheme(scheme);
+		builder.host(hadoopHostserver);
+		builder.port(hadoopNamenodePort);
+		builder.path(protocol + "/" + version + "/" + hdfsdiruserpath + "/" + location + "/" + path);
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-		params.add(OPERATION, WebHDFSOperation.DELETE.name());
+		params.add(operation, WebHDFSOperation.DELETE.name());
 		params.add(WebHDFSParameter.replication.name(), "true");
 		builder.queryParams(params);
 		
@@ -171,20 +184,20 @@ public class WebHDFSUriBuilder {
 	 * @throws URISyntaxException
 	 * 
 	 */
-	public static URI getMkdirURI(Location location, String path) throws URISyntaxException, IllegalArgumentException {
+	public URI getMkdirURI(Location location, String path) throws URISyntaxException, IllegalArgumentException {
 		
 		if(location == null || path == null) {
 			throw new IllegalArgumentException("Parameter is null");
 		}
 		
-		path = path.startsWith(FORWARDSLASH) ? path.substring(1) : path;
+		path = path.startsWith(forwardslash) ? path.substring(1) : path;
 		
 		UriComponentsBuilder builder = UriComponentsBuilder.newInstance();
-		builder.scheme(SCHEME);
-		builder.host(HADOOP_HOSTSERVER);
-		builder.port(HADOOP_NAMENODE_PORT);
-		builder.path(PROTOCOL + "/" + VERSION + "/" + HDFSDIRUSERPATH + "/" + location + "/" + path);
-		builder.queryParam(OPERATION, WebHDFSOperation.MKDIRS.name());
+		builder.scheme(scheme);
+		builder.host(hadoopHostserver);
+		builder.port(hadoopNamenodePort);
+		builder.path(protocol + "/" + version + "/" + hdfsdiruserpath + "/" + location + "/" + path);
+		builder.queryParam(operation, WebHDFSOperation.MKDIRS.name());
 		
 		return new URI(builder.toUriString());
 	}
@@ -204,23 +217,23 @@ public class WebHDFSUriBuilder {
 	 * @throws URISyntaxException
 	 * 
 	 */
-	public static URI getRenameURI(Location location, String from, String to) throws URISyntaxException, IllegalArgumentException {
+	public URI getRenameURI(Location location, String from, String to) throws URISyntaxException, IllegalArgumentException {
 
 		if(location == null || from == null || to == null) {
 			throw new IllegalArgumentException("Parameter is null");
 		}
 		
-		from = from.startsWith(FORWARDSLASH) ? from.substring(1) : from;
-		to = to.startsWith(FORWARDSLASH) ? to.substring(1) : to;
+		from = from.startsWith(forwardslash) ? from.substring(1) : from;
+		to = to.startsWith(forwardslash) ? to.substring(1) : to;
 		
 		UriComponentsBuilder builder = UriComponentsBuilder.newInstance();
-		builder.scheme(SCHEME);
-		builder.host(HADOOP_HOSTSERVER);
-		builder.port(HADOOP_NAMENODE_PORT);
-		builder.path(PROTOCOL + "/" + VERSION + "/" + HDFSDIRUSERPATH + "/" + location + "/" + from);
+		builder.scheme(scheme);
+		builder.host(hadoopHostserver);
+		builder.port(hadoopNamenodePort);
+		builder.path(protocol + "/" + version + "/" + hdfsdiruserpath + "/" + location + "/" + from);
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-		params.add(OPERATION, WebHDFSOperation.RENAME.name());
-		params.add(WebHDFSParameter.destination.name(), "/" + HDFSDIRUSERPATH + "/" + location + "/" + to);
+		params.add(operation, WebHDFSOperation.RENAME.name());
+		params.add(WebHDFSParameter.destination.name(), "/" + hdfsdiruserpath + "/" + location + "/" + to);
 		builder.queryParams(params);
 		
 		return new URI(builder.toUriString());

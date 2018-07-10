@@ -29,14 +29,14 @@ public class StoreTask implements Runnable {
 
 	@Override
 	public void run() {
-			logger.info("Start Thread: " + StoreTask.class.getName());				
-			String uri = "http://DATABASE-MS";
-			HttpHeaders headers = new HttpHeaders();
-			MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
-			map.add("input", data);
-			HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, headers);
-			ResponseEntity<String> response = restTemplate.postForEntity(uri + "/updateGraph?", request, String.class);
-			logger.info(response.getStatusCode());
+		logger.info("Start Thread: " + StoreTask.class.getName());
+		String uri = "http://DATABASE-MS";
+		HttpHeaders headers = new HttpHeaders();
+		MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
+		map.add("input", data);
+		HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, headers);
+		ResponseEntity<String> response = restTemplate.postForEntity(uri + "/updateGraph?", request, String.class);
+		logger.info(response.getStatusCode());
 	}
 
 	private String getTargetGrapName() {
