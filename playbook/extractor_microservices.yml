@@ -1,0 +1,35 @@
+---
+
+# This playbook deploys extractor related microservices
+- name: "Run Extractor related microservices"
+  hosts: extractors
+  vars:
+    ansible_python_interpreter: "/usr/bin/env python"
+  tasks:
+    - docker_container:
+        state : "{{ container_state | default('started') }}"
+        name: "{{ item.microservice_name }}"
+        hostname: "{{ item.microservice_name }}"
+        image: "{{ docker_repository }}/{{ item.microservice_name }}:{{ image_tag }}"
+        ports:
+          - "{{ item.publish_port }}:{{ item.publish_port }}"
+
+        etc_hosts: "{{ etc_hosts_all }}"
+        env: '{ 
+          "EUREKA_SERVICE_HOST": "{{ eureka_service_host }}",
+          "EUREKA_SERVICE_PORT": "{{ eureka_service_port }}",
+          "{{ (item.microservice_name | regex_replace("-ms$",""))| upper }}_PUBLISH_HOST": "{{ ansible_hostname }}",
+          "{{ (item.microservice_name | regex_replace("-ms$",""))| upper }}_PUBLISH_PORT": "{{ item.publish_port }}" 
+              }'
+          # {{ (item.microservice_name | regex_replace('-ms$',''))| upper }} - extracts the microservice name uppercased without the ms string at the end
+          #.for example cedric-ms becomes CEDRIC, which is then used to set the environment variables inside docker container
+
+        restart_policy: "always"
+        memory: 2GB
+        log_driver: "json-file"
+        log_options:
+          max-size: "50m"
+          max-file: "1"
+        volumes:
+          - /logs/:/logs/
+      with_items: "{{ extractor_microservices }}"

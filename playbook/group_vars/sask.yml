@@ -46,6 +46,8 @@ webclient_instance_base_port: 9090
 
 ## WebClient Service Related properties -- END 
 
+
+## Extractor microservices, which has a dependency only on Eureka server
 extractor_microservices:
   - { microservice_name: 'cedric-ms',                 publish_port: 2225 }
   - { microservice_name: 'dbpedia-ms',                publish_port: 2224 }
