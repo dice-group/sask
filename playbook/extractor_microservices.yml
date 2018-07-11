@@ -6,6 +6,18 @@
   vars:
     ansible_python_interpreter: "/usr/bin/env python"
   tasks:
+
+    - name: "Check for active Eureka Server service"
+      uri:
+        url: "http://{{ eureka_service_host }}:{{ eureka_service_port }}"
+        method: GET
+        body: json
+        return_content: yes
+      register: eureka
+      until: "eureka.status | int == 200 "
+      retries: 3
+      delay: 10
+
     - docker_container:
         state : "{{ container_state | default('started') }}"
         name: "{{ item.microservice_name }}"
@@ -18,8 +30,8 @@
         env: '{ 
           "EUREKA_SERVICE_HOST": "{{ eureka_service_host }}",
           "EUREKA_SERVICE_PORT": "{{ eureka_service_port }}",
-          "{{ (item.microservice_name | regex_replace("-ms$",""))| upper }}_PUBLISH_HOST": "{{ ansible_hostname }}",
-          "{{ (item.microservice_name | regex_replace("-ms$",""))| upper }}_PUBLISH_PORT": "{{ item.publish_port }}" 
+          "{{ (item.microservice_name | regex_replace("-ms$",""))| upper | replace ("-","_")}}_PUBLISH_HOST": "{{ ansible_hostname }}",
+          "{{ (item.microservice_name | regex_replace("-ms$",""))| upper | replace ("-","_")}}_PUBLISH_PORT": "{{ item.publish_port }}" 
               }'
           # {{ (item.microservice_name | regex_replace('-ms$',''))| upper }} - extracts the microservice name uppercased without the ms string at the end
           #.for example cedric-ms becomes CEDRIC, which is then used to set the environment variables inside docker container
@@ -33,3 +45,46 @@
         volumes:
           - /logs/:/logs/
       with_items: "{{ extractor_microservices }}"
+
+    - name: "Start the hadoop server needed for Repo-MS"
+      docker_container:
+        state : "{{ container_state | default('started') }}"
+        name: "hadoop"
+        hostname: "hadoop"
+        image: sequenceiq/hadoop-docker:2.7.0
+        ports:
+          - 50070:50070
+          - 50075:50075
+          - 2401:8088
+        etc_hosts: "{{ etc_hosts_all }}"
+        command: /etc/bootstrap.sh -bash -u $(date -u +%m%d%H%M%Y)
+        restart_policy: "always"
+        log_driver: "json-file"
+
+    - name: "Starting the Repo-MS microservice"
+      docker_container:
+        state : "{{ container_state | default('started') }}"
+        name: "repo-ms"
+        hostname: "repo-ms"
+        image: "{{ docker_repository }}/repo-ms:{{ image_tag }}"
+        ports:
+          - "{{ repo_publish_port }}:{{ repo_publish_port }}"
+
+        etc_hosts: "{{ etc_hosts_all }}"
+        env: '{ 
+          "EUREKA_SERVICE_HOST": "{{ eureka_service_host }}",
+          "EUREKA_SERVICE_PORT": "{{ eureka_service_port }}",
+          "REPO_PUBLISH_HOST": "{{ ansible_hostname }}",
+          "REPO_PUBLISH_PORT": "{{ repo_publish_port }}"
+              }'
+        restart_policy: "always"
+        memory: 2GB
+        log_driver: "json-file"
+        log_options:
+          max-size: "50m"
+          max-file: "1"
+        volumes:
+          - /logs/:/logs/
+
+
+
