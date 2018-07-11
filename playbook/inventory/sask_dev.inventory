@@ -28,6 +28,10 @@ nodes
 eureka-server
 webclient
 chatbot
+extractors
+hadoop-server
+fuseki-server
+taipan-server
 
 
 [all:vars]

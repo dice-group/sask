@@ -11,6 +11,7 @@ microservices:
   - database-ms
   - sorookin-ms
   - dbpedia-ms
+  - ensemble-ms
   - executer-ms
   - fox-ms
   - fred-ms
@@ -72,7 +73,7 @@ executer_publish_port: 2500
 
 
 ## Fox-MS Service Related properties -- START
-dbpedia_publish_port: 2222
+fox_publish_port: 2222
 
 ## Fox-MS Service Related properties -- END 
 
@@ -84,7 +85,7 @@ fred_publish_port: 2223
 
 
 ## OpenIE-MS Service Related properties -- START
-openie_publish_port: 2226
+open_ie_publish_port: 2226
 
 ## OpenIE-MS Service Related properties -- END
 
