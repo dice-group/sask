@@ -33,4 +33,4 @@ qa:
 # SESSA SEARCH Service Endpoint
 sessa:
   search:
-    url: http://${SESSA_SEARCH_SERVICE_HOST:localhost}:${SESSA_SEARCH_SERVICE_HOST:7070}/search?query=
+    url: http://${SESSA_SEARCH_URL:localhost}/search?query=
