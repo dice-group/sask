@@ -1,0 +1,79 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Nagoya_Grampus ;
+  rdf:predicate  dbo:formerTeam ;
+  rdf:subject    <http://dbpedia.org/resource/Ars%C3%A8ne_Wenger> ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.premierleague.com/managers/1137/Ars%C3%A8ne-Wenger/overview#char=0,260>
+                 ]
+] .
+
+<https://www.premierleague.com/managers/1137/Ars%C3%A8ne-Wenger/overview#char=5,18>
+        a                     nif:String , nif:Phrase , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Arsene Wenger" ;
+        nif:beginIndex        "5"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "18"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.premierleague.com/managers/1137/Ars%C3%A8ne-Wenger/overview#char=0,260> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Ars%C3%A8ne_Wenger> .
+
+<https://www.premierleague.com/managers/1137/Ars%C3%A8ne-Wenger/overview#char=143,150>
+        a                     nif:RFC5147String , nif:String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Arsenal" ;
+        nif:beginIndex        "143"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "150"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.premierleague.com/managers/1137/Ars%C3%A8ne-Wenger/overview#char=0,260> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Arsenal_F.C.> .
+
+<https://www.premierleague.com/managers/1137/Ars%C3%A8ne-Wenger/overview#char=0,260>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "260"^^xsd:nonNegativeInteger ;
+        nif:isString    "When Arsene Wenger was appointed as Arsenal manager on 1 October 1996 from Japanese club Nagoya Grampus Eight he was an unknown entity to many Arsenal fans, but that is not the case anymore after a hugely successful tenure as the clubs longest serving manager." .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     <http://dbpedia.org/resource/Arsenal_F.C.> ;
+  rdf:predicate  dbo:employer ;
+  rdf:subject    <http://dbpedia.org/resource/Ars%C3%A8ne_Wenger> ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.premierleague.com/managers/1137/Ars%C3%A8ne-Wenger/overview#char=0,260>
+                 ]
+] .
+
+<https://www.premierleague.com/managers/1137/Ars%C3%A8ne-Wenger/overview#char=36,43>
+        a                     nif:String , nif:RFC5147String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Arsenal" ;
+        nif:beginIndex        "36"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "43"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.premierleague.com/managers/1137/Ars%C3%A8ne-Wenger/overview#char=0,260> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Arsenal_F.C.> .
+
+<https://www.premierleague.com/managers/1137/Ars%C3%A8ne-Wenger/overview#char=89,110>
+        a                     nif:Phrase , nif:RFC5147String , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Deleted> ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasErrorType>
+                <http://gerbil.aksw.org/eaglet/vocab#WrongPos> ;
+        nif:anchorOf          "Nagoya Grampus Eight " ;
+        nif:beginIndex        "89"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "110"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.premierleague.com/managers/1137/Ars%C3%A8ne-Wenger/overview#char=0,260> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     dbr:Nagoya_Grampus .

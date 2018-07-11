@@ -1,0 +1,46 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+<https://www.essex.ac.uk/news/2017/08/04/essex-becomes-a-member-of-the-cfa-institute-university-affiliation-program#char=51,64>
+        a                     nif:String , nif:Phrase , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Added> ;
+        nif:anchorOf          "CFA Institute" ;
+        nif:beginIndex        "51"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "64"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.essex.ac.uk/news/2017/08/04/essex-becomes-a-member-of-the-cfa-institute-university-affiliation-program#char=0,180> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     dbr:CFA_Institute .
+
+<https://www.essex.ac.uk/news/2017/08/04/essex-becomes-a-member-of-the-cfa-institute-university-affiliation-program#char=0,180>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "180"^^xsd:nonNegativeInteger ;
+        nif:isString    "The University of Essex has been welcomed into the CFA Institute University Affiliation Program, widely considered as the investment professions most rigorous credentialing scheme." .
+
+<https://www.essex.ac.uk/news/2017/08/04/essex-becomes-a-member-of-the-cfa-institute-university-affiliation-program#char=4,23>
+        a                     nif:String , nif:RFC5147String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "University of Essex" ;
+        nif:beginIndex        "4"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "23"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.essex.ac.uk/news/2017/08/04/essex-becomes-a-member-of-the-cfa-institute-university-affiliation-program#char=0,180> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     dbr:University_of_Essex .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:CFA_Institute ;
+  rdf:predicate  dbo:affiliation ;
+  rdf:subject    dbr:University_of_Essex ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.essex.ac.uk/news/2017/08/04/essex-becomes-a-member-of-the-cfa-institute-university-affiliation-program#char=0,180>
+                 ]
+] .

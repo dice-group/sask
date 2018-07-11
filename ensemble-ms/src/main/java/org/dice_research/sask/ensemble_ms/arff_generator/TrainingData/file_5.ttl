@@ -1,0 +1,66 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Wellesley_College ;
+  rdf:predicate  dbo:almaMater ;
+  rdf:subject    dbr:Hillary_Clinton ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.bbc.com/news/av/election-us-2016-36402780/graduation-day-at-hillary-clinton-s-alma-mater#char=0,151>
+                 ]
+] .
+
+<http://www.bbc.com/news/av/election-us-2016-36402780/graduation-day-at-hillary-clinton-s-alma-mater#char=105,120>
+        a                     nif:String , nif:Phrase , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Hillary Clinton" ;
+        nif:beginIndex        "105"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "120"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.bbc.com/news/av/election-us-2016-36402780/graduation-day-at-hillary-clinton-s-alma-mater#char=0,151> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:Hillary_Clinton .
+
+<http://www.bbc.com/news/av/election-us-2016-36402780/graduation-day-at-hillary-clinton-s-alma-mater#char=37,54>
+        a                     nif:Phrase , nif:String , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Wellesley College" ;
+        nif:beginIndex        "37"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "54"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.bbc.com/news/av/election-us-2016-36402780/graduation-day-at-hillary-clinton-s-alma-mater#char=0,151> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     dbr:Wellesley_College .
+
+<http://www.bbc.com/news/av/election-us-2016-36402780/graduation-day-at-hillary-clinton-s-alma-mater#char=58,64>
+        a                     nif:RFC5147String , nif:String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Boston" ;
+        nif:beginIndex        "58"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "64"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.bbc.com/news/av/election-us-2016-36402780/graduation-day-at-hillary-clinton-s-alma-mater#char=0,151> ;
+        itsrdf:taClassRef     dbo:Place ;
+        itsrdf:taIdentRef     dbr:Boston .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Boston ;
+  rdf:predicate  dbo:location ;
+  rdf:subject    dbr:Wellesley_College ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.bbc.com/news/av/election-us-2016-36402780/graduation-day-at-hillary-clinton-s-alma-mater#char=0,151>
+                 ]
+] .
+
+<http://www.bbc.com/news/av/election-us-2016-36402780/graduation-day-at-hillary-clinton-s-alma-mater#char=0,151>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "151"^^xsd:nonNegativeInteger ;
+        nif:isString    "The class of 2016 has graduated from Wellesley College in Boston as the university's most famous alumna, Hillary Clinton, campaigns for the presidency." .

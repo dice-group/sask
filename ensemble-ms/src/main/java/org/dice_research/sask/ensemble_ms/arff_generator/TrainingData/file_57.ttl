@@ -1,0 +1,64 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+<http://www.bbc.com/news/world-asia-pacific-11551399#char=0,113>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "113"^^xsd:nonNegativeInteger ;
+        nif:isString    "Xi Jinping became president of China in 2012, ushering in an era of increased assertiveness and authoritarianism." .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Xi_Jinping ;
+  rdf:predicate  dbo:leaderName ;
+  rdf:subject    dbr:China ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.bbc.com/news/world-asia-pacific-11551399#char=0,113>
+                 ]
+] .
+
+<http://www.bbc.com/news/world-asia-pacific-11551399#char=0,10>
+        a                     nif:Phrase , nif:String , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Xi Jinping" ;
+        nif:beginIndex        "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "10"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.bbc.com/news/world-asia-pacific-11551399#char=0,113> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:Xi_Jinping .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:China ;
+  rdf:predicate  dbo:country ;
+  rdf:subject    dbr:Xi_Jinping ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.bbc.com/news/world-asia-pacific-11551399#char=0,113>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:China ;
+  rdf:predicate  dbo:location ;
+  rdf:subject    dbr:Xi_Jinping ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.bbc.com/news/world-asia-pacific-11551399#char=0,113>
+                 ]
+] .
+
+<http://www.bbc.com/news/world-asia-pacific-11551399#char=31,36>
+        a                     nif:Phrase , nif:String , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "China" ;
+        nif:beginIndex        "31"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "36"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.bbc.com/news/world-asia-pacific-11551399#char=0,113> ;
+        itsrdf:taClassRef     dbo:Place ;
+        itsrdf:taIdentRef     dbr:China .

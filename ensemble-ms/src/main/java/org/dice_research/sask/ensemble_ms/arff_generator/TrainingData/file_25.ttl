@@ -1,0 +1,66 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+<https://www.nytimes.com/2018/01/07/fashion/weddings/carol-meylan-russel-caflisch.html?rref=collection%2Fsectioncollection%2Fweddings#char=72,98>
+        a                     nif:RFC5147String , nif:Phrase , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Manhattan Marriage Bureau" ;
+        nif:beginIndex        "72"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "98"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.nytimes.com/2018/01/07/fashion/weddings/carol-meylan-russel-caflisch.html?rref=collection%2Fsectioncollection%2Fweddings#char=0,98> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     dbr:Manhattan_Marriage_Bureau .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     aksw:CarolLynnMeylan ;
+  rdf:predicate  dbo:spouse ;
+  rdf:subject    dbr:Russel_E._Caflisch ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.nytimes.com/2018/01/07/fashion/weddings/carol-meylan-russel-caflisch.html?rref=collection%2Fsectioncollection%2Fweddings#char=0,98>
+                 ]
+] .
+
+<https://www.nytimes.com/2018/01/07/fashion/weddings/carol-meylan-russel-caflisch.html?rref=collection%2Fsectioncollection%2Fweddings#char=22,44>
+        a                     nif:Phrase , nif:RFC5147String , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Completed> ;
+        nif:anchorOf          "Russel Edward Caflisch" ;
+        nif:beginIndex        "22"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "44"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.nytimes.com/2018/01/07/fashion/weddings/carol-meylan-russel-caflisch.html?rref=collection%2Fsectioncollection%2Fweddings#char=0,98> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:Russel_E._Caflisch .
+
+<https://www.nytimes.com/2018/01/07/fashion/weddings/carol-meylan-russel-caflisch.html?rref=collection%2Fsectioncollection%2Fweddings#char=0,98>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "98"^^xsd:nonNegativeInteger ;
+        nif:isString    "Carol Lynn Meylan and Russel Edward Caflisch were married Jan. 2 at the Manhattan Marriage Bureau." .
+
+<https://www.nytimes.com/2018/01/07/fashion/weddings/carol-meylan-russel-caflisch.html?rref=collection%2Fsectioncollection%2Fweddings#char=0,17>
+        a                     nif:RFC5147String , nif:Phrase , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Completed> ;
+        nif:anchorOf          "Carol Lynn Meylan" ;
+        nif:beginIndex        "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "17"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.nytimes.com/2018/01/07/fashion/weddings/carol-meylan-russel-caflisch.html?rref=collection%2Fsectioncollection%2Fweddings#char=0,98> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     aksw:CarolLynnMeylan .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Russel_E._Caflisch ;
+  rdf:predicate  dbo:spouse ;
+  rdf:subject    aksw:CarolLynnMeylan ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.nytimes.com/2018/01/07/fashion/weddings/carol-meylan-russel-caflisch.html?rref=collection%2Fsectioncollection%2Fweddings#char=0,98>
+                 ]
+] .

@@ -1,0 +1,140 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Sydney ;
+  rdf:predicate  dbo:location ;
+  rdf:subject    <http://dbpedia.org/resource/South_Coogee%2C_New_South_Wales> ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.dailymail.co.uk/news/article-3445537/Cricketer-David-Warner-wife-Candice-sell-luxury-Sydney-mansion-auction-7million.html#char=0,156>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Sydney ;
+  rdf:predicate  dbo:location ;
+  rdf:subject    <http://dbpedia.org/resource/South_Coogee%2C_New_South_Wales> ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.dailymail.co.uk/news/article-3445537/Cricketer-David-Warner-wife-Candice-sell-luxury-Sydney-mansion-auction-7million.html#char=0,156>
+                 ]
+] .
+
+<http://www.dailymail.co.uk/news/article-3445537/Cricketer-David-Warner-wife-Candice-sell-luxury-Sydney-mansion-auction-7million.html#char=75,82>
+        a                     nif:RFC5147String , nif:String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Candice" ;
+        nif:beginIndex        "75"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "82"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.dailymail.co.uk/news/article-3445537/Cricketer-David-Warner-wife-Candice-sell-luxury-Sydney-mansion-auction-7million.html#char=0,156> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:Candice_Warner .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     <http://dbpedia.org/resource/South_Coogee%2C_New_South_Wales> ;
+  rdf:predicate  dbo:location ;
+  rdf:subject    <http://dbpedia.org/resource/David_Warner_(cricketer)> ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.dailymail.co.uk/news/article-3445537/Cricketer-David-Warner-wife-Candice-sell-luxury-Sydney-mansion-auction-7million.html#char=0,156>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Sydney ;
+  rdf:predicate  dbo:location ;
+  rdf:subject    <http://dbpedia.org/resource/David_Warner_(cricketer)> ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.dailymail.co.uk/news/article-3445537/Cricketer-David-Warner-wife-Candice-sell-luxury-Sydney-mansion-auction-7million.html#char=0,156>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     <http://dbpedia.org/resource/David_Warner_(cricketer)> ;
+  rdf:predicate  dbo:spouse ;
+  rdf:subject    dbr:Candice_Warner ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.dailymail.co.uk/news/article-3445537/Cricketer-David-Warner-wife-Candice-sell-luxury-Sydney-mansion-auction-7million.html#char=0,156>
+                 ]
+] .
+
+<http://www.dailymail.co.uk/news/article-3445537/Cricketer-David-Warner-wife-Candice-sell-luxury-Sydney-mansion-auction-7million.html#char=129,141>
+        a                     nif:RFC5147String , nif:Phrase , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "South Coogee" ;
+        nif:beginIndex        "129"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "141"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.dailymail.co.uk/news/article-3445537/Cricketer-David-Warner-wife-Candice-sell-luxury-Sydney-mansion-auction-7million.html#char=0,156> ;
+        itsrdf:taClassRef     dbo:Place ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/South_Coogee%2C_New_South_Wales> .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     <http://dbpedia.org/resource/South_Coogee%2C_New_South_Wales> ;
+  rdf:predicate  dbo:location ;
+  rdf:subject    dbr:Candice_Warner ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.dailymail.co.uk/news/article-3445537/Cricketer-David-Warner-wife-Candice-sell-luxury-Sydney-mansion-auction-7million.html#char=0,156>
+                 ]
+] .
+
+<http://www.dailymail.co.uk/news/article-3445537/Cricketer-David-Warner-wife-Candice-sell-luxury-Sydney-mansion-auction-7million.html#char=0,156>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "156"^^xsd:nonNegativeInteger ;
+        nif:isString    "Early last month it was reported that cricketer David Warner, 29, and wife Candice, 30, had put their sprawling home in Sydney's South Coogee on the market." .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Sydney ;
+  rdf:predicate  dbo:locatedInArea ;
+  rdf:subject    <http://dbpedia.org/resource/South_Coogee%2C_New_South_Wales> ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.dailymail.co.uk/news/article-3445537/Cricketer-David-Warner-wife-Candice-sell-luxury-Sydney-mansion-auction-7million.html#char=0,156>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Sydney ;
+  rdf:predicate  dbo:location ;
+  rdf:subject    dbr:Candice_Warner ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.dailymail.co.uk/news/article-3445537/Cricketer-David-Warner-wife-Candice-sell-luxury-Sydney-mansion-auction-7million.html#char=0,156>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Candice_Warner ;
+  rdf:predicate  dbo:spouse ;
+  rdf:subject    <http://dbpedia.org/resource/David_Warner_(cricketer)> ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.dailymail.co.uk/news/article-3445537/Cricketer-David-Warner-wife-Candice-sell-luxury-Sydney-mansion-auction-7million.html#char=0,156>
+                 ]
+] .
+
+<http://www.dailymail.co.uk/news/article-3445537/Cricketer-David-Warner-wife-Candice-sell-luxury-Sydney-mansion-auction-7million.html#char=48,60>
+        a                     nif:String , nif:RFC5147String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "David Warner" ;
+        nif:beginIndex        "48"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "60"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.dailymail.co.uk/news/article-3445537/Cricketer-David-Warner-wife-Candice-sell-luxury-Sydney-mansion-auction-7million.html#char=0,156> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/David_Warner_(cricketer)> .
+
+<http://www.dailymail.co.uk/news/article-3445537/Cricketer-David-Warner-wife-Candice-sell-luxury-Sydney-mansion-auction-7million.html#char=120,126>
+        a                     nif:String , nif:Phrase , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Sydney" ;
+        nif:beginIndex        "120"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "126"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.dailymail.co.uk/news/article-3445537/Cricketer-David-Warner-wife-Candice-sell-luxury-Sydney-mansion-auction-7million.html#char=0,156> ;
+        itsrdf:taClassRef     dbo:Place ;
+        itsrdf:taIdentRef     dbr:Sydney .

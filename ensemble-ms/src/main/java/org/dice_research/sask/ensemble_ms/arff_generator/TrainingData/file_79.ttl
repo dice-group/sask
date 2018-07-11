@@ -1,0 +1,57 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+<http://www.latimes.com/sports/angels/la-sp-shohei-ohtani-japan-farewell-20171225-story.html#char=0,156>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "156"^^xsd:nonNegativeInteger ;
+        nif:isString    "Los Angeles Angels-bound Shohei Ohtani bid farewell to fans of his former Japanese club on Monday as he sets off to join his new Major League Baseball team." .
+
+<http://www.latimes.com/sports/angels/la-sp-shohei-ohtani-japan-farewell-20171225-story.html#char=25,38>
+        a                     nif:Phrase , nif:String , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Shohei Ohtani" ;
+        nif:beginIndex        "25"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "38"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.latimes.com/sports/angels/la-sp-shohei-ohtani-japan-farewell-20171225-story.html#char=0,156> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:Shohei_Otani .
+
+<http://www.latimes.com/sports/angels/la-sp-shohei-ohtani-japan-farewell-20171225-story.html#char=129,150>
+        a                     nif:Phrase , nif:RFC5147String , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Major League Baseball" ;
+        nif:beginIndex        "129"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "150"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.latimes.com/sports/angels/la-sp-shohei-ohtani-japan-farewell-20171225-story.html#char=0,156> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     dbr:Major_League_Baseball .
+
+<http://www.latimes.com/sports/angels/la-sp-shohei-ohtani-japan-farewell-20171225-story.html#char=0,18>
+        a                     nif:String , nif:Phrase , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Los Angeles Angels" ;
+        nif:beginIndex        "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "18"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.latimes.com/sports/angels/la-sp-shohei-ohtani-japan-farewell-20171225-story.html#char=0,156> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     dbr:Los_Angeles_Angels_of_Anaheim .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Los_Angeles_Angels_of_Anaheim ;
+  rdf:predicate  dbo:club ;
+  rdf:subject    dbr:Shohei_Otani ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.latimes.com/sports/angels/la-sp-shohei-ohtani-japan-farewell-20171225-story.html#char=0,156>
+                 ]
+] .

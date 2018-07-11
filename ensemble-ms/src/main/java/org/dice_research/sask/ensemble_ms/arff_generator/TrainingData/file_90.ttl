@@ -1,0 +1,79 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+<http://www.dailymail.co.uk/sport/football/article-5109453/Leaving-Lionel-Messi-bench-difficult-Valverde.html#char=56,68>
+        a                     nif:RFC5147String , nif:String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Lionel Messi" ;
+        nif:beginIndex        "56"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "68"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.dailymail.co.uk/sport/football/article-5109453/Leaving-Lionel-Messi-bench-difficult-Valverde.html#char=0,120> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:Lionel_Messi .
+
+<http://www.dailymail.co.uk/sport/football/article-5109453/Leaving-Lionel-Messi-bench-difficult-Valverde.html#char=0,120>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "120"^^xsd:nonNegativeInteger ;
+        nif:isString    "Barcelona coach Ernesto Valverde admitted starting with Lionel Messi on the bench against Juventus was a tough decision." .
+
+<http://www.dailymail.co.uk/sport/football/article-5109453/Leaving-Lionel-Messi-bench-difficult-Valverde.html#char=90,98>
+        a                     nif:Phrase , nif:RFC5147String , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Juventus" ;
+        nif:beginIndex        "90"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "98"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.dailymail.co.uk/sport/football/article-5109453/Leaving-Lionel-Messi-bench-difficult-Valverde.html#char=0,120> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Juventus_F.C.> .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Ernesto_Valverde ;
+  rdf:predicate  dbo:trainer ;
+  rdf:subject    dbr:Lionel_Messi ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.dailymail.co.uk/sport/football/article-5109453/Leaving-Lionel-Messi-bench-difficult-Valverde.html#char=0,120>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:FC_Barcelona ;
+  rdf:predicate  dbo:club ;
+  rdf:subject    dbr:Lionel_Messi ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.dailymail.co.uk/sport/football/article-5109453/Leaving-Lionel-Messi-bench-difficult-Valverde.html#char=0,120>
+                 ]
+] .
+
+<http://www.dailymail.co.uk/sport/football/article-5109453/Leaving-Lionel-Messi-bench-difficult-Valverde.html#char=0,10>
+        a                     nif:RFC5147String , nif:Phrase , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Deleted> ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasErrorType>
+                <http://gerbil.aksw.org/eaglet/vocab#WrongPos> ;
+        nif:anchorOf          "Barcelona " ;
+        nif:beginIndex        "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "10"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.dailymail.co.uk/sport/football/article-5109453/Leaving-Lionel-Messi-bench-difficult-Valverde.html#char=0,120> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     dbr:FC_Barcelona .
+
+<http://www.dailymail.co.uk/sport/football/article-5109453/Leaving-Lionel-Messi-bench-difficult-Valverde.html#char=16,32>
+        a                     nif:RFC5147String , nif:String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Ernesto Valverde" ;
+        nif:beginIndex        "16"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "32"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.dailymail.co.uk/sport/football/article-5109453/Leaving-Lionel-Messi-bench-difficult-Valverde.html#char=0,120> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:Ernesto_Valverde .

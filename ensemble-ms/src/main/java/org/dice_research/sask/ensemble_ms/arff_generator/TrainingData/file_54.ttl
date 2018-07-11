@@ -1,0 +1,57 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+<https://www.theguardian.com/sport/2018/jan/12/johanna-konta-new-coach-michael-joyce-australian-open#char=75,89>
+        a                     nif:Phrase , nif:String , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Johanna Kontas" ;
+        nif:beginIndex        "75"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "89"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.theguardian.com/sport/2018/jan/12/johanna-konta-new-coach-michael-joyce-australian-open#char=0,147> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:Johanna_Konta .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     <http://dbpedia.org/resource/Michael_Joyce_%28tennis%29> ;
+  rdf:predicate  dbo:trainer ;
+  rdf:subject    dbr:Johanna_Konta ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.theguardian.com/sport/2018/jan/12/johanna-konta-new-coach-michael-joyce-australian-open#char=0,147>
+                 ]
+] .
+
+<https://www.theguardian.com/sport/2018/jan/12/johanna-konta-new-coach-michael-joyce-australian-open#char=0,20>
+        a                     nif:Phrase , nif:RFC5147String , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "David Foster Wallace" ;
+        nif:beginIndex        "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "20"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.theguardian.com/sport/2018/jan/12/johanna-konta-new-coach-michael-joyce-australian-open#char=0,147> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:David_Foster_Wallace .
+
+<https://www.theguardian.com/sport/2018/jan/12/johanna-konta-new-coach-michael-joyce-australian-open#char=0,147>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "147"^^xsd:nonNegativeInteger ;
+        nif:isString    "David Foster Wallace, one of the sports finest chroniclers, once described Johanna Kontas new coach, Michael Joyce, as a world-class tennis player." .
+
+<https://www.theguardian.com/sport/2018/jan/12/johanna-konta-new-coach-michael-joyce-australian-open#char=101,114>
+        a                     nif:String , nif:Phrase , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Michael Joyce" ;
+        nif:beginIndex        "101"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "114"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.theguardian.com/sport/2018/jan/12/johanna-konta-new-coach-michael-joyce-australian-open#char=0,147> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Michael_Joyce_%28tennis%29> .
