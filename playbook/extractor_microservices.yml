@@ -50,7 +50,7 @@
       docker_container:
         state : "{{ container_state | default('started') }}"
         name: "hadoop"
-        hostname: "hadoop"
+        hostname: "{{ ansible_hostname }}"
         image: sequenceiq/hadoop-docker:2.7.0
         ports:
           - 50070:50070
@@ -78,6 +78,45 @@
           "REPO_PUBLISH_PORT": "{{ repo_publish_port }}",
           "HADOOP_HOSTSERVER": "{{ hadoop_hostserver }}",
           "HADOOP_PORT": "{{ hadoop_port  }}"
+              }'
+        restart_policy: "always"
+        memory: 2GB
+        log_driver: "json-file"
+        log_options:
+          max-size: "50m"
+          max-file: "1"
+        volumes:
+          - /logs/:/logs/
+
+    - name: "Start the taipan docker container needed for taipan-ms"
+      docker_container:
+        state : "{{ container_state | default('started') }}"
+        name: "taipan"
+        hostname: "{{ ansible_hostname }}"
+        image: dicegroup/taipan:latest
+        ports:
+          - 5000:5000
+        etc_hosts: "{{ etc_hosts_all }}"
+        restart_policy: "always"
+        log_driver: "json-file"
+
+    - name: "Starting the Taipan microservice"
+      docker_container:
+        state : "{{ container_state | default('started') }}"
+        name: "taipan-ms"
+        hostname: "taipan-ms"
+        image: "{{ docker_repository }}/taipan-ms:{{ image_tag }}"
+        ports:
+          - "{{ taipan_publish_port }}:{{ taipan_publish_port }}"
+
+        etc_hosts: "{{ etc_hosts_all }}"
+        env: '{ 
+          "EUREKA_SERVICE_HOST": "{{ eureka_service_host }}",
+          "EUREKA_SERVICE_PORT": "{{ eureka_service_port }}",
+          "TAIPAN_PUBLISH_HOST": "{{ ansible_hostname }}",
+          "TAIPAN_PUBLISH_PORT": "{{ repo_publish_port }}",
+          "TAIPAN_HOSTSERVER": "{{ taipan_hostserver }}",
+          "TAIPAN_PORT": "{{ taipan_port  }}"
               }'
         restart_policy: "always"
         memory: 2GB
