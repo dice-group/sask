@@ -46,47 +46,14 @@ webclient_instance_base_port: 9090
 
 ## WebClient Service Related properties -- END 
 
-
-## Cedric-MS Service Related properties -- START
-cedric_publish_port: 2225
-
-## Cedric-MS Service Related properties -- END 
-
-
-## DBPEDIA-MS Service Related properties -- START
-dbpedia_publish_port: 2224
-
-## DBPEDIA-MS Service Related properties -- END 
-
-
-## Executer-MS Service Related properties -- START
-executer_publish_port: 2500
-
-## Executer-MS Service Related properties -- END 
-
-
-## Fox-MS Service Related properties -- START
-fox_publish_port: 2222
-
-## Fox-MS Service Related properties -- END 
-
-
-## Fred-MS Service Related properties -- START
-fred_publish_port: 2223
-
-## Fred-MS Service Related properties -- END
-
-
-## OpenIE-MS Service Related properties -- START
-open_ie_publish_port: 2226
-
-## OpenIE-MS Service Related properties -- END
-
-
-## Sorookin-MS Service Related properties -- START
-sorookin_publish_port: 2227
-
-## Sorookin-MS Service Related properties -- END
+extractor_microservices:
+  - { microservice_name: 'cedric-ms',                 publish_port: 2225 }
+  - { microservice_name: 'dbpedia-ms',                publish_port: 2224 }
+  - { microservice_name: 'executer-ms',               publish_port: 2500 }
+  - { microservice_name: 'fox-ms',                    publish_port: 2222 }
+  - { microservice_name: 'fred-ms',                   publish_port: 2223 }
+  - { microservice_name: 'open-ie-ms',                publish_port: 2226 }
+  - { microservice_name: 'sorookin-ms',               publish_port: 2227 }
 
 
 ## Database-MS Service Related properties -- START
