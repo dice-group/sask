@@ -11,6 +11,18 @@ project-group-search-extraction
 [chatbot]
 project-group-search-extraction
 
+[extractors]
+project-group-search-extraction
+
+[hadoop-server]
+project-group-search-extraction
+
+[fuseki-server]
+project-group-search-extraction
+
+[taipan-server]
+project-group-search-extraction
+
 [sask:children]
 nodes
 eureka-server
@@ -27,3 +39,6 @@ chatbot_instances_per_node=1
 
 [webclient:vars]
 webclient_instances_per_node=1
+
+[extractors:vars]
+extractors_instance_per_node=1

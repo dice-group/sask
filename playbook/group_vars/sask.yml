@@ -24,7 +24,7 @@ image_tag: "latest"
 
 eureka_service_port: 8761
 
-eureka_service_host: "{{ groups['eureka-server']| join(',') }}"
+eureka_service_host: "{{ groups['eureka-server']| first }}"
 
 ## Eureka Service Related properties -- END
 
@@ -44,5 +44,86 @@ sessa_search_url: "http://localhost:7070/search?query="
 ## WebClient Service Related properties -- START
 webclient_instance_base_port: 9090
 
-
 ## WebClient Service Related properties -- END 
+
+
+## Cedric-MS Service Related properties -- START
+cedric_publish_port: 2225
+
+## Cedric-MS Service Related properties -- END 
+
+
+## DBPEDIA-MS Service Related properties -- START
+dbpedia_publish_port: 2224
+
+## DBPEDIA-MS Service Related properties -- END 
+
+
+## Ensemble-MS Service Related properties -- START
+ensemble_publish_port: 2400
+
+## Ensemble-MS Service Related properties -- END 
+
+
+## Executer-MS Service Related properties -- START
+executer_publish_port: 2500
+
+## Executer-MS Service Related properties -- END 
+
+
+## Fox-MS Service Related properties -- START
+dbpedia_publish_port: 2222
+
+## Fox-MS Service Related properties -- END 
+
+
+## Fred-MS Service Related properties -- START
+fred_publish_port: 2223
+
+## Fred-MS Service Related properties -- END
+
+
+## OpenIE-MS Service Related properties -- START
+openie_publish_port: 2226
+
+## OpenIE-MS Service Related properties -- END
+
+
+## Sorookin-MS Service Related properties -- START
+sorookin_publish_port: 2227
+
+## Sorookin-MS Service Related properties -- END
+
+
+## Database-MS Service Related properties -- START
+fuseki_publish_port: 3031
+
+# Hostserver where fuseki is running
+# It takes the hostname where fuseiki is running based on inventory
+fuseki_hostserver : "{{ groups['fuseki-server']| first }}"
+fuseki_port: 3030
+
+## Database-MS Service Related properties -- END
+
+
+## Repo-MS Service Related properties -- START
+hadoop_publish_port: 2300
+
+# Hostserver where Hadoop is running
+# It takes the hostname where hadoop is running based on inventory
+hadoop_hostserver : "{{ groups['hadoop-server']| first }}"
+hadoop_port: 50070
+
+## Repo-MS Service Related properties -- END
+
+
+## Taipan-MS Service Related properties -- START
+taipan_publish_port: 2228
+
+# Hostserver where Taipan is running
+# It takes the hostname where Taipan is running based on inventory
+taipan_hostserver : "{{ groups['taipan-server']| first }}"
+taipan_port: 5000
+
+## Taipan-MS Service Related properties -- END
+

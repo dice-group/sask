@@ -50,7 +50,7 @@
 
         etc_hosts: "{{ etc_hosts_all }}"
         env:
-          EUREKA_SERVICE_HOST: "{{ ansible_hostname }}"
+          EUREKA_SERVICE_HOST: "{{ eureka_service_host }}"
           EUREKA_SERVICE_PORT: "{{ eureka_service_port }}"
 
         restart_policy: "always"
