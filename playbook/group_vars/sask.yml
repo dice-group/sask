@@ -7,6 +7,16 @@ microservices:
   - chatbot
   - eureka-server
   - webclient
+  - cedric-ms
+  - database-ms
+  - sorookin-ms
+  - dbpedia-ms
+  - executer-ms
+  - fox-ms
+  - fred-ms
+  - open-ie-ms
+  - repo-ms
+  - taipan-ms
 
 image_tag: "latest"
 
