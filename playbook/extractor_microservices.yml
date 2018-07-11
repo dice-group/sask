@@ -75,7 +75,9 @@
           "EUREKA_SERVICE_HOST": "{{ eureka_service_host }}",
           "EUREKA_SERVICE_PORT": "{{ eureka_service_port }}",
           "REPO_PUBLISH_HOST": "{{ ansible_hostname }}",
-          "REPO_PUBLISH_PORT": "{{ repo_publish_port }}"
+          "REPO_PUBLISH_PORT": "{{ repo_publish_port }}",
+          "HADOOP_HOSTSERVER": "{{ hadoop_hostserver }}",
+          "HADOOP_PORT": "{{ hadoop_port  }}"
               }'
         restart_policy: "always"
         memory: 2GB
