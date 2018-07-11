@@ -127,5 +127,44 @@
         volumes:
           - /logs/:/logs/
 
+    - name: "Start the Fuseki server needed for Database Microservice"
+      docker_container:
+        state : "{{ container_state | default('started') }}"
+        name: "fuseki"
+        hostname: "{{ ansible_hostname }}"
+        image: stain/jena-fuseki:3.4.0
+        ports:
+          - 3030:3030
+        etc_hosts: "{{ etc_hosts_all }}"
+        restart_policy: "always"
+        log_driver: "json-file"
+        volumes:
+          - /sask/data/fuseki/:/fuseki
 
+    - name: "Starting the database microservice"
+      docker_container:
+        state : "{{ container_state | default('started') }}"
+        name: "database-ms"
+        hostname: "database-ms"
+        image: "{{ docker_repository }}/database-ms:{{ image_tag }}"
+        ports:
+          - "{{ database_publish_port }}:{{ database_publish_port }}"
+
+        etc_hosts: "{{ etc_hosts_all }}"
+        env: '{ 
+          "EUREKA_SERVICE_HOST": "{{ eureka_service_host }}",
+          "EUREKA_SERVICE_PORT": "{{ eureka_service_port }}",
+          "DATABASE_PUBLISH_HOST": "{{ ansible_hostname }}",
+          "DATABASE_PUBLISH_PORT": "{{ repo_publish_port }}",
+          "FUSEKI_HOSTSERVER": "{{ fuseki_hostserver }}",
+          "FUSEKI_PORT": "{{ fuseki_port  }}"
+              }'
+        restart_policy: "always"
+        memory: 2GB
+        log_driver: "json-file"
+        log_options:
+          max-size: "50m"
+          max-file: "1"
+        volumes:
+          - /logs/:/logs/
 
