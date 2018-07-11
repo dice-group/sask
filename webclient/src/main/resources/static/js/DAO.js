@@ -1,7 +1,8 @@
 /**
  * Data access object for the REST interfaces.
- * 
+ * @author Nilanjan
  * @author Kevin Haack
+ * 
  */
 ;
 var DAO = function(options) {
@@ -114,7 +115,7 @@ var DAO = function(options) {
 	
 /** fetch data from Query graph to display in table* */
 	
-	this.queryGraph = function()
+	this.queryGraph = function(success)
 	{
 		
 		$.ajax({
@@ -123,21 +124,20 @@ var DAO = function(options) {
 			success: function(data){
 				var parsedData = JSON.parse(data)
 				var bindingsArray = parsedData.results.bindings
-				console.log(parsedData)
+
+				var result = [];
 				bindingsArray.forEach(function(element) {
-					var bindingObj = element
-				$(element).each(function(id,val){
-					// var header = "<tr> <th>Subject</th> <th>Predicate</th>
-					// <th>Object</th></tr>";
-					var s = bindingObj.s.value;
-					var p = bindingObj.p.value;
-					var o = bindingObj.o.value;
-					var record_data = "<tr><td>"+s+"</td><td>"+p+"</td><td>"+o+"</td></tr>";
-	                $("#querytable").append(record_data);
-	                console.log(record_data);
-				});
-				}); 
 					
+					var s = element.s.value;
+					var p = element.p.value;
+					var o = element.o.value;
+					result.push({
+						s,
+						p,
+						o
+					});
+				}); 
+				success(result);
 		}
 	});
   };
