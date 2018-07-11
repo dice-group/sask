@@ -11,7 +11,6 @@ microservices:
   - database-ms
   - sorookin-ms
   - dbpedia-ms
-  - ensemble-ms
   - executer-ms
   - fox-ms
   - fred-ms
@@ -58,12 +57,6 @@ cedric_publish_port: 2225
 dbpedia_publish_port: 2224
 
 ## DBPEDIA-MS Service Related properties -- END 
-
-
-## Ensemble-MS Service Related properties -- START
-ensemble_publish_port: 2400
-
-## Ensemble-MS Service Related properties -- END 
 
 
 ## Executer-MS Service Related properties -- START
