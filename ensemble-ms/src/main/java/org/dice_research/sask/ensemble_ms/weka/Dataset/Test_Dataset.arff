@@ -1,0 +1,28 @@
+@relation DataExtraction2
+
+@attribute Sentence string
+@attribute Subject string
+@attribute Predicate string
+@attribute Object string
+@attribute class {True,False}
+
+@data
+'Ram was born in India',<http://example.org/Ram>,<http://example.org/birthplce>,<http://example.org/Argentina>,False
+'Harsh was born in India',<http://example.org/Harsh>,<http://example.org/birthplce>,<http://example.org/India>,True
+'Alex was born in Argentina',<http://example.org/Alex>,<http://example.org/birthplce>,<http://example.org/India>,False
+'Katty was born in Portugal',<http://example.org/Katty>,<http://example.org/birthplce>,<http://example.org/Portugal>,True
+'Kane was born in Russia',<http://example.org/Kane>,<http://example.org/birthplce>,<http://example.org/Russia>,True
+'Donald was born in Portugal',<http://example.org/Donald>,<http://example.org/birthplce>,'<http://example.org/Japan>',False
+'Thomas was born in Germany',<http://example.org/Thomas>,<http://example.org/birthplce>,<http://example.org/Germany>,True
+'Aahana was born in India',<http://example.org/Abc>,<http://example.org/birthplce>,<http://example.org/USA>,False
+'Tau was born in China',<http://example.org/Tau>,<http://example.org/birthplce>,<http://example.org/China>,True
+'Tau was born in Japan',<http://example.org/Tau>,<http://example.org/birthplce>,<http://example.org/Japan>,False
+'Kevin was born in Germany',<http://example.org/Kevin>,<http://example.org/birthplce>,<http://example.org/Germany>,True
+'Nick was born in Germany',<http://example.org/Nick>,<http://example.org/birthplce>,<http://example.org/Germany>,True
+'Kapil was born in USA',<http://example.org/Kapil>,<http://example.org/birthplce>,<http://example.org/USA>,False
+'Aamir was died in Russia',<http://example.org/Aahana>,<http://example.org/died>,<http://example.org/Russia>,True
+'James was born in Canada',<http://example.org/James>,<http://example.org/birthplce>,<http://example.org/Canada>,True
+'Jimmy was died in Mexico',<http://example.org/Katty>,<http://example.org/died>,<http://example.org/Mexico>,True
+'Robert was born in France',<http://example.org/Robert>,<http://example.org/birthplce>,<http://example.org/France>,True
+'Tom was born in China',<http://example.org/Tom>,<http://example.org/birthplce>,<http://example.org/Mexico>,True
+'Sunil was died in Pakistan',<http://example.org/Sunil>,<http://example.org/died>,<http://example.org/Pakistan>,True
