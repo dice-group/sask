@@ -14,7 +14,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
-
+/**
+ * This class take data from oke folder folder  sort them and provide it to different extractors and store
+ *	response from extractors
+ * @author Harsh Shah
+ */
 
 
 
@@ -26,7 +30,7 @@ public class SentenceExtractor
 	public static void main(String[] args) throws IOException, NullPointerException 
 	{
 		int i;
-		File path = new File("C:\\Users\\harsh\\Downloads\\Ensemble Data\\task3");
+		File path = new File("TrainingData");
 		File[] files = path.listFiles();
 		 List<String> sentences = new ArrayList<String>();
 		 

@@ -1,4 +1,4 @@
-package weka.api;
+package org.dice_research.sask.ensemble_ms.weka.api;
 import weka.core.Instances;
 import weka.core.converters.ArffLoader;
 import weka.core.converters.ArffSaver;
@@ -15,6 +15,12 @@ import weka.filters.unsupervised.attribute.StringToWordVector;
 import weka.classifiers.Evaluation;
 import weka.classifiers.trees.J48;
 import weka.classifiers.meta.FilteredClassifier;
+/**
+ * This class take data from weka dataset and predict the training data
+ * class using split by %
+ * @author Harsh Shah
+ */
+
 
 
 public class SplitDataset 
@@ -23,7 +29,7 @@ public class SplitDataset
 	public static void main(String[] args) throws Exception
 	{
 //		load the arff file
-		String filename = "C:\\Users\\harsh\\Desktop\\WEKA\\datasetExtraction.arff";
+		String filename = "Dataset\\datasetExtraction.arff";
 		DataSource source = new DataSource(filename);
 
 		Instances dataset = source.getDataSet();
@@ -33,7 +39,7 @@ public class SplitDataset
 		
 		ArffSaver saver = new ArffSaver();
 		saver.setInstances(dataset);
-		saver.setFile(new File("C:\\Users\\harsh\\Desktop\\WEKA\\datasetArffExtraction.arff"));
+		saver.setFile(new File("Dataset\\datasetArffExtraction.arff"));
 		saver.writeBatch();
 //		provide filter
 		StringToWordVector converterVector = new StringToWordVector();
@@ -47,7 +53,7 @@ public class SplitDataset
 		
 
 		
-		saver.setFile(new File("C:\\Users\\harsh\\Desktop\\WEKA\\datasetArff_Filtered.arff"));
+		saver.setFile(new File("Dataset\\datasetArff_Filtered.arff"));
 		saver.writeBatch();
 		//classify using j48
 		J48 Treeclassifier = new J48();
