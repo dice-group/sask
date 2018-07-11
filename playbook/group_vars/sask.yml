@@ -59,7 +59,7 @@ extractor_microservices:
 
 
 ## Database-MS Service Related properties -- START
-fuseki_publish_port: 3031
+database_publish_port: 3031
 
 # Hostserver where fuseki is running
 # It takes the hostname where fuseiki is running based on inventory
@@ -70,7 +70,7 @@ fuseki_port: 3030
 
 
 ## Repo-MS Service Related properties -- START
-hadoop_publish_port: 2300
+repo_publish_port: 2300
 
 # Hostserver where Hadoop is running
 # It takes the hostname where hadoop is running based on inventory

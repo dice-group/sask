@@ -10,7 +10,7 @@ eureka:
     metadataMap:
       type: repo
       friendlyname: Hadoop
-    hostName: ${HADOOP_PUBLISH_HOST:localhost} 
+    hostName: ${REPO_PUBLISH_HOST:localhost} 
     preferIpAddress: false 
   client:
     serviceUrl:
@@ -18,7 +18,7 @@ eureka:
 
 # HTTP Server (Tomcat) Port
 server: 
-  port: ${HADOOP_PUBLISH_PORT:2300}
+  port: ${REPO_PUBLISH_PORT:2300}
 
 # Disable Spring Boot's "Whitelabel" default error page, so we can use our own
 error:
