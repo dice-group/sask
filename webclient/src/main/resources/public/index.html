@@ -91,8 +91,7 @@
 				<h4>Chatbot</h4>
 				<div id="chat-chatbot" class="sask-border"></div>
 			</div>
-			<div class="col-lg-12 sask-column resizable" id="ex-query"
-				data-sizeMin="col-lg-6" data-sizeMax="col-lg-12">
+			<div class="col-lg-9 sask-column closable" id="ex-query">
 				<h4>Query sask</h4>
 				<div id="ex-query-table">
 				</div>
@@ -166,11 +165,15 @@
 						data
 					});
 					
+					
 					$('#ex-query').show();
+					$('#ex-workspace').parent().hide();
+					$('#chat-chatbot').parent().hide();
 				};
 				dao.queryGraph(success);
 
 			}
+
 
 			
 		
