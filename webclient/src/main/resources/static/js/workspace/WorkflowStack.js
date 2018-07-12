@@ -1,3 +1,10 @@
+/**
+ * Javascript class for the workflow stack. Provides the ability to build and
+ * manage a stack of workflows.
+ * 
+ * @author Kevin Haack
+ */
+;
 var WorkflowStack = function(options) {
 
 	/**

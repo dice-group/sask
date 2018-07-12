@@ -1,12 +1,9 @@
+package org.dice_research.sask.database_ms.rdftriples;
+
 /**
- * 
- *
  * @author Sepide Tari
  * @author Suganya Kannan
- *
- *
  **/
-package org.dice_research.sask.database_ms.RDFTriples;
 
 public class TripleDTO {
 	private String triple = "";

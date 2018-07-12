@@ -4,7 +4,11 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 import org.dice_research.sask_commons.workflow.Operator;
 import org.dice_research.sask_commons.workflow.Workflow;
-import org.springframework.web.client.RestOperations;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 public class StoreTask implements Runnable {
@@ -25,9 +29,14 @@ public class StoreTask implements Runnable {
 
 	@Override
 	public void run() {
-			logger.info("Start Thread: " + StoreTask.class.getName());	
-			String uri = "http://DATABASE-MS/updateGraph";
-			restTemplate.postForObject(uri, data, String.class);
+		logger.info("Start Thread: " + StoreTask.class.getName());
+		String uri = "http://DATABASE-MS";
+		HttpHeaders headers = new HttpHeaders();
+		MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
+		map.add("input", data);
+		HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, headers);
+		ResponseEntity<String> response = restTemplate.postForEntity(uri + "/updateGraph?", request, String.class);
+		logger.info(response.getStatusCode());
 	}
 
 	private String getTargetGrapName() {

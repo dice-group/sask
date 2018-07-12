@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
@@ -13,7 +14,6 @@
 		<version>1.5.8.RELEASE</version>
 	</parent>
 
-
 	<modules>
 		<module>cedric-ms</module>
 		<module>chatbot</module>
@@ -26,9 +26,56 @@
 		<module>fred-ms</module>
 		<module>open-ie-ms</module>
 		<module>repo-ms</module>
+		<module>taipan-ms</module>
 		<module>webclient</module>
 	</modules>
-
+	
+    <profiles>
+    	<profile>
+    		<!-- ~~~~~~~ for local usage ~~~~~~~ -->
+      		<id>local</id>
+      		<properties>
+			<eureka.hostname>localhost</eureka.hostname>
+			<eureka.port>8761</eureka.port>
+			<hadoop.hostserver>localhost</hadoop.hostserver>
+			<hadoop.port>50070</hadoop.port>
+			<fuseki.hostserver>localhost</fuseki.hostserver>
+			<fuseki.port>3030</fuseki.port>
+			<taipan.hostserver>localhost</taipan.hostserver>
+			<taipan.port>5000</taipan.port>
+      		</properties>
+    	</profile>
+    	<profile>
+        	<!-- ~~~~~~~ for docker usage ~~~~~~~ -->
+      		<id>docker</id>
+      		<properties>
+			<eureka.hostname>eureka-server</eureka.hostname>
+			<eureka.port>8761</eureka.port>
+			<hadoop.hostserver>hadoop</hadoop.hostserver>
+			<hadoop.port>50070</hadoop.port>
+			<fuseki.hostserver>fuseki</fuseki.hostserver>
+			<fuseki.port>3030</fuseki.port>
+			<taipan.hostserver>taipan</taipan.hostserver>
+			<taipan.port>5000</taipan.port>
+      		</properties>
+    	</profile>
+		<profile>
+			<!-- ~~~~~~~ for windows ~~~~~~~ -->
+			<id>windows</id>
+			<properties>
+				<logback.dir>C:/logs/</logback.dir>
+				<logback.archive>C:/logs/archived/</logback.archive>
+			</properties>
+		</profile>
+		<profile>
+			<!-- ~~~~~~~ for linux ~~~~~~~ -->
+			<id>linux</id>
+			<properties>
+				<logback.dir>/logs/</logback.dir>
+				<logback.archive>/logs/archived/</logback.archive>
+			</properties>
+		</profile>
+  	</profiles>
 
 	<properties>
 		<!-- ~~~~~~~ general ~~~~~~~ -->
@@ -42,6 +89,13 @@
 		<spring.test.version>1.5.8.RELEASE</spring.test.version>
 		<spring.cloud.version>1.3.0.RELEASE</spring.cloud.version>
 		<spring.boot.version>1.5.8.RELEASE</spring.boot.version>
+
+		<!-- ~~~~~~~ docker ~~~~~~~ -->
+		<docker.image.prefix>dicegroup</docker.image.prefix>
+
+		<!-- ~~~~~~~ logback ~~~~~~~ -->
+		<logback.level.file>WARN</logback.level.file>
+		<logback.level.console>WARN</logback.level.console>
 	</properties>
 
 	<dependencies>
@@ -87,6 +141,13 @@
 	</dependencies>
 
 	<build>
+		<!-- ~~~~~~~ resource filtering ~~~~~~~ -->
+		<resources>
+	        <resource>
+	            <directory>src/main/resources</directory>
+	            <filtering>true</filtering>
+	        </resource>
+	    </resources>
 		<plugins>
 			<!-- ~~~~~~~ spring boot ~~~~~~~ -->
 			<plugin>
@@ -97,6 +158,24 @@
 					<!-- https://blog.frankel.ch/migrating-to-java-9/1/ -->
 					<jvmArguments>--add-modules java.xml.bind</jvmArguments>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>dockerfile-maven-plugin</artifactId>
+				<version>1.3.6</version>
+				<configuration>
+					<repository>${docker.image.prefix}/${project.artifactId}</repository>
+					<buildArgs>
+					    <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+					</buildArgs>
+				    </configuration>
+				<dependencies>
+				    <dependency>
+				        <groupId>javax.activation</groupId>
+				        <artifactId>activation</artifactId>
+				        <version>1.1.1</version>
+				    </dependency>
+				</dependencies>
 			</plugin>
 		</plugins>
 	</build>

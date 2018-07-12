@@ -34,7 +34,6 @@ import weka.core.Attribute;
 import weka.core.DenseInstance;
 import weka.core.Instances;
 import weka.core.SelectedTag;
-import weka.core.Utils;
 import weka.core.converters.ArffLoader.ArffReader;
 import weka.filters.unsupervised.attribute.StringToWordVector;
 

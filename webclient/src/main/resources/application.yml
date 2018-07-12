@@ -12,7 +12,7 @@ eureka:
       friendlyname: Webclient
   client:
     serviceUrl:
-      defaultZone: http://localhost:1111/eureka/
+      defaultZone: http://@eureka.hostname@:@eureka.port@/eureka/
 
 # Disable Spring Boot's "Whitelabel" default error page, so we can use our own
 error:
@@ -27,17 +27,8 @@ server:
 zuul:
   routes:
     chatbot:
-      path: /chatbot/**
-      serviceId: chatbot
-    fred:
-      path: /fred-ms/**
-      serviceId: FRED-MS
-    fox:
-      path: /fox-ms/**
-      serviceId: FOX-MS
-    spotlight:
-      path: /spotlight-ms/**
-      serviceId: SPOTLIGHT-MS
+      path: /CHATBOT/**
+      serviceId: CHATBOT
     repo:
       path: /REPO-MS/**
       serviceId: REPO-MS
