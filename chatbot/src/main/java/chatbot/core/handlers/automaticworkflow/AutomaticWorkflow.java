@@ -37,14 +37,13 @@ import chatbot.io.response.ResponseList;
 
 @RestController
 public class AutomaticWorkflow extends Handler {
-	
+	private static Logger log = Logger.getLogger(AutomaticWorkflow.class.getName());
+
 	private final RestTemplate restTemplate;
 	
 	public AutomaticWorkflow(RestTemplate restTemplate) {
 		this.restTemplate = restTemplate;
 	}
-
-	private static Logger log = Logger.getLogger(AutomaticWorkflow.class.getName());
 
 	public ResponseList search(IncomingRequest request) throws IOException {
 		try {
@@ -72,13 +71,11 @@ public class AutomaticWorkflow extends Handler {
 		
 		ResponseList returnValue =  new ResponseList();
 		Response responseData = new Response();
-		String keyword = null;
 		String extractor = null;
 		String fileName = null;
 
-		if (splitQuery[0].toLowerCase().equals("extract") ) {
+		if (splitQuery[0].equalsIgnoreCase("extract") ) {
 			if(splitQuery.length==5) {
-				keyword = splitQuery[0];
 				fileName = splitQuery[2];
 				extractor = splitQuery[4];
 			}else {
@@ -119,7 +116,7 @@ public class AutomaticWorkflow extends Handler {
   		}
 			 if(fileList.contains(fileName)) {
 				 log.info("FILE PRESENT");				
-					fileInfo= constructWorkFlow(extractor,fileName);				
+					fileInfo= exeWorkFlow(extractor,fileName);				
 			 } else {
 				 log.info("FILE NOT PRESENT");
 				 responseData.setContent("Please enter the correct file name");
@@ -129,7 +126,7 @@ public class AutomaticWorkflow extends Handler {
 		return fileInfo; 
 	}
 	
-	public ResponseList constructWorkFlow(String extractor,String fileName) {
+	public ResponseList exeWorkFlow(String extractor, String fileName) {
 		ResponseList returnedResponse =  new ResponseList();
 		Response responseData = new Response();
 
@@ -172,7 +169,7 @@ public class AutomaticWorkflow extends Handler {
 		o2.setOutputs(outputs2);
 		
 		Map<String, Operator> op2 = new HashMap<>();
-		op1.put("node_178rj2s179x", o2);
+		op2.put("node_178rj2s179x", o2);
 	
 		// o3
 		Map<String, String> inputs3 = new HashMap<>();
