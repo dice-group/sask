@@ -414,7 +414,6 @@ public class IntentLearner {
 			
 			for (String string : automaticTerms) {
 				if (query.contains(string)) {
-					log.warn("IN FOR EACH");
 					log.warn("Query::"+query);
 					AutomaticWorkflow automaticWorflowObject = new AutomaticWorkflow(restTemplate);
 					return automaticWorflowObject;

@@ -28,7 +28,12 @@ import chatbot.core.handlers.Handler;
 import chatbot.io.incomingrequest.IncomingRequest;
 import chatbot.io.response.Response;
 import chatbot.io.response.ResponseList;
-
+/**
+ * This class represents executes the worflow automatically with commands.
+ * 
+ * @author Juzer Kanchwala
+ *
+ */
 
 @RestController
 public class AutomaticWorkflow extends Handler {
@@ -43,16 +48,13 @@ public class AutomaticWorkflow extends Handler {
 
 	public ResponseList search(IncomingRequest request) throws IOException {
 		try {
-			
+			log.info("Search, Automatic Handling Workflow");
 			ResponseList responselist = new ResponseList();
 			String query = request.getRequestContent()
 			                      .get(0)
 			                      .getText();
-			                      
-			log.warn("IN AutomaticWorkflow SEARCH:::"+query);
-			
+			   			
 			responselist = startFunction(query);
-			log.warn("RESPONSE LIST SEARCH::"+responselist);
 			return responselist;
 
 		} catch (Exception e) {
@@ -66,92 +68,60 @@ public class AutomaticWorkflow extends Handler {
 	
 	public ResponseList startFunction(String query) {
 
-		int queryLength = query.trim().split("\\s+").length;
-		log.warn("Start Func Query:"+query);
-		log.warn("Start Func Query Length:"+query.trim().split("\\s+").length);
-
 		String[] splitQuery = query.trim().split(" ");
-		log.warn("Start Func Query Equals:"+splitQuery[0].toLowerCase().equals("extract"));
 		
 		ResponseList returnValue =  new ResponseList();
-		log.warn("splitQuery.length::"+(splitQuery.length==1));
 		Response responseData = new Response();
 		String keyword = null;
 		String extractor = null;
 		String fileName = null;
-		
-		
-		
-//		log.info("Compare length::"+ (queryLength > 1));
-//		log.info("Compare length Equal::"+ (queryLength == 1));
-//		 if(splitQuery[0].toLowerCase().equals("extract") && splitQuery.length==1 ){
-//			log.info("QUERY EXTRACT STRING EMPTY");
-//			responseData.setContent("The query should be \"extract extractor filename\"");
-//			returnValue.addMessage(responseData);
-//		}else 
-			if (splitQuery[0].toLowerCase().equals("extract") ) {
-				log.warn("QUERY EXTRACT::"+splitQuery.length);
-				if(splitQuery.length==5) {
-					keyword = splitQuery[0];
-					fileName = splitQuery[2];
-					extractor = splitQuery[4];
-					log.warn("keyword"+keyword);
-					log.warn("extractor"+extractor);
-					log.warn("fileName"+fileName);
-				}else {
-					responseData.setContent("The query should be \"Extract From Filename Using Extractor\"");
-					returnValue.addMessage(responseData);
-					return returnValue;
-				}
-				
-				if( !extractor.isEmpty() && !fileName.isEmpty()) {
-					log.warn("IN EXCT AND FILE NT EMPTY");
-					returnValue = checkFilePresent(extractor, fileName);
-										
-				} else {
-					log.warn("QUERY EXTRACT STRING IN ELSE");
-					responseData.setContent("UNKNOWN EXCEPTION FROM ELSE");
-					returnValue.addMessage(responseData);
-				}
+
+		if (splitQuery[0].toLowerCase().equals("extract") ) {
+			if(splitQuery.length==5) {
+				keyword = splitQuery[0];
+				fileName = splitQuery[2];
+				extractor = splitQuery[4];
+			}else {
+				responseData.setContent("The query should be \"Extract From Filename Using Extractor\"");
+				returnValue.addMessage(responseData);
+				return returnValue;
+			}
+			// Future TODO: Make a check for valid Extractor
+			if( !extractor.isEmpty()) {
+				returnValue = checkFilePresent(extractor, fileName);
+									
+			} else {
+				responseData.setContent("Invalid Extractor");
+				returnValue.addMessage(responseData);
+			}
 		}
-//			else if(splitQuery[0].toLowerCase().equals("upload") ) {
-//			returnValue = uploadFile();
-//			
-//		}
-		return returnValue;
-		
+
+		return returnValue;		
 	}
 
 	public ResponseList checkFilePresent(String extractor, String fileName) {
 		ResponseList fileInfo =  new ResponseList();
 		Response responseData = new Response();
-		log.warn("In extractWF");
-		log.warn("extractor:::"+extractor);	
-		log.warn("fileName:::"+fileName);
-		
+				
 		String uri = "http://REPO-MS/getHdfsStructure?location=repo";
   		String response = restTemplate.getForObject(uri, String.class);
   		
   		JsonElement jelement = new JsonParser().parse(response);
 		JsonObject jsonInputText = jelement.getAsJsonObject();
-  		log.warn("jsonInputText:"+jsonInputText);
 
 		JsonArray typeValue = jsonInputText.getAsJsonArray("fileList");
-  		log.warn("typeValue:"+typeValue);
-  		log.warn("typeValueSize:"+typeValue.size());
-  		List<String> fileList = new ArrayList<String>();
+   		List<String> fileList = new ArrayList<String>();
 
   		for(int i = 0; i<typeValue.size(); i++) {
   			 JsonObject objectTest = typeValue.get(i).getAsJsonObject();
   			 String receivedFileName = objectTest.get("suffix").getAsString();
   			 fileList.add(receivedFileName);
   		}
-			 log.warn("filename:"+fileList);
 			 if(fileList.contains(fileName)) {
-				 log.warn("FILE PRESENT");				
+				 log.info("FILE PRESENT");				
 					fileInfo= constructWorkFlow(extractor,fileName);				
 			 } else {
-				 log.warn("FILE NOT PRESENT");
+				 log.info("FILE NOT PRESENT");
 				 responseData.setContent("Please enter the correct file name");
 				 fileInfo.addMessage(responseData);
 			 }
@@ -160,10 +130,8 @@ public class AutomaticWorkflow extends Handler {
 	}
 	
 	public ResponseList constructWorkFlow(String extractor,String fileName) {
-		ResponseList fileInfo =  new ResponseList();
+		ResponseList returnedResponse =  new ResponseList();
 		Response responseData = new Response();
-		responseData.setContent("RETURN CONSTRUCTWF FUNC");
-		log.warn("IN CONSTRUCT WORKFLOW");
 
 		/*
 		 * create
@@ -205,8 +173,6 @@ public class AutomaticWorkflow extends Handler {
 		
 		Map<String, Operator> op2 = new HashMap<>();
 		op1.put("node_178rj2s179x", o2);
-		log.warn("O2 To String:::"+o2.toString());
-		
 	
 		// o3
 		Map<String, String> inputs3 = new HashMap<>();
@@ -222,8 +188,6 @@ public class AutomaticWorkflow extends Handler {
 	
 		Map<String, Operator> op3 = new HashMap<>();
 		op3.put("node_hcj9pytiiml", o3);
-		log.warn("O3 To String:::"+o3.toString());
-
 		
 		// l1
 		Link l1 = new Link();
@@ -248,8 +212,6 @@ public class AutomaticWorkflow extends Handler {
 		w.getLinks().add(l1);
 		w.getLinks().add(l2);
 				
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.APPLICATION_JSON);
 				
 		ObjectMapper mapper = new ObjectMapper();
 		SimpleModule module = new SimpleModule();
@@ -257,25 +219,30 @@ public class AutomaticWorkflow extends Handler {
 		mapper.registerModule(module);
 		try {
 			String jsonInString = mapper.writeValueAsString(w);
-			
-			log.warn("jsonInString..."+jsonInString);
-			log.warn("BEFOR REST CALL***");
 
-			String uri1 = "http://EXECUTER-MS/executeWorkflow";
-		
+			HttpHeaders headers = new HttpHeaders();
+			headers.setContentType(MediaType.APPLICATION_JSON);
 			HttpEntity<String> request = new HttpEntity<String>(jsonInString, headers);
-			ResponseEntity<String> response = restTemplate.postForEntity(uri1, request, String.class );
-		
-			log.warn("Response Code::."+response.getStatusCodeValue());
+
+			log.info("jsonInString::"+jsonInString);
+
+			String uri = "http://EXECUTER-MS/executeWorkflow";		
+			ResponseEntity<String> httpResponse = restTemplate.postForEntity(uri, request, String.class );
+			log.info("Response Code::"+httpResponse.getStatusCodeValue());
+			
+			if(httpResponse.getStatusCodeValue() == 200) {
+				responseData.setContent("Query executed successfully");
+				returnedResponse.addMessage(responseData);	
+			}else {
+				responseData.setContent("Query failed");
+				returnedResponse.addMessage(responseData);
+			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		
-			responseData.setContent("done");
-			fileInfo.addMessage(responseData);	
-
-	return fileInfo;
+		}		
+		log.info("Returned Response::"+ returnedResponse.getMessageData().get(0).getContent());
+	return returnedResponse;
 	}
 	
 }
