@@ -24,7 +24,7 @@ public class QAServiceHandler extends Handler {
 
     private static final Logger log = Logger.getLogger(QAServiceHandler.class);
 
-    private static final String URL = "http://localhost:8080/qa/{var}"; // TODO: 11/07/2018 read from application.yml later
+    private static final String URL = "http://localhost:8082/qa/{var}"; // TODO: 11/07/2018 read from application.yml later
 
     private final RestTemplate restTemplate;
 
@@ -39,7 +39,7 @@ public class QAServiceHandler extends Handler {
         EntryInformation entry = new EntryInformation();
         entry.setDisplayText(answer);
         entry.setButtonType(EntryInformation.Type.URL);
-        entry.setUri(answer);
+        entry.setUri("http://test/uri");
         Response response = new Response();
         response.addEntry(entry);
         ResponseList responseList = new ResponseList();

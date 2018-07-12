@@ -1,0 +1,15 @@
+# Service registers under this name
+# Control the InternalResourceViewResolver:
+spring:
+  application:
+    name: qa-ms
+
+# Discovery Server Access
+eureka:
+  instance:
+    metadataMap:
+      type: qa-ms
+      friendlyname: qa-ms
+
+server:
+  port: 8082
