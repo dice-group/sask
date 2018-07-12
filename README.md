@@ -22,7 +22,9 @@ If all microservices are running, but are not available in the application: Wait
 - Currently discovered microservices by the UI: http://localhost:9090/status.html
 - Currently registered microservices by eureka: http://localhost:8761/
 
-You will find example data for the extraction in the wiki: https://github.com/dice-group/sask/wiki/Example-Data
+You will find example data for the extraction in the wiki: https://github.com/dice-group/sask/wiki/Example-Data.
+
+For chatbot, Refer to the ReadMe under chatbot microservices. For Example: Query Type, Some info about the handlers etc.
 
 ## Necessary components
 - hadoop docker container [see here](https://github.com/dice-group/sask/wiki/Hadoop)
@@ -33,3 +35,4 @@ You will find example data for the extraction in the wiki: https://github.com/di
 - repo ms
 - at least one extractor
 - database ms
+- chatbot
