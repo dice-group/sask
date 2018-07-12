@@ -24,7 +24,7 @@ If all microservices are running, but are not available in the application: Wait
 
 You will find example data for the extraction in the wiki: https://github.com/dice-group/sask/wiki/Example-Data.
 
-For chatbot, Refer to the ReadMe under chatbot microservices for Example Query Type, Some info about the handlers etc.
+For chatbot, Refer to the ReadMe under chatbot microservices. For Example: Query Type, Some info about the handlers etc.
 
 ## Necessary components
 - hadoop docker container [see here](https://github.com/dice-group/sask/wiki/Hadoop)
