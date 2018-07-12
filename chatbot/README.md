@@ -9,9 +9,13 @@ Start chatbot microservice and webclient microservice for UI. For Start procedur
 ### Categories of Query:
 
 Automatic Workflow Generation (For ex: Extract File1.txt using FOX into sask).
+
 QAHandler: Question Answer (For ex: What is the capital of Germany? Who are the members of the German national Football team? etc).
+
 SessaHandler: Keyword Search (For ex: Berlin Mayor, President of USA etc).
+
 Eliza: Psychologist (For ex: I want to know something etc.)
+
 Rivescript: Personal Greetings( For ex: Hello, How are you, good bye etc).
 
 ### About Current Handlers:
