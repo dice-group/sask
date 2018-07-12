@@ -215,7 +215,9 @@ public class AutomaticWorkflow extends Handler {
 		o1.setId("node_hgibcp02st");
 		o1.setContent("/testData.txt");
 		o1.setOutputs(outputs1);
-				
+		
+		Map<String, Operator> op1 = new HashMap<>();
+		op1.put("node_hgibcp02st", o1);
 		// o2
 		Map<String, String> inputs2 = new HashMap<>();
 		inputs2.put("input_tzil25otre", "NL");
@@ -232,6 +234,8 @@ public class AutomaticWorkflow extends Handler {
 		o2.setInputs(inputs2);
 		o2.setOutputs(outputs2);
 		
+		Map<String, Operator> op2 = new HashMap<>();
+		op1.put("node_178rj2s179x", o2);
 		log.warn("O2 To String:::"+o2.toString());
 	
 		// o3
@@ -245,6 +249,8 @@ public class AutomaticWorkflow extends Handler {
 		o3.setContent("sask");
 		o3.setInputs(inputs3);
 	
+		Map<String, Operator> op3 = new HashMap<>();
+		op3.put("node_hcj9pytiiml", o3);
 		log.warn("O3 To String:::"+o3.toString());
 
 		
@@ -271,7 +277,11 @@ public class AutomaticWorkflow extends Handler {
 		w.getOperators().put("node_hcj9pytiiml", o3);
 		w.getLinks().add(l1);
 		w.getLinks().add(l2);
-
+		
+		w.setOperators(op1);
+		w.setOperators(op2);
+		w.setOperators(op3);
+		
 //		w.getNextOperators(o2);
 //		w.setOperators(operators);
 //		w.getStartOperatorSet().add(o1);
@@ -295,6 +305,9 @@ public class AutomaticWorkflow extends Handler {
 			ResponseEntity<String> response = restTemplate.postForEntity(uri1, request , String.class );
 			
 			log.info("Response Code::."+response.getStatusCodeValue());
+			
+			responseData.setContent("done");
+			fileInfo.addMessage(responseData);
 			
 		} catch (JsonProcessingException e) {
 			// TODO Auto-generated catch block
@@ -375,8 +388,7 @@ public class AutomaticWorkflow extends Handler {
 //		Boolean response = restTemplate.postForObject(uri, workflow, Boolean.class);
 //		System.out.println("Response found=" + response);
 		
-			responseData.setContent("done");
-			fileInfo.addMessage(responseData);	
+				
 
 	return fileInfo;
 	}
@@ -393,4 +405,87 @@ public class AutomaticWorkflow extends Handler {
 
 //{\"operators\":{\"node_hgibcp02st\":{\"top\":20,\"left\":100,\"properties\":{\"type\":\"file\",\"id\":\"node_hgibcp02st\",\"content\":\"\/testData.txt\",\"title\":\"testData.txt\",\"inputs\":{},\"outputs\":{\"output_55uqv2wzcus\":{\"label\":\"NL\"},\"output_y97vayejxre\":{\"label\":\"NL\"}}}},\"node_178rj2s179x\":{\"top\":0,\"left\":300,\"properties\":{\"type\":\"extractor\",\"id\":\"node_178rj2s179x\",\"content\":\"FOX-MS\",\"title\":\"FOX\",\"inputs\":{\"input_tzil25otre\":{\"label\":\"NL\"},\"input_2hfqgk71ukp\":{\"label\":\"NL\"}},\"outputs\":{\"output_a2b3epd6nd\":{\"label\":\"RDF\"},\"output_09phmd5hdmvi\":{\"label\":\"RDF\"}}}},\"node_hcj9pytiiml\":{\"top\":0,\"left\":480,\"properties\":{\"type\":\"db\",\"id\":\"node_hcj9pytiiml\",\"content\":\"sask\",\"title\":\"sask\",\"inputs\":{\"input_5ezhp221vou\":{\"label\":\"RDF\"},\"input_g4z7qll7d8s\":{\"label\":\"RDF\"}},\"outputs\":{}}}},\"links\":{\"0\":{\"fromOperator\":\"node_hgibcp02st\",\"fromConnector\":\"output_55uqv2wzcus\",\"fromSubConnector\":0,\"toOperator\":\"node_178rj2s179x\",\"toConnector\":\"input_tzil25otre\",\"toSubConnector\":0},\"1\":{\"fromOperator\":\"node_178rj2s179x\",\"fromConnector\":\"output_a2b3epd6nd\",\"fromSubConnector\":0,\"toOperator\":\"node_hcj9pytiiml\",\"toConnector\":\"input_5ezhp221vou\",\"toSubConnector\":0}},\"operatorTypes\":{}}\r\n
 
+//HttpHeaders headers = new HttpHeaders();
+//headers.setContentType(MediaType.APPLICATION_JSON);
+//HttpEntity<Workflow> entity = new HttpEntity<Workflow>(workflow,headers);
+
+//ResponseEntity<String> out = restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
+//log.warn("Status COde::"+out.getStatusCode());
+//log.warn("Before rest call.."+restTemplate.postForObject("http://EXECUTER-MS/executeWorkflow",workflow, Workflow.class ));
+
+//try {
+//log.warn("In TRy");
+//ResponseEntity<String>  response = restTemplate.postForEntity(uri, workflow, String.class);
+//log.warn("RESPONE:"+response.getStatusCode());
+//log.warn("CONSTRUCT WORKFLOW RESPONSE::"+response );
+//} catch(Exception ex) {
+//	throw new NullPointerException("Failed to send input to fred (" + ex.getMessage() + ").");
+//}
+//if (response.isEmpty()) {
+
+//JSONObject obj = new JSONObject();
+//try {
+//	obj = new JSONObject("{\"operators\":{\"node_hgibcp02st\":{\"top\":20,\"left\":100,\"properties\":{\"type\":\"file\",\"id\":\"node_hgibcp02st\",\"content\":\"\/testData.txt\",\"title\":\"testData.txt\",\"inputs\":{},\"outputs\":{\"output_55uqv2wzcus\":{\"label\":\"NL\"},\"output_y97vayejxre\":{\"label\":\"NL\"}}}},\"node_178rj2s179x\":{\"top\":0,\"left\":300,\"properties\":{\"type\":\"extractor\",\"id\":\"node_178rj2s179x\",\"content\":\"FOX-MS\",\"title\":\"FOX\",\"inputs\":{\"input_tzil25otre\":{\"label\":\"NL\"},\"input_2hfqgk71ukp\":{\"label\":\"NL\"}},\"outputs\":{\"output_a2b3epd6nd\":{\"label\":\"RDF\"},\"output_09phmd5hdmvi\":{\"label\":\"RDF\"}}}},\"node_hcj9pytiiml\":{\"top\":0,\"left\":480,\"properties\":{\"type\":\"db\",\"id\":\"node_hcj9pytiiml\",\"content\":\"sask\",\"title\":\"sask\",\"inputs\":{\"input_5ezhp221vou\":{\"label\":\"RDF\"},\"input_g4z7qll7d8s\":{\"label\":\"RDF\"}},\"outputs\":{}}}},\"links\":{\"0\":{\"fromOperator\":\"node_hgibcp02st\",\"fromConnector\":\"output_55uqv2wzcus\",\"fromSubConnector\":0,\"toOperator\":\"node_178rj2s179x\",\"toConnector\":\"input_tzil25otre\",\"toSubConnector\":0},\"1\":{\"fromOperator\":\"node_178rj2s179x\",\"fromConnector\":\"output_a2b3epd6nd\",\"fromSubConnector\":0,\"toOperator\":\"node_hcj9pytiiml\",\"toConnector\":\"input_5ezhp221vou\",\"toSubConnector\":0}},\"operatorTypes\":{}}\r\n");
+//} catch (JSONException e) {
+//	log.warn("IN JSON EXCP");
+//	// TODO Auto-generated catch block
+//	e.printStackTrace();
+//}
+//Workflow work = g.fromJson(jsonString, Player.class);		
+//
+//JSONParser parser = new JSONParser();
+//Object object = null;
+//try {log.warn("File Reading");
+//	object = parser.parse(new FileReader("D:\\gitCloneFolder\\NewAutomaticHandlerCode\\sask\\chatbot\\src\\main\\resources\\JsonTestData.json"));
+//} catch (IOException | ParseException e) {
+//	// TODO Auto-generated catch block
+//	e.printStackTrace();
+//}
+//  
+//  //convert Object to JSONObject
+////  JSONObject jsonObject = (JSONObject)object;
+//log.warn("Casting to wf obj::");
+//Workflow obj = (Workflow)object;
+//ObjectMapper mapper = new ObjectMapper();
+//String jsonInString = mapper.writeValueAsString(workflow);
+//log.warn(message);
+
+////HttpHeaders headers = new HttpHeaders();
+////headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+////HttpEntity<Workflow> request1 = new HttpEntity<Workflow>(workflow, headers);
+//
+////ResponseEntity<?> response = restTemplate.postForEntity("http://EXECUTER-MS/executeWorkflow",request1 , String.class );
+
+
+//String response = restTemplate.getForObject("http://EXECUTER-MS/executeWorkflow",  String.class, request1 );
+//extract from testData.txt using OpenIE
+//String response = restTemplate.exchange(uri, String.class, workflow);
+
+//JSONParser parser = new JSONParser();
+//Object object = null;
+//try {log.warn("File Reading");
+//	object = parser.parse(new FileReader("D:\\gitCloneFolder\\NewAutomaticHandlerCode\\sask\\chatbot\\src\\main\\resources\\JsonTestData.json"));
+//} catch (IOException | ParseException e) {
+//	// TODO Auto-generated catch block
+//	e.printStackTrace();
+//}
+//  
+//  //convert Object to JSONObject
+////  JSONObject jsonObject = (JSONObject)object;
+//log.warn("Casting to wf obj::");
+//Workflow obj = (Workflow)object;
+//ObjectMapper mapper = new ObjectMapper();
+//String jsonInString = mapper.writeValueAsString(workflow);
+//log.warn(message);
+
+////HttpHeaders headers = new HttpHeaders();
+////headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+////HttpEntity<Workflow> request1 = new HttpEntity<Workflow>(workflow, headers);
+//
+////ResponseEntity<?> response = restTemplate.postForEntity("http://EXECUTER-MS/executeWorkflow",request1 , String.class );
+
+
+//String response = restTemplate.getForObject("http://EXECUTER-MS/executeWorkflow",  String.class, request1 );
+//extract from testData.txt using OpenIE
+//String response = restTemplate.exchange(uri, String.class, workflow);
 
