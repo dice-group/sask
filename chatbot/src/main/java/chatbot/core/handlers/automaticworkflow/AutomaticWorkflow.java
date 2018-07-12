@@ -35,9 +35,6 @@ import chatbot.io.response.ResponseList;
 public class AutomaticWorkflow extends Handler {
 	
 	private final RestTemplate restTemplate;
-//	@Autowired
-//	@LoadBalanced
-//	protected RestTemplate restTemplate;
 	
 	public AutomaticWorkflow(RestTemplate restTemplate) {
 		this.restTemplate = restTemplate;
@@ -47,8 +44,7 @@ public class AutomaticWorkflow extends Handler {
 
 	public ResponseList search(IncomingRequest request) throws IOException {
 		try {
-			// Analyze passed Output from Rivescript for whether further
-			// processing is required.
+			
 			ResponseList responselist = new ResponseList();
 			String query = request.getRequestContent()
 			                      .get(0)
@@ -61,8 +57,7 @@ public class AutomaticWorkflow extends Handler {
 			return responselist;
 
 		} catch (Exception e) {
-			// Check if we can create a logger.
-			log.error("search, Exception in handling Rivescript Queries");
+			log.error("search, Exception in handling Automatic Handling Queries");
 			ResponseList responselist = new ResponseList();
 			responselist.setError();
 			return responselist;
@@ -113,9 +108,7 @@ public class AutomaticWorkflow extends Handler {
 				if( !extractor.isEmpty() && !fileName.isEmpty()) {
 					log.warn("IN EXCT AND FILE NT EMPTY");
 					returnValue = checkFilePresent(extractor, fileName);
-					
-//						returnValue = constructWorkFlow(extractor, fileName);
-					
+										
 				} else {
 					log.warn("QUERY EXTRACT STRING IN ELSE");
 					responseData.setContent("UNKNOWN EXCEPTION FROM ELSE");
@@ -152,7 +145,7 @@ public class AutomaticWorkflow extends Handler {
   		for(int i = 0; i<typeValue.size(); i++) {
   			 JsonObject objectTest = typeValue.get(i).getAsJsonObject();
   			 String receivedFileName = objectTest.get("suffix").getAsString();
-  			fileList.add(receivedFileName);
+  			 fileList.add(receivedFileName);
   		}
 			 log.warn("filename:"+fileList);
 			 if(fileList.contains(fileName)) {
@@ -163,23 +156,10 @@ public class AutomaticWorkflow extends Handler {
 				 responseData.setContent("Please enter the correct file name");
 				 fileInfo.addMessage(responseData);
 			 }
-//  		log.warn("After search rest call");
 
 		return fileInfo; 
 	}
 	
-//	public ResponseList constructWorkFlow(String extractor,String fileName) {
-//		ResponseList fileInfo =  new ResponseList();
-//		Response responseData = new Response();
-//
-//		log.warn("IN TEST REQUEST");
-//		String uri = "http://EXECUTER-MS/test";
-//  		String response = restTemplate.postForObject(uri, "test",String.class);
-//		
-//		responseData.setContent(response);		
-//		fileInfo.addMessage(responseData);;
-//		return fileInfo;
-//	}
 	public ResponseList constructWorkFlow(String extractor,String fileName) {
 		ResponseList fileInfo =  new ResponseList();
 		Response responseData = new Response();
@@ -193,7 +173,6 @@ public class AutomaticWorkflow extends Handler {
 		 */
 		// o1		
 		Map<String, String> outputs1 = new HashMap<>();	
-//		String outputLabel1 = "{\"label\": \"NL\" }";
 
 		outputs1.put("output_55uqv2wzcus", "NL");
 		outputs1.put("output_y97vayejxre", "NL");
@@ -210,13 +189,11 @@ public class AutomaticWorkflow extends Handler {
 		
 		// o2
 		Map<String, String> inputs2 = new HashMap<>();
-//		String inputLabel1 = "{\"label\": \"NL\" }";
 		
 		inputs2.put("input_tzil25otre", "NL");
 		inputs2.put("input_2hfqgk71ukp", "NL");
 
 		Map<String, String> outputs2 = new HashMap<>();
-//		String outputLabel2 = "{\"label\": \"RDF\" }";
 
 		outputs2.put("output_a2b3epd6nd", "RDF");
 		outputs2.put("output_09phmd5hdmvi", "RDF");
@@ -225,6 +202,7 @@ public class AutomaticWorkflow extends Handler {
 		o2.setType("extractor");
 		o2.setId("node_178rj2s179x");
 		o2.setContent("FOX-MS");
+		
 		o2.setInputs(inputs2);
 		o2.setOutputs(outputs2);
 		
@@ -235,7 +213,6 @@ public class AutomaticWorkflow extends Handler {
 	
 		// o3
 		Map<String, String> inputs3 = new HashMap<>();
-//		String inputLabel2 = "{\"label\": \"RDF\" }";
 
 		inputs3.put("input_5ezhp221vou", "RDF");
 		inputs3.put("input_g4z7qll7d8s", "RDF");
@@ -257,7 +234,6 @@ public class AutomaticWorkflow extends Handler {
 		l1.setToOperator("node_178rj2s179x");
 		l1.setFromConnector("output_55uqv2wzcus");
 		l1.setToConnector("input_tzil25otre");
-//		log.warn(l1.toString());
 
 		// l2
 		Link l2 = new Link();
@@ -265,31 +241,15 @@ public class AutomaticWorkflow extends Handler {
 		l2.setToOperator("node_hcj9pytiiml");
 		l2.setFromConnector("output_a2b3epd6nd");
 		l2.setToConnector("input_5ezhp221vou");	
-//		log.warn(l2.toString());
+
 		// workflow
 		Workflow w = new Workflow();
 		w.getOperators().put("node_hgibcp02st", o1);
 		w.getOperators().put("node_178rj2s179x", o2);
 		w.getOperators().put("node_hcj9pytiiml", o3);
-//		w.getLinks().set(0, l1);
-//		w.getLinks().set(1, l2);
 		
 		w.getLinks().add(l1);
 		w.getLinks().add(l2);
-		Set<Operator> queue = w.getStartOperatorSet();
-		log.warn("QUE SIZE"+queue.size());
-//		w.setOperators(op1);
-//		w.setOperators(op2);
-//		w.setOperators(op3);
-		
-//		w.getNextOperators(o2);
-//		w.setOperators(operators);
-//		w.getStartOperatorSet().add(o1);
-//		w.getNextOperators(o3);
-//		w.setLinks(myList);
-		
-		
-
 				
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
@@ -357,7 +317,6 @@ public class AutomaticWorkflow extends Handler {
 			
 			log.warn("jsonInString..."+jsonInString);
 //			String jsonInString = "{\"links\":{\"0\":{\"fromConnector\":\"output_55uqv2wzcus\",\"fromOperator\":\"node_hgibcp02st\",\"toConnector\":\"input_tzil25otre\",\"toOperator\":\"node_178rj2s179x\"},\"1\":{\"fromConnector\":\"output_a2b3epd6nd\",\"fromOperator\":\"node_178rj2s179x\",\"toConnector\":\"input_5ezhp221vou\",\"toOperator\":\"node_hcj9pytiiml\"}},\"operators\":{\"node_hcj9pytiiml\":{\"id\":\"node_hcj9pytiiml\",\"content\":\"sask\",\"type\":\"db\",\"inputs\":{\"input_5ezhp221vou\":\"RDF\",\"input_g4z7qll7d8s\":\"RDF\"},\"outputs\":{}},\"node_hgibcp02st\":{\"id\":\"node_hgibcp02st\",\"content\":\"/testData.txt\",\"type\":\"file\",\"inputs\":{},\"outputs\":{\"output_55uqv2wzcus\":\"NL\",\"output_y97vayejxre\":\"NL\"}},\"node_178rj2s179x\":{\"id\":\"node_178rj2s179x\",\"content\":\"FOX-MS\",\"type\":\"extractor\",\"inputs\":{\"input_2hfqgk71ukp\":\"NL\",\"input_tzil25otre\":\"NL\"},\"outputs\":{\"output_a2b3epd6nd\":\"RDF\",\"output_09phmd5hdmvi\":\"RDF\"}}},\"startOperatorSet\":[{\"id\":\"node_hgibcp02st\",\"content\":\"/testData.txt\",\"type\":\"file\",\"inputs\":{},\"outputs\":{\"output_55uqv2wzcus\":\"NL\",\"output_y97vayejxre\":\"NL\"}}]}";
-//			log.warn("REQUEST:::"+request);
 			log.warn("BEFOR REST CALL***");
 
 			String uri1 = "http://EXECUTER-MS/executeWorkflow";
@@ -368,7 +327,7 @@ public class AutomaticWorkflow extends Handler {
 
 			ResponseEntity<String> response = restTemplate.postForEntity(uri1, request, String.class );
 		
-		log.info("Response Code::."+response.getStatusCodeValue());
+			log.warn("Response Code::."+response.getStatusCodeValue());
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -392,3 +351,162 @@ public class AutomaticWorkflow extends Handler {
 //{"operators":{"node_hgibcp02st":{"top":20,"left":100,"properties":{"type":"file","id":"node_hgibcp02st","content":"/testData.txt","title":"testData.txt","inputs":{},"outputs":{"output_55uqv2wzcus":{"label":"NL"},"output_y97vayejxre":{"label":"NL"}}}},"node_178rj2s179x":{"top":0,"left":300,"properties":{"type":"extractor","id":"node_178rj2s179x","content":"FOX-MS","title":"FOX","inputs":{"input_tzil25otre":{"label":"NL"},"input_2hfqgk71ukp":{"label":"NL"}},"outputs":{"output_a2b3epd6nd":{"label":"RDF"},"output_09phmd5hdmvi":{"label":"RDF"}}}},"node_hcj9pytiiml":{"top":0,"left":480,"properties":{"type":"db","id":"node_hcj9pytiiml","content":"sask","title":"sask","inputs":{"input_5ezhp221vou":{"label":"RDF"},"input_g4z7qll7d8s":{"label":"RDF"}},"outputs":{}}}},"links":{"0":{"fromOperator":"node_hgibcp02st","fromConnector":"output_55uqv2wzcus","fromSubConnector":0,"toOperator":"node_178rj2s179x","toConnector":"input_tzil25otre","toSubConnector":0},"1":{"fromOperator":"node_178rj2s179x","fromConnector":"output_a2b3epd6nd","fromSubConnector":0,"toOperator":"node_hcj9pytiiml","toConnector":"input_5ezhp221vou","toSubConnector":0}},"operatorTypes":{}}
 
 //{\"operators\":{\"node_hgibcp02st\":{\"top\":20,\"left\":100,\"properties\":{\"type\":\"file\",\"id\":\"node_hgibcp02st\",\"content\":\"\/testData.txt\",\"title\":\"testData.txt\",\"inputs\":{},\"outputs\":{\"output_55uqv2wzcus\":{\"label\":\"NL\"},\"output_y97vayejxre\":{\"label\":\"NL\"}}}},\"node_178rj2s179x\":{\"top\":0,\"left\":300,\"properties\":{\"type\":\"extractor\",\"id\":\"node_178rj2s179x\",\"content\":\"FOX-MS\",\"title\":\"FOX\",\"inputs\":{\"input_tzil25otre\":{\"label\":\"NL\"},\"input_2hfqgk71ukp\":{\"label\":\"NL\"}},\"outputs\":{\"output_a2b3epd6nd\":{\"label\":\"RDF\"},\"output_09phmd5hdmvi\":{\"label\":\"RDF\"}}}},\"node_hcj9pytiiml\":{\"top\":0,\"left\":480,\"properties\":{\"type\":\"db\",\"id\":\"node_hcj9pytiiml\",\"content\":\"sask\",\"title\":\"sask\",\"inputs\":{\"input_5ezhp221vou\":{\"label\":\"RDF\"},\"input_g4z7qll7d8s\":{\"label\":\"RDF\"}},\"outputs\":{}}}},\"links\":{\"0\":{\"fromOperator\":\"node_hgibcp02st\",\"fromConnector\":\"output_55uqv2wzcus\",\"fromSubConnector\":0,\"toOperator\":\"node_178rj2s179x\",\"toConnector\":\"input_tzil25otre\",\"toSubConnector\":0},\"1\":{\"fromOperator\":\"node_178rj2s179x\",\"fromConnector\":\"output_a2b3epd6nd\",\"fromSubConnector\":0,\"toOperator\":\"node_hcj9pytiiml\",\"toConnector\":\"input_5ezhp221vou\",\"toSubConnector\":0}},\"operatorTypes\":{}}\r\n
+
+//HttpHeaders headers = new HttpHeaders();
+//headers.setContentType(MediaType.APPLICATION_JSON);
+//HttpEntity<Workflow> entity = new HttpEntity<Workflow>(workflow,headers);
+
+//ResponseEntity<String> out = restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
+//log.warn("Status COde::"+out.getStatusCode());
+//log.warn("Before rest call.."+restTemplate.postForObject("http://EXECUTER-MS/executeWorkflow",workflow, Workflow.class ));
+
+//try {
+//log.warn("In TRy");
+//ResponseEntity<String>  response = restTemplate.postForEntity(uri, workflow, String.class);
+//log.warn("RESPONE:"+response.getStatusCode());
+//log.warn("CONSTRUCT WORKFLOW RESPONSE::"+response );
+//} catch(Exception ex) {
+//	throw new NullPointerException("Failed to send input to fred (" + ex.getMessage() + ").");
+//}
+//if (response.isEmpty()) {
+
+//JSONObject obj = new JSONObject();
+//try {
+//	obj = new JSONObject("{\"operators\":{\"node_hgibcp02st\":{\"top\":20,\"left\":100,\"properties\":{\"type\":\"file\",\"id\":\"node_hgibcp02st\",\"content\":\"\/testData.txt\",\"title\":\"testData.txt\",\"inputs\":{},\"outputs\":{\"output_55uqv2wzcus\":{\"label\":\"NL\"},\"output_y97vayejxre\":{\"label\":\"NL\"}}}},\"node_178rj2s179x\":{\"top\":0,\"left\":300,\"properties\":{\"type\":\"extractor\",\"id\":\"node_178rj2s179x\",\"content\":\"FOX-MS\",\"title\":\"FOX\",\"inputs\":{\"input_tzil25otre\":{\"label\":\"NL\"},\"input_2hfqgk71ukp\":{\"label\":\"NL\"}},\"outputs\":{\"output_a2b3epd6nd\":{\"label\":\"RDF\"},\"output_09phmd5hdmvi\":{\"label\":\"RDF\"}}}},\"node_hcj9pytiiml\":{\"top\":0,\"left\":480,\"properties\":{\"type\":\"db\",\"id\":\"node_hcj9pytiiml\",\"content\":\"sask\",\"title\":\"sask\",\"inputs\":{\"input_5ezhp221vou\":{\"label\":\"RDF\"},\"input_g4z7qll7d8s\":{\"label\":\"RDF\"}},\"outputs\":{}}}},\"links\":{\"0\":{\"fromOperator\":\"node_hgibcp02st\",\"fromConnector\":\"output_55uqv2wzcus\",\"fromSubConnector\":0,\"toOperator\":\"node_178rj2s179x\",\"toConnector\":\"input_tzil25otre\",\"toSubConnector\":0},\"1\":{\"fromOperator\":\"node_178rj2s179x\",\"fromConnector\":\"output_a2b3epd6nd\",\"fromSubConnector\":0,\"toOperator\":\"node_hcj9pytiiml\",\"toConnector\":\"input_5ezhp221vou\",\"toSubConnector\":0}},\"operatorTypes\":{}}\r\n");
+//} catch (JSONException e) {
+//	log.warn("IN JSON EXCP");
+//	// TODO Auto-generated catch block
+//	e.printStackTrace();
+//}
+//Workflow work = g.fromJson(jsonString, Player.class);		
+//
+//JSONParser parser = new JSONParser();
+//Object object = null;
+//try {log.warn("File Reading");
+//	object = parser.parse(new FileReader("D:\\gitCloneFolder\\NewAutomaticHandlerCode\\sask\\chatbot\\src\\main\\resources\\JsonTestData.json"));
+//} catch (IOException | ParseException e) {
+//	// TODO Auto-generated catch block
+//	e.printStackTrace();
+//}
+//  
+//  //convert Object to JSONObject
+////  JSONObject jsonObject = (JSONObject)object;
+//log.warn("Casting to wf obj::");
+//Workflow obj = (Workflow)object;
+//ObjectMapper mapper = new ObjectMapper();
+//String jsonInString = mapper.writeValueAsString(workflow);
+//log.warn(message);
+
+////HttpHeaders headers = new HttpHeaders();
+////headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+////HttpEntity<Workflow> request1 = new HttpEntity<Workflow>(workflow, headers);
+//
+////ResponseEntity<?> response = restTemplate.postForEntity("http://EXECUTER-MS/executeWorkflow",request1 , String.class );
+
+
+//String response = restTemplate.getForObject("http://EXECUTER-MS/executeWorkflow",  String.class, request1 );
+//extract from testData.txt using OpenIE
+//String response = restTemplate.exchange(uri, String.class, workflow);
+
+//JSONParser parser = new JSONParser();
+//Object object = null;
+//try {log.warn("File Reading");
+//	object = parser.parse(new FileReader("D:\\gitCloneFolder\\NewAutomaticHandlerCode\\sask\\chatbot\\src\\main\\resources\\JsonTestData.json"));
+//} catch (IOException | ParseException e) {
+//	// TODO Auto-generated catch block
+//	e.printStackTrace();
+//}
+//  
+//  //convert Object to JSONObject
+////  JSONObject jsonObject = (JSONObject)object;
+//log.warn("Casting to wf obj::");
+//Workflow obj = (Workflow)object;
+//ObjectMapper mapper = new ObjectMapper();
+//String jsonInString = mapper.writeValueAsString(workflow);
+//log.warn(message);
+
+////HttpHeaders headers = new HttpHeaders();
+////headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+////HttpEntity<Workflow> request1 = new HttpEntity<Workflow>(workflow, headers);
+//
+////ResponseEntity<?> response = restTemplate.postForEntity("http://EXECUTER-MS/executeWorkflow",request1 , String.class );
+
+
+//String response = restTemplate.getForObject("http://EXECUTER-MS/executeWorkflow",  String.class, request1 );
+//extract from testData.txt using OpenIE
+//String response = restTemplate.exchange(uri, String.class, workflow);
+
+//
+//log.warn("AFTER HEADERS::"+w.toString());
+//Gson gson = new Gson();
+//String json = gson.toJson(w).toString();
+//
+//HttpEntity<String> request = new HttpEntity<String>(json,headers);
+//log.warn("BEFOR REST CALL");
+//String uri1 = "http://EXECUTER-MS/executeWorkflow";
+//
+//ResponseEntity<String> response = restTemplate.postForEntity(uri1, request , String.class );
+//
+//log.info("Response Code::."+response.getStatusCodeValue());
+
+
+//String rewe =  "{\"operators\":{\"node_hgibcp02st\":{\"top\":20,\"left\":100,\"properties\":{\"type\":\"file\",\"id\":\"node_hgibcp02st\",\"content\":\"/testData.txt\",\"title\":\"testData.txt\",\"inputs\":{},\"outputs\":{\"output_55uqv2wzcus\":{\"label\":\"NL\"},\"output_y97vayejxre\":{\"label\":\"NL\"}}}},\"node_178rj2s179x\":{\"top\":0,\"left\":300,\"properties\":{\"type\":\"extractor\",\"id\":\"node_178rj2s179x\",\"content\":\"FOX-MS\",\"title\":\"FOX\",\"inputs\":{\"input_tzil25otre\":{\"label\":\"NL\"},\"input_2hfqgk71ukp\":{\"label\":\"NL\"}},\"outputs\":{\"output_a2b3epd6nd\":{\"label\":\"RDF\"},\"output_09phmd5hdmvi\":{\"label\":\"RDF\"}}}},\"node_hcj9pytiiml\":{\"top\":0,\"left\":480,\"properties\":{\"type\":\"db\",\"id\":\"node_hcj9pytiiml\",\"content\":\"sask\",\"title\":\"sask\",\"inputs\":{\"input_5ezhp221vou\":{\"label\":\"RDF\"},\"input_g4z7qll7d8s\":{\"label\":\"RDF\"}},\"outputs\":{}}}},\"links\":{\"0\":{\"fromOperator\":\"node_hgibcp02st\",\"fromConnector\":\"output_55uqv2wzcus\",\"fromSubConnector\":0,\"toOperator\":\"node_178rj2s179x\",\"toConnector\":\"input_tzil25otre\",\"toSubConnector\":0},\"1\":{\"fromOperator\":\"node_178rj2s179x\",\"fromConnector\":\"output_a2b3epd6nd\",\"fromSubConnector\":0,\"toOperator\":\"node_hcj9pytiiml\",\"toConnector\":\"input_5ezhp221vou\",\"toSubConnector\":0}},\"operatorTypes\":{}}";
+
+//String rewe = "{\"operators\":{\"node_hgibcp02st\":{\"properties\":{\"type\":\"file\",\"id\":\"node_hgibcp02st\",\"content\":\"/testData.txt\",\"title\":\"testData.txt\",\"inputs\":{},\"outputs\":{\"output_55uqv2wzcus\":{\"label\":\"NL\"},\"output_y97vayejxre\":{\"label\":\"NL\"}}}},\"node_178rj2s179x\":{\"properties\":{\"type\":\"extractor\",\"id\":\"node_178rj2s179x\",\"content\":\"FOX-MS\",\"title\":\"FOX\",\"inputs\":{\"input_tzil25otre\":{\"label\":\"NL\"},\"input_2hfqgk71ukp\":{\"label\":\"NL\"}},\"outputs\":{\"output_a2b3epd6nd\":{\"label\":\"RDF\"},\"output_09phmd5hdmvi\":{\"label\":\"RDF\"}}}},\"node_hcj9pytiiml\":{\"properties\":{\"type\":\"db\",\"id\":\"node_hcj9pytiiml\",\"content\":\"sask\",\"title\":\"sask\",\"inputs\":{\"input_5ezhp221vou\":{\"label\":\"RDF\"},\"input_g4z7qll7d8s\":{\"label\":\"RDF\"}},\"outputs\":{}}}},\"links\":{\"0\":{\"fromOperator\":\"node_hgibcp02st\",\"fromConnector\":\"output_55uqv2wzcus\",\"fromSubConnector\":0,\"toOperator\":\"node_178rj2s179x\",\"toConnector\":\"input_tzil25otre\",\"toSubConnector\":0},\"1\":{\"fromOperator\":\"node_178rj2s179x\",\"fromConnector\":\"output_a2b3epd6nd\",\"fromSubConnector\":0,\"toOperator\":\"node_hcj9pytiiml\",\"toConnector\":\"input_5ezhp221vou\",\"toSubConnector\":0}},\"operatorTypes\":{}}";
+//log.warn("REWE::"+rewe);
+
+
+//Workflow workflow = new Workflow();
+////HttpEntity<Workflow> request = new HttpEntity<>(workflow);
+//
+//Link links = new Link();
+//
+//links.setFromConnector("A");
+//links.setToConnector("B");
+//links.setFromOperator("id_1");
+//links.setToOperator("id_2");
+//workflow.getLinks().add(links);
+//log.warn("Link to string::"+links.toString());
+//log.warn("GET FROM CONNECTOR::"+links.getFromConnector());
+
+//Operator id_1 = new Operator();
+//Map<String, String> outputs;
+
+//id_1.setId("id_1");
+//id_1.setContent("testData.txt");
+//id_1.setType("file");
+//id_1.getOutputs().put("A", "NL");
+//workflow.getOperators().put("id_1", id_1);
+//workflow.getNextOperators(id_1);
+
+//log.warn("ID !::"+id_1.toString());
+//log.warn("GET OUTPT::"+id_1.getOutputs().toString());
+//log.warn("connector::"+workflow.getLinks().get(0).getFromConnector());
+//log.warn("ID::"+workflow.getOperators().get("id_1").getId());
+//log.warn("Filename::"+workflow.getOperators().get("id_1").getContent());
+//log.warn("File::"+workflow.getOperators().get("id_1").getType());
+//log.warn("GetA::"+workflow.getOperators().get("id_1").getOutputs().get("A"));
+
+//Operator id_2 = new Operator();
+//id_2.setId("id_2");
+//id_2.setContent("FOX-MS");
+////id_2.setContent("OPEN-IE-MS");
+//id_2.setType("extractor");
+//id_2.getInputs().put("B", "RDF");
+////workflow.getNextOperators(id_2);
+//workflow.getOperators().put("id_2", id_2);
+////log.warn("Workflow Object::"+ workflow());
+//
+//log.warn("WF STRING::"+workflow.getLinks().get(0).toString());
+
+
+//log.warn("getConnector::"+workflow.getLinks().get(0).getFromConnector());
+//log.warn("ID::"+workflow.getOperators().get("id_2").getId());
+//log.warn("Content::"+workflow.getOperators().get("id_2").getContent());
+//log.warn("GetB::"+workflow.getOperators().get("id_2").getInputs().get("B"));
+
+//String uri = "http://EXECUTER-MS/executeSimple?data=%2FtestData.txt&extractor=OPEN-IE-MS&targetGraph=sask";
+
+//String uri = "http://EXECUTER-MS/executeWorkflow";
+//Boolean response = restTemplate.postForObject(uri, workflow, Boolean.class);
+//System.out.println("Response found=" + response);
