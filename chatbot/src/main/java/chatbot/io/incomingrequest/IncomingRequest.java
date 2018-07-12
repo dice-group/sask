@@ -66,11 +66,4 @@ public class IncomingRequest {
 	public MessageType getMessageType() {
 		return messageType;
 	}
-
-	@Override
-	public String toString() {
-		return "IncomingRequest{" +
-				"requestContent=" + requestContent +
-				'}';
-	}
 }

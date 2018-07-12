@@ -37,7 +37,8 @@ public class SurniaQAService {
     public String askSurnia(String query) {
         logger.info("Requesting SurniaQA for following query: " + query);
         URI uri = new UriTemplate(SURNIA_URL).expand(query);
-        return exchange(uri, String.class);
+//        return exchange(uri, String.class);
+        return "Hello from QA Service";
     }
 
     /**
