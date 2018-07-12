@@ -1,20 +1,19 @@
 package chatbot.core.classifier;
 
-import static org.junit.Assert.*;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import org.junit.AfterClass;
-import org.junit.Test;
-
 import chatbot.core.handlers.eliza.ElizaHandler;
-import chatbot.core.handlers.qa.QAHandler;
+import chatbot.core.handlers.qa.QAServiceHandler;
 import chatbot.core.handlers.rivescript.RiveScriptQueryHandler;
 import chatbot.core.handlers.sessa.SessaHandler;
 import chatbot.io.incomingrequest.FeedbackRequest;
 import chatbot.io.incomingrequest.IncomingRequest;
 import chatbot.io.incomingrequest.RequestContent;
+import org.junit.AfterClass;
+import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.assertTrue;
 
 public class IntentLearnerTest {
 	
@@ -49,7 +48,7 @@ public class IntentLearnerTest {
 		
 		IncomingRequest input = createInitialRequest("what is Obama's birthplace");
 		Object actualOutput= classifyInput(input);
-        assertTrue(actualOutput instanceof QAHandler);
+        assertTrue(actualOutput instanceof QAServiceHandler);
 	}
 	
 	@Test
