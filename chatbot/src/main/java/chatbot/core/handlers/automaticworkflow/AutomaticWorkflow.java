@@ -99,7 +99,7 @@ public class AutomaticWorkflow extends Handler {
 					log.warn("extractor"+extractor);
 					log.warn("fileName"+fileName);
 				}else {
-					responseData.setContent("The query should be \"extract From filename using extractor\"");
+					responseData.setContent("The query should be \"Extract From Filename Using Extractor\"");
 					returnValue.addMessage(responseData);
 					return returnValue;
 				}
@@ -164,8 +164,6 @@ public class AutomaticWorkflow extends Handler {
 		Response responseData = new Response();
 		responseData.setContent("RETURN CONSTRUCTWF FUNC");
 		log.warn("IN CONSTRUCT WORKFLOW");
-//		log.warn("EXTRACTOR::"+extractor);
-//		log.warn("FILENAME::"+fileName);
 
 		/*
 		 * create
@@ -261,24 +259,19 @@ public class AutomaticWorkflow extends Handler {
 			String jsonInString = mapper.writeValueAsString(w);
 			
 			log.warn("jsonInString..."+jsonInString);
-//			String jsonInString = "{\"links\":{\"0\":{\"fromConnector\":\"output_55uqv2wzcus\",\"fromOperator\":\"node_hgibcp02st\",\"toConnector\":\"input_tzil25otre\",\"toOperator\":\"node_178rj2s179x\"},\"1\":{\"fromConnector\":\"output_a2b3epd6nd\",\"fromOperator\":\"node_178rj2s179x\",\"toConnector\":\"input_5ezhp221vou\",\"toOperator\":\"node_hcj9pytiiml\"}},\"operators\":{\"node_hcj9pytiiml\":{\"id\":\"node_hcj9pytiiml\",\"content\":\"sask\",\"type\":\"db\",\"inputs\":{\"input_5ezhp221vou\":\"RDF\",\"input_g4z7qll7d8s\":\"RDF\"},\"outputs\":{}},\"node_hgibcp02st\":{\"id\":\"node_hgibcp02st\",\"content\":\"/testData.txt\",\"type\":\"file\",\"inputs\":{},\"outputs\":{\"output_55uqv2wzcus\":\"NL\",\"output_y97vayejxre\":\"NL\"}},\"node_178rj2s179x\":{\"id\":\"node_178rj2s179x\",\"content\":\"FOX-MS\",\"type\":\"extractor\",\"inputs\":{\"input_2hfqgk71ukp\":\"NL\",\"input_tzil25otre\":\"NL\"},\"outputs\":{\"output_a2b3epd6nd\":\"RDF\",\"output_09phmd5hdmvi\":\"RDF\"}}},\"startOperatorSet\":[{\"id\":\"node_hgibcp02st\",\"content\":\"/testData.txt\",\"type\":\"file\",\"inputs\":{},\"outputs\":{\"output_55uqv2wzcus\":\"NL\",\"output_y97vayejxre\":\"NL\"}}]}";
 			log.warn("BEFOR REST CALL***");
 
 			String uri1 = "http://EXECUTER-MS/executeWorkflow";
 		
-//			String testString = "{\"links\":{\"0\":{\"fromConnector\":\"output_55uqv2wzcus\",\"fromOperator\":\"node_hgibcp02st\",\"toConnector\":\"input_tzil25otre\",\"toOperator\":\"node_178rj2s179x\"},\"1\":{\"fromConnector\":\"output_a2b3epd6nd\",\"fromOperator\":\"node_178rj2s179x\",\"toConnector\":\"input_5ezhp221vou\",\"toOperator\":\"node_hcj9pytiiml\"}},\"operators\":{\"node_hgibcp02st\":{\"properties\":{\"id\":\"node_hgibcp02st\",\"content\":\"/testData.txt\",\"type\":\"file\",\"inputs\":{},\"outputs\":{\"output_55uqv2wzcus\":{\"label\":\"NL\"},\"output_y97vayejxre\":{\"label\":\"NL\"}}}},\"node_178rj2s179x\":{\"properties\":{\"id\":\"node_178rj2s179x\",\"content\":\"FOX-MS\",\"type\":\"extractor\",\"inputs\":{\"input_2hfqgk71ukp\":{\"label\":\"NL\"},\"input_tzil25otre\":{\"label\":\"NL\"}},\"outputs\":{\"output_a2b3epd6nd\":{\"label\":\"RDF\"},\"output_09phmd5hdmvi\":{\"label\":\"RDF\"}}}},\"node_hcj9pytiiml\":{\"properties\":{\"id\":\"node_hcj9pytiiml\",\"content\":\"sask\",\"type\":\"db\",\"inputs\":{\"input_5ezhp221vou\":{\"label\":\"RDF\"},\"input_g4z7qll7d8s\":{\"label\":\"RDF\"}},\"outputs\":{}}}}}";
-//			String testString = "{\"operators\":{\"node_hgibcp02st\":{\"top\":20,\"left\":100,\"properties\":{\"type\":\"file\",\"id\":\"node_hgibcp02st\",\"content\":\"/testData.txt\",\"title\":\"testData.txt\",\"inputs\":{},\"outputs\":{\"output_55uqv2wzcus\":{\"label\":\"NL\"},\"output_y97vayejxre\":{\"label\":\"NL\"}}}},\"node_178rj2s179x\":{\"top\":0,\"left\":300,\"properties\":{\"type\":\"extractor\",\"id\":\"node_178rj2s179x\",\"content\":\"FOX-MS\",\"title\":\"FOX\",\"inputs\":{\"input_tzil25otre\":{\"label\":\"NL\"},\"input_2hfqgk71ukp\":{\"label\":\"NL\"}},\"outputs\":{\"output_a2b3epd6nd\":{\"label\":\"RDF\"},\"output_09phmd5hdmvi\":{\"label\":\"RDF\"}}}},\"node_hcj9pytiiml\":{\"top\":0,\"left\":480,\"properties\":{\"type\":\"db\",\"id\":\"node_hcj9pytiiml\",\"content\":\"sask\",\"title\":\"sask\",\"inputs\":{\"input_5ezhp221vou\":{\"label\":\"RDF\"},\"input_g4z7qll7d8s\":{\"label\":\"RDF\"}},\"outputs\":{}}}},\"links\":{\"0\":{\"fromOperator\":\"node_hgibcp02st\",\"fromConnector\":\"output_55uqv2wzcus\",\"fromSubConnector\":0,\"toOperator\":\"node_178rj2s179x\",\"toConnector\":\"input_tzil25otre\",\"toSubConnector\":0},\"1\":{\"fromOperator\":\"node_178rj2s179x\",\"fromConnector\":\"output_a2b3epd6nd\",\"fromSubConnector\":0,\"toOperator\":\"node_hcj9pytiiml\",\"toConnector\":\"input_5ezhp221vou\",\"toSubConnector\":0}},\"operatorTypes\":{}}";
 			HttpEntity<String> request = new HttpEntity<String>(jsonInString, headers);
-
 			ResponseEntity<String> response = restTemplate.postForEntity(uri1, request, String.class );
 		
 			log.warn("Response Code::."+response.getStatusCodeValue());
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-//		
+		
 			responseData.setContent("done");
 			fileInfo.addMessage(responseData);	
 
@@ -286,13 +279,3 @@ public class AutomaticWorkflow extends Handler {
 	}
 	
 }
-
-
-//Repo-microservice storeFile() invoked
-//: http://localhost:50070/webhdfs/v1/user/DICE/repo/notes%20of%20presntn.txt?op=CREATE&overwrite=true
-//: Repo-microservice getHdfsStructure() invoked
-//: http://localhost:50070/webhdfs/v1/user/DICE/repo/?op=LISTSTATUS
-
-//{"operators":{"node_hgibcp02st":{"top":20,"left":100,"properties":{"type":"file","id":"node_hgibcp02st","content":"/testData.txt","title":"testData.txt","inputs":{},"outputs":{"output_55uqv2wzcus":{"label":"NL"},"output_y97vayejxre":{"label":"NL"}}}},"node_178rj2s179x":{"top":0,"left":300,"properties":{"type":"extractor","id":"node_178rj2s179x","content":"FOX-MS","title":"FOX","inputs":{"input_tzil25otre":{"label":"NL"},"input_2hfqgk71ukp":{"label":"NL"}},"outputs":{"output_a2b3epd6nd":{"label":"RDF"},"output_09phmd5hdmvi":{"label":"RDF"}}}},"node_hcj9pytiiml":{"top":0,"left":480,"properties":{"type":"db","id":"node_hcj9pytiiml","content":"sask","title":"sask","inputs":{"input_5ezhp221vou":{"label":"RDF"},"input_g4z7qll7d8s":{"label":"RDF"}},"outputs":{}}}},"links":{"0":{"fromOperator":"node_hgibcp02st","fromConnector":"output_55uqv2wzcus","fromSubConnector":0,"toOperator":"node_178rj2s179x","toConnector":"input_tzil25otre","toSubConnector":0},"1":{"fromOperator":"node_178rj2s179x","fromConnector":"output_a2b3epd6nd","fromSubConnector":0,"toOperator":"node_hcj9pytiiml","toConnector":"input_5ezhp221vou","toSubConnector":0}},"operatorTypes":{}}
-
-//{\"operators\":{\"node_hgibcp02st\":{\"top\":20,\"left\":100,\"properties\":{\"type\":\"file\",\"id\":\"node_hgibcp02st\",\"content\":\"\/testData.txt\",\"title\":\"testData.txt\",\"inputs\":{},\"outputs\":{\"output_55uqv2wzcus\":{\"label\":\"NL\"},\"output_y97vayejxre\":{\"label\":\"NL\"}}}},\"node_178rj2s179x\":{\"top\":0,\"left\":300,\"properties\":{\"type\":\"extractor\",\"id\":\"node_178rj2s179x\",\"content\":\"FOX-MS\",\"title\":\"FOX\",\"inputs\":{\"input_tzil25otre\":{\"label\":\"NL\"},\"input_2hfqgk71ukp\":{\"label\":\"NL\"}},\"outputs\":{\"output_a2b3epd6nd\":{\"label\":\"RDF\"},\"output_09phmd5hdmvi\":{\"label\":\"RDF\"}}}},\"node_hcj9pytiiml\":{\"top\":0,\"left\":480,\"properties\":{\"type\":\"db\",\"id\":\"node_hcj9pytiiml\",\"content\":\"sask\",\"title\":\"sask\",\"inputs\":{\"input_5ezhp221vou\":{\"label\":\"RDF\"},\"input_g4z7qll7d8s\":{\"label\":\"RDF\"}},\"outputs\":{}}}},\"links\":{\"0\":{\"fromOperator\":\"node_hgibcp02st\",\"fromConnector\":\"output_55uqv2wzcus\",\"fromSubConnector\":0,\"toOperator\":\"node_178rj2s179x\",\"toConnector\":\"input_tzil25otre\",\"toSubConnector\":0},\"1\":{\"fromOperator\":\"node_178rj2s179x\",\"fromConnector\":\"output_a2b3epd6nd\",\"fromSubConnector\":0,\"toOperator\":\"node_hcj9pytiiml\",\"toConnector\":\"input_5ezhp221vou\",\"toSubConnector\":0}},\"operatorTypes\":{}}\r\n
