@@ -10,13 +10,15 @@ eureka:
     metadataMap:
       type: executer
       friendlyname: Executer
+    hostName: ${EXECUTER_PUBLISH_HOST:localhost} 
+    preferIpAddress: false 
   client:
     serviceUrl:
-      defaultZone: http://@eureka.hostname@:@eureka.port@/eureka/
+      defaultZone: http://${EUREKA_SERVICE_HOST:localhost}:${EUREKA_SERVICE_PORT:8761}/eureka/
 
 # HTTP Server (Tomcat) Port
 server: 
-  port: 2500
+  port: ${EXECUTER_PUBLISH_PORT:2500}
 
 # Disable Spring Boot's "Whitelabel" default error page, so we can use our own
 error:

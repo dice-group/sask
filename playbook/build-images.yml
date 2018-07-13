@@ -1,0 +1,12 @@
+---
+
+- name: "Build docker images and push it to the repository"
+  hosts: localhost
+  vars:
+    ansible_python_interpreter: "/usr/bin/env python"
+
+  pre_tasks:
+    # Since we are running it on hosts sask group vars variable are not available hence including explicitly
+    - include_vars: group_vars/sask.yml
+  roles:
+    - build-images
