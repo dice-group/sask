@@ -30,7 +30,7 @@ public class DbControllerTest {
 	public void testQueryGraph() throws Exception {
 
 		DbController mockController = new DbController();
-		String realOutput = mockController.queryGraph("http://localhost:3030/sask/data/graph1").replace("\n", "\r\n")
+		String realOutput = mockController.queryGraph(10, "http://localhost:3030/sask/data/graph1").replace("\n", "\r\n")
 				.trim();
 
 		System.out.println(realOutput);
