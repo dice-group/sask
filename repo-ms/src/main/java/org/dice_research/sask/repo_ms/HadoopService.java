@@ -39,10 +39,12 @@ public class HadoopService implements IHadoopService {
 	private RestTemplate restTemplate;
 	private Logger logger = Logger.getLogger(RepoMsController.class.getName());
 	private WebHDFSUriBuilder uriBuilder;
+	private final String server;
 
 	public HadoopService(RestTemplate restTemplate, YAMLConfig config) {
 		this.restTemplate = restTemplate;
-		this.uriBuilder = new WebHDFSUriBuilder(config.getHostserver(), config.getPort());		
+		this.uriBuilder = new WebHDFSUriBuilder(config.getHostserver(), config.getPort());
+		this.server = config.getHostserver();
 	}
 	
 	@Override
@@ -57,7 +59,10 @@ public class HadoopService implements IHadoopService {
 		}
 		ResponseEntity<String> response = restTemplate.exchange(createFileURI, HttpMethod.PUT, null, String.class);
 		URI nodeLocation = response.getHeaders().getLocation();
-
+		String uriStr = nodeLocation.toString().replaceAll("localhost", server);
+		nodeLocation = URI.create(uriStr);
+		
+		
 		final RequestCallback requestCallback = new RequestCallback() {
 			@Override
 			public void doWithRequest(ClientHttpRequest request) throws IOException {
@@ -65,6 +70,9 @@ public class HadoopService implements IHadoopService {
 				IOUtils.copy(fis, request.getBody());
 			}
 		};
+		
+		
+		
 
 		SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
 		requestFactory.setBufferRequestBody(false);
