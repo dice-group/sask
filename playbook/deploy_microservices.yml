@@ -100,6 +100,7 @@
         #  - /var/lib/docker/chatbot:/sask/chatbot/
       with_sequence: start=0 end="{{ (chatbot_instances_per_node | int) - 1 }}"
 
+- import_playbook: extractor_microservices.yml
 
 - name: "Run Webclient, which would be the user interface for the service"
   hosts: webclient
