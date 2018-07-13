@@ -11,6 +11,9 @@ public class RequestContent {
 	private String data;
 	private String payload;
 
+	public RequestContent() {
+	}
+
 	public String getPayload() {
 		return payload;
 	}

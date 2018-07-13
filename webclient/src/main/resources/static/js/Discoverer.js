@@ -1,9 +1,3 @@
-/**
- * Javascript class for the discovery of microservices and the types.
- * 
- * @author Kevin Haack
- */
-;
 var Discoverer = function(options) {
 	/**
 	 * this.
@@ -19,9 +13,9 @@ var Discoverer = function(options) {
 	 * Plugin settings.
 	 */
 	this.settings = {
-		dao : null,
-		onRefreshed : null,
-		onError : null
+		dao : undefined,
+		onRefreshed : undefined,
+		onError : undefined
 	};
 
 	/**
@@ -44,7 +38,7 @@ var Discoverer = function(options) {
 
 			microservices[microservice.type].push(microservice);
 		});
-	};
+	}
 
 	/**
 	 * Constructor
@@ -53,7 +47,7 @@ var Discoverer = function(options) {
 		$.extend(this.settings, options);
 
 		if (!this.settings.dao) {
-			logError("dao is not defined.");
+			logError('dao is not defined.');
 			return;
 		}
 	};
@@ -64,31 +58,21 @@ var Discoverer = function(options) {
 	 * Is true, if a microservice with the type 'repo' is discovered.
 	 */
 	this.isRepoDiscovered = function() {
-		if (!("repo" in microservices)) {
+		if (!('repo' in microservices)) {
 			return false;
 		}
-		return microservices.repo.length > 0;
-	};
+		return microservices.repo.length > 0
+	}
 	
-	/**
-	 * Is true, if a microservice with the type 'chatbot' is discovered.
-	 */
-	this.isChatbotDiscovered = function() {
-		if (!("chatbot" in microservices)) {
-			return false;
-		}
-		return microservices.chatbot.length > 0;
-	};
-
 	/**
 	 * Is true, if a microservice with the type 'executer' is discovered.
 	 */
 	this.isExecuterDiscovered = function() {
-		if (!("executer" in microservices)) {
+		if (!('executer' in microservices)) {
 			return false;
 		}
-		return microservices.executer.length > 0;
-	};
+		return microservices.executer.length > 0
+	}
 
 	/**
 	 * Return the discovered microservice with the type 'repo'.
@@ -100,20 +84,8 @@ var Discoverer = function(options) {
 		}
 
 		return microservices["repo"][0];
-	};
+	}
 	
-	/**
-	 * Return the discovered microservice with the type 'chatbot'.
-	 */
-	this.getChatbot = function() {
-		if (!this.isChatbotDiscovered()) {
-			logError("no microservice with the type 'chatbot' discovered.");
-			return;
-		}
-
-		return microservices["chatbot"][0];
-	};
-
 	/**
 	 * Return the discovered microservice with the type 'executer'.
 	 */
@@ -124,14 +96,14 @@ var Discoverer = function(options) {
 		}
 
 		return microservices["executer"][0];
-	};
+	}
 
 	/**
 	 * Returns the discovered microservices.
 	 */
 	this.getMicroservices = function() {
 		return microservices;
-	};
+	}
 
 	/**
 	 * Discover the microservices.
@@ -145,13 +117,13 @@ var Discoverer = function(options) {
 			if (typeof self.settings.onRefreshed !== "undefined") {
 				self.settings.onRefreshed();
 			}
-		};
+		}
 
 		var error = function(data) {
 			if (typeof self.settings.onError !== "undefined") {
 				self.settings.onError(data);
 			}
-		};
+		}
 
 		this.settings.dao.discoverMicroservices(success, error);
 	};

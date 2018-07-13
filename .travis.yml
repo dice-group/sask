@@ -7,5 +7,4 @@ jdk:
 install: true
 
 script:
-  - mvn clean install -q -P linux,local
-
+- mvn clean install

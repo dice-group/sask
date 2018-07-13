@@ -25,11 +25,10 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>com.github.dice-group</groupId>
-			<artifactId>cedric-extraction</artifactId>
-			<version>1.02</version>
+			<groupId>com.github.KHaack</groupId>
+			<artifactId>relationextraction</artifactId>
+			<version>v0.93</version>
 		</dependency>
-
 
 		<!-- ~~~~~~~ spring eureka server ~~~~~~~ -->
 		<dependency>

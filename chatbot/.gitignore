@@ -28,5 +28,3 @@ hs_err_pid*
 .wtpmodules
 .DS_Store
 target
-
-bin

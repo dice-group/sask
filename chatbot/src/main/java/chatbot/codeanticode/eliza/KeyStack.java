@@ -10,7 +10,7 @@ public class KeyStack {
 	/** The key stack */
 	Key keyStack[] = new Key[stackSize];
 	/** The top of the key stack */
-	private int keyTop = 0;
+	int keyTop = 0;
 
 	/**
 	 * Prints the key stack.

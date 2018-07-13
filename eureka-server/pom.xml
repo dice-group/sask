@@ -14,7 +14,7 @@
 		<version>0.0.7</version>
 		<!--relativePath>..</relativePath-->
 	</parent>
-
+	
 	<dependencies>
 		<!-- ~~~~~~~ spring eureka server ~~~~~~~ -->
 		<dependency>

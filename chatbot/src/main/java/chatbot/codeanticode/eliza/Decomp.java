@@ -1,15 +1,17 @@
 package chatbot.codeanticode.eliza;
+
 import java.lang.Math;
+
 /**
  * Eliza decomposition rule
  */
 public class Decomp {
 	/** The decomp pattern */
-	private String pattern;
+	String pattern;
 	/** The mem flag */
 	boolean mem;
 	/** The reassembly list */
-	private ReasembList reasemb;
+	ReasembList reasemb;
 	/** The current reassembly point */
 	int currReasmb;
 
