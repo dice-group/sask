@@ -74,7 +74,7 @@ repo_publish_port: 2300
 
 # Hostserver where Hadoop is running
 # It takes the hostname where hadoop is running based on inventory
-hadoop_hostserver : "{{ groups['hadoop-server']| first }}"
+hadoop_hostserver : "hadoop"
 hadoop_port: 50070
 
 ## Repo-MS Service Related properties -- END

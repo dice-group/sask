@@ -34,6 +34,9 @@
         - /sask/
       become: true
 
+    - name: Create a network
+      docker_network:
+        name: sask
 
 - name: "Run eureka Server"
   hosts: eureka-server
@@ -76,7 +79,7 @@
         image: "{{ docker_repository }}/chatbot:{{ image_tag }}"
         ports:
           - "{{ (chatbot_instance_base_port | int) + (item | int) }}:{{ (chatbot_instance_base_port | int) + (item | int) }}"
-
+        network_mode: sask
         etc_hosts: "{{ etc_hosts_all }}"
         env:
           EUREKA_SERVICE_HOST: "{{ eureka_service_host }}"
@@ -115,7 +118,7 @@
         image: "{{ docker_repository }}/webclient:{{ image_tag }}"
         ports:
           - "{{ (webclient_instance_base_port | int) + (item | int) }}:{{ (webclient_instance_base_port | int) + (item | int) }}"
-
+        network_mode: sask
         etc_hosts: "{{ etc_hosts_all }}"
         env:
           EUREKA_SERVICE_HOST: "{{ eureka_service_host }}"

@@ -25,7 +25,7 @@
         image: "{{ docker_repository }}/{{ item.microservice_name }}:{{ image_tag }}"
         ports:
           - "{{ item.publish_port }}:{{ item.publish_port }}"
-
+        network_mode: sask
         etc_hosts: "{{ etc_hosts_all }}"
         env: '{ 
           "EUREKA_SERVICE_HOST": "{{ eureka_service_host }}",
@@ -46,21 +46,6 @@
           - /logs/:/logs/
       with_items: "{{ extractor_microservices }}"
 
-    - name: "Start the hadoop server needed for Repo-MS"
-      docker_container:
-        state : "{{ container_state | default('started') }}"
-        name: "hadoop"
-        hostname: "{{ ansible_hostname }}"
-        image: sequenceiq/hadoop-docker:2.7.0
-        ports:
-          - 50070:50070
-          - 50075:50075
-          - 2401:8088
-        etc_hosts: "{{ etc_hosts_all }}"
-        command: /etc/bootstrap.sh -bash -u $(date -u +%m%d%H%M%Y)
-        restart_policy: "always"
-        log_driver: "json-file"
-
     - name: "Starting the Repo-MS microservice"
       docker_container:
         state : "{{ container_state | default('started') }}"
@@ -71,6 +56,7 @@
           - "{{ repo_publish_port }}:{{ repo_publish_port }}"
 
         etc_hosts: "{{ etc_hosts_all }}"
+        network_mode: sask
         env: '{ 
           "EUREKA_SERVICE_HOST": "{{ eureka_service_host }}",
           "EUREKA_SERVICE_PORT": "{{ eureka_service_port }}",
@@ -94,6 +80,7 @@
         name: "taipan"
         hostname: "{{ ansible_hostname }}"
         image: dicegroup/taipan:latest
+        network_mode: sask
         ports:
           - 5000:5000
         etc_hosts: "{{ etc_hosts_all }}"
@@ -108,13 +95,13 @@
         image: "{{ docker_repository }}/taipan-ms:{{ image_tag }}"
         ports:
           - "{{ taipan_publish_port }}:{{ taipan_publish_port }}"
-
+        network_mode: sask
         etc_hosts: "{{ etc_hosts_all }}"
         env: '{ 
           "EUREKA_SERVICE_HOST": "{{ eureka_service_host }}",
           "EUREKA_SERVICE_PORT": "{{ eureka_service_port }}",
           "TAIPAN_PUBLISH_HOST": "{{ ansible_hostname }}",
-          "TAIPAN_PUBLISH_PORT": "{{ repo_publish_port }}",
+          "TAIPAN_PUBLISH_PORT": "{{ taipan_publish_port }}",
           "TAIPAN_HOSTSERVER": "{{ taipan_hostserver }}",
           "TAIPAN_PORT": "{{ taipan_port  }}"
               }'
@@ -135,6 +122,9 @@
         image: stain/jena-fuseki:3.4.0
         ports:
           - 3030:3030
+        env:
+          ADMIN_PASSWORD: "sask12345"
+        network_mode: sask
         etc_hosts: "{{ etc_hosts_all }}"
         restart_policy: "always"
         log_driver: "json-file"
@@ -149,13 +139,13 @@
         image: "{{ docker_repository }}/database-ms:{{ image_tag }}"
         ports:
           - "{{ database_publish_port }}:{{ database_publish_port }}"
-
+        network_mode: sask
         etc_hosts: "{{ etc_hosts_all }}"
         env: '{ 
           "EUREKA_SERVICE_HOST": "{{ eureka_service_host }}",
           "EUREKA_SERVICE_PORT": "{{ eureka_service_port }}",
           "DATABASE_PUBLISH_HOST": "{{ ansible_hostname }}",
-          "DATABASE_PUBLISH_PORT": "{{ repo_publish_port }}",
+          "DATABASE_PUBLISH_PORT": "{{ database_publish_port }}",
           "FUSEKI_HOSTSERVER": "{{ fuseki_hostserver }}",
           "FUSEKI_PORT": "{{ fuseki_port  }}"
               }'
