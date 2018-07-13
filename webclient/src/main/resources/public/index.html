@@ -104,7 +104,7 @@
 				Build time: @timestamp@ (GMT)</span>
 		</div>
 	</footer>
-	  <script>
+	<script>
 		(function($) {
 			var dao = new DAO({});
 			var columnOrganizer;
@@ -127,7 +127,6 @@
 					dao : dao,
 					onAddToWorkspace : onAddToWorkspace,
 					onAddToWorkspaceTable : onAddToWorkspaceTable,
-					onAddToWorkspaceGraph : onAddToWorkspaceGraph,
 					onLoadToWorkspace : onLoadToWorkspace
 				});
 
@@ -157,40 +156,30 @@
 				$('#ex-query').hide();
 			});
 			
-			
 			function onAddToWorkspaceTable(target) {
 				var success = function(data) {
 					queryTable.DataVisualization({
 						data
 					});
 					
-					
 					$('#ex-query').show();
 					$('#ex-workspace').parent().hide();
 					$('#chat-chatbot').parent().hide();
 				};
 				dao.queryGraph(success);
-
 			}
 
-
-			
-		
-			
-			
 			function onAddToWorkspaceGraph(target) {
 				var success = function(data) {
 					createGraph(triplesToGraph(data));
 					
 				};
 				dao.queryGraph(success);
-
 			}
 
 			function onBigMessage() {
 				var column = $(chatbot).parent();
 				columnOrganizer.columnOrganizer("maximizeColumn", column);
-
 			}
 
 			function onLoadToWorkspace(target) {
