@@ -39,6 +39,9 @@ zuul:
     executer:
       path: /EXECUTER-MS/**
       serviceId: EXECUTER-MS
+    database:
+      path: /DATABASE-MS/**
+      serviceId: DATABASE-MS
 hystrix:
   command:
     default:

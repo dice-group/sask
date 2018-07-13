@@ -1,7 +1,9 @@
 /**
  * Data access object for the REST interfaces.
  * 
+ * @author Nilanjan
  * @author Kevin Haack
+ * 
  */
 ;
 var DAO = function(options) {
@@ -81,6 +83,14 @@ var DAO = function(options) {
 
 		return "./" + discoverer.getRepo().serviceId + "/";
 	};
+	
+	var getDatabaseServiceId = function() {
+		if (!discoverer.isDatabaseDiscovered()) {
+			return;
+		}
+
+		return "./" + discoverer.getDatabase().serviceId + "/";
+	};
 
 	/**
 	 * Return the executer service id.
@@ -103,6 +113,44 @@ var DAO = function(options) {
 
 		return "./" + discoverer.getChatbot().serviceId + "/";
 	};
+	
+/** fetch data from Query graph to display in table* */
+	
+	this.queryGraph = function(onSuccess)
+	{
+		var success = function(data) {
+			var parsedData = JSON.parse(data);
+			var result = [];
+			
+			if("results" in parsedData
+					&& "bindings" in parsedData.results) {
+				var bindingsArray = parsedData.results.bindings;
+				bindingsArray.forEach(function(element) {
+					
+					var s = element.s.value;
+					var p = element.p.value;
+					var o = element.o.value;
+					result.push({
+						s,
+						p,
+						o
+					});
+				}); 
+			}
+			onSuccess(result);
+		};
+		
+		var data = {
+			limit : "30"
+		};
+		
+		$.ajax({
+			type: "GET",
+			url: getDatabaseServiceId() + "queryDefaultGraph",
+			data,
+			success
+		});
+  };
 
 	/**
 	 * Parse the hdfs workflows structure to the ui structure.

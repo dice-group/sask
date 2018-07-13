@@ -94,13 +94,17 @@ public class DbService {
 	 * @return The query results in json format
 	 * 
 	 */
-	public String queryDefaultGraph() {
-		try (QueryEngineHTTP qe = (QueryEngineHTTP) QueryExecutionFactory.sparqlService(uri + "/query",
-				"SELECT * { {?s ?p ?o} UNION { GRAPH <default> { ?s ?p ?o } } }")) {
+	public String queryDefaultGraph(int limit) {
+
+		String query = "SELECT * { {?s ?p ?o} UNION { GRAPH <default> { ?s ?p ?o } } }" + "LIMIT " + limit;
+
+		try (QueryEngineHTTP qe = (QueryEngineHTTP) QueryExecutionFactory
+				.sparqlService(uri+"/query", query)) {
 			ResultSet results = qe.execSelect();
 			ByteArrayOutputStream b = new ByteArrayOutputStream();
 			ResultSetFormatter.outputAsJSON(b, results);
 			String json = b.toString();
+
 			return json;
 		}
 	}
@@ -112,15 +116,17 @@ public class DbService {
 	 *            The name of the graph
 	 * @return The query result in the form of JSON.
 	 */
-	public String queryGraph(String graphName) {
-
-		try (QueryEngineHTTP qe = (QueryEngineHTTP) QueryExecutionFactory.sparqlService(uri + "/query",
-				"SELECT * WHERE {GRAPH <" + graphName + "> {?s ?p ?o}}")) {
+	public String queryGraph(String graphName, int limit) {
+		
+		String query = "SELECT * WHERE {GRAPH <" + graphName + "> {?s ?p ?o}}" + "LIMIT " + limit;
+		try (QueryEngineHTTP qe = (QueryEngineHTTP) QueryExecutionFactory
+				.sparqlService(uri+"/query", query)) {
 			ResultSet results = qe.execSelect();
 			ByteArrayOutputStream b = new ByteArrayOutputStream();
 			ResultSetFormatter.outputAsJSON(b, results);
 			String json = b.toString();
 			return json;
+
 		}
 	}
 
