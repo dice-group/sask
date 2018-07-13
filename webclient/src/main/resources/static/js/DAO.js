@@ -123,8 +123,8 @@ var DAO = function(options) {
 			type: "GET",
 			url: getDatabaseServiceId() + "queryGraph",
 			success: function(data){
-				var parsedData = JSON.parse(data)
-				var bindingsArray = parsedData.results.bindings
+				var parsedData = JSON.parse(data);
+				var bindingsArray = parsedData.results.bindings;
 
 				var result = [];
 				bindingsArray.forEach(function(element) {

@@ -383,7 +383,7 @@
 					self.options.onAddToWorkspace(target);
 				}
 			},{
-				name : 'Query graph (as table)',
+				name : "Query graph (as table)",
 				onClick : function(target) {
 				self.options.onAddToWorkspaceTable(target);
 				},
