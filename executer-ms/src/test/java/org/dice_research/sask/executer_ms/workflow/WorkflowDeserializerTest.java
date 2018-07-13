@@ -142,6 +142,10 @@ public class WorkflowDeserializerTest {
 		assertEquals("file", os.get("id1").getType());
 		assertEquals(1, os.get("id1").getOutputs().size());
 		assertEquals("NL", os.get("id1").getOutputs().get("out1"));
+		
+		// start operator
+		assertEquals(1, workflow.getStartOperatorSet().size());
+		assertEquals("id1", workflow.getStartOperatorSet().iterator().next().getId());
 	}
 
 }
