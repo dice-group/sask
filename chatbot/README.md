@@ -8,7 +8,7 @@ Start chatbot microservice and webclient microservice for UI. For Start procedur
 
 ### Categories of Query:
 
-Automatic Workflow Generation (For ex: Extract File1.txt using FOX into sask).
+Automatic Workflow Generation (For ex: Extract from File1.txt using FOX).
 
 QAHandler: Question Answer (For ex: What is the capital of Germany? Who are the members of the German national Football team? etc).
 
