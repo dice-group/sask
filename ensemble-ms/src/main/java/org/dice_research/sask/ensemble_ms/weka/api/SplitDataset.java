@@ -1,15 +1,15 @@
 package org.dice_research.sask.ensemble_ms.weka.api;
 
 import weka.core.Instances;
-import weka.core.converters.ArffLoader;
+
 import weka.core.converters.ArffSaver;
 import weka.core.converters.ConverterUtils.DataSource;
 import weka.filters.Filter;
-import weka.core.Attribute;
+
 import weka.core.Instance;
 
 import java.io.File;
-import java.io.IOException;
+
 import java.util.Random;
 
 import weka.filters.unsupervised.attribute.StringToWordVector;
