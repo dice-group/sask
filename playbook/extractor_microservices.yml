@@ -46,6 +46,33 @@
           - /logs/:/logs/
       with_items: "{{ extractor_microservices }}"
 
+    - name: "Copy Hadoop sask settings file"
+      copy:
+        src: "{{ playbook_dir }}/configs/sask_hadoop_settings.sh"
+        dest: "/sask/hadoop/"
+        mode: 0755
+
+    - name: "Start the hadoop server needed for Repo-MS"
+      docker_container:
+        state : "started"
+        name: "hadoop"
+        hostname: "hadoop"
+        image: sequenceiq/hadoop-docker:2.7.0
+        ports:
+          - 50070:50070
+          - 50075:50075
+          - 2401:8088
+        etc_hosts: "{{ etc_hosts_all }}"
+        network_mode: sask
+        command: /etc/bootstrap.sh -bash -u $(date -u +%m%d%H%M%Y)
+        restart_policy: "always"
+        log_driver: "json-file"
+        volumes:
+          - /sask/hadoop/sask_hadoop_settings.sh:/root/sask_hadoop_settings.sh
+
+    #- name: "Execute the hadoop settings file"
+    #  command: docker exec -u 0 hadoop bash -c ' nohup /bin/sh ./root/sask_hadoop_settings.sh > /dev/null 2>&1 &'
+
     - name: "Starting the Repo-MS microservice"
       docker_container:
         state : "{{ container_state | default('started') }}"

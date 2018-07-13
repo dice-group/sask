@@ -28,10 +28,11 @@
         state: directory
         owner: "sask"
         group: "sask"
-        mode: 0775
+        mode: 0777
       with_items:
         - /logs/
         - /sask/
+        - /sask/hadoop/
       become: true
 
     - name: Create a network
