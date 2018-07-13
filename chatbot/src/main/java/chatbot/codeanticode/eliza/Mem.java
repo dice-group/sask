@@ -7,11 +7,11 @@ package chatbot.codeanticode.eliza;
 public class Mem {
 
 	/** The memory size */
-	final int memMax = 20;
+	private final int memMax = 20;
 	/** The memory */
 	String memory[] = new String[memMax];
 	/** The memory top */
-	int memTop = 0;
+	private int memTop = 0;
 
 	public void save(String str) {
 		if (memTop < memMax) {

@@ -3,6 +3,7 @@ package org.dice_research.sask.fred_ms;
 import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
+import org.dice_research.sask.fred_ms.DTO.FredDTO;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -52,47 +53,18 @@ public class FredMsController {
 			throw new IllegalArgumentException("No input");
 		}
 
-		String input = fred.getInput();
-		String wfd = fred.getWfd_profile();
-		String annotation = fred.getTextannotation();
-		String format = fred.getFormat();
-
-		// URI creating
-		String uri;
-		try {
-			String host = "http://wit.istc.cnr.it/stlab-tools/fred";
-			UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(host)
-			                                                   .queryParam("text", input)
-			                                                   .queryParam("wfd_profile", wfd)
-			                                                   .queryParam("textannotation", annotation)
-			                                                   .queryParam("format", format);
-			
-			uri = builder.build()
-			             .toUriString();
-		} catch (Exception ex) {
-			throw new RuntimeException("Unable to build fred uri (" + ex.getMessage() + ").", ex);
-		}
-
-		// Build header for FRED request
-		try {
-			HttpHeaders headers = new HttpHeaders();
-			headers.set("accept", format);
-			HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
-			ResponseEntity<String> result = restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
-			return result.getBody();
-		} catch (Exception ex) {
-			throw new RuntimeException("Failed to send input to fred (" + ex.getMessage() + ").", ex);
-		}
+		FredService service = new FredService(restTemplate);
+		return service.extract(fred);
 	}
 
 	@ExceptionHandler
-	void handleIllegalArgumentException(IllegalArgumentException e, HttpServletResponse response) throws IOException {
+	public void handleIllegalArgumentException(IllegalArgumentException e, HttpServletResponse response) throws IOException {
 		this.logger.error("FRED-microservice IllegalArgumentException: " + e.getMessage());
 		response.sendError(HttpStatus.BAD_REQUEST.value());
 	}
 
 	@ExceptionHandler
-	void handleRuntimeException(RuntimeException e, HttpServletResponse response) throws IOException {
+	public void handleRuntimeException(RuntimeException e, HttpServletResponse response) throws IOException {
 		this.logger.error("FRED-microservice RuntimeException: " + e.getMessage());
 		response.sendError(HttpStatus.BAD_REQUEST.value());
 	}

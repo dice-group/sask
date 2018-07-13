@@ -1,13 +1,18 @@
+/**
+ * JQuery plugin for the workspace toolbar.
+ * 
+ * @author Kevin Haack
+ */
 ;
-(function($, window, document) {
+((function($, window, document) {
 
 	/* global jQuery, console */
-	'use strict';
+	"use strict";
 
 	/**
 	 * The plugin name.
 	 */
-	var pluginName = 'toolbar';
+	var pluginName = "toolbar";
 
 	/**
 	 * Default settings.
@@ -15,18 +20,18 @@
 	var _default = {};
 
 	_default.settings = {
-		buttongroupTemplate : '<div class="btn-group" role="group"></div>',
-		newButtonTemplate : '<button type="button" class="btn btn-default"><a href="#"><span class="glyphicon glyphicon glyphicon-file"></span> New</a></button>',
-		undoButtonTemplate : '<button type="button" class="btn btn-default"><a href="#"><span class="glyphicon glyphicon-arrow-left"></span> Undo</a></button>',
-		redoButtonTemplate : '<button type="button" class="btn btn-default"><a href="#">Redo <span class="glyphicon glyphicon-arrow-right"></span></a></button>',
-		saveButtonTemplate : '<button type="button" class="btn btn-default"><a href="#"><span class="glyphicon glyphicon-floppy-disk"></span> Save</a></button>',
-		executeButtonTemplate : '<button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-play"></span> Execute</button>',
-		workflownameFieldTemplate : '<span class="pull-right"></span>',
-		onNewButtonClick : undefined,
-		onUndoButtonClick : undefined,
-		onRedoButtonClick : undefined,
-		onSaveButtonClick : undefined,
-		onExecuteButtonClick : undefined
+		buttongroupTemplate : "<div class=\"btn-group\" role=\"group\"></div>",
+		newButtonTemplate : "<button type=\"button\" class=\"btn btn-default\"><a href=\"#\"><span class=\"glyphicon glyphicon glyphicon-file\"></span> New</a></button>",
+		undoButtonTemplate : "<button type=\"button\" class=\"btn btn-default\"><a href=\"#\"><span class=\"glyphicon glyphicon-arrow-left\"></span> Undo</a></button>",
+		redoButtonTemplate : "<button type=\"button\" class=\"btn btn-default\"><a href=\"#\">Redo <span class=\"glyphicon glyphicon-arrow-right\"></span></a></button>",
+		saveButtonTemplate : "<button type=\"button\" class=\"btn btn-default\"><a href=\"#\"><span class=\"glyphicon glyphicon-floppy-disk\"></span> Save</a></button>",
+		executeButtonTemplate : "<button type=\"button\" class=\"btn btn-primary\"><span class=\"glyphicon glyphicon-play\"></span> Execute</button>",
+		workflownameFieldTemplate : "<span class=\"pull-right\"></span>",
+		onNewButtonClick : null,
+		onUndoButtonClick : null,
+		onRedoButtonClick : null,
+		onSaveButtonClick : null,
+		onExecuteButtonClick : null
 	};
 
 	_default.options = {};
@@ -34,32 +39,32 @@
 	/**
 	 * The new button.
 	 */
-	var newButton = undefined;
+	var newButton;
 
 	/**
 	 * The undo button.
 	 */
-	var undoButton = undefined;
+	var undoButton;
 
 	/**
 	 * The redo button.
 	 */
-	var redoButton = undefined;
+	var redoButton;
 
 	/**
 	 * The save button.
 	 */
-	var saveButton = undefined;
-	
+	var saveButton;
+
 	/**
 	 * The execute button.
 	 */
-	var executeButton = undefined;
+	var executeButton;
 
 	/**
 	 * The workflow name.
 	 */
-	var workflownameField = undefined;
+	var workflownameField;
 
 	/**
 	 * logging function
@@ -74,7 +79,7 @@
 
 		this.$element = $(element);
 		this.elementId = element.id;
-		this.styleId = this.elementId + '-style';
+		this.styleId = this.elementId + "-style";
 
 		this.init(options);
 
@@ -86,7 +91,7 @@
 			disableSave : $.proxy(this.disableSave, this),
 			setWorkflowName : $.proxy(this.setWorkflowName, this)
 		};
-	}
+	};
 
 	/**
 	 * Init.
@@ -108,17 +113,17 @@
 		redoButton = $(this.options.redoButtonTemplate);
 		saveButton = $(this.options.saveButtonTemplate);
 		executeButton = $(this.options.executeButtonTemplate);
-		
+
 		var buttongroup = $(this.options.buttongroupTemplate);
-		
+
 		buttongroup.append(newButton);
 		buttongroup.append(undoButton);
 		buttongroup.append(redoButton);
 		buttongroup.append(saveButton);
 		buttongroup.append(executeButton);
-		
+
 		this.$element.append(buttongroup);
-		
+
 		// name
 		workflownameField = $(this.options.workflownameFieldTemplate);
 		this.$element.append(workflownameField);
@@ -157,7 +162,7 @@
 				self.options.onSaveButtonClick();
 			}
 		});
-		
+
 		// execute
 		executeButton.click(function() {
 			if (self.options.onExecuteButtonClick) {
@@ -171,9 +176,9 @@
 	 */
 	Toolbar.prototype.disableRedo = function(disable) {
 		if (disable) {
-			redoButton.removeAttr('disabled');
+			redoButton.removeAttr("disabled");
 		} else {
-			redoButton.attr('disabled', 'disabled');
+			redoButton.attr("disabled", "disabled");
 		}
 	};
 
@@ -182,9 +187,9 @@
 	 */
 	Toolbar.prototype.disableUndo = function(disable) {
 		if (disable) {
-			undoButton.removeAttr('disabled');
+			undoButton.removeAttr("disabled");
 		} else {
-			undoButton.attr('disabled', 'disabled');
+			undoButton.attr("disabled", "disabled");
 		}
 	};
 
@@ -193,9 +198,9 @@
 	 */
 	Toolbar.prototype.disableSave = function(disable) {
 		if (disable) {
-			saveButton.removeAttr('disabled');
+			saveButton.removeAttr("disabled");
 		} else {
-			saveButton.attr('disabled', 'disabled');
+			saveButton.attr("disabled", "disabled");
 		}
 	};
 
@@ -217,20 +222,20 @@
 		this.each(function() {
 			var _this = $.data(this, pluginName);
 
-			if (typeof options === 'string') {
+			if (typeof options === "string") {
 				if (!_this) {
-					logError('Not initialized, can not call method : '
+					logError("Not initialized, can not call method : "
 							+ options);
 				} else if (!$.isFunction(_this[options])
-						|| options.charAt(0) === '_') {
-					logError('No such method : ' + options);
+						|| options.charAt(0) === "_") {
+					logError("No such method : " + options);
 				} else {
 					if (!(args instanceof Array)) {
 						args = [ args ];
 					}
 					result = _this[options].apply(_this, args);
 				}
-			} else if (typeof options === 'boolean') {
+			} else if (typeof options === "boolean") {
 				result = _this;
 			} else {
 				$.data(this, pluginName, new Toolbar(this, $.extend(true, {},
@@ -241,5 +246,4 @@
 		return result || this;
 	};
 
-})(jQuery, window, document);
-0
+})(jQuery, window, document));

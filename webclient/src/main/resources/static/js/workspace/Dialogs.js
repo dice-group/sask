@@ -1,3 +1,9 @@
+/**
+ * Javascript class to provide ui dialogs.
+ * 
+ * @author Kevin Haack
+ */
+;
 var Dialogs = function(options) {
 	/**
 	 * this.
@@ -31,45 +37,45 @@ var Dialogs = function(options) {
 	 * Dialog templates.
 	 */
 	var dialogTemplates = {
-		remove : '<div title="Delete item">'
-				+ '<input type="hidden" name="target" />'
-				+ '<p>'
-				+ 'This item will be permanently deleted and cannot be recovered. Are you sure?'
-				+ '</p>' + '</div>',
-		rename : '<div title="Rename">'
-				+ '<form>'
-				+ '<fieldset>'
-				+ '<input type="hidden" name="target" />'
-				+ '<label for="name">Name</label>'
-				+ '<input type="text" name="name" required="required" class="text ui-widget-content ui-corner-all" />'
-				+ '</fieldset>' + '</form>' + '</div>',
-		newFolder : '<div title="New folder">'
-				+ '<form>'
-				+ '<fieldset>'
-				+ '<input type="hidden" name="target" />'
-				+ '<label for="name">Name</label> <input type="text" name="name" required="required" class="text ui-widget-content ui-corner-all" />'
-				+ '</fieldset>' + '</form>' + '</div>',
-		newWorkflow : '<div title="New workflow">'
-				+ '<form>'
-				+ '<fieldset>'
-				+ '<label for="name">Name</label> <input type="text" name="name" required="required" class="text ui-widget-content ui-corner-all" />'
-				+ '</fieldset>' + '</form>' + '</div>'
+		remove : "<div title=\"Delete item\">"
+				+ "<input type=\"hidden\" name=\"target\" />"
+				+ "<p>"
+				+ "This item will be permanently deleted and cannot be recovered. Are you sure?"
+				+ "</p></div>",
+		rename : "<div title=\"Rename\">"
+				+ "<form>"
+				+ "<fieldset>"
+				+ "<input type=\"hidden\" name=\"target\" />"
+				+ "<label for=\"name\">Name</label>"
+				+ "<input type=\"text\" name=\"name\" required=\"required\" class=\"text ui-widget-content ui-corner-all\" />"
+				+ "</fieldset></form></div>",
+		newFolder : "<div title=\"New folder\">"
+				+ "<form>"
+				+ "<fieldset>"
+				+ "<input type=\"hidden\" name=\"target\" />"
+				+ "<label for=\"name\">Name</label> <input type=\"text\" name=\"name\" required=\"required\" class=\"text ui-widget-content ui-corner-all\" />"
+				+ "</fieldset></form></div>",
+		newWorkflow : "<div title=\"New workflow\">"
+				+ "<form>"
+				+ "<fieldset>"
+				+ "<label for=\"name\">Name</label> <input type=\"text\" name=\"name\" required=\"required\" class=\"text ui-widget-content ui-corner-all\" />"
+				+ "</fieldset></form></div>"
 	};
 
 	/**
 	 * Creates a dialog.
 	 */
 	var createDialog = function(dialog, buttons) {
-		var dialog = $(dialogTemplates[dialog]).dialog({
+		var d = $(dialogTemplates[dialog]).dialog({
 			autoOpen : false,
 			resizable : false,
 			height : "auto",
 			width : "auto",
 			modal : true,
-			buttons : buttons
+			buttons
 		});
 
-		return dialog;
+		return d;
 	};
 
 	/**
@@ -81,8 +87,8 @@ var Dialogs = function(options) {
 			Cancel : negativ
 		};
 
-		var dialog = createDialog('remove', buttons);
-		dialog.find('input[name="target"]').val(target.id);
+		var dialog = createDialog("remove", buttons);
+		dialog.find("input[name=\"target\"]").val(target.id);
 
 		// positiv on enter
 		dialog.submit(function(e) {
@@ -102,9 +108,9 @@ var Dialogs = function(options) {
 			Cancel : negativ
 		};
 
-		var dialog = createDialog('rename', buttons);
-		dialog.find('input[name="name"]').val(target.text);
-		dialog.find('input[name="target"]').val(target.id);
+		var dialog = createDialog("rename", buttons);
+		dialog.find("input[name=\"name\"]").val(target.text);
+		dialog.find("input[name=\"target\"]").val(target.id);
 
 		// positiv on enter
 		dialog.submit(function(e) {
@@ -121,7 +127,7 @@ var Dialogs = function(options) {
 			Cancel : negativ
 		};
 
-		var dialog = createDialog('newWorkflow', buttons);
+		var dialog = createDialog("newWorkflow", buttons);
 
 		// positiv on enter
 		dialog.submit(function(e) {
@@ -130,7 +136,7 @@ var Dialogs = function(options) {
 		});
 
 		return dialog;
-	}
+	};
 
 	/**
 	 * New folder dialog.
@@ -141,8 +147,8 @@ var Dialogs = function(options) {
 			Cancel : negativ
 		};
 
-		var dialog = createDialog('newFolder', buttons);
-		dialog.find('input[name="target"]').val(target.id);
+		var dialog = createDialog("newFolder", buttons);
+		dialog.find("input[name=\"target\"]").val(target.id);
 
 		// positiv on enter
 		dialog.submit(function(e) {
@@ -162,7 +168,7 @@ var Dialogs = function(options) {
 			Cancel : negativ
 		};
 
-		var dialog = createDialog('upload', buttons);
+		var dialog = createDialog("upload", buttons);
 
 		// positiv on enter
 		dialog.submit(function(e) {

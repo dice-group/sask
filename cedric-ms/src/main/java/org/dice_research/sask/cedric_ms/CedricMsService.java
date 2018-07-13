@@ -1,6 +1,6 @@
 package org.dice_research.sask.cedric_ms;
 
-import org.dice_research.cedric.Extractor;
+import org.dice_research.cedric_extraction.Extractor;
 
 /**
  * This class forms a facade to Cedric extractor.
