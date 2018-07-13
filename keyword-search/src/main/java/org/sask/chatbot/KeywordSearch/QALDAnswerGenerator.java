@@ -4,7 +4,9 @@ package org.sask.chatbot.KeywordSearch;
  * @since 03-07-2018
  */
 import java.io.*;
-
+/*
+* This class is used to benchmark Qald-7 results with the results returned with SCC query.
+*/
 
 public class QALDAnswerGenerator {
 
