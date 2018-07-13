@@ -266,8 +266,9 @@
 			if (messageData[0].classPredicted !== "") {
 				this.addErrorMessage(messageData[0].classPredicted + ", Answer: " + this.options.messageInternalError);
 			}
-			else
+			else{
 				this.addErrorMessage(this.options.messageInternalError);
+			}
 			return;
 		}
 
@@ -278,8 +279,9 @@
 			if (messageData[0].classPredicted !== "") {
 				this.addLeftCard(messageData[0].classPredicted + ", Answer: " + messageData[0].content);	
 			}
-			else
+			else {
 				this.addLeftCard(messageData[0].content);
+			}
 		} else if (messageType === "TEXT_WITH_URL" || messageType === "URL") {
 			if (this.options.onBigMessage) {
 				this.options.onBigMessage();
