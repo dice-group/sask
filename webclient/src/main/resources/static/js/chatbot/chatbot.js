@@ -263,7 +263,7 @@
 		var dataObject = JSON.parse(data);
 		var messageData = dataObject.messageData;
 		if (dataObject.error === true) {
-			if (messageData[0].classPredicted !== "") {
+			if ((typeof messageData != "undefined" && messageData != null && messageData.length != null && messageData.length > 0) && messageData[0].classPredicted !== "") {
 				this.addErrorMessage(messageData[0].classPredicted + ", Answer: " + this.options.messageInternalError);
 			}
 			else{
