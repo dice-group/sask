@@ -463,10 +463,10 @@ public class IntentLearner {
 		
 		try {
 			ClassLoader classLoader = IntentLearner.class.getClassLoader();
-			Resource[] messageResources = new PathMatchingResourcePatternResolver(classLoader).getResources("classpath*:"+ resource + trainingData);
+			Resource[] messageResources = new PathMatchingResourcePatternResolver(classLoader).getResources("classpath*:"+ resource + datafile);
 			// Since there is only one resource file, it is accessed directly
 			
-			File file = new File(trainingData);
+			File file = new File(datafile);
 			InputStream inputStream = messageResources[0].getInputStream();
 			OutputStream outputStream = new FileOutputStream(file);
 			IOUtils.copy(inputStream, outputStream);
