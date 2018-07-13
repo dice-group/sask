@@ -97,11 +97,14 @@ public class RiveScriptOutputAnalyzer {
 
 	private Response createPlainTextResponse(String response) {
 		Response obj = new Response();
-		obj.setContent(response);
+		obj.setContent(response);		
 		obj.setTitle("");
+		if(log.isDebugEnabled())
+			obj.setClassPredicted("Static Rivescript prediction");
 		return obj;
 	}
 
+	
 	// Custom Function to check if Query is found in Rive Script.
 	public static boolean isQueryFound(String query) {
 		resourceLoader();

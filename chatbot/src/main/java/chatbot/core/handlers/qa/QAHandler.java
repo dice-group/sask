@@ -83,24 +83,41 @@ public class QAHandler extends Handler {
 			String response = sendHTTPRequest(sendText);
 			//If in future, multiple answers need to be returned, then split it into n*1 and call below functions in a loop
 			Response output = generateResponse(response); 
+			if(log.isDebugEnabled())
+				output.setClassPredicted("Class Predicted - QA");
 			responselist.addMessage(output);
 			return responselist;
 		} catch (JsonProcessingException e) {
 			// Check if we can create a logger.
 			log.error("search, JsonProcessingException in handling QA Queries,Stack Trace=" + e.getMessage());
 			ResponseList responselist = new ResponseList();
+			if(log.isDebugEnabled()) {
+				Response response = new Response();
+				response.setClassPredicted("Class Predicted - QA");
+				responselist.addMessage(response);
+			}
 			responselist.setError();
 			return responselist;
 		} catch (IOException e) {
 			// Check if we can create a logger.
 			log.error("search, IOException in handling QA Queries,Stack Trace=" + e.getMessage());
 			ResponseList responselist = new ResponseList();
+			if(log.isDebugEnabled()) {
+				Response response = new Response();
+				response.setClassPredicted("Class Predicted - QA");
+				responselist.addMessage(response);
+			}
 			responselist.setError();
 			return responselist;
 		} catch (Exception e) {
 			// Check if we can create a logger.
 			log.error("search, Exception in handling QA Queries,Stack Trace=" + e.getMessage());
 			ResponseList responselist = new ResponseList();
+			if(log.isDebugEnabled()) {
+				Response response = new Response();
+				response.setClassPredicted("Class Predicted - QA");
+				responselist.addMessage(response);
+			}
 			responselist.setError();
 			return responselist;
 

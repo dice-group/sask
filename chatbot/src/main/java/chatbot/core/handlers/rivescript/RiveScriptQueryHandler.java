@@ -6,6 +6,7 @@ import org.apache.log4j.Logger;
 
 import chatbot.core.handlers.Handler;
 import chatbot.io.incomingrequest.IncomingRequest;
+import chatbot.io.response.Response;
 import chatbot.io.response.ResponseList;
 
 public class RiveScriptQueryHandler extends Handler {
@@ -30,6 +31,11 @@ public class RiveScriptQueryHandler extends Handler {
 			// Check if we can create a logger.
 			log.error("search, Exception in handling Rivescript Queries");
 			ResponseList responselist = new ResponseList();
+			if(log.isDebugEnabled()) {
+				Response response = new Response();
+				response.setClassPredicted("Static Rivescript prediction");
+				responselist.addMessage(response);
+			}
 			responselist.setError();
 			return responselist;
 		}

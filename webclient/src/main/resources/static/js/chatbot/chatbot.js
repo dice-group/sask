@@ -187,8 +187,11 @@
 		var messageDiv = card.find("." + this.options.messageClass);
 
 		for (var i = 0; i < messageData.length; i++) {
+			if (messageData[i].classPredicted !== "") {
+				messageDiv.append(messageData[i].classPredicted + "<br />");	
+			}
 			if (messageData[i].content !== "") {
-				messageDiv.append(messageData[0].content + "<br />");
+				messageDiv.append(messageData[i].content + "<br />");
 			}
 
 			if (messageData[i].image !== "" && messageData[i].image !== null) {
@@ -258,17 +261,27 @@
 	 */
 	Chatbot.prototype.addMessage = function(data, requestMessage) {
 		var dataObject = JSON.parse(data);
-
+		var messageData = dataObject.messageData;
 		if (dataObject.error === true) {
-			this.addErrorMessage(this.options.messageInternalError);
+			if ((typeof messageData != "undefined" && messageData != null && messageData.length != null && messageData.length > 0) && messageData[0].classPredicted !== "") {
+				this.addErrorMessage(messageData[0].classPredicted + ", Answer: " + this.options.messageInternalError);
+			}
+			else{
+				this.addErrorMessage(this.options.messageInternalError);
+			}
 			return;
 		}
 
-		var messageData = dataObject.messageData;
+		//var messageData = dataObject.messageData;
 		var messageType = dataObject.messageType;
 
 		if (messageType === "PLAIN_TEXT") {
-			this.addLeftCard(messageData[0].content);
+			if (messageData[0].classPredicted !== "") {
+				this.addLeftCard(messageData[0].classPredicted + ", Answer: " + messageData[0].content);	
+			}
+			else {
+				this.addLeftCard(messageData[0].content);
+			}
 		} else if (messageType === "TEXT_WITH_URL" || messageType === "URL") {
 			if (this.options.onBigMessage) {
 				this.options.onBigMessage();

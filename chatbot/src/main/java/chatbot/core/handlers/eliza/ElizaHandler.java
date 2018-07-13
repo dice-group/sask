@@ -68,7 +68,10 @@ public class ElizaHandler extends Handler {
 			resourceLoader();
 			String response = eliza.processInput(query);
 			responselist.setMessageType(MessageType.PLAIN_TEXT);
-			responselist.addMessage(createNewResponse(response)); // Add
+			Response resp = createNewResponse(response);
+			if(log.isDebugEnabled()) 
+				resp.setClassPredicted("Class Predicted - Eliza");
+			responselist.addMessage(resp); // Add
 			                                                      // Response to
 			                                                      // Final
 			                                                      // String
@@ -88,6 +91,11 @@ public class ElizaHandler extends Handler {
 			// Check if we can create a logger.
 			log.error("search, Exception in handling QA Queries,Stack Trace=" + e.getMessage());
 			ResponseList responselist = new ResponseList();
+			if(log.isDebugEnabled()) {
+				Response response = new Response();
+				response.setClassPredicted("Class Predicted - Eliza");
+				responselist.addMessage(response);
+			}	
 			responselist.setMessageType(MessageType.PLAIN_TEXT);
 			responselist.setError();
 			return responselist;
