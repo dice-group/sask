@@ -7,12 +7,19 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.stream.Collectors;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 import chatbot.core.handlers.Handler;
 import chatbot.core.handlers.eliza.ElizaHandler;
@@ -314,11 +321,13 @@ public class IntentLearner {
 		//FileWriter fw = null;
 		query = query.replace("'", "");
 		try {
-			ClassLoader classLoader = this.getClass().getClassLoader();
-			URL urlTrainingData = classLoader.getResource(resourcePath+ trainingData);
-			String trainingDataFile = urlTrainingData.getFile();
+			
+			String trainingDataFile = readResourceFromClassPath(resourcePath, trainingData);
 			File trainFile = new File(trainingDataFile);
-			URL urlTempData = classLoader.getResource(resourcePath); 	
+			
+			ClassLoader cl = IntentLearner.class.getClassLoader();
+
+			URL urlTempData = cl.getResource(resourcePath); 	
 			String tempDataFile = urlTempData.getFile();
 			File tempFile = new File(tempDataFile+ "temp.arff");
 			tempFile.createNewFile();
@@ -432,6 +441,32 @@ public class IntentLearner {
 		log.info("Corrected Query:" + result); 
 		return result;
 	}
+	
+	private String readResourceFromClassPath(String resource, String datafile) {
+		
+		
+		try {
+			ClassLoader classLoader = IntentLearner.class.getClassLoader();
+			Resource[] messageResources = new PathMatchingResourcePatternResolver(classLoader).getResources("classpath*:"+ resource + trainingData);
+			// Since there is only one resource file, it is accessed directly
+			
+			File file = new File(trainingData);
+			InputStream inputStream = messageResources[0].getInputStream();
+			OutputStream outputStream = new FileOutputStream(file);
+			IOUtils.copy(inputStream, outputStream);
+			outputStream.close();
+			
+			return file.getPath();
+			
+	        } catch (IOException e) {
+			log.error("resourceLoader, IO Exception while parsing YAML template,Stack Trace=" + e.getMessage());
+			e.printStackTrace();
+			
+			return null;
+		}
+		
+	}
+	
 	/**
 	 * Handle intent classification
 	 */
@@ -440,15 +475,15 @@ public class IntentLearner {
 		String query = request.getRequestContent().get(0).getText().toLowerCase();
 		query = query.replace("'", "");
 		//learner = new IntentLearner();
-		ClassLoader classLoader = this.getClass().getClassLoader();
-		URL urlTrainingData = classLoader.getResource(resourcePath+ trainingData);
-		String trainingDataFile = urlTrainingData.getFile();
+		
+		String trainingDataFile = readResourceFromClassPath(resourcePath, trainingData);
 		this.loadDataset(trainingDataFile);
 		
 		this.evaluate();
 		this.learn();
-		URL urlModel = classLoader.getResource(resourcePath + model);
-		this.saveModel(urlModel.getFile());
+		
+		String urlModel = readResourceFromClassPath(resourcePath, model);
+		this.saveModel(urlModel);
 		String prediction=this.classify(trainingDataFile , query);
 		return this.usePrediction(prediction);
 		

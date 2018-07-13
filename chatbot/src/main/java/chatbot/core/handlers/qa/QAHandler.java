@@ -34,8 +34,7 @@ public class QAHandler extends Handler {
 	// Handle Hawk Service.
 	private static Logger log = Logger.getLogger(QAHandler.class.getName());
 	
-	@Value("${qa.hawk.url}")
-	private String URL;
+	private static String URL = "http://185.2.103.92:8081/tebaqa/qa-simple?query=";
 
 	
 	private Response generateResponse(String incomingResponse) throws JsonProcessingException, IOException {
