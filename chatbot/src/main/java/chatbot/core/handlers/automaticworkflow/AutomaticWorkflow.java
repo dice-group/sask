@@ -116,7 +116,7 @@ public class AutomaticWorkflow extends Handler {
   		}
 			 if(fileList.contains(fileName)) {
 				 log.info("FILE PRESENT");				
-					fileInfo= exeWorkFlow(extractor,fileName);				
+					fileInfo= constructWorkFlow(extractor,fileName);				
 			 } else {
 				 log.info("FILE NOT PRESENT");
 				 responseData.setContent("Please enter the correct file name");
@@ -126,16 +126,12 @@ public class AutomaticWorkflow extends Handler {
 		return fileInfo; 
 	}
 	
-	public ResponseList exeWorkFlow(String extractor, String fileName) {
-		ResponseList returnedResponse =  new ResponseList();
-		Response responseData = new Response();
-
+	public ResponseList constructWorkFlow(String extractor, String fileName) {
 		/*
 		 * create
 		 */
 		// o1		
 		Map<String, String> outputs1 = new HashMap<>();	
-
 		outputs1.put("output_55uqv2wzcus", "NL");
 		outputs1.put("output_y97vayejxre", "NL");
 
@@ -148,7 +144,6 @@ public class AutomaticWorkflow extends Handler {
 		Map<String, Operator> op1 = new HashMap<>();
 		op1.put("node_hgibcp02st", o1);
 		
-		
 		// o2
 		Map<String, String> inputs2 = new HashMap<>();
 		
@@ -156,7 +151,6 @@ public class AutomaticWorkflow extends Handler {
 		inputs2.put("input_2hfqgk71ukp", "NL");
 
 		Map<String, String> outputs2 = new HashMap<>();
-
 		outputs2.put("output_a2b3epd6nd", "RDF");
 		outputs2.put("output_09phmd5hdmvi", "RDF");
 
@@ -173,7 +167,6 @@ public class AutomaticWorkflow extends Handler {
 	
 		// o3
 		Map<String, String> inputs3 = new HashMap<>();
-
 		inputs3.put("input_5ezhp221vou", "RDF");
 		inputs3.put("input_g4z7qll7d8s", "RDF");
 			
@@ -208,8 +201,17 @@ public class AutomaticWorkflow extends Handler {
 		
 		w.getLinks().add(l1);
 		w.getLinks().add(l2);
+		
+		ResponseList responseConstructWF= execWorkFlow(w);
+		return responseConstructWF;
+	}		
 				
-				
+	
+	
+	public ResponseList execWorkFlow(Workflow w) {
+		ResponseList responseExecWF =  new ResponseList();
+		Response responseData = new Response();
+		
 		ObjectMapper mapper = new ObjectMapper();
 		SimpleModule module = new SimpleModule();
 		module.addSerializer(Workflow.class, new WorkflowSerializer());
@@ -229,17 +231,17 @@ public class AutomaticWorkflow extends Handler {
 			
 			if(httpResponse.getStatusCodeValue() == 200) {
 				responseData.setContent("Query executed successfully");
-				returnedResponse.addMessage(responseData);	
+				responseExecWF.addMessage(responseData);	
 			}else {
 				responseData.setContent("Query failed");
-				returnedResponse.addMessage(responseData);
+				responseExecWF.addMessage(responseData);
 			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}		
-		log.info("Returned Response::"+ returnedResponse.getMessageData().get(0).getContent());
-	return returnedResponse;
+		log.info("Returned Response::"+ responseExecWF.getMessageData().get(0).getContent());
+	return responseExecWF;
 	}
 	
 }
