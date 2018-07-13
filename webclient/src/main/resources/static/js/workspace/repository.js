@@ -377,18 +377,17 @@
 			fetchElementData(target) {
 				return self.getNodeFromTarget(target);
 			},
-			actions : [ {
+			actions : [{
 				name : "Add to Workspace",
 				onClick(target) {
 					self.options.onAddToWorkspace(target);
 				}
 			},{
 				name : "Query graph (as table)",
-				onClick : function(target) {
+				onClick(target) {
 				self.options.onAddToWorkspaceTable(target);
 				},
-			}
-	               ]
+			}]
 		});
 
 		// extractor
@@ -401,7 +400,7 @@
 				onClick(target) {
 					self.options.onAddToWorkspace(target);
 				}
-			} ]
+			}]
 		});
 
 		// workflow
