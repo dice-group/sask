@@ -17,11 +17,21 @@ public class Response {
 	 private String title;
 	 private String content;
 	 private String image;
+	 private String classPredicted = "";
 	 public Response() {
 		 title="";
 		 content="";
 		 image="";
 	 }
+	 
+	 public String getClassPredicted() {
+		return classPredicted;
+	 }
+	 
+	 public void setClassPredicted(String classPredicted) {
+		this.classPredicted = classPredicted;
+	 }
+	
 	 public void addEntry(EntryInformation entry) {
 	   entryList.add(entry);
 	 }

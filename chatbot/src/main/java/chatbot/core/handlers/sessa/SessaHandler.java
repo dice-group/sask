@@ -64,24 +64,41 @@ public class SessaHandler extends Handler {
 			String sendText = URL + URLEncoder.encode(query, "UTF-8");
 			String response = sendHTTPRequest(sendText);
 			Response output = generateResponse(response);
+			if(log.isDebugEnabled()) 
+				output.setClassPredicted("Class Predicted - Keyword Search");
 			responselist.addMessage(output);
 			return responselist;
 		} catch (JsonProcessingException e) {
 			// Check if we can create a logger.
 			log.error("search, JsonProcessingException in handling QA Queries,Stack Trace=" + e.getMessage());
 			ResponseList responselist = new ResponseList();
+			if(log.isDebugEnabled()) {
+				Response output = new Response();
+				output.setClassPredicted("Class Predicted - Keyword Search");
+				responselist.addMessage(output);
+			}
 			responselist.setError();
 			return responselist;
 		} catch (IOException e) {
 			// Check if we can create a logger.
 			log.error("search, IOException in handling QA Queries,Stack Trace=" + e.getMessage());
 			ResponseList responselist = new ResponseList();
+			if(log.isDebugEnabled()) {
+				Response output = new Response();
+				output.setClassPredicted("Class Predicted - Keyword Search");
+				responselist.addMessage(output);
+			}
 			responselist.setError();
 			return responselist;
 		} catch (Exception e) {
 			// Check if we can create a logger.
 			log.error("search, Exception in handling QA Queries,Stack Trace=" + e.getMessage());
 			ResponseList responselist = new ResponseList();
+			if(log.isDebugEnabled()) {
+				Response output = new Response();
+				output.setClassPredicted("Class Predicted - Keyword Search");
+				responselist.addMessage(output);
+			}
 			responselist.setError();
 			return responselist;
 
