@@ -25,6 +25,7 @@
 	_default.settings = {
 		columnHeader : "h4",
 		columnClass : "sask-column",
+		columnClassClosable : "closable",
 		columnClassResizable : "resizable",
 		columnClassPrefix : "col-lg-",
 		arrowTemplate : "<span class=\"glyphicon glyphicon-chevron-down pull-right\"></span>",
@@ -92,7 +93,6 @@
 		var self = this;
 		var selector = "#" + this.elementId;
 		selector += " ." + this.options.columnClass;
-		selector += "." + this.options.columnClassResizable;
 		selector += " " + this.options.columnHeader;
 
 		$(selector).each(function(index) {
@@ -155,6 +155,12 @@
 
 		this.hideOthers(column);
 	};
+	
+	ColumnOrganizer.prototype.close = function(column) {
+		column.hide();
+		
+		this.showAll(column);
+	};
 
 	/**
 	 * Minimize the passed column
@@ -196,6 +202,27 @@
 					self.minimizeColumn(column);
 				}
 			} ]
+		});
+		
+		selector = "#" + this.elementId;
+		selector += " ." + this.options.columnClass;
+		selector += "." + this.options.columnClassClosable;
+		selector += " " + this.options.columnHeader;
+		selector += " span";
+
+		new BootstrapMenu(selector, {
+			fetchElementData(target) {
+				var head = $(target.parent());
+				var column = $(head.parent());
+				return column;
+			},
+			menuEvent : "click",
+			actions : [ {
+				name : "Close",
+				onClick(column) {
+					self.close(column);
+				}
+			}]
 		});
 	};
 

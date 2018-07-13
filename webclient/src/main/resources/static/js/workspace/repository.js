@@ -23,6 +23,8 @@
 
 	_default.settings = {
 		onAddToWorkspace : null,
+		onAddToWorkspaceTable: null,
+		onAddToWorkspaceGraph: null,
 		onLoadToWorkspace : null,
 		dao : null
 	};
@@ -375,12 +377,17 @@
 			fetchElementData(target) {
 				return self.getNodeFromTarget(target);
 			},
-			actions : [ {
+			actions : [{
 				name : "Add to Workspace",
 				onClick(target) {
 					self.options.onAddToWorkspace(target);
 				}
-			} ]
+			},{
+				name : "Query graph (as table)",
+				onClick(target) {
+				self.options.onAddToWorkspaceTable(target);
+				},
+			}]
 		});
 
 		// extractor
@@ -393,7 +400,7 @@
 				onClick(target) {
 					self.options.onAddToWorkspace(target);
 				}
-			} ]
+			}]
 		});
 
 		// workflow
