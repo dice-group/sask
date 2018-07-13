@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 
@@ -83,7 +84,7 @@ public class DbController {
 	 * 
 	 */
 	@RequestMapping(value = "/queryDefaultGraph")
-	public String queryDefaultGraph(@RequestParam(required = false, defaultValue = "10") Integer limit) {
+	public String queryDefaultGraph(@RequestParam(required = false, defaultValue = "10") int limit) {
 		logger.info("db-microservice queryDefaultGraph() is invoked");
 		return service.queryDefaultGraph(limit);
 	}
@@ -96,10 +97,10 @@ public class DbController {
 	 * @return The query result in the form of JSON.
 	 */
 	@RequestMapping(value = "/queryGraph")
-	public String queryGraph(@RequestParam(required = false, defaultValue = "10") Integer limit,
+	public String queryGraph(@RequestParam(required = false, defaultValue = "10") int limit,
 			@RequestParam String graphName) {
 		logger.info("db-microservice queryGraph() is invoked");
-		return service.queryGraph(graphName, limmit );
+		return service.queryGraph(graphName, limit);
 	}
 
 	/**

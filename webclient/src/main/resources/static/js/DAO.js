@@ -116,17 +116,15 @@ var DAO = function(options) {
 	
 /** fetch data from Query graph to display in table* */
 	
-	this.queryGraph = function(success)
+	this.queryGraph = function(onSuccess)
 	{
-		
-		$.ajax({
-			type: "GET",
-			url: getDatabaseServiceId() + "queryGraph",
-			success: function(data){
-				var parsedData = JSON.parse(data);
+		var success = function(data) {
+			var parsedData = JSON.parse(data);
+			var result = [];
+			
+			if("results" in parsedData
+					&& "bindings" in parsedData.results) {
 				var bindingsArray = parsedData.results.bindings;
-
-				var result = [];
 				bindingsArray.forEach(function(element) {
 					
 					var s = element.s.value;
@@ -138,9 +136,20 @@ var DAO = function(options) {
 						o
 					});
 				}); 
-				success(result);
-		}
-	});
+			}
+			onSuccess(result);
+		};
+		
+		var data = {
+			limit : "30"
+		};
+		
+		$.ajax({
+			type: "GET",
+			url: getDatabaseServiceId() + "queryDefaultGraph",
+			data,
+			success
+		});
   };
 
 	/**

@@ -94,7 +94,7 @@ public class DbService {
 	 * @return The query results in json format
 	 * 
 	 */
-	public String queryDefaultGraph(String limit) {
+	public String queryDefaultGraph(int limit) {
 
 		String query = "SELECT * { {?s ?p ?o} UNION { GRAPH <default> { ?s ?p ?o } } }" + "LIMIT " + limit;
 
@@ -116,7 +116,7 @@ public class DbService {
 	 *            The name of the graph
 	 * @return The query result in the form of JSON.
 	 */
-	public String queryGraph(String graphName, String limit) {
+	public String queryGraph(String graphName, int limit) {
 		
 		String query = "SELECT * WHERE {GRAPH <" + graphName + "> {?s ?p ?o}}" + "LIMIT " + limit;
 		try (QueryEngineHTTP qe = (QueryEngineHTTP) QueryExecutionFactory
