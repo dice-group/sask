@@ -6,9 +6,9 @@
 
 * Statements in RDF are _**Triples**_ consisting of *subject*, *predicate* and *object*.
 
-     For example: Alia is a girl.
+     For example: Alia sells books.
 
-                 Subject : Alia, Predicate : is a, Object : girl
+                 Subject : Alia, Predicate : sells, Object : books
                  
 * Subject and predicate could be URIs whereas object could be URIs or literals.
 
