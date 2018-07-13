@@ -37,7 +37,7 @@ public class ExecuterService {
 		Set<Runnable> taskSet = TaskFactory.createTasks(restTemplate, workflow, startOperators);
 		TaskExecuter executer = new TaskExecuter(taskSet);
 		executer.execute();
-		return " Return from Executor";
+		return "";
 	}
 
 }
