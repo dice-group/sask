@@ -46,10 +46,17 @@ public class ElizaHandlerTest {
 		MessageType actualType = responseListObject.getMessageType();
 		String actualOutput = responseListObject.getMessageData().get(0).getContent();
 		String expectedOutput = "How do you do. Please state your question.";
+		String expectedOutput2 = "Hi. What seems to be your question ?";
 		assertNotNull(actualOutput);
 		assertNotNull(expectedOutput);
+		assertNotNull(expectedOutput2);
 		assertEquals("Message when failed Message Type", MessageType.PLAIN_TEXT, actualType );
-		assertEquals("Message when Incorrect Output", expectedOutput, actualOutput );
+		
+		if (actualOutput.equalsIgnoreCase(expectedOutput) || actualOutput.equalsIgnoreCase(expectedOutput2)) {
+			assert true;
+		} else {
+			assertEquals("Message when Incorrect Output", expectedOutput + " || " + expectedOutput2, actualOutput );
+		}
 	}
 
 	@Test

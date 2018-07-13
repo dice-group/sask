@@ -24,7 +24,8 @@ public class DbControllerTest {
 		UpdateProcessor processor = UpdateExecutionFactory.createRemote(update, "http://localhost:3030/sask/update");
 		processor.execute();
 	}
-    @Ignore
+
+	@Ignore
 	@Test
 	public void testQueryGraph() throws Exception {
 

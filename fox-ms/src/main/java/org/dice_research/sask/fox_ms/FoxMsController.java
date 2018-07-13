@@ -30,7 +30,6 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Sepide Tari
  * @author André Sonntag
  * @author Kevin Haack
- * @author Suganya Kannan
  * 
  */
 @RestController
@@ -52,12 +51,14 @@ public class FoxMsController {
 	public String extract(@RequestBody FoxDTO fox) {
 		this.logger.info("FOX-microservice extract() invoked");
 
-		if (null == fox || null == fox.getInput() || (fox.getInput().trim().isEmpty())) {
+		if (null == fox || null == fox.getInput() || (fox.getInput()
+		                                                 .trim()
+		                                                 .isEmpty())) {
 			throw new IllegalArgumentException("No input");
 		}
 
-		FoxService gateway = new FoxService();
-		return gateway.extract(fox);
+		FoxService service = new FoxService();
+		return service.extract(fox);
 	}
 
 	/**
@@ -74,8 +75,7 @@ public class FoxMsController {
 		FoxDTO fox = new FoxDTO();
 		fox.setInput(input);
 		String turtle = extract(fox);
-		String extractorOutput = FormatParser.parse(turtle, Lang.TURTLE, Lang.NTRIPLES);
-		return transformTtl(extractorOutput);
+		return transformTtl(turtle);
 	}
 
 	/**

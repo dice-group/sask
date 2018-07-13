@@ -91,13 +91,13 @@ public class SorookinMsController {
 	}
 
 	@ExceptionHandler
-	void handleIllegalArgumentException(IllegalArgumentException e, HttpServletResponse response) throws IOException {
+	public void handleIllegalArgumentException(IllegalArgumentException e, HttpServletResponse response) throws IOException {
 		this.logger.error("sorookin-microservice IllegalArgumentException: " + e.getMessage());
 		response.sendError(HttpStatus.BAD_REQUEST.value());
 	}
 
 	@ExceptionHandler
-	void handleRuntimeException(RuntimeException e, HttpServletResponse response) throws IOException {
+	public void handleRuntimeException(RuntimeException e, HttpServletResponse response) throws IOException {
 		this.logger.error("sorookin-microservice RuntimeException: " + e.getMessage());
 		response.sendError(HttpStatus.BAD_REQUEST.value());
 	}
