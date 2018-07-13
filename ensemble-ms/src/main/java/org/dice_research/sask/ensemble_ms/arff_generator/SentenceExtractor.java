@@ -1,7 +1,6 @@
 package org.dice_research.sask.ensemble_ms.arff_generator;
 import java.io.*;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -93,17 +92,6 @@ public class SentenceExtractor
 
 //						int portNumb[] = { 2222, 2224, 2225, 2226, 2227 };
 						int portNumb[] = {2222, 2226};
-						
-						
-
-						Map<String, String> foxRespMap = new HashMap<String, String>();
-						Map<String, String> fredRespMap = new HashMap<String, String>();
-						Map<String, String> spotlightRespMap = new HashMap<String, String>();
-						Map<String, String> cedricRespMap = new HashMap<String, String>();
-						Map<String, String> openIERespMap = new HashMap<String, String>();
-						Map<String, String> sorookinRespMap = new HashMap<String, String>();
-					
-						
 
 
 							// calling every extractors and getting outputs
