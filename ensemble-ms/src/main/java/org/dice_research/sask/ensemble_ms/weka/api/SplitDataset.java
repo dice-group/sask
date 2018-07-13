@@ -15,7 +15,6 @@ import java.util.Random;
 import weka.filters.unsupervised.attribute.StringToWordVector;
 import weka.classifiers.Evaluation;
 import weka.classifiers.trees.J48;
-import weka.classifiers.meta.FilteredClassifier;
 
 /**
  * This class take data from weka dataset and predict the training data class
@@ -26,10 +25,13 @@ import weka.classifiers.meta.FilteredClassifier;
 
 public class SplitDataset {
 
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args){
 		// load the arff file
 		String filename = "Dataset\\datasetExtraction.arff";
-		DataSource source = new DataSource(filename);
+		DataSource source;
+		try {
+			source = new DataSource(filename);
+		
 
 		Instances dataset = source.getDataSet();
 		System.out.println("printing summary of training data.....");
@@ -103,7 +105,10 @@ public class SplitDataset {
 		}
 
 		// TODO Auto-generated method stub
-
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
