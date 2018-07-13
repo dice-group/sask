@@ -188,10 +188,10 @@
 
 		for (var i = 0; i < messageData.length; i++) {
 			if (messageData[i].classPredicted !== "") {
-				messageDiv.append(messageData[0].classPredicted + "<br />");	
+				messageDiv.append(messageData[i].classPredicted + "<br />");	
 			}
 			if (messageData[i].content !== "") {
-				messageDiv.append(messageData[0].content + "<br />");
+				messageDiv.append(messageData[i].content + "<br />");
 			}
 
 			if (messageData[i].image !== "" && messageData[i].image !== null) {
