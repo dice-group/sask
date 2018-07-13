@@ -8,18 +8,17 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.web.client.RestTemplate;
 
 import chatbot.core.handlers.Handler;
 import chatbot.core.handlers.automaticworkflow.AutomaticWorkflow;
@@ -464,10 +463,10 @@ public class IntentLearner {
 		
 		try {
 			ClassLoader classLoader = IntentLearner.class.getClassLoader();
-			Resource[] messageResources = new PathMatchingResourcePatternResolver(classLoader).getResources("classpath*:"+ resource + trainingData);
+			Resource[] messageResources = new PathMatchingResourcePatternResolver(classLoader).getResources("classpath*:"+ resource + datafile);
 			// Since there is only one resource file, it is accessed directly
 			
-			File file = new File(trainingData);
+			File file = new File(datafile);
 			InputStream inputStream = messageResources[0].getInputStream();
 			OutputStream outputStream = new FileOutputStream(file);
 			IOUtils.copy(inputStream, outputStream);
