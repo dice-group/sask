@@ -1,0 +1,57 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Puerto_Rico ;
+  rdf:predicate  dbo:department ;
+  rdf:subject    <http://dbpedia.org/resource/Washington%2C_D> ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://blogs.edweek.org/edweek/campaign-k-12/2018/01/government_shutdown_education_your_guide.html#char=0,159>
+                 ]
+] .
+
+<http://blogs.edweek.org/edweek/campaign-k-12/2018/01/government_shutdown_education_your_guide.html#char=147,158>
+        a                     nif:RFC5147String , nif:String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Puerto Rico" ;
+        nif:beginIndex        "147"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "158"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://blogs.edweek.org/edweek/campaign-k-12/2018/01/government_shutdown_education_your_guide.html#char=0,159> ;
+        itsrdf:taClassRef     dbo:Place ;
+        itsrdf:taIdentRef     dbr:Puerto_Rico .
+
+<http://blogs.edweek.org/edweek/campaign-k-12/2018/01/government_shutdown_education_your_guide.html#char=122,142>
+        a                     nif:Phrase , nif:String , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "District of Columbia" ;
+        nif:beginIndex        "122"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "142"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://blogs.edweek.org/edweek/campaign-k-12/2018/01/government_shutdown_education_your_guide.html#char=0,159> ;
+        itsrdf:taClassRef     dbo:Place ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Washington%2C_D.C.> .
+
+<http://blogs.edweek.org/edweek/campaign-k-12/2018/01/government_shutdown_education_your_guide.html#char=4,24>
+        a                     nif:RFC5147String , nif:String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Education Department" ;
+        nif:beginIndex        "4"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "24"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://blogs.edweek.org/edweek/campaign-k-12/2018/01/government_shutdown_education_your_guide.html#char=0,159> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     dbr:United_States_Department_of_Education .
+
+<http://blogs.edweek.org/edweek/campaign-k-12/2018/01/government_shutdown_education_your_guide.html#char=0,159>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "159"^^xsd:nonNegativeInteger ;
+        nif:isString    "The Education Department has been approving plans at a fast and furious clip in recent weeks. So far, 33 states, plus the District of Columbia and Puerto Rico." .

@@ -1,129 +1,66 @@
 
 package org.dice_research.sask.database_ms;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.Set;
 
-import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.jena.query.QueryExecutionFactory;
+import org.apache.jena.query.ResultSet;
+import org.apache.jena.query.ResultSetFormatter;
+import org.apache.jena.sparql.engine.http.QueryEngineHTTP;
+import org.apache.jena.update.UpdateExecutionFactory;
+import org.apache.jena.update.UpdateFactory;
+import org.apache.jena.update.UpdateProcessor;
+import org.apache.jena.update.UpdateRequest;
 import org.apache.log4j.Logger;
-import org.dice_research.sask.config.YAMLConfig;
-import org.dice_research.sask.database_ms.rdftriples.TripleDTO;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.dice_research.sask.database_ms.RDFTriples.TripleDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
-
-/**
- * 
- *
- * @author Sepide Tari
- * @author Suganya Kannan
- *
- *         Contains all the methods to interact with the Fuseki server through
- *         Jena API
- **/
 
 @RestController
 public class DbController {
-	@Autowired
-	@LoadBalanced
-	protected RestTemplate restTemplate;
 
-	@Autowired
-	private YAMLConfig config;
+	protected Logger logger = Logger.getLogger(DbController.class);
 
-	public Logger logger = Logger.getLogger(DbController.class);
-	private DbService service;
-
-	@PostConstruct
-	public void init() {
-		service = new DbService(restTemplate, config);
-	}
-
+	// storing the triples(@input) inside default graph
 	@RequestMapping(value = "/updateGraph")
-	public void updateGraph(String input) {
-		TripleDTO tripleDTO = new TripleDTO();
-		tripleDTO.setTriple(input);
-		String triples = tripleDTO.getTriple();
-		service.updateGraph(triples);
-	}
+	public void updateGraph(@RequestBody String input) {
 
-	/**
-	 * method to store triples inside the named graph If the name of the graph does
-	 * not exists it creates a new graph with the given name and stores the triples
-	 * in the sask dataset. Now it accepts triples in N-Triples format it can be
-	 * changed to TTL later.
-	 * 
-	 * @param input
-	 *            The triples which are to be stored.
-	 * 
-	 * @param graphName
-	 */
-	@RequestMapping(value = "/updateNamedGraph")
-	public void updateNamedGraph(String input, String graphName) {
-		logger.info("db-microservice updateGraph() is invoked");
+		logger.info("db-microservice is invoked");
 
 		TripleDTO tripleDTO = new TripleDTO();
 		tripleDTO.setTriple(input);
-		String triples = tripleDTO.getTriple();
-		service.updateNamedGraph(triples, graphName);
+
+		String string_triples = tripleDTO.getTriple();
+
+		UpdateRequest update = UpdateFactory.create("INSERT DATA { " + string_triples + "}");
+		UpdateProcessor processor = UpdateExecutionFactory.createRemote(update, "http://localhost:3030/sask/update");
+		processor.execute();
+
 	}
 
-	/**
-	 * Method to query the default graph.
-	 * 
-	 * 
-	 * @return The query results in json format
-	 * 
-	 */
-	@RequestMapping(value = "/queryDefaultGraph")
-	public String queryDefaultGraph() {
-		logger.info("db-microservice queryDefaultGraph() is invoked");
-		return service.queryDefaultGraph();
-	}
-
-	/**
-	 * Method to query the named graph inside the SASK dataset.
-	 * 
-	 * @param graphName
-	 *            The name of the graph
-	 * @return The query result in the form of JSON.
-	 */
+	// represent all the RDF stored in default graph
 	@RequestMapping(value = "/queryGraph")
-	public String queryGraph(String graphName) {
-		logger.info("db-microservice queryGraph() is invoked");
-		return service.queryGraph(graphName);
-	}
+	public String queryGraph() {
 
-	/**
-	 * Method to return all the named graphs from a dataset.
-	 * 
-	 * @param dataSet
-	 *            The name of the dataset.
-	 * @return all the graph names present in the given dataset.
-	 */
-	@RequestMapping(value = "/getNamedGraphs")
-	public Set<String> getNamedGraphs(String dataSet) {
-		logger.info("db-microservice getNamedGraphs() is invoked");
-		return service.getNamedGraphs(dataSet);
-	}
+		logger.info("db-microservice is invoked");
 
-	/**
-	 * Method to process the given Sparql Query and return the output.
-	 * 
-	 * @param sparqlQuery
-	 *            The query to be processed.
-	 * @return The query result in the form of JSON.
-	 */
-	@RequestMapping(value = "/processSparqlQuery")
-	public String processSparqlQuery(String sparqlQuery) {
-		logger.info("db-microservice queryGraph() is invoked");
-		return service.processSparqlQuery(sparqlQuery);
+		try (QueryEngineHTTP qe = (QueryEngineHTTP) QueryExecutionFactory.sparqlService(
+				"http://localhost:3030/sask/query", "SELECT * { {?s ?p ?o} UNION { GRAPH ?g { ?s ?p ?o } } }")) {
+			ResultSet results = qe.execSelect();
+			ByteArrayOutputStream b = new ByteArrayOutputStream();
+			ResultSetFormatter.outputAsJSON(b, results);
+			String json = b.toString();
+
+			System.out.println(json);
+
+			return json;
+		}
 	}
 
 	@ExceptionHandler

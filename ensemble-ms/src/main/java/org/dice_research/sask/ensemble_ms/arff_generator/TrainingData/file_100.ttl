@@ -1,0 +1,46 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:One_Direction ;
+  rdf:predicate  dbo:formerBandMember ;
+  rdf:subject    dbr:Zayn_Malik ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.eonline.com/de/news/639463/zayn-malik-leaves-one-direction-read-his-official-statement-and-get-details-on-the-boy-band-s-future#char=0,32>
+                 ]
+] .
+
+<http://www.eonline.com/de/news/639463/zayn-malik-leaves-one-direction-read-his-official-statement-and-get-details-on-the-boy-band-s-future#char=0,32>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "32"^^xsd:nonNegativeInteger ;
+        nif:isString    "Zayn Malik Leaves One Direction." .
+
+<http://www.eonline.com/de/news/639463/zayn-malik-leaves-one-direction-read-his-official-statement-and-get-details-on-the-boy-band-s-future#char=0,10>
+        a                     nif:RFC5147String , nif:Phrase , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Zayn Malik" ;
+        nif:beginIndex        "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "10"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.eonline.com/de/news/639463/zayn-malik-leaves-one-direction-read-his-official-statement-and-get-details-on-the-boy-band-s-future#char=0,32> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:Zayn_Malik .
+
+<http://www.eonline.com/de/news/639463/zayn-malik-leaves-one-direction-read-his-official-statement-and-get-details-on-the-boy-band-s-future#char=18,31>
+        a                     nif:RFC5147String , nif:Phrase , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "One Direction" ;
+        nif:beginIndex        "18"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "31"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.eonline.com/de/news/639463/zayn-malik-leaves-one-direction-read-his-official-statement-and-get-details-on-the-boy-band-s-future#char=0,32> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     dbr:One_Direction .

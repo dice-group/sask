@@ -1,0 +1,93 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+<https://timesofindia.indiatimes.com/city/bengaluru/crisis-looms-as-20-karnataka-districts-receive-less-rain/articleshow/59555030.cms#char=0,23>
+        a                     nif:String , nif:Phrase , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Doddaullarathi Kariappa" ;
+        nif:beginIndex        "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "23"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://timesofindia.indiatimes.com/city/bengaluru/crisis-looms-as-20-karnataka-districts-receive-less-rain/articleshow/59555030.cms#char=0,146> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     aksw:DoddaullarathiKariappa .
+
+<https://timesofindia.indiatimes.com/city/bengaluru/crisis-looms-as-20-karnataka-districts-receive-less-rain/articleshow/59555030.cms#char=44,54>
+        a                     nif:Phrase , nif:String , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Challakere" ;
+        nif:beginIndex        "44"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "54"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://timesofindia.indiatimes.com/city/bengaluru/crisis-looms-as-20-karnataka-districts-receive-less-rain/articleshow/59555030.cms#char=0,146> ;
+        itsrdf:taClassRef     dbo:Place ;
+        itsrdf:taIdentRef     dbr:Challakere .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Chitradurga ;
+  rdf:predicate  dbo:location ;
+  rdf:subject    dbr:Challakere ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://timesofindia.indiatimes.com/city/bengaluru/crisis-looms-as-20-karnataka-districts-receive-less-rain/articleshow/59555030.cms#char=0,146>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     aksw:DoddaullarathiKariappa ;
+  rdf:predicate  dbo:leaderName ;
+  rdf:subject    dbr:Challakere ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://timesofindia.indiatimes.com/city/bengaluru/crisis-looms-as-20-karnataka-districts-receive-less-rain/articleshow/59555030.cms#char=0,146>
+                 ]
+] .
+
+<https://timesofindia.indiatimes.com/city/bengaluru/crisis-looms-as-20-karnataka-districts-receive-less-rain/articleshow/59555030.cms#char=56,67>
+        a                     nif:RFC5147String , nif:Phrase , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Chitradurga" ;
+        nif:beginIndex        "56"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "67"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://timesofindia.indiatimes.com/city/bengaluru/crisis-looms-as-20-karnataka-districts-receive-less-rain/articleshow/59555030.cms#char=0,146> ;
+        itsrdf:taClassRef     dbo:Place ;
+        itsrdf:taIdentRef     dbr:Chitradurga .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Chitradurga ;
+  rdf:predicate  dbo:locatedInArea ;
+  rdf:subject    dbr:Challakere ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://timesofindia.indiatimes.com/city/bengaluru/crisis-looms-as-20-karnataka-districts-receive-less-rain/articleshow/59555030.cms#char=0,146>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Challakere ;
+  rdf:predicate  dbo:location ;
+  rdf:subject    aksw:DoddaullarathiKariappa ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://timesofindia.indiatimes.com/city/bengaluru/crisis-looms-as-20-karnataka-districts-receive-less-rain/articleshow/59555030.cms#char=0,146>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Chitradurga ;
+  rdf:predicate  dbo:location ;
+  rdf:subject    aksw:DoddaullarathiKariappa ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://timesofindia.indiatimes.com/city/bengaluru/crisis-looms-as-20-karnataka-districts-receive-less-rain/articleshow/59555030.cms#char=0,146>
+                 ]
+] .
+
+<https://timesofindia.indiatimes.com/city/bengaluru/crisis-looms-as-20-karnataka-districts-receive-less-rain/articleshow/59555030.cms#char=0,146>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "146"^^xsd:nonNegativeInteger ;
+        nif:isString    "Doddaullarathi Kariappa, a farmer leader in Challakere, Chitradurga, said the district has been reeling under drought for nine consecu tive years." .

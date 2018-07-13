@@ -1,0 +1,55 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+<http://zeenews.india.com/bollywood/golmaal-again-ajay-devgn-spotted-outside-theatre-with-wife-kajol-kids-nysa-and-yug-see-pics-2052296.html#char=62,67>
+        a                     nif:Phrase , nif:RFC5147String , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Kajol" ;
+        nif:beginIndex        "62"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "67"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://zeenews.india.com/bollywood/golmaal-again-ajay-devgn-spotted-outside-theatre-with-wife-kajol-kids-nysa-and-yug-see-pics-2052296.html#char=0,68> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:Kajol .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Kajol ;
+  rdf:predicate  dbo:spouse ;
+  rdf:subject    dbr:Ajay_Devgan ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://zeenews.india.com/bollywood/golmaal-again-ajay-devgn-spotted-outside-theatre-with-wife-kajol-kids-nysa-and-yug-see-pics-2052296.html#char=0,68>
+                 ]
+] .
+
+<http://zeenews.india.com/bollywood/golmaal-again-ajay-devgn-spotted-outside-theatre-with-wife-kajol-kids-nysa-and-yug-see-pics-2052296.html#char=0,10>
+        a                     nif:RFC5147String , nif:String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Ajay Devgn" ;
+        nif:beginIndex        "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "10"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://zeenews.india.com/bollywood/golmaal-again-ajay-devgn-spotted-outside-theatre-with-wife-kajol-kids-nysa-and-yug-see-pics-2052296.html#char=0,68> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:Ajay_Devgan .
+
+<http://zeenews.india.com/bollywood/golmaal-again-ajay-devgn-spotted-outside-theatre-with-wife-kajol-kids-nysa-and-yug-see-pics-2052296.html#char=0,68>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "68"^^xsd:nonNegativeInteger ;
+        nif:isString    "Ajay Devgn was spotted outside a theatre here along with wife Kajol." .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Ajay_Devgan ;
+  rdf:predicate  dbo:spouse ;
+  rdf:subject    dbr:Kajol ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://zeenews.india.com/bollywood/golmaal-again-ajay-devgn-spotted-outside-theatre-with-wife-kajol-kids-nysa-and-yug-see-pics-2052296.html#char=0,68>
+                 ]
+] .

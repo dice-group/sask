@@ -6,11 +6,11 @@ package chatbot.codeanticode.eliza;
  */
 public class Key {
 	/** The key itself */
-	private String key;
+	String key;
 	/** The numerical rank */
 	int rank;
 	/** The list of decompositions */
-	private DecompList decomp;
+	DecompList decomp;
 
 	/**
 	 * Initialize the key.

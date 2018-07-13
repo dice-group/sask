@@ -1,12 +1,14 @@
 package chatbot.core.handlers.rivescript;
 
-import java.io.IOException;
-
 import org.apache.log4j.Logger;
+import java.util.*;
+import com.rivescript.RiveScript;
 
-import chatbot.core.handlers.Handler;
 import chatbot.io.incomingrequest.IncomingRequest;
+import chatbot.io.response.Response;
 import chatbot.io.response.ResponseList;
+import chatbot.core.handlers.*;
+import java.io.IOException;
 
 public class RiveScriptQueryHandler extends Handler {
 	private static Logger log = Logger.getLogger(RiveScriptQueryHandler.class.getName());

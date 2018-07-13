@@ -1,0 +1,160 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Cuba ;
+  rdf:predicate  dbo:country ;
+  rdf:subject    dbr:Havana ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.thesun.co.uk/tvandshowbiz/2431781/camila-cabello-fifth-harmony-solo/#char=0,137>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Mexico ;
+  rdf:predicate  dbo:location ;
+  rdf:subject    dbr:Camila_Cabello ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.thesun.co.uk/tvandshowbiz/2431781/camila-cabello-fifth-harmony-solo/#char=0,137>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:United_States ;
+  rdf:predicate  dbo:location ;
+  rdf:subject    dbr:Camila_Cabello ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.thesun.co.uk/tvandshowbiz/2431781/camila-cabello-fifth-harmony-solo/#char=0,137>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Cuba ;
+  rdf:predicate  dbo:location ;
+  rdf:subject    dbr:Havana ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.thesun.co.uk/tvandshowbiz/2431781/camila-cabello-fifth-harmony-solo/#char=0,137>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Cuba ;
+  rdf:predicate  dbo:birthPlace ;
+  rdf:subject    dbr:Camila_Cabello ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.thesun.co.uk/tvandshowbiz/2431781/camila-cabello-fifth-harmony-solo/#char=0,137>
+                 ]
+] .
+
+<https://www.thesun.co.uk/tvandshowbiz/2431781/camila-cabello-fifth-harmony-solo/#char=77,83>
+        a                     nif:RFC5147String , nif:Phrase , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Mexico" ;
+        nif:beginIndex        "77"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "83"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.thesun.co.uk/tvandshowbiz/2431781/camila-cabello-fifth-harmony-solo/#char=0,137> ;
+        itsrdf:taClassRef     dbo:Place ;
+        itsrdf:taIdentRef     dbr:Mexico .
+
+<https://www.thesun.co.uk/tvandshowbiz/2431781/camila-cabello-fifth-harmony-solo/#char=19,23>
+        a                     nif:Phrase , nif:String , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Cuba" ;
+        nif:beginIndex        "19"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "23"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.thesun.co.uk/tvandshowbiz/2431781/camila-cabello-fifth-harmony-solo/#char=0,137> ;
+        itsrdf:taClassRef     dbo:Place ;
+        itsrdf:taIdentRef     dbr:Cuba .
+
+<https://www.thesun.co.uk/tvandshowbiz/2431781/camila-cabello-fifth-harmony-solo/#char=0,6>
+        a                     nif:Phrase , nif:RFC5147String , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Camila" ;
+        nif:beginIndex        "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "6"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.thesun.co.uk/tvandshowbiz/2431781/camila-cabello-fifth-harmony-solo/#char=0,137> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:Camila_Cabello .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Cuba ;
+  rdf:predicate  dbo:country ;
+  rdf:subject    dbr:Camila_Cabello ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.thesun.co.uk/tvandshowbiz/2431781/camila-cabello-fifth-harmony-solo/#char=0,137>
+                 ]
+] .
+
+<https://www.thesun.co.uk/tvandshowbiz/2431781/camila-cabello-fifth-harmony-solo/#char=0,137>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "137"^^xsd:nonNegativeInteger ;
+        nif:isString    "Camila was born in Cuba, and lived in the capital of Havana and neighbouring Mexico before moving to the United States when she was five." .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Cuba ;
+  rdf:predicate  dbo:locatedInArea ;
+  rdf:subject    dbr:Havana ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.thesun.co.uk/tvandshowbiz/2431781/camila-cabello-fifth-harmony-solo/#char=0,137>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:United_States ;
+  rdf:predicate  dbo:country ;
+  rdf:subject    dbr:Camila_Cabello ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.thesun.co.uk/tvandshowbiz/2431781/camila-cabello-fifth-harmony-solo/#char=0,137>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Mexico ;
+  rdf:predicate  dbo:country ;
+  rdf:subject    dbr:Camila_Cabello ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.thesun.co.uk/tvandshowbiz/2431781/camila-cabello-fifth-harmony-solo/#char=0,137>
+                 ]
+] .
+
+<https://www.thesun.co.uk/tvandshowbiz/2431781/camila-cabello-fifth-harmony-solo/#char=105,118>
+        a                     nif:RFC5147String , nif:String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "United States" ;
+        nif:beginIndex        "105"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "118"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.thesun.co.uk/tvandshowbiz/2431781/camila-cabello-fifth-harmony-solo/#char=0,137> ;
+        itsrdf:taClassRef     dbo:Place ;
+        itsrdf:taIdentRef     dbr:United_States .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Cuba ;
+  rdf:predicate  dbo:location ;
+  rdf:subject    dbr:Camila_Cabello ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.thesun.co.uk/tvandshowbiz/2431781/camila-cabello-fifth-harmony-solo/#char=0,137>
+                 ]
+] .
+
+<https://www.thesun.co.uk/tvandshowbiz/2431781/camila-cabello-fifth-harmony-solo/#char=53,59>
+        a                     nif:String , nif:RFC5147String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Havana" ;
+        nif:beginIndex        "53"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "59"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.thesun.co.uk/tvandshowbiz/2431781/camila-cabello-fifth-harmony-solo/#char=0,137> ;
+        itsrdf:taClassRef     dbo:Place ;
+        itsrdf:taIdentRef     dbr:Havana .

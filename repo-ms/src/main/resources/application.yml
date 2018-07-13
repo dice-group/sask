@@ -12,7 +12,7 @@ eureka:
       friendlyname: Hadoop
   client:
     serviceUrl:
-      defaultZone: http://@eureka.hostname@:@eureka.port@/eureka/
+      defaultZone: http://localhost:1111/eureka/
 
 # HTTP Server (Tomcat) Port
 server: 
@@ -22,7 +22,3 @@ server:
 error:
   whitelabel:
     enabled: false
-    
-hadoop:    
-  hostserver: @hadoop.hostserver@
-  port: @hadoop.port@

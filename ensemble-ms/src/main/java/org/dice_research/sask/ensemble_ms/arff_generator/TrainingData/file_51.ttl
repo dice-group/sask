@@ -1,0 +1,46 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:A._J._McLean ;
+  rdf:predicate  dbo:bandMember ;
+  rdf:subject    dbr:Backstreet_Boys ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.billboard.com/articles/news/dance/7949830/chainsmokers-diplo-courted-backstreet-boys-collabs#char=0,150>
+                 ]
+] .
+
+<https://www.billboard.com/articles/news/dance/7949830/chainsmokers-diplo-courted-backstreet-boys-collabs#char=26,32>
+        a                     nif:RFC5147String , nif:Phrase , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "McLean" ;
+        nif:beginIndex        "26"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "32"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.billboard.com/articles/news/dance/7949830/chainsmokers-diplo-courted-backstreet-boys-collabs#char=0,150> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:A._J._McLean .
+
+<https://www.billboard.com/articles/news/dance/7949830/chainsmokers-diplo-courted-backstreet-boys-collabs#char=0,150>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "150"^^xsd:nonNegativeInteger ;
+        nif:isString    "Backstreet Boys member AJ McLean said, We are reaching out to people who we were always inspired by or who may have been fans and we didn't even know." .
+
+<https://www.billboard.com/articles/news/dance/7949830/chainsmokers-diplo-courted-backstreet-boys-collabs#char=0,15>
+        a                     nif:RFC5147String , nif:Phrase , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Backstreet Boys" ;
+        nif:beginIndex        "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "15"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.billboard.com/articles/news/dance/7949830/chainsmokers-diplo-courted-backstreet-boys-collabs#char=0,150> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     dbr:Backstreet_Boys .

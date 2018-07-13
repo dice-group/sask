@@ -1,89 +1,55 @@
 package chatbot.core.handlers.rivescript;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.util.stream.Collectors;
-
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
-import org.apache.log4j.Logger;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
-
 import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.rivescript.RiveScript;
-
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import chatbot.core.handlers.*;
 import chatbot.io.response.Response;
 import chatbot.io.response.ResponseList;
 import chatbot.io.response.ResponseList.MessageType;
 
+import java.lang.String;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.io.File;
+import java.io.IOException;
+import org.apache.log4j.Logger;
+
 public class RiveScriptOutputAnalyzer {
 
 	private static Logger log = Logger.getLogger(RiveScriptOutputAnalyzer.class.getName());
+	private static final String TEMPLATE_FILE = "src/main/resources/rivescript/properties/template.yml";
 	private static final String ERRMSG = "error";
 	private static String yamlTemplateContents = null;
 	private static RiveScript bot = null;
 
 	public RiveScriptOutputAnalyzer() {
-		resourceLoader();
+		
 	}
 	
 	private static void resourceLoader() {
-        
-		ClassLoader cl = RiveScriptOutputAnalyzer.class.getClassLoader(); 
-		log.debug("Loading the Rive Script Files");
-    try {
-    		
-    		bot = new RiveScript(); 
-
-        // Create a directory to store the rive files which will be used by RiveScript loader
-        File temp = new File("rivefiles/");
-        temp.delete();
-        temp.mkdir();
-        
-        Resource[] messageResources = new PathMatchingResourcePatternResolver(cl).getResources("classpath*:rivescript/rivefiles/*.rive");
-        for (Resource resource: messageResources){
-        	
-        		File file = new File(temp + "/" + resource.getFilename() +"/");
-        		InputStream inputStream = resource.getInputStream();
-        		OutputStream outputStream = new FileOutputStream(file);
-        		IOUtils.copy(inputStream, outputStream);
-        		outputStream.close();
-
-        }
-        bot.loadDirectory(temp);
-        bot.sortReplies();
-        
-        // deleting the temp directory post loading the data
-        FileUtils.deleteDirectory(temp);
-       
-    } catch (Exception e) {
-    		log.error("resourceLoader, Exception while loading the resouce files,Stack Trace=" + e.getMessage());
-		e.printStackTrace();
-    }
-    
-    
-    log.debug("Loading the Template file containing the pre-defined questions");
-	try {
-		Resource[] messageResources = new PathMatchingResourcePatternResolver(cl).getResources("classpath*:rivescript/properties/template.yml");
-		// Since there is only one resource file, it is accessed directly
-		InputStream templateFileStream = messageResources[0].getInputStream();
-        yamlTemplateContents = new BufferedReader(new InputStreamReader(templateFileStream)).lines().collect(Collectors.joining("\n"));
-        } catch (IOException e) {
-		log.error("resourceLoader, IO Exception while parsing YAML template,Stack Trace=" + e.getMessage());
-		e.printStackTrace();
+		
+		bot = new RiveScript();
+		bot.loadDirectory("src/main/resources/rivescript/rivefiles");
+		bot.sortReplies();
+		
+		try {
+			yamlTemplateContents = new String(Files.readAllBytes(Paths.get(TEMPLATE_FILE)));
+		} catch (IOException e) {
+			log.error("resourceLoader, IO Exception while parsing YAML template,Stack Trace=" + e.getMessage());
+			e.printStackTrace();
+		}
+		
 	}
-}
+
+
 
 	public ResponseList riveHandler(String query) {
 
@@ -115,8 +81,8 @@ public class RiveScriptOutputAnalyzer {
 	private ResponseList handleTextMessage(ResponseList responselist, String textMessage) {
 
 		String responseHandleText = null;
-		
-		if (isJSONValid(textMessage))  {
+
+		if (isJSONValid(textMessage)) {
 			JsonObject jsonInputText = new JsonObject().getAsJsonObject(textMessage);
 			if (jsonInputText.has("type")) {
 				String typeValue = jsonInputText.get("name").getAsString();
@@ -134,10 +100,12 @@ public class RiveScriptOutputAnalyzer {
 		} else {
 			responseHandleText = responseFromRive(textMessage);
 			// Response will be of the form {"comment":"Great! You?"}
+
 			log.debug("Response message from Rive = " + textMessage);
 			responselist.setMessageType(MessageType.PLAIN_TEXT);
 			responselist.addMessage(createPlainTextResponse(textMessage));
 		}
+
 		return responselist;
 	}
 
@@ -156,6 +124,7 @@ public class RiveScriptOutputAnalyzer {
 
 		String responseForTemplate = null;
 		if (!templateValue.equalsIgnoreCase("help")) {
+
 			responseForTemplate = convertYamlToJsonString(yamlTemplateContents);
 		}
 		return responseForTemplate;
@@ -164,12 +133,8 @@ public class RiveScriptOutputAnalyzer {
 	private static boolean isJSONValid(String jsonInString) {
 		Gson gson = new Gson();
 		try {
-			if(jsonInString.length() > 0 && jsonInString.split("\\s+").length==1) {
-				return false;
-			} else{
-				gson.fromJson(jsonInString, Object.class);
-				return true;
-			}
+			gson.fromJson(jsonInString, Object.class);
+			return true;
 		} catch (com.google.gson.JsonSyntaxException ex) {
 			return false;
 		}

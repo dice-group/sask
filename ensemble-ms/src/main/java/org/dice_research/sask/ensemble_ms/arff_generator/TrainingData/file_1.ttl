@@ -1,0 +1,75 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+<https://www.theverge.com/2018/1/19/16911482/james-damore-google-ceo-sundar-pichai-women-in-tech-memo-firing#char=11,24>
+        a                     nif:RFC5147String , nif:Phrase , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Added> ;
+        nif:anchorOf          "Sundar Pichai" ;
+        nif:beginIndex        "11"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "24"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.theverge.com/2018/1/19/16911482/james-damore-google-ceo-sundar-pichai-women-in-tech-memo-firing#char=0,131> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:Sundar_Pichai .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Google ;
+  rdf:predicate  dbo:employer ;
+  rdf:subject    aksw:James_Damore ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.india.com/travel/agra/#char=0,80>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Sundar_Pichai ;
+  rdf:predicate  dbo:CEO ;
+  rdf:subject    dbr:Google ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.india.com/travel/agra/#char=0,80>
+                 ]
+] .
+
+<https://www.theverge.com/2018/1/19/16911482/james-damore-google-ceo-sundar-pichai-women-in-tech-memo-firing#char=0,6>
+        a                     nif:String , nif:Phrase , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Added> ;
+        nif:anchorOf          "Google" ;
+        nif:beginIndex        "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "6"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.theverge.com/2018/1/19/16911482/james-damore-google-ceo-sundar-pichai-women-in-tech-memo-firing#char=0,131> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     dbr:Google .
+
+<https://www.theverge.com/2018/1/19/16911482/james-damore-google-ceo-sundar-pichai-women-in-tech-memo-firing#char=66,79>
+        a                     nif:Phrase , nif:String , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Added> ;
+        nif:anchorOf          " James Damore" ;
+        nif:beginIndex        "66"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "79"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.theverge.com/2018/1/19/16911482/james-damore-google-ceo-sundar-pichai-women-in-tech-memo-firing#char=0,131> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     aksw:James_Damore .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Google ;
+  rdf:predicate  dbo:employer ;
+  rdf:subject    dbr:Sundar_Pichai ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.india.com/travel/agra/#char=0,80>
+                 ]
+] .
+
+<https://www.theverge.com/2018/1/19/16911482/james-damore-google-ceo-sundar-pichai-women-in-tech-memo-firing#char=0,131>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "131"^^xsd:nonNegativeInteger ;
+        nif:isString    "Google CEO Sundar Pichai responded today to the firing of employee James Damore over his controversial memo on workplace diversity." .

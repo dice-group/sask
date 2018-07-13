@@ -1,9 +1,3 @@
-/**
- * Javascript class the file upload.
- * 
- * @author Kevin Haack
- */
-;
 var Upload = function(options) {
 	/**
 	 * this.
@@ -14,44 +8,44 @@ var Upload = function(options) {
 	 * Plugin settings.
 	 */
 	var settings = {
-		onUploaded : null,
-		dao : null
+		onUploaded : undefined,
+		dao : undefined
 	};
 
 	/**
 	 * The dialog.
 	 */
-	var dialog;
+	var dialog = undefined;
 
 	/**
 	 * The form.
 	 */
-	var form;
+	var form = undefined;
 
 	/**
 	 * The Input.
 	 */
-	var inputFile;
+	var inputFile = undefined;
 
 	/**
 	 * The select button.
 	 */
-	var selectButton;
+	var selectButton = undefined;
 
 	/**
 	 * The clear button.
 	 */
-	var clearButton;
+	var clearButton = undefined;
 
 	/**
 	 * The list of uploaded/uploading files.
 	 */
-	var uploadList;
+	var uploadList = undefined;
 
 	/**
 	 * The select file message.
 	 */
-	var selectFileMessage;
+	var selectFileMessage = undefined;
 
 	/**
 	 * The currently uploading files.
@@ -68,75 +62,82 @@ var Upload = function(options) {
 	};
 
 	/**
-	 * Clear the uploadList.
+	 * Constructor
 	 */
-	var clearUploadList = function() {
-		uploadList.find("a").each(function() {
-			if ($(this).attr("data-status") !== "uploading") {
-				$(this).remove();
-			}
+	this.construct = function(options) {
+		$.extend(settings, options);
+
+		if (!settings.dao) {
+			logError('dao is not defined.');
+			return;
+		}
+
+		initDialog();
+	};
+
+	/**
+	 * Init the dialog.
+	 */
+	var initDialog = function() {
+		/*
+		 * HTML
+		 */
+		selectButton = $('<button type="button" class="btn btn-primary">Select file...</button>');
+		clearButton = $('<button type="button" class="btn btn-warning">Clear list</button>');
+
+		var buttonGroup = $('<div class="btn-group" role="group"></div>');
+		buttonGroup.append(selectButton);
+		buttonGroup.append(clearButton);
+
+		inputFile = $('<input type="file" name="file" required="required" multiple/>');
+
+		form = $('<form></form>');
+		form.prepend(inputFile);
+		form.prepend(buttonGroup);
+		inputFile.hide();
+
+		selectFileMessage = $('<p class="text-muted text-center">Select files to upload.</p>');
+
+		uploadList = $('<div class="list-group" style="overflow-y: auto; height: 200px"></div>');
+		uploadList.append(selectFileMessage);
+
+		var html = $('<div title="Upload" style="overflow:hidden;"></div>');
+		html.append(form);
+		html.append('<hr />');
+		html.append(uploadList);
+
+		/*
+		 * listener
+		 */
+		clearButton.click(clearUploadList);
+
+		selectButton.click(function() {
+			inputFile.click();
 		});
 
-		if (uploadList.find("a").length === 0) {
-			selectFileMessage.show();
-		}
-	};
-	
-	/**
-	 * Create the file row.
-	 */
-	var createFileRow = function(path, file) {
-		var status = $("<span class=\"pull-right\">Uploading...</span>");
-		var row = $("<a href=\"#\" class=\"list-group-item\">" + file.name
-				+ "</a>");
-		row.append(status);
-		row.attr("data-file", file.name);
-		row.attr("data-path", path);
-		row.attr("data-status", "uploading");
+		inputFile.on("change", function() {
+			handleFileUpload('/', inputFile[0]);
+		});
 
-		return row;
-	};
-	
-	/**
-	 * Returns the row of the file in the uploadList.
-	 */
-	var getFileRow = function(path, filename) {
-		return uploadList.find("a[data-file=\"" + filename + "\"][data-path=\""
-				+ path + "\"]");
-	};
-	
-	/**
-	 * Function to be called, when the upload was failed.
-	 */
-	var onUploadError = function(path, filename) {
-		var row = getFileRow(path, filename);
-		var status = row.find("span");
+		var close = function() {
+			$(this).dialog("close");
+		};
 
-		row.attr("data-status", "error");
-		row.addClass("list-group-item-danger");
-		status.text("Error");
+		/*
+		 * create dialog
+		 */
+		dialog = html.dialog({
+			autoOpen : false,
+			resizable : false,
+			height : 400,
+			width : 600,
+			modal : true,
+			buttons : {
+				'Close' : close
+			}
+		});
 	};
-	
-	/**
-	 * Function to be called, when the upload was successful.
-	 */
-	var onUploadSuccess = function(path, filename) {
-		var row = getFileRow(path, filename);
-		var status = row.find("span");
 
-		row.attr("data-status", "success");
-		row.addClass("list-group-item-success");
-		status.text("Success");
-	};
-	
-	/**
-	 * Append the file row to the uploadList.
-	 */
-	var appendFileRow = function(row) {
-		selectFileMessage.hide();
-		uploadList.append(row);
-	};
-	
 	/**
 	 * Handle the file upload.
 	 */
@@ -144,7 +145,7 @@ var Upload = function(options) {
 
 		if (!window.File || !window.FileReader || !window.FileList
 				|| !window.Blob) {
-			logError("The File APIs are not fully supported in this browser.");
+			logError('The File APIs are not fully supported in this browser.');
 			return;
 		}
 
@@ -191,88 +192,80 @@ var Upload = function(options) {
 	};
 
 	/**
-	 * Init the dialog.
+	 * Function to be called, when the upload was successful.
 	 */
-	var initDialog = function() {
-		/*
-		 * HTML
-		 */
-		selectButton = $("<button type=\"button\" class=\"btn btn-primary\">Select file...</button>");
-		clearButton = $("<button type=\"button\" class=\"btn btn-warning\">Clear list</button>");
+	var onUploadSuccess = function(path, filename) {
+		var row = getFileRow(path, filename);
+		var status = row.find('span');
 
-		var buttonGroup = $("<div class=\"btn-group\" role=\"group\"></div>");
-		buttonGroup.append(selectButton);
-		buttonGroup.append(clearButton);
-
-		inputFile = $("<input type=\"file\" name=\"file\" required=\"required\" multiple/>");
-
-		form = $("<form></form>");
-		form.prepend(inputFile);
-		form.prepend(buttonGroup);
-		inputFile.hide();
-
-		selectFileMessage = $("<p class=\"text-muted text-center\">Select files to upload.</p>");
-
-		uploadList = $("<div class=\"list-group\" style=\"overflow-y: auto; height: 200px\"></div>");
-		uploadList.append(selectFileMessage);
-
-		var html = $("<div title=\"Upload\" style=\"overflow:hidden;\"></div>");
-		html.append(form);
-		html.append("<hr />");
-		html.append(uploadList);
-
-		/*
-		 * listener
-		 */
-		clearButton.click(clearUploadList);
-
-		selectButton.click(function() {
-			inputFile.click();
-		});
-
-		inputFile.on("change", function() {
-			handleFileUpload("/", inputFile[0]);
-		});
-
-		var close = function() {
-			$(this).dialog("close");
-		};
-
-		/*
-		 * create dialog
-		 */
-		dialog = html.dialog({
-			autoOpen : false,
-			resizable : false,
-			height : 400,
-			width : 600,
-			modal : true,
-			buttons : {
-				"Close" : close
-			}
-		});
+		row.attr('data-status', 'success');
+		row.addClass('list-group-item-success');
+		status.text('Success');
 	};
 
 	/**
-	 * Constructor
+	 * Function to be called, when the upload was failed.
 	 */
-	this.construct = function(options) {
-		$.extend(settings, options);
+	var onUploadError = function(path, filename) {
+		var row = getFileRow(path, filename);
+		var status = row.find('span');
 
-		if (!settings.dao) {
-			logError("dao is not defined.");
-			return;
-		}
-
-		initDialog();
+		row.attr('data-status', 'error');
+		row.addClass('list-group-item-danger');
+		status.text('Error');
 	};
+
+	/**
+	 * Clear the uploadList.
+	 */
+	var clearUploadList = function() {
+		uploadList.find('a').each(function() {
+			if ($(this).attr('data-status') !== 'uploading') {
+				$(this).remove();
+			}
+		});
+
+		if (uploadList.find('a').length == 0) {
+			selectFileMessage.show();
+		}
+	}
+
+	/**
+	 * Append the file row to the uploadList.
+	 */
+	var appendFileRow = function(row) {
+		selectFileMessage.hide();
+		uploadList.append(row);
+	}
+
+	/**
+	 * Create the file row.
+	 */
+	var createFileRow = function(path, file) {
+		var status = $('<span class="pull-right">Uploading...</span>');
+		var row = $('<a href="#" class="list-group-item">' + file.name + '</a>');
+		row.append(status);
+		row.attr('data-file', file.name);
+		row.attr('data-path', path);
+		row.attr('data-status', 'uploading');
+
+		return row;
+	};
+
+	/**
+	 * Returns the row of the file in the uploadList.
+	 */
+	var getFileRow = function(path, filename) {
+		return uploadList.find('a[data-file="' + filename + '"][data-path="'
+				+ path + '"]');
+	}
 
 	/**
 	 * Open the dialog.
 	 */
 	this.open = function() {
-		dialog.dialog("open");
-	};
+		dialog.dialog('open');
+	}
 
 	/**
 	 * Run the constructor.

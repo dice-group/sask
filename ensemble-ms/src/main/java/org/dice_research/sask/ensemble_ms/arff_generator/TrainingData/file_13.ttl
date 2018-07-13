@@ -1,0 +1,102 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Sergey_Brin ;
+  rdf:predicate  dbo:doctoralAdvisor ;
+  rdf:subject    dbr:Rajeev_Motwani ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.theguardian.com/technology/2009/jun/07/rajeev-motwani-dead-google-swimming-pool#char=0,127>
+                 ]
+] .
+
+<https://www.theguardian.com/technology/2009/jun/07/rajeev-motwani-dead-google-swimming-pool#char=0,127>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "127"^^xsd:nonNegativeInteger ;
+        nif:isString    "Rajeev Motwani was mentor to Google's founders, Larry Page and Sergey Brin, when they were PhD students at Stanford university." .
+
+<https://www.theguardian.com/technology/2009/jun/07/rajeev-motwani-dead-google-swimming-pool#char=107,126>
+        a                     nif:String , nif:RFC5147String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Stanford university" ;
+        nif:beginIndex        "107"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "126"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.theguardian.com/technology/2009/jun/07/rajeev-motwani-dead-google-swimming-pool#char=0,127> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     dbr:Stanford_University .
+
+<https://www.theguardian.com/technology/2009/jun/07/rajeev-motwani-dead-google-swimming-pool#char=48,58>
+        a                     nif:Phrase , nif:String , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Larry Page" ;
+        nif:beginIndex        "48"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "58"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.theguardian.com/technology/2009/jun/07/rajeev-motwani-dead-google-swimming-pool#char=0,127> ;
+        itsrdf:taIdentRef     dbr:Larry_Page .
+
+<https://www.theguardian.com/technology/2009/jun/07/rajeev-motwani-dead-google-swimming-pool#char=29,35>
+        a                     nif:Phrase , nif:String , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Google" ;
+        nif:beginIndex        "29"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "35"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.theguardian.com/technology/2009/jun/07/rajeev-motwani-dead-google-swimming-pool#char=0,127> ;
+        itsrdf:taIdentRef     dbr:Google .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Rajeev_Motwani ;
+  rdf:predicate  dbo:doctoralStudent ;
+  rdf:subject    dbr:Larry_Page ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.theguardian.com/technology/2009/jun/07/rajeev-motwani-dead-google-swimming-pool#char=0,127>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Larry_Page ;
+  rdf:predicate  dbo:doctoralAdvisor ;
+  rdf:subject    dbr:Rajeev_Motwani ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.theguardian.com/technology/2009/jun/07/rajeev-motwani-dead-google-swimming-pool#char=0,127>
+                 ]
+] .
+
+<https://www.theguardian.com/technology/2009/jun/07/rajeev-motwani-dead-google-swimming-pool#char=63,74>
+        a                     nif:Phrase , nif:String , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Sergey Brin" ;
+        nif:beginIndex        "63"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "74"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.theguardian.com/technology/2009/jun/07/rajeev-motwani-dead-google-swimming-pool#char=0,127> ;
+        itsrdf:taIdentRef     dbr:Sergey_Brin .
+
+<https://www.theguardian.com/technology/2009/jun/07/rajeev-motwani-dead-google-swimming-pool#char=0,14>
+        a                     nif:Phrase , nif:String , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Rajeev Motwani" ;
+        nif:beginIndex        "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "14"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.theguardian.com/technology/2009/jun/07/rajeev-motwani-dead-google-swimming-pool#char=0,127> ;
+        itsrdf:taIdentRef     dbr:Rajeev_Motwani .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Rajeev_Motwani ;
+  rdf:predicate  dbo:doctoralStudent ;
+  rdf:subject    dbr:Sergey_Brin ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.theguardian.com/technology/2009/jun/07/rajeev-motwani-dead-google-swimming-pool#char=0,127>
+                 ]
+] .

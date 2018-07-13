@@ -1,0 +1,46 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+<http://www.dw.com/en/eus-juncker-to-stand-down-as-commission-president-at-end-of-term/a-37512670#char=21,40>
+        a                     nif:Phrase , nif:String , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "European Commission" ;
+        nif:beginIndex        "21"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "40"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.dw.com/en/eus-juncker-to-stand-down-as-commission-president-at-end-of-term/a-37512670#char=0,116> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     dbr:European_Commission .
+
+<http://www.dw.com/en/eus-juncker-to-stand-down-as-commission-president-at-end-of-term/a-37512670#char=42,61>
+        a                     nif:String , nif:RFC5147String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Jean-Claude Juncker" ;
+        nif:beginIndex        "42"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "61"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.dw.com/en/eus-juncker-to-stand-down-as-commission-president-at-end-of-term/a-37512670#char=0,116> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:Jean-Claude_Juncker .
+
+<http://www.dw.com/en/eus-juncker-to-stand-down-as-commission-president-at-end-of-term/a-37512670#char=0,116>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "116"^^xsd:nonNegativeInteger ;
+        nif:isString    "The president of the European Commission, Jean-Claude Juncker, has told German media he will not seek a second term." .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Jean-Claude_Juncker ;
+  rdf:predicate  dbo:president ;
+  rdf:subject    dbr:European_Commission ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.dw.com/en/eus-juncker-to-stand-down-as-commission-president-at-end-of-term/a-37512670#char=0,116>
+                 ]
+] .

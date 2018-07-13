@@ -3,17 +3,15 @@ package org.dice_research.sask.repo_ms;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Paths;
-
-import javax.annotation.PostConstruct;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 import org.apache.tomcat.util.http.fileupload.FileUploadException;
-import org.dice_research.sask.config.YAMLConfig;
 import org.dice_research.sask.repo_ms.hdfs.HDFSFile;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -28,19 +26,11 @@ import org.springframework.web.client.RestTemplate;
  */
 @RestController
 public class RepoMsController {
-    
-	@Autowired
-	private YAMLConfig config;
-	
+
 	private RestTemplate restTemplate = new RestTemplate();
 	private Logger logger = Logger.getLogger(RepoMsController.class.getName());
-	private HadoopService hadoopService;
+	private HadoopService hadoopService = new HadoopService(restTemplate);
 
-	@PostConstruct
-	public void init() {
-		hadoopService = new HadoopService(restTemplate, config);
-	}
-	
 	@RequestMapping(value = "/storeFile")
 	public boolean storeFile(HttpServletRequest request) throws FileUploadException, IOException {
 		this.logger.info("Repo-microservice storeFile() invoked");

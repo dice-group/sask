@@ -1,0 +1,66 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:FC_Barcelona ;
+  rdf:predicate  dbo:club ;
+  rdf:subject    dbr:Lionel_Messi ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.fcbarcelona.com/football/first-team/news/2017-2018/video-lionel-messi-signs-new-contract-fc-barcelona#char=0,215>
+                 ]
+] .
+
+<https://www.fcbarcelona.com/football/first-team/news/2017-2018/video-lionel-messi-signs-new-contract-fc-barcelona#char=0,12>
+        a                     nif:String , nif:Phrase , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "FC Barcelona" ;
+        nif:beginIndex        "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "12"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.fcbarcelona.com/football/first-team/news/2017-2018/video-lionel-messi-signs-new-contract-fc-barcelona#char=0,215> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     dbr:FC_Barcelona .
+
+<https://www.fcbarcelona.com/football/first-team/news/2017-2018/video-lionel-messi-signs-new-contract-fc-barcelona#char=17,29>
+        a                     nif:Phrase , nif:String , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Lionel Messi" ;
+        nif:beginIndex        "17"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "29"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.fcbarcelona.com/football/first-team/news/2017-2018/video-lionel-messi-signs-new-contract-fc-barcelona#char=0,215> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:Lionel_Messi .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:FC_Barcelona ;
+  rdf:predicate  dbo:debutTeam ;
+  rdf:subject    dbr:Lionel_Messi ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.fcbarcelona.com/football/first-team/news/2017-2018/video-lionel-messi-signs-new-contract-fc-barcelona#char=0,215>
+                 ]
+] .
+
+<https://www.fcbarcelona.com/football/first-team/news/2017-2018/video-lionel-messi-signs-new-contract-fc-barcelona#char=206,214>
+        a                     nif:String , nif:RFC5147String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "FC Porto" ;
+        nif:beginIndex        "206"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "214"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.fcbarcelona.com/football/first-team/news/2017-2018/video-lionel-messi-signs-new-contract-fc-barcelona#char=0,215> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     dbr:FC_Porto .
+
+<https://www.fcbarcelona.com/football/first-team/news/2017-2018/video-lionel-messi-signs-new-contract-fc-barcelona#char=0,215>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "215"^^xsd:nonNegativeInteger ;
+        nif:isString    "FC Barcelona and Lionel Messi signed on Saturday morning a new contract. After impressing throughout the various youth categories, he made his first team debut at just 16 years of age in a friendly against FC Porto." .

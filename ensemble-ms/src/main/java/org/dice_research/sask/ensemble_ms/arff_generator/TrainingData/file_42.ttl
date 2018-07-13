@@ -1,0 +1,164 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+<http://indiatoday.intoday.in/story/private-colleges-claiming-affiliation-to-foreign-universities-mushroom-in-indian-cities/1/348270.html#char=74,82>
+        a                     nif:String , nif:RFC5147String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Chittoor" ;
+        nif:beginIndex        "74"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "82"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://indiatoday.intoday.in/story/private-colleges-claiming-affiliation-to-foreign-universities-mushroom-in-indian-cities/1/348270.html#char=0,346> ;
+        itsrdf:taClassRef     dbo:Place ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Chittoor%2C_Andhra_Pradesh> .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:United_States ;
+  rdf:predicate  dbo:location ;
+  rdf:subject    aksw:InternationalUniversity ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://indiatoday.intoday.in/story/private-colleges-claiming-affiliation-to-foreign-universities-mushroom-in-indian-cities/1/348270.html#char=0,346>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:United_States ;
+  rdf:predicate  dbo:country ;
+  rdf:subject    aksw:InternationalUniversity ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://indiatoday.intoday.in/story/private-colleges-claiming-affiliation-to-foreign-universities-mushroom-in-indian-cities/1/348270.html#char=0,346>
+                 ]
+] .
+
+<http://indiatoday.intoday.in/story/private-colleges-claiming-affiliation-to-foreign-universities-mushroom-in-indian-cities/1/348270.html#char=0,346>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "346"^^xsd:nonNegativeInteger ;
+        nif:isString    "When V. Narayan registered at the Maruthi College of Engineering (MCE) in Chittoor district in 1983, the year it opened its impressive doors, he thought his future was secure. With the affiliation of the college to the International University IU at Missouri in the US, Narayan had visions of completing his education with a fancy foreign degree." .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     aksw:InternationalUniversity ;
+  rdf:predicate  dbo:affiliation ;
+  rdf:subject    aksw:MaruthiCollegeofEngineering ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://indiatoday.intoday.in/story/private-colleges-claiming-affiliation-to-foreign-universities-mushroom-in-indian-cities/1/348270.html#char=0,346>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Missouri ;
+  rdf:predicate  dbo:location ;
+  rdf:subject    aksw:InternationalUniversity ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://indiatoday.intoday.in/story/private-colleges-claiming-affiliation-to-foreign-universities-mushroom-in-indian-cities/1/348270.html#char=0,346>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:United_States ;
+  rdf:predicate  dbo:country ;
+  rdf:subject    dbr:Missouri ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://indiatoday.intoday.in/story/private-colleges-claiming-affiliation-to-foreign-universities-mushroom-in-indian-cities/1/348270.html#char=0,346>
+                 ]
+] .
+
+<http://indiatoday.intoday.in/story/private-colleges-claiming-affiliation-to-foreign-universities-mushroom-in-indian-cities/1/348270.html#char=34,64>
+        a                     nif:RFC5147String , nif:Phrase , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Maruthi College of Engineering" ;
+        nif:beginIndex        "34"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "64"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://indiatoday.intoday.in/story/private-colleges-claiming-affiliation-to-foreign-universities-mushroom-in-indian-cities/1/348270.html#char=0,346> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     aksw:MaruthiCollegeofEngineering .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:United_States ;
+  rdf:predicate  dbo:locatedInArea ;
+  rdf:subject    dbr:Missouri ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://indiatoday.intoday.in/story/private-colleges-claiming-affiliation-to-foreign-universities-mushroom-in-indian-cities/1/348270.html#char=0,346>
+                 ]
+] .
+
+<http://indiatoday.intoday.in/story/private-colleges-claiming-affiliation-to-foreign-universities-mushroom-in-indian-cities/1/348270.html#char=266,268>
+        a                     nif:RFC5147String , nif:String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "US" ;
+        nif:beginIndex        "266"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "268"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://indiatoday.intoday.in/story/private-colleges-claiming-affiliation-to-foreign-universities-mushroom-in-indian-cities/1/348270.html#char=0,346> ;
+        itsrdf:taClassRef     dbo:Country ;
+        itsrdf:taIdentRef     dbr:United_States .
+
+<http://indiatoday.intoday.in/story/private-colleges-claiming-affiliation-to-foreign-universities-mushroom-in-indian-cities/1/348270.html#char=250,258>
+        a                     nif:RFC5147String , nif:String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Missouri" ;
+        nif:beginIndex        "250"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "258"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://indiatoday.intoday.in/story/private-colleges-claiming-affiliation-to-foreign-universities-mushroom-in-indian-cities/1/348270.html#char=0,346> ;
+        itsrdf:taClassRef     dbo:Place ;
+        itsrdf:taIdentRef     dbr:Missouri .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     <http://dbpedia.org/resource/Chittoor%2C_Andhra_Pradesh> ;
+  rdf:predicate  dbo:location ;
+  rdf:subject    aksw:V.Narayan ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://indiatoday.intoday.in/story/private-colleges-claiming-affiliation-to-foreign-universities-mushroom-in-indian-cities/1/348270.html#char=0,346>
+                 ]
+] .
+
+<http://indiatoday.intoday.in/story/private-colleges-claiming-affiliation-to-foreign-universities-mushroom-in-indian-cities/1/348270.html#char=5,15>
+        a                     nif:Phrase , nif:RFC5147String , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "V. Narayan" ;
+        nif:beginIndex        "5"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "15"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://indiatoday.intoday.in/story/private-colleges-claiming-affiliation-to-foreign-universities-mushroom-in-indian-cities/1/348270.html#char=0,346> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     aksw:V.Narayan .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     <http://dbpedia.org/resource/Chittoor%2C_Andhra_Pradesh> ;
+  rdf:predicate  dbo:location ;
+  rdf:subject    aksw:MaruthiCollegeofEngineering ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://indiatoday.intoday.in/story/private-colleges-claiming-affiliation-to-foreign-universities-mushroom-in-indian-cities/1/348270.html#char=0,346>
+                 ]
+] .
+
+<http://indiatoday.intoday.in/story/private-colleges-claiming-affiliation-to-foreign-universities-mushroom-in-indian-cities/1/348270.html#char=219,246>
+        a                     nif:String , nif:Phrase , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "International University IU" ;
+        nif:beginIndex        "219"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "246"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://indiatoday.intoday.in/story/private-colleges-claiming-affiliation-to-foreign-universities-mushroom-in-indian-cities/1/348270.html#char=0,346> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     aksw:InternationalUniversity .
+
+<http://indiatoday.intoday.in/story/private-colleges-claiming-affiliation-to-foreign-universities-mushroom-in-indian-cities/1/348270.html#char=270,277>
+        a                     nif:String , nif:Phrase , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Narayan" ;
+        nif:beginIndex        "270"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "277"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://indiatoday.intoday.in/story/private-colleges-claiming-affiliation-to-foreign-universities-mushroom-in-indian-cities/1/348270.html#char=0,346> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     aksw:V.Narayan .

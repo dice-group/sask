@@ -6,7 +6,7 @@ package chatbot.codeanticode.eliza;
 public class EString {
 
 	/** The digits. */
-	private static final String num = "0123456789";
+	static final String num = "0123456789";
 
 	/**
 	 * Look for a match between the string and the pattern. Return count of
@@ -161,7 +161,6 @@ public class EString {
 	public static String translate(String str, String src, String dest) {
 		if (src.length() != dest.length()) {
 			// impossible error
-			System.out.print("impossible error");
 		}
 		for (int i = 0; i < src.length(); i++) {
 			str = str.replace(src.charAt(i), dest.charAt(i));
@@ -182,7 +181,6 @@ public class EString {
 		for (int i = 1; i < s.length(); i++) {
 			if (c == ' ' && ((s.charAt(i) == ' ') || (s.charAt(i) == ',') || (s.charAt(i) == '.'))) {
 				// nothing
-				System.out.print("nothing");
 			} else if (c != ' ' && s.charAt(i) == '?') {
 				dest += c + " ";
 			} else {

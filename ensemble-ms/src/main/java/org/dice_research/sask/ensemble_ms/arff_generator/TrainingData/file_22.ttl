@@ -1,0 +1,68 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+<http://ftw.usatoday.com/2018/01/trae-young-oklahoma-sooners-basketball-43-points-tcu-overtime-3-pointer-highlights-video#char=111,131>
+        a                     nif:String , nif:RFC5147String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Golden State Warrior" ;
+        nif:beginIndex        "111"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "131"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://ftw.usatoday.com/2018/01/trae-young-oklahoma-sooners-basketball-43-points-tcu-overtime-3-pointer-highlights-video#char=0,177> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     dbr:Golden_State_Warriors .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     <http://dbpedia.org/resource/Oklahoma_Sooners_men's_basketball> ;
+  rdf:predicate  dbo:club ;
+  rdf:subject    aksw:TraeYoung ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://ftw.usatoday.com/2018/01/trae-young-oklahoma-sooners-basketball-43-points-tcu-overtime-3-pointer-highlights-video#char=0,177>
+                 ]
+] .
+
+<http://ftw.usatoday.com/2018/01/trae-young-oklahoma-sooners-basketball-43-points-tcu-overtime-3-pointer-highlights-video#char=0,177>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "177"^^xsd:nonNegativeInteger ;
+        nif:isString    "Oklahoma Trae Young is simply stunning. His deep 3-ball has drawn multiple comparisons to Steph Curry, and the Golden State Warrior called the freshman guard style unbelievable." .
+
+<http://ftw.usatoday.com/2018/01/trae-young-oklahoma-sooners-basketball-43-points-tcu-overtime-3-pointer-highlights-video#char=9,19>
+        a                     nif:String , nif:RFC5147String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Trae Young" ;
+        nif:beginIndex        "9"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "19"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://ftw.usatoday.com/2018/01/trae-young-oklahoma-sooners-basketball-43-points-tcu-overtime-3-pointer-highlights-video#char=0,177> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     aksw:TraeYoung .
+
+<http://ftw.usatoday.com/2018/01/trae-young-oklahoma-sooners-basketball-43-points-tcu-overtime-3-pointer-highlights-video#char=0,8>
+        a                     nif:RFC5147String , nif:Phrase , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Oklahoma" ;
+        nif:beginIndex        "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "8"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://ftw.usatoday.com/2018/01/trae-young-oklahoma-sooners-basketball-43-points-tcu-overtime-3-pointer-highlights-video#char=0,177> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Oklahoma_Sooners_men's_basketball> .
+
+<http://ftw.usatoday.com/2018/01/trae-young-oklahoma-sooners-basketball-43-points-tcu-overtime-3-pointer-highlights-video#char=90,101>
+        a                     nif:Phrase , nif:RFC5147String , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Steph Curry" ;
+        nif:beginIndex        "90"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "101"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://ftw.usatoday.com/2018/01/trae-young-oklahoma-sooners-basketball-43-points-tcu-overtime-3-pointer-highlights-video#char=0,177> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:Stephen_Curry .

@@ -1,0 +1,64 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Donald_Trump ;
+  rdf:predicate  dbo:leaderName ;
+  rdf:subject    dbr:United_States ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.whitehouse.gov/people/donald-j-trump/#char=0,182>
+                 ]
+] .
+
+<https://www.whitehouse.gov/people/donald-j-trump/#char=0,15>
+        a                     nif:RFC5147String , nif:Phrase , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Added> ;
+        nif:anchorOf          "Donald J. Trump" ;
+        nif:beginIndex        "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "15"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.whitehouse.gov/people/donald-j-trump/#char=0,182> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:Donald_Trump .
+
+<https://www.whitehouse.gov/people/donald-j-trump/#char=0,182>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "182"^^xsd:nonNegativeInteger ;
+        nif:isString    "Donald J. Trump is the 45th President of the United States. He believes the United States has incredible potential and will go on to exceed anything that it has achieved in the past." .
+
+<https://www.whitehouse.gov/people/donald-j-trump/#char=45,58>
+        a                     nif:String , nif:Phrase , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Added> ;
+        nif:anchorOf          "United States" ;
+        nif:beginIndex        "45"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "58"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.whitehouse.gov/people/donald-j-trump/#char=0,182> ;
+        itsrdf:taClassRef     dbo:Place ;
+        itsrdf:taIdentRef     dbr:United_States .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:United_States ;
+  rdf:predicate  dbo:country ;
+  rdf:subject    dbr:Donald_Trump ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.whitehouse.gov/people/donald-j-trump/#char=0,182>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:United_States ;
+  rdf:predicate  dbo:location ;
+  rdf:subject    dbr:Donald_Trump ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.whitehouse.gov/people/donald-j-trump/#char=0,182>
+                 ]
+] .

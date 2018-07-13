@@ -1,10 +1,3 @@
-/**
- * Javascript class for the workflow stack. Provides the ability to build and
- * manage a stack of workflows.
- * 
- * @author Kevin Haack
- */
-;
 var WorkflowStack = function(options) {
 
 	/**
@@ -112,7 +105,7 @@ var WorkflowStack = function(options) {
 	 * Is saved.
 	 */
 	this.isSaved = function() {
-		return index === lastSaved;
+		return index == lastSaved;
 	};
 
 	/**
@@ -120,7 +113,7 @@ var WorkflowStack = function(options) {
 	 */
 	this.setSaved = function() {
 		lastSaved = index;
-	};
+	}
 
 	/**
 	 * Has a next workflow.
