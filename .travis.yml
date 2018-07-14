@@ -3,27 +3,33 @@ matrix:
     - language: java
 
       java: "oraclejdk8"
-      env: TEST_SUITE = suite_oraclejdk8
+      env: TEST_SUITE1 = suite_oraclejdk8
 
       java: "oraclejdk9"
-      env: TEST_SUITE = suite_oraclejdk9
+      env: TEST_SUITE2 = suite_oraclejdk9
 
       java: "openjdk8"
-      env: TEST_SUITE = suite_openjdk8
+      env: TEST_SUITE2 = suite_openjdk8
 
       script:
-        - mvn clean install -q -P linux $TEST_SUITE
+        - mvn clean install -q -P linux $TEST_SUITE1
+        - mvn clean install -q -P linux $TEST_SUITE2
+        - mvn clean install -q -P linux $TEST_SUITE2
 
     - sudo: required
 
       language: python
       python: "2.7"
 
+      services:
+        - docker
+
       before_install:
         - sudo apt-get update -qq
      
       install:
-        - pip install ansible
+        - pip install docker-py
+        - pip install ansible===2.4.0.0
 
       script:
-        - ansible-playbook -i playbook/inventory/dev.inventory playbook/build-images.yml
+        - ansible-playbook -i playbook/inventory/dev.inventory playbook/build-images.yml --extra-vars "image_tag=$TRAVIS_COMMIT"
