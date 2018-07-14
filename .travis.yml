@@ -1,15 +1,18 @@
 matrix:
   include:
     - language: java
-      jdk:
-        - oraclejdk8
-        - oraclejdk9
-        - openjdk8
 
-      install: true
+      java: "oraclejdk8"
+      env: TEST_SUITE = suite_oraclejdk8
+
+      java: "oraclejdk9"
+      env: TEST_SUITE = suite_oraclejdk9
+
+      java: "openjdk8"
+      env: TEST_SUITE = suite_openjdk8
 
       script:
-        - mvn clean install -q -P linux
+        - mvn clean install -q -P linux $TEST_SUITE
 
     - sudo: required
 
@@ -23,4 +26,4 @@ matrix:
         - pip install ansible
 
       script:
-        - ansible-playbook -i inventory/dev.inventory build-images.yml
+        - ansible-playbook -i playbook/inventory/dev.inventory playbook/build-images.yml
