@@ -1,11 +1,26 @@
-language: java
-jdk:
-  - oraclejdk8
-  - oraclejdk9
-  - openjdk8
+matrix:
+  include:
+    - language: java
+      jdk:
+        - oraclejdk8
+        - oraclejdk9
+        - openjdk8
 
-install: true
+      install: true
 
-script:
-  - mvn clean install -q -P linux,local
+      script:
+        - mvn clean install -q -P linux
 
+    - sudo: required
+
+      language: python
+      python: "2.7"
+
+      before_install:
+        - sudo apt-get update -qq
+     
+      install:
+        - pip install ansible
+
+      script:
+        - ansible-playbook -i inventory/dev.inventory build-images.yml
