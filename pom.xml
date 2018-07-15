@@ -28,7 +28,6 @@
 		<module>repo-ms</module>
 		<module>taipan-ms</module>
 		<module>webclient</module>
-		<!----><module>keyword-search</module>
 	</modules>
 	
     <profiles>
