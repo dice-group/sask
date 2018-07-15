@@ -1,4 +1,4 @@
-package org.sask.chatbot.KeywordSearch;
+package org.sask.chatbot.keyword_search;
 /**
  * @author Muzammil Ahmed
  * @since 12-07-2018
@@ -14,7 +14,7 @@ public class Comparative {
 
     public static void main(String[] args)throws IOException {
 
-        String SAMPLE_OUTPUT_FILE_PATH = "./src/main/resources/QALD_TSV_OUTPUT.txt";
+        String SAMPLE_OUTPUT_FILE_PATH = ".\\keyword-search\\src\\main\\resources\\QALD_TSV_OUTPUT.txt";
         BufferedReader TSVFile = new BufferedReader(new FileReader(SAMPLE_OUTPUT_FILE_PATH));
         int count = 0;
         boolean flag = false;
@@ -37,7 +37,7 @@ public class Comparative {
                         }
                     }
 //                    System.out.println("flag value : " + flag);
-                    if(flag == true){
+                    if(flag){
                         count++;
                         flag = false;
                     }

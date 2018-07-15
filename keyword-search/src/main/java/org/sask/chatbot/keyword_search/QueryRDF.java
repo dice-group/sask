@@ -1,4 +1,4 @@
-package org.sask.chatbot.KeywordSearch;
+package org.sask.chatbot.keyword_search;
 /**
  * @author Muzammil Ahmed
  * @since 11-06-2018
@@ -8,6 +8,9 @@ import org.apache.jena.rdf.model.Model;
 
 import java.util.List;
 
+/**
+ * This class is used to query rdf model for finding SCC.
+ */
 public class QueryRDF {
 
 
@@ -15,7 +18,7 @@ public class QueryRDF {
     *  This Method returns Triples (subject, predicate and object) if given rdf if triple model data.
     */
     public static void getTriples(Model model) {
-        String value = "http://dbpedia.org/page/Mona_Lisa";
+        //String value = "http://dbpedia.org/page/Mona_Lisa";
         ParameterizedSparqlString qs = new ParameterizedSparqlString( "" +
                 "select distinct ?subject ?predicate ?object where {\n" +
                 "  ?subject ?predicate ?object.\n" +

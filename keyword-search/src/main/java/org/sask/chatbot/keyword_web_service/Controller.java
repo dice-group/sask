@@ -1,4 +1,4 @@
-package KeywordWebService;
+package org.sask.chatbot.keyword_web_service;
 /**
  * @author Muzammil Ahmed
  * @since 10-07-2018
@@ -6,6 +6,9 @@ package KeywordWebService;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * This class creates the rest controller for keyword search.
+ */
 @RestController
 public class Controller {
 

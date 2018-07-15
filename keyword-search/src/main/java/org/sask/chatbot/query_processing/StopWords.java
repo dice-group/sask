@@ -1,4 +1,4 @@
-package QueryProcessing;
+package org.sask.chatbot.query_processing;
 /**
  * @author Muzammil Ahmed
  * @since 25-04-2018
@@ -18,25 +18,21 @@ public class StopWords {
             public StopWords() throws IOException{
 
                 stopWords =  new ArrayList<String>();
-                BufferedReader reader = new BufferedReader(new FileReader("./src/main/resources/stopwords.txt"));
-                int counter = 0;
+                BufferedReader reader = new BufferedReader(new FileReader(".\\keyword-search\\src\\main\\resources\\stopwords.txt"));
                 String stopWord = "";
                 while ((stopWord = reader.readLine()) != null) {
                     stopWords.add(stopWord);
-                    counter++;
+
                 }
                 reader.close();
             }
 
-            public String removeStopWords(String string){
+            public String removeStopWords(String s){
 
-                String[] wordTokens =string.replaceAll("[^a-zA-Z0-9' ']", "").toLowerCase().split(" ");
-                List<String> outputList = new ArrayList<String>();
+                String[] wordTokens = s.split(" ");
                 String result = "";
                 for (String word: wordTokens) {
-                    if(word.length() == 0)
-                        continue;
-                    if(IsStopWord(word))
+                    if(word.length() == 0 ||isStopWord(word))
                         continue;
                     result += (word+ " ");
                 }
@@ -45,13 +41,8 @@ public class StopWords {
 
             }
 
-            public boolean IsStopWord(String word){
-
-                if(stopWords.contains(word))
-                    return true;
-                else
-                    return false;
-
+            public boolean isStopWord(String word){
+                return stopWords.contains(word);
             }
 
 }

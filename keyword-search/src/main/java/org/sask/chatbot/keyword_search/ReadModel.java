@@ -1,4 +1,4 @@
-package org.sask.chatbot.KeywordSearch;
+package org.sask.chatbot.keyword_search;
 /**
  * @author Muzammil Ahmed
  * @since 19-06-2018
@@ -9,6 +9,9 @@ import org.apache.jena.util.FileManager;
 
 import java.io.InputStream;
 
+/**
+ * This class is used to read rdf or n triples file
+ */
 public class ReadModel {
 
     public static Model readModel(String fileName) throws IllegalArgumentException {

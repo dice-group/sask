@@ -1,4 +1,4 @@
-package org.sask.chatbot.KeywordSearch;
+package org.sask.chatbot.keyword_search;
 /**
  * @author Muzammil Ahmed
  * @since 03-07-2018
@@ -6,18 +6,20 @@ package org.sask.chatbot.KeywordSearch;
 import java.io.*;
 /*
 * This class is used to benchmark Qald-7 results with the results returned with SCC query.
+* It takes the QALD-7 results and creates another file with answers returned from the query
+* for comparison.
 */
 
 public class QALDAnswerGenerator {
 
-    public static final String SAMPLE_XLSX_FILE_PATH = "./src/main/resources/QALD_TSV.txt";
-    public static final String SAMPLE_OUTPUT_FILE_PATH = "./src/main/resources/QALD_TSV_OUTPUT.txt";
+    public static final String SAMPLE_XLSX_FILE_PATH = ".\\keyword-search\\src\\main\\resources\\QALD_TSV.txt";
+    public static final String SAMPLE_OUTPUT_FILE_PATH = ".\\keyword-search\\src\\main\\resources\\QALD_TSV_OUTPUT.txt";
 
     public static void main(String[] args) throws IOException {
         BufferedReader TSVFile = new BufferedReader(new FileReader(SAMPLE_XLSX_FILE_PATH));
         BufferedWriter write = new BufferedWriter(new FileWriter(SAMPLE_OUTPUT_FILE_PATH));
         QueryDbpedia query = new QueryDbpedia();
-        String result = new String();
+        String result = "";
         try{
             String dataRow = TSVFile.readLine();
             while (dataRow != null){

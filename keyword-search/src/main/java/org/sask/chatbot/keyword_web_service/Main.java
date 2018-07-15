@@ -1,12 +1,11 @@
-package KeywordWebService;
+package org.sask.chatbot.keyword_web_service;
 
-import org.apache.jena.base.Sys;
-import org.sask.chatbot.KeywordSearch.QueryDbpedia;
-import org.sask.chatbot.KeywordSearch.QueryRDF;
-import org.sask.chatbot.KeywordSearch.ReadModel;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ * This is the class that is used to run keyword search web service.
+ */
 @SpringBootApplication
 public class Main {
 

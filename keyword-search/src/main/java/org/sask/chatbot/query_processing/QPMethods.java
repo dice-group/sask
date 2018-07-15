@@ -1,4 +1,4 @@
-package QueryProcessing;
+package org.sask.chatbot.query_processing;
 /**
  * @author Muzammil Ahmed
  * @since 25-04-2018
@@ -15,10 +15,15 @@ import java.util.Properties;
 
 public class QPMethods {
 
-    public static String RemoveSpecialCharacters(String string){
+    /**
+     * This method removes special characters from a string.
+     * @param query string with special characters
+     * @return string without special characters
+     */
+    public static String removeSpecialCharacters(String query){
 
-        string = string.replaceAll("[^a-zA-Z0-9' ']", "").toLowerCase();
-        return string;
+        query = query.replaceAll("[^a-zA-Z0-9' ']", "").toLowerCase();
+        return query;
 
     }
 
@@ -42,7 +47,7 @@ public class QPMethods {
         String lema = "";
         String pos = "";
         String[] split = input.split(" ");
-        String ProcessedString = input;
+        String processedString = input;
 
         //traversing sentences in the document
         for (CoreMap sentence: sentences) {
@@ -55,7 +60,7 @@ public class QPMethods {
                 lema = token.get(CoreAnnotations.LemmaAnnotation.class);
 
                 if(!(word.equals(lema))){
-                    ProcessedString = ProcessedString.replaceAll(wrd.toString(), lema.toString());
+                    processedString = processedString.replaceAll(wrd, lema);
                 }
                 lemma.add(lema);
                 pos = token.get(CoreAnnotations.PartOfSpeechAnnotation.class);
@@ -63,7 +68,7 @@ public class QPMethods {
                 System.out.println("POS: " + pos);
 
             }
-        }return ProcessedString;
+        }return processedString;
 
 
 
