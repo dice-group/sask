@@ -21,10 +21,7 @@ public class QPMethods {
      * @return string without special characters
      */
     public static String removeSpecialCharacters(String query){
-
-        query = query.replaceAll("[^a-zA-Z0-9' ']", "").toLowerCase();
-        return query;
-
+        return query.replaceAll("[^a-zA-Z0-9' ']", "").toLowerCase();
     }
 
     // this method is used to remove lemma from the string and POS tagging
