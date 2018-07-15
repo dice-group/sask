@@ -12,8 +12,8 @@ import java.io.*;
 
 public class QALDAnswerGenerator {
 
-    public static final String SAMPLE_XLSX_FILE_PATH = ".\\keyword-search\\src\\main\\resources\\QALD_TSV.txt";
-    public static final String SAMPLE_OUTPUT_FILE_PATH = ".\\keyword-search\\src\\main\\resources\\QALD_TSV_OUTPUT.txt";
+    public static final String SAMPLE_XLSX_FILE_PATH = ".\\QALD_TSV.txt";
+    public static final String SAMPLE_OUTPUT_FILE_PATH = ".\\QALD_TSV_OUTPUT.txt";
 
     public static void main(String[] args) throws IOException {
         BufferedReader TSVFile = new BufferedReader(new FileReader(SAMPLE_XLSX_FILE_PATH));

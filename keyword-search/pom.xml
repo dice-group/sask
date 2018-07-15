@@ -7,12 +7,12 @@
     <groupId>org.sask.chatbot</groupId>
     <artifactId>keyword_search</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <parent>
+    <!--<parent>
         <groupId>org.dice-research</groupId>
         <artifactId>sask</artifactId>
         <version>0.0.7</version>
         <relativePath>..</relativePath>
-    </parent>
+    </parent>-->
 
     <dependencies>
         <dependency>
@@ -25,19 +25,19 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot</artifactId>
-            <version>2.0.0.RELEASE</version>
+            <version>1.5.8.RELEASE</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-autoconfigure</artifactId>
-            <version>2.0.0.RELEASE</version>
+            <version>1.5.8.RELEASE</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <version>2.0.3.RELEASE</version>
+            <version>1.5.8.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>edu.stanford.nlp</groupId>

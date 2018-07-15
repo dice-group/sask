@@ -14,7 +14,7 @@ public class Comparative {
 
     public static void main(String[] args)throws IOException {
 
-        String SAMPLE_OUTPUT_FILE_PATH = ".\\keyword-search\\src\\main\\resources\\QALD_TSV_OUTPUT.txt";
+        String SAMPLE_OUTPUT_FILE_PATH = ".\\QALD_TSV_OUTPUT.txt";
         BufferedReader TSVFile = new BufferedReader(new FileReader(SAMPLE_OUTPUT_FILE_PATH));
         int count = 0;
         boolean flag = false;
