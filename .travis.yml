@@ -6,13 +6,19 @@ jdk:
   - oraclejdk9
   - openjdk8
 
+install: true
+
 script:
 - mvn clean install -q -P linux
+
+cache:
+  directories:
+  - $HOME/.m2
 
 jobs:
   include:
     - stage: deploy
-
+      sudo: required
       python: "2.7"
       services:
       - docker
