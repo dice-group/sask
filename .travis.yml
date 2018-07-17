@@ -19,6 +19,7 @@ jobs:
   include:
     - stage: deploy
       sudo: required
+      dist: trusty
       python: "2.7"
       services:
       - docker
