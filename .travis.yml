@@ -16,9 +16,6 @@ install:
 script:
   - mvn clean install -DskipTests -P linux
 
-after_success:
-  - ansible-playbook -i playbook/inventory/dev.inventory playbook/build-images.yml --extra-vars "image_tag=$TRAVIS_COMMIT"
-
 cache:
   directories:
   - $HOME/.m2
@@ -26,6 +23,7 @@ cache:
 jobs:
   include:
     - stage: deploy
+      if: branch = master
       sudo: required
       dist: trusty
       python: "2.7"
@@ -45,5 +43,6 @@ jobs:
       - sudo pip install docker_py
       - sudo pip install ansible===2.4.0.0
       script:
+      - ansible-playbook -i playbook/inventory/dev.inventory playbook/build-images.yml --extra-vars "image_tag=$TRAVIS_COMMIT"
       - ansible-playbook -i playbook/inventory/sask_dev.inventory playbook/deploy_microservices.yml --extra-vars "image_tag=$TRAVIS_COMMIT"
 
