@@ -6,10 +6,18 @@ jdk:
   - oraclejdk9
   - openjdk8
 
-install: true
+before_install:
+  - sudo apt-get update -qq
+
+install: 
+  - sudo pip install docker-py
+  - sudo pip install ansible===2.4.0.0
 
 script:
-- mvn clean install -DskipTests -P linux
+  - mvn clean install -DskipTests -P linux
+
+after_success:
+  - ansible-playbook -i playbook/inventory/dev.inventory playbook/build-images.yml --extra-vars "image_tag=$TRAVIS_COMMIT"
 
 cache:
   directories:
@@ -37,5 +45,5 @@ jobs:
       - sudo pip install docker_py
       - sudo pip install ansible===2.4.0.0
       script:
-      - ansible-playbook -i playbook/inventory/sask_dev.inventory playbook/deploy_microservices.yml --extra-vars "image_tag=91a1f96a418912108dc4e9f4dc5be5cf5a03e3ad"
+      - ansible-playbook -i playbook/inventory/sask_dev.inventory playbook/deploy_microservices.yml --extra-vars "image_tag=$TRAVIS_COMMIT"
 
