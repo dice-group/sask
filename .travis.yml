@@ -9,9 +9,7 @@ jdk:
 before_install:
   - sudo apt-get update -qq
 
-install: 
-  - sudo pip install docker-py
-  - sudo pip install ansible===2.4.0.0
+install: true
 
 script:
   - mvn clean install -q -P linux
