@@ -14,7 +14,7 @@ install:
   - sudo pip install ansible===2.4.0.0
 
 script:
-  - mvn clean install -q -P linux cobertura:cobertura
+  - mvn clean install -q -P linux
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
