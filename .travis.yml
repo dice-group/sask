@@ -32,7 +32,8 @@ jobs:
       - ssh-add /tmp/deploy_rsa
 
       install:
-      - pip install ansible===2.4.0.0
+      - sudo pip install docker_py
+      - sudo pip install ansible===2.4.0.0
       script:
       - ansible-playbook -i playbook/inventory/sask_dev.inventory playbook/deploy_microservices.yml --extra-vars "image_tag=91a1f96a418912108dc4e9f4dc5be5cf5a03e3ad"
 
