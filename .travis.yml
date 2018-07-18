@@ -3,11 +3,13 @@ sudo: required
 language: java
 jdk:
   - oraclejdk8
+  - oraclejdk9
+  - openjdk8
 
 install: true
 
 script:
-- mvn clean install -DskipTests -q -P linux
+- mvn clean install -DskipTests -P linux
 
 cache:
   directories:
