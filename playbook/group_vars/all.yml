@@ -6,7 +6,7 @@ docker_repository : "guru5590"
 
 docker_repository_user : "guru5590"
 
-docker_repository_user_password : "****"
+docker_repository_user_password : "topsecret"
 
 etc_hosts_all: >
  {% set hosts_dict = {} -%}
