@@ -1,7 +1,6 @@
 # What's the project all about?
 
-#### The objective of the project is to build a SPARQL template that captures the internal structure of the users' input question and 
-#### return the precise answers for the queries written and extract the data that's queried from the RDF database and other knowledge bases.
+#### The objective of the project is to build a SPARQL template that captures the internal structure of the users' input question and return the precise answers for the queries written and extract the data that's queried from the RDF database and other knowledge bases.
 
 ## Technical approach:
 
@@ -9,11 +8,11 @@ We have to setup few microservices before proceeding to the further steps such a
 Virtual Machine (VM) via terminal using SSH login.  
 
 To run these microservices the following command is used:
-                                              ```
-			                                        mvn clean spring-boot:run
-                                              
-                                              ```
 
+				```
+				mvn clean spring-boot:run
+				```
+					
 We have built a microservice named qa-ms which is solely making a call to web service at the moment. Further, it will be enhanced to 
 identify with entities, classes and resources of the incoming questions. The qa-ms microservice needs to be connected to SurniaQA which is 
 a POS (Part of Speech) based Question Answering System (QA System). In the SASK system there is a Fuseki server which is an RDF database 
