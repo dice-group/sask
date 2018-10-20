@@ -4,7 +4,7 @@
 
 ## Technical approach:
 
-We have to setup few microservices before proceeding to the further steps such as Eureka Server, Chatbot, Webclient and Autoindex on the 
+Before proceeding to the further steps we have to setup few microservices such as Eureka Server, Chatbot, Webclient and Autoindex on the 
 Virtual Machine (VM) via terminal using SSH login.  
 
 To run these microservices the following command is used:
