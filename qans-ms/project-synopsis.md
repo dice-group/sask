@@ -8,10 +8,10 @@ We have to setup few microservices before proceeding to the further steps such a
 Virtual Machine (VM) via terminal using SSH login.  
 
 To run these microservices the following command is used:
-
-				```
-				mvn clean spring-boot:run
-				```
+```
+						mvn clean spring-boot:run
+				
+```
 					
 We have built a microservice named qa-ms which is solely making a call to web service at the moment. Further, it will be enhanced to 
 identify with entities, classes and resources of the incoming questions. The qa-ms microservice needs to be connected to SurniaQA which is 
