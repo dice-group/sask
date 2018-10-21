@@ -1,4 +1,4 @@
-package org.dice_research.sask.ensemble_ms.arff_generator;
+
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -23,15 +23,23 @@ import java.util.stream.Stream;
 
 public class SentenceExtractor {
 
+	static File path = new File("C:\\Users\\harsh\\Downloads\\Ensemble Data\\oke data");
+	static File[] files = path.listFiles();
+	static List<String> sentences = new ArrayList<String>();
+	static File file = new File("C:\\Users\\harsh\\\\MLdata\\traindata.arff");
+   static File file2 = new File("C:\\Users\\harsh\\\\MLdata\\trainNewdata2.arff") ;	
+	
+	static FileWriter fileWriter;
+	
+	 static String sentence_data;
+
 	public static void main(String[] args) {
+		
+		  
 
-		String sentence_data;
+		
 
-		File path = new File("C:\\Users\\harsh\\Downloads\\Ensemble Data\\oke data");
-		File[] files = path.listFiles();
-		List<String> sentences = new ArrayList<String>();
-		File file = new File("C:\\Users\\harsh\\\\MLdata\\traindata.arff");
-		FileWriter fileWriter;
+
 		try {
 			fileWriter = new FileWriter(file);
 
@@ -71,8 +79,12 @@ public class SentenceExtractor {
 					sentence_data = sentence.substring(start, end);
 					// System.out.println(sentence_data);
 					sentences.add(sentence_data);
+					
+//				Extractors responses
 					String fox_response_string = null;
 					String openie_response_string = null;
+					String sorokin_response_string = null;
+					String cedric_response_string = null;
 
 					Map<String, Integer> port_vs_extractorMap = new HashMap<String, Integer>();
 					port_vs_extractorMap.put("fox", 2222);
@@ -83,7 +95,7 @@ public class SentenceExtractor {
 					port_vs_extractorMap.put("sorookin", 2227);
 
 					// int portNumb[] = { 2222, 2224, 2225, 2226, 2227 };
-					int portNumb[] = { 2222, 2226 };
+					int portNumb[] = { 2222, 2226, 2227, 2225 };
 
 					Map<String, String> foxRespMap = new HashMap<String, String>();
 					Map<String, String> fredRespMap = new HashMap<String, String>();
@@ -160,6 +172,9 @@ public class SentenceExtractor {
 								spotlightRespMap.put(sentences.get(i), response.toString());
 								System.out.println(
 										portNumb[j] + "----Extractors response--------------" + j + " response");
+								ArrayList<String> sorokin_response_string_list = new ArrayList<String>();
+								sorokin_response_string = response.toString();
+								sorokin_response_string_list.add(sorokin_response_string);
 
 								System.out.println(response.toString());
 								System.out.println();
@@ -167,6 +182,11 @@ public class SentenceExtractor {
 								cedricRespMap.put(sentences.get(i), response.toString());
 								System.out.println(
 										portNumb[j] + "----Extractors response--------------" + j + " response");
+								ArrayList<String> cedric_response_string_list = new ArrayList<String>();
+								cedric_response_string = response.toString();
+								cedric_response_string_list.add(cedric_response_string);
+
+								
 
 								System.out.println(response.toString());
 								System.out.println();
@@ -187,11 +207,14 @@ public class SentenceExtractor {
 							// TODO: handle exception
 						}
 					}
+					TrainingFileWriter();
 					String training_data = " ' " + sentences.get(i) + " ' " + ", " + "'" + fox_response_string + " ' "
-							+ "," + " ' " + openie_response_string + " ' ";
+							+ "," + " ' " + openie_response_string + " ' "  + "," + " ' " + sorokin_response_string + "," + " ' " + cedric_response_string+ " ' ";
 					System.out.println(sentences.get(i));
 					System.out.println(fox_response_string);
 					System.out.println(openie_response_string);
+					System.out.println(cedric_response_string);
+					System.out.println(sorokin_response_string);
 					System.out.println(training_data);
 					try {
 
@@ -229,5 +252,41 @@ public class SentenceExtractor {
 		}
 		return contentBuilder.toString();
 	}
+	public static void TrainingFileWriter()
+	{
+
+//		List<String> sentences = new ArrayList<String>();
+
+		FileWriter fileWriter;
+		try 
+		{
+			fileWriter = new FileWriter(file2);
+			BufferedWriter bw2 = new BufferedWriter(fileWriter);
+			bw2.write("@relation DataExtraction2");
+			bw2.newLine();
+			bw2.write("@ATTRIBUTE Sentence	string");
+			bw2.newLine();
+			bw2.write("@ATTRIBUTE Foxoutput	string");
+			bw2.newLine();
+			bw2.newLine();
+			bw2.write("@ATTRIBUTE OPENIEoutput	string");
+			bw2.newLine();
+			bw2.write("@data");
+			bw2.newLine();
+			bw2.close();
+			fileWriter.close();
+			System.out.println("File Created and closed");
+	
+			
+		} catch (IOException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		// write in train data file for weka
+		
+	
+		}
+	
 
 }
