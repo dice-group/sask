@@ -21,3 +21,8 @@ the Autoindex and connect it to Fuseki sever. Then setup the SurniaQA on VM and 
 it decides whether it’s a question and sends it to the microservice (qa-ms). From there it goes to the SurniaQA and then to Autoindex and
 get back the URIs as the response. The retrieved URIs from the Autoindex goes to the SurniaQA and finally they are displayed on the 
 Chatbot UI.
+
+
+Following is the figure on how it works:
+
+![screenshot](https://user-images.githubusercontent.com/39854185/47263960-0f6e2280-d50c-11e8-8955-4dbd1136324d.png)
