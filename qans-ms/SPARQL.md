@@ -15,7 +15,7 @@ It's one of the three core standards of the Semantic Web, along with RDF (Resour
   3. ASK - Returns a boolean indicating whether a query pattern matches.
   4. DESCRIBE - Returns an RDF graph that describes the resources found (identified bt name or description).
   
-  ### A simple SPARQL query looks as follows:
+  A simple SPARQL query looks as follows:
   
  **SELECT** ?a ?b ?c \
  **WHERE**\
