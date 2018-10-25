@@ -47,6 +47,11 @@ WHERE\
      
 }
 
+In the above query:\
+    1. <http://example.org/book/book1> is the subject\
+    2. <http://purl.org/dc/elements/1.1/title> is the predicate \
+    3. ?title is the object for which the actual value will be allocated.
+
 The above query has the solution on the data given in the table form as:
 
 | **title**               |
