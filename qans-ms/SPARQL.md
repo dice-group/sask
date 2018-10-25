@@ -13,7 +13,7 @@ It's one of the three core standards of the Semantic Web, along with RDF (Resour
   1. SELECT - Return the results in a table form for all variables satisfying the given conditions.
   2. CONSTRUCT - Return the results as the valid RDF graph constructed by substituting variables in a set of triple templates.
   3. ASK - Returns a boolean indicating whether a query pattern matches.
-  4. DESCRIBE - Returns an RDF graph that describes the resources found (identified bt name or description).
+  4. DESCRIBE - Returns an RDF graph that describes the resources found (identified by name or description).
   
   A simple SPARQL query looks as follows:
   
@@ -35,7 +35,7 @@ It's one of the three core standards of the Semantic Web, along with RDF (Resour
 
 Let's consider a simple example:
 
-Here is the data given: <http://example.org/book/book1> <http://purl.org/dc/elements/1.1/title> "SPARQL Tutorial" .
+Here is the data given: http://example.org/book/book1  http://purl.org/dc/elements/1.1/title "SPARQL Tutorial" .
 
 The query would be as follows:
 
