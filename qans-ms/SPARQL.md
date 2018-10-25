@@ -30,4 +30,28 @@ It's one of the three core standards of the Semantic Web, along with RDF (Resour
   **SELECT** clause lists all the variables that needs to be returned. Variables start with a question mark.\
   **WHERE** clause contains restrictions on them (variables), mostly in the form of triples.
   
-  When we run the query, the variables need to be filled with actual values so that resulting triples appear in the knowledge base (KB) and returns one result for each combination of variables it finds.
+  When we run the query, the variables need to be filled with actual values so that resulting triples appear in the knowledge base (KB) and returns one result for each combination of variables it finds.\
+  
+
+Let's consider a simple example:
+
+Here is the data given: <http://example.org/book/book1> <http://purl.org/dc/elements/1.1/title> "SPARQL Tutorial" .
+
+The query would be as follows:
+
+SELECT ?title\
+WHERE\
+{
+
+     <http://example.org/book/book1> <http://purl.org/dc/elements/1.1/title> ?title.
+     
+}
+
+The above query has the solution on the data given in the table form as:
+
+| **title**               |
+| :----------------------:|
+| SPARQL Tutorial         |
+
+This is just the overview on how to create a SPARQL query shown with the help of a simple example. There are lot many things which can be done. For that the [SPARQL Query Language](https://www.w3.org/TR/sparql11-query/) link would be helpful.
+
