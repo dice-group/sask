@@ -10,7 +10,7 @@ If you want to get acquainted with an example on how to frame questions, just cl
 
 From the Task 4 we can elucidate an example and here it goes:
   
-There is string or in a layman's term a sentence: "Conor McGregor's longtime trainer, John Kavanagh, is ready to shock the world."
+There is a string or in a layman's term a sentence: "Conor McGregor's longtime trainer, John Kavanagh, is ready to shock the world."
         
 A question that can be framed would look like **"Who is the trainer of Conor McGregor?"**
         
