@@ -29,6 +29,11 @@
 			<artifactId>weka-stable</artifactId>
 			<version>3.8.2</version>
 		</dependency>
+		<dependency>
+    			<groupId>org.apache.jena</groupId>
+    			<artifactId>apache-jena-libs</artifactId>
+    			<version>3.9.0</version>
+  		</dependency>
 
 	</dependencies>
 
