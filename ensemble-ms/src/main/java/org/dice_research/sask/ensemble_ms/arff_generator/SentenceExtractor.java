@@ -23,6 +23,7 @@ import org.apache.jena.query.QueryFactory;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.StmtIterator;
+import org.apache.jena.riot.RiotException;
 import org.apache.jena.util.FileManager;
 import org.apache.log4j.BasicConfigurator;
 
@@ -269,7 +270,9 @@ public class SentenceExtractor {
 	{
 		BasicConfigurator.configure();
         // create an empty model
-		 final String inputFileName  = files[0].toString();
+		for (int i = 1; i < 100; i++) 
+		{
+		 final String inputFileName  = files[i].toString();
         Model model = ModelFactory.createDefaultModel();
         Model model2 = ModelFactory.createDefaultModel();
         
@@ -283,7 +286,14 @@ public class SentenceExtractor {
         // read the RDF/XML file
 //         read() method call is the URI which will be used for resolving relative URI's
 //        model.read(in, "TURTLE");
+        try
+        {
         model.read(inputFileName) ;
+        }
+        catch(RiotException ro)
+        {
+        	ro.getMessage();
+        }
 
         
 //      to run in command line sparql.bat --data=vc-db-1.rdf --query=q1.rq               
@@ -303,11 +313,14 @@ public class SentenceExtractor {
         	
           Model results = qexec.execConstruct() ;
        StmtIterator iter = results.listStatements();
+       System.out.println(files[i].getName() + "  result after pasing sparql query.......");
           while(iter.hasNext())
           {
            System.out.println(iter.next());
           }
         }
+        }
+        
 //        System.out.println("   Response after rdf read");
 //     model.write(System.out,"TURTLE"); 
 //     System.out.println(".............................");
