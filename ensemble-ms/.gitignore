@@ -18,8 +18,7 @@
 *.tar.gz
 *.rar
 
-# arff files
-*.arff
+
 
 # oke training files
 *.ttl
