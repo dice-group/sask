@@ -1,21 +1,17 @@
 package org.dice_research.sask.ensemble_ms.weka.api;
 
 import weka.core.Instances;
-import weka.core.converters.ArffLoader;
 import weka.core.converters.ArffSaver;
 import weka.core.converters.ConverterUtils.DataSource;
 import weka.filters.Filter;
-import weka.core.Attribute;
+
 import weka.core.Instance;
-
 import java.io.File;
-import java.io.IOException;
 import java.util.Random;
-
 import weka.filters.unsupervised.attribute.StringToWordVector;
 import weka.classifiers.Evaluation;
 import weka.classifiers.trees.J48;
-import weka.classifiers.meta.FilteredClassifier;
+
 
 /**
  * This class take data from weka dataset and predict the training data class
@@ -30,7 +26,7 @@ public class CrossvalidateDataset {
 		// load the arff file
 
 		try {
-			String filename = "Dataset\\datasetExtraction.arff";
+			String filename = "C:\\Users\\harsh\\git\\sask\\ensemble-ms\\src\\main\\java\\org\\dice_research\\sask\\ensemble_ms\\weka\\Dataset\\datasetExtraction.arff";
 			DataSource source;
 			source = new DataSource(filename);
 
@@ -41,7 +37,7 @@ public class CrossvalidateDataset {
 
 			ArffSaver saver = new ArffSaver();
 			saver.setInstances(dataset);
-			saver.setFile(new File("Dataset\\datasetArffExtraction.arff"));
+			saver.setFile(new File("C:\\Users\\harsh\\git\\sask\\ensemble-ms\\src\\main\\java\\org\\dice_research\\sask\\ensemble_ms\\weka\\Dataset\\datasetArffExtraction.arff"));
 			saver.writeBatch();
 			// provide filter
 			StringToWordVector converterVector = new StringToWordVector();
