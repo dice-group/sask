@@ -1,0 +1,136 @@
+@relation 'DataExtraction-weka.filters.unsupervised.attribute.StringToWordVector-R1,2,3,4-W1000-prune-rate-1.0-N0-stemmerweka.core.stemmers.NullStemmer-stopwords-handlerweka.core.stopwords.Null-M1-tokenizerweka.core.tokenizers.WordTokenizer -delimiters \" \\r\\n\\t.,;:\\\'\\\"()?!\"'
+
+@attribute class {True,False}
+@attribute //example numeric
+@attribute <http numeric
+@attribute > numeric
+@attribute Abc numeric
+@attribute Amit numeric
+@attribute Ana numeric
+@attribute Argentina numeric
+@attribute Asd numeric
+@attribute China numeric
+@attribute Diana numeric
+@attribute England numeric
+@attribute Finland numeric
+@attribute Germany numeric
+@attribute Harry numeric
+@attribute Harsh numeric
+@attribute Hitler numeric
+@attribute India numeric
+@attribute Japan numeric
+@attribute Jinping numeric
+@attribute John numeric
+@attribute Kaith numeric
+@attribute Mahesh numeric
+@attribute Messi numeric
+@attribute Obama numeric
+@attribute Portugal numeric
+@attribute Ronaldo numeric
+@attribute Sachin numeric
+@attribute Srilanka numeric
+@attribute Tau numeric
+@attribute Thomas numeric
+@attribute Trump numeric
+@attribute USA numeric
+@attribute Xyz numeric
+@attribute born numeric
+@attribute died numeric
+@attribute in numeric
+@attribute org/Abc> numeric
+@attribute org/Amit> numeric
+@attribute org/Ana> numeric
+@attribute org/Argentina> numeric
+@attribute org/Asd> numeric
+@attribute org/Canada> numeric
+@attribute org/China> numeric
+@attribute org/Diana> numeric
+@attribute org/England> numeric
+@attribute org/Finland> numeric
+@attribute org/Germany> numeric
+@attribute org/Harry> numeric
+@attribute org/Harsh> numeric
+@attribute org/Hitler> numeric
+@attribute org/India> numeric
+@attribute org/Japan numeric
+@attribute org/Japan> numeric
+@attribute org/Jinping> numeric
+@attribute org/John> numeric
+@attribute org/Kaith> numeric
+@attribute org/Mahesh> numeric
+@attribute org/Messi> numeric
+@attribute org/Obama> numeric
+@attribute org/Portugal> numeric
+@attribute org/Ronaldo> numeric
+@attribute org/Sachin> numeric
+@attribute org/Srilanka> numeric
+@attribute org/Tan> numeric
+@attribute org/Thomas> numeric
+@attribute org/Trump> numeric
+@attribute org/USA> numeric
+@attribute org/Xyz> numeric
+@attribute org/birthplce> numeric
+@attribute org/died> numeric
+@attribute was numeric
+
+@data
+{1 1,2 1,24 1,32 1,34 1,36 1,59 1,67 1,69 1,71 1}
+{0 False,1 1,2 1,17 1,27 1,34 1,36 1,61 1,67 1,69 1,71 1}
+{0 False,1 1,2 1,24 1,32 1,34 1,36 1,61 1,67 1,69 1,71 1}
+{0 False,1 1,2 1,24 1,32 1,34 1,36 1,62 1,67 1,69 1,71 1}
+{1 1,2 1,21 1,32 1,35 1,36 1,56 1,67 1,70 1,71 1}
+{0 False,1 1,2 1,17 1,27 1,34 1,36 1,58 1,67 1,69 1,71 1}
+{0 False,1 1,2 1,24 1,32 1,34 1,36 1,59 1,60 1,69 1,71 1}
+{1 1,2 1,13 1,16 1,34 1,36 1,47 1,50 1,69 1,71 1}
+{1 1,2 1,11 1,14 1,34 1,36 1,45 1,64 1,69 1,71 1}
+{1 1,2 1,10 1,11 1,35 1,36 1,44 1,45 1,70 1,71 1}
+{0 False,1 1,2 1,10 1,11 1,34 1,36 1,44 1,45 1,70 1,71 1}
+{1 1,2 1,6 1,12 1,35 1,36 1,39 1,46 1,70 1,71 1}
+{0 False,1 1,2 1,20 1,32 1,34 1,36 1,42 1,55 1,69 1,71 1}
+{1 1,2 1,25 1,26 1,34 1,36 1,60 1,61 1,69 1,71 1}
+{0 False,1 1,2 1,17 1,27 1,34 1,36 1,58 1,60 1,69 1,71 1}
+{0 False,1 1,2 1,7 1,23 1,34 1,36 1,51 1,59 1,69 1,71 1}
+{0 False,1 1,2 1,17 1,27 1,34 1,36 1,51 1,59 1,69 1,71 1}
+{0 False,1 1,2 1,7 1,26 1,34 1,36 1,51 1,61 1,69 1,71 1}
+{0 False,1 1,2 1,17 1,27 1,34 1,36 1,51 1,61 1,69 1,71 1}
+{0 False,1 1,2 1,24 1,32 1,34 1,36 1,51 1,61 1,69 1,71 1}
+{1 1,2 1,17 1,27 1,34 1,36 1,51 1,62 1,69 1,71 1}
+{0 False,1 1,2 1,24 1,32 1,34 1,36 1,51 1,62 1,69 1,71 1}
+{0 False,1 1,2 1,7 1,23 1,34 1,36 1,51 1,58 1,69 1,71 1}
+{0 False,1 1,2 1,7 1,23 1,34 1,36 1,51 1,58 1,69 1,71 1}
+{0 False,1 1,2 1,7 1,23 1,34 1,36 1,51 1,58 1,69 1,71 1}
+{0 False,1 1,2 1,17 1,27 1,34 1,36 1,51 1,58 1,69 1,71 1}
+{0 False,1 1,2 1,24 1,32 1,34 1,36 1,51 1,58 1,69 1,71 1}
+{0 False,1 1,2 1,17 1,24 1,34 1,36 1,40 1,59 1,69 1,71 1}
+{0 False,1 1,2 1,25 1,26 1,34 1,36 1,40 1,59 1,69 1,71 1}
+{1 1,2 1,7 1,23 1,34 1,36 1,40 1,58 1,69 1,71 1}
+{0 False,1 1,2 1,17 1,27 1,34 1,36 1,40 1,58 1,69 1,71 1}
+{0 False,1 1,2 1,24 1,32 1,34 1,36 1,40 1,58 1,69 1,71 1}
+{0 False,1 1,2 1,25 1,26 1,34 1,36 1,61 1,67 1,69 1,71 1}
+{0 False,1 1,2 1,15 1,17 1,34 1,36 1,40 1,49 1,69 1,71 1}
+{1 1,2 1,15 1,17 1,34 1,36 1,49 1,51 1,69 1,71 1}
+{0 False,1 1,2 1,7 1,23 1,34 1,36 1,51 1,58 1,69 1,71 1}
+{0 False,1 1,2 1,25 1,26 1,34 1,36 1,59 1,60 1,69 1,71 1}
+{0 False,1 1,2 1,3 1,25 1,26 1,34 1,36 1,37 1,52 1,69 1,71 1}
+{0 False,1 1,2 1,4 1,17 1,34 1,36 1,40 1,49 1,69 1,71 1}
+{0 False,1 1,2 1,15 1,17 1,34 1,36 1,40 1,49 1,69 1,71 1}
+{1 1,2 1,4 1,17 1,34 1,36 1,37 1,51 1,69 1,71 1}
+{1 1,2 1,7 1,33 1,34 1,36 1,40 1,68 1,69 1,71 1}
+{0 False,1 1,2 1,4 1,17 1,34 1,36 1,37 1,67 1,69 1,71 1}
+{1 1,2 1,31 1,32 1,34 1,36 1,66 1,67 1,69 1,71 1}
+{1 1,2 1,8 1,13 1,34 1,36 1,41 1,47 1,69 1,71 1}
+{1 1,2 1,13 1,30 1,34 1,36 1,47 1,65 1,69 1,71 1}
+{0 False,1 1,2 1,17 1,30 1,34 1,36 1,37 1,51 1,69 1,71 1}
+{1 1,2 1,9 1,29 1,34 1,36 1,43 1,64 1,69 1,71 1}
+{1 1,2 1,18 1,29 1,34 1,36 1,53 1,64 1,69 1,71 1}
+{1 1,2 1,18 1,19 1,34 1,36 1,53 1,54 1,69 1,71 1}
+{1 1,2 1,11 1,14 1,35 1,36 1,45 1,48 1,70 1,71 1}
+{1 1,2 1,20 1,32 1,35 1,36 1,55 1,67 1,70 1,71 1}
+{1 1,2 1,25 1,26 1,34 1,36 1,60 1,61 1,69 1,71 1}
+{0 False,1 1,2 1,17 1,22 1,35 1,36 1,57 1,60 1,70 1,71 1}
+{1 1,2 1,17 1,22 1,35 1,36 1,51 1,57 1,70 1,71 1}
+{0 False,1 1,2 1,7 1,23 1,34 1,36 1,51 1,59 1,69 1,71 1}
+{1 1,2 1,7 1,33 1,35 1,36 1,40 1,68 1,70 1,71 1}
+{0 False,1 1,2 1,4 1,28 1,35 1,36 1,37 1,63 1,70 1,71 1}
+{1 1,2 1,31 1,32 1,34 1,36 1,66 1,67 1,69 1,71 1}
+{0 False,1 1,2 1,5 1,13 1,34 1,36 1,38 1,47 1,70 1,71 1}

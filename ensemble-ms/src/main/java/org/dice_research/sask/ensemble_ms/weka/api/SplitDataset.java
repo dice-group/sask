@@ -42,7 +42,7 @@ public class SplitDataset {
 
 		ArffSaver saver = new ArffSaver();
 		saver.setInstances(dataset);
-		saver.setFile(new File("C:\\Users\\harsh\\git\\sask\\ensemble-ms\\src\\main\\java\\org\\dice_research\\sask\\ensemble_ms\\weka\\Dataset\\Test_Dataset.arff"));
+		saver.setFile(new File("Dataset\\Test_Dataset.arff"));
 		saver.writeBatch();
 		// provide filter
 		StringToWordVector converterVector = new StringToWordVector();
