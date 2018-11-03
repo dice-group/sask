@@ -81,8 +81,13 @@ public class SentenceExtractor {
 				}
 			});
 			ResponseRader();
+			String fox_response_string = null;
+			String openie_response_string = null;
+			String sorokin_response_string = null;
+			String cedric_response_string = null;
 
-			for (int i = 0; i < 2; i++) {
+			for (int i = 0; i < 2; i++) 
+			{
 				if (files[i].isFile()) {
 
 					String sentence = readLineByLine(files[i].toString());
@@ -95,10 +100,6 @@ public class SentenceExtractor {
 					sentences.add(sentence_data);
 					
 //				Extractors responses
-					String fox_response_string = null;
-					String openie_response_string = null;
-					String sorokin_response_string = null;
-					String cedric_response_string = null;
 
 					Map<String, Integer> port_vs_extractorMap = new HashMap<String, Integer>();
 					port_vs_extractorMap.put("fox", 2222);
@@ -149,69 +150,54 @@ public class SentenceExtractor {
 							in.close();
 
 							// print result from response
-							// System.out.println("----Extractors response port--------------" + j + "
-							// response");
-							// System.out.println();
 
-							if (j == 0) {
-
-								// foxRespMap.(sentences.get(i), response.toString());
-								// System.out.println(portNumb[j] + "----Extractors response--------------" + j
-								// + " response");
-								// System.out.println(sentences.size());
+							if (j == 0) 
+							{
 								List<String> fox_response_string_list = new ArrayList<String>();
-
 								fox_response_string = response.toString();
 								fox_response_string_list.add(fox_response_string);
-								// System.out.println(fox_response_string);
-								// saving response string from extractor in string list array
-								// for(String s:fox_response_string_list)
-								// {
-								// System.out.print(s+" ----");
-								// }
-
 							}
 
-							else if (j == 1) {
+							else if (j == 1) 
+							{
 								fredRespMap.put(sentences.get(i), response.toString());
 								// System.out.println(portNumb[j] + "----Extractors response--------------" + j
 								// + " response");
 								ArrayList<String> openie_response_string_list = new ArrayList<String>();
 								openie_response_string = response.toString();
 								openie_response_string_list.add(openie_response_string);
-
 							}
 
-							else if (j == 2) {
+							else if (j == 2) 
+							{
 								spotlightRespMap.put(sentences.get(i), response.toString());
-								System.out.println(
-										portNumb[j] + "----Extractors response--------------" + j + " response");
+								System.out.println(portNumb[j] + "----Extractors response--------------" + j + " response");
 								ArrayList<String> sorokin_response_string_list = new ArrayList<String>();
 								sorokin_response_string = response.toString();
 								sorokin_response_string_list.add(sorokin_response_string);
-
 								System.out.println(response.toString());
 								System.out.println();
-							} else if (j == 3) {
+							}
+							else if (j == 3) 
+							{
 								cedricRespMap.put(sentences.get(i), response.toString());
 								System.out.println(
 										portNumb[j] + "----Extractors response--------------" + j + " response");
 								ArrayList<String> cedric_response_string_list = new ArrayList<String>();
 								cedric_response_string = response.toString();
-								cedric_response_string_list.add(cedric_response_string);
-
-								
-
+								cedric_response_string_list.add(cedric_response_string);								
 								System.out.println(response.toString());
 								System.out.println();
-							} else if (j == 4) {
+							}
+							else if (j == 4) {
 								openIERespMap.put(sentences.get(i), response.toString());
 								System.out.println(
 										portNumb[j] + "----Extractors response--------------" + j + " response");
-
 								System.out.println(response.toString());
 								System.out.println();
-							} else if (j == 5) {
+							}
+							else if (j == 5) 
+							{
 								sorookinRespMap.put(sentences.get(i), response.toString());
 							}
 
@@ -222,7 +208,7 @@ public class SentenceExtractor {
 						}
 					}
 					TrainingFileWriter();
-					String training_data = " ' " + sentences.get(i) + " ' " + ", " + "'" + fox_response_string + " ' "
+				String training_data = " ' " + sentences.get(i) + " ' " + ", " + "'" + fox_response_string + " ' "
 							+ "," + " ' " + openie_response_string + " ' "  + "," + " ' " + sorokin_response_string + "," + " ' " + cedric_response_string+ " ' ";
 					System.out.println(sentences.get(i));
 					System.out.println(fox_response_string);
@@ -312,6 +298,8 @@ public class SentenceExtractor {
         {
         	
           Model results = qexec.execConstruct() ;
+          
+          System.out.println(results.toString());
        StmtIterator iter = results.listStatements();
        System.out.println(files[i].getName() + "  result after pasing sparql query.......");
           while(iter.hasNext())

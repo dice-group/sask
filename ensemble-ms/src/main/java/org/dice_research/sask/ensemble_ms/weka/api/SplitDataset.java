@@ -33,7 +33,7 @@ public class SplitDataset {
 			source = new DataSource(filename);
 		
 
-		Instances dataset = source.getDataSet();
+		Instances dataset = source.getDataSetstat();
 		
 		
 		System.out.println("printing summary of training data.....");
