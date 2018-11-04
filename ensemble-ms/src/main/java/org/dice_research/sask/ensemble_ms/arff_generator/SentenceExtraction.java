@@ -1,9 +1,5 @@
 package org.dice_research.sask.ensemble_ms.arff_generator;
 
-
-
-
-
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -25,24 +21,19 @@ import java.util.stream.Stream;
  * @author Harsh Shah
  */
 
-public class SentenceExtraction{
+public class SentenceExtraction {
 
 	static File path = new File("C:\\Users\\harsh\\Downloads\\Ensemble Data\\oke data");
 	static File[] files = path.listFiles();
 	static List<String> sentences = new ArrayList<String>();
 	static File file = new File("C:\\Users\\harsh\\\\MLdata\\traindata.arff");
-   static File file2 = new File("C:\\Users\\harsh\\\\MLdata\\trainNewdata2.arff") ;	
-	
+	static File file2 = new File("C:\\Users\\harsh\\\\MLdata\\trainNewdata2.arff");
+
 	static FileWriter fileWriter;
-	
-	 static String sentence_data;
+
+	static String sentence_data;
 
 	public static void main(String[] args) {
-		
-		  
-
-		
-
 
 		try {
 			fileWriter = new FileWriter(file);
@@ -74,7 +65,6 @@ public class SentenceExtraction{
 
 			for (int i = 0; i < 2; i++) {
 				if (files[i].isFile()) {
-
 					String sentence = readLineByLine(files[i].toString());
 					int x = sentence.indexOf("nif:isString   ");
 					int start = x + 17;
@@ -83,8 +73,7 @@ public class SentenceExtraction{
 					sentence_data = sentence.substring(start, end);
 					// System.out.println(sentence_data);
 					sentences.add(sentence_data);
-					
-//				Extractors responses
+					// Extractors responses
 					String fox_response_string = null;
 					String openie_response_string = null;
 					String sorokin_response_string = null;
@@ -117,7 +106,7 @@ public class SentenceExtraction{
 
 						String _extractorURL = "http://localhost:" + portNumb[j] + "/extractSimple?input=" + URL2;
 
-						// java.awt.Desktop.getDesktop().browse(java.net.URI.create(_extractorURL));
+						java.awt.Desktop.getDesktop().browse(java.net.URI.create(_extractorURL));
 						// _extractorURL = "https://www.google.com/";
 
 						URL url;
@@ -153,12 +142,6 @@ public class SentenceExtraction{
 
 								fox_response_string = response.toString();
 								fox_response_string_list.add(fox_response_string);
-								// System.out.println(fox_response_string);
-								// saving response string from extractor in string list array
-								// for(String s:fox_response_string_list)
-								// {
-								// System.out.print(s+" ----");
-								// }
 
 							}
 
@@ -174,33 +157,31 @@ public class SentenceExtraction{
 
 							else if (j == 2) {
 								spotlightRespMap.put(sentences.get(i), response.toString());
-								System.out.println(
-										portNumb[j] + "----Extractors response--------------" + j + " response");
+//								System.out.println(
+//										portNumb[j] + "----Extractors response--------------" + j + " response");
 								ArrayList<String> sorokin_response_string_list = new ArrayList<String>();
 								sorokin_response_string = response.toString();
 								sorokin_response_string_list.add(sorokin_response_string);
 
-								System.out.println(response.toString());
-								System.out.println();
+//								System.out.println(response.toString());
+//								System.out.println();
 							} else if (j == 3) {
 								cedricRespMap.put(sentences.get(i), response.toString());
-								System.out.println(
-										portNumb[j] + "----Extractors response--------------" + j + " response");
+//								System.out.println(
+//										portNumb[j] + "----Extractors response--------------" + j + " response");
 								ArrayList<String> cedric_response_string_list = new ArrayList<String>();
 								cedric_response_string = response.toString();
 								cedric_response_string_list.add(cedric_response_string);
 
-								
-
-								System.out.println(response.toString());
-								System.out.println();
+//								System.out.println(response.toString());
+//								System.out.println();
 							} else if (j == 4) {
 								openIERespMap.put(sentences.get(i), response.toString());
-								System.out.println(
-										portNumb[j] + "----Extractors response--------------" + j + " response");
+//								System.out.println(
+//										portNumb[j] + "----Extractors response--------------" + j + " response");
 
-								System.out.println(response.toString());
-								System.out.println();
+//								System.out.println(response.toString());
+//								System.out.println();
 							} else if (j == 5) {
 								sorookinRespMap.put(sentences.get(i), response.toString());
 							}
@@ -211,15 +192,23 @@ public class SentenceExtraction{
 							// TODO: handle exception
 						}
 					}
-					TrainingFileWriter();
-					String training_data = " ' " + sentences.get(i) + " ' " + ", " + "'" + fox_response_string + " ' "
-							+ "," + " ' " + openie_response_string + " ' "  + "," + " ' " + sorokin_response_string + "," + " ' " + cedric_response_string+ " ' ";
+					System.out.println("Extracted sentence From the file " + files[i].getName());	
+
 					System.out.println(sentences.get(i));
+					System.out.println("Fox extractor response for file" + files[i].getName());			
 					System.out.println(fox_response_string);
+					System.out.println("OpenIE extractor response for file " + files[i].getName());			
 					System.out.println(openie_response_string);
+					System.out.println("Cedric extractor response for file"  + files[i].getName());		
 					System.out.println(cedric_response_string);
+					System.out.println("Sorokin extractor response for file " + files[i].getName());				
 					System.out.println(sorokin_response_string);
+					System.out.println("Training Data for file " + files[i].getName());		
+					String training_data = " ' " + sentences.get(i) + " ' " + ", " + "'" + fox_response_string + " ' "
+							+ "," + " ' " + openie_response_string + " ' " + "," + " ' " + sorokin_response_string + ","
+							+ " ' " + cedric_response_string + " ' ";
 					System.out.println(training_data);
+					TrainingFileWriter();
 					try {
 
 						bw.write(training_data);
@@ -256,14 +245,13 @@ public class SentenceExtraction{
 		}
 		return contentBuilder.toString();
 	}
-	public static void TrainingFileWriter()
-	{
 
-//		List<String> sentences = new ArrayList<String>();
+	public static void TrainingFileWriter() {
+
+		// List<String> sentences = new ArrayList<String>();
 
 		FileWriter fileWriter;
-		try 
-		{
+		try {
 			fileWriter = new FileWriter(file2);
 			BufferedWriter bw2 = new BufferedWriter(fileWriter);
 			bw2.write("@relation DataExtraction2");
@@ -280,17 +268,13 @@ public class SentenceExtraction{
 			bw2.close();
 			fileWriter.close();
 			System.out.println("File Created and closed");
-	
-			
-		} catch (IOException e) 
-		{
+
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}		
-		// write in train data file for weka
-		
-	
 		}
-	
+		// write in train data file for weka
+
+	}
 
 }
