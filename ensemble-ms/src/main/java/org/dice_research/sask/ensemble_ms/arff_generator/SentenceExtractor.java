@@ -210,12 +210,12 @@ public class SentenceExtractor {
 					TrainingFileWriter();
 				String training_data = " ' " + sentences.get(i) + " ' " + ", " + "'" + fox_response_string + " ' "
 							+ "," + " ' " + openie_response_string + " ' "  + "," + " ' " + sorokin_response_string + "," + " ' " + cedric_response_string+ " ' ";
-					System.out.println(sentences.get(i));
-					System.out.println(fox_response_string);
-					System.out.println(openie_response_string);
-					System.out.println(cedric_response_string);
-					System.out.println(sorokin_response_string);
-					System.out.println(training_data);
+//					System.out.println(sentences.get(i));
+//					System.out.println(fox_response_string);
+//					System.out.println(openie_response_string);
+//					System.out.println(cedric_response_string);
+//					System.out.println(sorokin_response_string);
+//					System.out.println(training_data);
 					try {
 
 						bw.write(training_data);
@@ -299,7 +299,7 @@ public class SentenceExtractor {
         	
           Model results = qexec.execConstruct() ;
           
-          System.out.println(results.toString());
+//          System.out.println(results.toString());
        StmtIterator iter = results.listStatements();
        System.out.println(files[i].getName() + "  result after pasing sparql query.......");
           while(iter.hasNext())
