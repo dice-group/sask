@@ -17,7 +17,7 @@ public class SurniaQAService {
 
     private static final Logger logger = Logger.getLogger(SurniaQAService.class);
 
-    private static final String SURNIA_URL = "http://localhost:8181/ask-gerbil"; // TODO: 02/07/2018 should be read from properties file
+    private static final String SURNIA_URL = "http://localhost:8181/ask/{var}"; // TODO: 02/07/2018 should be read from properties file
 
     private final RestTemplate restTemplate;
 
@@ -37,8 +37,8 @@ public class SurniaQAService {
     public String askSurnia(String query) {
         logger.info("Requesting SurniaQA for following query: " + query);
         URI uri = new UriTemplate(SURNIA_URL).expand(query);
-//        return exchange(uri, String.class);
-        return "Hello from QA Service";
+        return exchange(uri, String.class);
+//        return "Hello from QA Service: Football is a game";
     }
 
     /**

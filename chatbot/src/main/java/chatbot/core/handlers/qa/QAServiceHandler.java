@@ -44,6 +44,7 @@ public class QAServiceHandler extends Handler {
         response.addEntry(entry);
         ResponseList responseList = new ResponseList();
         responseList.addMessage(response);
+        responseList.setMessageType(ResponseList.MessageType.TEXT_WITH_URL);
         return responseList;
     }
 
