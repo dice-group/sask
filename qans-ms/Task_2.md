@@ -8,48 +8,6 @@ Let's consider the example for the question which was described in the task 1 i.
 
 As you remember, this question was taken from the response data (refer task 1 if needed for explanantion) where "dbo:trainer dbr:Conor_McGregor"
 
-Here goes the code:
+You can take a look at the code which is there by name SparqlQuery.java.
 
-import org.apache.jena.rdf.model.Model;\
-import org.apache.jena.rdf.model.ModelFactory;\
-import org.apache.jena.util.FileManager;
-
-import java.io.*;
-
-
-public class SparqlQuery extends Object{
-
-    static final String inputFileName = "new.ttl"; // input the ttl (Turtle format) file from the dataset 
-
-    public static void main(String args[]){
-
-        // create an empty model
-        Model model = ModelFactory.createDefaultModel();
-
-        // use the FileManager to find the input file
-        InputStream in = FileManager.get().open( inputFileName );
-        if (in == null) {
-            throw new IllegalArgumentException(
-                    "File: " + inputFileName + " not found");
-        }
-
-// read the RDF/XML file 
-
-         model.read(inputFileName);
-
-         String sparqlQuery =
-
-                "Prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> "
-                        + " SELECT ?uri" +
-                        "WHERE {" +
-                        "  ?uri  dbo:trainer  dbr:Conor_McGregor." +
-                        "      }";
-
-// write it to standard out 
-
-         model.write(System.out);
-
-    }
-}
-
-Like above, frame the SPARQL queries for each of the 50 questions which you created from the dataset.
+Using the mentioned code above, frame the SPARQL queries for each of the 50 questions which you created from the dataset.
