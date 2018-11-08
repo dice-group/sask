@@ -27,9 +27,11 @@ public class SparqlQuery extends Object{
         String sparqlQuery =
 
                 "Prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> "
-                        + " SELECT ?uri" +
+                        + " SELECT ?person" +
                         "WHERE {" +
-                        "  ?uri  dbo:trainer  dbr:Conor_McGregor." +
+                        "  []  rdf:subject  ?person;" +
+                        "      rdf:predicate  dbo:trainer;" +
+                        "      rdf:object   dbr:Conor_McGregor." +
                         "      }";
 
 // write it to standard out
