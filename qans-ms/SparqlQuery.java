@@ -28,11 +28,9 @@ public class SparqlQuery extends Object{
 
                 "Prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> "
                         + " SELECT ?person" +
-                        "WHERE {" +
-                        "  []  rdf:subject  ?person;" +
-                        "      rdf:predicate  dbo:trainer;" +
-                        "      rdf:object   dbr:Conor_McGregor." +
-                        "      }";
+                          "WHERE {" +
+                          "   ?person dbo:trainer dbr:Conor_McGregor." +
+                          "      }";
 
 // write it to standard out
         model.write(System.out);
