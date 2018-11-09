@@ -15,7 +15,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
-
 import org.apache.jena.query.Query;
 import org.apache.jena.query.QueryExecution;
 import org.apache.jena.query.QueryExecutionFactory;
@@ -255,14 +254,14 @@ public class SentenceExtractor {
 	public static void ResponseRader()
 	{
 		BasicConfigurator.configure();
+   	  StringBuffer squery = new StringBuffer();
+      List<String> sparqueryList = new ArrayList<String>();
+	
         // create an empty model
-		for (int i = 1; i < 100; i++) 
+		for (int i = 0; i < 100; i++) 
 		{
 		 final String inputFileName  = files[i].toString();
         Model model = ModelFactory.createDefaultModel();
-        Model model2 = ModelFactory.createDefaultModel();
-        
-        
         InputStream in = FileManager.get().open( inputFileName );
         if (in == null)
         {
@@ -279,7 +278,13 @@ public class SentenceExtractor {
         catch(RiotException ro)
         {
         	ro.getMessage();
+        	
         }
+//        catch(MalformedURLException mur)
+//        {
+//   
+//        	mur.getMessage();
+//        }
 
         
 //      to run in command line sparql.bat --data=vc-db-1.rdf --query=q1.rq               
@@ -304,9 +309,18 @@ public class SentenceExtractor {
        System.out.println(files[i].getName() + "  result after pasing sparql query.......");
           while(iter.hasNext())
           {
-           System.out.println(iter.next());
+        	  squery.append(iter.next().toString()); 
+              squery.append(System.getProperty("line.separator"));
           }
-        }
+        }		
+        String sparql_query_result = squery.toString();
+        squery.delete(0, squery.length());
+        
+//		System.out.println("sparql  query result for  file " + files[i].getName());
+		sparqueryList.add(sparql_query_result);
+//		System.out.println(sparqueryList);
+
+        
         }
         
 //        System.out.println("   Response after rdf read");
@@ -314,7 +328,7 @@ public class SentenceExtractor {
 //     System.out.println(".............................");
 //     model2.write(System.out,"TURTLE");
 
-		
+		System.out.println(sparqueryList);
 	}
 	public static void TrainingFileWriter()
 	{

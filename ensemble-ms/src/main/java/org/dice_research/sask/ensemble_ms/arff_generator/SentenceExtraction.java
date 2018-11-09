@@ -105,14 +105,12 @@ public class SentenceExtraction {
 						// add extractor for url
 
 						String _extractorURL = "http://localhost:" + portNumb[j] + "/extractSimple?input=" + URL2;
-
-						java.awt.Desktop.getDesktop().browse(java.net.URI.create(_extractorURL));
+//open in chrome
+//						java.awt.Desktop.getDesktop().browse(java.net.URI.create(_extractorURL));
 						// _extractorURL = "https://www.google.com/";
-
 						URL url;
 						try {
 							url = new URL(_extractorURL);
-							//
 							HttpURLConnection con = (HttpURLConnection) url.openConnection();
 							// System.out.println(url);
 							con.setRequestMethod("GET");
