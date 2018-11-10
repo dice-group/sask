@@ -1,6 +1,6 @@
 {
   "dataset" : {
-    "id" : "qald-9-train-multilingual"
+    "id" : "qald-9"
   },
   "questions" : [ {
     "id" : "1",
