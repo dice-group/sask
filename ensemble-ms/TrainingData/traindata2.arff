@@ -1,0 +1,6 @@
+@relation DataExtraction2
+@ATTRIBUTE Sentence	string
+@ATTRIBUTE Foxoutput	string
+
+@ATTRIBUTE OPENIEoutput	string
+@data

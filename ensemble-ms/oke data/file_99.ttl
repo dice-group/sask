@@ -1,0 +1,66 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     aksw:Brad_Smith ;
+  rdf:predicate  dbo:president ;
+  rdf:subject    dbr:Microsoft ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://news.microsoft.com/exec/brad-smith/#char=0,151>
+                 ]
+] .
+
+<https://news.microsoft.com/exec/brad-smith/#char=73,78>
+        a                     nif:Phrase , nif:String , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Smith" ;
+        nif:beginIndex        "73"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "78"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://news.microsoft.com/exec/brad-smith/#char=0,151> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     aksw:Brad_Smith .
+
+<https://news.microsoft.com/exec/brad-smith/#char=14,23>
+        a                     nif:String , nif:Phrase , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Microsoft" ;
+        nif:beginIndex        "14"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "23"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://news.microsoft.com/exec/brad-smith/#char=0,151> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     dbr:Microsoft .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Microsoft ;
+  rdf:predicate  dbo:employer ;
+  rdf:subject    aksw:Brad_Smith ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://news.microsoft.com/exec/brad-smith/#char=0,151>
+                 ]
+] .
+
+<https://news.microsoft.com/exec/brad-smith/#char=0,151>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "151"^^xsd:nonNegativeInteger ;
+        nif:isString    "Brad Smith is Microsoft s president and chief legal officer.In this role Smith is responsible for the company s corporate, external, and legal affairs." .
+
+<https://news.microsoft.com/exec/brad-smith/#char=0,10>
+        a                     nif:RFC5147String , nif:String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Brad Smith" ;
+        nif:beginIndex        "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "10"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://news.microsoft.com/exec/brad-smith/#char=0,151> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     aksw:Brad_Smith .

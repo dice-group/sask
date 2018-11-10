@@ -1,0 +1,57 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+<http://www.ibtimes.co.in/ms-dhoni-ipl-2018-former-player-has-some-bad-news-chennai-super-kings-743345#char=94,121>
+        a                     nif:RFC5147String , nif:Phrase , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Added> ;
+        nif:anchorOf          "Indian Premier League (IPL)" ;
+        nif:beginIndex        "94"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "121"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.ibtimes.co.in/ms-dhoni-ipl-2018-former-player-has-some-bad-news-chennai-super-kings-743345#char=0,122> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     dbr:Indian_Premier_League .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Chennai_Super_Kings ;
+  rdf:predicate  dbo:formerTeam ;
+  rdf:subject    dbr:Dhoni ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.ibtimes.co.in/ms-dhoni-ipl-2018-former-player-has-some-bad-news-chennai-super-kings-743345#char=0,122>
+                 ]
+] .
+
+<http://www.ibtimes.co.in/ms-dhoni-ipl-2018-former-player-has-some-bad-news-chennai-super-kings-743345#char=0,122>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "122"^^xsd:nonNegativeInteger ;
+        nif:isString    "MS Dhoni was an integral part of Chennai Super Kings (CSK) in the first eight editions of the Indian Premier League (IPL)." .
+
+<http://www.ibtimes.co.in/ms-dhoni-ipl-2018-former-player-has-some-bad-news-chennai-super-kings-743345#char=33,52>
+        a                     nif:RFC5147String , nif:Phrase , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Chennai Super Kings" ;
+        nif:beginIndex        "33"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "52"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.ibtimes.co.in/ms-dhoni-ipl-2018-former-player-has-some-bad-news-chennai-super-kings-743345#char=0,122> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     dbr:Chennai_Super_Kings .
+
+<http://www.ibtimes.co.in/ms-dhoni-ipl-2018-former-player-has-some-bad-news-chennai-super-kings-743345#char=3,8>
+        a                     nif:String , nif:Phrase , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Dhoni" ;
+        nif:beginIndex        "3"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "8"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.ibtimes.co.in/ms-dhoni-ipl-2018-former-player-has-some-bad-news-chennai-super-kings-743345#char=0,122> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:Dhoni .

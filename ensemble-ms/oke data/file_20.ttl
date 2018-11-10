@@ -1,0 +1,46 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+<http://www.digitalspy.com/music/news/a817229/fifth-harmony-camila-cabello-leaves-group/#char=16,30>
+        a                     nif:String , nif:RFC5147String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Camila Cabello" ;
+        nif:beginIndex        "16"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "30"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.digitalspy.com/music/news/a817229/fifth-harmony-camila-cabello-leaves-group/#char=0,55> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:Camila_Cabello .
+
+<http://www.digitalspy.com/music/news/a817229/fifth-harmony-camila-cabello-leaves-group/#char=0,13>
+        a                     nif:RFC5147String , nif:Phrase , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Fifth Harmony" ;
+        nif:beginIndex        "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "13"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.digitalspy.com/music/news/a817229/fifth-harmony-camila-cabello-leaves-group/#char=0,55> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     dbr:Fifth_Harmony .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:CamilaCabello ;
+  rdf:predicate  dbo:formerBandMember ;
+  rdf:subject    dbr:Fifth_Harmony ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.digitalspy.com/music/news/a817229/fifth-harmony-camila-cabello-leaves-group/#char=0,55>
+                 ]
+] .
+
+<http://www.digitalspy.com/music/news/a817229/fifth-harmony-camila-cabello-leaves-group/#char=0,55>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "55"^^xsd:nonNegativeInteger ;
+        nif:isString    "Fifth Harmony's Camila Cabello has quit the girl group." .

@@ -1,0 +1,8 @@
+@relation DataExtraction2
+@ATTRIBUTE Sentence	string
+@ATTRIBUTE Foxoutput	string
+
+@ATTRIBUTE OPENIEoutput	string
+@data
+ ' Google CEO Sundar Pichai responded today to the firing of employee James Damore over his controversial memo on workplace diversity ' , 'null ' , ' null ' , ' null, ' null ' 
+ ' Pope Francis in Chile at start of Latin America visit ' , 'null ' , ' null ' , ' null, ' null ' 

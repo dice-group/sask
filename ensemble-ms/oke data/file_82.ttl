@@ -1,0 +1,64 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+<https://timesofindia.indiatimes.com/city/bengaluru/crisis-looms-as-20-karnataka-districts-receive-less-rain/articleshow/59555030.cms#char=39,48>
+        a                     nif:Phrase , nif:RFC5147String , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Karnataka" ;
+        nif:beginIndex        "39"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "48"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://timesofindia.indiatimes.com/city/bengaluru/crisis-looms-as-20-karnataka-districts-receive-less-rain/articleshow/59555030.cms#char=0,87> ;
+        itsrdf:taClassRef     dbo:Place ;
+        itsrdf:taIdentRef     dbr:Karnataka .
+
+<https://timesofindia.indiatimes.com/city/bengaluru/crisis-looms-as-20-karnataka-districts-receive-less-rain/articleshow/59555030.cms#char=0,87>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "87"^^xsd:nonNegativeInteger ;
+        nif:isString    "Chitradurga, part of an arid region in Karnataka, has recorded a deficit of 43 percent." .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Karnataka ;
+  rdf:predicate  dbo:location ;
+  rdf:subject    dbr:Chitradurga ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://timesofindia.indiatimes.com/city/bengaluru/crisis-looms-as-20-karnataka-districts-receive-less-rain/articleshow/59555030.cms#char=0,87>
+                 ]
+] .
+
+<https://timesofindia.indiatimes.com/city/bengaluru/crisis-looms-as-20-karnataka-districts-receive-less-rain/articleshow/59555030.cms#char=0,11>
+        a                     nif:Phrase , nif:RFC5147String , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Chitradurga" ;
+        nif:beginIndex        "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "11"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://timesofindia.indiatimes.com/city/bengaluru/crisis-looms-as-20-karnataka-districts-receive-less-rain/articleshow/59555030.cms#char=0,87> ;
+        itsrdf:taClassRef     dbo:Place ;
+        itsrdf:taIdentRef     dbr:Chitradurga .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Karnataka ;
+  rdf:predicate  dbo:district ;
+  rdf:subject    dbr:Chitradurga ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://timesofindia.indiatimes.com/city/bengaluru/crisis-looms-as-20-karnataka-districts-receive-less-rain/articleshow/59555030.cms#char=0,87>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Karnataka ;
+  rdf:predicate  dbo:locatedInArea ;
+  rdf:subject    dbr:Chitradurga ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://timesofindia.indiatimes.com/city/bengaluru/crisis-looms-as-20-karnataka-districts-receive-less-rain/articleshow/59555030.cms#char=0,87>
+                 ]
+] .

@@ -1,0 +1,55 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:PepsiCo ;
+  rdf:predicate  dbo:employer ;
+  rdf:subject    dbr:Indra_Nooyi ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.businessinsider.de/pepsi-indra-nooyi-work-life-balance-2017-8?r=US&IR=T#char=0,127>
+                 ]
+] .
+
+<http://www.businessinsider.de/pepsi-indra-nooyi-work-life-balance-2017-8?r=US&IR=T#char=0,127>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "127"^^xsd:nonNegativeInteger ;
+        nif:isString    "When Pepsi CEO Indra Nooyi got her pivotal promotion, her mother cut off the announcement and sent her out to get milk instead." .
+
+<http://www.businessinsider.de/pepsi-indra-nooyi-work-life-balance-2017-8?r=US&IR=T#char=15,26>
+        a                     nif:RFC5147String , nif:String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Indra Nooyi" ;
+        nif:beginIndex        "15"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "26"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.businessinsider.de/pepsi-indra-nooyi-work-life-balance-2017-8?r=US&IR=T#char=0,127> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:Indra_Nooyi .
+
+<http://www.businessinsider.de/pepsi-indra-nooyi-work-life-balance-2017-8?r=US&IR=T#char=5,10>
+        a                     nif:RFC5147String , nif:String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Pepsi" ;
+        nif:beginIndex        "5"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "10"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.businessinsider.de/pepsi-indra-nooyi-work-life-balance-2017-8?r=US&IR=T#char=0,127> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     dbr:PepsiCo .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Indra_Nooyi ;
+  rdf:predicate  dbo:ceo ;
+  rdf:subject    dbr:PepsiCo ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.businessinsider.de/pepsi-indra-nooyi-work-life-balance-2017-8?r=US&IR=T#char=0,127>
+                 ]
+] .

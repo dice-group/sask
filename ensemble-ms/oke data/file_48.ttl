@@ -1,0 +1,46 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+<https://www.reuters.com/article/brief-sinclair-announces-affiliation-agr/brief-sinclair-announces-affiliation-agreement-renewals-with-fox-idUSFWN1LG0PX#char=0,8>
+        a                     nif:String , nif:Phrase , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Sinclair" ;
+        nif:beginIndex        "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "8"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.reuters.com/article/brief-sinclair-announces-affiliation-agr/brief-sinclair-announces-affiliation-agreement-renewals-with-fox-idUSFWN1LG0PX#char=0,59> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     dbr:Sinclair_Broadcast_Group .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Fox_Broadcasting_Company ;
+  rdf:predicate  dbo:affiliation ;
+  rdf:subject    dbr:Sinclair_Broadcast_Group ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.reuters.com/article/brief-sinclair-announces-affiliation-agr/brief-sinclair-announces-affiliation-agreement-renewals-with-fox-idUSFWN1LG0PX#char=0,59>
+                 ]
+] .
+
+<https://www.reuters.com/article/brief-sinclair-announces-affiliation-agr/brief-sinclair-announces-affiliation-agreement-renewals-with-fox-idUSFWN1LG0PX#char=0,59>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "59"^^xsd:nonNegativeInteger ;
+        nif:isString    "Sinclair announces affiliation agreement renewals with Fox." .
+
+<https://www.reuters.com/article/brief-sinclair-announces-affiliation-agr/brief-sinclair-announces-affiliation-agreement-renewals-with-fox-idUSFWN1LG0PX#char=55,58>
+        a                     nif:String , nif:RFC5147String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Fox" ;
+        nif:beginIndex        "55"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "58"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.reuters.com/article/brief-sinclair-announces-affiliation-agr/brief-sinclair-announces-affiliation-agreement-renewals-with-fox-idUSFWN1LG0PX#char=0,59> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     dbr:Fox_Broadcasting_Company .

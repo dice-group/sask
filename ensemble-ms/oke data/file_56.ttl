@@ -1,0 +1,46 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+<https://www.reuters.com/article/serbia-film-fiennes/serbia-grants-citizenship-to-actor-ralph-fiennes-idUSL5N1LW1NK#char=35,48>
+        a                     nif:Phrase , nif:RFC5147String , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Ralph Fiennes" ;
+        nif:beginIndex        "35"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "48"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.reuters.com/article/serbia-film-fiennes/serbia-grants-citizenship-to-actor-ralph-fiennes-idUSL5N1LW1NK#char=0,49> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:Ralph_Fiennes .
+
+<https://www.reuters.com/article/serbia-film-fiennes/serbia-grants-citizenship-to-actor-ralph-fiennes-idUSL5N1LW1NK#char=0,49>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "49"^^xsd:nonNegativeInteger ;
+        nif:isString    "Serbia grants citizenship to actor Ralph Fiennes." .
+
+<https://www.reuters.com/article/serbia-film-fiennes/serbia-grants-citizenship-to-actor-ralph-fiennes-idUSL5N1LW1NK#char=0,6>
+        a                     nif:Phrase , nif:String , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Serbia" ;
+        nif:beginIndex        "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "6"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.reuters.com/article/serbia-film-fiennes/serbia-grants-citizenship-to-actor-ralph-fiennes-idUSL5N1LW1NK#char=0,49> ;
+        itsrdf:taClassRef     dbo:Place ;
+        itsrdf:taIdentRef     dbr:Serbia .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Serbia ;
+  rdf:predicate  dbo:nationality ;
+  rdf:subject    dbr:Ralph_Fiennes ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.reuters.com/article/serbia-film-fiennes/serbia-grants-citizenship-to-actor-ralph-fiennes-idUSL5N1LW1NK#char=0,49>
+                 ]
+] .

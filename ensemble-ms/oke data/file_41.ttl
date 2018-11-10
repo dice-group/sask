@@ -1,0 +1,68 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     aksw:Styx ;
+  rdf:predicate  dbo:formerBandMember ;
+  rdf:subject    dbr:John_Panozzo ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.moderndrummer.com/article/july-1982-styxs-john-panozzo/#char=0,118>
+                 ]
+] .
+
+<https://www.moderndrummer.com/article/july-1982-styxs-john-panozzo/#char=0,12>
+        a                     nif:Phrase , nif:RFC5147String , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Added> ;
+        nif:anchorOf          "John Panozzo" ;
+        nif:beginIndex        "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "12"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.moderndrummer.com/article/july-1982-styxs-john-panozzo/#char=0,118> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:John_Panozzo .
+
+<https://www.moderndrummer.com/article/july-1982-styxs-john-panozzo/#char=74,81>
+        a                     nif:RFC5147String , nif:Phrase , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Added> ;
+        nif:anchorOf          "Panozzo" ;
+        nif:beginIndex        "74"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "81"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.moderndrummer.com/article/july-1982-styxs-john-panozzo/#char=0,118> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:John_Panozzo .
+
+<https://www.moderndrummer.com/article/july-1982-styxs-john-panozzo/#char=32,37>
+        a                     nif:RFC5147String , nif:String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Added> ;
+        nif:anchorOf          " Styx" ;
+        nif:beginIndex        "32"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "37"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.moderndrummer.com/article/july-1982-styxs-john-panozzo/#char=0,118> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     aksw:Styx .
+
+<https://www.moderndrummer.com/article/july-1982-styxs-john-panozzo/#char=52,56>
+        a                     nif:RFC5147String , nif:Phrase , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Added> ;
+        nif:anchorOf          "Styx" ;
+        nif:beginIndex        "52"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "56"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.moderndrummer.com/article/july-1982-styxs-john-panozzo/#char=0,118> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     aksw:Styx .
+
+<https://www.moderndrummer.com/article/july-1982-styxs-john-panozzo/#char=0,118>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "118"^^xsd:nonNegativeInteger ;
+        nif:isString    "John Panozzo is the only drummer Styx has ever had; Styx is the only band Panozzo has ever worked with professionally." .

@@ -1,0 +1,55 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+<http://indianexpress.com/article/technology/social/as-sundar-pichai-becomes-google-ceo-wikipedia-fights-over-his-school/#char=0,135>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "135"^^xsd:nonNegativeInteger ;
+        nif:isString    "With Sundar Pichai, an Indian becoming Google CEO, the natural reaction for most people in the country is that it is a matter of pride." .
+
+<http://indianexpress.com/article/technology/social/as-sundar-pichai-becomes-google-ceo-wikipedia-fights-over-his-school/#char=5,18>
+        a                     nif:String , nif:RFC5147String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Sundar Pichai" ;
+        nif:beginIndex        "5"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "18"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://indianexpress.com/article/technology/social/as-sundar-pichai-becomes-google-ceo-wikipedia-fights-over-his-school/#char=0,135> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:Sundar_Pichai .
+
+<http://indianexpress.com/article/technology/social/as-sundar-pichai-becomes-google-ceo-wikipedia-fights-over-his-school/#char=39,45>
+        a                     nif:RFC5147String , nif:Phrase , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Google" ;
+        nif:beginIndex        "39"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "45"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://indianexpress.com/article/technology/social/as-sundar-pichai-becomes-google-ceo-wikipedia-fights-over-his-school/#char=0,135> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     dbr:Google .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Google ;
+  rdf:predicate  dbo:employer ;
+  rdf:subject    dbr:Sundar_Pichai ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://indianexpress.com/article/technology/social/as-sundar-pichai-becomes-google-ceo-wikipedia-fights-over-his-school/#char=0,135>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Google ;
+  rdf:predicate  dbo:ceo ;
+  rdf:subject    dbr:Sundar_Pichai ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://indianexpress.com/article/technology/social/as-sundar-pichai-becomes-google-ceo-wikipedia-fights-over-his-school/#char=0,135>
+                 ]
+] .

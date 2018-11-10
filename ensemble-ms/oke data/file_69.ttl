@@ -1,0 +1,243 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Tamil_Nadu ;
+  rdf:predicate  dbo:deathPlace ;
+  rdf:subject    dbr:Jayalalithaa ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.aljazeera.com/news/2016/12/tamil-nadu-chief-minister-jayalalithaa-dies-161205190409596.html#char=0,395>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Tamil_Nadu ;
+  rdf:predicate  dbo:locatedInArea ;
+  rdf:subject    dbr:Chennai ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.aljazeera.com/news/2016/12/tamil-nadu-chief-minister-jayalalithaa-dies-161205190409596.html#char=0,395>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Tamil_Nadu ;
+  rdf:predicate  dbo:location ;
+  rdf:subject    dbr:Chennai ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.aljazeera.com/news/2016/12/tamil-nadu-chief-minister-jayalalithaa-dies-161205190409596.html#char=0,395>
+                 ]
+] .
+
+<http://www.aljazeera.com/news/2016/12/tamil-nadu-chief-minister-jayalalithaa-dies-161205190409596.html#char=196,208>
+        a                     nif:Phrase , nif:RFC5147String , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Added> ;
+        nif:anchorOf          "Jayalalithaa" ;
+        nif:beginIndex        "196"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "208"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.aljazeera.com/news/2016/12/tamil-nadu-chief-minister-jayalalithaa-dies-161205190409596.html#char=0,396> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:Jayalalithaa .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Chennai ;
+  rdf:predicate  dbo:deathPlace ;
+  rdf:subject    dbr:Jayalalithaa ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.aljazeera.com/news/2016/12/tamil-nadu-chief-minister-jayalalithaa-dies-161205190409596.html#char=0,395>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Chennai ;
+  rdf:predicate  dbo:location ;
+  rdf:subject    dbr:Apollo_Hospitals ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.aljazeera.com/news/2016/12/tamil-nadu-chief-minister-jayalalithaa-dies-161205190409596.html#char=0,395>
+                 ]
+] .
+
+<http://www.aljazeera.com/news/2016/12/tamil-nadu-chief-minister-jayalalithaa-dies-161205190409596.html#char=69,89>
+        a                     nif:Phrase , nif:String , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Jayalalithaa Jayaram" ;
+        nif:beginIndex        "69"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "89"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.aljazeera.com/news/2016/12/tamil-nadu-chief-minister-jayalalithaa-dies-161205190409596.html#char=0,396> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:Jayalalithaa .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:India ;
+  rdf:predicate  dbo:locatedInArea ;
+  rdf:subject    dbr:Tamil_Nadu ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.aljazeera.com/news/2016/12/tamil-nadu-chief-minister-jayalalithaa-dies-161205190409596.html#char=0,395>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:India ;
+  rdf:predicate  dbo:deathPlace ;
+  rdf:subject    dbr:Jayalalithaa ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.aljazeera.com/news/2016/12/tamil-nadu-chief-minister-jayalalithaa-dies-161205190409596.html#char=0,395>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:India ;
+  rdf:predicate  dbo:location ;
+  rdf:subject    dbr:Apollo_Hospitals ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.aljazeera.com/news/2016/12/tamil-nadu-chief-minister-jayalalithaa-dies-161205190409596.html#char=0,395>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:India ;
+  rdf:predicate  dbo:country ;
+  rdf:subject    dbr:Jayalalithaa ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.aljazeera.com/news/2016/12/tamil-nadu-chief-minister-jayalalithaa-dies-161205190409596.html#char=0,395>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Chennai ;
+  rdf:predicate  dbo:location ;
+  rdf:subject    dbr:Jayalalithaa ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.aljazeera.com/news/2016/12/tamil-nadu-chief-minister-jayalalithaa-dies-161205190409596.html#char=0,395>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:India ;
+  rdf:predicate  dbo:country ;
+  rdf:subject    dbr:Apollo_Hospitals ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.aljazeera.com/news/2016/12/tamil-nadu-chief-minister-jayalalithaa-dies-161205190409596.html#char=0,395>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:India ;
+  rdf:predicate  dbo:location ;
+  rdf:subject    dbr:Jayalalithaa ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.aljazeera.com/news/2016/12/tamil-nadu-chief-minister-jayalalithaa-dies-161205190409596.html#char=0,395>
+                 ]
+] .
+
+<http://www.aljazeera.com/news/2016/12/tamil-nadu-chief-minister-jayalalithaa-dies-161205190409596.html#char=305,320>
+        a                     nif:Phrase , nif:String , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Apollo Hospital" ;
+        nif:beginIndex        "305"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "320"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.aljazeera.com/news/2016/12/tamil-nadu-chief-minister-jayalalithaa-dies-161205190409596.html#char=0,396> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     dbr:Apollo_Hospitals .
+
+<http://www.aljazeera.com/news/2016/12/tamil-nadu-chief-minister-jayalalithaa-dies-161205190409596.html#char=0,396>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "396"^^xsd:nonNegativeInteger ;
+        nif:isString    "Thousands of Indians have taken to the streets to mourn the death of Jayalalithaa Jayaram, chief minister of India's southern Tamil Nadu state, who died at the age of 68 after a prolonged illness.Jayalalithaa, one of the countrys most popular political leaders, died late on Monday evening at the private Apollo Hospital in the state capital, Chennai, where she suffered a heart attack on Sunday." .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Tamil_Nadu ;
+  rdf:predicate  dbo:location ;
+  rdf:subject    dbr:Jayalalithaa ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.aljazeera.com/news/2016/12/tamil-nadu-chief-minister-jayalalithaa-dies-161205190409596.html#char=0,395>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:India ;
+  rdf:predicate  dbo:country ;
+  rdf:subject    dbr:Chennai ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.aljazeera.com/news/2016/12/tamil-nadu-chief-minister-jayalalithaa-dies-161205190409596.html#char=0,395>
+                 ]
+] .
+
+<http://www.aljazeera.com/news/2016/12/tamil-nadu-chief-minister-jayalalithaa-dies-161205190409596.html#char=343,350>
+        a                     nif:RFC5147String , nif:Phrase , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Chennai" ;
+        nif:beginIndex        "343"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "350"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.aljazeera.com/news/2016/12/tamil-nadu-chief-minister-jayalalithaa-dies-161205190409596.html#char=0,396> ;
+        itsrdf:taClassRef     dbo:Place ;
+        itsrdf:taIdentRef     dbr:Chennai .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Tamil_Nadu ;
+  rdf:predicate  dbo:location ;
+  rdf:subject    dbr:Apollo_Hospitals ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.aljazeera.com/news/2016/12/tamil-nadu-chief-minister-jayalalithaa-dies-161205190409596.html#char=0,395>
+                 ]
+] .
+
+<http://www.aljazeera.com/news/2016/12/tamil-nadu-chief-minister-jayalalithaa-dies-161205190409596.html#char=126,136>
+        a                     nif:RFC5147String , nif:String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Tamil Nadu" ;
+        nif:beginIndex        "126"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "136"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.aljazeera.com/news/2016/12/tamil-nadu-chief-minister-jayalalithaa-dies-161205190409596.html#char=0,396> ;
+        itsrdf:taClassRef     dbo:Place ;
+        itsrdf:taIdentRef     dbr:Tamil_Nadu .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:India ;
+  rdf:predicate  dbo:country ;
+  rdf:subject    dbr:Apollo_Hospitals ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.aljazeera.com/news/2016/12/tamil-nadu-chief-minister-jayalalithaa-dies-161205190409596.html#char=0,395>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:India ;
+  rdf:predicate  dbo:location ;
+  rdf:subject    dbr:Tamil_Nadu ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.aljazeera.com/news/2016/12/tamil-nadu-chief-minister-jayalalithaa-dies-161205190409596.html#char=0,395>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:India ;
+  rdf:predicate  dbo:location ;
+  rdf:subject    dbr:Chennai ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.aljazeera.com/news/2016/12/tamil-nadu-chief-minister-jayalalithaa-dies-161205190409596.html#char=0,395>
+                 ]
+] .
+
+<http://www.aljazeera.com/news/2016/12/tamil-nadu-chief-minister-jayalalithaa-dies-161205190409596.html#char=109,114>
+        a                     nif:Phrase , nif:String , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "India" ;
+        nif:beginIndex        "109"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "114"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.aljazeera.com/news/2016/12/tamil-nadu-chief-minister-jayalalithaa-dies-161205190409596.html#char=0,396> ;
+        itsrdf:taClassRef     dbo:Place ;
+        itsrdf:taIdentRef     dbr:India .

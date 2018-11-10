@@ -1,0 +1,95 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:United_States ;
+  rdf:predicate  dbo:country ;
+  rdf:subject    dbr:Barack_Obama ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.bbc.com/news/election-us-2016-37381452#char=0,102>
+                 ]
+] .
+
+<http://www.bbc.com/news/election-us-2016-37381452#char=37,47>
+        a                     nif:String , nif:RFC5147String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Washington" ;
+        nif:beginIndex        "37"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "47"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.bbc.com/news/election-us-2016-37381452#char=0,102> ;
+        itsrdf:taClassRef     dbo:Place ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Washington,_D.C.> .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:United_States ;
+  rdf:predicate  dbo:location ;
+  rdf:subject    dbr:Barack_Obama ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.bbc.com/news/election-us-2016-37381452#char=0,102>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Washington ;
+  rdf:predicate  dbo:location ;
+  rdf:subject    dbr:Donald_Trump ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.bbc.com/news/election-us-2016-37381452#char=0,102>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:United_States ;
+  rdf:predicate  dbo:birthPlace ;
+  rdf:subject    dbr:Barack_Obama ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.bbc.com/news/election-us-2016-37381452#char=0,102>
+                 ]
+] .
+
+<http://www.bbc.com/news/election-us-2016-37381452#char=88,101>
+        a                     nif:Phrase , nif:RFC5147String , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "United States" ;
+        nif:beginIndex        "88"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "101"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.bbc.com/news/election-us-2016-37381452#char=0,102> ;
+        itsrdf:taClassRef     dbo:Place ;
+        itsrdf:taIdentRef     dbr:United_States .
+
+<http://www.bbc.com/news/election-us-2016-37381452#char=3,8>
+        a                     nif:Phrase , nif:String , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Trump" ;
+        nif:beginIndex        "3"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "8"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.bbc.com/news/election-us-2016-37381452#char=0,102> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:Donald_Trump .
+
+<http://www.bbc.com/news/election-us-2016-37381452#char=59,71>
+        a                     nif:Phrase , nif:String , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Barack Obama" ;
+        nif:beginIndex        "59"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "71"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.bbc.com/news/election-us-2016-37381452#char=0,102> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:Barack_Obama .
+
+<http://www.bbc.com/news/election-us-2016-37381452#char=0,102>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "102"^^xsd:nonNegativeInteger ;
+        nif:isString    "Mr Trump said at a campaign event in Washington: President Barack Obama was born in the United States." .

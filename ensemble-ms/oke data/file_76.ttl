@@ -1,0 +1,131 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+<http://www.ancient-origins.net/news-history-archaeology/have-scientists-solved-2000-year-old-mystery-death-alexander-great-001213#char=0,139>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "139"^^xsd:nonNegativeInteger ;
+        nif:isString    "In June 323 BC, Alexander the Great died in Babylon aged 32, having conquered an empire stretching from modern Albania to eastern Pakistan." .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Babylon ;
+  rdf:predicate  dbo:deathPlace ;
+  rdf:subject    dbr:Alexander_the_Great ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.ancient-origins.net/news-history-archaeology/have-scientists-solved-2000-year-old-mystery-death-alexander-great-001213#char=0,139>
+                 ]
+] .
+
+<http://www.ancient-origins.net/news-history-archaeology/have-scientists-solved-2000-year-old-mystery-death-alexander-great-001213#char=130,138>
+        a                     nif:String , nif:RFC5147String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Added> ;
+        nif:anchorOf          "Pakistan" ;
+        nif:beginIndex        "130"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "138"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.ancient-origins.net/news-history-archaeology/have-scientists-solved-2000-year-old-mystery-death-alexander-great-001213#char=0,139> ;
+        itsrdf:taClassRef     dbo:Place ;
+        itsrdf:taIdentRef     dbr:Pakistan .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Babylon ;
+  rdf:predicate  dbo:location ;
+  rdf:subject    dbr:Alexander_the_Great ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.ancient-origins.net/news-history-archaeology/have-scientists-solved-2000-year-old-mystery-death-alexander-great-001213#char=0,139>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Albania ;
+  rdf:predicate  dbo:location ;
+  rdf:subject    dbr:Alexander_the_Great ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.ancient-origins.net/news-history-archaeology/have-scientists-solved-2000-year-old-mystery-death-alexander-great-001213#char=0,139>
+                 ]
+] .
+
+<http://www.ancient-origins.net/news-history-archaeology/have-scientists-solved-2000-year-old-mystery-death-alexander-great-001213#char=44,52>
+        a                     nif:Phrase , nif:String , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Added> ;
+        nif:anchorOf          "Babylon " ;
+        nif:beginIndex        "44"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "52"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.ancient-origins.net/news-history-archaeology/have-scientists-solved-2000-year-old-mystery-death-alexander-great-001213#char=0,139> ;
+        itsrdf:taClassRef     dbo:Place ;
+        itsrdf:taIdentRef     dbr:Babylon .
+
+<http://www.ancient-origins.net/news-history-archaeology/have-scientists-solved-2000-year-old-mystery-death-alexander-great-001213#char=111,118>
+        a                     nif:String , nif:Phrase , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Added> ;
+        nif:anchorOf          "Albania" ;
+        nif:beginIndex        "111"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "118"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.ancient-origins.net/news-history-archaeology/have-scientists-solved-2000-year-old-mystery-death-alexander-great-001213#char=0,139> ;
+        itsrdf:taClassRef     dbo:Place ;
+        itsrdf:taIdentRef     dbr:Albania .
+
+<http://www.ancient-origins.net/news-history-archaeology/have-scientists-solved-2000-year-old-mystery-death-alexander-great-001213#char=16,35>
+        a                     nif:String , nif:Phrase , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Added> ;
+        nif:anchorOf          "Alexander the Great" ;
+        nif:beginIndex        "16"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "35"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.ancient-origins.net/news-history-archaeology/have-scientists-solved-2000-year-old-mystery-death-alexander-great-001213#char=0,139> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:Alexander_the_Great .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Pakistan ;
+  rdf:predicate  dbo:location ;
+  rdf:subject    dbr:Alexander_the_Great ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.ancient-origins.net/news-history-archaeology/have-scientists-solved-2000-year-old-mystery-death-alexander-great-001213#char=0,139>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Alexander_the_Great ;
+  rdf:predicate  dbo:leaderName ;
+  rdf:subject    dbr:Albania ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.ancient-origins.net/news-history-archaeology/have-scientists-solved-2000-year-old-mystery-death-alexander-great-001213#char=0,139>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Alexander_the_Great ;
+  rdf:predicate  dbo:leaderName ;
+  rdf:subject    dbr:Pakistan ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.ancient-origins.net/news-history-archaeology/have-scientists-solved-2000-year-old-mystery-death-alexander-great-001213#char=0,139>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Albania ;
+  rdf:predicate  dbo:country ;
+  rdf:subject    dbr:Alexander_the_Great ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.ancient-origins.net/news-history-archaeology/have-scientists-solved-2000-year-old-mystery-death-alexander-great-001213#char=0,139>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Pakistan ;
+  rdf:predicate  dbo:country ;
+  rdf:subject    dbr:Alexander_the_Great ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.ancient-origins.net/news-history-archaeology/have-scientists-solved-2000-year-old-mystery-death-alexander-great-001213#char=0,139>
+                 ]
+] .

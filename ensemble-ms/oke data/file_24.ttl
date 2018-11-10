@@ -1,0 +1,55 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+<http://www.techradar.com/news/microsoft-ceo-satya-nadella-on-how-its-different-from-apple-and-google#char=14,27>
+        a                     nif:String , nif:RFC5147String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Satya Nadella" ;
+        nif:beginIndex        "14"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "27"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.techradar.com/news/microsoft-ceo-satya-nadella-on-how-its-different-from-apple-and-google#char=0,181> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:Satya_Nadella .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Microsoft ;
+  rdf:predicate  dbo:employer ;
+  rdf:subject    dbr:Satya_Nadella ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.techradar.com/news/microsoft-ceo-satya-nadella-on-how-its-different-from-apple-and-google#char=0,181>
+                 ]
+] .
+
+<http://www.techradar.com/news/microsoft-ceo-satya-nadella-on-how-its-different-from-apple-and-google#char=0,181>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "181"^^xsd:nonNegativeInteger ;
+        nif:isString    "Microsoft CEO Satya Nadella is in the middle of a world tour to promote his new book Hit Refresh, in which he talks about how he's in the process of reinventing the computing giant." .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Satya_Nadella ;
+  rdf:predicate  dbo:ceo ;
+  rdf:subject    dbr:Microsoft ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.techradar.com/news/microsoft-ceo-satya-nadella-on-how-its-different-from-apple-and-google#char=0,181>
+                 ]
+] .
+
+<http://www.techradar.com/news/microsoft-ceo-satya-nadella-on-how-its-different-from-apple-and-google#char=0,9>
+        a                     nif:String , nif:RFC5147String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Microsoft" ;
+        nif:beginIndex        "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "9"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.techradar.com/news/microsoft-ceo-satya-nadella-on-how-its-different-from-apple-and-google#char=0,181> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     dbr:Microsoft .

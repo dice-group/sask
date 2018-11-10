@@ -1,0 +1,102 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+<https://www.msn.com/en-in/money/topstories/mukesh-ambanis-son-anant-ambani-trolled-again-this-time-for-his-speech-at-reliances-40-year-anniversary-event/ar-BBHP6bQ#char=11,22>
+        a                     nif:Phrase , nif:String , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Added> ;
+        nif:anchorOf          "Nita Ambani" ;
+        nif:beginIndex        "11"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "22"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.msn.com/en-in/money/topstories/mukesh-ambanis-son-anant-ambani-trolled-again-this-time-for-his-speech-at-reliances-40-year-anniversary-event/ar-BBHP6bQ#char=0,179> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:Nita_Ambani .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Anant_Ambani ;
+  rdf:predicate  dbo:parent ;
+  rdf:subject    dbr:Mukesh_Ambani ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.msn.com/en-in/money/topstories/mukesh-ambanis-son-anant-ambani-trolled-again-this-time-for-his-speech-at-reliances-40-year-anniversary-event/ar-BBHP6bQ#char=0,179>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Anant_Ambani ;
+  rdf:predicate  dbo:parent ;
+  rdf:subject    dbr:Nita_Ambani ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.msn.com/en-in/money/topstories/mukesh-ambanis-son-anant-ambani-trolled-again-this-time-for-his-speech-at-reliances-40-year-anniversary-event/ar-BBHP6bQ#char=0,179>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Nita_Ambani ;
+  rdf:predicate  dbo:child ;
+  rdf:subject    dbr:Anant_Ambani ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.msn.com/en-in/money/topstories/mukesh-ambanis-son-anant-ambani-trolled-again-this-time-for-his-speech-at-reliances-40-year-anniversary-event/ar-BBHP6bQ#char=0,179>
+                 ]
+] .
+
+<https://www.msn.com/en-in/money/topstories/mukesh-ambanis-son-anant-ambani-trolled-again-this-time-for-his-speech-at-reliances-40-year-anniversary-event/ar-BBHP6bQ#char=0,179>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "179"^^xsd:nonNegativeInteger ;
+        nif:isString    "Mukesh and Nita Ambani's youngest son Anant Ambani, who became a victim of online trolls because of his weight, has hogged the limelight again and this time because of his speech." .
+
+<https://www.msn.com/en-in/money/topstories/mukesh-ambanis-son-anant-ambani-trolled-again-this-time-for-his-speech-at-reliances-40-year-anniversary-event/ar-BBHP6bQ#char=38,50>
+        a                     nif:String , nif:Phrase , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Added> ;
+        nif:anchorOf          "Anant Ambani" ;
+        nif:beginIndex        "38"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "50"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.msn.com/en-in/money/topstories/mukesh-ambanis-son-anant-ambani-trolled-again-this-time-for-his-speech-at-reliances-40-year-anniversary-event/ar-BBHP6bQ#char=0,179> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     aksw:Anant_Ambani .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Mukesh_Ambani ;
+  rdf:predicate  dbo:spouse ;
+  rdf:subject    dbr:Nita_Ambani ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.msn.com/en-in/money/topstories/mukesh-ambanis-son-anant-ambani-trolled-again-this-time-for-his-speech-at-reliances-40-year-anniversary-event/ar-BBHP6bQ#char=0,179>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Mukesh_Ambani ;
+  rdf:predicate  dbo:child ;
+  rdf:subject    dbr:Anant_Ambani ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.msn.com/en-in/money/topstories/mukesh-ambanis-son-anant-ambani-trolled-again-this-time-for-his-speech-at-reliances-40-year-anniversary-event/ar-BBHP6bQ#char=0,179>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Nita_Ambani ;
+  rdf:predicate  dbo:spouse ;
+  rdf:subject    dbr:Mukesh_Ambani ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.msn.com/en-in/money/topstories/mukesh-ambanis-son-anant-ambani-trolled-again-this-time-for-his-speech-at-reliances-40-year-anniversary-event/ar-BBHP6bQ#char=0,179>
+                 ]
+] .
+
+<https://www.msn.com/en-in/money/topstories/mukesh-ambanis-son-anant-ambani-trolled-again-this-time-for-his-speech-at-reliances-40-year-anniversary-event/ar-BBHP6bQ#char=0,6>
+        a                     nif:Phrase , nif:String , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Added> ;
+        nif:anchorOf          "Mukesh" ;
+        nif:beginIndex        "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "6"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.msn.com/en-in/money/topstories/mukesh-ambanis-son-anant-ambani-trolled-again-this-time-for-his-speech-at-reliances-40-year-anniversary-event/ar-BBHP6bQ#char=0,179> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:Mukesh_Ambani .

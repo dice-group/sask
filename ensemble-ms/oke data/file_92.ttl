@@ -1,0 +1,84 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+<https://sports.ndtv.com/south-africa-vs-india-2018/virat-kohli-anushka-sharma-enjoy-beautiful-cape-town-with-shikhar-dhawan-and-family-see-pics-1795998#char=0,89>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "89"^^xsd:nonNegativeInteger ;
+        nif:isString    "Newly-weds Virat Kohli and Anushka Sharma are making the most of their time in Cape Town." .
+
+<https://sports.ndtv.com/south-africa-vs-india-2018/virat-kohli-anushka-sharma-enjoy-beautiful-cape-town-with-shikhar-dhawan-and-family-see-pics-1795998#char=27,41>
+        a                     nif:String , nif:Phrase , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Anushka Sharma" ;
+        nif:beginIndex        "27"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "41"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://sports.ndtv.com/south-africa-vs-india-2018/virat-kohli-anushka-sharma-enjoy-beautiful-cape-town-with-shikhar-dhawan-and-family-see-pics-1795998#char=0,89> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:Anushka_Sharma .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Anushka_Sharma ;
+  rdf:predicate  dbo:spouse ;
+  rdf:subject    dbr:Virat_Kohli ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://sports.ndtv.com/south-africa-vs-india-2018/virat-kohli-anushka-sharma-enjoy-beautiful-cape-town-with-shikhar-dhawan-and-family-see-pics-1795998#char=0,89>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Cape_Town ;
+  rdf:predicate  dbo:location ;
+  rdf:subject    dbr:Virat_Kohli ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://sports.ndtv.com/south-africa-vs-india-2018/virat-kohli-anushka-sharma-enjoy-beautiful-cape-town-with-shikhar-dhawan-and-family-see-pics-1795998#char=0,89>
+                 ]
+] .
+
+<https://sports.ndtv.com/south-africa-vs-india-2018/virat-kohli-anushka-sharma-enjoy-beautiful-cape-town-with-shikhar-dhawan-and-family-see-pics-1795998#char=79,88>
+        a                     nif:String , nif:RFC5147String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Cape Town" ;
+        nif:beginIndex        "79"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "88"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://sports.ndtv.com/south-africa-vs-india-2018/virat-kohli-anushka-sharma-enjoy-beautiful-cape-town-with-shikhar-dhawan-and-family-see-pics-1795998#char=0,89> ;
+        itsrdf:taClassRef     dbo:Place ;
+        itsrdf:taIdentRef     dbr:Cape_Town .
+
+<https://sports.ndtv.com/south-africa-vs-india-2018/virat-kohli-anushka-sharma-enjoy-beautiful-cape-town-with-shikhar-dhawan-and-family-see-pics-1795998#char=11,22>
+        a                     nif:RFC5147String , nif:Phrase , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Virat Kohli" ;
+        nif:beginIndex        "11"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "22"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://sports.ndtv.com/south-africa-vs-india-2018/virat-kohli-anushka-sharma-enjoy-beautiful-cape-town-with-shikhar-dhawan-and-family-see-pics-1795998#char=0,89> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:Virat_Kohli .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Virat_Kohli ;
+  rdf:predicate  dbo:spouse ;
+  rdf:subject    dbr:Anushka_Sharma ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://sports.ndtv.com/south-africa-vs-india-2018/virat-kohli-anushka-sharma-enjoy-beautiful-cape-town-with-shikhar-dhawan-and-family-see-pics-1795998#char=0,89>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Cape_Town ;
+  rdf:predicate  dbo:location ;
+  rdf:subject    dbr:Anushka_Sharma ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://sports.ndtv.com/south-africa-vs-india-2018/virat-kohli-anushka-sharma-enjoy-beautiful-cape-town-with-shikhar-dhawan-and-family-see-pics-1795998#char=0,89>
+                 ]
+] .
