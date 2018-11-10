@@ -23,11 +23,11 @@ import java.util.stream.Stream;
 
 public class SentenceExtraction {
 
-	static File path = new File("C:\\Users\\harsh\\Downloads\\Ensemble Data\\oke data");
+	static File path = new File("oke data");
 	static File[] files = path.listFiles();
 	static List<String> sentences = new ArrayList<String>();
-	static File file = new File("C:\\Users\\harsh\\\\MLdata\\traindata.arff");
-	static File file2 = new File("C:\\Users\\harsh\\\\MLdata\\trainNewdata2.arff");
+	static File file = new File("TrainingData\\traindata.arff");
+	static File file2 = new File("TrainingData\\traindata2.arff");
 
 	static FileWriter fileWriter;
 
