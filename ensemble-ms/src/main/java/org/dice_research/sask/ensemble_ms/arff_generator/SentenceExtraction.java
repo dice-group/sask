@@ -79,18 +79,18 @@ public class SentenceExtraction {
 					String sorokin_response_string = null;
 					String cedric_response_string = null;
 
-					Map<String, Integer> port_vs_extractorMap = new HashMap<String, Integer>();
-					port_vs_extractorMap.put("fox", 2222);
-					port_vs_extractorMap.put("fred", 2223);
-					port_vs_extractorMap.put("spotlight", 2224);
-					port_vs_extractorMap.put("cedric", 2225);
-					port_vs_extractorMap.put("openIE", 2226);
-					port_vs_extractorMap.put("sorookin", 2227);
+//					Map<String, Integer> port_vs_extractorMap = new HashMap<String, Integer>();
+//					port_vs_extractorMap.put("fox", 2222);
+//					port_vs_extractorMap.put("fred", 2223);
+//					port_vs_extractorMap.put("spotlight", 2224);
+//					port_vs_extractorMap.put("cedric", 2225);
+//					port_vs_extractorMap.put("openIE", 2226);
+//					port_vs_extractorMap.put("sorookin", 2227);
 
 					// int portNumb[] = { 2222, 2224, 2225, 2226, 2227 };
 					int portNumb[] = { 2222, 2226, 2227, 2225 };
 
-					Map<String, String> foxRespMap = new HashMap<String, String>();
+
 					Map<String, String> fredRespMap = new HashMap<String, String>();
 					Map<String, String> spotlightRespMap = new HashMap<String, String>();
 					Map<String, String> cedricRespMap = new HashMap<String, String>();
@@ -206,7 +206,7 @@ public class SentenceExtraction {
 							+ "," + " ' " + openie_response_string + " ' " + "," + " ' " + sorokin_response_string + ","
 							+ " ' " + cedric_response_string + " ' ";
 					System.out.println(training_data);
-					TrainingFileWriter();
+					trainingFileWriter();
 					try {
 
 						bw.write(training_data);
@@ -244,7 +244,7 @@ public class SentenceExtraction {
 		return contentBuilder.toString();
 	}
 
-	public static void TrainingFileWriter() {
+	public static void trainingFileWriter() {
 
 		// List<String> sentences = new ArrayList<String>();
 
