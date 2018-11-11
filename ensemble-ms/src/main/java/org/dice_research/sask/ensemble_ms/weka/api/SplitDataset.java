@@ -89,7 +89,7 @@ public class SplitDataset {
 		System.out.println(evaluation.toClassDetailsString());
 		System.out.println(evaluation.toMatrixString("=== Overall Confusion Matrix ===\n"));
 
-		// printing result comparison......
+		// printing result comparison......gi
 		System.out.println("===================");
 		System.out.println("Actual Class, Predicted Class");
 		for (int i = 0; i < test.numInstances(); i++) {

@@ -23,21 +23,19 @@ import java.util.stream.Stream;
 
 public class SentenceExtraction {
 
-	static File path = new File("oke data");
-	static File[] files = path.listFiles();
-	static List<String> sentences = new ArrayList<String>();
-	static File file = new File("TrainingData\\traindata.arff");
-	static File file2 = new File("TrainingData\\traindata2.arff");
+	 private static File path = new File("oke data");
+	 private static File[] files = path.listFiles();
+	 private static List<String> sentences = new ArrayList<String>();
+	 private static File file = new File("TrainingData\\traindata.arff");
+	 private static File file2 = new File("TrainingData\\traindata2.arff");
+	 private static FileWriter fileWriter;
 
-	static FileWriter fileWriter;
-
-	static String sentence_data;
+	private static String sentence_data;
 
 	public static void main(String[] args) {
 
 		try {
 			fileWriter = new FileWriter(file);
-
 			BufferedWriter bw = new BufferedWriter(fileWriter);
 			// write in train data file for weka
 
