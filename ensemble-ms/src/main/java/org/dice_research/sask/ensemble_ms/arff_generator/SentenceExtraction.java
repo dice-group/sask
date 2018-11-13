@@ -61,7 +61,8 @@ public class SentenceExtraction {
 				}
 			});
 
-			for (int i = 0; i < 2; i++) {
+			for (int i = 0; i < 3; i++) 
+			{
 				if (files[i].isFile()) {
 					String sentence = readLineByLine(files[i].toString());
 					int x = sentence.indexOf("nif:isString   ");

@@ -37,9 +37,7 @@ public class SentenceExtractor {
 	private static List<String> sentences = new ArrayList<String>();
 	private static File file = new File("TrainingData\\traindata.arff");
 	private static File file2 = new File("TrainingData\\traindata2.arff");	
-	
 	private static FileWriter fileWriter;
-	
 	private  static String sentence_data;
 
 	public static void main(String[] args) {
@@ -74,7 +72,7 @@ public class SentenceExtractor {
 			String sorokin_response_string = null;
 			String cedric_response_string = null;
 
-			for (int i = 0; i < 2; i++) 
+			for (int i = 0; i < 3; i++) 
 			{
 				if (files[i].isFile()) {
 					String sentence = readLineByLine(files[i].toString());
