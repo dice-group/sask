@@ -27,6 +27,9 @@
 		<module>repo-ms</module>
 		<module>taipan-ms</module>
 		<module>webclient</module>
+		<module>ensemble-ms</module>
+		
+		
 	</modules>
 
 	<profiles>

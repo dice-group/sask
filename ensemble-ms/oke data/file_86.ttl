@@ -1,0 +1,55 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Ivanka_Trump ;
+  rdf:predicate  dbo:parent ;
+  rdf:subject    dbr:Donald_Trump ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.independent.co.uk/news/world/americas/us-elections/donald-trump-ivanka-trump-creepiest-most-unsettling-comments-a-roundup-a7353876.html#char=0,70>
+                 ]
+] .
+
+<http://www.independent.co.uk/news/world/americas/us-elections/donald-trump-ivanka-trump-creepiest-most-unsettling-comments-a-roundup-a7353876.html#char=0,70>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "70"^^xsd:nonNegativeInteger ;
+        nif:isString    "Donald Trump s unsettling record of comments about his daughter Ivanka" .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Donald_Trump ;
+  rdf:predicate  dbo:child ;
+  rdf:subject    dbr:Ivanka_Trump ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.independent.co.uk/news/world/americas/us-elections/donald-trump-ivanka-trump-creepiest-most-unsettling-comments-a-roundup-a7353876.html#char=0,70>
+                 ]
+] .
+
+<http://www.independent.co.uk/news/world/americas/us-elections/donald-trump-ivanka-trump-creepiest-most-unsettling-comments-a-roundup-a7353876.html#char=0,12>
+        a                     nif:RFC5147String , nif:Phrase , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Donald Trump" ;
+        nif:beginIndex        "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "12"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.independent.co.uk/news/world/americas/us-elections/donald-trump-ivanka-trump-creepiest-most-unsettling-comments-a-roundup-a7353876.html#char=0,70> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:Donald_Trump .
+
+<http://www.independent.co.uk/news/world/americas/us-elections/donald-trump-ivanka-trump-creepiest-most-unsettling-comments-a-roundup-a7353876.html#char=64,70>
+        a                     nif:String , nif:RFC5147String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Ivanka" ;
+        nif:beginIndex        "64"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "70"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.independent.co.uk/news/world/americas/us-elections/donald-trump-ivanka-trump-creepiest-most-unsettling-comments-a-roundup-a7353876.html#char=0,70> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:Ivanka_Trump .

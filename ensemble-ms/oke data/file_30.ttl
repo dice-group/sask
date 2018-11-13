@@ -1,0 +1,140 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:India ;
+  rdf:predicate  dbo:country ;
+  rdf:subject    dbr:Jaipur ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.india.com/travel/agra/#char=0,80>
+                 ]
+] .
+
+<http://www.india.com/travel/agra/#char=21,27>
+        a                     nif:String , nif:Phrase , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Added> ;
+        nif:anchorOf          "Jaipur" ;
+        nif:beginIndex        "21"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "27"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.india.com/travel/agra/#char=0,80> ;
+        itsrdf:taClassRef     dbo:Place ;
+        itsrdf:taIdentRef     dbr:Jaipur .
+
+<http://www.india.com/travel/agra/#char=74,79>
+        a                     nif:RFC5147String , nif:Phrase , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Added> ;
+        nif:anchorOf          "India" ;
+        nif:beginIndex        "74"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "79"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.india.com/travel/agra/#char=0,80> ;
+        itsrdf:taClassRef     dbo:Place ;
+        itsrdf:taIdentRef     dbr:India .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:India ;
+  rdf:predicate  dbo:locatedInArea ;
+  rdf:subject    dbr:Agra ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.india.com/travel/agra/#char=0,80>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:India ;
+  rdf:predicate  dbo:location ;
+  rdf:subject    dbr:Delhi ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.india.com/travel/agra/#char=0,80>
+                 ]
+] .
+
+<http://www.india.com/travel/agra/#char=11,16>
+        a                     nif:Phrase , nif:RFC5147String , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Added> ;
+        nif:anchorOf          "Delhi" ;
+        nif:beginIndex        "11"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "16"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.india.com/travel/agra/#char=0,80> ;
+        itsrdf:taClassRef     dbo:Place ;
+        itsrdf:taIdentRef     dbr:Delhi .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:India ;
+  rdf:predicate  dbo:location ;
+  rdf:subject    dbr:Jaipur ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.india.com/travel/agra/#char=0,80>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:India ;
+  rdf:predicate  dbo:locatedInArea ;
+  rdf:subject    dbr:Delhi ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.india.com/travel/agra/#char=0,80>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:India ;
+  rdf:predicate  dbo:country ;
+  rdf:subject    dbr:Agra ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.india.com/travel/agra/#char=0,80>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:India ;
+  rdf:predicate  dbo:country ;
+  rdf:subject    dbr:Delhi ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.india.com/travel/agra/#char=0,80>
+                 ]
+] .
+
+<http://www.india.com/travel/agra/#char=29,33>
+        a                     nif:Phrase , nif:RFC5147String , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Added> ;
+        nif:anchorOf          "Agra" ;
+        nif:beginIndex        "29"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "33"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.india.com/travel/agra/#char=0,80> ;
+        itsrdf:taClassRef     dbo:Place ;
+        itsrdf:taIdentRef     dbr:Agra .
+
+<http://www.india.com/travel/agra/#char=0,80>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "80"^^xsd:nonNegativeInteger ;
+        nif:isString    "Along with Delhi and Jaipur, Agra forms the Golden Triangle of tourism in India." .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:India ;
+  rdf:predicate  dbo:location ;
+  rdf:subject    dbr:Agra ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.india.com/travel/agra/#char=0,80>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:India ;
+  rdf:predicate  dbo:locatedInArea ;
+  rdf:subject    dbr:Jaipur ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.india.com/travel/agra/#char=0,80>
+                 ]
+] .

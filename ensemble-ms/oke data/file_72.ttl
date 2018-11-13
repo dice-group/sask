@@ -1,0 +1,55 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Facebook ;
+  rdf:predicate  dbo:president ;
+  rdf:subject    dbr:Sean_Parker ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.theguardian.com/technology/2017/nov/09/facebook-sean-parker-vulnerability-brain-psychology#char=0,188>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Facebook ;
+  rdf:predicate  dbo:employer ;
+  rdf:subject    dbr:Sean_Parker ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.theguardian.com/technology/2017/nov/09/facebook-sean-parker-vulnerability-brain-psychology#char=0,188>
+                 ]
+] .
+
+<https://www.theguardian.com/technology/2017/nov/09/facebook-sean-parker-vulnerability-brain-psychology#char=0,188>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "188"^^xsd:nonNegativeInteger ;
+        nif:isString    "Facebooks founders knew they were creating something addictive that exploited a vulnerability in human psychology from the outset, according to the companys founding president Sean Parker." .
+
+<https://www.theguardian.com/technology/2017/nov/09/facebook-sean-parker-vulnerability-brain-psychology#char=176,187>
+        a                     nif:Phrase , nif:RFC5147String , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Sean Parker" ;
+        nif:beginIndex        "176"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "187"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.theguardian.com/technology/2017/nov/09/facebook-sean-parker-vulnerability-brain-psychology#char=0,188> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:Sean_Parker .
+
+<https://www.theguardian.com/technology/2017/nov/09/facebook-sean-parker-vulnerability-brain-psychology#char=0,8>
+        a                     nif:String , nif:RFC5147String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Added> ;
+        nif:anchorOf          "Facebook" ;
+        nif:beginIndex        "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "8"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.theguardian.com/technology/2017/nov/09/facebook-sean-parker-vulnerability-brain-psychology#char=0,188> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     dbr:Facebook .

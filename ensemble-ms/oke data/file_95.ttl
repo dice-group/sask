@@ -1,0 +1,46 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+<https://www.nytimes.com/2016/07/08/business/media/amazons-audible-goes-long-on-short-term-audio.html#char=0,7>
+        a                     nif:String , nif:Phrase , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Audible" ;
+        nif:beginIndex        "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "7"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.nytimes.com/2016/07/08/business/media/amazons-audible-goes-long-on-short-term-audio.html#char=0,209> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Audible_Inc.> .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Amazon.com ;
+  rdf:predicate  dbo:subsidiary ;
+  rdf:subject    <http://dbpedia.org/resource/Audible_Inc.> ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.nytimes.com/2016/07/08/business/media/amazons-audible-goes-long-on-short-term-audio.html#char=0,209>
+                 ]
+] .
+
+<https://www.nytimes.com/2016/07/08/business/media/amazons-audible-goes-long-on-short-term-audio.html#char=0,209>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "209"^^xsd:nonNegativeInteger ;
+        nif:isString    "Audible, Amazon s audiobook and spoken-word subsidiary, on Thursday announced Channels, a subscription service that will offer a new library of audio, including original programs, articles read aloud and more." .
+
+<https://www.nytimes.com/2016/07/08/business/media/amazons-audible-goes-long-on-short-term-audio.html#char=9,15>
+        a                     nif:RFC5147String , nif:Phrase , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Amazon" ;
+        nif:beginIndex        "9"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "15"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.nytimes.com/2016/07/08/business/media/amazons-audible-goes-long-on-short-term-audio.html#char=0,209> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     dbr:Amazon.com .

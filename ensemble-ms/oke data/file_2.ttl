@@ -1,0 +1,93 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Chile ;
+  rdf:predicate  dbo:location ;
+  rdf:subject    dbr:Pope_Francis ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.bbc.com/news/world-latin-america-42698564#char=0,54>
+                 ]
+] .
+
+<http://www.bbc.com/news/world-latin-america-42698564#char=16,21>
+        a                     nif:RFC5147String , nif:String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Chile" ;
+        nif:beginIndex        "16"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "21"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.bbc.com/news/world-latin-america-42698564#char=0,54> ;
+        itsrdf:taClassRef     dbo:Place ;
+        itsrdf:taIdentRef     dbr:Chile .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Chile ;
+  rdf:predicate  dbo:country ;
+  rdf:subject    dbr:Pope_Francis ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.bbc.com/news/world-latin-america-42698564#char=0,54>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Latin_America ;
+  rdf:predicate  dbo:locatedInArea ;
+  rdf:subject    dbr:Chile ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.bbc.com/news/world-latin-america-42698564#char=0,54>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Latin_America ;
+  rdf:predicate  dbo:location ;
+  rdf:subject    dbr:Chile ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.bbc.com/news/world-latin-america-42698564#char=0,54>
+                 ]
+] .
+
+<http://www.bbc.com/news/world-latin-america-42698564#char=0,12>
+        a                     nif:Phrase , nif:RFC5147String , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Pope Francis" ;
+        nif:beginIndex        "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "12"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.bbc.com/news/world-latin-america-42698564#char=0,54> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:Pope_Francis .
+
+<http://www.bbc.com/news/world-latin-america-42698564#char=0,54>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "54"^^xsd:nonNegativeInteger ;
+        nif:isString    "Pope Francis in Chile at start of Latin America visit." .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Latin_America ;
+  rdf:predicate  dbo:location ;
+  rdf:subject    dbr:Pope_Francis ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.bbc.com/news/world-latin-america-42698564#char=0,54>
+                 ]
+] .
+
+<http://www.bbc.com/news/world-latin-america-42698564#char=34,47>
+        a                     nif:Phrase , nif:RFC5147String , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Latin America" ;
+        nif:beginIndex        "34"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "47"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.bbc.com/news/world-latin-america-42698564#char=0,54> ;
+        itsrdf:taClassRef     dbo:Place ;
+        itsrdf:taIdentRef     dbr:Latin_America .

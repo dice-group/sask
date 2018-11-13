@@ -27,20 +27,22 @@ public class SplitDataset {
 
 	public static void main(String[] args){
 		// load the arff file
-		String filename = "Dataset\\datasetExtraction.arff";
+		String filename = "C:\\Users\\harsh\\git\\sask\\ensemble-ms\\src\\main\\java\\org\\dice_research\\sask\\ensemble_ms\\weka\\Dataset\\datasetExtraction.arff";
 		DataSource source;
 		try {
 			source = new DataSource(filename);
 		
 
 		Instances dataset = source.getDataSet();
+		
+		
 		System.out.println("printing summary of training data.....");
 		System.out.println(dataset.toSummaryString());
 		// save arff file
 
 		ArffSaver saver = new ArffSaver();
 		saver.setInstances(dataset);
-		saver.setFile(new File("Dataset\\datasetArffExtraction.arff"));
+		saver.setFile(new File("Dataset\\Test_Dataset.arff"));
 		saver.writeBatch();
 		// provide filter
 		StringToWordVector converterVector = new StringToWordVector();
@@ -87,7 +89,7 @@ public class SplitDataset {
 		System.out.println(evaluation.toClassDetailsString());
 		System.out.println(evaluation.toMatrixString("=== Overall Confusion Matrix ===\n"));
 
-		// printing result comparison......
+		// printing result comparison......gi
 		System.out.println("===================");
 		System.out.println("Actual Class, Predicted Class");
 		for (int i = 0; i < test.numInstances(); i++) {

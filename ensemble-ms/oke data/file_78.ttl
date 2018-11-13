@@ -1,0 +1,57 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+<https://www.foxsports.com.au/football/a-league/melbourne-city-hand-debut-to-dylan-pierias-the-aleagues-first-player-born-in-the-2000s/news-story/e7a22529ae003df024e95e4eed17cb10#char=48,56>
+        a                     nif:RFC5147String , nif:String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Added> ;
+        nif:anchorOf          "A-League" ;
+        nif:beginIndex        "48"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "56"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.foxsports.com.au/football/a-league/melbourne-city-hand-debut-to-dylan-pierias-the-aleagues-first-player-born-in-the-2000s/news-story/e7a22529ae003df024e95e4eed17cb10#char=0,92> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     dbr:A-League .
+
+<https://www.foxsports.com.au/football/a-league/melbourne-city-hand-debut-to-dylan-pierias-the-aleagues-first-player-born-in-the-2000s/news-story/e7a22529ae003df024e95e4eed17cb10#char=29,42>
+        a                     nif:String , nif:RFC5147String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Added> ;
+        nif:anchorOf          "Dylan Pierias" ;
+        nif:beginIndex        "29"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "42"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.foxsports.com.au/football/a-league/melbourne-city-hand-debut-to-dylan-pierias-the-aleagues-first-player-born-in-the-2000s/news-story/e7a22529ae003df024e95e4eed17cb10#char=0,92> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     aksw:Dylan_Pierias .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Melbourne_City_FC ;
+  rdf:predicate  dbo:debutTeam ;
+  rdf:subject    aksw:Dylan_Pierias ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.foxsports.com.au/football/a-league/melbourne-city-hand-debut-to-dylan-pierias-the-aleagues-first-player-born-in-the-2000s/news-story/e7a22529ae003df024e95e4eed17cb10#char=0,92>
+                 ]
+] .
+
+<https://www.foxsports.com.au/football/a-league/melbourne-city-hand-debut-to-dylan-pierias-the-aleagues-first-player-born-in-the-2000s/news-story/e7a22529ae003df024e95e4eed17cb10#char=0,92>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "92"^^xsd:nonNegativeInteger ;
+        nif:isString    "Melbourne City hand debut to Dylan Pierias, the A-League’s first player born in the 2000s." .
+
+<https://www.foxsports.com.au/football/a-league/melbourne-city-hand-debut-to-dylan-pierias-the-aleagues-first-player-born-in-the-2000s/news-story/e7a22529ae003df024e95e4eed17cb10#char=0,14>
+        a                     nif:String , nif:RFC5147String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Added> ;
+        nif:anchorOf          "Melbourne City" ;
+        nif:beginIndex        "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "14"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.foxsports.com.au/football/a-league/melbourne-city-hand-debut-to-dylan-pierias-the-aleagues-first-player-born-in-the-2000s/news-story/e7a22529ae003df024e95e4eed17cb10#char=0,92> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     dbr:Melbourne_City_FC .

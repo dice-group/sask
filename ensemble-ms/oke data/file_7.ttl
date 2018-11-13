@@ -1,0 +1,55 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Sundar_Pichai ;
+  rdf:predicate  dbo:ceo ;
+  rdf:subject    dbr:Google ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.dailymail.co.uk/news/article-5029545/Google-CEO-promises-fix-cheeseburger-emoki-error.html#char=0,190>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Google ;
+  rdf:predicate  dbo:employer ;
+  rdf:subject    dbr:Sundar_Pichai ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.dailymail.co.uk/news/article-5029545/Google-CEO-promises-fix-cheeseburger-emoki-error.html#char=0,190>
+                 ]
+] .
+
+<http://www.dailymail.co.uk/news/article-5029545/Google-CEO-promises-fix-cheeseburger-emoki-error.html#char=176,189>
+        a                     nif:RFC5147String , nif:String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Sundar Pichai" ;
+        nif:beginIndex        "176"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "189"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.dailymail.co.uk/news/article-5029545/Google-CEO-promises-fix-cheeseburger-emoki-error.html#char=0,190> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:Sundar_Pichai .
+
+<http://www.dailymail.co.uk/news/article-5029545/Google-CEO-promises-fix-cheeseburger-emoki-error.html#char=11,17>
+        a                     nif:Phrase , nif:String , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Google" ;
+        nif:beginIndex        "11"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "17"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.dailymail.co.uk/news/article-5029545/Google-CEO-promises-fix-cheeseburger-emoki-error.html#char=0,190> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     dbr:Google .
+
+<http://www.dailymail.co.uk/news/article-5029545/Google-CEO-promises-fix-cheeseburger-emoki-error.html#char=0,190>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "190"^^xsd:nonNegativeInteger ;
+        nif:isString    "The CEO of Google promised the company would drop everything to fix a glaring error that was pointed out on its cheeseburger emoji. The viral tweet caught the attention of CEO Sundar Pichai." .

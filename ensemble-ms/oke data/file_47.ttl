@@ -1,0 +1,64 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+<http://edition.cnn.com/2015/07/27/world/apj-abdul-kalam-indian-president-dies/index.html#char=28,39>
+        a                     nif:Phrase , nif:RFC5147String , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Abdul Kalam" ;
+        nif:beginIndex        "28"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "39"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://edition.cnn.com/2015/07/27/world/apj-abdul-kalam-indian-president-dies/index.html#char=0,132> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:A._P._J._Abdul_Kalam .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Northeast_India ;
+  rdf:predicate  dbo:deathPlace ;
+  rdf:subject    dbr:A._P._J._Abdul_Kalam ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://edition.cnn.com/2015/07/27/world/apj-abdul-kalam-indian-president-dies/index.html#char=0,133>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Northeast_India ;
+  rdf:predicate  dbo:country ;
+  rdf:subject    dbr:A._P._J._Abdul_Kalam ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://edition.cnn.com/2015/07/27/world/apj-abdul-kalam-indian-president-dies/index.html#char=0,133>
+                 ]
+] .
+
+<http://edition.cnn.com/2015/07/27/world/apj-abdul-kalam-indian-president-dies/index.html#char=0,132>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "132"^^xsd:nonNegativeInteger ;
+        nif:isString    "Former Indian president APJ Abdul Kalam, who was pivotal in the countrys nuclear weapons program, died Monday in northeastern India." .
+
+<http://edition.cnn.com/2015/07/27/world/apj-abdul-kalam-indian-president-dies/index.html#char=113,131>
+        a                     nif:RFC5147String , nif:Phrase , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Added> ;
+        nif:anchorOf          "northeastern India" ;
+        nif:beginIndex        "113"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "131"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://edition.cnn.com/2015/07/27/world/apj-abdul-kalam-indian-president-dies/index.html#char=0,132> ;
+        itsrdf:taClassRef     dbo:Place ;
+        itsrdf:taIdentRef     dbr:Northeast_India .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Northeast_India ;
+  rdf:predicate  dbo:location ;
+  rdf:subject    dbr:A._P._J._Abdul_Kalam ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://edition.cnn.com/2015/07/27/world/apj-abdul-kalam-indian-president-dies/index.html#char=0,133>
+                 ]
+] .

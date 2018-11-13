@@ -1,0 +1,29 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+<https://www.usmagazine.com/celebrity-news/news/jenny-mccarthy-shares-adorable-throwback-with-cousin-melissa-mccarthy-2015317/#char=0,166>
+        a                     nif:RFC5147String , nif:Context , nif:Phrase , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Melissa McCarthy" , "Jenny McCarthy" ;
+        nif:beginIndex        "0"^^xsd:nonNegativeInteger , "141"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "166"^^xsd:nonNegativeInteger , "14"^^xsd:nonNegativeInteger , "157"^^xsd:nonNegativeInteger ;
+        nif:isString          "Jenny McCarthy took it way back on Thursday, July 30, celebrating Throwback Thursday with an adorable photo of herself and her famous cousin Melissa McCarthy as kids." .
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:Jenny_McCarthy , dbr:Melissa_McCarthy .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Jenny_McCarthy ;
+  rdf:predicate  dbo:relative ;
+  rdf:subject    dbr:Melissa_McCarthy ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.usmagazine.com/celebrity-news/news/jenny-mccarthy-shares-adorable-throwback-with-cousin-melissa-mccarthy-2015317/#char=0,166>
+                 ]
+] .

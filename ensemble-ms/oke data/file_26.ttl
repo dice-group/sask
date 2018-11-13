@@ -1,0 +1,88 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+<http://gulfnews.com/life-style/celebrity/desi-news/bollywood/twinkle-s-cousin-karan-kapadia-to-make-bollywood-debut-1.2149134#char=142,154>
+        a                     nif:Phrase , nif:String , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Tony D Souza" ;
+        nif:beginIndex        "142"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "154"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://gulfnews.com/life-style/celebrity/desi-news/bollywood/twinkle-s-cousin-karan-kapadia-to-make-bollywood-debut-1.2149134#char=0,199> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     aksw:TonyDSouza .
+
+<http://gulfnews.com/life-style/celebrity/desi-news/bollywood/twinkle-s-cousin-karan-kapadia-to-make-bollywood-debut-1.2149134#char=0,199>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "199"^^xsd:nonNegativeInteger ;
+        nif:isString    "Veteran actress Dimple Kapadias nephew and producer-entrepreneur Twinkle Khannas cousin Karan Kapadia is set to make his Bollywood debut with Tony D Souza and Vishal Ranas upcoming yet-untitled film." .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     aksw:KaranKapadia ;
+  rdf:predicate  dbo:relative ;
+  rdf:subject    dbr:Dimple_Kapadia ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://gulfnews.com/life-style/celebrity/desi-news/bollywood/twinkle-s-cousin-karan-kapadia-to-make-bollywood-debut-1.2149134#char=0,199>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     aksw:KaranKapadia ;
+  rdf:predicate  dbo:relative ;
+  rdf:subject    dbr:Twinkle_Khanna ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://gulfnews.com/life-style/celebrity/desi-news/bollywood/twinkle-s-cousin-karan-kapadia-to-make-bollywood-debut-1.2149134#char=0,199>
+                 ]
+] .
+
+<http://gulfnews.com/life-style/celebrity/desi-news/bollywood/twinkle-s-cousin-karan-kapadia-to-make-bollywood-debut-1.2149134#char=65,79>
+        a                     nif:Phrase , nif:String , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Added> ;
+        nif:anchorOf          "Twinkle Khanna" ;
+        nif:beginIndex        "65"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "79"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://gulfnews.com/life-style/celebrity/desi-news/bollywood/twinkle-s-cousin-karan-kapadia-to-make-bollywood-debut-1.2149134#char=0,199> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:Twinkle_Khanna .
+
+<http://gulfnews.com/life-style/celebrity/desi-news/bollywood/twinkle-s-cousin-karan-kapadia-to-make-bollywood-debut-1.2149134#char=159,171>
+        a                     nif:RFC5147String , nif:Phrase , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Vishal Ranas" ;
+        nif:beginIndex        "159"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "171"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://gulfnews.com/life-style/celebrity/desi-news/bollywood/twinkle-s-cousin-karan-kapadia-to-make-bollywood-debut-1.2149134#char=0,199> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     aksw:VishalRanas .
+
+<http://gulfnews.com/life-style/celebrity/desi-news/bollywood/twinkle-s-cousin-karan-kapadia-to-make-bollywood-debut-1.2149134#char=16,30>
+        a                     nif:String , nif:RFC5147String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Added> ;
+        nif:anchorOf          "Dimple Kapadia" ;
+        nif:beginIndex        "16"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "30"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://gulfnews.com/life-style/celebrity/desi-news/bollywood/twinkle-s-cousin-karan-kapadia-to-make-bollywood-debut-1.2149134#char=0,199> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:Dimple_Kapadia .
+
+<http://gulfnews.com/life-style/celebrity/desi-news/bollywood/twinkle-s-cousin-karan-kapadia-to-make-bollywood-debut-1.2149134#char=88,101>
+        a                     nif:Phrase , nif:RFC5147String , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Karan Kapadia" ;
+        nif:beginIndex        "88"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "101"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://gulfnews.com/life-style/celebrity/desi-news/bollywood/twinkle-s-cousin-karan-kapadia-to-make-bollywood-debut-1.2149134#char=0,199> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     aksw:KaranKapadia .

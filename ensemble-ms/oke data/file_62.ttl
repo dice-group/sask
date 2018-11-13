@@ -1,0 +1,133 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+<https://www.ndtv.com/india-news/president-apj-abdul-kalams-funeral-today-pm-modi-expected-to-attend-1201936#char=93,103>
+        a                     nif:RFC5147String , nif:String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Rameswaram" ;
+        nif:beginIndex        "93"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "103"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.ndtv.com/india-news/president-apj-abdul-kalams-funeral-today-pm-modi-expected-to-attend-1201936#char=0,222> ;
+        itsrdf:taClassRef     dbo:Place ;
+        itsrdf:taIdentRef     dbr:Rameswaram .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Tamil_Nadu ;
+  rdf:predicate  dbo:location ;
+  rdf:subject    dbr:A._P._J._Abdul_Kalam ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.ndtv.com/india-news/president-apj-abdul-kalams-funeral-today-pm-modi-expected-to-attend-1201936#char=0,222>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Shillong ;
+  rdf:predicate  dbo:location ;
+  rdf:subject    dbr:A._P._J._Abdul_Kalam ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.ndtv.com/india-news/president-apj-abdul-kalams-funeral-today-pm-modi-expected-to-attend-1201936#char=0,222>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Tamil_Nadu ;
+  rdf:predicate  dbo:location ;
+  rdf:subject    dbr:Rameswaram ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.ndtv.com/india-news/president-apj-abdul-kalams-funeral-today-pm-modi-expected-to-attend-1201936#char=0,222>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Tamil_Nadu ;
+  rdf:predicate  dbo:locatedInArea ;
+  rdf:subject    dbr:Rameswaram ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.ndtv.com/india-news/president-apj-abdul-kalams-funeral-today-pm-modi-expected-to-attend-1201936#char=0,222>
+                 ]
+] .
+
+<https://www.ndtv.com/india-news/president-apj-abdul-kalams-funeral-today-pm-modi-expected-to-attend-1201936#char=80,90>
+        a                     nif:String , nif:Phrase , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Tamil Nadu" ;
+        nif:beginIndex        "80"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "90"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.ndtv.com/india-news/president-apj-abdul-kalams-funeral-today-pm-modi-expected-to-attend-1201936#char=0,222> ;
+        itsrdf:taClassRef     dbo:Place ;
+        itsrdf:taIdentRef     dbr:Tamil_Nadu .
+
+<https://www.ndtv.com/india-news/president-apj-abdul-kalams-funeral-today-pm-modi-expected-to-attend-1201936#char=0,18>
+        a                     nif:String , nif:Phrase , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Dr APJ Abdul Kalam" ;
+        nif:beginIndex        "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "18"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.ndtv.com/india-news/president-apj-abdul-kalams-funeral-today-pm-modi-expected-to-attend-1201936#char=0,222> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:A._P._J._Abdul_Kalam .
+
+<https://www.ndtv.com/india-news/president-apj-abdul-kalams-funeral-today-pm-modi-expected-to-attend-1201936#char=155,163>
+        a                     nif:RFC5147String , nif:Phrase , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Shillong" ;
+        nif:beginIndex        "155"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "163"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.ndtv.com/india-news/president-apj-abdul-kalams-funeral-today-pm-modi-expected-to-attend-1201936#char=0,222> ;
+        itsrdf:taClassRef     dbo:Place ;
+        itsrdf:taIdentRef     dbr:Shillong .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Rameswaram ;
+  rdf:predicate  dbo:birthPlace ;
+  rdf:subject    dbr:A._P._J._Abdul_Kalam ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.ndtv.com/india-news/president-apj-abdul-kalams-funeral-today-pm-modi-expected-to-attend-1201936#char=0,222>
+                 ]
+] .
+
+<https://www.ndtv.com/india-news/president-apj-abdul-kalams-funeral-today-pm-modi-expected-to-attend-1201936#char=128,136>
+        a                     nif:String , nif:RFC5147String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Dr Kalam" ;
+        nif:beginIndex        "128"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "136"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.ndtv.com/india-news/president-apj-abdul-kalams-funeral-today-pm-modi-expected-to-attend-1201936#char=0,222> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:A._P._J._Abdul_Kalam .
+
+<https://www.ndtv.com/india-news/president-apj-abdul-kalams-funeral-today-pm-modi-expected-to-attend-1201936#char=0,222>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "222"^^xsd:nonNegativeInteger ;
+        nif:isString    "Dr APJ Abdul Kalam who was buried with full state honours at a public ground in Tamil Nadu's Rameswaram town where he was born. Dr Kalam died on Monday in Shillong after a massive cardiac arrest while delivering a lecture." .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Shillong ;
+  rdf:predicate  dbo:deathPlace ;
+  rdf:subject    dbr:A._P._J._Abdul_Kalam ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.ndtv.com/india-news/president-apj-abdul-kalams-funeral-today-pm-modi-expected-to-attend-1201936#char=0,222>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Rameswaram ;
+  rdf:predicate  dbo:location ;
+  rdf:subject    dbr:A._P._J._Abdul_Kalam ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.ndtv.com/india-news/president-apj-abdul-kalams-funeral-today-pm-modi-expected-to-attend-1201936#char=0,222>
+                 ]
+] .

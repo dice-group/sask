@@ -1,0 +1,46 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+<http://www.independent.co.uk/news/business/vw-to-buy-lamborghini-from-son-of-suharto-1164653.html#char=0,144>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "144"^^xsd:nonNegativeInteger ;
+        nif:isString    "THE GERMAN car maker Volkswagen added another luxury marque to its stable yesterday by agreeing to buy the Italian sports car maker Lamborghini." .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Lamborghini ;
+  rdf:predicate  dbo:subsidiary ;
+  rdf:subject    dbr:Volkswagen ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.independent.co.uk/news/business/vw-to-buy-lamborghini-from-son-of-suharto-1164653.html#char=0,144>
+                 ]
+] .
+
+<http://www.independent.co.uk/news/business/vw-to-buy-lamborghini-from-son-of-suharto-1164653.html#char=21,31>
+        a                     nif:Phrase , nif:RFC5147String , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Added> ;
+        nif:anchorOf          "Volkswagen" ;
+        nif:beginIndex        "21"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "31"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.independent.co.uk/news/business/vw-to-buy-lamborghini-from-son-of-suharto-1164653.html#char=0,144> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     dbr:Volkswagen .
+
+<http://www.independent.co.uk/news/business/vw-to-buy-lamborghini-from-son-of-suharto-1164653.html#char=132,143>
+        a                     nif:RFC5147String , nif:String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Added> ;
+        nif:anchorOf          "Lamborghini" ;
+        nif:beginIndex        "132"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "143"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.independent.co.uk/news/business/vw-to-buy-lamborghini-from-son-of-suharto-1164653.html#char=0,144> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     dbr:Lamborghini .
