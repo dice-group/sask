@@ -31,6 +31,7 @@ import org.apache.log4j.BasicConfigurator;
  */
 
 public class SentenceExtractor {
+	
 
 	private static File path = new File("oke data");
 	private static File[] files = path.listFiles();
@@ -38,7 +39,7 @@ public class SentenceExtractor {
 	private static File file = new File("TrainingData\\traindata.arff");
 	private static File file2 = new File("TrainingData\\traindata2.arff");	
 	private static FileWriter fileWriter;
-	private  static String sentence_data;
+	private static String sentence_data;
 
 	public static void main(String[] args) {
 		try {			fileWriter = new FileWriter(file);
@@ -66,7 +67,7 @@ public class SentenceExtractor {
 					return Integer.valueOf(s1).compareTo(Integer.valueOf(s2));
 				}
 			});
-			responseRader();
+//			responseRader();
 			String fox_response_string = null;
 			String openie_response_string = null;
 			String sorokin_response_string = null;
@@ -151,7 +152,6 @@ public class SentenceExtractor {
 							else if (j == 2) 
 							{
 								spotlightRespMap.put(sentences.get(i), response.toString());
-								System.out.println(portNumb[j] + "----Extractors response--------------" + j + " response");
 								ArrayList<String> sorokin_response_string_list = new ArrayList<String>();
 								sorokin_response_string = response.toString();
 								sorokin_response_string_list.add(sorokin_response_string);
@@ -190,11 +190,21 @@ public class SentenceExtractor {
 					System.out.println(cedric_response_string);
 					System.out.println("Sorokin extractor response for file " + files[i].getName());				
 					System.out.println(sorokin_response_string);
+					System.out.println("Gethering Sparql Query Result................................");
+					
+					String squery_Result = responseRader(i);
+					System.out.println("......................................");
+					System.out.println(squery_Result);
+					
 					System.out.println("Training Data for file " + files[i].getName());		
 					String training_data = " ' " + sentences.get(i) + " ' " + ", " + "'" + fox_response_string + " ' "
 							+ "," + " ' " + openie_response_string + " ' " + "," + " ' " + sorokin_response_string + ","
-							+ " ' " + cedric_response_string + " ' ";
+							+ " ' " + cedric_response_string +   " ' " +  squery_Result + " ' ";
+					
+					System.out.println("------");
 					System.out.println(training_data);
+
+					System.out.println("-------------------------------------------------------------");
 				trainingFileWriter();
 					try {
 
@@ -232,15 +242,16 @@ public class SentenceExtractor {
 		}
 		return contentBuilder.toString();
 	}
-	public static void responseRader()
+	public static String responseRader(int i)
 	{
+		String sparql_query_result = null;
 		BasicConfigurator.configure();
    	  StringBuffer squery = new StringBuffer();
       List<String> sparqueryList = new ArrayList<String>();
 	
         // create an empty model
-		for (int i = 0; i < 100; i++) 
-		{
+//		for (int i = 0; i < 3; i++) 
+		
 		 final String inputFileName  = files[i].toString();
         Model model = ModelFactory.createDefaultModel();
         InputStream in = FileManager.get().open( inputFileName );
@@ -250,16 +261,15 @@ public class SentenceExtractor {
         }
         
         // read the RDF/XML file
-//         read() method call is the URI which will be used for resolving relative URI's
-//        model.read(in, "TURTLE");
-        try
+//        read() method call is the URI which will be used for resolving relative URI's
+//       model.read(in, "TURTLE");
+       try
         {
         model.read(inputFileName) ;
         }
-        catch(RiotException ro)
-        {
-        	ro.getMessage();
-        	
+       catch(RiotException ro)
+        {      	
+       	ro.getMessage();
         }
 //        catch(MalformedURLException mur)
 //        {
@@ -290,12 +300,12 @@ public class SentenceExtractor {
           while(iter.hasNext())
           {
         	  squery.append(iter.next().toString()); 
-              squery.append(System.getProperty("line.separator"));
+//              squery.append(System.getProperty("line.separator"));
           }
         }	
-        System.out.println(files[i].getName() + "  result after pasing sparql query.......");
-        String sparql_query_result = squery.toString();
-        System.out.println(sparql_query_result);
+        System.out.println(files[i].getName() + "  Result after pasing sparql query.......");
+         sparql_query_result = squery.toString();
+//        System.out.println(sparql_query_result);
         
         squery.delete(0, squery.length());
         
@@ -304,7 +314,7 @@ public class SentenceExtractor {
 //		System.out.println(sparqueryList);
 
         
-        }
+        
         
 //        System.out.println("   Response after rdf read");
 //     model.write(System.out,"TURTLE"); 
@@ -312,7 +322,9 @@ public class SentenceExtractor {
 //     model2.write(System.out,"TURTLE");
        
 //		System.out.println(sparqueryList);
+		return sparql_query_result;
 	}
+	
 	public static void trainingFileWriter()
 	{
 
@@ -349,6 +361,7 @@ public class SentenceExtractor {
 		
 	
 		}
+	
 	
 
 }
