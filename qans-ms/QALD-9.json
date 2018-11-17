@@ -79,7 +79,7 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Who was the most famous alumna from the Wellesley College, campaigned for the presidency and where is it located? ",
+      "string" : "Who was the most famous alumna from the Wellesley College and where is it located? ",
       "keywords" : "alumna, Wellesley College , located "
     }],
 	"query" : {
@@ -148,7 +148,7 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Who is the relative of Jenny McCarthy who celebrated Throwback Thursday? ",
+      "string" : "Who is the relative of Jenny McCarthy? ",
       "keywords" : "relative, Jenny_McCarthy  "
     }],
 	"query" : {
@@ -217,7 +217,7 @@
       "sparql" : "PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX dbr: <http://dbpedia.org/resource/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX aksw: <http://aksw.org/notInWiki/>
 	   SELECT DISTINCT ?person
 	   WHERE {
-			<http://dbpedia.org/page/Eagles_(band)>  dbo:formerBandMember  ?person.
+			<http://dbpedia.org/resource/Eagles_(band)>  dbo:formerBandMember  ?person.
 	    }"
 	},
 	"answers" : [ {	
@@ -241,7 +241,7 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Who were the doctral students of Rajeev Motwani who were the founders of Google? ",
+      "string" : "Who were the doctral students of Rajeev Motwani? ",
       "keywords" : "doctral students, Rajeev Motwani "
     }],
 	"query" : {
@@ -442,7 +442,7 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Who was the former band member of Fifth Harmony who had quit the girl group? ",
+      "string" : "Who was the former band member of Fifth Harmony? ",
       "keywords" : "former, band member, Fifth Harmony "
     }],
 	"query" : {
@@ -473,7 +473,7 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Name the Altice company’s subsidiary that signs Virgin Mobile acquisition agreement? ",
+      "string" : "Name the Altice company’s subsidiary? ",
       "keywords" : "Altice, subsidiary "
     }],
 	"query" : {
@@ -626,7 +626,7 @@
     "id" : "20",
     "answertype" : "resource",
     "aggregation" : false,
-    "onlydbo" : true,
+    "onlydbo" : false,
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
@@ -701,7 +701,7 @@
     "id" : "22",
     "answertype" : "resource",
     "aggregation" : false,
-    "onlydbo" : true,
+    "onlydbo" : false,
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
@@ -830,7 +830,7 @@
     "id" : "26",
     "answertype" : "resource",
     "aggregation" : false,
-    "onlydbo" : true,
+    "onlydbo" : false,
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
@@ -958,11 +958,11 @@
     "id" : "30",
     "answertype" : "resource",
     "aggregation" : false,
-    "onlydbo" : true,
+    "onlydbo" : false,
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Who is the relative of John Colaneri who used their contracting skills to transform people's home? ",
+      "string" : "Who is the relative of John Colaneri? ",
       "keywords" : "relative, John Colaneri "
     }],
 	"query" : {
@@ -989,7 +989,7 @@
     "id" : "31",
     "answertype" : "resource",
     "aggregation" : false,
-    "onlydbo" : true,
+    "onlydbo" : false,
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
@@ -1158,7 +1158,7 @@
     "id" : "36",
     "answertype" : "resource",
     "aggregation" : false,
-    "onlydbo" : true,
+    "onlydbo" : false,
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
@@ -1287,7 +1287,7 @@
     "id" : "40",
     "answertype" : "resource",
     "aggregation" : false,
-    "onlydbo" : true,
+    "onlydbo" : false,
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
@@ -1386,12 +1386,12 @@
     "id" : "43",
     "answertype" : "resource",
     "aggregation" : false,
-    "onlydbo" : true,
+    "onlydbo" : false,
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Who is the reporter of Sunday Mirror? ",
-      "keywords" : "reporter, Sunday Mirror "
+      "string" : "Who is the employer of Sunday Mirror? ",
+      "keywords" : "employer, Sunday Mirror "
     }],
 	"query" : {
       "sparql" : "PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX dbr: <http://dbpedia.org/resource/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX aksw: <http://aksw.org/notInWiki/>
