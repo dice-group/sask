@@ -67,7 +67,7 @@ public class SentenceExtractor {
 					return Integer.valueOf(s1).compareTo(Integer.valueOf(s2));
 				}
 			});
-//			responseRader();
+//			Initialize value with null
 			String fox_response_string = null;
 			String openie_response_string = null;
 			String sorokin_response_string = null;
@@ -192,7 +192,7 @@ public class SentenceExtractor {
 					System.out.println(sorokin_response_string);
 					System.out.println("Gethering Sparql Query Result................................");
 					
-					String squery_Result = responseRader(i);
+					String squery_Result = responseReader(i);
 					System.out.println("......................................");
 					System.out.println(squery_Result);
 					
@@ -242,7 +242,7 @@ public class SentenceExtractor {
 		}
 		return contentBuilder.toString();
 	}
-	public static String responseRader(int i)
+	public static String responseReader(int i)
 	{
 		String sparql_query_result = null;
 		BasicConfigurator.configure();
