@@ -40,10 +40,10 @@ public class SentenceExtractor {
 	private static File file2 = new File("TrainingData\\traindata2.arff");	
 	private static FileWriter fileWriter;
 	private static String sentence_data;
-
+    
 	public static void main(String[] args) {
 		try {			fileWriter = new FileWriter(file);
-
+		
 			BufferedWriter bw = new BufferedWriter(fileWriter);
 			// write in train data file for weka
 			bw.write("@relation DataExtraction2");
@@ -67,6 +67,7 @@ public class SentenceExtractor {
 					return Integer.valueOf(s1).compareTo(Integer.valueOf(s2));
 				}
 			});
+
 //			Initialize value with null
 			String fox_response_string = null;
 			String openie_response_string = null;
