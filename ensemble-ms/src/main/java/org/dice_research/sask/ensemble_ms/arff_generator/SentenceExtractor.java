@@ -36,28 +36,11 @@ public class SentenceExtractor {
 	private static File path = new File("oke data");
 	private static File[] files = path.listFiles();
 	private static List<String> sentences = new ArrayList<String>();
-	private static File file = new File("TrainingData\\traindata.arff");
 	private static File file2 = new File("TrainingData\\traindata2.arff");	
-	private static FileWriter fileWriter;
+
 	private static String sentence_data;
     
-	public static void main(String[] args) {
-		try {			fileWriter = new FileWriter(file);
-		
-			BufferedWriter bw = new BufferedWriter(fileWriter);
-			// write in train data file for weka
-			bw.write("@relation DataExtraction2");
-			bw.newLine();
-			bw.write("@ATTRIBUTE Sentence	string");
-			bw.newLine();
-			bw.write("@ATTRIBUTE Foxoutput	string");
-			bw.newLine();
-			bw.newLine();
-			bw.write("@ATTRIBUTE OPENIEoutput	string");
-			bw.newLine();
-			bw.write("@data");
-			bw.newLine();
-
+	public static void main(String[] args) {			
 			// sort the files in numerical order
 			Arrays.sort(files, new Comparator<File>() {
 				@Override
@@ -108,6 +91,8 @@ public class SentenceExtractor {
 					// calling every extractors and getting outputs
 
 					for (int j = 0; j < portNumb.length; j++) {
+//      To handle url_encoding exception
+						try {
 						// replacing url with space character
 						String URL2 = java.net.URLEncoder.encode(sentences.get(i), "UTF-8").replace("+", "%20");
 						// add extractor for url
@@ -116,7 +101,7 @@ public class SentenceExtractor {
 						// _extractorURL = "https://www.google.com/";
 
 						URL url;
-						try {
+	
 							url = new URL(_extractorURL);
 							//
 							HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -178,7 +163,10 @@ public class SentenceExtractor {
 						catch (Exception e) {
 							// TODO: handle exception
 						}
+
 					}
+					
+
 	
 					System.out.println("Extracted sentence From the file " + files[i].getName());	
 
@@ -206,33 +194,18 @@ public class SentenceExtractor {
 					System.out.println(training_data);
 
 					System.out.println("-------------------------------------------------------------");
-				trainingFileWriter();
-					try {
+					trainingFileWriter(training_data);
 
-						bw.write(training_data);
-						bw.newLine();
-
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
 
 				}
 
 			}
-			bw.close();
-			fileWriter.close();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+
+		
 
 	}
 
-	// catch (Exception e)
-	// {
-	// // TODO Auto-generated catch block
-	// e.printStackTrace();
-	// }
+
 
 	public static String readLineByLine(String filePath) {
 		StringBuilder contentBuilder = new StringBuilder();
@@ -325,8 +298,8 @@ public class SentenceExtractor {
 //		System.out.println(sparqueryList);
 		return sparql_query_result;
 	}
-	
-	public static void trainingFileWriter()
+
+	public static void trainingFileWriter(String training_data)
 	{
 
 //		List<String> sentences = new ArrayList<String>();
@@ -334,19 +307,27 @@ public class SentenceExtractor {
 		FileWriter fileWriter;
 		try 
 		{
+			int x =0;
 			fileWriter = new FileWriter(file2);
 			BufferedWriter bw2 = new BufferedWriter(fileWriter);
-			bw2.write("@relation DataExtraction2");
-			bw2.newLine();
-			bw2.write("@ATTRIBUTE Sentence	string");
-			bw2.newLine();
-			bw2.write("@ATTRIBUTE Foxoutput	string");
-			bw2.newLine();
-			bw2.newLine();
-			bw2.write("@ATTRIBUTE OPENIEoutput	string");
-			bw2.newLine();
-			bw2.write("@data");
-			bw2.newLine();
+			if(x == 0)
+			{
+				bw2.write("@relation DataExtraction2");
+				bw2.newLine();
+				bw2.write("@ATTRIBUTE Sentence	string");
+				bw2.newLine();
+				bw2.write("@ATTRIBUTE Foxoutput	string");
+				bw2.newLine();
+				bw2.newLine();
+				bw2.write("@ATTRIBUTE OPENIEoutput	string");
+				bw2.newLine();
+				bw2.write("@data");
+				bw2.newLine();
+				x++;
+			}
+			
+			bw2.append(training_data);
+
 			bw2.close();
 			
 			fileWriter.close();
