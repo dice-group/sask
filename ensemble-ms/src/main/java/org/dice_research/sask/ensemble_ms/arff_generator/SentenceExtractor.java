@@ -39,6 +39,10 @@ public class SentenceExtractor {
 	private static File file2 = new File("TrainingData\\traindata2.arff");	
 
 	private static String sentence_data;
+	public static String fox_response_string = null;
+	static String openie_response_string = null;
+	static String sorokin_response_string = null;
+	static String cedric_response_string = null;
     
 	public static void main(String[] args) {			
 			// sort the files in numerical order
@@ -50,9 +54,38 @@ public class SentenceExtractor {
 					return Integer.valueOf(s1).compareTo(Integer.valueOf(s2));
 				}
 			});
+			
 			for (int i = 0; i < 3; i++) 
 			{
 			sentence_Extracion(i);
+			System.out.println("Extracted sentence From the file " + files[i].getName());	
+
+			System.out.println(sentences.get(i));
+			System.out.println("Fox extractor response for file" + files[i].getName());			
+			System.out.println(fox_response_string);
+			System.out.println("OpenIE extractor response for file " + files[i].getName());			
+			System.out.println(openie_response_string);
+			System.out.println("Cedric extractor response for file"  + files[i].getName());		
+			System.out.println(cedric_response_string);
+			System.out.println("Sorokin extractor response for file " + files[i].getName());				
+			System.out.println(sorokin_response_string);
+			System.out.println("Gethering Sparql Query Result................................");
+			
+			String squery_Result = responseReader(i);
+			System.out.println("......................................");
+			System.out.println(squery_Result);
+			
+			System.out.println("Training Data for file " + files[i].getName());		
+			String training_data = " ' " + sentences.get(i) + " ' " + ", " + "'" + fox_response_string + " ' "
+					+ "," + " ' " + openie_response_string + " ' " + "," + " ' " + sorokin_response_string + ","
+					+ " ' " + cedric_response_string +   " ' " +  squery_Result + " ' ";
+			
+			System.out.println("------");
+			System.out.println(training_data);
+
+			System.out.println("-------------------------------------------------------------");
+			trainingFileWriter(training_data);
+
 			}
 			
 	}
@@ -62,10 +95,7 @@ public class SentenceExtractor {
  private static void sentence_Extracion(int i) 
  	{
 //		Initialize value with null
-		String fox_response_string = null;
-		String openie_response_string = null;
-		String sorokin_response_string = null;
-		String cedric_response_string = null;
+
 
 		
 		
@@ -179,33 +209,6 @@ public class SentenceExtractor {
 				
 
 
-				System.out.println("Extracted sentence From the file " + files[i].getName());	
-
-				System.out.println(sentences.get(i));
-				System.out.println("Fox extractor response for file" + files[i].getName());			
-				System.out.println(fox_response_string);
-				System.out.println("OpenIE extractor response for file " + files[i].getName());			
-				System.out.println(openie_response_string);
-				System.out.println("Cedric extractor response for file"  + files[i].getName());		
-				System.out.println(cedric_response_string);
-				System.out.println("Sorokin extractor response for file " + files[i].getName());				
-				System.out.println(sorokin_response_string);
-				System.out.println("Gethering Sparql Query Result................................");
-				
-				String squery_Result = responseReader(i);
-				System.out.println("......................................");
-				System.out.println(squery_Result);
-				
-				System.out.println("Training Data for file " + files[i].getName());		
-				String training_data = " ' " + sentences.get(i) + " ' " + ", " + "'" + fox_response_string + " ' "
-						+ "," + " ' " + openie_response_string + " ' " + "," + " ' " + sorokin_response_string + ","
-						+ " ' " + cedric_response_string +   " ' " +  squery_Result + " ' ";
-				
-				System.out.println("------");
-				System.out.println(training_data);
-
-				System.out.println("-------------------------------------------------------------");
-				trainingFileWriter(training_data);
 
 
 			}
