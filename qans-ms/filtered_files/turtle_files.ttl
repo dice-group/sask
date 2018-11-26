@@ -1,880 +1,427 @@
-@prefix dbo:   <http://dbpedia.org/ontology/> .
-@prefix oa:    <http://www.w3.org/ns/oa#> .
-@prefix aksw:  <http://aksw.org/notInWiki/> .
-@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix dbr:   <http://dbpedia.org/resource/> .
-@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
-@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
-@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
-
-aksw:James_Damore  dbo:employee  dbr:Google .
-
-dbr:Google  dbo:CEO  dbr:Sundar_Pichai .
-
-dbr:Sundar_Pichai  dbo:employer  dbr:Google .
-
-dbr:Sundar_Pichai  rdfs:label "Sundar Pichai".
-dbr:Google rdfs:label "Google".
-dbo:employee rdfs:label "works for".
-
-
-@prefix dbo:   <http://dbpedia.org/ontology/> .
-@prefix oa:    <http://www.w3.org/ns/oa#> .
-@prefix aksw:  <http://aksw.org/notInWiki/> .
-@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix dbr:   <http://dbpedia.org/resource/> .
-@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
-@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
-@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
-
-dbr:Chile  dbo:locatedInArea  dbr:Latin_America ;
-        dbo:location       dbr:Latin_America .
-
-dbr:Pope_Francis  dbo:country  dbr:Chile ;
-        dbo:location  dbr:Chile , dbr:Latin_America .
-		
-		
-@prefix dbo:   <http://dbpedia.org/ontology/> .
-@prefix oa:    <http://www.w3.org/ns/oa#> .
-@prefix aksw:  <http://aksw.org/notInWiki/> .
-@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix dbr:   <http://dbpedia.org/resource/> .
-@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
-@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
-@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
-
-dbr:Hillary_Clinton  dbo:almaMater  dbr:Wellesley_College .
-
-dbr:Wellesley_College  dbo:location  dbr:Boston .
-
-
-@prefix dbo:   <http://dbpedia.org/ontology/> .
-@prefix oa:    <http://www.w3.org/ns/oa#> .
-@prefix aksw:  <http://aksw.org/notInWiki/> .
-@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix dbr:   <http://dbpedia.org/resource/> .
-@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
-@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
-@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
-
-dbr:Google  dbo:ceo  dbr:Sundar_Pichai .
-
-dbr:Sundar_Pichai  dbo:employer  dbr:Google .
-
-
-@prefix dbo:   <http://dbpedia.org/ontology/> .
-@prefix oa:    <http://www.w3.org/ns/oa#> .
-@prefix aksw:  <http://aksw.org/notInWiki/> .
-@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix dbr:   <http://dbpedia.org/resource/> .
-@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
-@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
-@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
-
-dbr:Melissa_McCarthy  dbo:relative  dbr:Jenny_McCarthy .
-
-
-@prefix dbo:   <http://dbpedia.org/ontology/> .
-@prefix oa:    <http://www.w3.org/ns/oa#> .
-@prefix aksw:  <http://aksw.org/notInWiki/> .
-@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix dbr:   <http://dbpedia.org/resource/> .
-@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
-@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
-@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
-
-
-dbr:European_Commission  dbo:president  dbr:Jean-Claude_Juncker .
-
-
-@prefix dbo:   <http://dbpedia.org/ontology/> .
-@prefix oa:    <http://www.w3.org/ns/oa#> .
-@prefix aksw:  <http://aksw.org/notInWiki/> .
-@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix dbr:   <http://dbpedia.org/resource/> .
-@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
-@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
-@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
-
-
-<http://dbpedia.org/page/Eagles_(band)>  dbo:formerBandMember  dbr:Glenn_Frey .@prefix dbo:   <http://dbpedia.org/ontology/> .
-
-
-@prefix oa:    <http://www.w3.org/ns/oa#> .
-@prefix aksw:  <http://aksw.org/notInWiki/> .
-@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix dbr:   <http://dbpedia.org/resource/> .
-@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
-@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
-@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
-
-
-dbr:Sergey_Brin  dbo:doctoralStudent  dbr:Rajeev_Motwani .
-
-dbr:Rajeev_Motwani  dbo:doctoralAdvisor  dbr:Larry_Page , dbr:Sergey_Brin .
-
-dbr:Larry_Page  dbo:doctoralStudent  dbr:Rajeev_Motwani .
-
-
-@prefix dbo:   <http://dbpedia.org/ontology/> .
-@prefix oa:    <http://www.w3.org/ns/oa#> .
-@prefix aksw:  <http://aksw.org/notInWiki/> .
-@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix dbr:   <http://dbpedia.org/resource/> .
-@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
-@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
-@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
-
-
-<http://dbpedia.org/resource/Menlo_Park%2C_California>
-        dbo:locatedInArea  dbr:California ;
-        dbo:location       dbr:California .
-
-
-dbr:Google  dbo:foundationPlace  <http://dbpedia.org/resource/Menlo_Park%2C_California> ;
-        dbo:location         dbr:California , <http://dbpedia.org/resource/Menlo_Park%2C_California> .
-
-
-@prefix dbo:   <http://dbpedia.org/ontology/> .
-@prefix oa:    <http://www.w3.org/ns/oa#> .
-@prefix aksw:  <http://aksw.org/notInWiki/> .
-@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix dbr:   <http://dbpedia.org/resource/> .
-@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
-@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
-@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
-
-
-dbr:The_Beatles  dbo:bandMember  dbr:John_Lennon .
-
-
-@prefix dbo:   <http://dbpedia.org/ontology/> .
-@prefix oa:    <http://www.w3.org/ns/oa#> .
-@prefix aksw:  <http://aksw.org/notInWiki/> .
-@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix dbr:   <http://dbpedia.org/resource/> .
-@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
-@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
-@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
-
-
-dbr:Japan  dbo:country     dbr:Asia ;
-        dbo:locatedInArea  dbr:Asia ;
-        dbo:location       dbr:Asia .
-		
-		
-@prefix dbo:   <http://dbpedia.org/ontology/> .
-@prefix oa:    <http://www.w3.org/ns/oa#> .
-@prefix aksw:  <http://aksw.org/notInWiki/> .
-@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix dbr:   <http://dbpedia.org/resource/> .
-@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
-@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
-@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
-
-
-dbr:HSBC  dbo:foundationPlace  dbr:Hong_Kong , dbr:Shanghai ;
-        dbo:headquarter      dbr:London ;
-        dbo:location         dbr:Shanghai , dbr:London , dbr:Hong_Kong .
-		
-		
-@prefix dbo:   <http://dbpedia.org/ontology/> .
-@prefix oa:    <http://www.w3.org/ns/oa#> .
-@prefix aksw:  <http://aksw.org/notInWiki/> .
-@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix dbr:   <http://dbpedia.org/resource/> .
-@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
-@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
-@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
-
-
-dbr:Tata_Consultancy_Services
-        dbo:location  dbr:Thane , dbr:Hiranandani_Estate .
-
-		
-dbr:Hiranandani_Estate
-        dbo:locatedInArea  dbr:Thane ;
-        dbo:location       dbr:Thane ;
-        dbo:tenant         dbr:Tata_Consultancy_Services .
-
-
-@prefix dbo:   <http://dbpedia.org/ontology/> .
-@prefix oa:    <http://www.w3.org/ns/oa#> .
-@prefix aksw:  <http://aksw.org/notInWiki/> .
-@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix dbr:   <http://dbpedia.org/resource/> .
-@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
-@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
-@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
-
-
-dbr:Fifth_Harmony  dbo:formerBandMember
-                dbr:Camila_Cabello .
-				
-				
-@prefix dbo:   <http://dbpedia.org/ontology/> .
-@prefix oa:    <http://www.w3.org/ns/oa#> .
-@prefix aksw:  <http://aksw.org/notInWiki/> .
-@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix dbr:   <http://dbpedia.org/resource/> .
-@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
-@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
-@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
-
-
-<http://dbpedia.org/resource/Altice_(company)>
-        dbo:subsidiary  dbr:Numericable .
-		
-
-@prefix dbo:   <http://dbpedia.org/ontology/> .
-@prefix oa:    <http://www.w3.org/ns/oa#> .
-@prefix aksw:  <http://aksw.org/notInWiki/> .
-@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix dbr:   <http://dbpedia.org/resource/> .
-@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
-@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
-@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
-
-
-dbr:Dhoni  dbo:formerTeam  dbr:Chennai_Super_Kings .
-
-
-@prefix dbo:   <http://dbpedia.org/ontology/> .
-@prefix oa:    <http://www.w3.org/ns/oa#> .
-@prefix aksw:  <http://aksw.org/notInWiki/> .
-@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix dbr:   <http://dbpedia.org/resource/> .
-@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
-@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
-@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
-
-dbr:Satya_Nadella  dbo:employer  dbr:Microsoft .
-
-
-dbr:Microsoft  dbo:ceo  dbr:Satya_Nadella .@prefix dbo:   <http://dbpedia.org/ontology/> .
-@prefix oa:    <http://www.w3.org/ns/oa#> .
-@prefix aksw:  <http://aksw.org/notInWiki/> .
-@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix dbr:   <http://dbpedia.org/resource/> .
-@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
-@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
-@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
-
-
-dbr:Russel_E._Caflisch
-        dbo:spouse  aksw:CarolLynnMeylan .
-
-		
-aksw:CarolLynnMeylan  dbo:spouse  dbr:Russel_E._Caflisch .
-
-
-@prefix dbo:   <http://dbpedia.org/ontology/> .
-@prefix oa:    <http://www.w3.org/ns/oa#> .
-@prefix aksw:  <http://aksw.org/notInWiki/> .
-@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix dbr:   <http://dbpedia.org/resource/> .
-@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
-@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
-@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
-
+<http://dbpedia.org/resource/Johanna_Konta>
+        <http://dbpedia.org/ontology/trainer>
+                <http://dbpedia.org/resource/Michael_Joyce_%28tennis%29> .
+
+<http://dbpedia.org/resource/Chile>
+        <http://dbpedia.org/ontology/locatedInArea>
+                <http://dbpedia.org/resource/Latin_America> ;
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/Latin_America> .
+
+<http://dbpedia.org/resource/Russel_E._Caflisch>
+        <http://dbpedia.org/ontology/spouse>
+                <http://aksw.org/notInWiki/CarolLynnMeylan> .
+
+<http://dbpedia.org/resource/Facebook>
+        <http://dbpedia.org/ontology/ceo>
+                <http://dbpedia.org/resource/Mark_Zuckerberg> .
+
+<http://dbpedia.org/resource/North_Korea>
+        <http://dbpedia.org/ontology/leaderName>
+                <http://dbpedia.org/resource/Kim_Jong-un> , <http://dbpedia.org/resource/Kim_Jong-il> .
+
+<http://dbpedia.org/resource/David_Beckham>
+        <http://dbpedia.org/ontology/child>
+                <http://aksw.org/notInWiki/Brooklyn_Beckham> ;
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/Paris> ;
+        <http://dbpedia.org/ontology/spouse>
+                <http://dbpedia.org/resource/Victoria_Beckham> .
+
+<http://aksw.org/notInWiki/Moumita>
+        <http://dbpedia.org/ontology/country>
+                <http://dbpedia.org/resource/India> ;
+        <http://dbpedia.org/ontology/hometown>
+                <http://dbpedia.org/resource/Kolkata> ;
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/Kolkata> , <http://dbpedia.org/resource/India> .
 
 <http://dbpedia.org/resource/Oak_Brook,_Illinois>
-        dbo:locatedInArea  dbr:Chicago ;
-        dbo:location       dbr:Chicago .
-
-
-dbr:McDonalds  dbo:headquarter  <http://dbpedia.org/resource/Oak_Brook,_Illinois> ;
-        dbo:location     <http://dbpedia.org/resource/Oak_Brook,_Illinois> , dbr:Chicago .
-
-
-@prefix dbo:   <http://dbpedia.org/ontology/> .
-@prefix oa:    <http://www.w3.org/ns/oa#> .
-@prefix aksw:  <http://aksw.org/notInWiki/> .
-@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix dbr:   <http://dbpedia.org/resource/> .
-@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
-@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
-@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
-
-
-aksw:Brooklyn_Beckham
-        dbo:location  dbr:Paris ;
-        dbo:parent    dbr:Victoria_Beckham , dbr:David_Beckham .
-
-dbr:Louis_Vuitton  dbo:location  dbr:Paris .
-
-
-dbr:Victoria_Beckham  dbo:child  aksw:Brooklyn_Beckham ;
-        dbo:location  dbr:Paris ;
-        dbo:spouse    dbr:David_Beckham .
-
-		
-dbr:David_Beckham  dbo:child  aksw:Brooklyn_Beckham ;
-        dbo:location  dbr:Paris ;
-        dbo:spouse    dbr:Victoria_Beckham .
-
-
-@prefix dbo:   <http://dbpedia.org/ontology/> .
-@prefix oa:    <http://www.w3.org/ns/oa#> .
-@prefix aksw:  <http://aksw.org/notInWiki/> .
-@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix dbr:   <http://dbpedia.org/resource/> .
-@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
-@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
-@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
-
-
-dbr:The_Pussycat_Dolls
-        dbo:formerBandMember  dbr:Kaya_Jones .
-
-
-@prefix dbo:   <http://dbpedia.org/ontology/> .
-@prefix oa:    <http://www.w3.org/ns/oa#> .
-@prefix aksw:  <http://aksw.org/notInWiki/> .
-@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix dbr:   <http://dbpedia.org/resource/> .
-@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
-@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
-@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
-
-
-dbr:Pope_Francis  dbo:relative  aksw:Emanuel_Bergogolio .
-
-
-aksw:Cordoba-Rosario  dbo:country  dbr:Argentina ;
-        dbo:locatedInArea  dbr:Argentina .
-		
-
-aksw:Emanuel_Bergogolio
-        dbo:location  aksw:Cordoba-Rosario .
-
-
-@prefix dbo:   <http://dbpedia.org/ontology/> .
-@prefix oa:    <http://www.w3.org/ns/oa#> .
-@prefix aksw:  <http://aksw.org/notInWiki/> .
-@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix dbr:   <http://dbpedia.org/resource/> .
-@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
-@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
-@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
-
-
-dbr:Siemens  dbo:headquarter  dbr:Munich ;
-        dbo:location     dbr:Munich .
-
-
-@prefix dbo:   <http://dbpedia.org/ontology/> .
-@prefix oa:    <http://www.w3.org/ns/oa#> .
-@prefix aksw:  <http://aksw.org/notInWiki/> .
-@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix dbr:   <http://dbpedia.org/resource/> .
-@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
-@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
-@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
-
-
-dbr:Serbia  dbo:leaderName  <http://dbpedia.org/resource/Aleksandar_Vu%C4%8Di%C4%87> .
-
-
-
-@prefix dbo:   <http://dbpedia.org/ontology/> .
-@prefix oa:    <http://www.w3.org/ns/oa#> .
-@prefix aksw:  <http://aksw.org/notInWiki/> .
-@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix dbr:   <http://dbpedia.org/resource/> .
-@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
-@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
-@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
-
-
-dbr:Mark_Zuckerberg  dbo:employer  dbr:Facebook .
-
-
-dbr:Facebook  dbo:ceo  dbr:Mark_Zuckerberg .
-
-
-@prefix dbo:   <http://dbpedia.org/ontology/> .
-@prefix oa:    <http://www.w3.org/ns/oa#> .
-@prefix aksw:  <http://aksw.org/notInWiki/> .
-@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix dbr:   <http://dbpedia.org/resource/> .
-@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
-@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
-@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
-
-
-dbr:Donald_Trump  dbo:country  dbr:United_States ;
-        dbo:location  dbr:United_States .
-
-
-dbr:United_States  dbo:leaderName  dbr:Donald_Trump .
-
-
-
-
-@prefix dbo:   <http://dbpedia.org/ontology/> .
-@prefix oa:    <http://www.w3.org/ns/oa#> .
-@prefix aksw:  <http://aksw.org/notInWiki/> .
-@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix dbr:   <http://dbpedia.org/resource/> .
-@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
-@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
-@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
-
-
-aksw:KnowledgeServices
-        dbo:president  aksw:JoeBielawski .
-
-
-
-
-
-
-@prefix dbo:   <http://dbpedia.org/ontology/> .
-@prefix oa:    <http://www.w3.org/ns/oa#> .
-@prefix aksw:  <http://aksw.org/notInWiki/> .
-@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix dbr:   <http://dbpedia.org/resource/> .
-@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
-@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
-@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
-
-
-aksw:TMLDrivelines  dbo:subsidiary  dbr:Tata_Motors .
-
-
-
-
-
-
-@prefix dbo:   <http://dbpedia.org/ontology/> .
-@prefix oa:    <http://www.w3.org/ns/oa#> .
-@prefix aksw:  <http://aksw.org/notInWiki/> .
-@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix dbr:   <http://dbpedia.org/resource/> .
-@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
-@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
-@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
-
-
-aksw:Styx  dbo:formerBandMember  dbr:John_Panozzo .
-
-
-@prefix dbo:   <http://dbpedia.org/ontology/> .
-@prefix oa:    <http://www.w3.org/ns/oa#> .
-@prefix aksw:  <http://aksw.org/notInWiki/> .
-@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix dbr:   <http://dbpedia.org/resource/> .
-@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
-@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
-@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
-
-
-aksw:Anthony_Carrino  dbo:relative  aksw:John_Colaneri .
-
-
-@prefix dbo:   <http://dbpedia.org/ontology/> .
-@prefix oa:    <http://www.w3.org/ns/oa#> .
-@prefix aksw:  <http://aksw.org/notInWiki/> .
-@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix dbr:   <http://dbpedia.org/resource/> .
-@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
-@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
-@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
-
-
-aksw:CaroleeBull  dbo:almaMater  dbr:Ohio_University .
-
-
-
-
-
-
-@prefix dbo:   <http://dbpedia.org/ontology/> .
-@prefix oa:    <http://www.w3.org/ns/oa#> .
-@prefix aksw:  <http://aksw.org/notInWiki/> .
-@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix dbr:   <http://dbpedia.org/resource/> .
-@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
-@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
-@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
-
-dbr:Anant_Ambani  dbo:child  dbr:Nita_Ambani , dbr:Mukesh_Ambani .
-
-dbr:Nita_Ambani  dbo:parent  dbr:Anant_Ambani ;
-        dbo:spouse  dbr:Mukesh_Ambani .
-
-dbr:Mukesh_Ambani  dbo:parent  dbr:Anant_Ambani ;
-        dbo:spouse  dbr:Nita_Ambani .
-		
-		
-		
-@prefix dbo:   <http://dbpedia.org/ontology/> .
-@prefix oa:    <http://www.w3.org/ns/oa#> .
-@prefix aksw:  <http://aksw.org/notInWiki/> .
-@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix dbr:   <http://dbpedia.org/resource/> .
-@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
-@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
-@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
-
-
-dbr:A._P._J._Abdul_Kalam
-        dbo:country     dbr:Northeast_India ;
-        dbo:deathPlace  dbr:Northeast_India ;
-        dbo:location    dbr:Northeast_India .
-
-
-@prefix dbo:   <http://dbpedia.org/ontology/> .
-@prefix oa:    <http://www.w3.org/ns/oa#> .
-@prefix aksw:  <http://aksw.org/notInWiki/> .
-@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix dbr:   <http://dbpedia.org/resource/> .
-@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
-@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
-@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
-
-
-dbr:Sinclair_Broadcast_Group
-        dbo:affiliation  dbr:Fox_Broadcasting_Company .
-
-
-@prefix dbo:   <http://dbpedia.org/ontology/> .
-@prefix oa:    <http://www.w3.org/ns/oa#> .
-@prefix aksw:  <http://aksw.org/notInWiki/> .
-@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix dbr:   <http://dbpedia.org/resource/> .
-@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
-@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
-@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
-
-dbr:Kim_Jong-il  dbo:country  dbr:North_Korea ;
-        dbo:location  dbr:North_Korea ;
-        dbo:parent    dbr:Kim_Jong-un .
-
-dbr:Kim_Jong-un  dbo:child  dbr:Kim_Jong-il ;
-        dbo:country   dbr:North_Korea ;
-        dbo:location  dbr:North_Korea .
-
-dbr:North_Korea  dbo:leaderName  dbr:Kim_Jong-un , dbr:Kim_Jong-il .
-
-
-@prefix dbo:   <http://dbpedia.org/ontology/> .
-@prefix oa:    <http://www.w3.org/ns/oa#> .
-@prefix aksw:  <http://aksw.org/notInWiki/> .
-@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix dbr:   <http://dbpedia.org/resource/> .
-@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
-@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
-@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
-
-
-dbr:Rahul_Dravid  dbo:parent  aksw:Samit .
-
-aksw:Samit  dbo:child  dbr:Rahul_Dravid .
-
-
-@prefix dbo:   <http://dbpedia.org/ontology/> .
-@prefix oa:    <http://www.w3.org/ns/oa#> .
-@prefix aksw:  <http://aksw.org/notInWiki/> .
-@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix dbr:   <http://dbpedia.org/resource/> .
-@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
-@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
-@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
-
-
-dbr:Ryan_Lochte  dbo:location  <http://dbpedia.org/resource/Gainesville%2C_Florida> .
-
-
-dbr:Gregg_Troy  dbo:location  <http://dbpedia.org/resource/Gainesville%2C_Florida> ;
-        dbo:trainer   dbr:Ryan_Lochte .
-
-
-@prefix dbo:   <http://dbpedia.org/ontology/> .
-@prefix oa:    <http://www.w3.org/ns/oa#> .
-@prefix aksw:  <http://aksw.org/notInWiki/> .
-@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix dbr:   <http://dbpedia.org/resource/> .
-@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
-@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
-@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
-
-dbr:Nokia  dbo:country       dbr:Finland ;
-        dbo:foundationPlace  dbr:Finland ;
-        dbo:location         dbr:Finland .
-		
-		
-		
-@prefix dbo:   <http://dbpedia.org/ontology/> .
-@prefix oa:    <http://www.w3.org/ns/oa#> .
-@prefix aksw:  <http://aksw.org/notInWiki/> .
-@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix dbr:   <http://dbpedia.org/resource/> .
-@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
-@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
-@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
-
-
-dbr:Johanna_Konta  dbo:trainer  <http://dbpedia.org/resource/Michael_Joyce_%28tennis%29> .
-
-
-
-@prefix dbo:   <http://dbpedia.org/ontology/> .
-@prefix oa:    <http://www.w3.org/ns/oa#> .
-@prefix aksw:  <http://aksw.org/notInWiki/> .
-@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix dbr:   <http://dbpedia.org/resource/> .
-@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
-@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
-@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
-
-dbr:Chandrayaan-1  dbo:country  dbr:India .
-
-dbr:Kolkata  dbo:country   dbr:India ;
-        dbo:locatedInArea  dbr:India ;
-        dbo:location       dbr:India .
-
-aksw:Moumita  dbo:country  dbr:India ;
-        dbo:hometown  dbr:Kolkata ;
-        dbo:location  dbr:India , dbr:Kolkata .
-
-dbr:Anandabazar_Patrika
-        dbo:country   dbr:India ;
-        dbo:location  dbr:Kolkata , dbr:India .
-
-		
-
-@prefix dbo:   <http://dbpedia.org/ontology/> .
-@prefix oa:    <http://www.w3.org/ns/oa#> .
-@prefix aksw:  <http://aksw.org/notInWiki/> .
-@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix dbr:   <http://dbpedia.org/resource/> .
-@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
-@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
-@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
-
-dbr:Ralph_Fiennes  dbo:nationality  dbr:Serbia .
-
-
-@prefix dbo:   <http://dbpedia.org/ontology/> .
-@prefix oa:    <http://www.w3.org/ns/oa#> .
-@prefix aksw:  <http://aksw.org/notInWiki/> .
-@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix dbr:   <http://dbpedia.org/resource/> .
-@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
-@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
-@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
-
-
-dbr:China  dbo:leaderName  dbr:Xi_Jinping .
-
-dbr:Xi_Jinping  dbo:country  dbr:China ;
-        dbo:location  dbr:China .
-
-		
-		
-@prefix dbo:   <http://dbpedia.org/ontology/> .
-@prefix oa:    <http://www.w3.org/ns/oa#> .
-@prefix aksw:  <http://aksw.org/notInWiki/> .
-@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix dbr:   <http://dbpedia.org/resource/> .
-@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
-@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
-@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
-
-
-aksw:AlanSelby  dbo:employer  dbr:Sunday_Mirror .
-
-
-
-@prefix dbo:   <http://dbpedia.org/ontology/> .
-@prefix oa:    <http://www.w3.org/ns/oa#> .
-@prefix aksw:  <http://aksw.org/notInWiki/> .
-@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix dbr:   <http://dbpedia.org/resource/> .
-@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
-@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
-@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
-
-dbr:Roger_Federer  dbo:country  dbr:Switzerland ;
-        dbo:location     dbr:Switzerland ;
-        dbo:nationality  dbr:Switzerland .
-
-
-@prefix dbo:   <http://dbpedia.org/ontology/> .
-@prefix oa:    <http://www.w3.org/ns/oa#> .
-@prefix aksw:  <http://aksw.org/notInWiki/> .
-@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix dbr:   <http://dbpedia.org/resource/> .
-@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
-@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
-@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
-
-
-dbr:Toni_Nadal  dbo:trainer  dbr:Rafael_Nadal .
-
-dbr:Rafael_Nadal  dbo:relative  dbr:Toni_Nadal .
-
-
-@prefix dbo:   <http://dbpedia.org/ontology/> .
-@prefix oa:    <http://www.w3.org/ns/oa#> .
-@prefix aksw:  <http://aksw.org/notInWiki/> .
-@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix dbr:   <http://dbpedia.org/resource/> .
-@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
-@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
-@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
-
-
-dbr:A._P._J._Abdul_Kalam
-        dbo:birthPlace  dbr:Rameswaram ;
-        dbo:deathPlace  dbr:Shillong ;
-        dbo:location    dbr:Rameswaram , dbr:Shillong , dbr:Tamil_Nadu .
-
-dbr:Rameswaram  dbo:locatedInArea  dbr:Tamil_Nadu ;
-        dbo:location       dbr:Tamil_Nadu .
-		
-		
-		
-@prefix dbo:   <http://dbpedia.org/ontology/> .
-@prefix oa:    <http://www.w3.org/ns/oa#> .
-@prefix aksw:  <http://aksw.org/notInWiki/> .
-@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix dbr:   <http://dbpedia.org/resource/> .
-@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
-@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
-@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
-
+        <http://dbpedia.org/ontology/locatedInArea>
+                <http://dbpedia.org/resource/Chicago> ;
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/Chicago> .
+
+<http://dbpedia.org/resource/Anandabazar_Patrika>
+        <http://dbpedia.org/ontology/country>
+                <http://dbpedia.org/resource/India> ;
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/Kolkata> , <http://dbpedia.org/resource/India> .
+
+<http://dbpedia.org/resource/McDonalds>
+        <http://dbpedia.org/ontology/headquarter>
+                <http://dbpedia.org/resource/Oak_Brook,_Illinois> ;
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/Oak_Brook,_Illinois> , <http://dbpedia.org/resource/Chicago> .
+
+<http://dbpedia.org/resource/Bastian_Schweinsteiger>
+        <http://dbpedia.org/ontology/club>
+                <http://dbpedia.org/resource/Chicago_Fire_Soccer_Club> ;
+        <http://dbpedia.org/ontology/formerTeam>
+                <http://dbpedia.org/resource/Manchester_United_F.C.> .
+
+<http://dbpedia.org/resource/Hillary_Clinton>
+        <http://dbpedia.org/ontology/almaMater>
+                <http://dbpedia.org/resource/Wellesley_College> .
+
+<http://dbpedia.org/resource/Sundar_Pichai>
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Sundar Pichai" ;
+        <http://dbpedia.org/ontology/employer>
+                <http://dbpedia.org/resource/Google> .
+
+<http://dbpedia.org/resource/Anant_Ambani>
+        <http://dbpedia.org/ontology/child>
+                <http://dbpedia.org/resource/Nita_Ambani> , <http://dbpedia.org/resource/Mukesh_Ambani> .
+
+<http://dbpedia.org/resource/Ralph_Fiennes>
+        <http://dbpedia.org/ontology/nationality>
+                <http://dbpedia.org/resource/Serbia> .
+
+<http://dbpedia.org/resource/Melissa_McCarthy>
+        <http://dbpedia.org/ontology/relative>
+                <http://dbpedia.org/resource/Jenny_McCarthy> .
+
+<http://aksw.org/notInWiki/TMLDrivelines>
+        <http://dbpedia.org/ontology/subsidiary>
+                <http://dbpedia.org/resource/Tata_Motors> .
+
+<http://dbpedia.org/resource/Microsoft>
+        <http://dbpedia.org/ontology/ceo>
+                <http://dbpedia.org/resource/Satya_Nadella> .
+
+<http://dbpedia.org/resource/Ryan_Lochte>
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/Gainesville%2C_Florida> .
+
+<http://aksw.org/notInWiki/CaroleeBull>
+        <http://dbpedia.org/ontology/almaMater>
+                <http://dbpedia.org/resource/Ohio_University> .
+
+<http://dbpedia.org/resource/Rajeev_Motwani>
+        <http://dbpedia.org/ontology/doctoralAdvisor>
+                <http://dbpedia.org/resource/Sergey_Brin> , <http://dbpedia.org/resource/Larry_Page> .
+
+<http://dbpedia.org/resource/Dhoni>
+        <http://dbpedia.org/ontology/formerTeam>
+                <http://dbpedia.org/resource/Chennai_Super_Kings> .
+
+<http://dbpedia.org/resource/Mukesh_Ambani>
+        <http://dbpedia.org/ontology/parent>
+                <http://dbpedia.org/resource/Anant_Ambani> ;
+        <http://dbpedia.org/ontology/spouse>
+                <http://dbpedia.org/resource/Nita_Ambani> .
+
+<http://dbpedia.org/resource/Siemens>
+        <http://dbpedia.org/ontology/headquarter>
+                <http://dbpedia.org/resource/Munich> ;
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/Munich> .
+
+<http://dbpedia.org/resource/Kim_Jong-il>
+        <http://dbpedia.org/ontology/country>
+                <http://dbpedia.org/resource/North_Korea> ;
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/North_Korea> ;
+        <http://dbpedia.org/ontology/parent>
+                <http://dbpedia.org/resource/Kim_Jong-un> .
+
+<http://dbpedia.org/resource/Mark_Zuckerberg>
+        <http://dbpedia.org/ontology/employer>
+                <http://dbpedia.org/resource/Facebook> .
+
+<http://dbpedia.org/ontology/employee>
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "works for" .
+
+<http://dbpedia.org/resource/A._P._J._Abdul_Kalam>
+        <http://dbpedia.org/ontology/birthPlace>
+                <http://dbpedia.org/resource/Rameswaram> ;
+        <http://dbpedia.org/ontology/country>
+                <http://dbpedia.org/resource/Northeast_India> ;
+        <http://dbpedia.org/ontology/deathPlace>
+                <http://dbpedia.org/resource/Shillong> , <http://dbpedia.org/resource/Northeast_India> ;
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/Tamil_Nadu> , <http://dbpedia.org/resource/Shillong> , <http://dbpedia.org/resource/Rameswaram> , <http://dbpedia.org/resource/Northeast_India> .
+
+<http://dbpedia.org/resource/Donald_Trump>
+        <http://dbpedia.org/ontology/country>
+                <http://dbpedia.org/resource/United_States> ;
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/United_States> .
+
+<http://dbpedia.org/resource/Nokia>
+        <http://dbpedia.org/ontology/country>
+                <http://dbpedia.org/resource/Finland> ;
+        <http://dbpedia.org/ontology/foundationPlace>
+                <http://dbpedia.org/resource/Finland> ;
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/Finland> .
+
+<http://dbpedia.org/resource/Mike_Pence>
+        <http://dbpedia.org/ontology/country>
+                <http://dbpedia.org/resource/Israel> ;
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/Israel> .
+
+<http://aksw.org/notInWiki/Styx>
+        <http://dbpedia.org/ontology/formerBandMember>
+                <http://dbpedia.org/resource/John_Panozzo> .
+
+<http://aksw.org/notInWiki/Cordoba-Rosario>
+        <http://dbpedia.org/ontology/country>
+                <http://dbpedia.org/resource/Argentina> ;
+        <http://dbpedia.org/ontology/locatedInArea>
+                <http://dbpedia.org/resource/Argentina> .
+
+<http://aksw.org/notInWiki/Samit>
+        <http://dbpedia.org/ontology/child>
+                <http://dbpedia.org/resource/Rahul_Dravid> .
+
+<http://dbpedia.org/resource/Altice_(company)>
+        <http://dbpedia.org/ontology/subsidiary>
+                <http://dbpedia.org/resource/Numericable> .
+
+<http://dbpedia.org/resource/Serbia>
+        <http://dbpedia.org/ontology/leaderName>
+                <http://dbpedia.org/resource/Aleksandar_Vu%C4%8Di%C4%87> .
+
+<http://dbpedia.org/resource/The_Pussycat_Dolls>
+        <http://dbpedia.org/ontology/formerBandMember>
+                <http://dbpedia.org/resource/Kaya_Jones> .
+
+<http://dbpedia.org/resource/Fifth_Harmony>
+        <http://dbpedia.org/ontology/formerBandMember>
+                <http://dbpedia.org/resource/Camila_Cabello> .
+
+<http://dbpedia.org/resource/Gregg_Troy>
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/Gainesville%2C_Florida> ;
+        <http://dbpedia.org/ontology/trainer>
+                <http://dbpedia.org/resource/Ryan_Lochte> .
 
 <http://dbpedia.org/resource/John_McCarthy_%28computer_scientist%29>
-        dbo:employer  dbr:Stanford_University .
+        <http://dbpedia.org/ontology/employer>
+                <http://dbpedia.org/resource/Stanford_University> .
 
+<http://dbpedia.org/resource/Nita_Ambani>
+        <http://dbpedia.org/ontology/parent>
+                <http://dbpedia.org/resource/Anant_Ambani> ;
+        <http://dbpedia.org/ontology/spouse>
+                <http://dbpedia.org/resource/Mukesh_Ambani> .
 
-@prefix dbo:   <http://dbpedia.org/ontology/> .
-@prefix oa:    <http://www.w3.org/ns/oa#> .
-@prefix aksw:  <http://aksw.org/notInWiki/> .
-@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix dbr:   <http://dbpedia.org/resource/> .
-@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
-@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
-@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+<http://aksw.org/notInWiki/CarolLynnMeylan>
+        <http://dbpedia.org/ontology/spouse>
+                <http://dbpedia.org/resource/Russel_E._Caflisch> .
 
+<http://dbpedia.org/resource/The_Beatles>
+        <http://dbpedia.org/ontology/bandMember>
+                <http://dbpedia.org/resource/John_Lennon> .
 
-dbr:Bastian_Schweinsteiger
-        dbo:club        dbr:Chicago_Fire_Soccer_Club ;
-        dbo:formerTeam  dbr:Manchester_United_F.C .
+<http://aksw.org/notInWiki/Brooklyn_Beckham>
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/Paris> ;
+        <http://dbpedia.org/ontology/parent>
+                <http://dbpedia.org/resource/Victoria_Beckham> , <http://dbpedia.org/resource/David_Beckham> .
 
+<http://dbpedia.org/resource/Kim_Jong-un>
+        <http://dbpedia.org/ontology/child>
+                <http://dbpedia.org/resource/Kim_Jong-il> ;
+        <http://dbpedia.org/ontology/country>
+                <http://dbpedia.org/resource/North_Korea> ;
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/North_Korea> .
 
-@prefix dbo:   <http://dbpedia.org/ontology/> .
-@prefix oa:    <http://www.w3.org/ns/oa#> .
-@prefix aksw:  <http://aksw.org/notInWiki/> .
-@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix dbr:   <http://dbpedia.org/resource/> .
-@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
-@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
-@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+<http://dbpedia.org/resource/Sergey_Brin>
+        <http://dbpedia.org/ontology/doctoralStudent>
+                <http://dbpedia.org/resource/Rajeev_Motwani> .
 
+<http://dbpedia.org/resource/Chandrayaan-1>
+        <http://dbpedia.org/ontology/country>
+                <http://dbpedia.org/resource/India> .
 
-dbr:Barack_Obama  dbo:birthPlace  dbr:Honolulu ;
-        dbo:location    dbr:Honolulu , dbr:Hawaii .
+<http://aksw.org/notInWiki/Emanuel_Bergogolio>
+        <http://dbpedia.org/ontology/location>
+                <http://aksw.org/notInWiki/Cordoba-Rosario> .
 
+<http://dbpedia.org/resource/Google>
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Google" ;
+        <http://dbpedia.org/ontology/CEO>
+                <http://dbpedia.org/resource/Sundar_Pichai> ;
+        <http://dbpedia.org/ontology/ceo>
+                <http://dbpedia.org/resource/Sundar_Pichai> ;
+        <http://dbpedia.org/ontology/foundationPlace>
+                <http://dbpedia.org/resource/Menlo_Park%2C_California> ;
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/Menlo_Park%2C_California> , <http://dbpedia.org/resource/California> .
 
-dbr:Honolulu  dbo:locatedInArea  dbr:Hawaii ;
-        dbo:location       dbr:Hawaii .
+<http://dbpedia.org/resource/HSBC>
+        <http://dbpedia.org/ontology/foundationPlace>
+                <http://dbpedia.org/resource/Shanghai> , <http://dbpedia.org/resource/Hong_Kong> ;
+        <http://dbpedia.org/ontology/headquarter>
+                <http://dbpedia.org/resource/London> ;
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/Shanghai> , <http://dbpedia.org/resource/London> , <http://dbpedia.org/resource/Hong_Kong> .
 
+<http://dbpedia.org/resource/Sinclair_Broadcast_Group>
+        <http://dbpedia.org/ontology/affiliation>
+                <http://dbpedia.org/resource/Fox_Broadcasting_Company> .
 
-@prefix dbo:   <http://dbpedia.org/ontology/> .
-@prefix oa:    <http://www.w3.org/ns/oa#> .
-@prefix aksw:  <http://aksw.org/notInWiki/> .
-@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix dbr:   <http://dbpedia.org/resource/> .
-@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
-@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
-@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+<http://dbpedia.org/resource/Roger_Federer>
+        <http://dbpedia.org/ontology/country>
+                <http://dbpedia.org/resource/Switzerland> ;
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/Switzerland> ;
+        <http://dbpedia.org/ontology/nationality>
+                <http://dbpedia.org/resource/Switzerland> .
 
-dbr:Mike_Pence  dbo:country  dbr:Israel ;
-        dbo:location  dbr:Israel .
+<http://dbpedia.org/resource/Kolkata>
+        <http://dbpedia.org/ontology/country>
+                <http://dbpedia.org/resource/India> ;
+        <http://dbpedia.org/ontology/locatedInArea>
+                <http://dbpedia.org/resource/India> ;
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/India> .
 
+<http://dbpedia.org/resource/Hiranandani_Estate>
+        <http://dbpedia.org/ontology/locatedInArea>
+                <http://dbpedia.org/resource/Thane> ;
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/Thane> ;
+        <http://dbpedia.org/ontology/tenant>
+                <http://dbpedia.org/resource/Tata_Consultancy_Services> .
 
+<http://dbpedia.org/resource/Rafael_Nadal>
+        <http://dbpedia.org/ontology/relative>
+                <http://dbpedia.org/resource/Toni_Nadal> .
 
-@prefix dbo:   <http://dbpedia.org/ontology/> .
-@prefix oa:    <http://www.w3.org/ns/oa#> .
-@prefix aksw:  <http://aksw.org/notInWiki/> .
-@prefix dbr:   <http://dbpedia.org/resource/> .
-@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
-@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
-
-dbr:Lionel_Messi  dbo:club  dbr:FC_Barcelona ;
-        dbo:debutTeam  dbr:FC_Barcelona .@prefix dbo:   <http://dbpedia.org/ontology/> .
-		
-		
-		
-@prefix oa:    <http://www.w3.org/ns/oa#> .
-@prefix aksw:  <http://aksw.org/notInWiki/> .
-@prefix dbr:   <http://dbpedia.org/resource/> .
-@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
-@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
-
+<http://dbpedia.org/resource/Liam_Gallagher>
+        <http://dbpedia.org/ontology/birthPlace>
+                <http://dbpedia.org/resource/Manchester> ;
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/Manchester> .
 
 <http://dbpedia.org/resource/Oasis_(band)>
-        dbo:bandMember  dbr:Liam_Gallagher .
+        <http://dbpedia.org/ontology/bandMember>
+                <http://dbpedia.org/resource/Liam_Gallagher> .
 
-dbr:Liam_Gallagher  dbo:birthPlace  dbr:Manchester ;
-        dbo:location    dbr:Manchester .
+<http://dbpedia.org/resource/Toni_Nadal>
+        <http://dbpedia.org/ontology/trainer>
+                <http://dbpedia.org/resource/Rafael_Nadal> .
+
+<http://dbpedia.org/resource/Rameswaram>
+        <http://dbpedia.org/ontology/locatedInArea>
+                <http://dbpedia.org/resource/Tamil_Nadu> ;
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/Tamil_Nadu> .
+
+<http://dbpedia.org/resource/Japan>
+        <http://dbpedia.org/ontology/country>
+                <http://dbpedia.org/resource/Asia> ;
+        <http://dbpedia.org/ontology/locatedInArea>
+                <http://dbpedia.org/resource/Asia> ;
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/Asia> .
+
+<http://aksw.org/notInWiki/Anthony_Carrino>
+        <http://dbpedia.org/ontology/relative>
+                <http://aksw.org/notInWiki/John_Colaneri> .
+
+<http://dbpedia.org/resource/United_States>
+        <http://dbpedia.org/ontology/leaderName>
+                <http://dbpedia.org/resource/Donald_Trump> .
+
+<http://dbpedia.org/resource/Menlo_Park%2C_California>
+        <http://dbpedia.org/ontology/locatedInArea>
+                <http://dbpedia.org/resource/California> ;
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/California> .
+
+<http://dbpedia.org/resource/Eagles_(band)>
+        <http://dbpedia.org/ontology/formerBandMember>
+                <http://dbpedia.org/resource/Glenn_Frey> .
+
+<http://aksw.org/notInWiki/AlanSelby>
+        <http://dbpedia.org/ontology/employer>
+                <http://dbpedia.org/resource/Sunday_Mirror> .
+
+<http://aksw.org/notInWiki/James_Damore>
+        <http://dbpedia.org/ontology/employee>
+                <http://dbpedia.org/resource/Google> .
+
+<http://dbpedia.org/resource/Larry_Page>
+        <http://dbpedia.org/ontology/doctoralStudent>
+                <http://dbpedia.org/resource/Rajeev_Motwani> .
+
+<http://dbpedia.org/resource/China>
+        <http://dbpedia.org/ontology/leaderName>
+                <http://dbpedia.org/resource/Xi_Jinping> .
+
+<http://dbpedia.org/resource/Barack_Obama>
+        <http://dbpedia.org/ontology/birthPlace>
+                <http://dbpedia.org/resource/Honolulu> ;
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/Honolulu> , <http://dbpedia.org/resource/Hawaii> .
+
+<http://dbpedia.org/resource/Victoria_Beckham>
+        <http://dbpedia.org/ontology/child>
+                <http://aksw.org/notInWiki/Brooklyn_Beckham> ;
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/Paris> ;
+        <http://dbpedia.org/ontology/spouse>
+                <http://dbpedia.org/resource/David_Beckham> .
+
+<http://aksw.org/notInWiki/KnowledgeServices>
+        <http://dbpedia.org/ontology/president>
+                <http://aksw.org/notInWiki/JoeBielawski> .
+
+<http://dbpedia.org/resource/Satya_Nadella>
+        <http://dbpedia.org/ontology/employer>
+                <http://dbpedia.org/resource/Microsoft> .
+
+<http://dbpedia.org/resource/Pope_Francis>
+        <http://dbpedia.org/ontology/country>
+                <http://dbpedia.org/resource/Chile> ;
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/Latin_America> , <http://dbpedia.org/resource/Chile> ;
+        <http://dbpedia.org/ontology/relative>
+                <http://aksw.org/notInWiki/Emanuel_Bergogolio> .
+
+<http://dbpedia.org/resource/Lionel_Messi>
+        <http://dbpedia.org/ontology/club>
+                <http://dbpedia.org/resource/FC_Barcelona> ;
+        <http://dbpedia.org/ontology/debutTeam>
+                <http://dbpedia.org/resource/FC_Barcelona> .
+
+<http://dbpedia.org/resource/European_Commission>
+        <http://dbpedia.org/ontology/president>
+                <http://dbpedia.org/resource/Jean-Claude_Juncker> .
+
+<http://dbpedia.org/resource/Honolulu>
+        <http://dbpedia.org/ontology/locatedInArea>
+                <http://dbpedia.org/resource/Hawaii> ;
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/Hawaii> .
+
+<http://dbpedia.org/resource/Wellesley_College>
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/Boston> .
+
+<http://dbpedia.org/resource/Tata_Consultancy_Services>
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/Thane> , <http://dbpedia.org/resource/Hiranandani_Estate> .
+
+<http://dbpedia.org/resource/Xi_Jinping>
+        <http://dbpedia.org/ontology/country>
+                <http://dbpedia.org/resource/China> ;
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/China> .
+
+<http://dbpedia.org/resource/Louis_Vuitton>
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/Paris> .
+
+<http://dbpedia.org/resource/Rahul_Dravid>
+        <http://dbpedia.org/ontology/parent>
+                <http://aksw.org/notInWiki/Samit> .
