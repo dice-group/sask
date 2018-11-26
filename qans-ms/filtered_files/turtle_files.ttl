@@ -14,6 +14,10 @@ dbr:Google  dbo:CEO  dbr:Sundar_Pichai .
 
 dbr:Sundar_Pichai  dbo:employer  dbr:Google .
 
+dbr:Sundar_Pichai  rdfs:label "Sundar Pichai".
+dbr:Google rdfs:label "Google".
+dbo:employee rdfs:label "works for".
+
 
 @prefix dbo:   <http://dbpedia.org/ontology/> .
 @prefix oa:    <http://www.w3.org/ns/oa#> .
