@@ -52,7 +52,9 @@ public class RDF_repsoneMatching {
 	    }
 	    return costs[s2.length()];
 	  }
-
+//sim(Mpdel geold, Model extractor){
+//	return int
+//}
 	  public static void check_response_similarity(String s, String t) {
 	    System.out.println(String.format(
 	      "%.3f is the similarity between \"%s\" and \"%s\"", similarity(s, t), s, t));
@@ -65,7 +67,7 @@ public class RDF_repsoneMatching {
 		 String bc;
 		 String squery_result;
 		 squery_result = obj.responseReader(0);
-		 bc = "[http://dbpedia.org/resource/Google, http://dbpedia.org/ontology/CEO, http://dbpedia.org/resource/Sundar_Pichai]";
+		 bc = "[http://dbpedia.org/resource/Google, http://dbpedia.org/ontology/Ceo, http://dbpedia.org/resource/Sundar_Pichai]";
 		String Extractor_response = "<http://dbpedia.org/ontology/ceo> <null>.<null> <http://dbpedia.org/ontology/employer> <null>.<null> <http://dbpedia.org/ontology/parent> <null>.";
 	    check_response_similarity(bc,Extractor_response);
 		check_response_similarity(squery_result, Extractor_response);

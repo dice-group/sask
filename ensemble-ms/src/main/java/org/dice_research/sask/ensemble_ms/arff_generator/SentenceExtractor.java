@@ -39,7 +39,7 @@ public class SentenceExtractor {
 	private static File file2 = new File("TrainingData\\traindata2.arff");	
 
 	private static String sentence_data;
-	public static String fox_response_string = null;
+    static String fox_response_string = null;
 	static String openie_response_string = null;
 	static String sorokin_response_string = null;
 	static String cedric_response_string = null;
@@ -76,9 +76,12 @@ public class SentenceExtractor {
 			System.out.println(squery_Result);
 			
 			System.out.println("Training Data for file " + files[i].getName());		
-			String training_data = " ' " + sentences.get(i) + " ' " + ", " + "'" + fox_response_string + " ' "
-					+ "," + " ' " + openie_response_string + " ' " + "," + " ' " + sorokin_response_string + ","
-					+ " ' " + cedric_response_string +   " ' " +  squery_Result + " ' ";
+			String training_data = " ' " + sentences.get(i) + " ' " + ", " 
+						+ "'" + fox_response_string + " ' " 
+						+ "," + " ' " + openie_response_string + " ' " 
+						+ "," + " ' " + sorokin_response_string + " '  "
+						+ ","+ " ' "  + cedric_response_string +   " ' " 
+						+ "," + " ' "+  squery_Result + " ' ";
 			
 			System.out.println("------");
 			System.out.println(training_data);
@@ -131,7 +134,7 @@ public class SentenceExtractor {
 				// calling every extractors and getting outputs
 
 				for (int j = 0; j < portNumb.length; j++) {
-//To handle url_encoding exception
+					//To handle url_encoding exception
 					try {
 					// replacing url with space character
 					String URL2 = java.net.URLEncoder.encode(sentences.get(i), "UTF-8").replace("+", "%20");
@@ -281,40 +284,29 @@ public class SentenceExtractor {
 			    "      }";
 			 
         Query query = QueryFactory.create(queryString) ;
+        StringWriter modelAsString = new StringWriter();
          
         try (QueryExecution qexec = QueryExecutionFactory.create(query, model)) 
         {
         	
-          Model results = qexec.execConstruct() ;
+         Model results = qexec.execConstruct() ;
+         results.write(modelAsString,"N-TRIPLES");
+         sparql_query_result  = modelAsString.toString();
+   
+          
           
 //          System.out.println(results.toString());
-       StmtIterator iter = results.listStatements();
 
-          while(iter.hasNext())
-          {
-        	  squery.append(iter.next().toString()); 
-//              squery.append(System.getProperty("line.separator"));
-          }
+
+//          while(iter.hasNext())
+//          {
+//        	  squery.append(iter.next().toString()); 
+////              squery.append(System.getProperty("line.separator"));
+//          }
         }	
         System.out.println(files[i].getName() + "  Result after pasing sparql query.......");
-         sparql_query_result = squery.toString();
-//        System.out.println(sparql_query_result);
-        
-        squery.delete(0, squery.length());
-        
-//		System.out.println("sparql  query result for  file " + files[i].getName());
 		sparqueryList.add(sparql_query_result);
-//		System.out.println(sparqueryList);
-
-        
-        
-        
-//        System.out.println("   Response after rdf read");
-//     model.write(System.out,"TURTLE"); 
-//     System.out.println(".............................");
-//     model2.write(System.out,"TURTLE");
-       
-//		System.out.println(sparqueryList);
+	     System.out.println(modelAsString.toString());
 		return sparql_query_result;
 	}
 
