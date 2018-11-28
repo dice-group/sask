@@ -12,15 +12,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
-
-import org.apache.commons.io.IOUtils;
 import org.apache.jena.query.Query;
 import org.apache.jena.query.QueryExecution;
 import org.apache.jena.query.QueryExecutionFactory;
 import org.apache.jena.query.QueryFactory;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
-import org.apache.jena.rdf.model.StmtIterator;
 import org.apache.jena.riot.RiotException;
 import org.apache.jena.util.FileManager;
 import org.apache.log4j.BasicConfigurator;
@@ -37,12 +34,10 @@ public class SentenceExtractor {
 
 	private static File path = new File("oke data");
 	private static File[] files = path.listFiles();
-	private static List<String> sentences = new ArrayList<String>();
+	static List<String> sentences = new ArrayList<String>();
 	private static File file2 = new File("TrainingData\\traindata2.arff");	
-
 	private static String sentence_data;
-	 static String fox_response_string = null;
-   
+	static String fox_response_string = null;
 	static String openie_response_string = null;
 	static String sorokin_response_string = null;
 	static String cedric_response_string = null;
@@ -60,8 +55,8 @@ public class SentenceExtractor {
 				}
 			});
 			 
-			
-			for (int i = 0; i < 3; i++) 
+			System.out.println(files.length);
+			for (int i = 0; i < files.length; i++) 
 			{
 			se.sentence_Extracion(i);
 			System.out.println("Extracted sentence From the file " + files[i].getName());	
@@ -69,6 +64,7 @@ public class SentenceExtractor {
 			System.out.println(sentences.get(i));
 			System.out.println("Fox extractor response for file" + files[i].getName());			
 			System.out.println(fox_response_string);
+			
 			System.out.println("OpenIE extractor response for file " + files[i].getName());			
 			System.out.println(openie_response_string);
 			System.out.println("Cedric extractor response for file"  + files[i].getName());		
@@ -103,8 +99,6 @@ public class SentenceExtractor {
 
  public void sentence_Extracion(int i) 
  	{
-//		Initialize value with null
-		
 			if (files[i].isFile()) {
 				String sentence = readLineByLine(files[i].toString());
 				int x = sentence.indexOf("nif:isString   ");
@@ -174,7 +168,7 @@ public class SentenceExtractor {
 							fox_response_string = response.toString();
 							
 							String Filtered_fox_response = fox_response_processing(fox_response_string, i);
-							fox_response_string_list.add(fox_response_string);
+							fox_response_string_list.add(Filtered_fox_response);
 							System.out.println(Filtered_fox_response);
 						}
 
@@ -249,7 +243,6 @@ public class SentenceExtractor {
 	{
 		String sparql_query_result = null;
 		BasicConfigurator.configure();
-   	  StringBuffer squery = new StringBuffer();
       List<String> sparqueryList = new ArrayList<String>();
 	
         // create an empty model
@@ -376,7 +369,9 @@ public class SentenceExtractor {
 	    model.read(filename);
 	    System.out.println("For the file " + filename);
 	    // Write as Turtle via model.write
-	    model.write(System.out, "N-TRIPLES") ;
+        StringWriter modelAsString = new StringWriter();
+	    model.write(modelAsString, "N-TRIPLES") ;
+	    String fox_filtered_response = modelAsString.toString();
 	    
 		
 //		Create Files
@@ -400,7 +395,7 @@ public class SentenceExtractor {
 //		
 //		 System.out.println("1111111111111111111111111");
 
-		 return fox_response_string;
+		 return fox_filtered_response;
 		
 		
 		 
