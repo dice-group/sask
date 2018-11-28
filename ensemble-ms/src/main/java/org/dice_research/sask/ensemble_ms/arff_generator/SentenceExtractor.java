@@ -12,6 +12,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
+
+import org.apache.commons.io.IOUtils;
 import org.apache.jena.query.Query;
 import org.apache.jena.query.QueryExecution;
 import org.apache.jena.query.QueryExecutionFactory;
@@ -39,12 +41,15 @@ public class SentenceExtractor {
 	private static File file2 = new File("TrainingData\\traindata2.arff");	
 
 	private static String sentence_data;
-    static String fox_response_string = null;
+	 static String fox_response_string = null;
+   
 	static String openie_response_string = null;
 	static String sorokin_response_string = null;
 	static String cedric_response_string = null;
     
-	public static void main(String[] args) {			
+	public static void main(String[] args) {
+		
+		SentenceExtractor se = new SentenceExtractor();
 			// sort the files in numerical order
 			Arrays.sort(files, new Comparator<File>() {
 				@Override
@@ -54,10 +59,11 @@ public class SentenceExtractor {
 					return Integer.valueOf(s1).compareTo(Integer.valueOf(s2));
 				}
 			});
+			 
 			
 			for (int i = 0; i < 3; i++) 
 			{
-			sentence_Extracion(i);
+			se.sentence_Extracion(i);
 			System.out.println("Extracted sentence From the file " + files[i].getName());	
 
 			System.out.println(sentences.get(i));
@@ -71,7 +77,7 @@ public class SentenceExtractor {
 			System.out.println(sorokin_response_string);
 			System.out.println("Gethering Sparql Query Result................................");
 			
-			String squery_Result = responseReader(i);
+			String squery_Result = se.responseReader(i);
 			System.out.println("......................................");
 			System.out.println(squery_Result);
 			
@@ -87,7 +93,7 @@ public class SentenceExtractor {
 			System.out.println(training_data);
 
 			System.out.println("-------------------------------------------------------------");
-			trainingFileWriter(training_data);
+			se.trainingFileWriter(training_data);
 
 			}
 			
@@ -95,12 +101,9 @@ public class SentenceExtractor {
 
 
 
- private static void sentence_Extracion(int i) 
+ public void sentence_Extracion(int i) 
  	{
 //		Initialize value with null
-
-
-		
 		
 			if (files[i].isFile()) {
 				String sentence = readLineByLine(files[i].toString());
@@ -165,10 +168,14 @@ public class SentenceExtractor {
 
 						if (j == 0) 
 						{
+							
+							
 							List<String> fox_response_string_list = new ArrayList<String>();
 							fox_response_string = response.toString();
+							
+							String Filtered_fox_response = fox_response_processing(fox_response_string, i);
 							fox_response_string_list.add(fox_response_string);
-							fox_response_processing(fox_response_string);
+							System.out.println(Filtered_fox_response);
 						}
 
 						else if (j == 1) 
@@ -238,7 +245,7 @@ public class SentenceExtractor {
 		}
 		return contentBuilder.toString();
 	}
-	public static String responseReader(int i)
+	public String responseReader(int i)
 	{
 		String sparql_query_result = null;
 		BasicConfigurator.configure();
@@ -292,6 +299,7 @@ public class SentenceExtractor {
          Model results = qexec.execConstruct() ;
          results.write(modelAsString,"N-TRIPLES");
          sparql_query_result  = modelAsString.toString();
+         
    
           
           
@@ -310,7 +318,7 @@ public class SentenceExtractor {
 		return sparql_query_result;
 	}
 
-	public static void trainingFileWriter(String training_data)
+	public void trainingFileWriter(String training_data)
 	{
 
 //		List<String> sentences = new ArrayList<String>();
@@ -355,9 +363,48 @@ public class SentenceExtractor {
 	
 		}
 
-	private static void fox_response_processing(String fox_response_string) 
+	public String fox_response_processing(String fox_response_string, int i) throws IOException 
 	{
-		// TODO Auto-generated method stub
+//		create new file for for extractors response
+		String filename= "ExtractorResponse//FoxResponse//" +"Fox_" + i + ".ttl";
+		File file = new File(filename); 
+	    BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+	    writer.write(fox_response_string);
+	    writer.close();
+//	    create jena model for every files
+	    Model model = ModelFactory.createDefaultModel();
+	    model.read(filename);
+	    System.out.println("For the file " + filename);
+	    // Write as Turtle via model.write
+	    model.write(System.out, "N-TRIPLES") ;
+	    
+		
+//		Create Files
+		
+		
+		
+		
+		
+//		BasicConfigurator.configure();
+//		   Model model;
+//		try {
+//			model = ModelFactory.createDefaultModel()
+//				        .read(IOUtils.toInputStream(fox_response_string, "UTF-8"), null, "N-TRIPLES");
+//			 model.write(System.out,"N-TRIPLES"); 
+//		
+//			// TODO Auto-generated catch block
+//			
+//		
+//			    System.out.println("model size: " + model.size());
+//	} catch (IOException e) {e.printStackTrace();}
+//		
+//		 System.out.println("1111111111111111111111111");
+
+		 return fox_response_string;
+		
+		
+		 
+
 		
 	}
 
