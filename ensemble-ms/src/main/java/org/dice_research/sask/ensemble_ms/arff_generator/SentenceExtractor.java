@@ -54,9 +54,9 @@ public class SentenceExtractor {
 					return Integer.valueOf(s1).compareTo(Integer.valueOf(s2));
 				}
 			});
-			 
+//			 number of ttl files
 			System.out.println(files.length);
-			for (int i = 0; i < files.length; i++) 
+			for (int i = 0; i < 5; i++) 
 			{
 			se.sentence_Extracion(i);
 			System.out.println("Extracted sentence From the file " + files[i].getName());	
