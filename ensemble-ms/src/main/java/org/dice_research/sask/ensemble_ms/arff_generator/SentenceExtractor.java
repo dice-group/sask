@@ -16,8 +16,14 @@ import org.apache.jena.query.Query;
 import org.apache.jena.query.QueryExecution;
 import org.apache.jena.query.QueryExecutionFactory;
 import org.apache.jena.query.QueryFactory;
+import org.apache.jena.rdf.model.Literal;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.rdf.model.Property;
+import org.apache.jena.rdf.model.RDFNode;
+import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.rdf.model.Statement;
+import org.apache.jena.rdf.model.StmtIterator;
 import org.apache.jena.riot.RiotException;
 import org.apache.jena.util.FileManager;
 import org.apache.log4j.BasicConfigurator;
@@ -55,7 +61,7 @@ public class SentenceExtractor {
 				}
 			});
 //			 number of ttl files
-			System.out.println(files.length);
+//			System.out.println(files.length);
 			for (int i = 0; i < 5; i++) 
 			{
 			se.sentence_Extracion(i);
@@ -206,6 +212,7 @@ public class SentenceExtractor {
 					}
 					// end of try block
 					catch (Exception e) {
+						e.getMessage();
 						// TODO: handle exception
 					}
 
@@ -290,7 +297,7 @@ public class SentenceExtractor {
         {
         	
          Model results = qexec.execConstruct() ;
-         results.write(modelAsString,"N-TRIPLES");
+         results.write(modelAsString,"TTL");
          sparql_query_result  = modelAsString.toString();
          
    
@@ -370,8 +377,47 @@ public class SentenceExtractor {
 	    System.out.println("For the file " + filename);
 	    // Write as Turtle via model.write
         StringWriter modelAsString = new StringWriter();
-	    model.write(modelAsString, "N-TRIPLES") ;
+	    model.write(modelAsString, "N-TRIPLE") ;
 	    String fox_filtered_response = modelAsString.toString();
+	    StmtIterator statementIter = model.listStatements();
+	    Statement s;
+	    Resource subject;
+	    Property predicate;
+	    RDFNode object;
+	    while (statementIter.hasNext()) {
+	    	  s = statementIter.nextStatement();
+	    	  subject = s.getSubject();
+	    	  predicate = s.getPredicate();
+	    	  object = s.getObject();
+	    	  
+	    	System.out.println("List of Subject  ");
+	    	  System.out.println(subject.toString());
+	    		System.out.println("List of predicates   ");
+	            System.out.println(" " + predicate.toString() + " ");
+
+	            	System.out.println("List ofobjects    ");
+	                System.out.println(object.toString());
+	                
+
+
+	                
+
+
+	            System.out.println(" .");
+	    		
+////	    	  keyWords.add(predicate.getLocalName());
+//
+//	    	  // local name of (non blank nodes) Resources
+//	    	  if (object instanceof Resource && object.toString().contains("/")) {
+////	    		keyWords.add(object.asResource().getLocalName());
+//	    		  
+//	    	  } else if (object instanceof Literal) {
+//	    		// object is a Literal
+//
+//	    	  }
+	    	  
+	    }
+	  
 	    
 		
 //		Create Files
@@ -380,20 +426,7 @@ public class SentenceExtractor {
 		
 		
 		
-//		BasicConfigurator.configure();
-//		   Model model;
-//		try {
-//			model = ModelFactory.createDefaultModel()
-//				        .read(IOUtils.toInputStream(fox_response_string, "UTF-8"), null, "N-TRIPLES");
-//			 model.write(System.out,"N-TRIPLES"); 
-//		
-//			// TODO Auto-generated catch block
-//			
-//		
-//			    System.out.println("model size: " + model.size());
-//	} catch (IOException e) {e.printStackTrace();}
-//		
-//		 System.out.println("1111111111111111111111111");
+
 
 		 return fox_filtered_response;
 		

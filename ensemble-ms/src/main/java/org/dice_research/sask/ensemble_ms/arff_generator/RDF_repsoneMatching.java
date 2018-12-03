@@ -60,8 +60,7 @@ public class RDF_repsoneMatching {
 	      "%.3f is the similarity between \"%s\" and \"%s\"", similarity(s, t), s, t));
 	  }
 
-	  @SuppressWarnings("static-access")
-	public static void main(String[] args) {
+	  public static void main(String[] args) {
 		 SentenceExtractor obj = new SentenceExtractor();
 		 
 		 String bc;
