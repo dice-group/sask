@@ -380,6 +380,10 @@ public class SentenceExtractor {
 	    model.write(modelAsString, "N-TRIPLE") ;
 	    String fox_filtered_response = modelAsString.toString();
 	    StmtIterator statementIter = model.listStatements();
+	    List<String> sub = new ArrayList<String>();
+	    List<String> obj = new ArrayList<String>();
+	    List<String> pred = new ArrayList<String>();
+	    
 	    Statement s;
 	    Resource subject;
 	    Property predicate;
@@ -390,33 +394,38 @@ public class SentenceExtractor {
 	    	  predicate = s.getPredicate();
 	    	  object = s.getObject();
 	    	  
-	    	System.out.println("List of Subject  ");
-	    	  System.out.println(subject.toString());
-	    		System.out.println("List of predicates   ");
-	            System.out.println(" " + predicate.toString() + " ");
+//	    	System.out.println("List of Subject  ");
+//	     System.out.println(subject.toString());
+	     	sub.add(subject.getLocalName());
+//	    		System.out.println("List of predicates   ");
+//	            System.out.println(" " + predicate.toString() + " ");
+	            pred.add(predicate.getLocalName());
 
-	            	System.out.println("List ofobjects    ");
-	                System.out.println(object.toString());
+//	            	System.out.println("List of objects    ");
+	            if (object instanceof Resource && object.toString().contains("/")) 
+	            {
+	            	obj.add(object.asResource().getLocalName());
+	            	  
+	             }
+	            else if (object instanceof Literal) 
+	            {
+	         
+	    	     	obj.add(object.toString());
+	            }
 	                
-
-
-	                
-
-
-	            System.out.println(" .");
-	    		
-////	    	  keyWords.add(predicate.getLocalName());
-//
-//	    	  // local name of (non blank nodes) Resources
-//	    	  if (object instanceof Resource && object.toString().contains("/")) {
-////	    		keyWords.add(object.asResource().getLocalName());
-//	    		  
-//	    	  } else if (object instanceof Literal) {
-//	    		// object is a Literal
-//
-//	    	  }
+	          
 	    	  
 	    }
+	    
+	    
+    	System.out.println("List of Subjects.........  "); 
+	   System.out.println(sub);
+	   System.out.println("List of predicates.........  "); 
+	   System.out.println(pred);
+	   System.out.println("List of Objects.........  "); ;
+	   System.out.println(obj);
+	      System.out.println(" ...........");
+	   
 	  
 	    
 		
