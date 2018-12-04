@@ -1,7 +1,7 @@
 package org.dice_research.sask.ensemble_ms.arff_generator;
 
 
-public class RDF_repsoneMatching {
+public class RDF_repsoneMatching   {
 
 	  /**
 	   * Calculates the similarity of string  result between 0 and 1 b.
@@ -55,22 +55,24 @@ public class RDF_repsoneMatching {
 //sim(Mpdel geold, Model extractor){
 //	return int
 //}
-	  public static void check_response_similarity(String s, String t) {
+	  public void check_response_similarity(String s, String t) {
 	    System.out.println(String.format(
 	      "%.3f is the similarity between \"%s\" and \"%s\"", similarity(s, t), s, t));
 	  }
 
 	  public static void main(String[] args) {
-		 SentenceExtractor obj = new SentenceExtractor();
-		 
+		  
+		 RDF_repsoneMatching rdf_obj = new RDF_repsoneMatching();
+		 SentenceExtractor obj_se = new SentenceExtractor();
+		 System.out.println(SentenceExtractor.fox_response_string); 
 		 String bc;
 		 String squery_result;
-		 squery_result = obj.responseReader(0);
+		 squery_result = obj_se.responseReader(0);
 		 bc = "[http://dbpedia.org/resource/Google, http://dbpedia.org/ontology/Ceo, http://dbpedia.org/resource/Sundar_Pichai]";
 		String Extractor_response = "<http://dbpedia.org/ontology/ceo> <null>.<null> <http://dbpedia.org/ontology/employer> <null>.<null> <http://dbpedia.org/ontology/parent> <null>.";
-	    check_response_similarity(bc,Extractor_response);
-		check_response_similarity(squery_result, Extractor_response);
-	    check_response_similarity("mit", "sit");	    
+	    rdf_obj.check_response_similarity(bc,Extractor_response);
+		rdf_obj.check_response_similarity(squery_result, Extractor_response);
+	    rdf_obj.check_response_similarity("mit", "sit");	    
 //	    check_response_similarity(Ext,bc);
 	  }
 

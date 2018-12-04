@@ -37,6 +37,12 @@ import org.apache.log4j.BasicConfigurator;
  */
 
 public class SentenceExtractor {
+	List<String> sub_fox = new ArrayList<String>();
+	List<String> obj_fox = new ArrayList<String>();
+	List<String> pred_fox = new ArrayList<String>();
+	List<String> sub = new ArrayList<String>();
+	List<String> obj = new ArrayList<String>();
+	List<String> pred = new ArrayList<String>();
 
 	private static File path = new File("oke data");
 	private static File[] files = path.listFiles();
@@ -47,11 +53,13 @@ public class SentenceExtractor {
 	static String openie_response_string = null;
 	static String sorokin_response_string = null;
 	static String cedric_response_string = null;
+	
 
 	public static void main(String[] args) {
 
 		SentenceExtractor se = new SentenceExtractor();
 		// sort the files in numerical order
+		
 		Arrays.sort(files, new Comparator<File>() {
 			@Override
 			public int compare(File f1, File f2) {
@@ -89,9 +97,32 @@ public class SentenceExtractor {
 
 			System.out.println("------");
 			System.out.println(training_data);
+		       System.out.println("List of Subjects in OKE files.........  "); 
+			   System.out.println(se.sub);
+			   System.out.println("List of predicates  in OKE files.........  "); 
+			   System.out.println(se.pred);
+			   System.out.println("List of Objects  in OKE files.........  "); ;
+			   System.out.println(se.obj);
+			   System.out.println(" ...........");
 
 			System.out.println("-------------------------------------------------------------");
 			se.trainingFileWriter(training_data);
+			System.out.println("List of Subjects.........  ");
+			System.out.println(se.sub_fox);
+			System.out.println("List of predicates.........  ");
+			System.out.println(se.pred_fox);
+			System.out.println("List of Objects.........  ");
+			System.out.println(se.obj_fox);
+			System.out.println(" ...........");
+			se.response_Matching();
+	    	se.sub_fox.clear();
+			se.obj_fox.clear();
+			se.pred_fox.clear();
+	    	se.sub.clear();
+			se.obj.clear();
+			se.pred.clear();
+
+			
 
 		}
 
@@ -261,9 +292,7 @@ public class SentenceExtractor {
 			Model results = qexec.execConstruct();
 			// to separate subject, predcate,object
 			StmtIterator statementIter = results.listStatements();
-			List<String> sub = new ArrayList<String>();
-			List<String> obj = new ArrayList<String>();
-			List<String> pred = new ArrayList<String>();
+
 
 			Statement s;
 			Resource subject;
@@ -292,13 +321,13 @@ public class SentenceExtractor {
 				}
 
 			}
-		       System.out.println("List of Subjects in OKE files.........  "); 
-			   System.out.println(sub);
-			   System.out.println("List of predicates  in OKE files.........  "); 
-			   System.out.println(pred);
-			   System.out.println("List of Objects  in OKE files.........  "); ;
-			   System.out.println(obj);
-			   System.out.println(" ...........");
+//		       System.out.println("List of Subjects in OKE files.........  "); 
+//			   System.out.println(sub);
+//			   System.out.println("List of predicates  in OKE files.........  "); 
+//			   System.out.println(pred);
+//			   System.out.println("List of Objects  in OKE files.........  "); ;
+//			   System.out.println(obj);
+//			   System.out.println(" ...........");
 			// results.write(modelAsString,"TTL");
 			results.write(modelAsString, "N-TRIPLE");
 			sparql_query_result = modelAsString.toString();
@@ -365,14 +394,14 @@ public class SentenceExtractor {
 		model.write(modelAsString, "N-TRIPLE");
 		String fox_filtered_response = modelAsString.toString();
 		StmtIterator statementIter = model.listStatements();
-		List<String> sub = new ArrayList<String>();
-		List<String> obj = new ArrayList<String>();
-		List<String> pred = new ArrayList<String>();
+
+		
 
 		Statement s;
 		Resource subject;
 		Property predicate;
 		RDFNode object;
+		
 		while (statementIter.hasNext()) {
 			s = statementIter.nextStatement();
 			subject = s.getSubject();
@@ -381,35 +410,40 @@ public class SentenceExtractor {
 
 			// System.out.println("List of Subject ");
 			// System.out.println(subject.toString());
-			sub.add(subject.getLocalName());
+			sub_fox.add(subject.getLocalName());
 			// System.out.println("List of predicates ");
 			// System.out.println(" " + predicate.toString() + " ");
-			pred.add(predicate.getLocalName());
+			pred_fox.add(predicate.getLocalName());
 
 			// System.out.println("List of objects ");
 			if (object instanceof Resource && object.toString().contains("/")) {
-				obj.add(object.asResource().getLocalName());
+				obj_fox.add(object.asResource().getLocalName());
 
 			} else if (object instanceof Literal) {
 
-				obj.add(object.toString());
+				obj_fox.add(object.toString());
 			}
 
 		}
 
-		System.out.println("List of Subjects.........  ");
-		System.out.println(sub);
-		System.out.println("List of predicates.........  ");
-		System.out.println(pred);
-		System.out.println("List of Objects.........  ");
-		;
-		System.out.println(obj);
-		System.out.println(" ...........");
+//		System.out.println("List of Subjects.........  ");
+//		System.out.println(sub_fox);
+//		System.out.println("List of predicates.........  ");
+//		System.out.println(pred_fox);
+//		System.out.println("List of Objects.........  ");
+//		
+//		System.out.println(obj_fox);
+//		System.out.println(" ...........");
 
 		// Create Files
 
 		return fox_filtered_response;
 
 	}
+	
+	public void response_Matching() {
+//		response similarity function will be return here
+		System.out.println();
+}
 
 }

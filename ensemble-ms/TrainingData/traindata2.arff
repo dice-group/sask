@@ -4,18 +4,6 @@
 
 @ATTRIBUTE OPENIEoutput	string
 @data
- ' The class of 2016 has graduated from Wellesley College in Boston as the university's most famous alumna, Hillary Clinton, campaigns for the presidency ' , '@prefix schema: <http://schema.org/> .@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .@prefix its:   <http://www.w3.org/2005/11/its/rdf#> .@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .@prefix dbo:   <http://dbpedia.org/ontology/> .@prefix foxo:  <http://www.w3.org/2001/XMLSchema#> .@prefix oa:    <http://www.w3.org/ns/oa#> .@prefix foxr:  <http://ns.aksw.org/fox/resource#> .@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .@prefix dbr:   <http://learningsparql.com/ns/addressbook#> .@prefix prov:  <http://www.w3.org/ns/prov#> .@prefix foaf:  <http://xmlns.com/foaf/0.1/> .<http://dbpedia.org/resource/Hillary_Clinton>        rdfs:label  "Hillary Clinton" ;        <http://ns.aksw.org/fox/ontology#livein>                <http://dbpedia.org/resource/Boston> .<http://dbpedia.org/resource/Wellesley_College>        rdfs:label  "Wellesley College" .<http://dbpedia.org/resource/Boston>        rdfs:label  "Boston" . ' , ' null ' , ' null '  , ' null ' , ' @prefix dbo:   <http://dbpedia.org/ontology/> .
-@prefix oa:    <http://www.w3.org/ns/oa#> .
-@prefix aksw:  <http://aksw.org/notInWiki/> .
-@prefix dbr:   <http://dbpedia.org/resource/> .
-@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
-@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
-
-dbr:Hillary_Clinton  dbo:almaMater  dbr:Wellesley_College .
-
-dbr:Wellesley_College
-        dbo:location  dbr:Boston .
+ ' The class of 2016 has graduated from Wellesley College in Boston as the university's most famous alumna, Hillary Clinton, campaigns for the presidency ' , '@prefix schema: <http://schema.org/> .@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .@prefix its:   <http://www.w3.org/2005/11/its/rdf#> .@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .@prefix dbo:   <http://dbpedia.org/ontology/> .@prefix foxo:  <http://www.w3.org/2001/XMLSchema#> .@prefix oa:    <http://www.w3.org/ns/oa#> .@prefix foxr:  <http://ns.aksw.org/fox/resource#> .@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .@prefix dbr:   <http://learningsparql.com/ns/addressbook#> .@prefix prov:  <http://www.w3.org/ns/prov#> .@prefix foaf:  <http://xmlns.com/foaf/0.1/> .<http://dbpedia.org/resource/Hillary_Clinton>        rdfs:label  "Hillary Clinton" ;        <http://ns.aksw.org/fox/ontology#livein>                <http://dbpedia.org/resource/Boston> .<http://dbpedia.org/resource/Wellesley_College>        rdfs:label  "Wellesley College" .<http://dbpedia.org/resource/Boston>        rdfs:label  "Boston" . ' , ' null ' , ' null '  , ' null ' , ' <http://dbpedia.org/resource/Hillary_Clinton> <http://dbpedia.org/ontology/almaMater> <http://dbpedia.org/resource/Wellesley_College> .
+<http://dbpedia.org/resource/Wellesley_College> <http://dbpedia.org/ontology/location> <http://dbpedia.org/resource/Boston> .
  ' 
