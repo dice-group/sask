@@ -452,10 +452,30 @@ public class SentenceExtractor {
 			System.out.println("List of Objects.........  ");
 			System.out.println(obj_fox);
 			System.out.println(" ...........");
-			
-			
-		
-		
+			int small;
+	        int size_fox = obj_fox.size();
+	        int size_oke = pred.size();
+	        int truth = 0;
+	        if (size_fox == size_oke || size_fox > size_oke )
+	        {
+	        	System.out.println("size are same or oke triples is small");
+	        	small = size_oke;
+	        }
+	        else
+	        {
+	        	System.out.println("size of oke tripple is bigger");
+	        	small = size_fox;
+	        }
+	        for(int a =0; a <
+	        		small; a++) 
+	 
+	        if(obj.get(a) == obj_fox.get(a) && sub.get(a) == sub_fox.get(a) && pred.get(a) == pred_fox.get(a)  ) 
+	        {
+	        	System.out.println(" same triple found");
+	        	truth++;
+	        }
+	        
+
 //		response similarity function will be return here
 			
 	    	sub_fox.clear();
@@ -466,7 +486,7 @@ public class SentenceExtractor {
 			pred.clear();
 			
 			
-		System.out.println();
+		System.out.println(truth);
 }
 
 }
