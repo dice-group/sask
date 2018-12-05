@@ -97,23 +97,18 @@ public class SentenceExtractor {
 
 			System.out.println("------");
 			System.out.println(training_data);
-		       System.out.println("List of Subjects in OKE files.........  "); 
-			   System.out.println(se.sub);
-			   System.out.println("List of predicates  in OKE files.........  "); 
-			   System.out.println(se.pred);
-			   System.out.println("List of Objects  in OKE files.........  "); ;
-			   System.out.println(se.obj);
-			   System.out.println(" ...........");
+//		       System.out.println("List of Subjects in OKE files.........  "); 
+//			   System.out.println(se.sub);
+//			   System.out.println("List of predicates  in OKE files.........  "); 
+//			   System.out.println(se.pred);
+//			   System.out.println("List of Objects  in OKE files.........  "); ;
+//			   System.out.println(se.obj);
+//			   System.out.println(" ...........");
 
 			System.out.println("-------------------------------------------------------------");
+
+
 			se.trainingFileWriter(training_data);
-			System.out.println("List of Subjects.........  ");
-			System.out.println(se.sub_fox);
-			System.out.println("List of predicates.........  ");
-			System.out.println(se.pred_fox);
-			System.out.println("List of Objects.........  ");
-			System.out.println(se.obj_fox);
-			System.out.println(" ...........");
 			se.response_Matching();
 	    	se.sub_fox.clear();
 			se.obj_fox.clear();
@@ -442,7 +437,35 @@ public class SentenceExtractor {
 	}
 	
 	public void response_Matching() {
+		   System.out.println("List of Subjects in OKE files.........  "); 
+		   System.out.println(sub);
+		   System.out.println("List of predicates  in OKE files.........  "); 
+		   System.out.println(pred);
+		   System.out.println("List of Objects  in OKE files.........  "); ;
+		   System.out.println(
+				   obj);
+		   System.out.println(" ...........");
+			System.out.println("List of Subjects.........  ");
+			System.out.println(sub_fox);
+			System.out.println("List of predicates.........  ");
+			System.out.println(pred_fox);
+			System.out.println("List of Objects.........  ");
+			System.out.println(obj_fox);
+			System.out.println(" ...........");
+			
+			
+		
+		
 //		response similarity function will be return here
+			
+	    	sub_fox.clear();
+			obj_fox.clear();
+			pred_fox.clear();
+	    	sub.clear();
+			obj.clear();
+			pred.clear();
+			
+			
 		System.out.println();
 }
 
