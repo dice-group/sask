@@ -445,6 +445,14 @@ public class SentenceExtractor {
 		   System.out.println(
 				   obj);
 		   System.out.println(" ...........");
+		   int total_triples = sub.size();
+//		    sub_fox.add("Google");
+//		    pred_fox.add("CEO");
+//		    obj_fox.add("Sundar_Pichai");
+//		    
+//		    sub_fox.add("Google");
+//		    pred_fox.add("CEO");
+//		    obj_fox.add("Sundar_Pichai");
 			System.out.println("List of Subjects.........  ");
 			System.out.println(sub_fox);
 			System.out.println("List of predicates.........  ");
@@ -452,7 +460,9 @@ public class SentenceExtractor {
 			System.out.println("List of Objects.........  ");
 			System.out.println(obj_fox);
 			System.out.println(" ...........");
-			int small;
+			
+
+			int small,large;
 	        int size_fox = obj_fox.size();
 	        int size_oke = pred.size();
 	        int truth = 0;
@@ -460,19 +470,30 @@ public class SentenceExtractor {
 	        {
 	        	System.out.println("size are same or oke triples is small");
 	        	small = size_oke;
+	        	large = size_fox;
 	        }
 	        else
 	        {
 	        	System.out.println("size of oke tripple is bigger");
 	        	small = size_fox;
+	        	large = size_oke;
 	        }
-	        for(int a =0; a <
-	        		small; a++) 
-	 
-	        if(obj.get(a) == obj_fox.get(a) && sub.get(a) == sub_fox.get(a) && pred.get(a) == pred_fox.get(a)  ) 
+	        for(int a =0; a < large; a++) 
 	        {
+	            for(int b =0; b < small; b++)
+	            {
+	        
+//	        	if(obj.get(a).equals(obj_fox.get(a)) &&  pred.get(a).equals(pred_fox.get(a)) && sub.get(a).equals(sub_fox.get(a))) 
+//	        	{		
+//	        	System.out.println(" same triple found");
+//	        	truth++;
+//	        	}
+	        	if(obj.get(a).equals(obj_fox.get(b)) &&  pred.get(a).equals(pred_fox.get(b)) && sub.get(a).equals(sub_fox.get(b))) 
+	        	{		
 	        	System.out.println(" same triple found");
 	        	truth++;
+	        	}
+	            }
 	        }
 	        
 
@@ -486,7 +507,7 @@ public class SentenceExtractor {
 			pred.clear();
 			
 			
-		System.out.println(truth);
+		System.out.println( truth + " out of total  " + total_triples + "triples found");
 }
 
 }
