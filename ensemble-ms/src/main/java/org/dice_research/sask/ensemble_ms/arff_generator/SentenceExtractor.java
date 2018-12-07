@@ -52,17 +52,16 @@ public class SentenceExtractor {
 	List<String> sub_openIE = new ArrayList<String>();
 	List<String> obj_openIE = new ArrayList<String>();
 	List<String> pred_openIE = new ArrayList<String>();
-	
+
 	List<String> sub = new ArrayList<String>();
 	List<String> obj = new ArrayList<String>();
 	List<String> pred = new ArrayList<String>();
 
-	
 	public static void main(String[] args) {
 
 		SentenceExtractor se = new SentenceExtractor();
 		// sort the files in numerical order
-		
+
 		Arrays.sort(files, new Comparator<File>() {
 			@Override
 			public int compare(File f1, File f2) {
@@ -73,7 +72,7 @@ public class SentenceExtractor {
 		});
 		// number of ttl files
 		// System.out.println(files.length);
-		for (int i = 0; i < 5 ; i++) {
+		for (int i = 0; i < 5; i++) {
 			se.sentence_Extracion(i);
 			System.out.println("Extracted sentence From the file " + files[i].getName());
 
@@ -89,41 +88,38 @@ public class SentenceExtractor {
 			System.out.println("Gethering Sparql Query Result................................");
 
 			String squery_Result = se.responseReader(i);
-//			System.out.println("......................................");
-//			System.out.println(squery_Result);
-//
-//			System.out.println("Training Data for file " + files[i].getName());
+			 System.out.println("......................................");
+			 System.out.println(squery_Result);
+			
+			 System.out.println("Training Data for file " + files[i].getName());
 			String training_data = " ' " + sentences.get(i) + " ' " + ", " + "'" + fox_response_string + " ' " + ","
 					+ " ' " + openIE_response_string + " ' " + "," + " ' " + openIE_response_string + " '  " + ","
 					+ " ' " + cedric_response_string + " ' " + "," + " ' " + squery_Result + " ' ";
 
 			System.out.println("------");
 			System.out.println(training_data);
-		       System.out.println("List of Subjects in OKE files.........  "); 
-			   System.out.println(se.sub);
-			   System.out.println("List of predicates  in OKE files.........  "); 
-			   System.out.println(se.pred);
-			   System.out.println("List of Objects  in OKE files.........  "); ;
-			   System.out.println(se.obj);
-			   System.out.println(" ...........");
+			System.out.println("List of Subjects in OKE files.........  ");
+			System.out.println(se.sub);
+			System.out.println("List of predicates  in OKE files.........  ");
+			System.out.println(se.pred);
+			System.out.println("List of Objects  in OKE files.........  ");
+			;
+			System.out.println(se.obj);
+			System.out.println(" ...........");
 
 			System.out.println("-------------------------------------------------------------");
 
-
 			se.trainingFileWriter(training_data);
 			se.response_Matching();
-	    	se.sub_fox.clear();
+			se.sub_fox.clear();
 			se.obj_fox.clear();
 			se.pred_fox.clear();
-	    	se.sub.clear();
+			se.sub.clear();
 			se.obj.clear();
 			se.pred.clear();
-	    	se.sub_openIE.clear();
+			se.sub_openIE.clear();
 			se.obj_openIE.clear();
 			se.pred_openIE.clear();
-			
-
-			
 
 		}
 
@@ -150,6 +146,7 @@ public class SentenceExtractor {
 			// port_vs_extractorMap.put("sorookin", 2227);
 
 			// int portNumb[] = { 2222, 2224, 2225, 2226, 2227 };
+//			port of extractor array
 			int portNumb[] = { 2222, 2227, 2226, 2225 };
 
 			Map<String, String> fredRespMap = new HashMap<String, String>();
@@ -296,7 +293,6 @@ public class SentenceExtractor {
 			// to separate subject, predcate,object
 			StmtIterator statementIter = results.listStatements();
 
-
 			Statement s;
 			Resource subject;
 			Property predicate;
@@ -324,13 +320,13 @@ public class SentenceExtractor {
 				}
 
 			}
-//		       System.out.println("List of Subjects in OKE files.........  "); 
-//			   System.out.println(sub);
-//			   System.out.println("List of predicates  in OKE files.........  "); 
-//			   System.out.println(pred);
-//			   System.out.println("List of Objects  in OKE files.........  "); ;
-//			   System.out.println(obj);
-//			   System.out.println(" ...........");
+			// System.out.println("List of Subjects in OKE files......... ");
+			// System.out.println(sub);
+			// System.out.println("List of predicates in OKE files......... ");
+			// System.out.println(pred);
+			// System.out.println("List of Objects in OKE files......... "); ;
+			// System.out.println(obj);
+			// System.out.println(" ...........");
 			// results.write(modelAsString,"TTL");
 			results.write(modelAsString, "N-TRIPLE");
 			sparql_query_result = modelAsString.toString();
@@ -398,13 +394,11 @@ public class SentenceExtractor {
 		String fox_filtered_response = modelAsString.toString();
 		StmtIterator statementIter = model.listStatements();
 
-		
-
 		Statement s;
 		Resource subject;
 		Property predicate;
 		RDFNode object;
-		
+
 		while (statementIter.hasNext()) {
 			s = statementIter.nextStatement();
 			subject = s.getSubject();
@@ -429,20 +423,21 @@ public class SentenceExtractor {
 
 		}
 
-//		System.out.println("List of Subjects.........  ");
-//		System.out.println(sub_fox);
-//		System.out.println("List of predicates.........  ");
-//		System.out.println(pred_fox);
-//		System.out.println("List of Objects.........  ");
-//		
-//		System.out.println(obj_fox);
-//		System.out.println(" ...........");
+		// System.out.println("List of Subjects......... ");
+		// System.out.println(sub_fox);
+		// System.out.println("List of predicates......... ");
+		// System.out.println(pred_fox);
+		// System.out.println("List of Objects......... ");
+		//
+		// System.out.println(obj_fox);
+		// System.out.println(" ...........");
 
 		// Create Files
 
 		return fox_filtered_response;
 
 	}
+
 	public String openIE_response_processing(String openIE_response_string, int i) throws IOException {
 		// create new file for for extractors response
 		String filename = "ExtractorResponse//openIEResponse//" + "openIE_" + i + ".ttl";
@@ -462,7 +457,7 @@ public class SentenceExtractor {
 		Statement s;
 		Resource subject;
 		Property predicate;
-		RDFNode object;	
+		RDFNode object;
 		while (statementIter.hasNext()) {
 			s = statementIter.nextStatement();
 			subject = s.getSubject();
@@ -492,7 +487,7 @@ public class SentenceExtractor {
 		System.out.println("List of predicates for OPENIE extractor.........  ");
 		System.out.println(pred_openIE);
 		System.out.println("List of Objects for OPENIE extractor.........  ");
-		
+
 		System.out.println(obj_openIE);
 		System.out.println(" ...........");
 
@@ -501,87 +496,78 @@ public class SentenceExtractor {
 		return openIE_filtered_response;
 
 	}
-	
+
 	public void response_Matching() {
-		   int total_triples = sub.size();
-//		    sub.add("Google");
-//		    pred.add("CEO");
-//		    obj.add("Sundar_Pichai");
-//		    
-//		    sub.add("Sundar_Pichai");git
-//		    pred.add("workfor");
-//		    obj.add("Google");
-		   System.out.println("List of Subjects in OKE files.........  "); 
-		   System.out.println(sub);
-		   System.out.println("List of predicates  in OKE files.........  "); 
-		   System.out.println(pred);
-		   System.out.println("List of Objects  in OKE files.........  "); ;
-		   System.out.println( obj);
-		   System.out.println(" ...........");
+		int total_triples = sub.size();
+		// sub.add("Google");
+		// pred.add("CEO");
+		// obj.add("Sundar_Pichai");
+		//
+		// sub.add("Sundar_Pichai");git
+		// pred.add("workfor");
+		// obj.add("Google");
+		System.out.println("List of Subjects in OKE files.........  ");
+		System.out.println(sub);
+		System.out.println("List of predicates  in OKE files.........  ");
+		System.out.println(pred);
+		System.out.println("List of Objects  in OKE files.........  ");
+		;
+		System.out.println(obj);
+		System.out.println(" ...........");
 
-			System.out.println("List of Subjects.........  ");
-			System.out.println(sub_fox);
-			System.out.println("List of predicates.........  ");
-			System.out.println(pred_fox);
-			System.out.println("List of Objects.........  ");
-			System.out.println(obj_fox);
-			System.out.println(" ...........");
-			
+		System.out.println("List of Subjects.........  ");
+		System.out.println(sub_fox);
+		System.out.println("List of predicates.........  ");
+		System.out.println(pred_fox);
+		System.out.println("List of Objects.........  ");
+		System.out.println(obj_fox);
+		System.out.println(" ...........");
 
-			int small,large;
-	        int size_fox = obj_fox.size();
-	        int size_oke = pred.size();
-	        int truth = 0;
-	        if (size_fox == size_oke || size_fox > size_oke )
-	        {
-	        	System.out.println("size are same or oke triples is small");
-	        	small = size_oke;
-	        	large = size_fox;
-	        	
-		        for(int a =0; a < large; a++) 
-		        {
-		            for(int b =0; b < small; b++)
-		            {
-		        	if(obj.get(b).equals(obj_fox.get(a)) &&  pred.get(b).equals(pred_fox.get(a)) && sub.get(b).equals(sub_fox.get(a))) 
-		        	{		
-		        	System.out.println(" same triple found");
-		        	truth++;
-		        	}
-		            }
-		        }
-		        
-	        }
-	        else
-	        {
-	        	
-	        	System.out.println("size of oke tripple is bigger");
-	        	small = size_fox;
-	        	large = size_oke;
-		        for(int a =0; a < large; a++) 
-		        {
-		            for(int b =0; b < small; b++)
-		            {
-		        	if(obj.get(a).equals(obj_fox.get(b)) &&  pred.get(a).equals(pred_fox.get(b)) && sub.get(a).equals(sub_fox.get(b))) 
-		        	{		
-		        	System.out.println(" same triple found");
-		        	truth++;
-		        	}
-		            }
-		        }
-	        }
+		int small, large;
+		int size_fox = obj_fox.size();
+		int size_oke = pred.size();
+		int truth = 0;
+		if (size_fox == size_oke || size_fox > size_oke) {
+			System.out.println("size are same or oke triples is small");
+			small = size_oke;
+			large = size_fox;
 
+			for (int a = 0; a < large; a++) {
+				for (int b = 0; b < small; b++) {
+					if (obj.get(b).equals(obj_fox.get(a)) && pred.get(b).equals(pred_fox.get(a))
+							&& sub.get(b).equals(sub_fox.get(a))) {
+						System.out.println(" same triple found");
+						truth++;
+					}
+				}
+			}
 
-//		response similarity function will be return here
-			
-	    	sub_fox.clear();
-			obj_fox.clear();
-			pred_fox.clear();
-	    	sub.clear();
-			obj.clear();
-			pred.clear();
-			
-			
-		System.out.println( truth + " out of total  " + total_triples + " triples found");
-}
+		} else {
+
+			System.out.println("size of oke tripple is bigger");
+			small = size_fox;
+			large = size_oke;
+			for (int a = 0; a < large; a++) {
+				for (int b = 0; b < small; b++) {
+					if (obj.get(a).equals(obj_fox.get(b)) && pred.get(a).equals(pred_fox.get(b))
+							&& sub.get(a).equals(sub_fox.get(b))) {
+						System.out.println(" same triple found");
+						truth++;
+					}
+				}
+			}
+		}
+
+		// response similarity function will be return here
+
+		sub_fox.clear();
+		obj_fox.clear();
+		pred_fox.clear();
+		sub.clear();
+		obj.clear();
+		pred.clear();
+
+		System.out.println(truth + " out of total  " + total_triples + " triples found");
+	}
 
 }
