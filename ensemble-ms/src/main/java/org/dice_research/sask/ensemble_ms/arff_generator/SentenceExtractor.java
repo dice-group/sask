@@ -437,22 +437,22 @@ public class SentenceExtractor {
 	}
 	
 	public void response_Matching() {
+		   int total_triples = sub.size();
+//		    sub.add("Google");
+//		    pred.add("CEO");
+//		    obj.add("Sundar_Pichai");
+//		    
+		    sub.add("Sundar_Pichai");
+		    pred.add("workfor");
+		    obj.add("Google");
 		   System.out.println("List of Subjects in OKE files.........  "); 
 		   System.out.println(sub);
 		   System.out.println("List of predicates  in OKE files.........  "); 
 		   System.out.println(pred);
 		   System.out.println("List of Objects  in OKE files.........  "); ;
-		   System.out.println(
-				   obj);
+		   System.out.println( obj);
 		   System.out.println(" ...........");
-		   int total_triples = sub.size();
-//		    sub_fox.add("Google");
-//		    pred_fox.add("CEO");
-//		    obj_fox.add("Sundar_Pichai");
-//		    
-//		    sub_fox.add("Google");
-//		    pred_fox.add("CEO");
-//		    obj_fox.add("Sundar_Pichai");
+
 			System.out.println("List of Subjects.........  ");
 			System.out.println(sub_fox);
 			System.out.println("List of predicates.........  ");
@@ -471,31 +471,39 @@ public class SentenceExtractor {
 	        	System.out.println("size are same or oke triples is small");
 	        	small = size_oke;
 	        	large = size_fox;
+	        	
+		        for(int a =0; a < large; a++) 
+		        {
+		            for(int b =0; b < small; b++)
+		            {
+		        	if(obj.get(b).equals(obj_fox.get(a)) &&  pred.get(b).equals(pred_fox.get(a)) && sub.get(b).equals(sub_fox.get(a))) 
+		        	{		
+		        	System.out.println(" same triple found");
+		        	truth++;
+		        	}
+		            }
+		        }
+		        
 	        }
 	        else
 	        {
+	        	
 	        	System.out.println("size of oke tripple is bigger");
 	        	small = size_fox;
 	        	large = size_oke;
+		        for(int a =0; a < large; a++) 
+		        {
+		            for(int b =0; b < small; b++)
+		            {
+		        	if(obj.get(a).equals(obj_fox.get(b)) &&  pred.get(a).equals(pred_fox.get(b)) && sub.get(a).equals(sub_fox.get(b))) 
+		        	{		
+		        	System.out.println(" same triple found");
+		        	truth++;
+		        	}
+		            }
+		        }
 	        }
-	        for(int a =0; a < large; a++) 
-	        {
-	            for(int b =0; b < small; b++)
-	            {
-	        
-//	        	if(obj.get(a).equals(obj_fox.get(a)) &&  pred.get(a).equals(pred_fox.get(a)) && sub.get(a).equals(sub_fox.get(a))) 
-//	        	{		
-//	        	System.out.println(" same triple found");
-//	        	truth++;
-//	        	}
-	        	if(obj.get(a).equals(obj_fox.get(b)) &&  pred.get(a).equals(pred_fox.get(b)) && sub.get(a).equals(sub_fox.get(b))) 
-	        	{		
-	        	System.out.println(" same triple found");
-	        	truth++;
-	        	}
-	            }
-	        }
-	        
+
 
 //		response similarity function will be return here
 			
