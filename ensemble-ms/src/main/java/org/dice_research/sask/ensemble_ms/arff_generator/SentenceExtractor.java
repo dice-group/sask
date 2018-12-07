@@ -37,24 +37,27 @@ import org.apache.log4j.BasicConfigurator;
  */
 
 public class SentenceExtractor {
-	List<String> sub_fox = new ArrayList<String>();
-	List<String> obj_fox = new ArrayList<String>();
-	List<String> pred_fox = new ArrayList<String>();
-	List<String> sub = new ArrayList<String>();
-	List<String> obj = new ArrayList<String>();
-	List<String> pred = new ArrayList<String>();
-
 	private static File path = new File("oke data");
 	private static File[] files = path.listFiles();
 	static List<String> sentences = new ArrayList<String>();
 	private static File file2 = new File("TrainingData\\traindata2.arff");
 	private static String sentence_data;
 	static String fox_response_string = null;
-	static String openie_response_string = null;
 	static String sorokin_response_string = null;
+	static String openIE_response_string = null;
 	static String cedric_response_string = null;
+	List<String> sub_fox = new ArrayList<String>();
+	List<String> obj_fox = new ArrayList<String>();
+	List<String> pred_fox = new ArrayList<String>();
+	List<String> sub_openIE = new ArrayList<String>();
+	List<String> obj_openIE = new ArrayList<String>();
+	List<String> pred_openIE = new ArrayList<String>();
 	
+	List<String> sub = new ArrayList<String>();
+	List<String> obj = new ArrayList<String>();
+	List<String> pred = new ArrayList<String>();
 
+	
 	public static void main(String[] args) {
 
 		SentenceExtractor se = new SentenceExtractor();
@@ -70,52 +73,55 @@ public class SentenceExtractor {
 		});
 		// number of ttl files
 		// System.out.println(files.length);
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 100; i++) {
 			se.sentence_Extracion(i);
 			System.out.println("Extracted sentence From the file " + files[i].getName());
 
 			System.out.println(sentences.get(i));
 			System.out.println("Fox extractor response for file" + files[i].getName());
 			System.out.println(fox_response_string);
-
-			System.out.println("OpenIE extractor response for file " + files[i].getName());
-			System.out.println(openie_response_string);
-			System.out.println("Cedric extractor response for file" + files[i].getName());
-			System.out.println(cedric_response_string);
 			System.out.println("Sorokin extractor response for file " + files[i].getName());
 			System.out.println(sorokin_response_string);
+			System.out.println("Cedric extractor response for file" + files[i].getName());
+			System.out.println(cedric_response_string);
+			System.out.println("openIE extractor response for file " + files[i].getName());
+			System.out.println(openIE_response_string);
 			System.out.println("Gethering Sparql Query Result................................");
 
 			String squery_Result = se.responseReader(i);
-			System.out.println("......................................");
-			System.out.println(squery_Result);
-
-			System.out.println("Training Data for file " + files[i].getName());
+//			System.out.println("......................................");
+//			System.out.println(squery_Result);
+//
+//			System.out.println("Training Data for file " + files[i].getName());
 			String training_data = " ' " + sentences.get(i) + " ' " + ", " + "'" + fox_response_string + " ' " + ","
-					+ " ' " + openie_response_string + " ' " + "," + " ' " + sorokin_response_string + " '  " + ","
+					+ " ' " + openIE_response_string + " ' " + "," + " ' " + openIE_response_string + " '  " + ","
 					+ " ' " + cedric_response_string + " ' " + "," + " ' " + squery_Result + " ' ";
 
 			System.out.println("------");
 			System.out.println(training_data);
-//		       System.out.println("List of Subjects in OKE files.........  "); 
-//			   System.out.println(se.sub);
-//			   System.out.println("List of predicates  in OKE files.........  "); 
-//			   System.out.println(se.pred);
-//			   System.out.println("List of Objects  in OKE files.........  "); ;
-//			   System.out.println(se.obj);
-//			   System.out.println(" ...........");
+		       System.out.println("List of Subjects in OKE files.........  "); 
+			   System.out.println(se.sub);
+			   System.out.println("List of predicates  in OKE files.........  "); 
+			   System.out.println(se.pred);
+			   System.out.println("List of Objects  in OKE files.........  "); ;
+			   System.out.println(se.obj);
+			   System.out.println(" ...........");
 
 			System.out.println("-------------------------------------------------------------");
 
 
 			se.trainingFileWriter(training_data);
-			se.response_Matching();
+//			se.response_Matching();
 	    	se.sub_fox.clear();
 			se.obj_fox.clear();
 			se.pred_fox.clear();
 	    	se.sub.clear();
 			se.obj.clear();
 			se.pred.clear();
+	    	se.sub_openIE.clear();
+			se.obj_openIE.clear();
+			se.pred_openIE.clear();
+			
 
 			
 
@@ -144,7 +150,7 @@ public class SentenceExtractor {
 			// port_vs_extractorMap.put("sorookin", 2227);
 
 			// int portNumb[] = { 2222, 2224, 2225, 2226, 2227 };
-			int portNumb[] = { 2222, 2226, 2227, 2225 };
+			int portNumb[] = { 2222, 2227, 2226, 2225 };
 
 			Map<String, String> fredRespMap = new HashMap<String, String>();
 			Map<String, String> spotlightRespMap = new HashMap<String, String>();
@@ -196,16 +202,18 @@ public class SentenceExtractor {
 
 					else if (j == 1) {
 						fredRespMap.put(sentences.get(i), response.toString());
-						ArrayList<String> openie_response_string_list = new ArrayList<String>();
-						openie_response_string = response.toString();
-						openie_response_string_list.add(openie_response_string);
-					}
-
-					else if (j == 2) {
-						spotlightRespMap.put(sentences.get(i), response.toString());
 						ArrayList<String> sorokin_response_string_list = new ArrayList<String>();
 						sorokin_response_string = response.toString();
 						sorokin_response_string_list.add(sorokin_response_string);
+					}
+
+					else if (j == 2) {
+						List<String> openIE_response_string_list = new ArrayList<String>();
+						openIE_response_string = response.toString();
+						String Filtered_openIE_response = openIE_response_processing(openIE_response_string, i);
+						openIE_response_string_list.add(Filtered_openIE_response);
+						System.out.println(Filtered_openIE_response);
+
 					} else if (j == 3) {
 						cedricRespMap.put(sentences.get(i), response.toString());
 						ArrayList<String> cedric_response_string_list = new ArrayList<String>();
@@ -435,6 +443,64 @@ public class SentenceExtractor {
 		return fox_filtered_response;
 
 	}
+	public String openIE_response_processing(String openIE_response_string, int i) throws IOException {
+		// create new file for for extractors response
+		String filename = "ExtractorResponse//openIEResponse//" + "openIE_" + i + ".ttl";
+		File file = new File(filename);
+		BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+		writer.write(openIE_response_string);
+		writer.close();
+		// create jena model for every files
+		Model model = ModelFactory.createDefaultModel();
+		model.read(filename);
+		System.out.println("For the file " + filename);
+		// Write as Turtle via model.write
+		StringWriter modelAsString = new StringWriter();
+		model.write(modelAsString, "N-TRIPLE");
+		String openIE_filtered_response = modelAsString.toString();
+		StmtIterator statementIter = model.listStatements();
+		Statement s;
+		Resource subject;
+		Property predicate;
+		RDFNode object;	
+		while (statementIter.hasNext()) {
+			s = statementIter.nextStatement();
+			subject = s.getSubject();
+			predicate = s.getPredicate();
+			object = s.getObject();
+
+			// System.out.println("List of Subject ");
+			// System.out.println(subject.toString());
+			sub_openIE.add(subject.getLocalName());
+			// System.out.println("List of predicates ");
+			// System.out.println(" " + predicate.toString() + " ");
+			pred_openIE.add(predicate.getLocalName());
+
+			// System.out.println("List of objects ");
+			if (object instanceof Resource && object.toString().contains("/")) {
+				obj_openIE.add(object.asResource().getLocalName());
+
+			} else if (object instanceof Literal) {
+
+				obj_openIE.add(object.toString());
+			}
+
+		}
+
+		System.out.println("List of Subjects for OPENIE extractor.........  ");
+		System.out.println(sub_openIE);
+		System.out.println("List of predicates for OPENIE extractor.........  ");
+		System.out.println(pred_openIE);
+		System.out.println("List of Objects for OPENIE extractor.........  ");
+		
+		System.out.println(obj_openIE);
+		System.out.println(" ...........");
+
+		// Create Files
+
+		return openIE_filtered_response;
+
+	}
 	
 	public void response_Matching() {
 		   int total_triples = sub.size();
@@ -442,9 +508,9 @@ public class SentenceExtractor {
 //		    pred.add("CEO");
 //		    obj.add("Sundar_Pichai");
 //		    
-		    sub.add("Sundar_Pichai");
-		    pred.add("workfor");
-		    obj.add("Google");
+//		    sub.add("Sundar_Pichai");git
+//		    pred.add("workfor");
+//		    obj.add("Google");
 		   System.out.println("List of Subjects in OKE files.........  "); 
 		   System.out.println(sub);
 		   System.out.println("List of predicates  in OKE files.........  "); 
@@ -515,7 +581,7 @@ public class SentenceExtractor {
 			pred.clear();
 			
 			
-		System.out.println( truth + " out of total  " + total_triples + "triples found");
+		System.out.println( truth + " out of total  " + total_triples + " triples found");
 }
 
 }
