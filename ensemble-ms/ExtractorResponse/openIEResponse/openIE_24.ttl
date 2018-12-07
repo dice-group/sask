@@ -1,0 +1,1 @@
+@prefix :      <http://example.org/> .@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .<http://example.org/Carol%20Lynn%20Meylan>        :be     :marry , <http://example.org/marry%20Jan.%202> , <http://example.org/marry%20at%20Manhattan%20Marriage%20Bureau> , <http://example.org/marry%20Jan.%202%20at%20Manhattan%20Marriage%20Bureau> .

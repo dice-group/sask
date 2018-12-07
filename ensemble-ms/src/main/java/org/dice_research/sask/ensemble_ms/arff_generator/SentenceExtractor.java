@@ -73,7 +73,7 @@ public class SentenceExtractor {
 		});
 		// number of ttl files
 		// System.out.println(files.length);
-		for (int i = 0; i < 100; i++) {
+		for (int i = 0; i < 5 ; i++) {
 			se.sentence_Extracion(i);
 			System.out.println("Extracted sentence From the file " + files[i].getName());
 
@@ -111,7 +111,7 @@ public class SentenceExtractor {
 
 
 			se.trainingFileWriter(training_data);
-//			se.response_Matching();
+			se.response_Matching();
 	    	se.sub_fox.clear();
 			se.obj_fox.clear();
 			se.pred_fox.clear();

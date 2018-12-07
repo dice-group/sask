@@ -1,0 +1,1 @@
+@prefix :      <http://example.org/> .@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .:A-League  :have  <http://example.org/first%20player%20bear%20in%202000s> .<http://example.org/Dylan%20Pierias>        <http://example.org/player%20's>                :A-League .

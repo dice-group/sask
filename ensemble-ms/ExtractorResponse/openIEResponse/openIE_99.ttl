@@ -1,0 +1,1 @@
+@prefix :      <http://example.org/> .@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .<http://example.org/Zayn%20Malik>        :leave  <http://example.org/one%20direction> .

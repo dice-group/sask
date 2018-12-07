@@ -1,0 +1,1 @@
+@prefix :      <http://example.org/> .@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .<http://example.org/Bastian%20Schweinsteiger>        :join                          <http://example.org/Chicago%20Fire> ;        <http://example.org/join%20chicago%20fire%20from>                <http://example.org/Manchester%20United> .

@@ -1,0 +1,1 @@
+@prefix :      <http://example.org/> .@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .:tweet  :catch  :attention , <http://example.org/attention%20of%20CEO%20Sundar%20Pichai> .<http://example.org/viral%20tweet>        :catch  :attention , <http://example.org/attention%20of%20CEO%20Sundar%20Pichai> .
