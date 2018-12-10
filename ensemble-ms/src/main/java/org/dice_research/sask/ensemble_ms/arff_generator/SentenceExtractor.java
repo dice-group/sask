@@ -33,6 +33,9 @@ import org.apache.log4j.BasicConfigurator;
  * This class take data from oke folder folder sort them and provide it to
  * different extractors and store response from extractors
  * 
+ * Perform Sparql query on the ttl files from oke to construct rdf triple and write in ttl format
+ * 
+ * Filter the exractor response by reading as rdf model and write in N - Triple format
  * @author Harsh Shah
  */
 
@@ -52,6 +55,9 @@ public class SentenceExtractor {
 	List<String> sub_openIE = new ArrayList<String>();
 	List<String> obj_openIE = new ArrayList<String>();
 	List<String> pred_openIE = new ArrayList<String>();
+	List<String> sub_sorokin = new ArrayList<String>();
+	List<String> obj_sorokin = new ArrayList<String>();
+	List<String> pred_sorokin = new ArrayList<String>();
 
 	List<String> sub = new ArrayList<String>();
 	List<String> obj = new ArrayList<String>();
@@ -120,6 +126,10 @@ public class SentenceExtractor {
 			se.sub_openIE.clear();
 			se.obj_openIE.clear();
 			se.pred_openIE.clear();
+			se.sub_sorokin.clear();
+			se.obj_sorokin.clear();
+			se.pred_sorokin.clear();
+			
 
 		}
 
@@ -150,7 +160,6 @@ public class SentenceExtractor {
 			int portNumb[] = { 2222, 2227, 2226, 2225 };
 
 			Map<String, String> fredRespMap = new HashMap<String, String>();
-			Map<String, String> spotlightRespMap = new HashMap<String, String>();
 			Map<String, String> cedricRespMap = new HashMap<String, String>();
 			Map<String, String> openIERespMap = new HashMap<String, String>();
 			Map<String, String> sorookinRespMap = new HashMap<String, String>();
@@ -199,9 +208,12 @@ public class SentenceExtractor {
 
 					else if (j == 1) {
 						fredRespMap.put(sentences.get(i), response.toString());
-						ArrayList<String> sorokin_response_string_list = new ArrayList<String>();
+						List<String> sorokin_response_string_list = new ArrayList<String>();
 						sorokin_response_string = response.toString();
-						sorokin_response_string_list.add(sorokin_response_string);
+
+						String Filtered_sorokin_response = sorokin_response_processing(sorokin_response_string, i);
+						sorokin_response_string_list.add(Filtered_sorokin_response);
+						System.out.println(Filtered_sorokin_response);;
 					}
 
 					else if (j == 2) {
@@ -235,6 +247,67 @@ public class SentenceExtractor {
 		}
 
 		// TODO Auto-generated method stub
+
+	}
+
+	public String sorokin_response_processing(String sorokin_response_string2, int i) throws IOException  {
+		// create new file for for extractors response
+		String filename = "ExtractorResponse//sorokinResponse//" + "sorokin" + i + ".ttl";
+		File file = new File(filename);
+		BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+		writer.write(sorokin_response_string);
+		writer.close();
+		// create jena model for every files
+		Model model = ModelFactory.createDefaultModel();
+		model.read(filename);
+		System.out.println("For the file " + filename);
+		// Write as Turtle via model.write
+		StringWriter modelAsString = new StringWriter();
+		model.write(modelAsString, "N-TRIPLE");
+		String sorokin_filtered_response = modelAsString.toString();
+		StmtIterator statementIter = model.listStatements();
+		Statement s;
+		Resource subject;
+		Property predicate;
+		RDFNode object;
+		while (statementIter.hasNext()) {
+			s = statementIter.nextStatement();
+			subject = s.getSubject();
+			predicate = s.getPredicate();
+			object = s.getObject();
+
+			// System.out.println("List of Subject ");
+			// System.out.println(subject.toString());
+			sub_sorokin.add(subject.getLocalName());
+			// System.out.println("List of predicates ");
+			// System.out.println(" " + predicate.toString() + " ");
+			pred_sorokin.add(predicate.getLocalName());
+
+			// System.out.println("List of objects ");
+			if (object instanceof Resource && object.toString().contains("/")) {
+				obj_sorokin.add(object.asResource().getLocalName());
+
+			} else if (object instanceof Literal) {
+
+				obj_sorokin.add(object.toString());
+			}
+
+		}
+
+		System.out.println("List of Subjects for sorokin extractor.........  ");
+		System.out.println(sub_sorokin);
+		System.out.println("List of predicates for sorokin extractor.........  ");
+		System.out.println(pred_sorokin);
+		System.out.println("List of Objects for sorokin extractor.........  ");
+
+		System.out.println(obj_sorokin);
+		System.out.println(" ...........");
+
+		// Create Files
+
+		return sorokin_filtered_response;
+
+		
 
 	}
 
