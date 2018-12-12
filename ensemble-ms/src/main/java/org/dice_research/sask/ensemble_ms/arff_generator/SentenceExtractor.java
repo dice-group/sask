@@ -571,7 +571,6 @@ public class SentenceExtractor {
 	}
 
 	public void response_Matching() {
-		int total_triples = sub.size();
 		 sub_fox.add("Google");
 		 pred_fox.add("CEO");
 		 obj_fox.add("Sundar_üichai");
@@ -607,6 +606,7 @@ public class SentenceExtractor {
 		int size_fox = obj_fox.size();
 		int size_oke = pred.size();
 		float truth = 0;
+		float result = 0;
 
 			
 			for (int a = 0; a < size_oke; a++) {
@@ -645,14 +645,14 @@ public class SentenceExtractor {
 						truth = truth + 1;
 						
 					}
-					System.out.println("Value of truth " + truth);
-						
-					
-						
-				
+					System.out.println("Value of truth " + truth);		
 			}
+			result = truth/ size_fox;
+			System.out.println(result);
 		}
-
+			float score = (result/size_oke) *100;
+			System.out.println("Extractor score for this sentence " + score + "%");	
+	
 
 		// response similarity function will be return here
 
