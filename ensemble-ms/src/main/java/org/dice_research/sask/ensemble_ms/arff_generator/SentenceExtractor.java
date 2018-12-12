@@ -49,7 +49,7 @@ public class SentenceExtractor {
 	static String sorokin_response_string = null;
 	static String openIE_response_string = null;
 	static String cedric_response_string = null;
-	List<String> sub_fox = new ArrayList<String>();
+	public List<String> sub_fox = new ArrayList<String>();
 	List<String> obj_fox = new ArrayList<String>();
 	List<String> pred_fox = new ArrayList<String>();
 	List<String> sub_openIE = new ArrayList<String>();
