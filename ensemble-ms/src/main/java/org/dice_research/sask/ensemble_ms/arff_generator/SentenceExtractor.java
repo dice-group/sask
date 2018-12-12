@@ -574,7 +574,14 @@ public class SentenceExtractor {
 		int total_triples = sub.size();
 		 sub_fox.add("Google");
 		 pred_fox.add("CEO");
+		 obj_fox.add("Sundar_üichai");
+		 sub_fox.add("Google");
+		 pred_fox.add("CEO");
 		 obj_fox.add("Sundar_Pichai");
+		 sub_fox.add("Google");
+		 pred_fox.add("Ceo1");
+		 obj_fox.add("Sundar_üichai");
+		 
 		//
 		 sub.add("Sundar_Pichai");
 		 pred.add("workfor");
@@ -596,19 +603,53 @@ public class SentenceExtractor {
 		System.out.println(obj_fox);
 		System.out.println(" ...........");
 
-
+      
 		int size_fox = obj_fox.size();
 		int size_oke = pred.size();
-		int truth = 0;
+		float truth = 0;
 
 			
-			for (int a = 0; a < size_fox; a++) {
-			for (int b = 0; b < size_oke; b++) {
-				if (obj.get(b).equals(obj_fox.get(a)) && pred.get(b).equals(pred_fox.get(a))
-						&& sub.get(b).equals(sub_fox.get(a))) {
-					System.out.println(" same triple found");
-					truth++;
-				}
+			for (int a = 0; a < size_oke; a++) {
+			for (int b = 0; b < size_fox; b++) {
+//				if (obj.get(a).equals(obj_fox.get(b)) && pred.get(a).equals(pred_fox.get(b))
+//						&& sub.get(a).equals(sub_fox.get(b))) 
+//				{
+//					System.out.println(" same triple found");
+//					truth++;
+//				}
+		            int triple_counter = 0;
+					if (obj.get(a).equals(obj_fox.get(b)))
+					{triple_counter++;}
+					if (sub.get(a).equals(sub_fox.get(b)))
+					{triple_counter++;}
+					if (sub.get(a).equals(sub_fox.get(b)))
+					{triple_counter++;}
+					if(triple_counter == 0)
+					{
+						System.out.println("Noting matched");
+						
+					}
+					else if(triple_counter == 1)
+					{
+						System.out.println("one match found");
+						truth = (float) (truth + 0.33);
+					}
+					else if(triple_counter == 2)
+					{
+						System.out.println("two match found");
+						truth = (float) (truth + 0.66);
+					}
+					else if(triple_counter == 3)
+					{
+						System.out.println("three  match found");
+						truth = truth + 1;
+						
+					}
+					System.out.println("Value of truth " + truth);
+						
+					
+						
+				
 			}
 		}
 
@@ -622,7 +663,7 @@ public class SentenceExtractor {
 		obj.clear();
 		pred.clear();
 
-		System.out.println(truth + " out of total  " + total_triples + " triples found");
+//		System.out.println(truth + " out of total  " + total_triples + " triples found");
 	}
 
 }
