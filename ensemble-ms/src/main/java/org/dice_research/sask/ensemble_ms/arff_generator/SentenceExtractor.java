@@ -43,13 +43,15 @@ public class SentenceExtractor {
 	private static File path = new File("oke data");
 	private static File[] files = path.listFiles();
 	static List<String> sentences = new ArrayList<String>();
-	private static File file2 = new File("TrainingData\\traindata2.arff");
+//	private static File file2 = new File("TrainingData\\traindata2.arff");
+
+
 	private static String sentence_data;
 	static String fox_response_string = null;
 	static String sorokin_response_string = null;
 	static String openIE_response_string = null;
 	static String cedric_response_string = null;
-	public List<String> sub_fox = new ArrayList<String>();
+	List<String> sub_fox = new ArrayList<String>();
 	List<String> obj_fox = new ArrayList<String>();
 	List<String> pred_fox = new ArrayList<String>();
 	List<String> sub_openIE = new ArrayList<String>();
@@ -81,7 +83,6 @@ public class SentenceExtractor {
 		for (int i = 0; i < 5 ; i++) {
 			se.sentence_Extracion(i);
 			System.out.println("Extracted sentence From the file " + files[i].getName());
-
 			System.out.println(sentences.get(i));
 			System.out.println("Fox extractor response for file" + files[i].getName());
 			System.out.println(fox_response_string);
@@ -92,29 +93,18 @@ public class SentenceExtractor {
 			System.out.println("openIE extractor response for file " + files[i].getName());
 			System.out.println(openIE_response_string);
 			System.out.println("Gethering Sparql Query Result................................");
-
 			String squery_Result = se.responseReader(i);
 			 System.out.println("......................................");
-			 System.out.println(squery_Result);
-			
+			 System.out.println(squery_Result);	
+			 
 			 System.out.println("Training Data for file " + files[i].getName());
 			String training_data = " ' " + sentences.get(i) + " ' " + ", " + "'" + fox_response_string + " ' " + ","
 					+ " ' " + openIE_response_string + " ' " + "," + " ' " + openIE_response_string + " '  " + ","
 					+ " ' " + cedric_response_string + " ' " + "," + " ' " + squery_Result + " ' ";
 
 			System.out.println("------");
-			System.out.println(training_data);
-			System.out.println("List of Subjects in OKE files.........  ");
-			System.out.println(se.sub);
-			System.out.println("List of predicates  in OKE files.........  ");
-			System.out.println(se.pred);
-			System.out.println("List of Objects  in OKE files.........  ");
-			;
-			System.out.println(se.obj);
-			System.out.println(" ...........");
-
+//			System.out.println(training_data);
 			System.out.println("-------------------------------------------------------------");
-
 			se.trainingFileWriter(training_data);
 			se.response_Matching();
 			se.sub_fox.clear();
@@ -393,56 +383,49 @@ public class SentenceExtractor {
 				}
 
 			}
-			// System.out.println("List of Subjects in OKE files......... ");
-			// System.out.println(sub);
-			// System.out.println("List of predicates in OKE files......... ");
-			// System.out.println(pred);
-			// System.out.println("List of Objects in OKE files......... "); ;
-			// System.out.println(obj);
-			// System.out.println(" ...........");
-			// results.write(modelAsString,"TTL");
+
 			results.write(modelAsString, "N-TRIPLE");
 			sparql_query_result = modelAsString.toString();
 		}
 
 		System.out.println(files[i].getName() + "  Result after pasing sparql query.......");
 		sparqueryList.add(sparql_query_result);
-		System.out.println(modelAsString.toString());
 		return sparql_query_result;
 	}
 
 	public void trainingFileWriter(String training_data) {
 
 		// List<String> sentences = new ArrayList<String>();
-
-		FileWriter fileWriter;
 		try {
-			int x = 0;
-			fileWriter = new FileWriter(file2);
-			BufferedWriter bw2 = new BufferedWriter(fileWriter);
-			if (x == 0) {
-				bw2.write("@relation DataExtraction2");
-				bw2.newLine();
-				bw2.write("@ATTRIBUTE Sentence	string");
-				bw2.newLine();
-				bw2.write("@ATTRIBUTE Foxoutput	string");
-				bw2.newLine();
-				bw2.newLine();
-				bw2.write("@ATTRIBUTE OPENIEoutput	string");
-				bw2.newLine();
-				bw2.write("@data");
-				bw2.newLine();
-				x++;
-			}
+	    FileWriter fw = new FileWriter("TrainingData\\traindata2.arff",true);
 
-			bw2.append(training_data);
 
-			bw2.close();
+//			int x = 0;
+			
 
-			fileWriter.close();
-			System.out.println("File Created and closed");
+//			if (x == 0) {
+//				bw2.write("@relation DataExtraction2");
+//				bw2.newLine();
+//				bw2.write("@ATTRIBUTE Sentence	string");
+//				bw2.newLine();
+//				bw2.write("@ATTRIBUTE Foxoutput	string");
+//				bw2.newLine();
+//				bw2.newLine();
+//				bw2.write("@ATTRIBUTE OPENIEoutput	string");
+//				bw2.newLine();
+//				bw2.write("@data");
+//				bw2.newLine();
+//				x++;
+//			}
 
-		} catch (IOException e) {
+           fw.append(training_data);
+          fw.write(System.getProperty( "line.separator" ));
+           fw.close();
+     
+           System.out.println("File Created and closed");
+
+		} 
+		catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -571,20 +554,20 @@ public class SentenceExtractor {
 	}
 
 	public void response_Matching() {
-		 sub_fox.add("Google");
-		 pred_fox.add("CEO");
-		 obj_fox.add("Sundar_üichai");
-		 sub_fox.add("Google");
-		 pred_fox.add("CEO");
-		 obj_fox.add("Sundar_Pichai");
-		 sub_fox.add("Google");
-		 pred_fox.add("Ceo1");
-		 obj_fox.add("Sundar_üichai");
-		 
-		//
-		 sub.add("Sundar_Pichai");
-		 pred.add("workfor");
-		 obj.add("Google");
+//		 sub_fox.add("Google");
+//		 pred_fox.add("CEO");
+//		 obj_fox.add("Sundar_üichai");
+//		 sub_fox.add("Google");
+//		 pred_fox.add("CEO");
+//		 obj_fox.add("Sundar_Pichai");
+//		 sub_fox.add("Google");
+//		 pred_fox.add("Ceo1");
+//		 obj_fox.add("Sundar_üichai");
+//		 
+//		//
+//		 sub.add("Sundar_Pichai");
+//		 pred.add("workfor");
+//		 obj.add("Google");
 		System.out.println("List of Subjects in OKE files.........  ");
 		System.out.println(sub);
 		System.out.println("List of predicates  in OKE files.........  ");
@@ -602,7 +585,7 @@ public class SentenceExtractor {
 		System.out.println(obj_fox);
 		System.out.println(" ...........");
 
-      
+     
 		int size_fox = obj_fox.size();
 		int size_oke = pred.size();
 		float truth = 0;
@@ -647,14 +630,12 @@ public class SentenceExtractor {
 					}
 					System.out.println("Value of truth " + truth);		
 			}
-			result = truth/ size_fox;
+//		    result = truth;
+			result = truth/size_fox;
 			System.out.println(result);
 		}
 			float score = (result/size_oke) *100;
-			System.out.println("Extractor score for this sentence " + score + "%");	
-	
-
-		// response similarity function will be return here
+			System.out.println("Extractor score for this sentence " + score );	
 
 		sub_fox.clear();
 		obj_fox.clear();
@@ -663,7 +644,7 @@ public class SentenceExtractor {
 		obj.clear();
 		pred.clear();
 
-//		System.out.println(truth + " out of total  " + total_triples + " triples found");
 	}
 
 }
+		
