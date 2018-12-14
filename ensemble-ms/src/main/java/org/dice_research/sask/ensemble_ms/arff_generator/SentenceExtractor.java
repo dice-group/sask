@@ -35,7 +35,7 @@ import org.apache.log4j.BasicConfigurator;
  * 
  * Perform Sparql query on the ttl files from oke to construct rdf triple and write in ttl format
  * 
- * Filter the exractor response by reading as rdf model and write in N - Triple format
+ * Filter the extractor response by reading as rdf model and write in N - Triple format
  * @author Harsh Shah
  */
 
@@ -81,6 +81,7 @@ public class SentenceExtractor {
 		// number of ttl files
 		// System.out.println(files.length);
 		for (int i = 0; i < 5 ; i++) {
+			
 			se.sentence_Extracion(i);
 			System.out.println("Extracted sentence From the file " + files[i].getName());
 			System.out.println(sentences.get(i));
@@ -98,11 +99,14 @@ public class SentenceExtractor {
 			 System.out.println(squery_Result);	
 			 
 			 System.out.println("Training Data for file " + files[i].getName());
-			String training_data = " ' " + sentences.get(i) + " ' " + ", " + "'" + fox_response_string + " ' " + ","
-					+ " ' " + openIE_response_string + " ' " + "," + " ' " + openIE_response_string + " '  " + ","
-					+ " ' " + cedric_response_string + " ' " + "," + " ' " + squery_Result + " ' ";
+//			String training_data = " ' " + sentences.get(i) + " ' " + ", " + "'" + fox_response_string + " ' " + ","
+//					+ " ' " + openIE_response_string + " ' " + "," + " ' " + openIE_response_string + " '  " + ","
+//					+ " ' " + cedric_response_string + " ' " + "," + " ' " + squery_Result + " ' ";
 
 			System.out.println("------");
+			String training_data = sentences.get(i) + " ,  " +   fox_response_string  + " , " 
+			+ sorokin_response_string + "," + openIE_response_string + "," + squery_Result + "," + "0";
+			
 //			System.out.println(training_data);
 			System.out.println("-------------------------------------------------------------");
 			se.trainingFileWriter(training_data);
@@ -334,14 +338,9 @@ public class SentenceExtractor {
 		} catch (RiotException ro) {
 			ro.getMessage();
 		}
-		// catch(MalformedURLException mur)
-		// {
-		//
-		// mur.getMessage();
-		// }
-
 		// to run in command line sparql.bat --data=vc-db-1.rdf --query=q1.rq
 		// write it to standard outString queryString = " .... " ;
+//		sparql query
 		String queryString =
 
 				"Prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> " + " CONSTRUCT {?s ?p ?o}" + "WHERE {"
@@ -353,7 +352,7 @@ public class SentenceExtractor {
 		try (QueryExecution qexec = QueryExecutionFactory.create(query, model)) {
 
 			Model results = qexec.execConstruct();
-			// to separate subject, predcate,object
+			// to separate subject, predicate,object
 			StmtIterator statementIter = results.listStatements();
 
 			Statement s;
@@ -397,7 +396,7 @@ public class SentenceExtractor {
 
 		// List<String> sentences = new ArrayList<String>();
 		try {
-	    FileWriter fw = new FileWriter("TrainingData\\traindata2.arff",true);
+	    FileWriter fw = new FileWriter("TrainingData\\traindata2.csv",true);
 
 
 //			int x = 0;
