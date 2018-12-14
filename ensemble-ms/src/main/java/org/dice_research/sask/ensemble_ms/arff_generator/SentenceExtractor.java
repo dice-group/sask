@@ -80,7 +80,7 @@ public class SentenceExtractor {
 		});
 		// number of ttl files
 		// System.out.println(files.length);
-		for (int i = 0; i < 5 ; i++) {
+		for (int i = 0; i < 100 ; i++) {
 			
 			se.sentence_Extracion(i);
 			System.out.println("Extracted sentence From the file " + files[i].getName());
@@ -96,18 +96,27 @@ public class SentenceExtractor {
 			System.out.println("Gethering Sparql Query Result................................");
 			String squery_Result = se.responseReader(i);
 			 System.out.println("......................................");
-			 System.out.println(squery_Result);	
+//			 String str1=squery_Result.replace("[\r\n]+", ".");
+			 String str1 = squery_Result;
+			 
+			 System.out.println(str1);	
+			 String sentence = sentences.get(i);
+			 sentence = sentence.replace(",","."); 
+			 fox_response_string = fox_response_string.replace(",","."); 
+			 sorokin_response_string = sorokin_response_string.replace(",",".");
+			 openIE_response_string = openIE_response_string.replace(",",".");
+			 
 			 
 			 System.out.println("Training Data for file " + files[i].getName());
 //			String training_data = " ' " + sentences.get(i) + " ' " + ", " + "'" + fox_response_string + " ' " + ","
 //					+ " ' " + openIE_response_string + " ' " + "," + " ' " + openIE_response_string + " '  " + ","
-//					+ " ' " + cedric_response_string + " ' " + "," + " ' " + squery_Result + " ' ";
+//					+ " ' " + cedric_response_string + " ' " + "," + " ' " + str1 + " ' ";
 
 			System.out.println("------");
-			String training_data = sentences.get(i) + " ,  " +   fox_response_string  + " , " 
+			String training_data = sentence + " ,  " +   fox_response_string  + " , " 
 			+ sorokin_response_string + "," + openIE_response_string + "," + squery_Result + "," + "0";
 			
-//			System.out.println(training_data);
+			System.out.println(training_data);
 			System.out.println("-------------------------------------------------------------");
 			se.trainingFileWriter(training_data);
 			se.response_Matching();
@@ -364,15 +373,8 @@ public class SentenceExtractor {
 				subject = s.getSubject();
 				predicate = s.getPredicate();
 				object = s.getObject();
-
-				// System.out.println("List of Subject ");
-				// System.out.println(subject.toString());
 				sub.add(subject.getLocalName());
-				// System.out.println("List of predicates ");
-				// System.out.println(" " + predicate.toString() + " ");
 				pred.add(predicate.getLocalName());
-
-				// System.out.println("List of objects ");
 				if (object instanceof Resource && object.toString().contains("/")) {
 					obj.add(object.asResource().getLocalName());
 
@@ -383,8 +385,11 @@ public class SentenceExtractor {
 
 			}
 
-			results.write(modelAsString, "N-TRIPLE");
+			results.write(modelAsString, "N-Triples");
 			sparql_query_result = modelAsString.toString();
+			sparql_query_result = sparql_query_result.replaceAll("[\r\n]+", ".");
+			
+			
 		}
 
 		System.out.println(files[i].getName() + "  Result after pasing sparql query.......");
