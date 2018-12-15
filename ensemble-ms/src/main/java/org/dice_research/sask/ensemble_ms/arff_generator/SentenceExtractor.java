@@ -80,7 +80,7 @@ public class SentenceExtractor {
 		});
 		// number of ttl files
 		// System.out.println(files.length);
-		for (int i = 0; i < 100 ; i++) {
+		for (int i = 0; i < 5 ;i++) {
 			
 			se.sentence_Extracion(i);
 			System.out.println("Extracted sentence From the file " + files[i].getName());
@@ -89,12 +89,16 @@ public class SentenceExtractor {
 			System.out.println(fox_response_string);
 			System.out.println("Sorokin extractor response for file " + files[i].getName());
 			System.out.println(sorokin_response_string);
-			System.out.println("Cedric extractor response for file" + files[i].getName());
-			System.out.println(cedric_response_string);
+//			System.out.println("Cedric extractor response for file" + files[i].getName());
+//			System.out.println(cedric_response_string);
 			System.out.println("openIE extractor response for file " + files[i].getName());
 			System.out.println(openIE_response_string);
+
 			System.out.println("Gethering Sparql Query Result................................");
+			
 			String squery_Result = se.responseReader(i);
+			float sc_fox = se.fox_response_Matching();
+			float sc_openIE = se.openIE_response_Mathing();
 			 System.out.println("......................................");
 //			 String str1=squery_Result.replace("[\r\n]+", ".");
 			 String str1 = squery_Result;
@@ -119,7 +123,11 @@ public class SentenceExtractor {
 			System.out.println(training_data);
 			System.out.println("-------------------------------------------------------------");
 			se.trainingFileWriter(training_data);
-			se.response_Matching();
+
+			
+			
+			System.out.println("fox score : " + sc_fox + "openIE score :" + sc_openIE);
+
 			se.sub_fox.clear();
 			se.obj_fox.clear();
 			se.pred_fox.clear();
@@ -136,6 +144,73 @@ public class SentenceExtractor {
 
 		}
 
+	}
+
+	public float openIE_response_Mathing() {
+
+		System.out.println("List of Subjects in OKE files.........  ");
+		System.out.println(sub);
+		System.out.println("List of predicates  in OKE files.........  ");
+		System.out.println(pred);
+		System.out.println("List of Objects  in OKE files.........  ");
+		
+		System.out.println(obj);
+		System.out.println(" ...........");
+
+		System.out.println("List of Subjects.........  ");
+		System.out.println(sub_openIE);
+		System.out.println("List of predicates.........  ");
+		System.out.println(pred_openIE);
+		System.out.println("List of Objects.........  ");
+		System.out.println(obj_openIE);
+		System.out.println(" ...........");
+
+    
+		int size_openIE = obj_openIE.size();
+		int size_oke = pred.size();
+		float truth = 0;
+		float result = 0;
+
+			
+			for (int a = 0; a < size_oke; a++) {
+			for (int b = 0; b < size_openIE; b++) {
+		            int triple_counter = 0;
+					if (obj.get(a).equals(obj_openIE.get(b)))
+					{triple_counter++;}
+					if (sub.get(a).equals(sub_openIE.get(b)))
+					{triple_counter++;}
+					if (sub.get(a).equals(sub_openIE.get(b)))
+					{triple_counter++;}
+					if(triple_counter == 0)
+					{
+						System.out.println("Noting matched");
+						
+					}
+					else if(triple_counter == 1)
+					{
+						System.out.println("one match found");
+						truth = (float) (truth + 0.33);
+					}
+					else if(triple_counter == 2)
+					{
+						System.out.println("two match found");
+						truth = (float) (truth + 0.66);
+					}
+					else if(triple_counter == 3)
+					{
+						System.out.println("three  match found");
+						truth = truth + 1;
+						
+					}
+//					System.out.println("Value of truth " + truth);		
+			}
+//		    result = truth;
+			result = truth/size_openIE;
+			System.out.println(result);
+		}
+			float score = (result/size_oke) *100;
+			System.out.println("OPEN IE Extractor score for this sentence " + score );		
+		    return score;
 	}
 
 	public void sentence_Extracion(int i) {
@@ -206,7 +281,7 @@ public class SentenceExtractor {
 
 						String Filtered_fox_response = fox_response_processing(fox_response_string, i);
 						fox_response_string_list.add(Filtered_fox_response);
-						System.out.println(Filtered_fox_response);
+//						System.out.println(Filtered_fox_response);
 					}
 
 					else if (j == 1) {
@@ -224,7 +299,7 @@ public class SentenceExtractor {
 						openIE_response_string = response.toString();
 						String Filtered_openIE_response = openIE_response_processing(openIE_response_string, i);
 						openIE_response_string_list.add(Filtered_openIE_response);
-						System.out.println(Filtered_openIE_response);
+//						System.out.println(Filtered_openIE_response);
 
 					} else if (j == 3) {
 						cedricRespMap.put(sentences.get(i), response.toString());
@@ -493,8 +568,7 @@ public class SentenceExtractor {
 		// System.out.println(" ...........");
 
 		// Create Files
-
-		return fox_filtered_response;
+        return fox_filtered_response;
 
 	}
 
@@ -557,7 +631,7 @@ public class SentenceExtractor {
 
 	}
 
-	public void response_Matching() {
+	public float fox_response_Matching() {
 //		 sub_fox.add("Google");
 //		 pred_fox.add("CEO");
 //		 obj_fox.add("Sundar_üichai");
@@ -567,8 +641,6 @@ public class SentenceExtractor {
 //		 sub_fox.add("Google");
 //		 pred_fox.add("Ceo1");
 //		 obj_fox.add("Sundar_üichai");
-//		 
-//		//
 //		 sub.add("Sundar_Pichai");
 //		 pred.add("workfor");
 //		 obj.add("Google");
@@ -581,11 +653,11 @@ public class SentenceExtractor {
 		System.out.println(obj);
 		System.out.println(" ...........");
 
-		System.out.println("List of Subjects.........  ");
+		System.out.println("List of Subjects in Fox Extractor.........  ");
 		System.out.println(sub_fox);
-		System.out.println("List of predicates.........  ");
+		System.out.println("List of predicates Fox Extractor.........  ");
 		System.out.println(pred_fox);
-		System.out.println("List of Objects.........  ");
+		System.out.println("List of Objects Fox Extractor.........  ");
 		System.out.println(obj_fox);
 		System.out.println(" ...........");
 
@@ -632,7 +704,7 @@ public class SentenceExtractor {
 						truth = truth + 1;
 						
 					}
-					System.out.println("Value of truth " + truth);		
+//					System.out.println("Value of truth " + truth);		
 			}
 //		    result = truth;
 			result = truth/size_fox;
@@ -640,14 +712,7 @@ public class SentenceExtractor {
 		}
 			float score = (result/size_oke) *100;
 			System.out.println("Extractor score for this sentence " + score );	
-
-		sub_fox.clear();
-		obj_fox.clear();
-		pred_fox.clear();
-		sub.clear();
-		obj.clear();
-		pred.clear();
-
+            return score;
 	}
 
 }
