@@ -8,6 +8,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -99,6 +101,26 @@ public class SentenceExtractor {
 			float sc_fox = se.fox_response_Matching();
 			float sc_openIE = se.openIE_response_Mathing();
 			float sc_sorokin = se.sorokin_response_Matching();
+			
+			float score[] = new float[3];
+			score[0]  = sc_fox;
+			score[1]  = sc_sorokin;
+			score[0]  = sc_openIE;
+			int max =0;
+			 score[max] = score[0];
+			
+			for (int c = 1; c < score.length; c++)
+			{
+			     if (score[c] >score[max])
+			     {
+			      score[max] = score[c];
+			     }
+			}
+
+			System.out.println("The highest score for the extractor  is: " + score[max]  + "Index"  + max);
+	
+			
+			
 			 System.out.println("......................................");
 //			 String str1=squery_Result.replace("[\r\n]+", ".");
 			 String str1 = squery_Result;
@@ -118,7 +140,7 @@ public class SentenceExtractor {
 
 			System.out.println("------");
 			String training_data = sentence + " ,  " +   fox_response_string  + " , " 
-			+ sorokin_response_string + "," + openIE_response_string + "," + squery_Result + "," + "0";
+			+ sorokin_response_string + "," + openIE_response_string + "," + squery_Result + "," + max;
 			
 			System.out.println(training_data);
 			System.out.println("-------------------------------------------------------------");
