@@ -47,7 +47,7 @@ Here is the list of Penn treebank POS tag set:
 22. RBS Adverb, superlative
 23. RP Particle
 24. SYM Symbol
-25. TO t o
+25. TO to
 26. UH Interjection
 27. VB Verb, base form
 28. VBD Verb, past tense
@@ -63,7 +63,7 @@ Here is the list of Penn treebank POS tag set:
 If you want your sentence to be tagged with parts of speech you can use Stanford CoreNLP's POS tagger (software that reads text in some language and assigns parts of speech to each word) as provided in the [link](http://corenlp.run/).
 
 
-
+On how to create SPARQL templates and everything regarding it in bit detail is contained in the PDF provided in the [link](https://github.com/dice-group/SurniaQA/blob/master/docs/KG_Miniproject_Presentation.pdf).
 
 
 
