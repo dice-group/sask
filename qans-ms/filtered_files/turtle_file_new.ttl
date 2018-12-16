@@ -1,9 +1,32 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix dbp:   <http://dbpedia.org/property/> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix foaf:  <http://xmlns.com/foaf/spec/> .
+@prefix dcterms:  <http://dublincore.org/2012/06/14/dcterms#> .
+
 <http://dbpedia.org/ontology/employer>  <http://www.w3.org/2000/01/rdf-schema#label>  "employer".
 <http://aksw.org/notInWiki/James_Damore>  <http://www.w3.org/2000/01/rdf-schema#label>  "James Damore";
                                           <http://dbpedia.org/ontology/employer> <http://dbpedia.org/resource/Google> .
 
+<http://dbpedia.org/ontology/birthDate>  <http://www.w3.org/2000/01/rdf-schema#label>  "birth date".										  
+<http://dbpedia.org/resource/Andrew_Morton_(computer_programmer)>  <http://www.w3.org/2000/01/rdf-schema#label>  "Andrew Morton (computer programmer)";
+  <http://dbpedia.org/ontology/employer>  <http://dbpedia.org/resource/Google>;
+  <http://dbpedia.org/ontology/birthDate>  "1959-07-15".
+  
+<http://dbpedia.org/resource/Tim_Bray>  <http://www.w3.org/2000/01/rdf-schema#label>  "Tim Bray";
+<http://dbpedia.org/ontology/employer>  <http://dbpedia.org/resource/Google>;
+  <http://dbpedia.org/ontology/birthDate>  "1955-01-01".
+  
+<http://dbpedia.org/resource/Richard_Gingras>  <http://www.w3.org/2000/01/rdf-schema#label>  "Richard Gingras";
+<http://dbpedia.org/ontology/employer>  <http://dbpedia.org/resource/Google>;
+  <http://dbpedia.org/ontology/birthDate>  "1952-01-17".
+ 
 
-<http://dbpedia.org/ontology/ceo>  <http://www.w3.org/2000/01/rdf-schema#label>  "chief executive officer".
+<http://dbpedia.org/ontology/ceo>  <http://www.w3.org/2000/01/rdf-schema#label>  "chief executive officer", "ceo".
 <http://dbpedia.org/resource/Google>  <http://www.w3.org/2000/01/rdf-schema#label>  "Google";
   <http://dbpedia.org/ontology/ceo> <http://dbpedia.org/resource/Sundar_Pichai> .
   
@@ -16,9 +39,11 @@
   <http://dbpedia.org/ontology/foundationPlace> <http://dbpedia.org/resource/Menlo_Park%2C_California> ;
   <http://dbpedia.org/ontology/location> <http://dbpedia.org/resource/California>, <http://dbpedia.org/resource/Menlo_Park%2C_California> .
 
-  
+ 
+<http://dbpedia.org/ontology/networth>  <http://www.w3.org/2000/01/rdf-schema#label>  "networth ($)".
 <http://dbpedia.org/resource/Sundar_Pichai>  <http://www.w3.org/2000/01/rdf-schema#label>  "Sundar Pichai";
-                                             <http://dbpedia.org/ontology/employer> <http://dbpedia.org/resource/Google> .
+                                             <http://dbpedia.org/ontology/employer> <http://dbpedia.org/resource/Google> ;
+											 <http://dbpedia.org/ontology/networth>  "1.05e9".
 											 
 
 <http://dbpedia.org/ontology/locatedInArea>  <http://www.w3.org/2000/01/rdf-schema#label>  "located in area".
@@ -31,7 +56,10 @@
 <http://dbpedia.org/ontology/relative> <http://www.w3.org/2000/01/rdf-schema#label>  "relative". 
 <http://aksw.org/notInWiki/Emanuel_Bergogolio> <http://www.w3.org/2000/01/rdf-schema#label>  "Emanuel Bergogolio".
 
+<http://dbpedia.org/resource/Catholic_Church>  <http://www.w3.org/2000/01/rdf-schema#label>  "Catholic Church".
+<http://dbpedia.org/ontology/Pope>  <http://www.w3.org/2000/01/rdf-schema#label>  "pope".
 <http://dbpedia.org/resource/Pope_Francis>  <http://www.w3.org/2000/01/rdf-schema#label>  "Pope Francis";
+  <http://dbpedia.org/ontology/Pope>  <http://dbpedia.org/resource/Catholic_Church>;
   <http://dbpedia.org/ontology/country> <http://dbpedia.org/resource/Chile> ;
   <http://dbpedia.org/ontology/location> <http://dbpedia.org/resource/Chile>, <http://dbpedia.org/resource/Latin_America> ;
   <http://dbpedia.org/ontology/relative> <http://aksw.org/notInWiki/Emanuel_Bergogolio> .
@@ -39,13 +67,16 @@
 
 <http://dbpedia.org/ontology/almaMater>  <http://www.w3.org/2000/01/rdf-schema#label>  "alma mater".
 <http://dbpedia.org/resource/Hillary_Clinton>  <http://www.w3.org/2000/01/rdf-schema#label>  "Hillary Clinton";
-                                               <http://dbpedia.org/ontology/almaMater> <http://dbpedia.org/resource/Wellesley_College> .
+                                               <http://dbpedia.org/ontology/almaMater> <http://dbpedia.org/resource/Wellesley_College> .										   
 											   
 <http://dbpedia.org/resource/Boston>  <http://www.w3.org/2000/01/rdf-schema#label>  "Boston". 											   
 <http://dbpedia.org/resource/Wellesley_College>  <http://www.w3.org/2000/01/rdf-schema#label>  "Wellesley College";
                                                  <http://dbpedia.org/ontology/location> <http://dbpedia.org/resource/Boston> .
 
-<http://dbpedia.org/resource/Jenny_McCarthy>  <http://www.w3.org/2000/01/rdf-schema#label>  "Jenny McCarthy".
+<http://dbpedia.org/ontology/author>  <http://www.w3.org/2000/01/rdf-schema#label>  "author".												 
+<http://dbpedia.org/resource/Jenny_McCarthy>  <http://www.w3.org/2000/01/rdf-schema#label>  "Jenny McCarthy";
+                                              <http://dbpedia.org/ontology/author>  <http://dbpedia.org/resource/Mother_Warriors>.
+											  
 <http://dbpedia.org/resource/Melissa_McCarthy> <http://www.w3.org/2000/01/rdf-schema#label>  "Melissa McCarthy";
                                                <http://dbpedia.org/ontology/relative> <http://dbpedia.org/resource/Jenny_McCarthy> .
 
@@ -54,19 +85,24 @@
 <http://dbpedia.org/resource/European_Commission>  <http://www.w3.org/2000/01/rdf-schema#label>  "European Commission";
                                                    <http://dbpedia.org/ontology/president> <http://dbpedia.org/resource/Jean-Claude_Juncker> .
 
+<http://dbpedia.org/property/children>  <http://www.w3.org/2000/01/rdf-schema#label>  "children".
 <http://dbpedia.org/ontology/formerBandMember>  <http://www.w3.org/2000/01/rdf-schema#label>  "former band member".
-<http://dbpedia.org/resource/Glenn_Frey>  <http://www.w3.org/2000/01/rdf-schema#label>  "Glenn Frey". 
+<http://dbpedia.org/resource/Glenn_Frey>  <http://www.w3.org/2000/01/rdf-schema#label>  "Glenn Frey";
+                                          <http://dbpedia.org/property/children>  "3".
 <http://dbpedia.org/resource/Eagles_(band)>  <http://www.w3.org/2000/01/rdf-schema#label>  "Eagles (band)";
                                              <http://dbpedia.org/ontology/formerBandMember> <http://dbpedia.org/resource/Glenn_Frey> .
 
 											 
+<http://dbpedia.org/property/founders>	<http://www.w3.org/2000/01/rdf-schema#label>  "founders".										 
 <http://dbpedia.org/ontology/doctoralStudent>  <http://www.w3.org/2000/01/rdf-schema#label>  "doctoral student".
 <http://dbpedia.org/ontology/doctoralAdvisor>  <http://www.w3.org/2000/01/rdf-schema#label>  "doctoral advisor".
 <http://dbpedia.org/resource/Sergey_Brin>  <http://www.w3.org/2000/01/rdf-schema#label>  "Sergey Brin";
+                                           <http://dbpedia.org/property/founders>  <http://dbpedia.org/resource/Google>;
                                            <http://dbpedia.org/ontology/doctoralStudent> <http://dbpedia.org/resource/Rajeev_Motwani> .										 
 <http://dbpedia.org/resource/Rajeev_Motwani>  <http://www.w3.org/2000/01/rdf-schema#label>  "Rajeev Motwani".
 <http://dbpedia.org/resource/Rajeev_Motwani> <http://dbpedia.org/ontology/doctoralAdvisor> <http://dbpedia.org/resource/Larry_Page>, <http://dbpedia.org/resource/Sergey_Brin> .
 <http://dbpedia.org/resource/Larry_Page> <http://www.w3.org/2000/01/rdf-schema#label>  "Larry Page";
+                                         <http://dbpedia.org/property/founders>  <http://dbpedia.org/resource/Google>;
                                          <http://dbpedia.org/ontology/doctoralStudent> <http://dbpedia.org/resource/Rajeev_Motwani> .
 
 
@@ -74,12 +110,37 @@
   <http://dbpedia.org/ontology/locatedInArea> <http://dbpedia.org/resource/California> ;
   <http://dbpedia.org/ontology/location> <http://dbpedia.org/resource/California> .
   
+  
+<http://dbpedia.org/resource/Skywriting_by_Word_of_Mouth> <http://www.w3.org/2000/01/rdf-schema#label>  "Skywriting by Word of Mouth".
+<http://dbpedia.org/resource/A_Spaniard_in_the_Works>  <http://www.w3.org/2000/01/rdf-schema#label>  "A Spaniard in the Works".
+<http://dbpedia.org/resource/In_His_Own_Write>  <http://www.w3.org/2000/01/rdf-schema#label>  "In His Own Write".
+
+<http://dbpedia.org/resource/I,_Me,_Mine>   <http://www.w3.org/2000/01/rdf-schema#label>  "I, Me, Mine".
+<http://dbpedia.org/resource/Songs_by_George_Harrison>   <http://www.w3.org/2000/01/rdf-schema#label>  "Songs by George Harrison".
+<http://dbpedia.org/resource/Songs_by_George_Harrison_2>   <http://www.w3.org/2000/01/rdf-schema#label>  "Songs by George Harrison 2".
+
+<http://dbpedia.org/resource/Octopus's_Garden_(book)> <http://www.w3.org/2000/01/rdf-schema#label>  "Octopus's Garden (book)".
+
+<http://dbpedia.org/ontology/author>  <http://www.w3.org/2000/01/rdf-schema#label>  "author".
 <http://dbpedia.org/ontology/bandMember> <http://www.w3.org/2000/01/rdf-schema#label>  "band member". 
-<http://dbpedia.org/resource/John_Lennon>  <http://www.w3.org/2000/01/rdf-schema#label>  "John Lennon".
+
+<http://dbpedia.org/resource/John_Lennon>  <http://www.w3.org/2000/01/rdf-schema#label>  "John Lennon";
+ <http://dbpedia.org/ontology/author>  <http://dbpedia.org/resource/Skywriting_by_Word_of_Mouth>, <http://dbpedia.org/resource/A_Spaniard_in_the_Works>, 
+ <http://dbpedia.org/resource/In_His_Own_Write>.
+ 
+<http://dbpedia.org/resource/George_Harrison>  <http://www.w3.org/2000/01/rdf-schema#label>  "George Harrison";
+ <http://dbpedia.org/ontology/author> <http://dbpedia.org/resource/I,_Me,_Mine>, <http://dbpedia.org/resource/Songs_by_George_Harrison>,
+ <http://dbpedia.org/resource/Songs_by_George_Harrison_2>.
+ 
+<http://dbpedia.org/resource/Ringo_Starr>  <http://www.w3.org/2000/01/rdf-schema#label>  "Ringo Starr";
+  <http://dbpedia.org/ontology/author>  <http://dbpedia.org/resource/Octopus's_Garden_(book)>.
+ 
 <http://dbpedia.org/resource/The_Beatles>  <http://www.w3.org/2000/01/rdf-schema#label>  "The Beatles";
-                                           <http://dbpedia.org/ontology/bandMember> <http://dbpedia.org/resource/John_Lennon> .
+                                           <http://dbpedia.org/ontology/bandMember> <http://dbpedia.org/resource/John_Lennon>, <http://dbpedia.org/resource/George_Harrison>, 
+										   <http://dbpedia.org/resource/Ringo_Starr>, <http://dbpedia.org/resource/Paul_McCartney>.
 
 										   
+<http://dbpedia.org/ontology/wikiPageRedirects>  <http://www.w3.org/2000/01/rdf-schema#label>  "Wikipage redirect".
 <http://dbpedia.org/resource/Asia>  <http://www.w3.org/2000/01/rdf-schema#label>  "Asia".
 <http://dbpedia.org/resource/Japan>  <http://www.w3.org/2000/01/rdf-schema#label>  "Japan";
   <http://dbpedia.org/ontology/country> <http://dbpedia.org/resource/Asia> ;
@@ -109,22 +170,46 @@
   <http://dbpedia.org/ontology/location> <http://dbpedia.org/resource/Thane> ;
   <http://dbpedia.org/ontology/tenant> <http://dbpedia.org/resource/Tata_Consultancy_Services> .
   
+<http://dbpedia.org/ontology/genre>  <http://www.w3.org/2000/01/rdf-schema#label>  "genre".
+<http://dbpedia.org/resource/Pop_music>  <http://www.w3.org/2000/01/rdf-schema#label>  "Pop music".
+<http://dbpedia.org/resource/Contemporary_R&B>  <http://www.w3.org/2000/01/rdf-schema#label>  "Contemporary R&B".
 
 <http://dbpedia.org/resource/Camila_Cabello>  <http://www.w3.org/2000/01/rdf-schema#label>  "Camila Cabello".
 <http://dbpedia.org/resource/Fifth_Harmony>  <http://www.w3.org/2000/01/rdf-schema#label>  "Fifth Harmony";
+			<http://dbpedia.org/ontology/genre> <http://dbpedia.org/resource/Pop_music>, <http://dbpedia.org/resource/Contemporary_R&B>;
                                              <http://dbpedia.org/ontology/formerBandMember> <http://dbpedia.org/resource/Camila_Cabello> .
 
+<http://dbpedia.org/ontology/parentCompany>  <http://www.w3.org/2000/01/rdf-schema#label>  "parent company".
+<http://dbpedia.org/ontology/regionServed> <http://www.w3.org/2000/01/rdf-schema#label>  "region served".
+<http://dbpedia.org/resource/SFR>  <http://www.w3.org/2000/01/rdf-schema#label>  "SFR".
 
+<http://dbpedia.org/resource/Belgium>  <http://www.w3.org/2000/01/rdf-schema#label>  "Belgium".
+<http://dbpedia.org/resource/Luxembourg>  <http://www.w3.org/2000/01/rdf-schema#label>  "Luxembourg".
+<http://dbpedia.org/resource/Portugal>  <http://www.w3.org/2000/01/rdf-schema#label> "Portugal".
+<http://dbpedia.org/resource/Metropolitan_France>  <http://www.w3.org/2000/01/rdf-schema#label> "Metropolitan France".
 <http://dbpedia.org/ontology/subsidiary>  <http://www.w3.org/2000/01/rdf-schema#label>  "subsidiary".
-<http://dbpedia.org/resource/Numericable>  <http://www.w3.org/2000/01/rdf-schema#label>  "Numericable". 
+
+<http://dbpedia.org/resource/Numericable>  <http://www.w3.org/2000/01/rdf-schema#label>  "Numericable";
+<http://dbpedia.org/ontology/parentCompany>  <http://dbpedia.org/resource/SFR>;
+<http://dbpedia.org/ontology/regionServed> <http://dbpedia.org/resource/Belgium>, <http://dbpedia.org/resource/Luxembourg>,
+<http://dbpedia.org/resource/Portugal>, <http://dbpedia.org/resource/Metropolitan_France>.
+
 <http://dbpedia.org/resource/Altice_(company)>  <http://www.w3.org/2000/01/rdf-schema#label>  "Altice (company)";
                                                 <http://dbpedia.org/ontology/subsidiary> <http://dbpedia.org/resource/Numericable> .
 
-
+<http://dbpedia.org/property/catches/stumpings> <http://www.w3.org/2000/01/rdf-schema#label> "catches/stumpings".
+<http://dbpedia.org/property/role>  <http://www.w3.org/2000/01/rdf-schema#label>  "role".
+<http://dbpedia.org/resource/India_national_cricket_team>  <http://www.w3.org/2000/01/rdf-schema#label> "India national cricket team".
+<http://dbpedia.org/resource/Wicket-keeper>  <http://www.w3.org/2000/01/rdf-schema#label> "Wicket-keeper".
+<http://dbpedia.org/resource/Captain_(cricket)>  <http://www.w3.org/2000/01/rdf-schema#label> "Captain (cricket)".
 <http://dbpedia.org/ontology/formerTeam>  <http://www.w3.org/2000/01/rdf-schema#label>  "former team".
+
 <http://dbpedia.org/resource/Chennai_Super_Kings>  <http://www.w3.org/2000/01/rdf-schema#label>  "Chennai Super Kings".
-<http://dbpedia.org/resource/Dhoni>  <http://www.w3.org/2000/01/rdf-schema#label>  "Dhoni";
-                                     <http://dbpedia.org/ontology/formerTeam> <http://dbpedia.org/resource/Chennai_Super_Kings> .
+<http://dbpedia.org/resource/Mahendra_Singh_Dhoni>  <http://www.w3.org/2000/01/rdf-schema#label>  "Mahendra Singh Dhoni";
+                                     <http://dbpedia.org/property/catches/stumpings> "41", "256", "261", "364";
+                                     <http://dbpedia.org/ontology/formerTeam> <http://dbpedia.org/resource/Chennai_Super_Kings>;
+		<http://dbpedia.org/property/role> <http://dbpedia.org/resource/India_national_cricket_team>, <http://dbpedia.org/resource/Wicket-keeper>,
+		<http://dbpedia.org/resource/Captain_(cricket)>.
 
 
 <http://dbpedia.org/resource/Satya_Nadella>  <http://www.w3.org/2000/01/rdf-schema#label>  "Satya Nadella";
@@ -132,10 +217,17 @@
 <http://dbpedia.org/resource/Microsoft>  <http://www.w3.org/2000/01/rdf-schema#label>  "Microsoft";
                                          <http://dbpedia.org/ontology/ceo> <http://dbpedia.org/resource/Satya_Nadella> .
 
-
+										 
+<http://dbpedia.org/resource/Applied_mathematics> <http://www.w3.org/2000/01/rdf-schema#label> "Applied mathematics".
+<http://dbpedia.org/resource/Institute_for_Pure_and_Applied_Mathematics> <http://www.w3.org/2000/01/rdf-schema#label> "Institute for Pure and Applied Mathematics".
+<http://dbpedia.org/resource/University_of_California,_Los_Angeles> <http://www.w3.org/2000/01/rdf-schema#label> "University of California, Los Angeles".
+<http://dbpedia.org/property/workInstitutions> <http://www.w3.org/2000/01/rdf-schema#label>  "work institutions".
+<http://dbpedia.org/ontology/field> <http://www.w3.org/2000/01/rdf-schema#label> "field".
 <http://dbpedia.org/ontology/spouse>  <http://www.w3.org/2000/01/rdf-schema#label>  "spouse".
 <http://dbpedia.org/resource/Russel_E._Caflisch>  <http://www.w3.org/2000/01/rdf-schema#label>  "Russel E. Caflisch";
-                                                  <http://dbpedia.org/ontology/spouse> <http://aksw.org/notInWiki/CarolLynnMeylan> .
+                                                  <http://dbpedia.org/ontology/spouse> <http://aksw.org/notInWiki/CarolLynnMeylan>;
+												  <http://dbpedia.org/ontology/field> <http://dbpedia.org/resource/Applied_mathematics>;
+<http://dbpedia.org/property/workInstitutions> <http://dbpedia.org/resource/Institute_for_Pure_and_Applied_Mathematics>, <http://dbpedia.org/resource/University_of_California,_Los_Angeles>.
 <http://aksw.org/notInWiki/CarolLynnMeylan>  <http://www.w3.org/2000/01/rdf-schema#label>  "Carol Lynn Meylan";
                                              <http://dbpedia.org/ontology/spouse> <http://dbpedia.org/resource/Russel_E._Caflisch> .
 
@@ -145,17 +237,28 @@
   <http://dbpedia.org/ontology/locatedInArea> <http://dbpedia.org/resource/Chicago> ;
   <http://dbpedia.org/ontology/location> <http://dbpedia.org/resource/Chicago> .
   
+<http://dbpedia.org/ontology/occupation> <http://www.w3.org/2000/01/rdf-schema#label>  "occupation".
+<http://dbpedia.org/resource/Ronald_McDonald> <http://www.w3.org/2000/01/rdf-schema#label> "Ronald McDonald".
+<http://dbpedia.org/resource/Herb_Peterson> <http://www.w3.org/2000/01/rdf-schema#label> "Herb Peterson".
+<http://dbpedia.org/resource/Harry_J._Sonneborn> <http://www.w3.org/2000/01/rdf-schema#label> "Harry J. Sonneborn".
+<http://dbpedia.org/resource/Don_Thompson_(executive)> <http://www.w3.org/2000/01/rdf-schema#label> "Don Thompson (executive)".
 
 <http://dbpedia.org/resource/McDonalds>  <http://www.w3.org/2000/01/rdf-schema#label>  "McDonald's";
+<http://dbpedia.org/ontology/occupation> <http://dbpedia.org/resource/Ronald_McDonald>, <http://dbpedia.org/resource/Herb_Peterson>,
+<http://dbpedia.org/resource/Harry_J._Sonneborn>, <http://dbpedia.org/resource/Don_Thompson_(executive)>;
   <http://dbpedia.org/ontology/headquarter> <http://dbpedia.org/resource/Oak_Brook,_Illinois> ;
   <http://dbpedia.org/ontology/location> <http://dbpedia.org/resource/Oak_Brook,_Illinois>, <http://dbpedia.org/resource/Chicago> .
   
   
-
+<http://dbpedia.org/property/organization> <http://www.w3.org/2000/01/rdf-schema#label> "organization".
+<http://dbpedia.org/resource/UNICEF> <http://www.w3.org/2000/01/rdf-schema#label> "UNICEF".
+<http://dbpedia.org/resource/Malaria_No_More> <http://www.w3.org/2000/01/rdf-schema#label> "Malaria No More".
 <http://dbpedia.org/ontology/parent>  <http://www.w3.org/2000/01/rdf-schema#label>  "parent".
 <http://dbpedia.org/resource/Paris>  <http://www.w3.org/2000/01/rdf-schema#label>  "Paris".
+
 <http://dbpedia.org/resource/Victoria_Beckham>  <http://www.w3.org/2000/01/rdf-schema#label>  "Victoria Beckham".
-<http://dbpedia.org/resource/David_Beckham>  <http://www.w3.org/2000/01/rdf-schema#label>  "David Beckham".
+<http://dbpedia.org/resource/David_Beckham>  <http://www.w3.org/2000/01/rdf-schema#label>  "David Beckham";
+<http://dbpedia.org/property/organization> <http://dbpedia.org/resource/UNICEF>, <http://dbpedia.org/resource/Malaria_No_More>.
 
 <http://aksw.org/notInWiki/Brooklyn_Beckham>  <http://www.w3.org/2000/01/rdf-schema#label>  "Brooklyn Beckham";
   <http://dbpedia.org/ontology/location> <http://dbpedia.org/resource/Paris> ;
@@ -176,23 +279,49 @@
   <http://dbpedia.org/ontology/location> <http://dbpedia.org/resource/Paris> ;
   <http://dbpedia.org/ontology/spouse> <http://dbpedia.org/resource/Victoria_Beckham> .
   
+  
+<http://dbpedia.org/ontology/genre> <http://www.w3.org/2000/01/rdf-schema#label> "genre".
+<http://dbpedia.org/resource/Dance_music> <http://www.w3.org/2000/01/rdf-schema#label> "Dance music".
+<http://dbpedia.org/resource/Pop_music> <http://www.w3.org/2000/01/rdf-schema#label> "Pop music".
+<http://dbpedia.org/resource/Rhythm_and_blues> <http://www.w3.org/2000/01/rdf-schema#label> "Rhythm and blues".
+<http://dbpedia.org/resource/Electronic_dance_music> <http://www.w3.org/2000/01/rdf-schema#label> "Electronic dance music".
+<http://dbpedia.org/resource/House_music> <http://www.w3.org/2000/01/rdf-schema#label> "House music".
+<http://dbpedia.org/resource/Electro_(music)> <http://www.w3.org/2000/01/rdf-schema#label> "Electro (music)".
+<http://dbpedia.org/resource/Rock_music> <http://www.w3.org/2000/01/rdf-schema#label> "Rock music".
 
-<http://dbpedia.org/resource/Kaya_Jones>  <http://www.w3.org/2000/01/rdf-schema#label>  "Kaya Jones".
+<http://dbpedia.org/resource/Jessica_Sutta> <http://www.w3.org/2000/01/rdf-schema#label> "Jessica Sutta";
+<http://dbpedia.org/ontology/genre> <http://dbpedia.org/resource/Dance_music>, <http://dbpedia.org/resource/Pop_music>, 
+<http://dbpedia.org/resource/House_music>.
+
+<http://dbpedia.org/resource/Kimberly_Wyatt> <http://www.w3.org/2000/01/rdf-schema#label> "Kimberly Wyatt";
+<http://dbpedia.org/ontology/genre> <http://dbpedia.org/resource/Dance_music>, <http://dbpedia.org/resource/Pop_music>,
+<http://dbpedia.org/resource/Electro_(music)>.
+
+<http://dbpedia.org/resource/Carmit_Bachar> <http://www.w3.org/2000/01/rdf-schema#label> "Carmit Bachar";
+<http://dbpedia.org/ontology/genre> <http://dbpedia.org/resource/Dance_music>, <http://dbpedia.org/resource/Pop_music>,
+<http://dbpedia.org/resource/Rhythm_and_blues>, <http://dbpedia.org/resource/Rock_music>.
+
+<http://dbpedia.org/resource/Kaya_Jones>  <http://www.w3.org/2000/01/rdf-schema#label>  "Kaya Jones";
+<http://dbpedia.org/ontology/genre> <http://dbpedia.org/resource/Dance_music>, <http://dbpedia.org/resource/Pop_music>,
+<http://dbpedia.org/resource/Rhythm_and_blues>, <http://dbpedia.org/resource/Electronic_dance_music>.
+
 <http://dbpedia.org/resource/The_Pussycat_Dolls>  <http://www.w3.org/2000/01/rdf-schema#label>  "The Pussycat Dolls";
                                                   <http://dbpedia.org/ontology/formerBandMember> <http://dbpedia.org/resource/Kaya_Jones> .
 
 
-<http://dbpedia.org/resource/Argentina>  <http://www.w3.org/2000/01/rdf-schema#label>  "Argentina".												  
+<http://dbpedia.org/resource/Argentina>  <http://www.w3.org/2000/01/rdf-schema#label>  "Argentina".				
+								  
 <http://aksw.org/notInWiki/Cordoba-Rosario>  <http://www.w3.org/2000/01/rdf-schema#label>  "Cordoba-Rosario";
   <http://dbpedia.org/ontology/country> <http://dbpedia.org/resource/Argentina> ;
   <http://dbpedia.org/ontology/locatedInArea> <http://dbpedia.org/resource/Argentina> .
   
-
 <http://aksw.org/notInWiki/Emanuel_Bergogolio> <http://dbpedia.org/ontology/location> <http://aksw.org/notInWiki/Cordoba-Rosario> .
 
 
+<http://dbpedia.org/property/slogan> <http://www.w3.org/2000/01/rdf-schema#label> "slogan".
 <http://dbpedia.org/resource/Munich>  <http://www.w3.org/2000/01/rdf-schema#label>  "Munich".
 <http://dbpedia.org/resource/Siemens>  <http://www.w3.org/2000/01/rdf-schema#label>  "Siemens";
+<http://dbpedia.org/property/slogan> "Ingenuity for life";
   <http://dbpedia.org/ontology/headquarter> <http://dbpedia.org/resource/Munich> ;
   <http://dbpedia.org/ontology/location> <http://dbpedia.org/resource/Munich> .
   
@@ -203,15 +332,24 @@
                                       <http://dbpedia.org/ontology/leaderName> <http://dbpedia.org/resource/Aleksandar_Vu%C4%8Di%C4%87> .
 
 
+<http://dbpedia.org/property/programmingLanguage> <http://www.w3.org/2000/01/rdf-schema#label> "programming language".
 <http://dbpedia.org/resource/Mark_Zuckerberg>  <http://www.w3.org/2000/01/rdf-schema#label>  "Mark Zuckerberg";
                                                <http://dbpedia.org/ontology/employer> <http://dbpedia.org/resource/Facebook> .
 <http://dbpedia.org/resource/Facebook>  <http://www.w3.org/2000/01/rdf-schema#label>  "Facebook";
+                                        <http://dbpedia.org/property/programmingLanguage> "C++, PHP and D language"; 
                                         <http://dbpedia.org/ontology/ceo> <http://dbpedia.org/resource/Mark_Zuckerberg> .
 
 
+<http://dbpedia.org/resource/Melania_Trump> <http://www.w3.org/2000/01/rdf-schema#label> "Melania Trump".
+<http://dbpedia.org/resource/Marla_Maples> <http://www.w3.org/2000/01/rdf-schema#label> "Marla Maples".
+<http://dbpedia.org/resource/Ivana_Trump> <http://www.w3.org/2000/01/rdf-schema#label> "Ivana Trump".
 <http://dbpedia.org/resource/United_States>  <http://www.w3.org/2000/01/rdf-schema#label>  "United States".										
 <http://dbpedia.org/resource/Donald_Trump>  <http://www.w3.org/2000/01/rdf-schema#label>  "Donald Trump";
-  <http://dbpedia.org/ontology/country> <http://dbpedia.org/resource/United_States> ;
+ <http://dbpedia.org/ontology/spouse> <http://dbpedia.org/resource/Melania_Trump>,<http://dbpedia.org/resource/Marla_Maples>, 
+ <http://dbpedia.org/resource/Ivana_Trump>;
+ <http://dbpedia.org/ontology/networth> "3.7E9";
+ 
+ <http://dbpedia.org/ontology/country> <http://dbpedia.org/resource/United_States> ;
   <http://dbpedia.org/ontology/location> <http://dbpedia.org/resource/United_States> .
   
 
@@ -222,13 +360,20 @@
 <http://aksw.org/notInWiki/KnowledgeServices>  <http://www.w3.org/2000/01/rdf-schema#label>  "Knowledge Services";
                                                <http://dbpedia.org/ontology/president> <http://aksw.org/notInWiki/JoeBielawski> .
 
-
-<http://dbpedia.org/resource/Tata_Motors>  <http://www.w3.org/2000/01/rdf-schema#label>  "Tata Motors".											   
+<http://dbpedia.org/ontology/type> <http://www.w3.org/2000/01/rdf-schema#label> "type".
+<http://dbpedia.org/resource/Public_company> <http://www.w3.org/2000/01/rdf-schema#label> "Public company".
+<http://dbpedia.org/ontology/industry> <http://www.w3.org/2000/01/rdf-schema#label> "industry".
+<http://dbpedia.org/resource/Automotive_industry> <http://www.w3.org/2000/01/rdf-schema#label> "Automotive industry".
+<http://dbpedia.org/resource/Tata_Motors>  <http://www.w3.org/2000/01/rdf-schema#label>  "Tata Motors";
+                    <http://dbpedia.org/ontology/type> <http://dbpedia.org/resource/Public_company>;
+				    <http://dbpedia.org/ontology/industry> <http://dbpedia.org/resource/Automotive_industry>.
 <http://aksw.org/notInWiki/TMLDrivelines>  <http://www.w3.org/2000/01/rdf-schema#label>  "TML Drivelines";
                                            <http://dbpedia.org/ontology/subsidiary> <http://dbpedia.org/resource/Tata_Motors> .
 
 
-<http://dbpedia.org/resource/John_Panozzo>  <http://www.w3.org/2000/01/rdf-schema#label>  "John Panozzo".										   
+<http://dbpedia.org/ontology/background> <http://www.w3.org/2000/01/rdf-schema#label> "background".
+<http://dbpedia.org/resource/John_Panozzo>  <http://www.w3.org/2000/01/rdf-schema#label>  "John Panozzo";
+                                            <http://dbpedia.org/ontology/background> "non_vocal_instrumentalist".  										   
 <http://aksw.org/notInWiki/Styx>  <http://www.w3.org/2000/01/rdf-schema#label>  "Styx";
                                   <http://dbpedia.org/ontology/formerBandMember> <http://dbpedia.org/resource/John_Panozzo> .
 
@@ -237,10 +382,23 @@
 <http://aksw.org/notInWiki/Anthony_Carrino>  <http://www.w3.org/2000/01/rdf-schema#label>  "Anthony Carrino";
                                              <http://dbpedia.org/ontology/relative> <http://aksw.org/notInWiki/John_Colaneri> .
 
-
-<http://dbpedia.org/resource/Ohio_University>  <http://www.w3.org/2000/01/rdf-schema#label>  "Ohio University".											 
+<http://dbpedia.org/resource/William_O'Neill_(Ohio_judge)> <http://www.w3.org/2000/01/rdf-schema#label> "William O'Neill (Ohio judge)";
+                           <http://dbpedia.org/ontology/almaMater> <http://dbpedia.org/resource/Ohio_University> .
+<http://dbpedia.org/resource/Alex_Pacheco_(activist)> <http://www.w3.org/2000/01/rdf-schema#label> "Alex Pacheco (activist)";
+   <http://dbpedia.org/ontology/almaMater> <http://dbpedia.org/resource/Ohio_University> .
+<http://dbpedia.org/resource/John_Carey_(Ohio_state_legislator)> <http://www.w3.org/2000/01/rdf-schema#label> "John Carey (Ohio state legislator)";
+   <http://dbpedia.org/ontology/almaMater> <http://dbpedia.org/resource/Ohio_University> .
+<http://dbpedia.org/resource/Charles_Townsend_(Ohio_politician)> <http://www.w3.org/2000/01/rdf-schema#label> "Charles Townsend (Ohio politician)";
+  <http://dbpedia.org/ontology/almaMater> <http://dbpedia.org/resource/Ohio_University> .
+<http://dbpedia.org/resource/Ohio_University>  <http://www.w3.org/2000/01/rdf-schema#label>  "Ohio University";
+			<http://dbpedia.org/property/established> "1804";
+			<http://dbpedia.org/property/founder> <http://dbpedia.org/resource/Manasseh_Cutler_(representative)>.
 <http://aksw.org/notInWiki/CaroleeBull>  <http://www.w3.org/2000/01/rdf-schema#label>  "Carolee Bull";
                                          <http://dbpedia.org/ontology/almaMater> <http://dbpedia.org/resource/Ohio_University> .
+										
+<http://dbpedia.org/property/established> <http://www.w3.org/2000/01/rdf-schema#label> "established".
+<http://dbpedia.org/property/founder> <http://www.w3.org/2000/01/rdf-schema#label> "founder".
+<http://dbpedia.org/resource/Manasseh_Cutler_(representative)> <http://www.w3.org/2000/01/rdf-schema#label> "Manasseh Cutler (representative)".
 
 
 <http://dbpedia.org/resource/Anant_Ambani>  <http://www.w3.org/2000/01/rdf-schema#label>  "Anant Ambani". 										 
@@ -256,21 +414,40 @@
   
 
 <http://dbpedia.org/ontology/birthPlace>  <http://www.w3.org/2000/01/rdf-schema#label>  "birth place".
-<http://dbpedia.org/ontology/deathPlace>  <http://www.w3.org/2000/01/rdf-schema#label>  "death place". 
+<http://dbpedia.org/ontology/deathPlace>  <http://www.w3.org/2000/01/rdf-schema#label>  "death place".
+<http://dbpedia.org/property/deathCause>  <http://www.w3.org/2000/01/rdf-schema#label> "death cause".
 <http://dbpedia.org/resource/Northeast_India>  <http://www.w3.org/2000/01/rdf-schema#label>  "Northeast India".
 <http://dbpedia.org/resource/Shillong>  <http://www.w3.org/2000/01/rdf-schema#label>  "Shillong".
 <http://dbpedia.org/resource/Rameswaram>  <http://www.w3.org/2000/01/rdf-schema#label>  "Rameswaram".
 <http://dbpedia.org/resource/Tamil_Nadu>  <http://www.w3.org/2000/01/rdf-schema#label>  "Tamil Nadu".  
 
+<http://dbpedia.org/ontology/award> <http://www.w3.org/2000/01/rdf-schema#label> "award".
+<http://dbpedia.org/resource/Padma_Bhushan> <http://www.w3.org/2000/01/rdf-schema#label> "Padma Bhushan";
+  <http://dbpedia.org/ontology/award> "Third-highest civilian award of the Republic of India".
+<http://dbpedia.org/resource/Padma_Vibhushan> <http://www.w3.org/2000/01/rdf-schema#label> "Padma Vibhushan";
+           <http://dbpedia.org/ontology/award> "Second-highest civilian award of the Republic of India".
+<http://dbpedia.org/resource/Bharat_Ratna> <http://www.w3.org/2000/01/rdf-schema#label> "Bharat Ratna";
+                                           <http://dbpedia.org/ontology/award> "First-highest civilian award of the Republic of India". 
+
 <http://dbpedia.org/resource/A._P._J._Abdul_Kalam>  <http://www.w3.org/2000/01/rdf-schema#label>  "A. P. J. Abdul Kalam";
+ <http://dbpedia.org/ontology/award> <http://dbpedia.org/resource/Padma_Bhushan>, <http://dbpedia.org/resource/Padma_Vibhushan>,
+ <http://dbpedia.org/resource/Bharat_Ratna>;
   <http://dbpedia.org/ontology/country> <http://dbpedia.org/resource/Northeast_India> ;
   <http://dbpedia.org/ontology/deathPlace> <http://dbpedia.org/resource/Northeast_India>, <http://dbpedia.org/resource/Shillong> ;
+  <http://dbpedia.org/property/deathCause> "Cardiac arrest";
   <http://dbpedia.org/ontology/location> <http://dbpedia.org/resource/Northeast_India>, <http://dbpedia.org/resource/Rameswaram>, <http://dbpedia.org/resource/Shillong>, <http://dbpedia.org/resource/Tamil_Nadu> ;
   <http://dbpedia.org/ontology/birthPlace> <http://dbpedia.org/resource/Rameswaram> .
   
 
+<http://dbpedia.org/ontology/keyPerson> <http://www.w3.org/2000/01/rdf-schema#label> "key person".
+<http://dbpedia.org/ontology/foundedBy> <http://www.w3.org/2000/01/rdf-schema#label> "founded by".
+<http://dbpedia.org/resource/Dana_Walden> <http://www.w3.org/2000/01/rdf-schema#label> "Dana Walden".
+<http://dbpedia.org/resource/Rupert_Murdoch> <http://www.w3.org/2000/01/rdf-schema#label> "Rupert Murdoch".
 <http://dbpedia.org/ontology/affiliation>  <http://www.w3.org/2000/01/rdf-schema#label>  "affiliation".
-<http://dbpedia.org/resource/Fox_Broadcasting_Company>  <http://www.w3.org/2000/01/rdf-schema#label>  "Fox Broadcasting Company".   
+
+<http://dbpedia.org/resource/Fox_Broadcasting_Company>  <http://www.w3.org/2000/01/rdf-schema#label>  "Fox Broadcasting Company";
+  <http://dbpedia.org/ontology/keyPerson> <http://dbpedia.org/resource/Dana_Walden>;
+  <http://dbpedia.org/ontology/foundedBy> <http://dbpedia.org/resource/Rupert_Murdoch>.
 <http://dbpedia.org/resource/Sinclair_Broadcast_Group>  <http://www.w3.org/2000/01/rdf-schema#label>  "Sinclair Broadcast Group";
                               <http://dbpedia.org/ontology/affiliation> <http://dbpedia.org/resource/Fox_Broadcasting_Company> .
 
@@ -291,7 +468,11 @@
 <http://dbpedia.org/ontology/leaderName> <http://dbpedia.org/resource/Kim_Jong-un>, <http://dbpedia.org/resource/Kim_Jong-il> .
 
 
+<http://dbpedia.org/property/topScore> <http://www.w3.org/2000/01/rdf-schema#label> "top score".
+<http://xmlns.com/foaf/spec/#term_nick> <http://www.w3.org/2000/01/rdf-schema#label> "nickname".
 <http://dbpedia.org/resource/Rahul_Dravid>  <http://www.w3.org/2000/01/rdf-schema#label>  "Rahul Dravid";
+                                            <http://dbpedia.org/property/topScore> "153", "270";
+                                            <http://xmlns.com/foaf/spec/#term_nick> "The Wall, Jammy, Mr. Dependable";
                                             <http://dbpedia.org/ontology/parent> <http://aksw.org/notInWiki/Samit> .
 <http://aksw.org/notInWiki/Samit>   <http://www.w3.org/2000/01/rdf-schema#label>  "Samit";
                                     <http://dbpedia.org/ontology/child> <http://dbpedia.org/resource/Rahul_Dravid> .
@@ -299,23 +480,41 @@
 
 <http://dbpedia.org/resource/Gainesville%2C_Florida>  <http://www.w3.org/2000/01/rdf-schema#label>  "Gainesville, Florida".	
 <http://dbpedia.org/ontology/trainer>  <http://www.w3.org/2000/01/rdf-schema#label>  "trainer".		
+<http://dbpedia.org/property/currentTeam> <http://www.w3.org/2000/01/rdf-schema#label> "current team".
+<http://dbpedia.org/resource/Florida_Gators_swimming_and_diving> <http://www.w3.org/2000/01/rdf-schema#label> "Florida Gators swimming and diving".
 						
 <http://dbpedia.org/resource/Ryan_Lochte>  <http://www.w3.org/2000/01/rdf-schema#label>  "Ryan Lochte";
                                            <http://dbpedia.org/ontology/location> <http://dbpedia.org/resource/Gainesville%2C_Florida> .
 <http://dbpedia.org/resource/Gregg_Troy>  <http://www.w3.org/2000/01/rdf-schema#label>  "Gregg Troy";
+ <http://dbpedia.org/property/currentTeam> <http://dbpedia.org/resource/Florida_Gators_swimming_and_diving>;
   <http://dbpedia.org/ontology/location> <http://dbpedia.org/resource/Gainesville%2C_Florida> ;
   <http://dbpedia.org/ontology/trainer> <http://dbpedia.org/resource/Ryan_Lochte> .
   
 
-<http://dbpedia.org/resource/Finland>  <http://www.w3.org/2000/01/rdf-schema#label>  "Finland".   
+<http://dbpedia.org/ontology/computingPlatform> <http://www.w3.org/2000/01/rdf-schema#label> "computing platform".
+<http://dbpedia.org/resource/1legcall> <http://www.w3.org/2000/01/rdf-schema#label> "1legcall";
+   <http://dbpedia.org/ontology/computingPlatform> <http://dbpedia.org/resource/Nokia>;
+   <http://dbpedia.org/ontology/developer> <http://dbpedia.org/resource/TalkFree,_Inc>.
+   
+<http://dbpedia.org/resource/Mini_Friday> <http://www.w3.org/2000/01/rdf-schema#label> "Mini Friday";
+ <http://dbpedia.org/ontology/computingPlatform> <http://dbpedia.org/resource/Nokia>;
+ <http://dbpedia.org/ontology/developer> <http://dbpedia.org/resource/Sulake>.
+ 
+<http://dbpedia.org/ontology/developer> <http://www.w3.org/2000/01/rdf-schema#label> "developer".
+<http://dbpedia.org/resource/Sulake> <http://www.w3.org/2000/01/rdf-schema#label>  "Sulake".
+<http://dbpedia.org/resource/TalkFree,_Inc> <http://www.w3.org/2000/01/rdf-schema#label> "TalkFree, Inc".
+<http://dbpedia.org/resource/Finland>  <http://www.w3.org/2000/01/rdf-schema#label>  "Finland".
+   
 <http://dbpedia.org/resource/Nokia>  <http://www.w3.org/2000/01/rdf-schema#label>  "Nokia";
   <http://dbpedia.org/ontology/country> <http://dbpedia.org/resource/Finland> ;
   <http://dbpedia.org/ontology/foundationPlace> <http://dbpedia.org/resource/Finland> ;
   <http://dbpedia.org/ontology/location> <http://dbpedia.org/resource/Finland> .
   
 
+<http://dbpedia.org/property/currentsinglesranking> <http://www.w3.org/2000/01/rdf-schema#label> "currentsinglesranking".
 <http://dbpedia.org/resource/Michael_Joyce_%28tennis%29>  <http://www.w3.org/2000/01/rdf-schema#label>  "Michael Joyce (tennis)".  
 <http://dbpedia.org/resource/Johanna_Konta>  <http://www.w3.org/2000/01/rdf-schema#label>  "Johanna Konta";
+                                             <http://dbpedia.org/property/currentsinglesranking> "No. 10";
                                              <http://dbpedia.org/ontology/trainer> <http://dbpedia.org/resource/Michael_Joyce_%28tennis%29> .
 
 
@@ -334,7 +533,11 @@
   <http://dbpedia.org/ontology/location> <http://dbpedia.org/resource/India>, <http://dbpedia.org/resource/Kolkata> .
   
 
+<http://dbpedia.org/property/language> <http://www.w3.org/2000/01/rdf-schema#label> "language".
+<http://dbpedia.org/resource/Newspaper> <http://www.w3.org/2000/01/rdf-schema#label> "Newspaper".
 <http://dbpedia.org/resource/Anandabazar_Patrika>  <http://www.w3.org/2000/01/rdf-schema#label>  "Anandabazar Patrika";
+  <http://dbpedia.org/ontology/type> <http://dbpedia.org/resource/Newspaper>;
+  <http://dbpedia.org/property/language> "Bengali";
   <http://dbpedia.org/ontology/country> <http://dbpedia.org/resource/India> ;
   <http://dbpedia.org/ontology/location> <http://dbpedia.org/resource/Kolkata>, <http://dbpedia.org/resource/India> .
   
@@ -344,6 +547,10 @@
                                              <http://dbpedia.org/ontology/nationality> <http://dbpedia.org/resource/Serbia> .
 
 
+<http://dbpedia.org/property/stateHead> <http://www.w3.org/2000/01/rdf-schema#label> "state head".
+<http://dbpedia.org/resource/Xi%E2%80%93Li_Administration> <http://www.w3.org/2000/01/rdf-schema#label>  "Xi–Li Administration";
+ <http://dbpedia.org/property/stateHead> <http://dbpedia.org/resource/Xi_Jinping>.
+ 
 <http://dbpedia.org/resource/China>  <http://www.w3.org/2000/01/rdf-schema#label>  "China";
                                      <http://dbpedia.org/ontology/leaderName> <http://dbpedia.org/resource/Xi_Jinping> .
 <http://dbpedia.org/resource/Xi_Jinping>  <http://www.w3.org/2000/01/rdf-schema#label>  "Xi Jinping";
@@ -351,11 +558,33 @@
   <http://dbpedia.org/ontology/location> <http://dbpedia.org/resource/China> .
   
 
-<http://dbpedia.org/resource/Sunday_Mirror>  <http://www.w3.org/2000/01/rdf-schema#label>  "Sunday Mirror".   
+<http://dbpedia.org/property/type> <http://www.w3.org/2000/01/rdf-schema#label>  "type".
+<http://dbpedia.org/ontology/format> <http://www.w3.org/2000/01/rdf-schema#label> "format (object)".
+<http://dbpedia.org/resource/Tabloid_(newspaper_format)> <http://www.w3.org/2000/01/rdf-schema#label> "Tabloid (newspaper format)".
+<http://dbpedia.org/resource/Sunday_Mirror>  <http://www.w3.org/2000/01/rdf-schema#label>  "Sunday Mirror";
+  <http://dbpedia.org/property/type> "Weekly newspaper";
+  <http://dbpedia.org/ontology/format> <http://dbpedia.org/resource/Tabloid_(newspaper_format)>.
 <http://aksw.org/notInWiki/AlanSelby>  <http://www.w3.org/2000/01/rdf-schema#label>  "Alan Selby";
                                        <http://dbpedia.org/ontology/employer> <http://dbpedia.org/resource/Sunday_Mirror> .
 
-
+									   
+<http://dbpedia.org/resource/Roamer_(watchmaker)> <http://www.w3.org/2000/01/rdf-schema#label> "Roamer (watchmaker)";
+     <http://dbpedia.org/ontology/location> <http://dbpedia.org/resource/Switzerland>.
+	 
+<http://dbpedia.org/resource/Daniel_Roth_(watchmakers)> <http://www.w3.org/2000/01/rdf-schema#label> "Daniel Roth (watchmakers)";
+    <http://dbpedia.org/ontology/location> <http://dbpedia.org/resource/Switzerland>.
+	
+<http://dbpedia.org/resource/Rolex_(watchmaker)> <http://www.w3.org/2000/01/rdf-schema#label> "Rolex (watchmaker)";
+   <http://dbpedia.org/ontology/location> <http://dbpedia.org/resource/Switzerland>.
+   
+<http://dbpedia.org/resource/Zenith_(watchmaker)> <http://www.w3.org/2000/01/rdf-schema#label> "Zenith (watchmaker)";
+      <http://dbpedia.org/ontology/location> <http://dbpedia.org/resource/Switzerland>.
+	  
+<http://dbpedia.org/resource/HYT_(watchmaker)> <http://www.w3.org/2000/01/rdf-schema#label> "HYT (watchmaker)";
+      <http://dbpedia.org/ontology/location> <http://dbpedia.org/resource/Switzerland>.
+	  
+<http://dbpedia.org/resource/MKS_(Switzerland)> <http://www.w3.org/2000/01/rdf-schema#label> "MKS (Switzerland)";
+      <http://dbpedia.org/ontology/location> <http://dbpedia.org/resource/Switzerland>.
 <http://dbpedia.org/resource/Switzerland>  <http://www.w3.org/2000/01/rdf-schema#label>  "Switzerland".									   
 <http://dbpedia.org/resource/Roger_Federer>  <http://www.w3.org/2000/01/rdf-schema#label>  "Roger Federer";
   <http://dbpedia.org/ontology/country> <http://dbpedia.org/resource/Switzerland> ;
@@ -373,23 +602,50 @@
   <http://dbpedia.org/ontology/locatedInArea> <http://dbpedia.org/resource/Tamil_Nadu> ;
   <http://dbpedia.org/ontology/location> <http://dbpedia.org/resource/Tamil_Nadu> .
   
+  
 
+<http://dbpedia.org/resource/Jeff_Bezos> <http://www.w3.org/2000/01/rdf-schema#label> "Jeff Bezos".
+<http://dbpedia.org/resource/Amazon.com> <http://www.w3.org/2000/01/rdf-schema#label> "Amazon.com";
+         <http://dbpedia.org/ontology/foundedBy> <http://dbpedia.org/resource/Jeff_Bezos>.
+<http://dbpedia.org/resource/Blue_Origin> <http://www.w3.org/2000/01/rdf-schema#label> "Blue Origin";
+         <http://dbpedia.org/ontology/foundedBy> <http://dbpedia.org/resource/Jeff_Bezos>.
+
+
+<http://dublincore.org/2012/06/14/dcterms#description> <http://www.w3.org/2000/01/rdf-schema#label> "Description".
+<http://dbpedia.org/ontology/knownFor> <http://www.w3.org/2000/01/rdf-schema#label> "known for".
+<http://dbpedia.org/resource/Artificial_intelligence> <http://www.w3.org/2000/01/rdf-schema#label> "Artificial intelligence".
+<http://dbpedia.org/resource/Lisp_(programming_language)> <http://www.w3.org/2000/01/rdf-schema#label> "Lisp (programming language)".
+<http://dbpedia.org/resource/Situation_calculus> <http://www.w3.org/2000/01/rdf-schema#label> "Situation calculus".
 <http://dbpedia.org/resource/Stanford_University>  <http://www.w3.org/2000/01/rdf-schema#label>  "Stanford University".  
+
 <http://dbpedia.org/resource/John_McCarthy_%28computer_scientist%29>  <http://www.w3.org/2000/01/rdf-schema#label>  "John McCarthy (computer scientist)";
-                      <http://dbpedia.org/ontology/employer> <http://dbpedia.org/resource/Stanford_University> .
+   <http://dublincore.org/2012/06/14/dcterms#description> "American computer scientist and cognitive scientist";
+   <http://dbpedia.org/ontology/knownFor> <http://dbpedia.org/resource/Artificial_intelligence>, <http://dbpedia.org/resource/Lisp_(programming_language)>,
+   <http://dbpedia.org/resource/Situation_calculus>;
+   <http://dbpedia.org/ontology/employer> <http://dbpedia.org/resource/Stanford_University> .
 
 
 <http://dbpedia.org/ontology/club>  <http://www.w3.org/2000/01/rdf-schema#label>  "club". 		
 <http://dbpedia.org/resource/Chicago_Fire_Soccer_Club>  <http://www.w3.org/2000/01/rdf-schema#label>  "Chicago Fire Soccer Club".
 <http://dbpedia.org/resource/Manchester_United_F.C.>  <http://www.w3.org/2000/01/rdf-schema#label>  "Manchester United F.C.".
-  			  
+ 
+ 
+<http://dbpedia.org/ontology/team> <http://www.w3.org/2000/01/rdf-schema#label> "team".
+<http://dbpedia.org/resource/Bayern_Munich_Junior_Team> <http://www.w3.org/2000/01/rdf-schema#label> "Bayern Munich Junior Team".
+<http://dbpedia.org/resource/TSV_1860_Rosenheim> <http://www.w3.org/2000/01/rdf-schema#label> "TSV 1860 Rosenheim".
+<http://dbpedia.org/resource/FC_Bayern_Munich> <http://www.w3.org/2000/01/rdf-schema#label> "FC Bayern Munich".
+<http://dbpedia.org/resource/Germany_national_youth_football_team> <http://www.w3.org/2000/01/rdf-schema#label> "Germany national youth football team".
 <http://dbpedia.org/resource/Bastian_Schweinsteiger>  <http://www.w3.org/2000/01/rdf-schema#label>  "Bastian Schweinsteiger";
   <http://dbpedia.org/ontology/club> <http://dbpedia.org/resource/Chicago_Fire_Soccer_Club> ;
-  <http://dbpedia.org/ontology/formerTeam> <http://dbpedia.org/resource/Manchester_United_F.C.> .
+  <http://dbpedia.org/ontology/team> <http://dbpedia.org/resource/Manchester_United_F.C.> , <http://dbpedia.org/resource/Bayern_Munich_Junior_Team>,
+  <http://dbpedia.org/resource/TSV_1860_Rosenheim> , <http://dbpedia.org/resource/FC_Bayern_Munich> , <http://dbpedia.org/resource/Germany_national_youth_football_team>.
+  
   
 
+<http://dbpedia.org/ontology/orderInOffice> <http://www.w3.org/2000/01/rdf-schema#label> "order in office".
 <http://dbpedia.org/resource/Hawaii>  <http://www.w3.org/2000/01/rdf-schema#label>  "Hawaii".  
 <http://dbpedia.org/resource/Barack_Obama>  <http://www.w3.org/2000/01/rdf-schema#label>  "Barack Obama";
+  <http://dbpedia.org/ontology/orderInOffice> "44th President of the United States";
   <http://dbpedia.org/ontology/birthPlace> <http://dbpedia.org/resource/Honolulu> ;
   <http://dbpedia.org/ontology/location> <http://dbpedia.org/resource/Honolulu>, <http://dbpedia.org/resource/Hawaii> .
   
