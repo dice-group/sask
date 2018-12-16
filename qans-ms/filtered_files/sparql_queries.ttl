@@ -1,645 +1,461 @@
-#file_101.ttl
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix dbp:   <http://dbpedia.org/property/> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix foaf:  <http://xmlns.com/foaf/spec/> .
+@prefix dcterms:  <http://dublincore.org/2012/06/14/dcterms#> .
 
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX dbo: <http://dbpedia.org/ontology/> 
-PREFIX dbr: <http://dbpedia.org/resource/>
-PREFIX aksw: <http://aksw.org/notInWiki/>
-
-SELECT DISTINCT ?person
-WHERE {
-  ?person dbo:employee  dbr:Google.
-  
-  dbr:Google  dbo:CEO  dbr:Sundar_Pichai.
-  
-}
-
-
-#file_102.ttl
-
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX dbo: <http://dbpedia.org/ontology/> 
-PREFIX dbr: <http://dbpedia.org/resource/>
-
-SELECT DISTINCT ?person ?place
-WHERE {
-  ?person dbo:location  dbr:Chile.
-  dbr:Chile  dbo:location  ?place. 
-}
-
-
-#file_105.ttl
-
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX dbo: <http://dbpedia.org/ontology/> 
-PREFIX dbr: <http://dbpedia.org/resource/>
-	
-SELECT DISTINCT ?person ?place
-WHERE {
-  ?person dbo:almaMater  dbr:Wellesley_College.
-  dbr:Wellesley_College  dbo:location  ?place.
-}
-
-
-#file_107.ttl
-
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX dbo: <http://dbpedia.org/ontology/> 
-PREFIX dbr: <http://dbpedia.org/resource/>
-PREFIX aksw: <http://aksw.org/notInWiki/>
-
-SELECT DISTINCT ?company ?designation
-WHERE {
- 
-  {?company  ?designation  dbr:Sundar_Pichai.}
-   UNION
-  {dbr:Sundar_Pichai  ?designation  ?company.}
-  
-}
-
-
-#file_108.ttl
-
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX dbo: <http://dbpedia.org/ontology/> 
-PREFIX dbr: <http://dbpedia.org/resource/>
-
-SELECT DISTINCT ?person_1  ?person_2
-WHERE {
-  ?person_1  dbo:relative  ?person_2.
-}
-
-
-#file_110.ttl
-
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX dbo: <http://dbpedia.org/ontology/> 
-PREFIX dbr: <http://dbpedia.org/resource/>
-
-SELECT DISTINCT ?person
-WHERE {
-    dbr:European_Commission  dbo:president  ?person.
-}
-
-
-#file_111.ttl
-
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX dbo: <http://dbpedia.org/ontology/> 
-PREFIX dbr: <http://dbpedia.org/resource/>
-
-SELECT DISTINCT ?person
-WHERE {
-    <http://dbpedia.org/page/Eagles_(band)>  dbo:formerBandMember  ?person.
-}
-
-
-#file_113.ttl
-
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX dbo: <http://dbpedia.org/ontology/> 
-PREFIX dbr: <http://dbpedia.org/resource/>
 
 SELECT DISTINCT ?person 
 WHERE {
-      ?person  dbo:doctoralStudent  dbr:Rajeev_Motwani.
+  ?person  <http://dbpedia.org/ontology/employer>  <http://dbpedia.org/resource/Google>;
+           <http://dbpedia.org/ontology/birthDate>  ?birthDate.
 }
+ORDER BY DESC (?birthDate)
 
 
-#file_114.ttl
-
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX dbo: <http://dbpedia.org/ontology/> 
-PREFIX dbr: <http://dbpedia.org/resource/>
-
-SELECT DISTINCT ?place 
+SELECT DISTINCT ?person 
 WHERE {
-    dbr:Google  dbo:location  ?place.
+       ?person  <http://dbpedia.org/ontology/employer>  <http://dbpedia.org/resource/Google>.
+       FILTER regex(str(?person),"computer_programmer")
+        
 }
 
 
-#file_115.ttl
-
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX dbo: <http://dbpedia.org/ontology/> 
-PREFIX dbr: <http://dbpedia.org/resource/>
-
-SELECT DISTINCT  ?person
+SELECT DISTINCT ?person 
 WHERE {
-    dbr:The_Beatles  dbo:bandMember  ?person.
+      ?person  <http://dbpedia.org/ontology/Pope>  <http://dbpedia.org/resource/Catholic_Church>;
+               <http://dbpedia.org/ontology/country>  <http://dbpedia.org/resource/Chile>.
 }
 
 
-#file_117.ttl
-
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX dbo: <http://dbpedia.org/ontology/> 
-PREFIX dbr: <http://dbpedia.org/resource/>
-
-SELECT DISTINCT  ?place
+SELECT DISTINCT ?person 
 WHERE {
-   ?place  dbo:country  dbr:Asia.
+    ?person  <http://dbpedia.org/ontology/almaMater> <http://dbpedia.org/resource/Wellesley_College>.
 }
 
 
-#file_118.ttl
-
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX dbo: <http://dbpedia.org/ontology/> 
-PREFIX dbr: <http://dbpedia.org/resource/>
-
-SELECT DISTINCT  ?place
+SELECT DISTINCT ?person 
 WHERE {
-    dbr:HSBC  dbo:headquarter  ?place.
+     ?person <http://dbpedia.org/ontology/employer> <http://dbpedia.org/resource/Google> ;
+	     <http://dbpedia.org/ontology/networth>  "1.05e9".
 }
 
 
-
-#file_119.ttl
-
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX dbo: <http://dbpedia.org/ontology/> 
-PREFIX dbr: <http://dbpedia.org/resource/>
-
-SELECT DISTINCT  ?place
+SELECT DISTINCT ?person 
 WHERE {
-    dbr:Tata_Consultancy_Services  dbo:location  ?place.
+     ?person <http://dbpedia.org/ontology/author>  <http://dbpedia.org/resource/Mother_Warriors>.
 }
 
-
-#file_120.ttl
-
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX dbo: <http://dbpedia.org/ontology/> 
-PREFIX dbr: <http://dbpedia.org/resource/>
-
-SELECT DISTINCT  ?person
-WHERE {
-   dbr:Fifth_Harmony  dbo:formerBandMember  ?person.
-}
-
-
-
-#file_121.ttl
-
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX dbo: <http://dbpedia.org/ontology/> 
-PREFIX dbr: <http://dbpedia.org/resource/>
-
-SELECT DISTINCT  ?company ?subordinate
-WHERE {
-   ?company  dbo:subsidiary  ?subordinate.
-}
-
-
-#file_123.ttl
-
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX dbo: <http://dbpedia.org/ontology/> 
-PREFIX dbr: <http://dbpedia.org/resource/>
-
-SELECT DISTINCT  ?teamName
-WHERE {
-   dbr:Dhoni  dbo:formerTeam  ?teamName.
-}
-
-
-
-#file_124.ttl
-
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX dbo: <http://dbpedia.org/ontology/> 
-PREFIX dbr: <http://dbpedia.org/resource/>
 
 SELECT DISTINCT ?person
 WHERE {
-  {?person  dbo:employer  dbr:Microsoft.}
-  UNION
-  {dbr:Microsoft  dbo:ceo  ?person.}
+       ?person  <http://dbpedia.org/ontology/relative>  <http://dbpedia.org/resource/Jenny_McCarthy>.
 }
 
 
-#file_125.ttl
-
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX dbo: <http://dbpedia.org/ontology/> 
-PREFIX dbr: <http://dbpedia.org/resource/>
-PREFIX aksw:  <http://aksw.org/notInWiki/>
-
-SELECT DISTINCT  ?name
+SELECT DISTINCT ?person
 WHERE {
-  ?name  dbo:spouse  dbr:Russel_E._Caflisch.
+     <http://dbpedia.org/resource/European_Commission>  <http://dbpedia.org/ontology/president>  ?person.
 }
 
 
-#file_127.ttl
-
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX dbo: <http://dbpedia.org/ontology/> 
-PREFIX dbr: <http://dbpedia.org/resource/>
-
-SELECT DISTINCT  ?name
+SELECT DISTINCT ?number
 WHERE {
-   ?name  dbo:headquarter  <http://dbpedia.org/resource/Oak_Brook,_Illinois>.
+      <http://dbpedia.org/resource/Glenn_Frey>  <http://dbpedia.org/property/children>  ?number. 
 }
 
 
-#file_128.ttl
-
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX dbo: <http://dbpedia.org/ontology/> 
-PREFIX dbr: <http://dbpedia.org/resource/>
-PREFIX aksw:  <http://aksw.org/notInWiki/>
-
-SELECT DISTINCT  ?relation  ?name
+SELECT DISTINCT ?person
 WHERE {
-   ?name  ?relation  aksw:Brooklyn_Beckham.
-  
+	?person  <http://dbpedia.org/ontology/doctoralStudent>  <http://dbpedia.org/resource/Rajeev_Motwani>.
 }
 
 
-#file_129.ttl
-
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX dbo: <http://dbpedia.org/ontology/> 
-PREFIX dbr: <http://dbpedia.org/resource/>
-
-SELECT DISTINCT  ?name
+SELECT DISTINCT ?place 
 WHERE {
-  dbr:The_Pussycat_Dolls  dbo:formerBandMember  ?name.
+        <http://dbpedia.org/resource/Google>  <http://dbpedia.org/ontology/location>  ?place.
 }
 
 
-
-#file_131.ttl
-
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX dbo: <http://dbpedia.org/ontology/> 
-PREFIX dbr: <http://dbpedia.org/resource/>
-PREFIX aksw:  <http://aksw.org/notInWiki/>
-
-SELECT DISTINCT  ?name  ?place 
+SELECT DISTINCT ?persons
 WHERE {
-  
-  dbr:Pope_Francis  dbo:relative  ?name.
-  aksw:Cordoba-Rosario  dbo:locatedInArea  ?place.
-  
+	?persons  <http://dbpedia.org/ontology/author> ?books.
 }
+GROUP BY (?persons)
+HAVING (COUNT(?books)> 2)
 
-
-#file_132.ttl
-
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX dbo: <http://dbpedia.org/ontology/> 
-PREFIX dbr: <http://dbpedia.org/resource/>
 
 SELECT DISTINCT  ?place
 WHERE {
-  dbr:Siemens  dbo:headquarter ?place.
+	  <http://dbpedia.org/resource/Japan>  <http://dbpedia.org/ontology/location>  ?place.
 }
 
 
-#file_133.ttl
+SELECT DISTINCT  ?place	   
+WHERE{
+          <http://dbpedia.org/resource/HSBC>  <http://dbpedia.org/ontology/foundationPlace> ?place.
+  	  FILTER regex(str(?place), "H")
+}
 
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX dbo: <http://dbpedia.org/ontology/> 
-PREFIX dbr: <http://dbpedia.org/resource/>
 
 SELECT DISTINCT  ?name
-WHERE {
-  dbr:Serbia  dbo:leaderName ?name.
+WHERE{
+          ?name  <http://dbpedia.org/ontology/tenant> <http://dbpedia.org/resource/Tata_Consultancy_Services>.
 }
 
-
-
-#file_135.ttl
-
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX dbo: <http://dbpedia.org/ontology/> 
-PREFIX dbr: <http://dbpedia.org/resource/>
 
 SELECT DISTINCT  ?name
-WHERE {
- ?name  dbo:employer  dbr:Facebook.
+WHERE{
+          <http://dbpedia.org/resource/Fifth_Harmony>  <http://dbpedia.org/ontology/genre>  ?name.
 }
 
-
-
-#file_138.ttl
-
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX dbo: <http://dbpedia.org/ontology/> 
-PREFIX dbr: <http://dbpedia.org/resource/>
-
-SELECT DISTINCT  ?name
-WHERE {
-  dbr:United_States  dbo:leaderName  ?name.
-}
-
-
-
-#file_139.ttl
-
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX dbo: <http://dbpedia.org/ontology/> 
-PREFIX dbr: <http://dbpedia.org/resource/>
-PREFIX aksw:  <http://aksw.org/notInWiki/>
-
-SELECT DISTINCT  ?company  ?designation
-WHERE {
-  
-?company  ?designation  aksw:JoeBielawski.
-  
-}
-
-
-#file_140.ttl
-
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX dbo: <http://dbpedia.org/ontology/> 
-PREFIX dbr: <http://dbpedia.org/resource/>
-PREFIX aksw:  <http://aksw.org/notInWiki/>
-
-SELECT DISTINCT  ?component
-WHERE {
-  
-?component  dbo:subsidiary  dbr:Tata_Motors .
-  
-}
-
-
-#file_141.ttl
-
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX dbo: <http://dbpedia.org/ontology/> 
-PREFIX dbr: <http://dbpedia.org/resource/>
-PREFIX aksw:  <http://aksw.org/notInWiki/>
-
-SELECT DISTINCT  ?band
-WHERE {
-  
-  ?band  dbo:formerBandMember  dbr:John_Panozzo.
-  
-}
-
-
-#file_143.ttl
-
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX dbo: <http://dbpedia.org/ontology/> 
-PREFIX dbr: <http://dbpedia.org/resource/>
-PREFIX aksw:  <http://aksw.org/notInWiki/>
-
-SELECT DISTINCT  ?name
-WHERE {
-  
-  ?name  dbo:relative  aksw:John_Colaneri.
-  
-}
-
-
-#file_144.ttl
-
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX dbo: <http://dbpedia.org/ontology/> 
-PREFIX dbr: <http://dbpedia.org/resource/>
-PREFIX aksw:  <http://aksw.org/notInWiki/>
-
-SELECT DISTINCT  ?name
-WHERE {
-  
-  aksw:CaroleeBull  dbo:almaMater  ?name.
-  
-}
-
-
-#file_146.ttl
-
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX dbo: <http://dbpedia.org/ontology/> 
-PREFIX dbr: <http://dbpedia.org/resource/>
-
-SELECT DISTINCT  ?spouseName  ?childName
-WHERE {
-  ?spouseName  dbo:spouse  dbr:Mukesh_Ambani;
-               dbo:parent  ?childName.
-}
-
-
-#file_147.ttl
-
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX dbo: <http://dbpedia.org/ontology/> 
-PREFIX dbr: <http://dbpedia.org/resource/>
-
-SELECT DISTINCT  ?name
-WHERE {
-  ?name  dbo:deathPlace  dbr:Northeast_India.
-}
-
-
-#file_148.ttl
-
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX dbo: <http://dbpedia.org/ontology/> 
-PREFIX dbr: <http://dbpedia.org/resource/>
-
-SELECT DISTINCT  ?company_1  ?company_2
-WHERE {
-  ?company_1  dbo:affiliation  ?company_2.
-}
-
-
-#file_149.ttl
-
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX dbo: <http://dbpedia.org/ontology/> 
-PREFIX dbr: <http://dbpedia.org/resource/>
-
-SELECT DISTINCT  ?name   ?place
-WHERE {
-  ?name  dbo:child  dbr:Kim_Jong-il ;
-         dbo:country   ?place.
-}
-
-
-#file_150.ttl
-
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX dbo: <http://dbpedia.org/ontology/> 
-PREFIX dbr: <http://dbpedia.org/resource/>
-PREFIX aksw:  <http://aksw.org/notInWiki/>
-
-SELECT DISTINCT  ?name
-WHERE {
-  
-  ?name  dbo:child  dbr:Rahul_Dravid.
-  
-}
-
-
-#file_152.ttl
-
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX dbo: <http://dbpedia.org/ontology/> 
-PREFIX dbr: <http://dbpedia.org/resource/>
-
-SELECT DISTINCT  ?name   ?place
-WHERE {
-  dbr:Gregg_Troy  dbo:trainer  ?name.
-  ?name   dbo:location  ?place.
-}
-
-
-#file_153.ttl
-
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX dbo: <http://dbpedia.org/ontology/> 
-PREFIX dbr: <http://dbpedia.org/resource/>
-
-SELECT DISTINCT  ?place
-WHERE {
-  dbr:Nokia  dbo:country  ?place.
-}
-
-
-#file_154.ttl
-
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX dbo: <http://dbpedia.org/ontology/> 
-PREFIX dbr: <http://dbpedia.org/resource/>
-
-SELECT DISTINCT  ?name
-WHERE {
-  dbr:Johanna_Konta  dbo:trainer ?name.
-}
-
-
-#file_155.ttl
-
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX dbo: <http://dbpedia.org/ontology/> 
-PREFIX dbr: <http://dbpedia.org/resource/>
-PREFIX aksw:  <http://aksw.org/notInWiki/>
-
-SELECT DISTINCT  ?name  ?place
-WHERE {
-  
-  aksw:Moumita  dbo:hometown  ?name.
-  ?name  dbo:country  ?place.
-  
-}
-
-
-#file_156.ttl
-
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX dbo: <http://dbpedia.org/ontology/> 
-PREFIX dbr: <http://dbpedia.org/resource/>
-
-SELECT DISTINCT  ?name  ?place
-WHERE {
-  ?name  dbo:nationality dbr:Serbia.
-}
-
-
-#file_157.ttl
-
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX dbo: <http://dbpedia.org/ontology/> 
-PREFIX dbr: <http://dbpedia.org/resource/>
 
 SELECT DISTINCT ?place
+WHERE{
+      <http://dbpedia.org/resource/Numericable>  <http://dbpedia.org/ontology/regionServed>  ?place.
+}
+ORDER BY (?place)
+
+
+ASK
 WHERE {
-  dbr:Xi_Jinping  dbo:country  ?place.
+       <http://dbpedia.org/resource/Mahendra_Singh_Dhoni>  <http://dbpedia.org/property/role>  <http://dbpedia.org/page/Captain_(cricket)>.  
 }
 
 
-#file_158.ttl
+SELECT DISTINCT ?catch
+WHERE{
+       <http://dbpedia.org/resource/Mahendra_Singh_Dhoni> <http://dbpedia.org/property/catches/stumpings> ?catch.
+}
+ORDER BY DESC(?n)
+OFFSET 2
+LIMIT 1
 
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX dbo: <http://dbpedia.org/ontology/> 
-PREFIX dbr: <http://dbpedia.org/resource/>
-PREFIX aksw:  <http://aksw.org/notInWiki/>
 
-SELECT DISTINCT  ?name  
+SELECT DISTINCT ?person
 WHERE {
-  
-  ?name  dbo:employer  dbr:Sunday_Mirror.
-  
+       ?person  <http://dbpedia.org/ontology/employer>  <http://dbpedia.org/resource/Microsoft>.
+       <http://dbpedia.org/resource/Microsoft>  <http://dbpedia.org/ontology/ceo>  ?person.
 }
 
-
-#file_160.ttl
-
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX dbo: <http://dbpedia.org/ontology/> 
-PREFIX dbr: <http://dbpedia.org/resource/>
-
-SELECT DISTINCT ?place
-WHERE {
-  dbr:Roger_Federer  dbo:nationality  ?place.
-}
-
-
-#file_161.ttl
-
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX dbo: <http://dbpedia.org/ontology/> 
-PREFIX dbr: <http://dbpedia.org/resource/>
-
-SELECT DISTINCT ?name 
-WHERE {
- dbr:Rafael_Nadal  dbo:relative  ?name.
- ?name  dbo:trainer  dbr:Rafael_Nadal. 
-}
-
-
-#file_162.ttl
-
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX dbo: <http://dbpedia.org/ontology/> 
-PREFIX dbr: <http://dbpedia.org/resource/>
-
-SELECT DISTINCT ?name ?place
-WHERE {
-   dbr:A._P._J._Abdul_Kalam  dbo:birthPlace  ?name.
-   ?name  dbo:location  ?place.
-}
-
-
-#file_164.ttl
-
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX dbo: <http://dbpedia.org/ontology/> 
-PREFIX dbr: <http://dbpedia.org/resource/>
-
-SELECT DISTINCT ?designation  ?name
-WHERE {
-   <http://dbpedia.org/resource/John_McCarthy_%28computer_scientist%29>  ?designation  ?name.
-}
-
-
-#file_166.ttl
-
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX dbo: <http://dbpedia.org/ontology/> 
-PREFIX dbr: <http://dbpedia.org/resource/>
-
-SELECT DISTINCT ?place
-WHERE {
-   
-  dbr:Honolulu  dbo:location  ?place.
-}
-
-
-#file_184.ttl
-
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX dbo: <http://dbpedia.org/ontology/> 
-PREFIX dbr: <http://dbpedia.org/resource/>
 
 SELECT DISTINCT ?name
 WHERE {
-   
-  ?name dbo:location  dbr:Israel.
+        { <http://dbpedia.org/resource/Russel_E._Caflisch> <http://dbpedia.org/ontology/field> ?name. }
+      UNION
+        { <http://dbpedia.org/resource/Russel_E._Caflisch> <http://dbpedia.org/property/workInstitutions> ?name. }                                 
+}
+
+
+SELECT DISTINCT ?name
+WHERE {
+         <http://dbpedia.org/resource/McDonalds> <http://dbpedia.org/ontology/occupation> ?name.
+         FILTER regex(str(?name),"executive")
+}
+
+
+SELECT DISTINCT  ?name
+WHERE {
+	    <http://dbpedia.org/resource/David_Beckham> <http://dbpedia.org/property/organization> ?name. 
+}
+
+
+SELECT DISTINCT  ?person
+WHERE {
+	  ?person <http://dbpedia.org/ontology/genre> ?name.
+          FILTER regex(str(?name),"Rhythm_and_blues")
+}
+
+
+SELECT DISTINCT  ?person
+WHERE {
+           ?person <http://dbpedia.org/ontology/genre> ?name.
+}
+GROUP BY(?person)
+HAVING(count(?name) > 3)
+
+
+ASK
+WHERE {
+	   <http://aksw.org/notInWiki/Cordoba-Rosario>  <http://dbpedia.org/ontology/locatedInArea>  <http://dbpedia.org/resource/Argentina>.
+}
+
+
+SELECT DISTINCT ?quote ?place
+WHERE {
+        <http://dbpedia.org/resource/Siemens> <http://dbpedia.org/property/slogan> ?quote.{
+    SELECT DISTINCT ?quote ?place
+    WHERE{
+           <http://dbpedia.org/resource/Siemens> <http://dbpedia.org/ontology/headquarter> ?place.
+   }
+ }
+}
+
+
+SELECT DISTINCT  ?name
+WHERE {
+          <http://dbpedia.org/resource/Serbia>  <http://dbpedia.org/ontology/leaderName> ?name.
+}
+
+
+SELECT DISTINCT  ?name
+WHERE {
+	   <http://dbpedia.org/resource/Facebook>  <http://dbpedia.org/property/programmingLanguage> ?name.
+}
+
+
+SELECT DISTINCT  ?designation ?name
+WHERE {
+	    ?name ?designation <http://aksw.org/notInWiki/JoeBielawski>.{
+    SELECT DISTINCT ?designation ?name
+    WHERE {
+            ?name ?designation <http://aksw.org/notInWiki/JoeBielawski>.
+    }
+    ORDER BY (?name)
+  }
+}
+
+
+SELECT DISTINCT   ?name 
+WHERE{
+        <http://dbpedia.org/resource/Donald_Trump> <http://dbpedia.org/ontology/spouse> ?name.
+}
+ORDER BY DESC(?name)
+		
+
+SELECT DISTINCT   ?name ?company
+WHERE{
+         <http://dbpedia.org/resource/Tata_Motors> <http://dbpedia.org/ontology/industry> ?name.{
+    SELECT DISTINCT ?name ?company
+    WHERE{
+          <http://dbpedia.org/resource/Tata_Motors> <http://dbpedia.org/ontology/type> ?company.
+    }
+  }
+}
+
+
+ASK
+WHERE{
+       <http://dbpedia.org/resource/Tata_Motors> <http://dbpedia.org/ontology/industry> <http://dbpedia.org/resource/Textile_industry>. 
+}
+
+
+SELECT DISTINCT ?name ?background
+WHERE{
+         <http://aksw.org/notInWiki/Styx> <http://dbpedia.org/ontology/formerBandMember> ?name.{
+    SELECT DISTINCT ?name ?background
+    WHERE{
+            ?name <http://dbpedia.org/ontology/background> ?background.
+    }
+    ORDER BY(?background)
+  }
+}
+
+
+SELECT DISTINCT  ?name
+WHERE {
+	?name  <http://dbpedia.org/ontology/relative>  <http://aksw.org/notInWiki/John_Colaneri>.
+}
+
+
+SELECT DISTINCT  ?name
+WHERE {
+	    ?name <http://dbpedia.org/ontology/almaMater>  <http://dbpedia.org/resource/Ohio_University>.
+            FILTER regex(str(?name), "judge")
+}
+
+
+SELECT DISTINCT  ?year ?name
+WHERE {
+		<http://dbpedia.org/resource/Ohio_University> <http://dbpedia.org/property/established> ?year.{
+  SELECT DISTINCT ?year ?name
+   WHERE{
+           <http://dbpedia.org/resource/Ohio_University> <http://dbpedia.org/property/founder> ?name.
+   }
+  }	   
+}
+
+
+SELECT DISTINCT   ?spouseName ?childName
+WHERE {
+           <http://dbpedia.org/resource/Mukesh_Ambani> <http://dbpedia.org/ontology/spouse> ?spouseName.{
+    SELECT DISTINCT ?spouseName ?childName
+    WHERE {
+           ?childName <http://dbpedia.org/ontology/child> <http://dbpedia.org/resource/Mukesh_Ambani>, ?spouseName.
+    }
+    ORDER BY(?childName)
+  }
+}
+
+
+SELECT DISTINCT ?award
+WHERE {
+         <http://dbpedia.org/resource/A._P._J._Abdul_Kalam> <http://dbpedia.org/ontology/award> ?award.
+         ?award <http://dbpedia.org/ontology/award> ?highest.
+}
+ORDER BY (?highest)
+
+
+SELECT DISTINCT ?cause
+WHERE {
+          <http://dbpedia.org/resource/A._P._J._Abdul_Kalam> <http://dbpedia.org/property/deathCause> ?cause.
+}
+
+
+ASK 
+WHERE{
+        <http://dbpedia.org/resource/Fox_Broadcasting_Company>  <http://dbpedia.org/ontology/keyPerson> ?name.
+        <http://dbpedia.org/resource/Fox_Broadcasting_Company>  <http://dbpedia.org/ontology/foundedBy> ?name.
+}
+
+
+SELECT DISTINCT ?name ?place
+WHERE{
+          ?name <http://dbpedia.org/ontology/child> <http://dbpedia.org/resource/Kim_Jong-il>.{
+    SELECT DISTINCT ?name ?place
+    WHERE {
+          ?name <http://dbpedia.org/ontology/country> ?place.
+    }
+    ORDER BY (?place)
+  }  
+}
+
+
+SELECT DISTINCT ?score
+WHERE{
+       <http://dbpedia.org/resource/Rahul_Dravid> <http://dbpedia.org/property/topScore> ?score.
+}
+ORDER BY DESC (?score)
+OFFSET 0
+LIMIT 1
+
+
+SELECT DISTINCT ?name ?team
+WHERE{
+         ?name <http://dbpedia.org/ontology/trainer> <http://dbpedia.org/resource/Ryan_Lochte>.{
+    SELECT DISTINCT ?name ?team
+    WHERE {
+          ?name <http://dbpedia.org/property/currentTeam> ?team.
+    }
+    ORDER BY (?team)
+  }
+}
+
+
+SELECT DISTINCT ?name ?developer
+WHERE{
+         ?name <http://dbpedia.org/ontology/computingPlatform> <http://dbpedia.org/resource/Nokia>.{
+    SELECT DISTINCT ?name ?developer
+    WHERE {
+           ?name <http://dbpedia.org/ontology/developer> ?developer.
+    }
+    ORDER BY DESC(?developer)
+  }
+}
+
+
+SELECT DISTINCT  ?rank
+WHERE{
+       <http://dbpedia.org/resource/Johanna_Konta>  <http://dbpedia.org/property/currentsinglesranking> ?rank.
+}
+
+
+SELECT DISTINCT ?type ?language
+WHERE{
+          <http://dbpedia.org/resource/Anandabazar_Patrika>  <http://dbpedia.org/ontology/type> ?type.{
+    SELECT DISTINCT ?type ?language
+    WHERE{
+           <http://dbpedia.org/resource/Anandabazar_Patrika> <http://dbpedia.org/property/language> ?language.
+    }
+  }
+}
+
+
+SELECT DISTINCT ?name  
+WHERE {
+	  ?name  <http://dbpedia.org/ontology/nationality> <http://dbpedia.org/resource/Serbia>.
+}
+
+
+SELECT DISTINCT ?name ?place
+WHERE {
+         <http://dbpedia.org/resource/Xi%E2%80%93Li_Administration> <http://dbpedia.org/property/stateHead> ?name.{
+    SELECT DISTINCT ?name ?place
+    WHERE {
+           ?name <http://dbpedia.org/ontology/country> ?place.
+    }
+    ORDER BY(?place)
+  }
+}
+
+
+SELECT DISTINCT ?name ?format
+WHERE {
+         ?name <http://dbpedia.org/property/type> "Weekly newspaper".{
+    SELECT DISTINCT ?name ?format
+    WHERE {
+          ?name <http://dbpedia.org/ontology/format> ?format. 
+    }
+    ORDER BY(?format)
+  }
+}
+
+
+SELECT DISTINCT ?name
+WHERE {
+         ?name <http://dbpedia.org/ontology/location> <http://dbpedia.org/resource/Switzerland>.  
+         FILTER regex(str(?name), "watchmaker")
+}
+ORDER BY DESC(?name)
+LIMIT 3
+
+
+SELECT DISTINCT ?name 
+WHERE {
+		<http://dbpedia.org/resource/Rafael_Nadal>  <http://dbpedia.org/ontology/relative>  ?name.
+		?name  <http://dbpedia.org/ontology/trainer>  <http://dbpedia.org/resource/Rafael_Nadal>. 
+}
+
+
+SELECT DISTINCT ?name
+WHERE {
+          <http://dbpedia.org/resource/Blue_Origin>  <http://dbpedia.org/ontology/foundedBy> ?name.
+          <http://dbpedia.org/resource/Amazon.com>  <http://dbpedia.org/ontology/foundedBy> ?name.
+}
+
+
+SELECT DISTINCT ?name
+WHERE {
+       <http://dbpedia.org/resource/John_McCarthy_%28computer_scientist%29> <http://dbpedia.org/ontology/knownFor> ?name.
+}
+ORDER BY ASC (?name)
+
+
+SELECT DISTINCT ?name ?place
+WHERE {
+             ?name <http://dbpedia.org/ontology/orderInOffice> "44th President of the United States".{
+    SELECT DISTINCT ?name ?place
+    WHERE {
+             ?name <http://dbpedia.org/ontology/birthPlace> ?place.
+    }
+    ORDER BY(?place)
+  }
+}
+
+
+SELECT DISTINCT ?team
+WHERE {
+         <http://dbpedia.org/resource/Bastian_Schweinsteiger> <http://dbpedia.org/ontology/team> ?team.
+}
+ORDER BY ASC(?team)
+LIMIT 3
+
+
+SELECT DISTINCT ?name
+WHERE {
+	   ?name <http://dbpedia.org/ontology/location>  <http://dbpedia.org/resource/Israel>.
 }
