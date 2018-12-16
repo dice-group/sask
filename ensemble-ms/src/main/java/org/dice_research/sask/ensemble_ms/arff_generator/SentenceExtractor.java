@@ -60,7 +60,6 @@ public class SentenceExtractor {
 	List<String> sub_sorokin = new ArrayList<String>();
 	List<String> obj_sorokin = new ArrayList<String>();
 	List<String> pred_sorokin = new ArrayList<String>();
-
 	List<String> sub = new ArrayList<String>();
 	List<String> obj = new ArrayList<String>();
 	List<String> pred = new ArrayList<String>();
@@ -99,6 +98,7 @@ public class SentenceExtractor {
 			String squery_Result = se.responseReader(i);
 			float sc_fox = se.fox_response_Matching();
 			float sc_openIE = se.openIE_response_Mathing();
+			float sc_sorokin = se.sorokin_response_Matching();
 			 System.out.println("......................................");
 //			 String str1=squery_Result.replace("[\r\n]+", ".");
 			 String str1 = squery_Result;
@@ -123,10 +123,11 @@ public class SentenceExtractor {
 			System.out.println(training_data);
 			System.out.println("-------------------------------------------------------------");
 			se.trainingFileWriter(training_data);
+			
 
 			
 			
-			System.out.println("fox score : " + sc_fox + "openIE score :" + sc_openIE);
+			System.out.println("fox score : " + sc_fox + "openIE score :" + sc_openIE + "sorokin response :" + sc_sorokin);
 
 			se.sub_fox.clear();
 			se.obj_fox.clear();
@@ -144,6 +145,73 @@ public class SentenceExtractor {
 
 		}
 
+	}
+
+	public float sorokin_response_Matching() {
+
+		System.out.println("List of Subjects in OKE files.........  ");
+		System.out.println(sub);
+		System.out.println("List of predicates  in OKE files.........  ");
+		System.out.println(pred);
+		System.out.println("List of Objects  in OKE files.........  ");
+		
+		System.out.println(obj);
+		System.out.println(" ...........");
+
+		System.out.println("List of Subjects.........  ");
+		System.out.println(sub_sorokin);
+		System.out.println("List of predicates.........  ");
+		System.out.println(pred_sorokin);
+		System.out.println("List of Objects.........  ");
+		System.out.println(obj_sorokin);
+		System.out.println(" ...........");
+
+    
+		int size_sorokin = obj_sorokin.size();
+		int size_oke = pred.size();
+		float truth = 0;
+		float result = 0;
+
+			
+			for (int a = 0; a < size_oke; a++) {
+			for (int b = 0; b < size_sorokin; b++) {
+		            int triple_counter = 0;
+					if (obj.get(a).equals(obj_sorokin.get(b)))
+					{triple_counter++;}
+					if (sub.get(a).equals(sub_sorokin.get(b)))
+					{triple_counter++;}
+					if (sub.get(a).equals(sub_sorokin.get(b)))
+					{triple_counter++;}
+					if(triple_counter == 0)
+					{
+						System.out.println("Noting matched");
+						
+					}
+					else if(triple_counter == 1)
+					{
+						System.out.println("one match found");
+						truth = (float) (truth + 0.33);
+					}
+					else if(triple_counter == 2)
+					{
+						System.out.println("two match found");
+						truth = (float) (truth + 0.66);
+					}
+					else if(triple_counter == 3)
+					{
+						System.out.println("three  match found");
+						truth = truth + 1;
+						
+					}
+//					System.out.println("Value of truth " + truth);		
+			}
+//		    result = truth;
+			result = truth/size_sorokin;
+			System.out.println(result);
+		}
+			float score = (result/size_oke) *100;
+			System.out.println("Sorokin Extractor score for this sentence " + score );		
+		    return score;
 	}
 
 	public float openIE_response_Mathing() {
@@ -278,7 +346,6 @@ public class SentenceExtractor {
 
 						List<String> fox_response_string_list = new ArrayList<String>();
 						fox_response_string = response.toString();
-
 						String Filtered_fox_response = fox_response_processing(fox_response_string, i);
 						fox_response_string_list.add(Filtered_fox_response);
 //						System.out.println(Filtered_fox_response);
@@ -288,10 +355,8 @@ public class SentenceExtractor {
 						fredRespMap.put(sentences.get(i), response.toString());
 						List<String> sorokin_response_string_list = new ArrayList<String>();
 						sorokin_response_string = response.toString();
-
-						String Filtered_sorokin_response = sorokin_response_processing(sorokin_response_string, i);
+					    String Filtered_sorokin_response = sorokin_response_processing(sorokin_response_string, i);
 						sorokin_response_string_list.add(Filtered_sorokin_response);
-						System.out.println(Filtered_sorokin_response);;
 					}
 
 					else if (j == 2) {
@@ -317,7 +382,7 @@ public class SentenceExtractor {
 				// end of try block
 				catch (Exception e) {
 					e.getMessage();
-					// TODO: handle exception
+					System.out.println("Exception in creating url or takiing response from extractor");
 				}
 
 			}
@@ -404,7 +469,7 @@ public class SentenceExtractor {
 		BasicConfigurator.configure();
 		List<String> sparqueryList = new ArrayList<String>();
 
-		// create an empty model
+// create an empty model
 		// for (int i = 0; i < 3; i++)
 
 		final String inputFileName = files[i].toString();
@@ -414,16 +479,16 @@ public class SentenceExtractor {
 			throw new IllegalArgumentException("File: " + inputFileName + " not found");
 		}
 
-		// read the RDF/XML file
-		// read() method call is the URI which will be used for resolving relative URI's
+// read the RDF/XML file
+// read() method call is the URI which will be used for resolving relative URI's
 		// model.read(in, "TURTLE");
 		try {
 			model.read(inputFileName);
 		} catch (RiotException ro) {
 			ro.getMessage();
 		}
-		// to run in command line sparql.bat --data=vc-db-1.rdf --query=q1.rq
-		// write it to standard outString queryString = " .... " ;
+// to run in command line sparql.bat --data=vc-db-1.rdf --query=q1.rq
+// write it to standard outString queryString = " .... " ;
 //		sparql query
 		String queryString =
 
@@ -567,7 +632,6 @@ public class SentenceExtractor {
 		// System.out.println(obj_fox);
 		// System.out.println(" ...........");
 
-		// Create Files
         return fox_filtered_response;
 
 	}
