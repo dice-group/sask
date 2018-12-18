@@ -8,8 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
+
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -53,18 +52,18 @@ public class SentenceExtractor {
 	static String sorokin_response_string = null;
 	static String openIE_response_string = null;
 	static String cedric_response_string = null;
-	List<String> sub_fox = new ArrayList<String>();
-	List<String> obj_fox = new ArrayList<String>();
-	List<String> pred_fox = new ArrayList<String>();
-	List<String> sub_openIE = new ArrayList<String>();
-	List<String> obj_openIE = new ArrayList<String>();
-	List<String> pred_openIE = new ArrayList<String>();
-	List<String> sub_sorokin = new ArrayList<String>();
-	List<String> obj_sorokin = new ArrayList<String>();
-	List<String> pred_sorokin = new ArrayList<String>();
-	List<String> sub = new ArrayList<String>();
-	List<String> obj = new ArrayList<String>();
-	List<String> pred = new ArrayList<String>();
+	public List<String> sub_fox = new ArrayList<String>();
+	public List<String> obj_fox = new ArrayList<String>();
+	public List<String> pred_fox = new ArrayList<String>();
+	public List<String> sub_openIE = new ArrayList<String>();
+	public List<String> obj_openIE = new ArrayList<String>();
+	public List<String> pred_openIE = new ArrayList<String>();
+	public List<String> sub_sorokin = new ArrayList<String>();
+	public List<String> obj_sorokin = new ArrayList<String>();
+	public List<String> pred_sorokin = new ArrayList<String>();
+	public List<String> sub = new ArrayList<String>();
+	public List<String> obj = new ArrayList<String>();
+	public List<String> pred = new ArrayList<String>();
 
 	public static void main(String[] args) {
 
@@ -98,11 +97,11 @@ public class SentenceExtractor {
 			System.out.println("Gethering Sparql Query Result................................");
 			
 			String squery_Result = se.responseReader(i);
-			float sc_fox = se.fox_response_Matching();
-			float sc_openIE = se.openIE_response_Mathing();
-			float sc_sorokin = se.sorokin_response_Matching();
+			double sc_fox = se.fox_response_Matching();
+			double sc_openIE = se.openIE_response_Mathing();
+			double sc_sorokin = se.sorokin_response_Matching();
 			
-			float score[] = new float[3];
+			double score[] = new double[3];
 			score[0]  = sc_fox;
 			score[1]  = sc_sorokin;
 			score[0]  = sc_openIE;
@@ -169,7 +168,7 @@ public class SentenceExtractor {
 
 	}
 
-	public float sorokin_response_Matching() {
+	public double sorokin_response_Matching() {
 
 		System.out.println("List of Subjects in OKE files.........  ");
 		System.out.println(sub);
@@ -191,8 +190,8 @@ public class SentenceExtractor {
     
 		int size_sorokin = obj_sorokin.size();
 		int size_oke = pred.size();
-		float truth = 0;
-		float result = 0;
+		double truth = 0;
+		double result = 0;
 
 			
 			for (int a = 0; a < size_oke; a++) {
@@ -202,7 +201,7 @@ public class SentenceExtractor {
 					{triple_counter++;}
 					if (sub.get(a).equals(sub_sorokin.get(b)))
 					{triple_counter++;}
-					if (sub.get(a).equals(sub_sorokin.get(b)))
+					if (pred.get(a).equals(pred_sorokin.get(b)))
 					{triple_counter++;}
 					if(triple_counter == 0)
 					{
@@ -212,12 +211,12 @@ public class SentenceExtractor {
 					else if(triple_counter == 1)
 					{
 						System.out.println("one match found");
-						truth = (float) (truth + 0.33);
+						truth = (double) (truth + 0.33);
 					}
 					else if(triple_counter == 2)
 					{
 						System.out.println("two match found");
-						truth = (float) (truth + 0.66);
+						truth = (double) (truth + 0.66);
 					}
 					else if(triple_counter == 3)
 					{
@@ -231,12 +230,12 @@ public class SentenceExtractor {
 			result = truth/size_sorokin;
 			System.out.println(result);
 		}
-			float score = (result/size_oke) *100;
+			double score = (result/size_oke) *100;
 			System.out.println("Sorokin Extractor score for this sentence " + score );		
 		    return score;
 	}
 
-	public float openIE_response_Mathing() {
+	public double openIE_response_Mathing() {
 
 		System.out.println("List of Subjects in OKE files.........  ");
 		System.out.println(sub);
@@ -258,8 +257,8 @@ public class SentenceExtractor {
     
 		int size_openIE = obj_openIE.size();
 		int size_oke = pred.size();
-		float truth = 0;
-		float result = 0;
+		double truth = 0;
+		double result = 0;
 
 			
 			for (int a = 0; a < size_oke; a++) {
@@ -269,7 +268,7 @@ public class SentenceExtractor {
 					{triple_counter++;}
 					if (sub.get(a).equals(sub_openIE.get(b)))
 					{triple_counter++;}
-					if (sub.get(a).equals(sub_openIE.get(b)))
+					if (pred.get(a).equals(pred_openIE.get(b)))
 					{triple_counter++;}
 					if(triple_counter == 0)
 					{
@@ -279,12 +278,12 @@ public class SentenceExtractor {
 					else if(triple_counter == 1)
 					{
 						System.out.println("one match found");
-						truth = (float) (truth + 0.33);
+						truth = (double) (truth + 0.33);
 					}
 					else if(triple_counter == 2)
 					{
 						System.out.println("two match found");
-						truth = (float) (truth + 0.66);
+						truth = (double) (truth + 0.66);
 					}
 					else if(triple_counter == 3)
 					{
@@ -298,7 +297,7 @@ public class SentenceExtractor {
 			result = truth/size_openIE;
 			System.out.println(result);
 		}
-			float score = (result/size_oke) *100;
+			double score = (result/size_oke) *100;
 			System.out.println("OPEN IE Extractor score for this sentence " + score );		
 		    return score;
 	}
@@ -717,19 +716,7 @@ public class SentenceExtractor {
 
 	}
 
-	public float fox_response_Matching() {
-//		 sub_fox.add("Google");
-//		 pred_fox.add("CEO");
-//		 obj_fox.add("Sundar_üichai");
-//		 sub_fox.add("Google");
-//		 pred_fox.add("CEO");
-//		 obj_fox.add("Sundar_Pichai");
-//		 sub_fox.add("Google");
-//		 pred_fox.add("Ceo1");
-//		 obj_fox.add("Sundar_üichai");
-//		 sub.add("Sundar_Pichai");
-//		 pred.add("workfor");
-//		 obj.add("Google");
+	public double fox_response_Matching() {
 		System.out.println("List of Subjects in OKE files.........  ");
 		System.out.println(sub);
 		System.out.println("List of predicates  in OKE files.........  ");
@@ -750,8 +737,8 @@ public class SentenceExtractor {
      
 		int size_fox = obj_fox.size();
 		int size_oke = pred.size();
-		float truth = 0;
-		float result = 0;
+		double truth = 0;
+		double result = 0;
 
 			
 			for (int a = 0; a < size_oke; a++) {
@@ -767,7 +754,7 @@ public class SentenceExtractor {
 					{triple_counter++;}
 					if (sub.get(a).equals(sub_fox.get(b)))
 					{triple_counter++;}
-					if (sub.get(a).equals(sub_fox.get(b)))
+					if (pred.get(a).equals(pred_fox.get(b)))
 					{triple_counter++;}
 					if(triple_counter == 0)
 					{
@@ -777,12 +764,12 @@ public class SentenceExtractor {
 					else if(triple_counter == 1)
 					{
 						System.out.println("one match found");
-						truth = (float) (truth + 0.33);
+						truth = (double) (truth + 0.33);
 					}
 					else if(triple_counter == 2)
 					{
 						System.out.println("two match found");
-						truth = (float) (truth + 0.66);
+						truth = (double) (truth + 0.66);
 					}
 					else if(triple_counter == 3)
 					{
@@ -796,7 +783,7 @@ public class SentenceExtractor {
 			result = truth/size_fox;
 			System.out.println(result);
 		}
-			float score = (result/size_oke) *100;
+			double score = (result/size_oke) *100;
 			System.out.println("Extractor score for this sentence " + score );	
             return score;
 	}
