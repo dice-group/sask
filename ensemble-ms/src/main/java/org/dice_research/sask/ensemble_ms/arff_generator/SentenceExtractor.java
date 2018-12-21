@@ -127,9 +127,9 @@ public class SentenceExtractor {
 			 System.out.println(str1);	
 			 String sentence = sentences.get(i);
 			 sentence = sentence.replace(",","."); 
-			 fox_response_string = fox_response_string.replace(",","."); 
-			 sorokin_response_string = sorokin_response_string.replace(",",".");
-			 openIE_response_string = openIE_response_string.replace(",",".");
+//			 fox_response_string = fox_response_string.replace(",","."); 
+//			 sorokin_response_string = sorokin_response_string.replace(",",".");
+//			 openIE_response_string = openIE_response_string.replace(",",".");
 			 
 			 
 			 System.out.println("Training Data for file " + files[i].getName());
@@ -717,7 +717,20 @@ public class SentenceExtractor {
 	}
 
 	public double fox_response_Matching() {
-		System.out.println("List of Subjects in OKE files.........  ");
+
+		int size_fox = pred_fox.size();
+		int size_oke = pred.size();
+		double score = 0;
+		double result = 0;
+		double max = 0;
+		if(size_fox == 0)
+		{
+			System.out.println("no triples found");
+			result = 0;
+			return 0;
+		}
+		else 
+		{     		System.out.println("List of Subjects in OKE files.........  ");
 		System.out.println(sub);
 		System.out.println("List of predicates  in OKE files.........  ");
 		System.out.println(pred);
@@ -726,66 +739,65 @@ public class SentenceExtractor {
 		System.out.println(obj);
 		System.out.println(" ...........");
 
-		System.out.println("List of Subjects in Fox Extractor.........  ");
+		System.out.println("List of Subjects.........  ");
 		System.out.println(sub_fox);
-		System.out.println("List of predicates Fox Extractor.........  ");
+		System.out.println("List of predicates.........  ");
 		System.out.println(pred_fox);
-		System.out.println("List of Objects Fox Extractor.........  ");
+		System.out.println("List of Objects.........  ");
 		System.out.println(obj_fox);
 		System.out.println(" ...........");
-
-     
-		int size_fox = obj_fox.size();
-		int size_oke = pred.size();
-		double truth = 0;
-		double result = 0;
+		
 
 			
-			for (int a = 0; a < size_oke; a++) {
-			for (int b = 0; b < size_fox; b++) {
-//				if (obj.get(a).equals(obj_fox.get(b)) && pred.get(a).equals(pred_fox.get(b))
-//						&& sub.get(a).equals(sub_fox.get(b))) 
-//				{
-//					System.out.println(" same triple found");
-//					truth++;
-//				}
-		            int triple_counter = 0;
+			for (int a = 0; a < size_oke; a++)
+			{
+				
+			for (int b = 0; b < size_fox; b++) 
+				{
+
+				
+		            double triple_counter = 0;
+		        
 					if (obj.get(a).equals(obj_fox.get(b)))
 					{triple_counter++;}
 					if (sub.get(a).equals(sub_fox.get(b)))
 					{triple_counter++;}
 					if (pred.get(a).equals(pred_fox.get(b)))
 					{triple_counter++;}
-					if(triple_counter == 0)
-					{
-						System.out.println("Noting matched");
+					if(triple_counter> max)
+					{  
+						
+						 max = triple_counter;
 						
 					}
-					else if(triple_counter == 1)
-					{
-						System.out.println("one match found");
-						truth = (double) (truth + 0.33);
-					}
-					else if(triple_counter == 2)
-					{
-						System.out.println("two match found");
-						truth = (double) (truth + 0.66);
-					}
-					else if(triple_counter == 3)
-					{
-						System.out.println("three  match found");
-						truth = truth + 1;
-						
-					}
-//					System.out.println("Value of truth " + truth);		
+
+					
+				}
+			System.out.println("maximum number of Matches");
+			System.out.println(max);
+			score = (double)(score + (max/3)) ;
+            max = 0;
+			
 			}
-//		    result = truth;
-			result = truth/size_fox;
-			System.out.println(result);
+			System.out.println("total score");
+			System.out.println(score);
+			System.out.println("total score in percentage");
+			result = (score/size_oke)*100;
+	
+    	sub_fox.clear();
+    	obj_fox.clear();
+        pred_fox.clear();
+    	sub.clear();
+        obj.clear();
+        pred.clear();
+        result = Math.round(result * 100.0) / 100.0;
+    	System.out.println(result);
+		return result;
 		}
-			double score = (result/size_oke) *100;
-			System.out.println("Extractor score for this sentence " + score );	
-            return score;
+			
+	
+		
+		
 	}
 
 }
