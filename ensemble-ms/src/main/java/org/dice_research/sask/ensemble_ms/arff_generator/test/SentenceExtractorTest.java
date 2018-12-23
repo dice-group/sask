@@ -26,9 +26,28 @@ public class SentenceExtractorTest  {
 		double score = test_obj.fox_response_Matching();
 
 		System.out.println(score);
-		double preicted_score = 66.0;
+		double preicted_score = 66.67;
 		double delta =0;
 		Assert.assertEquals(score, preicted_score, delta);
+		
+        System.out.println("........................................");
+		
+//		test 2
+		 test_obj.sub_sorokin.add("Google");
+		 test_obj.pred_sorokin.add("CEO");
+		 test_obj.obj_sorokin.add("Sundar_Pichai");
+		 test_obj.sub_sorokin.add("Google");
+		 test_obj.pred_sorokin.add("located");
+		 test_obj.obj_sorokin.add("California");
+		 test_obj.sub.add("Google");
+		 test_obj.pred.add("located");
+		 test_obj.obj.add("Berlin");
+			double preicted_score2 = 33.33;
+			double actual_score2 =test_obj.sorokin_response_Matching();
+			delta =0;
+			Assert.assertEquals(actual_score2, preicted_score2, delta);
+			
+
 
 		
 		

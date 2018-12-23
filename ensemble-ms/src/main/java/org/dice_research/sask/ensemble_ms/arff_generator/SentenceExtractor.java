@@ -84,11 +84,11 @@ public class SentenceExtractor {
 			
 			se.sentence_Extracion(i);
 			System.out.println("Extracted sentence From the file " + files[i].getName());
-			System.out.println(sentences.get(i));
+//			System.out.println(sentences.get(i));
 			System.out.println("Fox extractor response for file" + files[i].getName());
-			System.out.println(fox_response_string);
+//			System.out.println(fox_response_string);
 			System.out.println("Sorokin extractor response for file " + files[i].getName());
-			System.out.println(sorokin_response_string);
+//			System.out.println(sorokin_response_string);
 //			System.out.println("Cedric extractor response for file" + files[i].getName());
 //			System.out.println(cedric_response_string);
 			System.out.println("openIE extractor response for file " + files[i].getName());
@@ -100,36 +100,18 @@ public class SentenceExtractor {
 			double sc_fox = se.fox_response_Matching();
 			double sc_openIE = se.openIE_response_Mathing();
 			double sc_sorokin = se.sorokin_response_Matching();
+			 int max = se.findMaxscore(sc_fox,sc_openIE,sc_sorokin);
 			
-			double score[] = new double[3];
-			score[0]  = sc_fox;
-			score[1]  = sc_sorokin;
-			score[0]  = sc_openIE;
-			int max =0;
-			 score[max] = score[0];
-			
-			for (int c = 1; c < score.length; c++)
-			{
-			     if (score[c] >score[max])
-			     {
-			      score[max] = score[c];
-			     }
-			}
-
-			System.out.println("The highest score for the extractor  is: " + score[max]  + "Index"  + max);
-	
-			
-			
-			 System.out.println("......................................");
+		
 //			 String str1=squery_Result.replace("[\r\n]+", ".");
 			 String str1 = squery_Result;
 			 
 			 System.out.println(str1);	
 			 String sentence = sentences.get(i);
 			 sentence = sentence.replace(",","."); 
-//			 fox_response_string = fox_response_string.replace(",","."); 
-//			 sorokin_response_string = sorokin_response_string.replace(",",".");
-//			 openIE_response_string = openIE_response_string.replace(",",".");
+			 fox_response_string = fox_response_string.replace(",","."); 
+			 sorokin_response_string = sorokin_response_string.replace(",",".");
+			 openIE_response_string = openIE_response_string.replace(",",".");
 			 
 			 
 			 System.out.println("Training Data for file " + files[i].getName());
@@ -148,17 +130,20 @@ public class SentenceExtractor {
 
 			
 			
-			System.out.println("fox score : " + sc_fox + "openIE score :" + sc_openIE + "sorokin response :" + sc_sorokin);
-
-			se.sub_fox.clear();
-			se.obj_fox.clear();
-			se.pred_fox.clear();
+		
+			
 			se.sub.clear();
 			se.obj.clear();
 			se.pred.clear();
+			
+			se.sub_fox.clear();
+			se.obj_fox.clear();
+			se.pred_fox.clear();
+
 			se.sub_openIE.clear();
 			se.obj_openIE.clear();
 			se.pred_openIE.clear();
+			
 			se.sub_sorokin.clear();
 			se.obj_sorokin.clear();
 			se.pred_openIE.clear();
@@ -168,9 +153,53 @@ public class SentenceExtractor {
 
 	}
 
+ int findMaxscore(double sc_fox, double sc_openIE, double sc_sorokin) {
+		
+		
+		double score[] = new double[3];
+		score[0]  = sc_fox;
+		score[1]  = sc_sorokin;
+		score[2]  = sc_openIE;
+		int max =0;
+		
+		
+		for (int c = 1; c < score.length; c++)
+		{
+		     if (score[c] >score[max])
+		     {
+		       max = c;
+		     
+		     }
+		}
+		System.out.println("fox score : " + sc_fox  + "sorokin response :" + sc_sorokin+ "openIE score :" + sc_openIE);
+		System.out.println("The highest score for the extractor  is: " + score[max]  + " Index "  + max);
+
+		
+		
+		 System.out.println("......................................");
+		 return max;
+		
+		// TODO Auto-generated method stub
+		
+	}
+
 	public double sorokin_response_Matching() {
 
-		System.out.println("List of Subjects in OKE files.........  ");
+
+
+		int size_sorokin = sub_sorokin.size();
+		int size_oke = sub.size();
+		double score = 0;
+		double result = 0;
+		double max = 0;
+		if(size_sorokin == 0)
+		{
+			System.out.println("no triples found");
+			result = 0;
+			return 0;
+		}
+		else 
+		{     		System.out.println("List of Subjects in OKE files.........  ");
 		System.out.println(sub);
 		System.out.println("List of predicates  in OKE files.........  ");
 		System.out.println(pred);
@@ -179,64 +208,81 @@ public class SentenceExtractor {
 		System.out.println(obj);
 		System.out.println(" ...........");
 
-		System.out.println("List of Subjects.........  ");
+		System.out.println("List of Subjects sorokin.........  ");
 		System.out.println(sub_sorokin);
-		System.out.println("List of predicates.........  ");
+		System.out.println("List of predicates sorokin........  ");
 		System.out.println(pred_sorokin);
-		System.out.println("List of Objects.........  ");
+		System.out.println("List of Objects sorokin.........  ");
 		System.out.println(obj_sorokin);
 		System.out.println(" ...........");
-
-    
-		int size_sorokin = obj_sorokin.size();
-		int size_oke = pred.size();
-		double truth = 0;
-		double result = 0;
+		
 
 			
-			for (int a = 0; a < size_oke; a++) {
-			for (int b = 0; b < size_sorokin; b++) {
-		            int triple_counter = 0;
+			for (int a = 0; a < size_oke; a++)
+			{
+				
+			for (int b = 0; b < size_sorokin; b++) 
+				{
+
+				
+		            double triple_counter = 0;
+		        
 					if (obj.get(a).equals(obj_sorokin.get(b)))
 					{triple_counter++;}
 					if (sub.get(a).equals(sub_sorokin.get(b)))
 					{triple_counter++;}
 					if (pred.get(a).equals(pred_sorokin.get(b)))
 					{triple_counter++;}
-					if(triple_counter == 0)
-					{
-						System.out.println("Noting matched");
+					if(triple_counter> max)
+					{  
+						
+						 max = triple_counter;
 						
 					}
-					else if(triple_counter == 1)
-					{
-						System.out.println("one match found");
-						truth = (double) (truth + 0.33);
-					}
-					else if(triple_counter == 2)
-					{
-						System.out.println("two match found");
-						truth = (double) (truth + 0.66);
-					}
-					else if(triple_counter == 3)
-					{
-						System.out.println("three  match found");
-						truth = truth + 1;
-						
-					}
-//					System.out.println("Value of truth " + truth);		
+
+					
+				}
+			System.out.println("maximum number of Matches");
+			System.out.println(max);
+			score = (double)(score + (max/3)) ;
+            max = 0;
+			
 			}
-//		    result = truth;
-			result = truth/size_sorokin;
-			System.out.println(result);
+			System.out.println("total score");
+			System.out.println(score);
+			System.out.println("total score in percentage");
+			result = (score/size_oke)*100;
+	
+
+        result = Math.round(result * 100.0) / 100.0;
+    	System.out.println(result);
+		return result;
 		}
-			double score = (result/size_oke) *100;
-			System.out.println("Sorokin Extractor score for this sentence " + score );		
-		    return score;
+			
+	
+		
+		
+	
+		
+	
 	}
 
 	public double openIE_response_Mathing() {
 
+
+		int size_openIE = sub_openIE.size();
+		int size_oke = pred.size();
+		double score = 0;
+		double result = 0;
+		double max = 0;
+		if(size_openIE == 0)
+		{
+			System.out.println("no triples found");
+			result = 0;
+			return 0;
+		}
+		else 
+		{     		
 		System.out.println("List of Subjects in OKE files.........  ");
 		System.out.println(sub);
 		System.out.println("List of predicates  in OKE files.........  ");
@@ -246,60 +292,61 @@ public class SentenceExtractor {
 		System.out.println(obj);
 		System.out.println(" ...........");
 
-		System.out.println("List of Subjects.........  ");
+		System.out.println("List of Subjects openIE.........  ");
 		System.out.println(sub_openIE);
-		System.out.println("List of predicates.........  ");
+		System.out.println("List of predicates openIE.........  ");
 		System.out.println(pred_openIE);
-		System.out.println("List of Objects.........  ");
+		System.out.println("List of Objects openIE.........  ");
 		System.out.println(obj_openIE);
 		System.out.println(" ...........");
-
-    
-		int size_openIE = obj_openIE.size();
-		int size_oke = pred.size();
-		double truth = 0;
-		double result = 0;
+		
 
 			
-			for (int a = 0; a < size_oke; a++) {
-			for (int b = 0; b < size_openIE; b++) {
-		            int triple_counter = 0;
+			for (int a = 0; a < size_oke; a++)
+			{
+				
+			for (int b = 0; b < size_openIE; b++) 
+				{
+
+				
+		            double triple_counter = 0;
+		        
 					if (obj.get(a).equals(obj_openIE.get(b)))
 					{triple_counter++;}
 					if (sub.get(a).equals(sub_openIE.get(b)))
 					{triple_counter++;}
 					if (pred.get(a).equals(pred_openIE.get(b)))
 					{triple_counter++;}
-					if(triple_counter == 0)
-					{
-						System.out.println("Noting matched");
+					if(triple_counter> max)
+					{  
+						
+						 max = triple_counter;
 						
 					}
-					else if(triple_counter == 1)
-					{
-						System.out.println("one match found");
-						truth = (double) (truth + 0.33);
-					}
-					else if(triple_counter == 2)
-					{
-						System.out.println("two match found");
-						truth = (double) (truth + 0.66);
-					}
-					else if(triple_counter == 3)
-					{
-						System.out.println("three  match found");
-						truth = truth + 1;
-						
-					}
-//					System.out.println("Value of truth " + truth);		
+
+					
+				}
+			System.out.println("maximum number of Matches");
+			System.out.println(max);
+			score = (double)(score + (max/3)) ;
+            max = 0;
+			
 			}
-//		    result = truth;
-			result = truth/size_openIE;
-			System.out.println(result);
+			System.out.println("total score");
+			System.out.println(score);
+			System.out.println("total score in percentage");
+			result = (score/size_oke)*100;
+
+        result = Math.round(result * 100.0) / 100.0;
+    	System.out.println(result);
+		return result;
 		}
-			double score = (result/size_oke) *100;
-			System.out.println("OPEN IE Extractor score for this sentence " + score );		
-		    return score;
+			
+	
+		
+		
+	
+		
 	}
 
 	public void sentence_Extracion(int i) {
@@ -458,16 +505,6 @@ public class SentenceExtractor {
 
 		}
 
-		System.out.println("List of Subjects for sorokin extractor.........  ");
-		System.out.println(sub_sorokin);
-		System.out.println("List of predicates for sorokin extractor.........  ");
-		System.out.println(pred_sorokin);
-		System.out.println("List of Objects for sorokin extractor.........  ");
-
-		System.out.println(obj_sorokin);
-		System.out.println(" ...........");
-
-		// Create Files
 
 		return sorokin_filtered_response;
 
@@ -701,16 +738,14 @@ public class SentenceExtractor {
 
 		}
 
-		System.out.println("List of Subjects for OPENIE extractor.........  ");
-		System.out.println(sub_openIE);
-		System.out.println("List of predicates for OPENIE extractor.........  ");
-		System.out.println(pred_openIE);
-		System.out.println("List of Objects for OPENIE extractor.........  ");
-
-		System.out.println(obj_openIE);
-		System.out.println(" ...........");
-
-		// Create Files
+//		System.out.println("List of Subjects for OPENIE extractor.........  ");
+//		System.out.println(sub_openIE);
+//		System.out.println("List of predicates for OPENIE extractor.........  ");
+//		System.out.println(pred_openIE);
+//		System.out.println("List of Objects for OPENIE extractor.........  ");
+//
+//		System.out.println(obj_openIE);
+//		System.out.println(" ...........");
 
 		return openIE_filtered_response;
 
@@ -739,11 +774,11 @@ public class SentenceExtractor {
 		System.out.println(obj);
 		System.out.println(" ...........");
 
-		System.out.println("List of Subjects.........  ");
+		System.out.println("List of Subjects Fox.........  ");
 		System.out.println(sub_fox);
-		System.out.println("List of predicates.........  ");
+		System.out.println("List of predicates Fox.........  ");
 		System.out.println(pred_fox);
-		System.out.println("List of Objects.........  ");
+		System.out.println("List of Objects Fox.........  ");
 		System.out.println(obj_fox);
 		System.out.println(" ...........");
 		
@@ -783,13 +818,7 @@ public class SentenceExtractor {
 			System.out.println(score);
 			System.out.println("total score in percentage");
 			result = (score/size_oke)*100;
-	
-    	sub_fox.clear();
-    	obj_fox.clear();
-        pred_fox.clear();
-    	sub.clear();
-        obj.clear();
-        pred.clear();
+
         result = Math.round(result * 100.0) / 100.0;
     	System.out.println(result);
 		return result;
