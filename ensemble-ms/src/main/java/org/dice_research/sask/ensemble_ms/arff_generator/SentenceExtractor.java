@@ -278,7 +278,7 @@ public class SentenceExtractor {
 		double max = 0;
 		if(size_openIE == 0)
 		{
-			System.out.println("no triples found");
+			System.out.println("no triples found ");
 			result = 0;
 			return 0;
 		}
