@@ -12,6 +12,17 @@
     ]
   },
   {
+    "questionStartWord": ["WHO"],
+    "containsSuperlative": false,
+    "resourceAmount": 1,
+    "ontologyAmount": 0,
+    "sparqlParams": ["R1"],
+    "sparqlTemplate": "SELECT DISTINCT ?x WHERE { ?x <http://dbpedia.org/ontology/almaMater> ?R1 . }",
+    "exampleQuestions": [
+      "WP VBN IN DT R1 IN CD ."
+    ]
+  },
+  {
     "questionStartWord": ["IN", "HOW", "WHO", "WHICH", "WHAT", "WHERE"],
     "containsSuperlative": false,
     "resourceAmount": 1,
