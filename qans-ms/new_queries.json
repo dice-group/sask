@@ -1,706 +1,226 @@
 [
   {
-    "questionStartWord": ["GIVE"], 
-    "containsSuperlative": false,
-    "resourceAmount": 1,
-    "ontologyAmount": 2,
-    "sparqlParams": ["O1", "O2", "R1"],
-    "sparqlTemplate": "SELECT DISTINCT ?person WHERE { ?person ?O2 ?R1 ; ?O1 ?birthDate.} ORDER BY DESC (?birthDate)",
-    "exampleQuestions": [
-      "VB DT O1 IN O2 IN R1 ."
-    ]
-  },
-  {
-    "questionStartWord": ["WHO"], 
-    "containsSuperlative": false,
-    "resourceAmount": 2,
-    "ontologyAmount": 2,
-    "sparqlParams": ["O1", "O2", "R1", "R2"],
-    "sparqlTemplate": "SELECT DISTINCT ?person WHERE { ?person ?O1 ?R1 ; ?O2 ?R2.}",
-    "exampleQuestions": [
-      "WP VBZ DT O1 IN R1 WP VBD DT O2 R2 ."
-    ]
-  },
-  {
-    "questionStartWord": ["WHO"], 
+    "questionStartWord": ["WHEN"],
     "containsSuperlative": false,
     "resourceAmount": 1,
     "ontologyAmount": 0,
     "sparqlParams": ["R1"],
-    "sparqlTemplate": "SELECT DISTINCT ?person WHERE { ?person <http://dbpedia.org/ontology/almaMater> ?R1 . }",
+    "sparqlTemplate": "PREFIX dbo: <http://dbpedia.org/ontology/> SELECT DISTINCT ?x WHERE { ?R1 dbo:date ?x . }",
     "exampleQuestions": [
-      "WP VBN IN DT R1 IN CD ."
-    ]
-  },
-  {
-    "questionStartWord": ["WHICH"], 
-    "containsSuperlative": true,
-    "resourceAmount": 1,                        
-    "ontologyAmount": 2,
-    "sparqlParams": ["O1", "O2", "R1"],
-    "sparqlTemplate": "SELECT DISTINCT ?person WHERE { ?person ?O1 ?R1 ; ?O2 ?CD NN . } ORDER BY DESC(?n) OFFSET 0 LIMIT 1",
-    "exampleQuestions": [
-      "WDT R1 O1 VBZ DT O2 IN CD NN ."
-    ]
-  },
-  {
-    "questionStartWord": ["WHO"], 
-    "containsSuperlative": false,
-    "resourceAmount": 1,
-    "ontologyAmount": 1,
-    "sparqlParams": ["O1", "R1"],
-    "sparqlTemplate": "SELECT DISTINCT ?person WHERE { ?person ?O1 ?R1 . }",
-    "exampleQuestions": [
-      "WP VBZ DT O1 IN R1 ."
-    ]
-  },
-  {
-    "questionStartWord": ["WHO"], 
-    "containsSuperlative": false,
-    "resourceAmount": 1,
-    "ontologyAmount": 1,
-    "sparqlParams": ["O1", "R1"],
-    "sparqlTemplate": "SELECT DISTINCT ?person WHERE { ?person ?O1 ?R1 . }",
-    "exampleQuestions": [
-      "WP VBZ DT O1 IN R1 ."
-    ]
-  },
-  {
-    "questionStartWord": ["WHO"], 
-    "containsSuperlative": false,
-    "resourceAmount": 1,
-    "ontologyAmount": 1,
-    "sparqlParams": ["O1", "R1"],
-    "sparqlTemplate": "SELECT DISTINCT ?person WHERE { ?R1 ?O1 ?person. }",
-    "exampleQuestions": [
-      "WP VBZ DT O1 IN R1 ."
-    ]
-  },
-  {
-    "questionStartWord": ["HOW"], 
-    "containsSuperlative": false,            
-    "resourceAmount": 1,
-    "ontologyAmount": 0,
-    "sparqlParams": ["R1"],
-    "sparqlTemplate": "SELECT DISTINCT ?number WHERE { ?R1 <http://dbpedia.org/property/children> ?number . }",
-    "exampleQuestions": [
-      "WRB JJ NNS VBZ R1 VB ."
-    ]
-  },
-  {
-    "questionStartWord": ["WHO"], 
-    "containsSuperlative": false,
-    "resourceAmount": 1,
-    "ontologyAmount": 0,
-    "sparqlParams": ["R1"],
-    "sparqlTemplate": "SELECT DISTINCT ?persons WHERE {  ?persons  <http://dbpedia.org/property/founders> ?R1 . }",
-    "exampleQuestions": [
-      "WP VBP DT NNS IN R1 ."
-    ]
-  },
-  {
-    "questionStartWord": ["WHO"], 
-    "containsSuperlative": false,             
-    "resourceAmount": 1,
-    "ontologyAmount": 1,
-    "sparqlParams": ["O1", "R1"],
-    "sparqlTemplate": "SELECT DISTINCT ?person WHERE {  ?person ?O1 ?R1 . }",
-    "exampleQuestions": [
-      "WP VBD DT O1 IN R1 ."
-    ]
-  },
-  {
-    "questionStartWord": ["WHERE"], 
-    "containsSuperlative": false,
-    "resourceAmount": 1,                       
-    "ontologyAmount": 1,
-    "sparqlParams": ["O1", "R1"],
-    "sparqlTemplate": "SELECT DISTINCT ?place WHERE { ?R1 ?O1 ?place . }",
-    "exampleQuestions": [
-      "WRB VBZ R1 O1 ."
-    ]
-  },
-  {
-    "questionStartWord": ["WHO"], 
-    "containsSuperlative": false,
-    "resourceAmount": 1,
-    "ontologyAmount": 1,
-    "sparqlParams": ["O1", "R1"],
-    "sparqlTemplate": "SELECT DISTINCT ?person WHERE { ?R1 ?O1 ?person . }",
-    "exampleQuestions": [
-      "WP VBD DT O1 IN R1 ."
-    ]
-  },
-  {
-    "questionStartWord": ["WHICH"], 
-    "containsSuperlative": false,
-    "resourceAmount": 1,
-    "ontologyAmount": 1,
-    "sparqlParams": ["O1", "R1"],
-    "sparqlTemplate": "SELECT DISTINCT ?persons WHERE {  ?persons ?O1 ?books . } GROUP BY (?persons) HAVING (COUNT(?books)> 2)",
-    "exampleQuestions": [
-      "WDT O1 IN R1 VBP VBN JJR IN CD NNS ."
-    ]
-  },
-  {
-    "questionStartWord": ["WHERE"], 
-    "containsSuperlative": false,
-    "resourceAmount": 1,
-    "ontologyAmount": 1,
-    "sparqlParams": ["O1", "R1"],
-    "sparqlTemplate": "SELECT DISTINCT ?place WHERE { ?R1 ?O1 ?place. }",
-    "exampleQuestions": [
-      "WRB VBZ R1 O1 ."
-    ]
-  },
-  {
-    "questionStartWord": ["WHERE"], 
-    "containsSuperlative": false,
-    "resourceAmount": 1,
-    "ontologyAmount": 0,
-    "sparqlParams": ["R1"],
-    "sparqlTemplate": "SELECT DISTINCT ?place WHERE { ?R1 <http://dbpedia.org/ontology/location> ?place . }",
-    "exampleQuestions": [
-      "WRB VBZ R1 ."
-    ]
-  },
-  {
-    "questionStartWord": ["WHICH"], 
-    "containsSuperlative": false,
-    "resourceAmount": 1,
-    "ontologyAmount": 1,
-    "sparqlParams": ["O1", "R1"],
-    "sparqlTemplate": "SELECT DISTINCT ?place WHERE { ?R1 ?O1 ?place. FILTER regex(str(?place), "H")}",
-    "exampleQuestions": [
-      "WDT VBZ DT O1 IN R1 WDT VBZ IN DT NN NN ."
-    ]
-  },
-  {
-    "questionStartWord": ["WHO"], 
-    "containsSuperlative": false,
-    "resourceAmount": 1,
-    "ontologyAmount": 1,
-    "sparqlParams": ["O1", "R1"],
-    "sparqlTemplate": "SELECT DISTINCT ?name WHERE { ?name ?O1 ?R1 . }",
-    "exampleQuestions": [
-      "WP VBD DT O1 TO R1 ."
-    ]
-  },
-  {
-    "questionStartWord": ["MENTION"], 
-    "containsSuperlative": false,
-    "resourceAmount": 1,
-    "ontologyAmount": 1,
-    "sparqlParams": ["O1", "R1"],
-    "sparqlTemplate": "SELECT DISTINCT ?name WHERE { ?R1 ?O1 ?name . }",
-    "exampleQuestions": [
-      "VB DT O1 IN R1 ."
-    ]
-  },
-  {
-    "questionStartWord": ["WHICH"], 
-    "containsSuperlative": false,
-    "resourceAmount": 1,
-    "ontologyAmount": 1,
-    "sparqlParams": ["O1", "R1"],
-    "sparqlTemplate": "SELECT DISTINCT ?place WHERE { ?R1 ?O1 ?place . }",
-    "exampleQuestions": [
-      "WDT VBP DT O1 IN R1 ."
-    ]
-  },
-  {
-    "questionStartWord": ["HAS"], 
-    "containsSuperlative": false,
-    "resourceAmount": 2,
-    "ontologyAmount": 0,
-    "sparqlParams": ["R1", "R2"],
-    "sparqlTemplate": "ASK WHERE { ?R1 <http://dbpedia.org/property/role> ?R2 . }",
-    "exampleQuestions": [
-      "VBZ R1 VBD DT NN IN DT R2 IN DT NN ."
-    ]
-  },
-  {
-    "questionStartWord": ["WHAT"], 
-    "containsSuperlative": true,
-    "resourceAmount": 1,
-    "ontologyAmount": 1,
-    "sparqlParams": ["O1", "R1"],
-    "sparqlTemplate": "SELECT DISTINCT ?catch WHERE { ?R1 <http://dbpedia.org/property/catches/stumpings> ?catch . } ORDER BY DESC(?n) OFFSET 2 LIMIT 1",
-    "exampleQuestions": [
-      "WP VBZ DT JJS NN IN NNS VBN IN R1 ."
-    ]
-  },
-  {
-    "questionStartWord": ["WHO"], 
-    "containsSuperlative": false,
-    "resourceAmount": 1,
-    "ontologyAmount": 2,
-    "sparqlParams": ["O1", "O2", "R1"],
-    "sparqlTemplate": "SELECT DISTINCT ?person WHERE { ?person ?O2 ?R1 . ?R1 ?O1 ?person. }",
-    "exampleQuestions": [
-      "WP VBZ DT O1 CC O2 IN R1 ."
-    ]
-  },
-  {
-    "questionStartWord": ["IN"], 
-    "containsSuperlative": false,
-    "resourceAmount": 1,
-    "ontologyAmount": 1,
-    "sparqlParams": ["O1", "R1"],
-    "sparqlTemplate": "SELECT DISTINCT ?name WHERE { { ?R1 ?O1 ?name. } UNION { ?R1 <http://dbpedia.org/property/workInstitutions> ?name. } }",
-    "exampleQuestions": [
-      "IN WDT O1 CC NNS VBD R1 VB ."
-    ]
-  },
-  {
-    "questionStartWord": ["WHO"], 
-    "containsSuperlative": false,
-    "resourceAmount": 1,
-    "ontologyAmount": 1,
-    "sparqlParams": ["O1", "R1"],
-    "sparqlTemplate": "SELECT DISTINCT ?name WHERE { ?R1 ?O1 ?name . FILTER regex(str(?name),"executive") }",
-    "exampleQuestions": [
-      "WP VBD O1 DT NN IN NN IN DT R1 IN CD IN CD ."
-    ]
-  },
-  {
-    "questionStartWord": ["WHICH"], 
-    "containsSuperlative": false,
-    "resourceAmount": 1,
-    "ontologyAmount": 0,
-    "sparqlParams": ["R1"],
-    "sparqlTemplate": "SELECT DISTINCT ?name WHERE { ?R1 <http://dbpedia.org/property/organization> ?name . }",
-    "exampleQuestions": [
-      "WDT VBP DT NNS VBN IN R1 ."
-    ]
-  },
-  {
-    "questionStartWord": ["WHICH"], 
-    "containsSuperlative": false,
-    "resourceAmount": 2,
-    "ontologyAmount": 2,
-    "sparqlParams": ["O1", "O2", "R1", "R2"],
-    "sparqlTemplate": "SELECT DISTINCT ?person WHERE { ?person ?O2 ?name . FILTER regex(str(?name),"Rhythm_and_blues") }",
-    "exampleQuestions": [
-      "WDT O1 IN R1 VBP PRP$ O2 IN R2 ."
-    ]
-  },
-  {
-    "questionStartWord": ["WHICH"], 
-    "containsSuperlative": false,
-    "resourceAmount": 1,
-    "ontologyAmount": 2,
-    "sparqlParams": ["O1", "O2", "R1"],
-    "sparqlTemplate": "SELECT DISTINCT ?person WHERE { ?person ?O2 ?name. } GROUP BY(?person) HAVING(count(?name) > 3)",
-    "exampleQuestions": [
-      "WDT O1 IN R1 VBP PRP$ O2 JJR IN CD ."
-    ]
-  },
-  {
-    "questionStartWord": ["IS"], 
-    "containsSuperlative": false,
-    "resourceAmount": 1,
-    "ontologyAmount": 0,
-    "sparqlParams": ["R1"],
-    "sparqlTemplate": "ASK WHERE {  <http://aksw.org/notInWiki/Cordoba-Rosario>  <http://dbpedia.org/ontology/locatedInArea> ?R1. }",
-    "exampleQuestions": [
-      "VBZ EX DT NN VBN NNP IN R1 ."
-    ]
-  },
-  {
-    "questionStartWord": ["GIVE"], 
-    "containsSuperlative": false,
-    "resourceAmount": 1,
-    "ontologyAmount": 1,
-    "sparqlParams": ["O1", "R1"],
-    "sparqlTemplate": "SELECT DISTINCT ?name  ?place WHERE {  ?R1 ?O1 ?name . { SELECT DISTINCT ?name ?place WHERE { ?name  <http://dbpedia.org/ontology/location>  ?place. } ORDER BY (?place) } }",
-    "exampleQuestions": [
-      "VB PRP DT NN IN DT O1 IN R1 WP VBD IN DT NN CC WRB ."
-    ]
-  },
-  {
-    "questionStartWord": ["WHAT"], 
-    "containsSuperlative": false,
-    "resourceAmount": 1,
-    "ontologyAmount": 2,
-    "sparqlParams": ["O1", "O2", "R1"],
-    "sparqlTemplate": "SELECT DISTINCT ?quote ?place WHERE { ?R1 <http://dbpedia.org/property/slogan> ?quote . { SELECT DISTINCT ?quote ?place WHERE { ?R1 ?O1 ?place. } } }",
-    "exampleQuestions": [
-      "WP VBZ DT NN IN R1 CC WRB VBZ DT O1 O2 ."
-    ]
-  },
-  {
-    "questionStartWord": ["WHAT"], 
-    "containsSuperlative": false,
-    "resourceAmount": 1,
-    "ontologyAmount": 1,
-    "sparqlParams": ["O1", "R1"],
-    "sparqlTemplate": "SELECT DISTINCT ?name WHERE { ?R1 ?O1 ?name. }",
-    "exampleQuestions": [
-      "WP VBZ DT O1 IN R1 ."
-    ]
-  },
-  {
-    "questionStartWord": ["WHICH"], 
-    "containsSuperlative": false,
-    "resourceAmount": 1,
-    "ontologyAmount": 0,
-    "sparqlParams": ["R1"],
-    "sparqlTemplate": "SELECT DISTINCT ?name WHERE {  ?R1 <http://dbpedia.org/property/programmingLanguage> ?name. }",
-    "exampleQuestions": [
-      "WDT NN NNS VBP VBN IN R1 ."
-    ]
-  },
-  {
-    "questionStartWord": ["WHO"], 
-    "containsSuperlative": false,
-    "resourceAmount": 0,
-    "ontologyAmount": 0,
-    "sparqlParams": [],
-    "sparqlTemplate": "SELECT DISTINCT ?designation ?name WHERE { ?name ?designation <http://aksw.org/notInWiki/JoeBielawski>. { SELECT DISTINCT ?designation ?name WHERE { ?name  ?designation <http://aksw.org/notInWiki/JoeBielawski>. } } }",
-    "exampleQuestions": [
-      "WP VBZ NNP NNP ."
-    ]
-  },
-  {
-    "questionStartWord": ["GIVE"], 
-    "containsSuperlative": false,
-    "resourceAmount": 1,
-    "ontologyAmount": 1,
-    "sparqlParams": ["O1", "R1"],
-    "sparqlTemplate": "SELECT DISTINCT ?name WHERE { ?R1 ?O1 ?name . ORDER BY DESC(?name) }",
-    "exampleQuestions": [
-      "VB DT NNS IN O1 IN R1 ."
-    ]
-  },
-  {
-    "questionStartWord": ["GIVE"], 
-    "containsSuperlative": false,
-    "resourceAmount": 1,
-    "ontologyAmount": 1,
-    "sparqlParams": ["O1", "R1"],
-    "sparqlTemplate": "SELECT DISTINCT ?networth WHERE { ?R1 ?O1 ?networth. }",
-    "exampleQuestions": [
-      "VB DT O1 IN R1 ."
-    ]
-  },
-  {
-    "questionStartWord": ["WHAT"], 
-    "containsSuperlative": false,
-    "resourceAmount": 1,
-    "ontologyAmount": 2,
-    "sparqlParams": ["O1", "O2", "R1"],
-    "sparqlTemplate": "SELECT DISTINCT ?name WHERE { ?name ?O2 ?CD NN ; <http://dbpedia.org/ontology/country> ?R1 . }",
-    "exampleQuestions": [
-      "WP VBZ DT O1 IN DT R1 IN DT O2 IN CD NN ."
-    ]
-  },
-  {
-    "questionStartWord": ["WHAT"], 
-    "containsSuperlative": false,
-    "resourceAmount": 1,
-    "ontologyAmount": 2,
-    "sparqlParams": ["O1", "O2", "R1"],
-    "sparqlTemplate": "SELECT DISTINCT ??name ?company WHERE { ?R1 ?O2 ?name . { SELECT DISTINCT ?name ?company WHERE {?R1 ?O1 ?company. } } }",
-    "exampleQuestions": [
-      "WDT O1 IN O2 VBZ DT R1 ."
-    ]
-  },
-  {
-    "questionStartWord": ["IS"], 
-    "containsSuperlative": false,
-    "resourceAmount": 2,
-    "ontologyAmount": 0,
-    "sparqlParams": ["R1", "R2"],
-    "sparqlTemplate": "ASK WHERE { ?R1 <http://dbpedia.org/ontology/industry> ?R2 . }",
-    "exampleQuestions": [
-      "VBZ R1 DT R2 ."
-    ]
-  },
-  {
-    "questionStartWord": ["WHO"], 
-    "containsSuperlative": false,
-    "resourceAmount": 0,
-    "ontologyAmount": 2,
-    "sparqlParams": ["R1"],
-    "sparqlTemplate": "SELECT DISTINCT ?name ?background WHERE { <http://aksw.org/notInWiki/Styx> ?O1 ?name . { SELECT DISTINCT ?name ?background WHERE { ?name ?O2 ?background. } ORDER BY(?background) } }",
-    "exampleQuestions": [
-      "WP VBD DT O1 IN NNP CC WP VBD PRP$ O2 ."
-    ]
-  },
-  {
-    "questionStartWord": ["WHO"], 
-    "containsSuperlative": false,
-    "resourceAmount": 0,
-    "ontologyAmount": 1,
-    "sparqlParams": ["O1"],
-    "sparqlTemplate": "SELECT DISTINCT ?name WHERE { ?name ?O1 <http://aksw.org/notInWiki/John_Colaneri> . }",
-    "exampleQuestions": [
-      "WP VBZ DT O1 IN NNP NNP ."
-    ]
-  },
-  {
-    "questionStartWord": ["WHO"], 
-    "containsSuperlative": false, 
-    "resourceAmount": 1,
-    "ontologyAmount": 0,
-    "sparqlParams": ["R1"],
-    "sparqlTemplate": "SELECT DISTINCT ?name WHERE { ?name <http://dbpedia.org/ontology/almaMater> ?R1 . FILTER regex(str(?name), "judge") }",
-    "exampleQuestions": [
-      "WP IN DT R1 VBZ DT NNP NN ."
-    ]
-  },
-  {
-    "questionStartWord": ["WHEN"], 
-    "containsSuperlative": false,
-    "resourceAmount": 1,
-    "ontologyAmount": 0,
-    "sparqlParams": ["O1"],
-    "sparqlTemplate": "SELECT DISTINCT ?year ?name WHERE { ?R1 <http://dbpedia.org/property/established> ?year . { SELECT DISTINCT ?year ?name WHERE { ?R1 <http://dbpedia.org/property/founder> ?name. } } } ",
-    "exampleQuestions": [
-      "WRB VBD R1 VBD CC WP VBD DT NN IN PRP ."
-    ]
-  },
-  {
-    "questionStartWord": ["WHO"], 
-    "containsSuperlative": false,
-    "resourceAmount": 1,
-    "ontologyAmount": 2,
-    "sparqlParams": ["O1", "O2", "R1"],
-    "sparqlTemplate": "SELECT DISTINCT ?spouseName ?childName WHERE { ?R1 ?O1 ?spouseName . SELECT DISTINCT ?spouseName ?childName WHERE { ?childName ?O2 ?R1, ?spouseName. } ORDER BY(?childName) } }",
-    "exampleQuestions": [
-      "WP VBZ DT O1 IN R1 CC WP VBZ PRP$ O2 ."
-    ]
-  },
-  {
-    "questionStartWord": ["HOW"], 
-    "containsSuperlative": false,
-    "resourceAmount": 3,
-    "ontologyAmount": 0,
-    "sparqlParams": ["R1", "R2", "R3"],
-    "sparqlTemplate": "SELECT DISTINCT ?relation  WHERE { ?R2 ?relation ?R1 . ?R3 ?relation ?R1 .}",
-    "exampleQuestions": [
-      "WRB VBZ R1 JJ TO R2 CC R3 ."
-    ]
-  },
-  {
-    "questionStartWord": ["LIST"], 
-    "containsSuperlative": true,
-    "resourceAmount": 1,
-    "ontologyAmount": 1,
-    "sparqlParams": ["O1", "R1"],
-    "sparqlTemplate": "SELECT DISTINCT ?award WHERE { ?R1 ?O1 ?award . ?award ?O1 ?highest. } ORDER BY (?highest)",
-    "exampleQuestions": [
-      "VB PDT DT O1 VBN TO R1 IN DT JJS VBG IN NN ."
-    ]
-  },
-  {
-    "questionStartWord": ["HOW"], 
-    "containsSuperlative": false,
-    "resourceAmount": 1,
-    "ontologyAmount": 0,
-    "sparqlParams": ["R1"],
-    "sparqlTemplate": "SELECT DISTINCT ?cause WHERE { ?R1 <http://dbpedia.org/property/deathCause> ?cause . }",
-    "exampleQuestions": [
+      "WRB VBD DT R1 .",
       "WRB VBD R1 VB ."
     ]
   },
   {
-    "questionStartWord": ["IN"], 
+    "questionStartWord": ["IN", "HOW", "WHO", "WHICH", "WHAT", "WHERE"],
     "containsSuperlative": false,
     "resourceAmount": 1,
     "ontologyAmount": 1,
     "sparqlParams": ["O1", "R1"],
-    "sparqlTemplate": "ASK WHERE {  ?R1 ?O1 ?name. ?R1 <http://dbpedia.org/ontology/foundedBy> ?name. }",
+    "sparqlTemplate": "SELECT DISTINCT ?x WHERE { ?R1 ?O1 ?x . }",
     "exampleQuestions": [
-      "VBZ DT O1 CC DT NN IN DT R1 DT JJ ."
+      "WRB O1 VBZ DT R1 .",
+      "WP O1 R1 .",
+      "WDT O1 VBZ DT R1 NN IN .",
+      "WDT O1 VBD R1 VBP .",
+      "WP VBZ DT O1 IN DT R1 .",
+      "WP VBD O1 TO R1 .",
+      "WRB O1 VBZ R1 .",
+      "WDT O1 NNS R1 .",
+      "WP VBD DT R1 IN O1 .",
+      "WRB JJ VBD R1 O1 .",
+      "IN WDT NN VBZ DT R1 O1 .",
+      "WP VBD R1 O1 ."
     ]
   },
   {
-    "questionStartWord": ["WHO"], 
-    "containsSuperlative": false,
-    "resourceAmount": 1,
-    "ontologyAmount": 2,
-    "sparqlParams": ["O1", "O2", "R1"],
-    "sparqlTemplate": "SELECT DISTINCT ?name ?place WHERE {  ?name ?O1 ?R1 . { SELECT DISTINCT ?name ?place WHERE { ?name ?O2 ?place. } ORDER BY (?place) } }",
-    "exampleQuestions": [
-      "WP VBZ DT O1 IN R1 CC TO WDT O2 VBZ PRP VB TO ."
-    ]
-  },
-  {
-    "questionStartWord": ["WHAT"], 
-    "containsSuperlative": false,
-    "resourceAmount": 1,
-    "ontologyAmount": 0,
-    "sparqlParams": ["R1"],
-    "sparqlTemplate": "SELECT DISTINCT ?name  WHERE { ?R1 <http://xmlns.com/foaf/spec/#term_nick> ?name . }",
-    "exampleQuestions": [
-      "WP VBP DT NNS IN R1 ."
-    ]
-  },
-  {
-    "questionStartWord": ["WHAT"], 
-    "containsSuperlative": false,
-    "resourceAmount": 1,
-    "ontologyAmount": 0,
-    "sparqlParams": ["R1"],
-    "sparqlTemplate": "SELECT DISTINCT ?score WHERE { ?R1 <http://dbpedia.org/property/topScore> ?score . } ORDER BY DESC (?score) OFFSET 0 LIMIT 1",
-    "exampleQuestions": [
-      "WP VBZ DT JJ NN VBN IN R1 ."
-    ]
-  },
-  {
-    "questionStartWord": ["WHO"], 
+    "questionStartWord": ["WHERE", "WHO"],
     "containsSuperlative": false,
     "resourceAmount": 1,
     "ontologyAmount": 1,
     "sparqlParams": ["O1", "R1"],
-    "sparqlTemplate": "SELECT DISTINCT ?name ?team WHERE {  ?name ?O1 ?R1 . { SELECT DISTINCT ?name ?team WHERE { ?name <http://dbpedia.org/property/currentTeam> ?team. } ORDER BY (?team) } }",
+    "sparqlTemplate": "SELECT DISTINCT ?x WHERE { ?x ?O1 ?R1 . }",
     "exampleQuestions": [
-      "WP VBZ DT O1 IN R1 CC TO WDT JJ NN PRP VBZ VBN DT NN ."
+      "WRB VBZ O1 R1 .",
+      "WP O1 R1 ."
     ]
   },
   {
-    "questionStartWord": ["GIVE"], 
-    "containsSuperlative": false,
-    "resourceAmount": 1,
-    "ontologyAmount": 2,
-    "sparqlParams": ["O1", "O2", "R1"],
-    "sparqlTemplate": "SELECT DISTINCT ?name ?developer WHERE { ?name ?O1 ?R1 . { SELECT DISTINCT ?name ?developer WHERE { ?name ?O2 ?developer. } ORDER BY DESC(?developer) } }",
-    "exampleQuestions": [
-      "VB DT O1 IN R1 CC PRP$ O2 ."
-    ]
-  },
-  {
-    "questionStartWord": ["WHAT"], 
-    "containsSuperlative": false,
-    "resourceAmount": 1,
-    "ontologyAmount": 0,
-    "sparqlParams": ["R1"],
-    "sparqlTemplate": "SELECT DISTINCT ?rank WHERE { ?R1 <http://dbpedia.org/property/currentsinglesranking> ?rank . }",
-    "exampleQuestions": [
-      "WP VBZ DT JJ NNS NN IN R1 ."
-    ]
-  },
-  {
-    "questionStartWord": ["WHAT"], 
-    "containsSuperlative": false,
-    "resourceAmount": 1,
-    "ontologyAmount": 0,
-    "sparqlParams": ["R1"],
-    "sparqlTemplate": "SELECT DISTINCT ?type ?language WHERE { ?R1 <http://dbpedia.org/ontology/type> ?type . { SELECT DISTINCT ?type ?language WHERE { ?R1 <http://dbpedia.org/property/language> ?language. } } }",
-    "exampleQuestions": [
-      "WP VBZ R1 CC IN WDT NN VBZ PRP ."
-    ]
-  },
-  {
-    "questionStartWord": ["WHO"], 
-    "containsSuperlative": false,
-    "resourceAmount": 1,
-    "ontologyAmount": 0,
-    "sparqlParams": ["R1"],
-    "sparqlTemplate": "SELECT DISTINCT ?name WHERE { ?name <http://dbpedia.org/ontology/nationality> ?R1 . }",
-    "exampleQuestions": [
-      "WP VBD VBN NN IN R1 ."
-    ]
-  },
-  {
-    "questionStartWord": ["WHO"], 
-    "containsSuperlative": false,
-    "resourceAmount": 1,
-    "ontologyAmount": 1,
-    "sparqlParams": ["O1", "R1"],
-    "sparqlTemplate": "SELECT DISTINCT  ?name  ?place WHERE { ?R1 <http://dbpedia.org/property/stateHead> ?name . { SELECT DISTINCT ?name ?place WHERE { ?name ?O1 ?place. } ORDER BY(?place) } }",
-    "exampleQuestions": [
-      "WP VBZ DT NN NN IN R1 CC WDT O1 VBZ PRP VB TO ."
-    ]
-  },
-  {
-    "questionStartWord": ["WHICH"], 
-    "containsSuperlative": false,
+    "questionStartWord": ["WHAT"],
+    "containsSuperlative": true,
     "resourceAmount": 0,
     "ontologyAmount": 1,
     "sparqlParams": ["O1"],
-    "sparqlTemplate": "SELECT DISTINCT ?name  ?format WHERE { ?name <http://dbpedia.org/property/type> "Weekly newspaper" . { SELECT DISTINCT ?name ?format WHERE { ?name ?O1 ?format. } ORDER BY(?format) } }",
+    "sparqlTemplate": "SELECT DISTINCT ?x WHERE { ?x a ?O1 . ?x <http://dbpedia.org/ontology/areaTotal> ?n . } ORDER BY DESC(?n) OFFSET 0 LIMIT 1",
     "exampleQuestions": [
-      "WDT VBZ DT JJ NN CC VB PRP$ O1 ."
+      "WP VBZ DT JJS O1 IN DT NN ."
     ]
   },
   {
-    "questionStartWord": ["LIST"], 
+    "questionStartWord": ["IS"],
     "containsSuperlative": false,
     "resourceAmount": 1,
-    "ontologyAmount": 0,
-    "sparqlParams": ["R1"],
-    "sparqlTemplate": "SELECT DISTINCT ?name WHERE { ?name <http://dbpedia.org/ontology/location> ?R1 . FILTER regex(str(?name), "watchmaker") } ORDER BY DESC(?name) LIMIT 3",
+    "ontologyAmount": 1,
+    "sparqlParams": ["O1", "R1"],
+    "sparqlTemplate": "ASK WHERE { ?R1 ?O1 ?y . }",
     "exampleQuestions": [
-      "VB PDT DT NN NNS IN R1 ."
+      "VBZ R1 O1 ."
     ]
   },
   {
-    "questionStartWord": ["WHO"], 45
+    "questionStartWord": ["WHO"],
     "containsSuperlative": false,
     "resourceAmount": 1,
     "ontologyAmount": 2,
     "sparqlParams": ["O1", "O2", "R1"],
-    "sparqlTemplate": "SELECT DISTINCT ?name WHERE { ?R1 ?O1 ?name . ?name ?O2 ?R1. }",
+    "sparqlTemplate": "SELECT DISTINCT ?x WHERE { ?R1 ?O2 ?y . ?y ?O1 ?x .}",
     "exampleQuestions": [
-      "WP VBZ DT O1 CC O2 IN R1 ."
+      "WP VBZ DT O1 IN DT O2 IN R1 ."
     ]
   },
   {
-    "questionStartWord": ["GIVE"], 
+    "questionStartWord": ["DO"],
+    "containsSuperlative": false,
+    "resourceAmount": 2,
+    "ontologyAmount": 1,
+    "sparqlParams": ["O1", "R1", "R2"],
+    "sparqlTemplate": "ASK WHERE { ?R1 ?O1 ?x . ?R2 ?O1 ?x . }",
+    "exampleQuestions": [
+      "VB R1 CC R2 VBP DT JJ O1 ."
+    ]
+  },
+  {
+    "questionStartWord": ["LIST", "GIVE"],
+    "containsSuperlative": false,
+    "resourceAmount": 1,
+    "ontologyAmount": 2,
+    "sparqlParams": ["O1", "O2", "R1"],
+    "sparqlTemplate": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?x WHERE { ?x rdf:type ?O1 . ?x ?O2 ?R1 . }",
+    "exampleQuestions": [
+      "VB PDT DT O1 IN O2 IN R1 .",
+      "VB PRP DT O1 NNS O2 IN R1"
+    ]
+  },
+  {
+    "questionStartWord": ["IN"],
+    "containsSuperlative": false,
+    "resourceAmount": 2,
+    "ontologyAmount": 2,
+    "sparqlParams": ["O1", "O2", "R1", "R2"],
+    "sparqlTemplate": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?x WHERE {  ?x rdf:type ?O1 .  ?x ?O2 ?R1 .  ?x ?O2 ?R2 . }",
+    "exampleQuestions": [
+      "IN WDT O1 VBD R1 RB RB IN R2 O2 ."
+    ]
+  },
+  {
+    "questionStartWord": ["How"],
+    "containsSuperlative": false,
+    "resourceAmount": 1,
+    "ontologyAmount": 1,
+    "sparqlParams": ["O1", "R1"],
+    "sparqlTemplate": "SELECT (COUNT(DISTINCT ?y) as ?x) WHERE {  ?R1 ?O1 ?y . }",
+    "exampleQuestions": [
+      "WRB RB VBD R1 O1 ."
+    ]
+  },
+  {
+    "questionStartWord": ["IS"],
+    "containsSuperlative": false,
+    "resourceAmount": 2,
+    "ontologyAmount": 1,
+    "sparqlParams": ["O1", "R1", "R2"],
+    "sparqlTemplate": "ASK WHERE { ?R2 ?O1 ?R1 . }",
+    "exampleQuestions": [
+      "VBZ R1 O1 IN R2 .",
+      "VBZ R1 DT O1 IN R2 ."
+    ]
+  },
+  {
+    "questionStartWord": ["WHAT"],
+    "containsSuperlative": true,
+    "resourceAmount": 1,
+    "ontologyAmount": 2,
+    "sparqlParams": ["O1", "O2", "R1"],
+    "sparqlTemplate": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> PREFIX dbo: <http://dbpedia.org/ontology/> SELECT DISTINCT ?x WHERE { ?x rdf:type ?O2 . ?x dbo:locatedInArea ?R1 . ?x ?O1 ?y . } ORDER BY DESC(?y) LIMIT 1",
+    "exampleQuestions": [
+      "WP VBZ DT O1 O2 IN R1 ."
+    ]
+  },
+  {
+    "questionStartWord": ["GIVE"],
+    "containsSuperlative": false,
+    "resourceAmount": 1,
+    "ontologyAmount": 2,
+    "sparqlParams": ["O1", "O2", "R1"],
+    "sparqlTemplate": "SELECT DISTINCT ?x WHERE {  ?y ?O2 ?R1 .  ?y ?O1 ?x . }",
+    "exampleQuestions": [
+      "VB DT O1 IN O2 IN R1."
+    ]
+  },
+  {
+    "questionStartWord": ["HOW"],
+    "containsSuperlative": false,
+    "resourceAmount": 1,
+    "ontologyAmount": 2,
+    "sparqlParams": ["O1", "O2", "R1"],
+    "sparqlTemplate": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT (COUNT(DISTINCT ?y) as ?x) WHERE { ?y rdf:ype ?O1 .  ?y ?O2 ?z . ?R1 ?O2 ?z . }",
+    "exampleQuestions": [
+      "WRB JJ O1 VBD O2 IN DT JJ NN IN R1 ."
+    ]
+  },
+  {
+    "questionStartWord": ["Was"],
     "containsSuperlative": false,
     "resourceAmount": 2,
     "ontologyAmount": 0,
     "sparqlParams": ["R1", "R2"],
-    "sparqlTemplate": "SELECT DISTINCT ?name WHERE { ?R1 dbo:foundedBy ?name . ?R2 dbo:foundedBy ?name. }",
+    "sparqlTemplate": "PREFIX dbo: <http://dbpedia.org/ontology/> ASK WHERE { ?R1 dbo:date ?x . ?R2 dbo:date ?y . FILTER (?x < ?y) }",
     "exampleQuestions": [
-      "VB DT NN IN R1 CC R2 ."
+      "VBD DT R1 JJR IN DT R2 ."
     ]
   },
   {
-    "questionStartWord": ["WHAT"], 
+    "questionStartWord": ["WHICH"],
+    "containsSuperlative": false,
+    "resourceAmount": 2,
+    "ontologyAmount": 3,
+    "sparqlParams": ["O1", "O2", "O3", "R1", "R2"],
+    "sparqlTemplate": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?x WHERE { ?x rdf:type ?O1 . ?x ?O2 ?R1 . ?x ?O3 ?R2 . }",
+    "exampleQuestions": [
+      "WDT O1 O2 R1 VBD O3 IN R3 ."
+    ]
+  },
+  {
+    "questionStartWord": ["DOES"],
+    "containsSuperlative": false,
+    "resourceAmount": 1,
+    "ontologyAmount": 2,
+    "sparqlParams": ["O1", "O2", "R1"],
+    "sparqlTemplate": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> ASK WHERE { ?x ?O1 ?R1 . ?x rdf:type ?O2 . }",
+    "exampleQuestions": [
+      "VBZ DT R1 O1 IN DT O2 ."
+    ]
+  },
+  {
+    "questionStartWord": ["DID"],
     "containsSuperlative": false,
     "resourceAmount": 1,
     "ontologyAmount": 1,
     "sparqlParams": ["O1", "R1"],
-    "sparqlTemplate": "SELECT DISTINCT ?name WHERE { ?R1 ?O1 ?name . } ORDER BY ASC (?name)",
+    "sparqlTemplate": "ASK WHERE { ?R1 ?O1 ?x . }",
     "exampleQuestions": [
-      "WP VBZ R1 O1 ."
+      "VBD R1 VBP NNS ."
     ]
   },
   {
-    "questionStartWord": ["IS"], 
-    "containsSuperlative": false,
-    "resourceAmount": 0,
-    "ontologyAmount": 0,
-    "sparqlParams": [],
-    "sparqlTemplate": "SELECT DISTINCT ?name ?place WHERE { ?name <http://dbpedia.org/ontology/orderInOffice> "JJ NN IN DT NNP NNPS" . { SELECT DISTINCT ?name ?place WHERE { ?name <http://dbpedia.org/ontology/birthPlace> ?place. } ORDER BY(?place) } }",
-    "exampleQuestions": [
-      "WP VBD VBN IN IN DT JJ NN IN DT NNP NNPS CC WRB VBD PRP VBN ."
-    ]
-  },
- 
-    "questionStartWord": ["GIVE"], 
+    "questionStartWord": ["WHICH"],
     "containsSuperlative": false,
     "resourceAmount": 1,
-    "ontologyAmount": 1,
-    "sparqlParams": ["O1", "R1"],
-    "sparqlTemplate": "SELECT DISTINCT ?team WHERE { ?R1 ?O1 ?team . } ORDER BY ASC(?team) LIMIT 3",
+    "ontologyAmount": 2,
+    "sparqlParams": ["O1", "O2", "R1"],
+    "sparqlTemplate": "SELECT DISTINCT ?x WHERE { ?R1 ?O2 ?y . ?y ?O1 ?x . }",
     "exampleQuestions": [
-      "VB DT NN IN O1 WRB R1 VBD ."
-    ]
-  },
-  {
-    "questionStartWord": ["WHO"], 
-    "containsSuperlative": false,
-    "resourceAmount": 1,
-    "ontologyAmount": 0,
-    "sparqlParams": ["R1"],
-    "sparqlTemplate": "SELECT DISTINCT ?name WHERE { ?name <http://dbpedia.org/ontology/location> ?R1 . }",
-    "exampleQuestions": [
-      "WP VBD IN R1 ."
+      "WDT O1 VBD R1 O2 IN ."
     ]
   }
 ]
