@@ -15,15 +15,15 @@
 <http://dbpedia.org/ontology/birthDate>  <http://www.w3.org/2000/01/rdf-schema#label>  "birth date".										  
 <http://dbpedia.org/resource/Andrew_Morton_(computer_programmer)>  <http://www.w3.org/2000/01/rdf-schema#label>  "Andrew Morton (computer programmer)";
   <http://dbpedia.org/ontology/employer>  <http://dbpedia.org/resource/Google>;
-  <http://dbpedia.org/ontology/birthDate>  "1959-07-15".
+  <http://dbpedia.org/ontology/birthDate>  "1959-07-15"^^xsd:date.
   
-<http://dbpedia.org/resource/Tim_Bray>  <http://www.w3.org/2000/01/rdf-schema#label>  "Tim Bray";
+<http://dbpedia.org/resource/Tim_Bray>  <http://www.w3.org/2000/01/rdf-schema#label>  "Tim Bray"; 	
 <http://dbpedia.org/ontology/employer>  <http://dbpedia.org/resource/Google>;
-  <http://dbpedia.org/ontology/birthDate>  "1955-01-01".
+  <http://dbpedia.org/ontology/birthDate>  "1955-06-21"^^xsd:date.
   
 <http://dbpedia.org/resource/Richard_Gingras>  <http://www.w3.org/2000/01/rdf-schema#label>  "Richard Gingras";
 <http://dbpedia.org/ontology/employer>  <http://dbpedia.org/resource/Google>;
-  <http://dbpedia.org/ontology/birthDate>  "1952-01-17".
+  <http://dbpedia.org/ontology/birthDate>  "1952-01-17"^^xsd:date. 
  
 
 <http://dbpedia.org/ontology/ceo>  <http://www.w3.org/2000/01/rdf-schema#label>  "chief executive officer", "ceo".
@@ -73,6 +73,7 @@
 <http://dbpedia.org/resource/Wellesley_College>  <http://www.w3.org/2000/01/rdf-schema#label>  "Wellesley College";
                                                  <http://dbpedia.org/ontology/location> <http://dbpedia.org/resource/Boston> .
 
+<http://dbpedia.org/resource/Mother_Warriors> <http://www.w3.org/2000/01/rdf-schema#label> "Mother Warriors".
 <http://dbpedia.org/ontology/author>  <http://www.w3.org/2000/01/rdf-schema#label>  "author".												 
 <http://dbpedia.org/resource/Jenny_McCarthy>  <http://www.w3.org/2000/01/rdf-schema#label>  "Jenny McCarthy";
                                               <http://dbpedia.org/ontology/author>  <http://dbpedia.org/resource/Mother_Warriors>.
@@ -140,7 +141,6 @@
 										   <http://dbpedia.org/resource/Ringo_Starr>, <http://dbpedia.org/resource/Paul_McCartney>.
 
 										   
-<http://dbpedia.org/ontology/wikiPageRedirects>  <http://www.w3.org/2000/01/rdf-schema#label>  "Wikipage redirect".
 <http://dbpedia.org/resource/Asia>  <http://www.w3.org/2000/01/rdf-schema#label>  "Asia".
 <http://dbpedia.org/resource/Japan>  <http://www.w3.org/2000/01/rdf-schema#label>  "Japan";
   <http://dbpedia.org/ontology/country> <http://dbpedia.org/resource/Asia> ;
@@ -280,7 +280,6 @@
   <http://dbpedia.org/ontology/spouse> <http://dbpedia.org/resource/Victoria_Beckham> .
   
   
-<http://dbpedia.org/ontology/genre> <http://www.w3.org/2000/01/rdf-schema#label> "genre".
 <http://dbpedia.org/resource/Dance_music> <http://www.w3.org/2000/01/rdf-schema#label> "Dance music".
 <http://dbpedia.org/resource/Pop_music> <http://www.w3.org/2000/01/rdf-schema#label> "Pop music".
 <http://dbpedia.org/resource/Rhythm_and_blues> <http://www.w3.org/2000/01/rdf-schema#label> "Rhythm and blues".
@@ -655,7 +654,7 @@
   <http://dbpedia.org/ontology/location> <http://dbpedia.org/resource/Hawaii> .
   
 
-<http://dbpedia.org/resource/Israel>  <http://www.w3.org/2000/01/rdf-schema#label>  "Israel ".  
+<http://dbpedia.org/resource/Israel>  <http://www.w3.org/2000/01/rdf-schema#label>  "Israel".  
 <http://dbpedia.org/resource/Mike_Pence>  <http://www.w3.org/2000/01/rdf-schema#label>  "Mike Pence";
   <http://dbpedia.org/ontology/country> <http://dbpedia.org/resource/Israel> ;
   <http://dbpedia.org/ontology/location> <http://dbpedia.org/resource/Israel> .
