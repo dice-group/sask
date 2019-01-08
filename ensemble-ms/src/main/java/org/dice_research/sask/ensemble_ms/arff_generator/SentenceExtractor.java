@@ -45,8 +45,6 @@ public class SentenceExtractor {
 	private static File[] files = path.listFiles();
 	static List<String> sentences = new ArrayList<String>();
 //	private static File file2 = new File("TrainingData\\traindata2.arff");
-
-
 	private static String sentence_data;
 	static String fox_response_string = null;
 	static String sorokin_response_string = null;
@@ -84,7 +82,7 @@ public class SentenceExtractor {
 			
 			se.sentence_Extracion(i);
 			System.out.println("Extracted sentence From the file " + files[i].getName());
-//			System.out.println(sentences.get(i));
+			System.out.println(sentences.get(i));
 			System.out.println("Fox extractor response for file" + files[i].getName());
 //			System.out.println(fox_response_string);
 			System.out.println("Sorokin extractor response for file " + files[i].getName());
@@ -101,14 +99,13 @@ public class SentenceExtractor {
 			double sc_openIE = se.openIE_response_Mathing();
 			double sc_sorokin = se.sorokin_response_Matching();
 			 int max = se.findMaxscore(sc_fox,sc_openIE,sc_sorokin);
-			
-		
 //			 String str1=squery_Result.replace("[\r\n]+", ".");
 			 String str1 = squery_Result;
 			 
 			 System.out.println(str1);	
 			 String sentence = sentences.get(i);
-			 sentence = sentence.replace(",","."); 
+			 sentence = sentence.replace(","," "); 
+			 sentence = sentence.replace("'"," " );
 			 fox_response_string = fox_response_string.replace(",","."); 
 			 sorokin_response_string = sorokin_response_string.replace(",",".");
 			 openIE_response_string = openIE_response_string.replace(",",".");
@@ -120,9 +117,10 @@ public class SentenceExtractor {
 //					+ " ' " + cedric_response_string + " ' " + "," + " ' " + str1 + " ' ";
 
 			System.out.println("------");
-			String training_data = sentence + " ,  " +   fox_response_string  + " , " 
-			+ sorokin_response_string + "," + openIE_response_string + "," + squery_Result + "," + max + "," + sc_fox + ","
-					+ sc_openIE + "," + sc_sorokin;
+//			String training_data = sentence + " ,  " +   fox_response_string  + " , " 
+//			+ sorokin_response_string + "," + openIE_response_string + "," + squery_Result + "," + max + "," + sc_fox + ","
+//					+ sc_openIE + "," + sc_sorokin;
+			String training_data = sentence + ","  + max ; 
 			
 			System.out.println(training_data);
 			System.out.println("-------------------------------------------------------------");
@@ -154,19 +152,19 @@ public class SentenceExtractor {
 
 	}
 
- int findMaxscore(double sc_fox, double sc_openIE, double sc_sorokin) {
+public int findMaxscore(double sc_fox, double sc_openIE, double sc_sorokin) {
 		
 		
 		double score[] = new double[3];
 		score[0]  = sc_fox;
-		score[1]  = sc_sorokin;
-		score[2]  = sc_openIE;
+		score[1]  = sc_openIE;
+		score[2]  = sc_sorokin;
 		int max =0;
 		
 		
 		for (int c = 1; c < score.length; c++)
 		{
-		     if (score[c] >score[max])
+		     if (score[c] >= score[max])
 		     {
 		       max = c;
 		     
@@ -174,20 +172,13 @@ public class SentenceExtractor {
 		}
 		System.out.println("fox score : " + sc_fox  + "sorokin response :" + sc_sorokin+ "openIE score :" + sc_openIE);
 		System.out.println("The highest score for the extractor  is: " + score[max]  + " Index "  + max);
-
-		
-		
 		 System.out.println("......................................");
 		 return max;
-		
-		// TODO Auto-generated method stub
+
 		
 	}
 
 	public double sorokin_response_Matching() {
-
-
-
 		int size_sorokin = sub_sorokin.size();
 		int size_oke = sub.size();
 		double score = 0;
@@ -600,7 +591,7 @@ public class SentenceExtractor {
 
 		// List<String> sentences = new ArrayList<String>();
 		try {
-	    FileWriter fw = new FileWriter("TrainingData\\traindata2.csv",true);
+	    FileWriter fw = new FileWriter("TrainingData\\traindata2.arff",true);
 
 
 //			int x = 0;

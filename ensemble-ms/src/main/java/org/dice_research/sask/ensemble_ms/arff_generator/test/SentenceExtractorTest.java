@@ -93,7 +93,50 @@ public class SentenceExtractorTest  {
 		double preicted_score = 66.67;
 		double delta =0;
 		Assert.assertEquals(score, preicted_score, delta);
+ 
 	}
 	
+	@Test
+	public void test_findMaxScore() {
+		
+		
+		SentenceExtractor test_obj = new  SentenceExtractor();
+        double sc_fox, sc_openIE, sc_sorokin;
+        sc_fox = 21;
+       sc_openIE= 13.33;
+       sc_sorokin = 33.33;
+       
+		int  max_index = test_obj.findMaxscore(sc_fox, sc_openIE, sc_sorokin);
+      System.out.println(max_index);
+       Assert.assertEquals(2, max_index);
+
+//      Test2
+       sc_fox =0;
+       sc_openIE= 66.66;
+       sc_sorokin = 33.33;
+
+       int  max_index2 = test_obj.findMaxscore(sc_fox, sc_openIE, sc_sorokin);
+       System.out.println(max_index2);
+       Assert.assertEquals(1, max_index2);
+       
+//     Test3
+      sc_fox =33.33;
+      sc_openIE= 16.66;
+      sc_sorokin = 33.33;
+
+      int  max_index3 = test_obj.findMaxscore(sc_fox, sc_openIE, sc_sorokin);
+      System.out.println(max_index);
+      Assert.assertEquals(2, max_index3);
+       
+ //   Test4
+      sc_fox =33.33;
+      sc_openIE= 16.66;
+      sc_sorokin = 66.66;
+
+      int  max_index4 = test_obj.findMaxscore(sc_fox, sc_openIE, sc_sorokin);
+      System.out.println(max_index);
+      Assert.assertEquals(2, max_index4);
+
+	}
 	
 }
