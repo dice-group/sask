@@ -12,7 +12,7 @@ public class SentenceExtractorTest  {
 
 	
 	@Test
-	public void testFox_response_Matching() {
+	public void testFoxResponseMatching() {
 		SentenceExtractor test_obj = new  SentenceExtractor();
 		test_obj.sub_fox.add("Sundar_Pichai");
 		test_obj.pred_fox.add("ceo");
@@ -23,7 +23,7 @@ public class SentenceExtractorTest  {
 		test_obj.pred.add("workfor");
 		test_obj.obj.add("Google");
 
-		double score = test_obj.fox_response_Matching();
+		double score = test_obj.foxResponseMatching();
 
 		System.out.println(score);
 		double preicted_score = 66.67;
@@ -43,7 +43,7 @@ public class SentenceExtractorTest  {
 		 test_obj.pred.add("located");
 		 test_obj.obj.add("Berlin");
 			double preicted_score2 = 33.33;
-			double actual_score2 =test_obj.sorokin_response_Matching();
+			double actual_score2 =test_obj.sorokinResponseMatching();
 			delta =0;
 			Assert.assertEquals(actual_score2, preicted_score2, delta);
 
@@ -51,7 +51,7 @@ public class SentenceExtractorTest  {
 	}
 	
 	@Test
-	public void testSorokin_response_Matching() {
+	public void testSorokinResponseMatching() {
 		
 		
 		SentenceExtractor test_obj = new  SentenceExtractor();
@@ -64,7 +64,7 @@ public class SentenceExtractorTest  {
 		test_obj.pred.add("workfor");
 		test_obj.obj.add("Google");
 
-		double score = test_obj.sorokin_response_Matching();
+		double score = test_obj.sorokinResponseMatching();
 
 		System.out.println(score);
 		double preicted_score = 66.67;
@@ -74,7 +74,7 @@ public class SentenceExtractorTest  {
 	
 	
 	@Test
-	public void testOpenIE_response_Matching() {
+	public void testOpenIEResponseMatching() {
 		
 		
 		SentenceExtractor test_obj = new  SentenceExtractor();
@@ -87,7 +87,7 @@ public class SentenceExtractorTest  {
 		test_obj.pred.add("workfor");
 		test_obj.obj.add("Google");
 
-		double score = test_obj.openIE_response_Mathing();
+		double score = test_obj.openIEResponseMathing();
 
 		System.out.println(score);
 		double preicted_score = 66.67;
@@ -97,11 +97,13 @@ public class SentenceExtractorTest  {
 	}
 	
 	@Test
-	public void test_findMaxScore() {
+	public void testFindMaxScore() {
 		
 		
 		SentenceExtractor test_obj = new  SentenceExtractor();
-        double sc_fox, sc_openIE, sc_sorokin;
+        double sc_fox;
+        double sc_openIE; 
+        double sc_sorokin;
         sc_fox = 21;
        sc_openIE= 13.33;
        sc_sorokin = 33.33;

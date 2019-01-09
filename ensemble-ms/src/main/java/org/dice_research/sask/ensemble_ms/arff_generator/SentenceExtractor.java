@@ -46,9 +46,9 @@ public class SentenceExtractor {
 	static List<String> sentences = new ArrayList<String>();
 //	private static File file2 = new File("TrainingData\\traindata2.arff");
 	private static String sentence_data;
-	static String fox_response_string = null;
-	static String sorokin_response_string = null;
-	static String openIE_response_string = null;
+	private static String fox_response_string = null;
+	private static String sorokin_response_string = null;
+	private static String openIE_response_string = null;
 	static String cedric_response_string = null;
 	public List<String> sub_fox = new ArrayList<String>();
 	public List<String> obj_fox = new ArrayList<String>();
@@ -80,7 +80,7 @@ public class SentenceExtractor {
 		// System.out.println(files.length);
 		for (int i = 0; i < files.length ;i++) {
 			
-			se.sentence_Extracion(i);
+			se.sentenceExtracion(i);
 			System.out.println("Extracted sentence From the file " + files[i].getName());
 			System.out.println(sentences.get(i));
 			System.out.println("Fox extractor response for file" + files[i].getName());
@@ -95,9 +95,9 @@ public class SentenceExtractor {
 			System.out.println("Gethering Sparql Query Result................................");
 			
 			String squery_Result = se.responseReader(i);
-			double sc_fox = se.fox_response_Matching();
-			double sc_openIE = se.openIE_response_Mathing();
-			double sc_sorokin = se.sorokin_response_Matching();
+			double sc_fox = se.foxResponseMatching();
+			double sc_openIE = se.openIEResponseMathing();
+			double sc_sorokin = se.sorokinResponseMatching();
 			 int max = se.findMaxscore(sc_fox,sc_openIE,sc_sorokin);
 //			 String str1=squery_Result.replace("[\r\n]+", ".");
 			 String str1 = squery_Result;
@@ -178,7 +178,7 @@ public int findMaxscore(double sc_fox, double sc_openIE, double sc_sorokin) {
 		
 	}
 
-	public double sorokin_response_Matching() {
+	public double sorokinResponseMatching() {
 		int size_sorokin = sub_sorokin.size();
 		int size_oke = sub.size();
 		double score = 0;
@@ -259,7 +259,7 @@ public int findMaxscore(double sc_fox, double sc_openIE, double sc_sorokin) {
 	
 	}
 
-	public double openIE_response_Mathing() {
+	public double openIEResponseMathing() {
 
 
 		int size_openIE = sub_openIE.size();
@@ -341,7 +341,7 @@ public int findMaxscore(double sc_fox, double sc_openIE, double sc_sorokin) {
 		
 	}
 
-	public void sentence_Extracion(int i) {
+	public void sentenceExtracion(int i) {
 		if (files[i].isFile()) {
 			String sentence = readLineByLine(files[i].toString());
 			int x = sentence.indexOf("nif:isString   ");
@@ -406,7 +406,7 @@ public int findMaxscore(double sc_fox, double sc_openIE, double sc_sorokin) {
 
 						List<String> fox_response_string_list = new ArrayList<String>();
 						fox_response_string = response.toString();
-						String Filtered_fox_response = fox_response_processing(fox_response_string, i);
+						String Filtered_fox_response = foxResponseProcessing(fox_response_string, i);
 						fox_response_string_list.add(Filtered_fox_response);
 //						System.out.println(Filtered_fox_response);
 					}
@@ -415,14 +415,14 @@ public int findMaxscore(double sc_fox, double sc_openIE, double sc_sorokin) {
 						fredRespMap.put(sentences.get(i), response.toString());
 						List<String> sorokin_response_string_list = new ArrayList<String>();
 						sorokin_response_string = response.toString();
-					    String Filtered_sorokin_response = sorokin_response_processing(sorokin_response_string, i);
+					    String Filtered_sorokin_response = sorokinResponseProcessing(sorokin_response_string, i);
 						sorokin_response_string_list.add(Filtered_sorokin_response);
 					}
 
 					else if (j == 2) {
 						List<String> openIE_response_string_list = new ArrayList<String>();
 						openIE_response_string = response.toString();
-						String Filtered_openIE_response = openIE_response_processing(openIE_response_string, i);
+						String Filtered_openIE_response = openIEResponseProcessing(openIE_response_string, i);
 						openIE_response_string_list.add(Filtered_openIE_response);
 //						System.out.println(Filtered_openIE_response);
 
@@ -453,7 +453,7 @@ public int findMaxscore(double sc_fox, double sc_openIE, double sc_sorokin) {
 
 	}
 
-	public String sorokin_response_processing(String sorokin_response_string2, int i) throws IOException  {
+	public String sorokinResponseProcessing(String sorokin_response_string2, int i) throws IOException  {
 		// create new file for for extractors response
 		String filename = "ExtractorResponse//sorokinResponse//" + "sorokin" + i + ".ttl";
 		File file = new File(filename);
@@ -627,7 +627,7 @@ public int findMaxscore(double sc_fox, double sc_openIE, double sc_sorokin) {
 
 	}
 
-	public String fox_response_processing(String fox_response_string, int i) throws IOException {
+	public String foxResponseProcessing(String fox_response_string, int i) throws IOException {
 		// create new file for for extractors response
 		String filename = "ExtractorResponse//FoxResponse//" + "Fox_" + i + ".ttl";
 		File file = new File(filename);
@@ -686,7 +686,7 @@ public int findMaxscore(double sc_fox, double sc_openIE, double sc_sorokin) {
 
 	}
 
-	public String openIE_response_processing(String openIE_response_string, int i) throws IOException {
+	public String openIEResponseProcessing(String openIE_response_string, int i) throws IOException {
 		// create new file for for extractors response
 		String filename = "ExtractorResponse//openIEResponse//" + "openIE_" + i + ".ttl";
 		File file = new File(filename);
@@ -743,7 +743,7 @@ public int findMaxscore(double sc_fox, double sc_openIE, double sc_sorokin) {
 
 	}
 
-	public double fox_response_Matching() {
+	public double foxResponseMatching() {
 
 		int size_fox = pred_fox.size();
 		int size_oke = pred.size();
