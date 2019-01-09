@@ -1,0 +1,1 @@
+@prefix :      <http://example.org/> .@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .:Camila  :be             :bear ;        <http://example.org/be%20bear%20in>                :Cuba ;        :live            :move , <http://example.org/move%20to%20United%20States> ;        <http://example.org/live%20in>  <http://example.org/capital%20of%20Havana> , :capital .

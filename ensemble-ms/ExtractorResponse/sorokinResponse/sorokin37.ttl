@@ -1,0 +1,1 @@
+<http://example.org/United%20States> <http://example.org/ALL_ZERO> <http://example.org/President> .<http://example.org/Donald%20J.%20Trump> <http://example.org/position%20held> <http://example.org/President> .<http://example.org/Donald%20J.%20Trump> <http://example.org/country%20of%20citizenship> <http://example.org/United%20States> .

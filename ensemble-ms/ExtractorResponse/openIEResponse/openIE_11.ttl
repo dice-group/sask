@@ -1,0 +1,1 @@
+@prefix :      <http://example.org/> .@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .<http://example.org/Ajay%20Devgn>        :be                   :spot ;        <http://example.org/be%20spot%20outside>                :theatre , <http://example.org/theatre%20here> .

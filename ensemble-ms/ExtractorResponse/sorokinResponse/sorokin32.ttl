@@ -1,0 +1,1 @@
+<http://example.org/conservative%20leader> <http://example.org/ALL_ZERO> <http://example.org/president> .<http://example.org/Serbias> <http://example.org/position%20held> <http://example.org/president> .<http://example.org/Serbias> <http://example.org/member%20of%20political%20party> <http://example.org/conservative%20leader> .

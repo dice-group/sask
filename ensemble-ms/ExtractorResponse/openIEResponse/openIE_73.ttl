@@ -1,0 +1,1 @@
+@prefix :      <http://example.org/> .@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .<http://example.org/campaign%20event>        <http://example.org/be%20in>  :Washington .<http://example.org/President%20Barack%20Obama>        :be              :bear ;        <http://example.org/be%20bear%20in>                <http://example.org/United%20States> .

@@ -1,0 +1,1 @@
+@prefix :      <http://example.org/> .@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .:Serbia  :grant  <http://example.org/citizenship%20to%20actor%20Ralph%20Fiennes> , :citizenship .
