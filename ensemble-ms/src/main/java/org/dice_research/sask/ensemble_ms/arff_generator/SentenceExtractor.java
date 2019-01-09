@@ -43,13 +43,13 @@ import org.apache.log4j.BasicConfigurator;
 public class SentenceExtractor {
 	private static File path = new File("oke data");
 	private static File[] files = path.listFiles();
-	static List<String> sentences = new ArrayList<String>();
+	private static List<String> sentences = new ArrayList<String>();
 //	private static File file2 = new File("TrainingData\\traindata2.arff");
 	private static String sentence_data;
 	private static String fox_response_string = null;
 	private static String sorokin_response_string = null;
 	private static String openIE_response_string = null;
-	static String cedric_response_string = null;
+	private static String cedric_response_string = null;
 	public List<String> sub_fox = new ArrayList<String>();
 	public List<String> obj_fox = new ArrayList<String>();
 	public List<String> pred_fox = new ArrayList<String>();
@@ -78,7 +78,7 @@ public class SentenceExtractor {
 		});
 		// number of ttl files
 		// System.out.println(files.length);
-		for (int i = 0; i < files.length ;i++) {
+		for (int i = 0; i < 5 ;i++) {
 			
 			se.sentenceExtracion(i);
 			System.out.println("Extracted sentence From the file " + files[i].getName());
