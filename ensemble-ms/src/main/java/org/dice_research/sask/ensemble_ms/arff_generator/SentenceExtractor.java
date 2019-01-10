@@ -78,7 +78,7 @@ public class SentenceExtractor {
 		});
 		// number of ttl files
 		// System.out.println(files.length);
-		for (int i = 0; i < 5 ;i++) {
+		for (int i = 0; i < files.length ;i++) {
 			
 			se.sentenceExtracion(i);
 			System.out.println("Extracted sentence From the file " + files[i].getName());
@@ -106,6 +106,7 @@ public class SentenceExtractor {
 			 String sentence = sentences.get(i);
 			 sentence = sentence.replace(","," "); 
 			 sentence = sentence.replace("'"," " );
+//			 sentence = sentence.replace("\"\" ," " );
 			 fox_response_string = fox_response_string.replace(",","."); 
 			 sorokin_response_string = sorokin_response_string.replace(",",".");
 			 openIE_response_string = openIE_response_string.replace(",",".");
@@ -120,7 +121,7 @@ public class SentenceExtractor {
 //			String training_data = sentence + " ,  " +   fox_response_string  + " , " 
 //			+ sorokin_response_string + "," + openIE_response_string + "," + squery_Result + "," + max + "," + sc_fox + ","
 //					+ sc_openIE + "," + sc_sorokin;
-			String training_data = sentence + ","  + max ; 
+			String training_data = "'" + sentence + "'" + ","  + max ; 
 			
 			System.out.println(training_data);
 			System.out.println("-------------------------------------------------------------");

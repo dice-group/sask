@@ -26,7 +26,7 @@ public class CrossvalidateDataset {
 		// load the arff file
 
 		try {
-			String filename = "Dataset\\datasetExtraction.arff";
+			String filename = "TrainingData\\traindata2.arff";
 			DataSource source;
 			source = new DataSource(filename);
 

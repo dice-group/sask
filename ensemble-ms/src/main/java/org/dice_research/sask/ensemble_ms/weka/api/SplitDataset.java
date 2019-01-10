@@ -27,7 +27,7 @@ public class SplitDataset {
 
 	public static void main(String[] args){
 		// load the arff file
-		String filename = "C:\\Users\\harsh\\git\\sask\\ensemble-ms\\src\\main\\java\\org\\dice_research\\sask\\ensemble_ms\\weka\\Dataset\\datasetExtraction.arff";
+		String filename = "TrainingData\\traindata2.arff";
 		DataSource source;
 		try {
 			source = new DataSource(filename);
