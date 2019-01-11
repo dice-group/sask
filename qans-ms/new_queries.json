@@ -127,9 +127,20 @@
     "sparqlParams": ["P1", "R1"],
     "sparqlTemplate": "SELECT DISTINCT ?x WHERE { ?R1 ?P1 ?x . }",
     "exampleQuestions": [
-        "WRB JJ P1 VBD R1 VB .",   
         "WRB JJ P1 VBZ R1 VB .",  
         "WRB VBD R1 P1 ."  
+    ]
+  },
+  {
+    "questionStartWord": ["HOW"],
+    "containsSuperlative": false,
+    "resourceAmount": 1,
+    "ontologyAmount": 0,
+    "propertyAmount": 1,
+    "sparqlParams": ["P1", "R1"],
+    "sparqlTemplate": "SELECT DISTINCT ?x WHERE { ?R1 ?P1 ?x . } ORDER BY DESC (?x) LIMIT 2",
+    "exampleQuestions": [
+        "WRB JJ P1 VBD R1 VB ."  
     ]
   },
   {
