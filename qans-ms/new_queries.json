@@ -117,7 +117,7 @@
     "ontologyAmount": 0,
     "propertyAmount": 1,
     "sparqlParams": ["P1", "R1"],
-    "sparqlTemplate": "SELECT DISTINCT ?x WHERE { ?R1 ?P1 ?x . } ORDER BY DESC (?x) LIMIT 2",
+    "sparqlTemplate": "SELECT (SUM(?x) as ?y) WHERE { ?R1 ?P1 ?x . }",
     "exampleQuestions": [
        "WRB JJ P1 VBD R1 VB ."  
     ]
@@ -180,7 +180,7 @@
     "ontologyAmount": 1,
     "propertyAmount": 0,
     "sparqlParams": ["O1"],
-    "sparqlTemplate": "SELECT DISTINCT ?x WHERE { ?x ?O1 ?y . }GROUP BY DESC (?x) HAVING(COUNT(?y) > 1)",
+    "sparqlTemplate": "SELECT DISTINCT ?x WHERE { ?x ?O1 ?y . } GROUP BY ?x HAVING(COUNT(?y) > 1) ORDER BY DESC (?x)",
     "exampleQuestions": [
        "WDT O1 VBP VBN JJR IN CD NN ."   
     ]
