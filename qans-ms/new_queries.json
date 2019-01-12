@@ -9,13 +9,11 @@
     "sparqlTemplate": "SELECT DISTINCT ?x WHERE { ?x ?O1 ?R1 . }",
     "exampleQuestions": [
         "VB DT O1 IN R1 .",   
-	"WP VBP DT O1 IN R1 .", 
+        "WP VBP DT O1 IN R1 .", 
         "VB PRP DT O1 IN R1 .",   
-	"WP VBZ DT O1 IN R1 .",  
-	"WDT NN VBZ DT O1 TO DT R1 .",  
-	"WP VBD DT O1 NN NNS IN R1 .",  
-	"VB DT NNS O1 IN R1 .",  
-	"NN IN NN O1 IN R1 ."  
+        "WP VBZ DT O1 IN R1 .",  
+        "WDT NN VBZ DT O1 TO DT R1 .",  
+        "WP VBD DT O1 NN NNS IN R1 ."  
     ]
   },
   {
@@ -41,33 +39,27 @@
     "sparqlParams": ["O1", "R1"],
     "sparqlTemplate": "SELECT DISTINCT ?x WHERE { ?R1 ?O1 ?x . }",
     "exampleQuestions": [
-         "WDT VBZ DT O1 IN R1 .",   
-	 "WP VBZ DT O1 IN R1 .",     
-	 "WP VBZ DT R1 O1 .", 
-	 "VB DT O1 CC NN IN R1 .", 
-	 "WP VBZ DT TO VB DT O1 IN R1 .", 
-	 "VB PRP DT O1 IN R1 .", 
-	 "WP VBN IN IN DT O1 IN DT R1 .", 
-	 "VB DT O1 IN R1 .",  
-	 "WDT NN O1 VBD R1 VB IN .",  
-	 "WP VBZ DT O1 IN R1 .",  
-	 "VB PRP DT O1 IN R1 .",  
-	 "WRB VBD R1 O1 .",  
-	 "VB DT NN WRB R1 VBD O1 .",  
-         "WP VBZ DT O1 IN R1 .", 
-	 "WRB VBZ DT O1 IN R1 .",  
-	 "IN WDT NN VBZ DT O1 IN R1 VBN .", 
-	 "WP VBZ DT O1 IN R1 .",  
-	 "WP VBD DT O1 IN R1 .", 
-	 "VB PDT DT O1 IN R1 .",  
-	 "IN WDT O1 VBD R1 VB .",  
-	 "WDT O1 VBD VBN IN R1 .",  
-	 "WRB JJ O1 VBP VBG IN R1 .", 
-	 "VB PDT DT O1 IN R1 .",  
-	 "WP VBP DT O1 IN R1 .",  
-	 "WP VBZ DT O1 IN R1 .",  
-	 "WDT JJ NN NN VBD DT O1 IN R1 .",  
-	 "VB PRP DT O1 IN R1 ." 
+        "WDT VBZ DT O1 IN R1 .",   
+        "WP VBZ DT O1 IN R1 .",  
+	"WP VBZ DT R1 O1 .",  
+	"VB DT O1 CC NN IN R1 .", 
+	"WP VBZ DT TO VB DT O1 IN R1 .", 
+	"VB PRP DT O1 IN R1 .", 
+	"WP VBN IN IN DT O1 IN DT R1 .", 
+	"VB DT O1 IN R1 .",  
+	"WDT NN O1 VBD R1 VB IN .",  
+	"WRB VBD R1 O1 .",  
+	"VB DT NN WRB R1 VBD O1 .",  
+	"WRB VBZ DT O1 IN R1 .",  
+	"IN WDT NN VBZ DT O1 IN R1 VBN .", 
+	"WP VBD DT O1 IN R1 .", 
+	"VB PDT DT O1 IN R1 .",  
+	"IN WDT O1 VBD R1 VB .",  
+	"WDT O1 VBD VBN IN R1 .",  
+	"WRB JJ O1 VBP VBG IN R1 .", 
+	"WP VBP DT O1 IN R1 .",  
+	"WDT JJ NN NN VBD DT O1 IN R1 ."  
+	  
     ]
   },
   {
@@ -79,7 +71,7 @@
     "sparqlParams": ["R1"],
     "sparqlTemplate": "SELECT DISTINCT ?x WHERE { ?R1 <http://dbpedia.org/ontology/date> ?x . }",
     "exampleQuestions": [
-        "WRB VBD DT R1 VB ."   
+       "WRB VBD DT R1 VB ."   
     ]
   },
   {
@@ -91,7 +83,7 @@
     "sparqlParams": ["O1", "R1", "R2"],
     "sparqlTemplate": "SELECT DISTINCT ?x WHERE { ?x ?O1 ?R2, ?R1 . }",
     "exampleQuestions": [
-        "WP VBD DT O1 IN R1 CC R2 ." 
+        "WP VBD DT O1 IN R1 CC R2 ."  
     ]
   },
   {
@@ -103,7 +95,7 @@
     "sparqlParams": ["O1", "R1", "R2"],
     "sparqlTemplate": "SELECT DISTINCT ?x WHERE { ?R1 ?O1 ?x . ?R2 ?O1 ?x . }",
     "exampleQuestions": [
-	  "VB DT O1 IN R1 CC R2 ."  
+        "VB DT O1 IN R1 CC R2 ."   
     ]
   },
   {
@@ -115,7 +107,19 @@
     "sparqlParams": ["R1", "R2"],
     "sparqlTemplate": "ASK WHERE { ?R1 <http://dbpedia.org/ontology/industry> ?R2 . }",
     "exampleQuestions": [
-        "VBZ R1 DT R2 NN ."   
+       "VBZ R1 DT R2 NN ."   
+    ]
+  },
+  {
+    "questionStartWord": ["HOW"],
+    "containsSuperlative": false,
+    "resourceAmount": 1,
+    "ontologyAmount": 0,
+    "propertyAmount": 1,
+    "sparqlParams": ["P1", "R1"],
+    "sparqlTemplate": "SELECT DISTINCT ?x WHERE { ?R1 ?P1 ?x . } ORDER BY DESC (?x) LIMIT 2",
+    "exampleQuestions": [
+       "WRB JJ P1 VBD R1 VB ."  
     ]
   },
   {
@@ -128,19 +132,7 @@
     "sparqlTemplate": "SELECT DISTINCT ?x WHERE { ?R1 ?P1 ?x . }",
     "exampleQuestions": [
         "WRB JJ P1 VBZ R1 VB .",  
-        "WRB VBD R1 P1 ."  
-    ]
-  },
-  {
-    "questionStartWord": ["HOW"],
-    "containsSuperlative": false,
-    "resourceAmount": 1,
-    "ontologyAmount": 0,
-    "propertyAmount": 1,
-    "sparqlParams": ["P1", "R1"],
-    "sparqlTemplate": "SELECT DISTINCT ?x WHERE { ?R1 ?P1 ?x . } ORDER BY DESC (?x) LIMIT 2",
-    "exampleQuestions": [
-        "WRB JJ P1 VBD R1 VB ."  
+	"WRB VBD R1 P1 ."  
     ]
   },
   {
@@ -152,7 +144,7 @@
     "sparqlParams": ["O1", "R1", "R2", "R3"],
     "sparqlTemplate": "ASK WHERE { ?R1 ?O1 ?R2 , ?R3 . }",
     "exampleQuestions": [
-        "VBD R1 VBN IN DT O1 TO R2 CC R3 ."   
+       "VBD R1 VBN IN DT O1 TO R2 CC R3 ."   
     ]
   },
   {
@@ -164,7 +156,7 @@
     "sparqlParams": ["O1", "R1"],
     "sparqlTemplate": "ASK WHERE { ?R1 ?O1 ?x . }",
     "exampleQuestions": [
-        "NNP R1 VBP DT O1 ."   
+       "NNP R1 VBP DT O1 ."   
     ]
   },
    {
@@ -176,7 +168,9 @@
     "sparqlParams": ["O1", "R1"],
     "sparqlTemplate": "SELECT DISTINCT ?x WHERE { ?x ?O1 ?R1 . }ORDER BY DESC (?x) LIMIT 3",
     "exampleQuestions": [
-        "VB DT NNS O1 R1 ."   
+       "VB DT NNS O1 R1 ." ,
+       "VB DT NNS O1 IN R1 .",  
+       "NN IN NN O1 IN R1 ." 
     ]
   },
   {
@@ -188,7 +182,7 @@
     "sparqlParams": ["O1"],
     "sparqlTemplate": "SELECT DISTINCT ?x WHERE { ?x ?O1 ?y . }GROUP BY DESC (?x) HAVING(COUNT(?y) > 1)",
     "exampleQuestions": [
-        "WDT O1 VBP VBN JJR IN CD NN ."   
+       "WDT O1 VBP VBN JJR IN CD NN ."   
     ]
   },
   {
@@ -200,7 +194,7 @@
     "sparqlParams": ["O1"],
     "sparqlTemplate": "SELECT (COUNT(DISTINCT ?x) as ?y) WHERE { ?x ?O1 ?R1 . }",
     "exampleQuestions": [
-        "WRB JJ NNS R1 VBZ VBN O1 IN ."   
+       "WRB JJ NNS R1 VBZ VBN O1 IN ."   
     ]
   }
  ]
