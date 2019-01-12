@@ -34,7 +34,7 @@
 
 18. How many matches did Dhoni play? 
 
-19. Who is the developer of WinCC and BS2000?  
+19. Give the developer of WinCC and BS2000?  
 
 20. Who are the employers of Microsoft? 
 
@@ -50,9 +50,9 @@
 
 26. How many employees are working at Siemens? 
 
-27. Give me the leader of Serbia?  
+27. Give me the leader of Serbia.
 
-28. Give me all the movies starring Ralph Fiennes.
+28. List the movies starring Ralph Fiennes.
 
 29. List all the subsidiary of Tata Motors. 
 
@@ -68,13 +68,13 @@
 
 35. Who is the trainee of Gregg Troy?  
 
-36. Give the place where Nokia was founded?  
+36. Give the place where Nokia was founded.
 
 37. Which world-class tennis player became the trainer of Johanna Konta?  
 
 38. Give the ceo and founder of Facebook.
 
-39. Give me the president of Facebook?  
+39. Give me the president of Facebook.
 
 40. List of watch manufacturers in Switzerland.
 
