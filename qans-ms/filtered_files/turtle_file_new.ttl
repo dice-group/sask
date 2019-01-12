@@ -200,7 +200,7 @@
                                      <http://dbpedia.org/ontology/developer>  <http://dbpedia.org/resource/Siemens> .
 									 
 <http://dbpedia.org/resource/Siemens>   <http://www.w3.org/2000/01/rdf-schema#label>  "Siemens";
-        <http://dbpedia.org/ontology/numberOfEmployees>  "348000"^^integer;
+        <http://dbpedia.org/ontology/numberOfEmployees>  "348000"^^xsd:integer;
         <http://dbpedia.org/ontology/headquarter>  <http://dbpedia.org/resource/Munich> ;
         <http://dbpedia.org/ontology/location>     <http://dbpedia.org/resource/Munich> .
 		
