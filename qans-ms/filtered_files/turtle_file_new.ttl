@@ -90,7 +90,7 @@
 <http://dbpedia.org/resource/Glenn_Frey>  <http://www.w3.org/2000/01/rdf-schema#label>  "Glenn Frey".
 
 <http://dbpedia.org/resource/Eagles_(band)>  <http://www.w3.org/2000/01/rdf-schema#label>  "Eagles (band)";
-        <http://dbpedia.org/ontology/date>  "1971-01-01";
+        <http://dbpedia.org/ontology/date>  "1971-01-01"^^xsd:date;
         <http://dbpedia.org/ontology/formerBandMember>  <http://dbpedia.org/resource/Glenn_Frey> .
 		
 <http://dbpedia.org/ontology/doctoralStudent>  <http://www.w3.org/2000/01/rdf-schema#label>  "doctoral student".
@@ -234,6 +234,7 @@
         <http://dbpedia.org/ontology/locatedInArea>  <http://dbpedia.org/resource/Chicago> ;
         <http://dbpedia.org/ontology/location>       <http://dbpedia.org/resource/Chicago> .
 		
+<http://dbpedia.org/property/children>  <http://www.w3.org/2000/01/rdf-schema#label>  "children".
 <http://dbpedia.org/resource/David_Beckham>   <http://www.w3.org/2000/01/rdf-schema#label>  "David Beckham";
         <http://dbpedia.org/property/children>  "4"^^xsd:integer;
         <http://dbpedia.org/ontology/child>  <http://aksw.org/notInWiki/Brooklyn_Beckham> ;
@@ -321,7 +322,7 @@
 <http://dbpedia.org/property/established> <http://www.w3.org/2000/01/rdf-schema#label> "established".
 <http://dbpedia.org/ontology/almaMater>   <http://www.w3.org/2000/01/rdf-schema#label>   "alma mater".
 <http://dbpedia.org/resource/Ohio_University>  <http://www.w3.org/2000/01/rdf-schema#label>  "Ohio University";
-              <http://dbpedia.org/property/established> "1804".
+              <http://dbpedia.org/property/established> "1804"^^xsd:integer.
 <http://aksw.org/notInWiki/CaroleeBull>   <http://www.w3.org/2000/01/rdf-schema#label>   "Carolee Bull";
                               <http://dbpedia.org/ontology/almaMater>  <http://dbpedia.org/resource/Ohio_University> .
 							  
