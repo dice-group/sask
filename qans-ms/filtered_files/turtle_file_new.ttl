@@ -107,7 +107,7 @@
 <http://dbpedia.org/ontology/populationTotal>  <http://www.w3.org/2000/01/rdf-schema#label>  "population total".
 <http://dbpedia.org/resource/Washington%2C_D.C.>
         <http://dbpedia.org/ontology/department>  <http://dbpedia.org/resource/Puerto_Rico> .
-<http://dbpedia.org/resource/Puerto_Rico>  <http://dbpedia.org/ontology/populationTotal>  "3474182".
+<http://dbpedia.org/resource/Puerto_Rico>  <http://dbpedia.org/ontology/populationTotal>  "3474182"^^xsd:integer.
 
 <http://dbpedia.org/resource/Skywriting_by_Word_of_Mouth> <http://www.w3.org/2000/01/rdf-schema#label>  "Skywriting by Word of Mouth".
 <http://dbpedia.org/resource/A_Spaniard_in_the_Works>  <http://www.w3.org/2000/01/rdf-schema#label>  "A Spaniard in the Works".
@@ -187,7 +187,7 @@
 <http://dbpedia.org/property/matches>   <http://www.w3.org/2000/01/rdf-schema#label>  "matches".
 
 <http://dbpedia.org/resource/Dhoni>  <http://www.w3.org/2000/01/rdf-schema#label>  "Dhoni";
-                    <http://dbpedia.org/property/matches>  "73", "90", "131", "278";
+                    <http://dbpedia.org/property/matches>  "73"^^xsd:integer, "90"^^xsd:integer, "131"^^xsd:integer, "278"^^xsd:integerxs;
                     <http://dbpedia.org/ontology/formerTeam>  <http://dbpedia.org/resource/Chennai_Super_Kings> .
 					
 <http://dbpedia.org/resource/Munich>  <http://www.w3.org/2000/01/rdf-schema#label>  "Munich".
@@ -200,7 +200,7 @@
                                      <http://dbpedia.org/ontology/developer>  <http://dbpedia.org/resource/Siemens> .
 									 
 <http://dbpedia.org/resource/Siemens>   <http://www.w3.org/2000/01/rdf-schema#label>  "Siemens";
-        <http://dbpedia.org/ontology/numberOfEmployees>  "348000";
+        <http://dbpedia.org/ontology/numberOfEmployees>  "348000"^^integer;
         <http://dbpedia.org/ontology/headquarter>  <http://dbpedia.org/resource/Munich> ;
         <http://dbpedia.org/ontology/location>     <http://dbpedia.org/resource/Munich> .
 		
@@ -235,7 +235,7 @@
         <http://dbpedia.org/ontology/location>       <http://dbpedia.org/resource/Chicago> .
 		
 <http://dbpedia.org/resource/David_Beckham>   <http://www.w3.org/2000/01/rdf-schema#label>  "David Beckham";
-        <http://dbpedia.org/property/children>  "4";
+        <http://dbpedia.org/property/children>  "4"^^xsd:integer;
         <http://dbpedia.org/ontology/child>  <http://aksw.org/notInWiki/Brooklyn_Beckham> ;
         <http://dbpedia.org/ontology/location>  <http://dbpedia.org/resource/Paris> ;
         <http://dbpedia.org/ontology/spouse>    <http://dbpedia.org/resource/Victoria_Beckham> .
