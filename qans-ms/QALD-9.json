@@ -10,28 +10,29 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Name the employee of Google who was fired? ",
-      "keywords" : "employee, Google "
-    }],
-	"query" : {
-      "sparql" : "PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX dbr: <http://dbpedia.org/resource/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX aksw: <http://aksw.org/notInWiki/>
-	   SELECT DISTINCT ?person
-	   WHERE {
-		  ?person dbo:employee  dbr:Google.
-	    }"
-	},
-	"answers" : [ {
-		"head": {
-		   "vars": [ "person" ]
-		} ,
-		"results": {
-		   "bindings": [ {
-			  "person": { 
-				 "type": "uri" , 
-				 "value": "http://aksw.org/notInWiki/James_Damore" 
-			    }
-		    } ]
-	    }
+      "string" : "List the employers of Google.",
+      "keywords" : "employer, Google"
+    } ],
+    "query" : {
+      "sparql" : "SELECT DISTINCT ?uri WHERE { ?uri <http://dbpedia.org/ontology/employer> <http://dbpedia.org/resource/Google>. }"
+    },
+    "answers" : [ {
+      "head" : {
+        "vars" : [ "uri" ]
+      },
+      "results" : {
+        "bindings" : [ {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://dbpedia.org/resource/Sundar_Pichai"
+          }
+        }, {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://aksw.org/notInWiki/James_Damores"
+          }
+        } ]
+      }
     } ]
   }, {
     "id" : "2",
@@ -41,36 +42,25 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Which person was in Chile and where is Chile located? ",
-      "keywords" : "person, Chile, located "
-    }],
-	"query" : {
-      "sparql" : "PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX dbr: <http://dbpedia.org/resource/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX aksw: <http://aksw.org/notInWiki/>
-	   SELECT DISTINCT ?person ?place
-	   WHERE {
-			?person dbo:location  dbr:Chile.
-			
-			dbr:Chile  dbo:location  ?place.
-  
-	    }"
-	},
-	"answers" : [ {
-		"head": {
-		  "vars": [ "person" , "place" ]
-		} ,
-		"results": {
-		  "bindings": [ {
-			 "person": { 
-			   "type": "uri" , 
-			   "value": "http://dbpedia.org/resource/Pope_Francis" 
-			   },  
-			 "place": { 
-				    "type": "uri" , 
-					"value": "http://dbpedia.org/resource/Latin_America" 
-				   }
-			} ]
-		}
-	} ]
+      "string" : "Which place did Pope Francis visit?",
+      "keywords" : "place, Pope Francis, visit"
+    } ],
+    "query" : {
+      "sparql" : "SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Pope_Francis>  <http://dbpedia.org/ontology/country> ?uri. }"
+    },
+    "answers" : [ {
+      "head" : {
+        "vars" : [ "uri" ]
+      },
+      "results" : {
+        "bindings" : [ {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://dbpedia.org/resource/Chile"
+          }
+        } ]
+      }
+    } ]
   }, {
     "id" : "3",
     "answertype" : "resource",
@@ -79,67 +69,52 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Who was the most famous alumna from the Wellesley College and where is it located? ",
-      "keywords" : "alumna, Wellesley College , located "
-    }],
-	"query" : {
-      "sparql" : "PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX dbr: <http://dbpedia.org/resource/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX aksw: <http://aksw.org/notInWiki/>
-	   SELECT DISTINCT ?person ?place
-	   WHERE {
-			?person dbo:almaMater  dbr:Wellesley_College.
-			
-			dbr:Wellesley_College  dbo:location  ?place.
-  
-	    }"
-	},
-	"answers" : [ { 
-		"head": {
-		  "vars": [ "person" , "place" ]
-		} ,
-		"results": {
-		  "bindings": [ {
-			 "person": { 
-				"type": "uri" , 
-				"value": "http://dbpedia.org/resource/Hillary_Clinton" 
-				 },
-			 "place": { 
-			  "type": "uri" , 
-			  "value": "http://dbpedia.org/resource/Boston" 
-			  }
-		  } ]
-		}
-	} ]
-   }, {
-	 "id" : "4",
+      "string" : "Where does Melania Trump come from?",
+      "keywords" : "Melania Trump, come from"
+    } ],
+    "query" : {
+      "sparql" : "SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Melania_Trump> <http://dbpedia.org/ontology/country> ?uri. }"
+    },
+    "answers" : [ {
+      "head" : {
+        "vars" : [ "uri" ]
+      },
+      "results" : {
+        "bindings" : [ {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://dbpedia.org/resource/Slovenia"
+          }
+        } ]
+      }
+    } ]
+  }, {
+    "id" : "4",
     "answertype" : "resource",
     "aggregation" : false,
     "onlydbo" : true,
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Who is the ceo of Google? ",
-      "keywords" : "ceo, Google "
-    }],
-	"query" : {
-      "sparql" : "PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX dbr: <http://dbpedia.org/resource/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX aksw: <http://aksw.org/notInWiki/>
-	   SELECT DISTINCT ?person
-	   WHERE {
-		  dbr:Google  dbo:ceo  ?person.
-	    }"
-	},
-	"answers" : [ {		
-	   "head": {
-         "vars": [ "person" ]
-		} ,
-		"results": {
-		   "bindings": [ {
-			  "person": { 
-			     "type": "uri" , 
-			     "value": "http://dbpedia.org/resource/Sundar_Pichai" 
-			    }
-		    } ]
-		}
-	} ]
+      "string" : "Who is the Google ceo?",
+      "keywords" : "Google, ceo"
+    } ],
+    "query" : {
+      "sparql" : "SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Google>  <http://dbpedia.org/ontology/ceo>  ?uri. }"
+    },
+    "answers" : [ {
+      "head" : {
+        "vars" : [ "uri" ]
+      },
+      "results" : {
+        "bindings" : [ {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://dbpedia.org/resource/Sundar_Pichai"
+          }
+        } ]
+      }
+    } ]
   }, {
     "id" : "5",
     "answertype" : "resource",
@@ -148,30 +123,26 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Who is the relative of Jenny McCarthy? ",
-      "keywords" : "relative, Jenny_McCarthy  "
-    }],
-	"query" : {
-      "sparql" : "PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX dbr: <http://dbpedia.org/resource/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX aksw: <http://aksw.org/notInWiki/>
-	   SELECT DISTINCT ?person
-	   WHERE {
-			?person  dbo:relative  dbr:Jenny_McCarthy.
-	    }"
-	},
-	"answers" : [ {	
-		"head": {
-		  "vars": [ "person" ]
-		} ,
-		"results": {
-		  "bindings": [ {
-			 "person": { 
-				"type": "uri" , 
-				"value": "http://dbpedia.org/resource/Melissa_McCarthy" 
-				}
-			} ]
-		}
-	} ]
-  }, {	
+      "string" : "Who is a dalit to become the leader of India?",
+      "keywords" : "dalit, leader, India"
+    } ],
+    "query" : {
+      "sparql" : "SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/India>  <http://dbpedia.org/ontology/leaderName>  ?uri. }"
+    },
+    "answers" : [ {
+      "head" : {
+        "vars" : [ "uri" ]
+      },
+      "results" : {
+        "bindings" : [ {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://dbpedia.org/resource/Ram_Nath_Kovind"
+          }
+        } ]
+      }
+    } ]
+  }, {
     "id" : "6",
     "answertype" : "resource",
     "aggregation" : false,
@@ -179,29 +150,25 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Who is the president of European Commission? ",
-      "keywords" : "president, European Commission "
-    }],
-	"query" : {
-      "sparql" : "PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX dbr: <http://dbpedia.org/resource/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX aksw: <http://aksw.org/notInWiki/>
-	   SELECT DISTINCT ?person
-	   WHERE {
-			dbr:European_Commission  dbo:president  ?person.
-	    }"
-	},
-	"answers" : [ {	 
-		"head": {
-		  "vars": [ "person" ]
-		} ,
-		"results": {
-		  "bindings": [ {
-			 "person": { 
-				"type": "uri" , 
-				"value": "http://dbpedia.org/resource/Jean-Claude_Juncker" 
-				}
-			} ]
-		}
-	} ]
+      "string" : "Who is the relative of Jenny McCarthy?",
+      "keywords" : "relative, Jenny McCarthy"
+    } ],
+    "query" : {
+      "sparql" : "SELECT DISTINCT ?uri WHERE { ?uri  <http://dbpedia.org/ontology/relative>  <http://dbpedia.org/resource/Jenny_McCarthy>. }"
+    },
+    "answers" : [ {
+      "head" : {
+        "vars" : [ "uri" ]
+      },
+      "results" : {
+        "bindings" : [ {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://dbpedia.org/resource/Melissa_McCarthy"
+          }
+        } ]
+      }
+    } ]
   }, {
     "id" : "7",
     "answertype" : "resource",
@@ -210,29 +177,25 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Who was the former band member of the Eagles who is dead? ",
-      "keywords" : "former, band member, Eagles "
-    }],
-	"query" : {
-      "sparql" : "PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX dbr: <http://dbpedia.org/resource/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX aksw: <http://aksw.org/notInWiki/>
-	   SELECT DISTINCT ?person
-	   WHERE {
-			<http://dbpedia.org/resource/Eagles_(band)>  dbo:formerBandMember  ?person.
-	    }"
-	},
-	"answers" : [ {	
-		"head": {
-		  "vars": [ "person" ]
-		} ,
-		"results": {
-		  "bindings": [ {
-			"person": { 
-				"type": "uri" , 
-				"value": "http://dbpedia.org/resource/Glenn_Frey"
-				}
-			} ]
-		}
-	} ]
+      "string" : "Which football club did Cristiano Ronaldo play for?",
+      "keywords" : "football, club, Cristiano Ronaldo"
+    } ],
+    "query" : {
+      "sparql" : "SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Cristiano_Ronaldo>  <http://dbpedia.org/ontology/club>  ?uri. }"
+    },
+    "answers" : [ {
+      "head" : {
+        "vars" : [ "uri" ]
+      },
+      "results" : {
+        "bindings" : [ {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://dbpedia.org/resource/Real_Madrid"
+          }
+        } ]
+      }
+    } ]
   }, {
     "id" : "8",
     "answertype" : "resource",
@@ -241,70 +204,52 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Who were the doctral students of Rajeev Motwani? ",
-      "keywords" : "doctral students, Rajeev Motwani "
-    }],
-	"query" : {
-      "sparql" : "PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX dbr: <http://dbpedia.org/resource/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX aksw: <http://aksw.org/notInWiki/>
-	   SELECT DISTINCT ?person
-	   WHERE {
-			?person  dbo:doctoralStudent  dbr:Rajeev_Motwani.
-	    }"
-	},
-	"answers" : [ {	
-		"head": {
-		  "vars": [ "person" ]
-		} ,
-		"results": {
-		  "bindings": [ {
-			"person": { 
-			  "type": "uri" , 
-			  "value": "http://dbpedia.org/resource/Sergey_Brin" 
-			  }
-			} , {
-			   "person": { 
-				  "type": "uri" , 
-				  "value": "http://dbpedia.org/resource/Larry_Page" 
-				  }
-			} ]
-		}
-	} ]
+      "string" : "Who is the president of European Commission?",
+      "keywords" : "president, European Commission"
+    } ],
+    "query" : {
+      "sparql" : "SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/European_Commission>  <http://dbpedia.org/ontology/president>  ?uri. }"
+    },
+    "answers" : [ {
+      "head" : {
+        "vars" : [ "uri" ]
+      },
+      "results" : {
+        "bindings" : [ {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://dbpedia.org/resource/Jean-Claude_Juncker"
+          }
+        } ]
+      }
+    } ]
   }, {
     "id" : "9",
-    "answertype" : "resource",
+    "answertype" : "date",
     "aggregation" : false,
     "onlydbo" : true,
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Where is Google located? ",
-      "keywords" : "Google, located "
-    }],
-	"query" : {
-      "sparql" : "PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX dbr: <http://dbpedia.org/resource/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX aksw: <http://aksw.org/notInWiki/>
-	   SELECT DISTINCT ?place 
-	   WHERE {
-		   dbr:Google  dbo:location  ?place.
-	    }"
-	},
-	"answers" : [ {	
-		"head": {
-		  "vars": [ "place" ]
-		} ,
-		"results": {
-		  "bindings": [ {
-			 "place": { 
-				"type": "uri" , 
-				"value": "http://dbpedia.org/resource/Menlo_Park%2C_California" 
-				} 
-			} , {
-               "place": { 
-			      "type": "uri" , 
-				  "value": "http://dbpedia.org/resource/California" 
-				  }
-			} ]
-		} 
-	} ]
+      "string" : "When did the Eagles begin?",
+      "keywords" : "Eagles, begin"
+    } ],
+    "query" : {
+      "sparql" : "SELECT DISTINCT ?date  WHERE { <http://dbpedia.org/resource/Eagles_(band)>  <http://dbpedia.org/ontology/date>  ?date. }"
+    },
+    "answers" : [ {
+      "head" : {
+        "vars" : [ "date" ]
+      },
+      "results" : {
+        "bindings" : [ {
+          "date" : {
+            "type" : "literal",
+            "value" : "1971-01-01"
+          }
+        } ]
+      }
+    } ]
   }, {
     "id" : "10",
     "answertype" : "resource",
@@ -313,29 +258,25 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Which famous singer-songwriter founded the band The Beatles? ",
-      "keywords" : "band, The Beatles "
-    }],
-	"query" : {
-      "sparql" : "PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX dbr: <http://dbpedia.org/resource/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX aksw: <http://aksw.org/notInWiki/>
-	   SELECT DISTINCT  ?person
-	   WHERE {
-		   dbr:The_Beatles  dbo:bandMember  ?person.
-	    }"
-	},
-	"answers" : [ {	
-		"head": {
-		  "vars": [ "person" ]
-		} ,
-		"results": {
-		  "bindings": [ {
-			 "person": { 
-				"type": "uri" , 
-				"value": "http://dbpedia.org/resource/John_Lennon" 
-				}
-			} ]
-		}
-	} ]
+      "string" : "Who was the doctoral advisor of Larry Page and Sergey Brin?",
+      "keywords" : "doctoral advisor, Larry Page, Sergey Brin"
+    } ],
+    "query" : {
+      "sparql" : "SELECT DISTINCT  ?uri WHERE { ?uri <http://dbpedia.org/ontology/doctoralAdvisor>  <http://dbpedia.org/resource/Sergey_Brin>, <http://dbpedia.org/resource/Larry_Page> . }"
+    },
+    "answers" : [ {
+      "head" : {
+        "vars" : [ "uri" ]
+      },
+      "results" : {
+        "bindings" : [ {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://dbpedia.org/resource/Rajeev_Motwani"
+          }
+        } ]
+      }
+    } ]
   }, {
     "id" : "11",
     "answertype" : "resource",
@@ -344,60 +285,52 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Which country in the east most of Asia is called as the Land of Rising Sun? ",
-      "keywords" : "country, Asia "
-    }],
-	"query" : {
-      "sparql" : "PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX dbr: <http://dbpedia.org/resource/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX aksw: <http://aksw.org/notInWiki/>
-	   SELECT DISTINCT  ?place
-	   WHERE {
-		   ?place  dbo:country  dbr:Asia.
-	    }"
-	},
-	"answers" : [ {	
-		"head": {
-		  "vars": [ "place" ]
-		} ,
-		"results": {
-		  "bindings": [ {
-			"place": { 
-				"type": "uri" , 
-				"value": "http://dbpedia.org/resource/Japan" 
-				}
-			} ]
-		}
-	} ]
+      "string" : "Where was Google founded?",
+      "keywords" : "Google, founded"
+    } ],
+    "query" : {
+      "sparql" : "SELECT DISTINCT  ?uri WHERE { <http://dbpedia.org/resource/Google>   <http://dbpedia.org/ontology/foundationPlace>  ?uri . }"
+    },
+    "answers" : [ {
+      "head" : {
+        "vars" : [ "uri" ]
+      },
+      "results" : {
+        "bindings" : [ {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://dbpedia.org/resource/Menlo_Park%2C_California"
+          }
+        } ]
+      }
+    } ]
   }, {
     "id" : "12",
-    "answertype" : "resource",
+    "answertype" : "number",
     "aggregation" : false,
     "onlydbo" : true,
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Where is the headquarters of HSBC? ",
-      "keywords" : "headquarters, HSBC "
-    }],
-	"query" : {
-      "sparql" : "PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX dbr: <http://dbpedia.org/resource/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX aksw: <http://aksw.org/notInWiki/>
-	   SELECT DISTINCT  ?place
-	   WHERE {
-		    dbr:HSBC  dbo:headquarter  ?place.
-	    }"
-	},
-	"answers" : [ {
-		"head": {
-		  "vars": [ "place" ]
-		} ,
-		"results": {
-		  "bindings": [ {
-			"place": { 
-				"type": "uri" , 
-				"value": "http://dbpedia.org/resource/London" 
-				}
-			} ]
-		}
-	} ]
+      "string" : "What is the total population of Puerto Rico?",
+      "keywords" : "total population, Puerto Rico"
+    } ],
+    "query" : {
+      "sparql" : "SELECT DISTINCT  ?number WHERE { <http://dbpedia.org/resource/Puerto_Rico>  <http://dbpedia.org/ontology/populationTotal> ?number. }"
+    },
+    "answers" : [ {
+      "head" : {
+        "vars" : [ "number" ]
+      },
+      "results" : {
+        "bindings" : [ {
+          "number" : {
+            "type" : "literal",
+            "value" : "3474182"
+          }
+        } ]
+      }
+    } ]
   }, {
     "id" : "13",
     "answertype" : "resource",
@@ -406,34 +339,25 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Where is Tata Consultancy Services (TCS) located? ",
-      "keywords" : "Tata Consultancy Services, located "
-    }],
-	"query" : {
-      "sparql" : "PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX dbr: <http://dbpedia.org/resource/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX aksw: <http://aksw.org/notInWiki/>
-	   SELECT DISTINCT  ?place
-	   WHERE {
-		    dbr:Tata_Consultancy_Services  dbo:location  ?place.
-	    }"
-	},
-	"answers" : [ {
-		"head": {
-		  "vars": [ "place" ]
-		} ,
-		"results": {
-		  "bindings": [ {
-			"place": { 
-				"type": "uri" , 
-				"value": "http://dbpedia.org/resource/Thane" 
-				}
-			} , {
-			   "place": { 
-				  "type": "uri" , 
-				  "value": "http://dbpedia.org/resource/Hiranandani_Estate"
-				  }
-			} ]
-		}
-	} ]
+      "string" : "What is the home town of The Beatles?",
+      "keywords" : "home town, The Beatles"
+    } ],
+    "query" : {
+      "sparql" : "SELECT DISTINCT  ?uri WHERE { <http://dbpedia.org/resource/The_Beatles>  <http://dbpedia.org/ontology/hometown>  ?uri. }"
+    },
+    "answers" : [ {
+      "head" : {
+        "vars" : [ "uri" ]
+      },
+      "results" : {
+        "bindings" : [ {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://dbpedia.org/resource/Liverpool"
+          }
+        } ]
+      }
+    } ]
   }, {
     "id" : "14",
     "answertype" : "resource",
@@ -442,29 +366,25 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Who was the former band member of Fifth Harmony? ",
-      "keywords" : "former, band member, Fifth Harmony "
-    }],
-	"query" : {
-      "sparql" : "PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX dbr: <http://dbpedia.org/resource/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX aksw: <http://aksw.org/notInWiki/>
-	   SELECT DISTINCT  ?person
-	   WHERE {
-		    dbr:Fifth_Harmony  dbo:formerBandMember  ?person.
-	    }"
-	},
-	"answers" : [ {  
-		"head": {
-		  "vars": [ "person" ]
-		} ,
-		"results": {
-		  "bindings": [ {
-			"person": { 
-				"type": "uri" , 
-				"value": "http://dbpedia.org/resource/Camila_Cabello" 
-				}
-			} ]
-		}
-	} ]
+      "string" : "Where is the headquarters of HSBC?",
+      "keywords" : "headquarter, HSBC"
+    } ],
+    "query" : {
+      "sparql" : "SELECT DISTINCT  ?uri WHERE { <http://dbpedia.org/resource/HSBC>  <http://dbpedia.org/ontology/headquarter>  ?uri. }"
+    },
+    "answers" : [ {
+      "head" : {
+        "vars" : [ "uri" ]
+      },
+      "results" : {
+        "bindings" : [ {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://dbpedia.org/resource/London"
+          }
+        } ]
+      }
+    } ]
   }, {
     "id" : "15",
     "answertype" : "resource",
@@ -473,29 +393,30 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Name the Altice company’s subsidiary? ",
-      "keywords" : "Altice, subsidiary "
-    }],
-	"query" : {
-      "sparql" : "PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX dbr: <http://dbpedia.org/resource/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX aksw: <http://aksw.org/notInWiki/>
-	   SELECT DISTINCT  ?subordinate
-	   WHERE {
-		   <http://dbpedia.org/resource/Altice_(company)>  dbo:subsidiary  ?subordinate.
-	    }"
-	},
-	"answers" : [ {  
-		"head": {
-		  "vars": [ "subordinate" ]
-		} ,
-		"results": {
-		  "bindings": [ {
-			"subordinate": { 
-				"type": "uri" , 
-				"value": "http://dbpedia.org/resource/Numericable" 
-				}
-			} ]
-		}
-	} ]
+      "string" : "What is the location of Tata Consultancy Services?",
+      "keywords" : "Tata Consultancy Services, location"
+    } ],
+    "query" : {
+      "sparql" : "SELECT DISTINCT  ?uri WHERE { <http://dbpedia.org/resource/Tata_Consultancy_Services>  <http://dbpedia.org/ontology/location>  ?uri . }"
+    },
+    "answers" : [ {
+      "head" : {
+        "vars" : [ "uri" ]
+      },
+      "results" : {
+        "bindings" : [ {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://dbpedia.org/resource/Thane"
+          }
+        }, {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://dbpedia.org/resource/Hiranandani_Estate"
+          }
+        } ]
+      }
+    } ]
   }, {
     "id" : "16",
     "answertype" : "resource",
@@ -504,93 +425,71 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "To which former team of IPL does Dhoni belong? ",
-      "keywords" : "former team, Dhoni "
-    }],
-	"query" : {
-      "sparql" : "PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX dbr: <http://dbpedia.org/resource/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX aksw: <http://aksw.org/notInWiki/>
-	   SELECT DISTINCT  ?team
-	   WHERE {
-		   dbr:Dhoni  dbo:formerTeam  ?team.
-	    }"
-	},
-	"answers" : [ {  
-		"head": {
-		  "vars": [ "team" ]
-		} ,
-		"results": {
-		  "bindings": [ {
-			"team": {
-				"type": "uri" , 
-				"value": "http://dbpedia.org/resource/Chennai_Super_Kings" 
-				}
-			} ]
-		}
-	} ]
+      "string" : "Who was the former band member of Fifth Harmony?",
+      "keywords" : "former band member, Fifth Harmony"
+    } ],
+    "query" : {
+      "sparql" : "SELECT DISTINCT  ?uri WHERE { <http://dbpedia.org/resource/Fifth_Harmony>  <http://dbpedia.org/ontology/formerBandMember>  ?uri . }"
+    },
+    "answers" : [ {
+      "head" : {
+        "vars" : [ "uri" ]
+      },
+      "results" : {
+        "bindings" : [ {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://dbpedia.org/resource/Camila_Cabello"
+          }
+        } ]
+      }
+    } ]
   }, {
     "id" : "17",
-    "answertype" : "resource",
+    "answertype" : "boolean",
     "aggregation" : false,
     "onlydbo" : true,
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Who is the ceo and employer of Microsoft? ",
-      "keywords" : "ceo, employer, Microsoft "
-    }],
-	"query" : {
-      "sparql" : "PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX dbr: <http://dbpedia.org/resource/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX aksw: <http://aksw.org/notInWiki/>
-	   SELECT DISTINCT ?person
-	   WHERE {
-		  {?person  dbo:employer  dbr:Microsoft.}
-		  UNION
-		  {dbr:Microsoft  dbo:ceo  ?person.}
-	    }"
-	},
-	"answers" : [ {    
-		"head": {
-		  "vars": [ "person" ]
-		} ,
-		"results": {
-		  "bindings": [ {
-			"person": { 
-				"type": "uri" , 
-				"value": "http://dbpedia.org/resource/Satya_Nadella" 
-				}
-			} ]
-		}
-	} ]
+      "string" : "Is Altice a telecommunication company?",
+      "keywords" : "Altice, telecommunication company"
+    } ],
+    "query" : {
+      "sparql" : "ASK WHERE { <http://dbpedia.org/resource/Altice_(company)> <http://dbpedia.org/ontology/industry>   <http://dbpedia.org/resource/Telecommunication> . }"
+    },
+    "answers" : [ {
+      "head" : { },
+      "results" : { },
+      "boolean" : true
+    } ]
   }, {
     "id" : "18",
-    "answertype" : "resource",
-    "aggregation" : false,
-    "onlydbo" : true,
+    "answertype" : "number",
+    "aggregation" : true,
+    "onlydbo" : false,
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Who is the spouse of Russel E. Caflisch? ",
-      "keywords" : "spouse, Russel E. Caflisch "
-    }],
-	"query" : {
-      "sparql" : "PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX dbr: <http://dbpedia.org/resource/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX aksw: <http://aksw.org/notInWiki/>
-	   SELECT DISTINCT  ?name
-	   WHERE {
-		   ?name  dbo:spouse  dbr:Russel_E._Caflisch.
-	    }"
-	},
-	"answers" : [ {    
-		"head": {
-		  "vars": [ "name" ]
-		} ,
-		"results": {
-		  "bindings": [ {
-			"name": { 
-				"type": "uri" , 
-				"value": "http://aksw.org/notInWiki/CarolLynnMeylan" 
-				}
-			} ]
-		}
-	} ]
+      "string" : "How many matches did Dhoni play?",
+      "keywords" : "matches, Dhoni"
+    } ],
+    "query" : {
+      "sparql" : "SELECT (SUM(?x) AS ?number) WHERE { <http://dbpedia.org/resource/Dhoni>  <http://dbpedia.org/property/matches>  ?x. }"
+    },
+    "answers" : [ {
+      "head" : {
+        "vars" : [ "number" ]
+      },
+      "results" : {
+        "bindings" : [ {
+          "number" : {
+            "type" : "literal",
+            "value" : "572"
+          }
+        } ]
+      }
+    } ]
   }, {
     "id" : "19",
     "answertype" : "resource",
@@ -599,73 +498,57 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Whose headquarters is at Oak Brook, Illinois? ",
-      "keywords" : "headquarters, Oak Brook, Illinois "
-    }],
-	"query" : {
-      "sparql" : "PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX dbr: <http://dbpedia.org/resource/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX aksw: <http://aksw.org/notInWiki/>
-	   SELECT DISTINCT  ?name
-	   WHERE {
-		   ?name  dbo:headquarter  <http://dbpedia.org/resource/Oak_Brook,_Illinois>.
-	    }"
-	},
-	"answers" : [ { 
-		"head": {
-		  "vars": [ "name" ]
-		} ,
-		"results": {
-		  "bindings": [ {
-			"name": { 
-				"type": "uri" , 
-				"value": "http://dbpedia.org/resource/McDonalds" 
-				}
-			} ]
-		}
-	} ]
+      "string" : "Give the developer of WinCC and BS2000.",
+      "keywords" : "developer, WinCC, BS2000"
+    } ],
+    "query" : {
+      "sparql" : "SELECT DISTINCT  ?uri WHERE { <http://dbpedia.org/resource/WinCC>  <http://dbpedia.org/ontology/developer>  ?uri . <http://dbpedia.org/resource/BS2000> <http://dbpedia.org/ontology/developer>  ?uri . }"
+    },
+    "answers" : [ {
+      "head" : {
+        "vars" : [ "uri" ]
+      },
+      "results" : {
+        "bindings" : [ {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://dbpedia.org/resource/Siemens"
+          }
+        } ]
+      }
+    } ]
   }, {
     "id" : "20",
     "answertype" : "resource",
     "aggregation" : false,
-    "onlydbo" : false,
+    "onlydbo" : true,
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Who is Brooklyn Beckham? ",
-      "keywords" : "Brooklyn Beckham "
-    }],
-	"query" : {
-      "sparql" : "PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX dbr: <http://dbpedia.org/resource/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX aksw: <http://aksw.org/notInWiki/>
-	   SELECT DISTINCT  ?relation  ?name
-	   WHERE {
-		  ?name  ?relation  aksw:Brooklyn_Beckham. 
-	    }"
-	},
-	"answers" : [ {
-		"head": {
-		  "vars": [ "relation" , "name" ]
-		} ,
-		"results": {
-		  "bindings": [ {
-			"relation": {
-				"type": "uri" , 
-				"value": "http://dbpedia.org/ontology/child" 
-				  } ,
-			"name": { 
-				"type": "uri" ,
-				"value": "http://dbpedia.org/resource/Victoria_Beckham"
-				}
-			} , {
-			   "relation": {
-				  "type": "uri" ,
-				  "value": "http://dbpedia.org/ontology/child" 
-					} ,
-				"name": { 
-					"type": "uri" , 
-					"value": "http://dbpedia.org/resource/David_Beckham" 
-					}
-				} ]
-		}
-	} ]
+      "string" : "Who are the employers of Microsoft?",
+      "keywords" : "employer, Microsoft"
+    } ],
+    "query" : {
+      "sparql" : "SELECT DISTINCT  ?uri WHERE { ?uri  <http://dbpedia.org/ontology/employer>  <http://dbpedia.org/resource/Microsoft>.  }"
+    },
+    "answers" : [ {
+      "head" : {
+        "vars" : [ "uri" ]
+      },
+      "results" : {
+        "bindings" : [ {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://aksw.org/notInWiki/Brad_Smith"
+          }
+        }, {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://dbpedia.org/resource/Satya_Nadella"
+          }
+        } ]
+      }
+    } ]
   }, {
     "id" : "21",
     "answertype" : "resource",
@@ -674,96 +557,79 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Which former band member of The Pussycat Dolls claimed the band as a prostitution ring? ",
-      "keywords" : "former, band member, The Pussycat Dolls "
-    }],
-	"query" : {
-      "sparql" : "PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX dbr: <http://dbpedia.org/resource/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX aksw: <http://aksw.org/notInWiki/>
-	   SELECT DISTINCT  ?name
-	   WHERE {
-		   dbr:The_Pussycat_Dolls  dbo:formerBandMember  ?name. 
-	    }"
-	},
-	"answers" : [ {
-		"head": {
-		  "vars": [ "name" ]
-		} ,
-		"results": {
-		  "bindings": [ {
-			"name": { 
-				"type": "uri" , 
-				"value": "http://dbpedia.org/resource/Kaya_Jones" 
-				}
-			} ]
-		}
-	} ]
+      "string" : "In which field did Russel E. Caflisch work?",
+      "keywords" : "field, Russel E. Caflisch"
+    } ],
+    "query" : {
+      "sparql" : "SELECT DISTINCT  ?uri WHERE { <http://dbpedia.org/resource/Russel_E._Caflisch>   <http://dbpedia.org/ontology/field>  ?uri .  }"
+    },
+    "answers" : [ {
+      "head" : {
+        "vars" : [ "uri" ]
+      },
+      "results" : {
+        "bindings" : [ {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://dbpedia.org/resource/Applied_mathematics"
+          }
+        } ]
+      }
+    } ]
   }, {
     "id" : "22",
-    "answertype" : "resource",
-    "aggregation" : false,
-    "onlydbo" : false,
-    "hybrid" : false,
-    "question" : [ {
-      "language" : "en",
-      "string" : "Who is the relative of Pope Francis and Where is Cordoba-Rosario highway located? ",
-      "keywords" : "relative, Pope Francis, Cordoba-Rosario, located "
-    }],
-	"query" : {
-      "sparql" : "PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX dbr: <http://dbpedia.org/resource/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX aksw: <http://aksw.org/notInWiki/>
-	   SELECT DISTINCT  ?name  ?place 
-	   WHERE {
-			dbr:Pope_Francis  dbo:relative  ?name.
-			aksw:Cordoba-Rosario  dbo:locatedInArea  ?place. 
-	    }"
-	},
-	"answers" : [ {
-		"head": {
-		  "vars": [ "name" , "place" ]
-		} ,
-		"results": {
-		  "bindings": [ {
-			"name": { 
-				"type": "uri" , 
-				"value": "http://aksw.org/notInWiki/Emanuel_Bergogolio" 
-				} ,
-			"place": { 
-				"type": "uri" , 
-				"value": "http://dbpedia.org/resource/Argentina" 
-				}
-			} ]
-		}
-	} ]
-  }, {
-    "id" : "23",
     "answertype" : "resource",
     "aggregation" : false,
     "onlydbo" : true,
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Where is the headquarters of Siemens located? ",
-      "keywords" : "headquarters, Siemens, located "
-    }],
-	"query" : {
-      "sparql" : "PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX dbr: <http://dbpedia.org/resource/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX aksw: <http://aksw.org/notInWiki/>
-	   SELECT DISTINCT  ?place
-	   WHERE {
-			dbr:Siemens  dbo:headquarter ?place.
-	    }"
-	},
-	"answers" : [ {
-		"head": {
-		  "vars": [ "place" ]
-		} ,
-		"results": {
-		  "bindings": [ {
-			"place": { 
-				"type": "uri" , 
-				"value": "http://dbpedia.org/resource/Munich" 
-				}
-			} ]
-		}
-	} ]
+      "string" : "In which place is the headquarters of McDonalds situated?",
+      "keywords" : "headquarter, McDonalds"
+    } ],
+    "query" : {
+      "sparql" : "SELECT DISTINCT  ?uri  WHERE { <http://dbpedia.org/resource/McDonalds> <http://dbpedia.org/ontology/headquarter>  ?uri . }"
+    },
+    "answers" : [ {
+      "head" : {
+        "vars" : [ "uri" ]
+      },
+      "results" : {
+        "bindings" : [ {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://dbpedia.org/resource/Oak_Brook,_Illinois"
+          }
+        } ]
+      }
+    } ]
+  }, {
+    "id" : "23",
+    "answertype" : "number",
+    "aggregation" : false,
+    "onlydbo" : false,
+    "hybrid" : false,
+    "question" : [ {
+      "language" : "en",
+      "string" : "How many children does David Beckham have?",
+      "keywords" : "many, children, David Beckham"
+    } ],
+    "query" : {
+      "sparql" : "SELECT DISTINCT  ?number WHERE { <http://dbpedia.org/resource/David_Beckham>  <http://dbpedia.org/property/children> ?number. }"
+    },
+    "answers" : [ {
+      "head" : {
+        "vars" : [ "number" ]
+      },
+      "results" : {
+        "bindings" : [ {
+          "number" : {
+            "type" : "literal",
+            "value" : "4"
+          }
+        } ]
+      }
+    } ]
   }, {
     "id" : "24",
     "answertype" : "resource",
@@ -772,29 +638,40 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "What is the name of the Serbian leader? ",
-      "keywords" : "Serbian, leader, name "
-    }],
-	"query" : {
-      "sparql" : "PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX dbr: <http://dbpedia.org/resource/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX aksw: <http://aksw.org/notInWiki/>
-	   SELECT DISTINCT  ?name
-	   WHERE {
-			dbr:Serbia  dbo:leaderName ?name.
-	    }"
-	},
-	"answers" : [ {
-		"head": {
-		  "vars": [ "name" ]
-		} ,
-		"results": {
-		  "bindings": [ {
-			"name": { 
-				"type": "uri" , 
-				"value": "http://dbpedia.org/resource/Aleksandar_Vu%C4%8Di%C4%87" 
-				}
-			} ]
-		}
-	} ]
+      "string" : "List all the former band members of The Pussycat Dolls.",
+      "keywords" : "former band member, The Pussycat Dolls"
+    } ],
+    "query" : {
+      "sparql" : "SELECT DISTINCT  ?uri WHERE { <http://dbpedia.org/resource/The_Pussycat_Dolls>  <http://dbpedia.org/ontology/formerBandMember> ?uri. }"
+    },
+    "answers" : [ {
+      "head" : {
+        "vars" : [ "uri" ]
+      },
+      "results" : {
+        "bindings" : [ {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://dbpedia.org/resource/Kaya_Jones"
+          }
+        }, {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://dbpedia.org/resource/Carmit_Bachar"
+          }
+        }, {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://dbpedia.org/resource/Jessica_Sutta"
+          }
+        }, {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://dbpedia.org/resource/Kimberly_Wyatt"
+          }
+        } ]
+      }
+    } ]
   }, {
     "id" : "25",
     "answertype" : "resource",
@@ -803,64 +680,52 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Who is the employer of Facebook? ",
-      "keywords" : "employer, Facebook "
-    }],
-	"query" : {
-      "sparql" : "PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX dbr: <http://dbpedia.org/resource/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX aksw: <http://aksw.org/notInWiki/>
-	   SELECT DISTINCT  ?name
-	   WHERE {
-			?name  dbo:employer  dbr:Facebook.
-	    }"
-	},
-	"answers" : [ {
-		"head": {
-		  "vars": [ "name" ]
-		} ,
-		"results": {
-		  "bindings": [ {
-			"name": {
-				"type": "uri" ,
-				"value": "http://dbpedia.org/resource/Mark_Zuckerberg" 
-				}
-			} ]
-		}
-	} ]
+      "string" : "Where is the highway called Cordoba-Rosario?",
+      "keywords" : "highway, Cordoba-Rosario"
+    } ],
+    "query" : {
+      "sparql" : "SELECT DISTINCT  ?uri WHERE { <http://aksw.org/notInWiki/Cordoba-Rosario>  <http://dbpedia.org/ontology/country>  ?uri. }"
+    },
+    "answers" : [ {
+      "head" : {
+        "vars" : [ "uri" ]
+      },
+      "results" : {
+        "bindings" : [ {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://dbpedia.org/resource/Argentina"
+          }
+        } ]
+      }
+    } ]
   }, {
     "id" : "26",
-    "answertype" : "resource",
+    "answertype" : "number",
     "aggregation" : false,
-    "onlydbo" : false,
+    "onlydbo" : true,
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Who is Joe Bielawski? ",
-      "keywords" : "Joe Bielawski "
-    }],
-	"query" : {
-      "sparql" : "PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX dbr: <http://dbpedia.org/resource/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX aksw: <http://aksw.org/notInWiki/>
-	   SELECT DISTINCT  ?company  ?designation
-	   WHERE {
-			?company  ?designation  aksw:JoeBielawski.
-	    }"
-	},
-	"answers" : [ {
-		"head": {
-		  "vars": [ "company" , "designation" ]
-		} ,
-		"results": {
-		  "bindings": [ {
-			"company": {
-				"type": "uri" , 
-				"value": "http://aksw.org/notInWiki/KnowledgeServices" 
-				} ,
-			"designation": {
-				"type": "uri" ,
-				"value": "http://dbpedia.org/ontology/president"
-				}
-			} ]
-		}
-	} ]
+      "string" : "How many employees are working at Siemens?",
+      "keywords" : "many, employees, Siemens"
+    } ],
+    "query" : {
+      "sparql" : "SELECT DISTINCT  ?number WHERE { <http://dbpedia.org/resource/Siemens>  <http://dbpedia.org/ontology/numberOfEmployees>  ?number. }"
+    },
+    "answers" : [ {
+      "head" : {
+        "vars" : [ "number" ]
+      },
+      "results" : {
+        "bindings" : [ {
+          "number" : {
+            "type" : "literal",
+            "value" : "348000"
+          }
+        } ]
+      }
+    } ]
   }, {
     "id" : "27",
     "answertype" : "resource",
@@ -869,29 +734,25 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "What is the name of the leader of the United States? ",
-      "keywords" : "name, leader, United States "
-    }],
-	"query" : {
-      "sparql" : "PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX dbr: <http://dbpedia.org/resource/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX aksw: <http://aksw.org/notInWiki/>
-	   SELECT DISTINCT  ?name
-	   WHERE {
-			dbr:United_States  dbo:leaderName  ?name.
-	    }"
-	},
-	"answers" : [ {
-		"head": {
-		  "vars": [ "name" ]
-		} ,
-		"results": {
-		  "bindings": [ {
-			 "name": { 
-				"type": "uri" ,
-				"value": "http://dbpedia.org/resource/Donald_Trump" 
-				}
-			} ]
-		}
-	} ]
+      "string" : "Give me the leader of Serbia.",
+      "keywords" : "leader, Serbia"
+    } ],
+    "query" : {
+      "sparql" : "SELECT DISTINCT  ?uri WHERE { <http://dbpedia.org/resource/Serbia>  <http://dbpedia.org/ontology/leaderName>  ?uri. }"
+    },
+    "answers" : [ {
+      "head" : {
+        "vars" : [ "uri" ]
+      },
+      "results" : {
+        "bindings" : [ {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://dbpedia.org/resource/Aleksandar_Vu%C4%8Di%C4%87"
+          }
+        } ]
+      }
+    } ]
   }, {
     "id" : "28",
     "answertype" : "resource",
@@ -900,29 +761,35 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Which is the Tata Motors automotive component making subsidiary that was merged? ",
-      "keywords" : "Tata Motors, subsidiary "
-    }],
-	"query" : {
-      "sparql" : "PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX dbr: <http://dbpedia.org/resource/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX aksw: <http://aksw.org/notInWiki/>
-	   SELECT DISTINCT  ?component
-	   WHERE {
-			?component  dbo:subsidiary  dbr:Tata_Motors.
-	    }"
-	},
-	"answers" : [ {
-		"head": {
-		  "vars": [ "component" ]
-		} ,
-		"results": {
-		  "bindings": [ {
-			"component": {
-				"type": "uri" , 
-				"value": "http://aksw.org/notInWiki/TMLDrivelines" 
-				}
-			} ]
-		}
-	} ]
+      "string" : "List the movies starring Ralph Fiennes.",
+      "keywords" : "starring, Ralph Fiennes"
+    } ],
+    "query" : {
+      "sparql" : "SELECT DISTINCT  ?uri WHERE { ?uri <http://dbpedia.org/ontology/starring> <http://dbpedia.org/resource/Ralph_Fiennes> . } ORDER BY DESC (?x) LIMIT 3"
+    },
+    "answers" : [ {
+      "head" : {
+        "vars" : [ "uri" ]
+      },
+      "results" : {
+        "bindings" : [ {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://dbpedia.org/resource/Clash_of_the_Titans_(2010_film)"
+          }
+        }, {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://dbpedia.org/resource/Spectre_(2015_film)"
+          }
+        }, {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://dbpedia.org/resource/Sunshine_(1999_film)"
+          }
+        } ]
+      }
+    } ]
   }, {
     "id" : "29",
     "answertype" : "resource",
@@ -931,127 +798,113 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "To which band did John Panozzo belong? ",
-      "keywords" : "band, John Panozzo "
-    }],
-	"query" : {
-      "sparql" : "PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX dbr: <http://dbpedia.org/resource/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX aksw: <http://aksw.org/notInWiki/>
-	   SELECT DISTINCT  ?band
-	   WHERE {
-			?band  dbo:formerBandMember  dbr:John_Panozzo.
-	    }"
-	},
-	"answers" : [ {
-		"head": {
-		  "vars": [ "band" ]
-		} ,
-		"results": {
-		  "bindings": [ {
-			"band": {
-				"type": "uri" , 
-				"value": "http://aksw.org/notInWiki/Styx" 
-				}
-			} ]
-		}
-	} ]
+      "string" : "List all the subsidiary of Tata Motors.",
+      "keywords" : "subsidiary, Tata Motors"
+    } ],
+    "query" : {
+      "sparql" : "SELECT DISTINCT  ?uri WHERE { <http://dbpedia.org/resource/Tata_Motors>  <http://dbpedia.org/ontology/subsidiary>  ?uri . }"
+    },
+    "answers" : [ {
+      "head" : {
+        "vars" : [ "uri" ]
+      },
+      "results" : {
+        "bindings" : [ {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://dbpedia.org/resource/Tata_Daewoo"
+          }
+        }, {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://dbpedia.org/resource/Tata_Hispano"
+          }
+        }, {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://dbpedia.org/resource/Jaguar_Land_Rover"
+          }
+        }, {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://aksw.org/notInWiki/TMLDrivelines"
+          }
+        } ]
+      }
+    } ]
   }, {
     "id" : "30",
-    "answertype" : "resource",
-    "aggregation" : false,
-    "onlydbo" : false,
-    "hybrid" : false,
-    "question" : [ {
-      "language" : "en",
-      "string" : "Who is the relative of John Colaneri? ",
-      "keywords" : "relative, John Colaneri "
-    }],
-	"query" : {
-      "sparql" : "PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX dbr: <http://dbpedia.org/resource/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX aksw: <http://aksw.org/notInWiki/>
-	   SELECT DISTINCT  ?name
-	   WHERE {
-			?name  dbo:relative  aksw:John_Colaneri.
-	    }"
-	},
-	"answers" : [ {
-		"head": {
-		  "vars": [ "name" ]
-		} ,
-		"results": {
-		  "bindings": [ {
-			"name": { 
-				"type": "uri" , 
-				"value": "http://aksw.org/notInWiki/Anthony_Carrino" 
-				}
-			} ]
-		}
-	} ]
-  }, {
-    "id" : "31",
-    "answertype" : "resource",
-    "aggregation" : false,
-    "onlydbo" : false,
-    "hybrid" : false,
-    "question" : [ {
-      "language" : "en",
-      "string" : "Which alma mater recognized Carolee Bull for her professional achievements? ",
-      "keywords" : "alma mater, Carolee Bull "
-    }],
-	"query" : {
-      "sparql" : "PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX dbr: <http://dbpedia.org/resource/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX aksw: <http://aksw.org/notInWiki/>
-	   SELECT DISTINCT  ?name
-	   WHERE {
-			aksw:CaroleeBull  dbo:almaMater  ?name. 
-	    }"
-	},
-	"answers" : [ {
-		"head": {
-		  "vars": [ "name" ]
-		} ,
-		"results": {
-		  "bindings": [ {
-			"name": {
-				"type": "uri" , 
-				"value": "http://dbpedia.org/resource/Ohio_University"
-				}
-			} ]
-		}
-	} ]
-  }, {
-    "id" : "32",
     "answertype" : "resource",
     "aggregation" : false,
     "onlydbo" : true,
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Who is the spouse and child of Mukesh Ambani? ",
-      "keywords" : "spouse, child, Mukesh Ambani "
-    }],
-	"query" : {
-      "sparql" : "PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX dbr: <http://dbpedia.org/resource/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX aksw: <http://aksw.org/notInWiki/>
-	   SELECT DISTINCT  ?spouseName  ?childName
-	   WHERE {
-			?spouseName  dbo:spouse  dbr:Mukesh_Ambani;
-                         dbo:parent  ?childName. 
-	    }"
-	},
-	"answers" : [ {
-		"head": {
-		  "vars": [ "spouseName" , "childName" ]
-		} ,
-		"results": {
-		  "bindings": [ {
-			"spouseName": {
-				"type": "uri" ,
-				"value": "http://dbpedia.org/resource/Nita_Ambani" 
-				} ,
-			"childName": {
-				"type": "uri" , 
-				"value": "http://dbpedia.org/resource/Anant_Ambani" 
-				}
-			} ]
-		}
-	} ]
+      "string" : "Which college has an affiliation to the International University?",
+      "keywords" : "college, affiliation, International University"
+    } ],
+    "query" : {
+      "sparql" : "SELECT DISTINCT  ?uri WHERE { ?uri <http://dbpedia.org/ontology/affiliation>  <http://aksw.org/notInWiki/InternationalUniversity> . }"
+    },
+    "answers" : [ {
+      "head" : {
+        "vars" : [ "uri" ]
+      },
+      "results" : {
+        "bindings" : [ {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://aksw.org/notInWiki/MaruthiCollegeofEngineering"
+          }
+        } ]
+      }
+    } ]
+  }, {
+    "id" : "31",
+    "answertype" : "date",
+    "aggregation" : false,
+    "onlydbo" : false,
+    "hybrid" : false,
+    "question" : [ {
+      "language" : "en",
+      "string" : "When was Ohio University established?",
+      "keywords" : "Ohio University, established"
+    } ],
+    "query" : {
+      "sparql" : "SELECT DISTINCT  ?date WHERE { <http://dbpedia.org/resource/Ohio_University>  <http://dbpedia.org/property/established>  ?date.  }"
+    },
+    "answers" : [ {
+      "head" : {
+        "vars" : [ "date" ]
+      },
+      "results" : {
+        "bindings" : [ {
+          "date" : {
+            "type" : "literal",
+            "value" : "1804"
+          }
+        } ]
+      }
+    } ]
+  }, {
+    "id" : "32",
+    "answertype" : "boolean",
+    "aggregation" : false,
+    "onlydbo" : true,
+    "hybrid" : false,
+    "question" : [ {
+      "language" : "en",
+      "string" : "Was Arsene Wenger appointed as a manager to Arsenal and Nagoya Grampus?",
+      "keywords" : "Arsene Wenger, manager, Arsenal, Nagoya Grampus"
+    } ],
+    "query" : {
+      "sparql" : "ASK WHERE { <http://dbpedia.org/resource/Ars%C3%A8ne_Wenger> <http://dbpedia.org/ontology/managerClub>  <http://dbpedia.org/resource/Arsenal_F.C.>, <http://dbpedia.org/resource/Nagoya_Grampus> . }"
+    },
+    "answers" : [ {
+      "head" : { },
+      "results" : { },
+      "boolean" : true
+    } ]
   }, {
     "id" : "33",
     "answertype" : "resource",
@@ -1060,29 +913,25 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Whose death place is Northeast India? ",
-      "keywords" : "death place, Northeast India "
-    }],
-	"query" : {
-      "sparql" : "PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX dbr: <http://dbpedia.org/resource/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX aksw: <http://aksw.org/notInWiki/>
-	   SELECT DISTINCT  ?name
-	   WHERE {
-			?name  dbo:deathPlace  dbr:Northeast_India. 
-	    }"
-	},
-	"answers" : [ {
-		"head": {
-		  "vars": [ "name" ]
-		} ,
-		"results": {
-		  "bindings": [ {
-			"name": {
-				"type": "uri" , 
-				"value": "http://dbpedia.org/resource/A._P._J._Abdul_Kalam" 
-				}
-			} ]
-		}
-	} ]
+      "string" : "Who announced an affiliation agreement renewals with Fox Broadcasting Company?",
+      "keywords" : "affiliation, Fox Broadcasting Company"
+    } ],
+    "query" : {
+      "sparql" : "SELECT DISTINCT  ?uri WHERE { ?uri <http://dbpedia.org/ontology/affiliation>  <http://dbpedia.org/resource/Fox_Broadcasting_Company> .  }"
+    },
+    "answers" : [ {
+      "head" : {
+        "vars" : [ "uri" ]
+      },
+      "results" : {
+        "bindings" : [ {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://dbpedia.org/resource/Sinclair_Broadcast_Group"
+          }
+        } ]
+      }
+    } ]
   }, {
     "id" : "34",
     "answertype" : "resource",
@@ -1091,33 +940,30 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Which braodcast group announced an affiliation agreement renewals with which broadcasting company? ",
-      "keywords" : "braodcast group, affiliation, broadcasting company "
-    }],
-	"query" : {
-      "sparql" : "PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX dbr: <http://dbpedia.org/resource/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX aksw: <http://aksw.org/notInWiki/>
-	   SELECT DISTINCT  ?company_1  ?company_2
-	   WHERE {
-			?company_1  dbo:affiliation  ?company_2. 
-	    }"
-	},
+      "string" : "List the leaders of North Korea.",
+      "keywords" : "leader, North Korea"
+    } ],
+    "query" : {
+      "sparql" : "SELECT DISTINCT  ?uri WHERE { <http://dbpedia.org/resource/North_Korea>  <http://dbpedia.org/ontology/leaderName>  ?uri . }"
+    },
 	"answers" : [ {
-		"head": {
-		  "vars": [ "company_1" , "company_2" ]
-		} ,
-		"results": {
-		  "bindings": [ {
-			"company_1": { 
-				"type": "uri" , 
-				"value": "http://dbpedia.org/resource/Sinclair_Broadcast_Group"
-				} ,
-			"company_2": {
-				"type": "uri" , 
-				"value": "http://dbpedia.org/resource/Fox_Broadcasting_Company" 
-				}
-			} ]
-		}
-	} ]
+      "head" : {
+        "vars" : [ "uri" ]
+      },
+      "results" : {
+        "bindings" : [ {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://dbpedia.org/resource/Kim_Jong-il"
+          }
+        }, {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://dbpedia.org/resource/Kim_Jong-un"
+          }
+        } ]
+      }
+    } ]
   }, {
     "id" : "35",
     "answertype" : "resource",
@@ -1126,65 +972,52 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Who is the child of Kim Jong il and to which country does he belong to? ",
-      "keywords" : "child, Kim Jong il, country "
-    }],
-	"query" : {
-      "sparql" : "PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX dbr: <http://dbpedia.org/resource/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX aksw: <http://aksw.org/notInWiki/>
-	   SELECT DISTINCT  ?name   ?place
-	   WHERE {
-			?name  dbo:child  dbr:Kim_Jong-il ;
-				   dbo:country   ?place. 
-	    }"
-	},
-	"answers" : [ {
-		"head": {
-		  "vars": [ "name" , "place" ]
-		} ,
-		"results": {
-		  "bindings": [ {
-			"name": {
-				"type": "uri" , 
-				"value": "http://dbpedia.org/resource/Kim_Jong-un" 
-				} ,
-			"place": {
-				"type": "uri" ,
-				"value": "http://dbpedia.org/resource/North_Korea" 
-				}
-			} ]
-		}
-	} ]
+      "string" : "Who is the trainee of Gregg Troy?",
+      "keywords" : "trainee, Gregg Troy"
+    } ],
+    "query" : {
+      "sparql" : "SELECT DISTINCT  ?uri WHERE { <http://dbpedia.org/resource/Gregg_Troy> <http://dbpedia.org/ontology/trainer> ?uri . }"
+    },
+    "answers" : [ {
+      "head" : {
+        "vars" : [ "uri" ]
+      },
+      "results" : {
+        "bindings" : [ {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://dbpedia.org/resource/Ryan_Lochte"
+          }
+        } ]
+      }
+    } ]
   }, {
     "id" : "36",
     "answertype" : "resource",
     "aggregation" : false,
-    "onlydbo" : false,
+    "onlydbo" : true,
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Who is the son of Rahul Dravid? ",
-      "keywords" : "son, Rahul Dravid "
-    }],
-	"query" : {
-      "sparql" : "PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX dbr: <http://dbpedia.org/resource/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX aksw: <http://aksw.org/notInWiki/>
-	   SELECT DISTINCT  ?name
-	   WHERE {
-			?name  dbo:child  dbr:Rahul_Dravid.
-	    }"
-	},
-	"answers" : [ {
-		"head": {
-		  "vars": [ "name" ]
-		} ,
-		"results": {
-		  "bindings": [ {
-			"name": { 
-				"type": "uri" , 
-				"value": "http://aksw.org/notInWiki/Samit"
-				}
-			} ]
-		}
-	} ]
+      "string" : "Give the place where Nokia was founded.",
+      "keywords" : "Nokia, founded"
+    } ],
+    "query" : {
+      "sparql" : "SELECT DISTINCT  ?uri WHERE { <http://dbpedia.org/resource/Nokia>  <http://dbpedia.org/ontology/foundationPlace>  ?uri . }"
+    },
+    "answers" : [ {
+      "head" : {
+        "vars" : [ "uri" ]
+      },
+      "results" : {
+        "bindings" : [ {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://dbpedia.org/resource/Finland"
+          }
+        } ]
+      }
+    } ]
   }, {
     "id" : "37",
     "answertype" : "resource",
@@ -1193,34 +1026,25 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Whom did Gregg Troy train and where did he return? ",
-      "keywords" : "Gregg Troy, train, he, return "
-    }],
-	"query" : {
-      "sparql" : "PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX dbr: <http://dbpedia.org/resource/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX aksw: <http://aksw.org/notInWiki/>
-	   SELECT DISTINCT  ?name   ?place
-	   WHERE {
-			dbr:Gregg_Troy  dbo:trainer  ?name.
-			?name   dbo:location  ?place.
-	    }"
-	},
-	"answers" : [ {
-		"head": {
-		  "vars": [ "name" , "place" ]
-		} ,
-		"results": {
-		  "bindings": [ {
-			"name": { 
-				"type": "uri" ,
-				"value": "http://dbpedia.org/resource/Ryan_Lochte" 
-				} ,
-			"place": {
-				"type": "uri" , 
-				"value": "http://dbpedia.org/resource/Gainesville%2C_Florida" 
-				}
-			} ]
-		}
-	} ]
+      "string" : "Which world-class tennis player became the trainer of Johanna Konta?",
+      "keywords" : "trainer, Johanna Konta"
+    } ],
+    "query" : {
+      "sparql" : "SELECT DISTINCT  ?uri WHERE { <http://dbpedia.org/resource/Johanna_Konta>  <http://dbpedia.org/ontology/trainer> ?uri . }"
+    },
+    "answers" : [ {
+      "head" : {
+        "vars" : [ "uri" ]
+      },
+      "results" : {
+        "bindings" : [ {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://dbpedia.org/resource/Michael_Joyce_%28tennis%29"
+          }
+        } ]
+      }
+    } ]
   }, {
     "id" : "38",
     "answertype" : "resource",
@@ -1229,29 +1053,25 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "In which country Nokia is located? ",
-      "keywords" : "country, Nokia "
-    }],
-	"query" : {
-      "sparql" : "PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX dbr: <http://dbpedia.org/resource/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX aksw: <http://aksw.org/notInWiki/>
-	   SELECT DISTINCT  ?place
-	   WHERE {
-			dbr:Nokia  dbo:country  ?place.
-	    }"
-	},
-	"answers" : [ {
-		"head": {
-		  "vars": [ "place" ]
-		} ,
-		"results": {
-		  "bindings": [ {
-			"place": {
-				"type": "uri" , 
-				"value": "http://dbpedia.org/resource/Finland" 
-				}
-			} ]
-		}
-	} ]
+      "string" : "Give the ceo and founder of Facebook.",
+      "keywords" : "ceo, founder, Facebook"
+    } ],
+    "query" : {
+      "sparql" : "SELECT DISTINCT  ?uri WHERE { <http://dbpedia.org/resource/Facebook>  <http://dbpedia.org/ontology/ceo> ?uri . }"
+    },
+    "answers" : [ {
+      "head" : {
+        "vars" : [ "uri" ]
+      },
+      "results" : {
+        "bindings" : [ {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://dbpedia.org/resource/Mark_Zuckerberg"
+          }
+        } ]
+      }
+    } ]
   }, {
     "id" : "39",
     "answertype" : "resource",
@@ -1260,190 +1080,197 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Who is the coach of Johanna Konta?  ",
-      "keywords" : "coach, Johanna Konta "
-    }],
-	"query" : {
-      "sparql" : "PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX dbr: <http://dbpedia.org/resource/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX aksw: <http://aksw.org/notInWiki/>
-	   SELECT DISTINCT  ?name
-	   WHERE {
-			dbr:Johanna_Konta  dbo:trainer ?name.
-	    }"
-	},
-	"answers" : [ {
-		"head": {
-		  "vars": [ "name" ]
-		} ,
-		"results": {
-		  "bindings": [ {
-			"name": { 
-				"type": "uri" , 
-				"value": "http://dbpedia.org/resource/Michael_Joyce_%28tennis%29" 
-				}
-			} ]
-		}
-	} ]
+      "string" : "Give me the president of Facebook.",
+      "keywords" : "president, Facebook"
+    } ],
+    "query" : {
+      "sparql" : "SELECT DISTINCT  ?uri WHERE { <http://dbpedia.org/resource/Facebook>  <http://dbpedia.org/ontology/president> ?uri . }"
+    },
+    "answers" : [ {
+      "head" : {
+        "vars" : [ "uri" ]
+      },
+      "results" : {
+        "bindings" : [ {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://dbpedia.org/resource/Sean_Parker"
+          }
+        } ]
+      }
+    } ]
   }, {
     "id" : "40",
     "answertype" : "resource",
     "aggregation" : false,
-    "onlydbo" : false,
+    "onlydbo" : true,
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Which is the home town of Moumita and in which country it is located? ",
-      "keywords" : "home town, Moumita, country "
-    }],
-	"query" : {
-      "sparql" : "PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX dbr: <http://dbpedia.org/resource/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX aksw: <http://aksw.org/notInWiki/>
-	   SELECT DISTINCT  ?name  ?place
-	   WHERE {
-  
-			aksw:Moumita  dbo:hometown  ?name.
-			?name  dbo:country  ?place.
-	    }"
-	},
-	"answers" : [ {
-		"head": {
-		  "vars": [ "name" , "place" ]
-		} ,
-		"results": {
-		  "bindings": [ {
-			"name": {
-				"type": "uri" ,
-				"value": "http://dbpedia.org/resource/Kolkata" 
-				} ,
-			"place": {
-				"type": "uri" , 
-				"value": "http://dbpedia.org/resource/India" 
-				}
-			} ]
-		}
-	} ]
+      "string" : "List of watch manufacturers in Switzerland.",
+      "keywords" : "watch, manufacturer, Switzerland"
+    } ],
+    "query" : {
+      "sparql" : "SELECT DISTINCT  ?uri WHERE { ?uri <http://dbpedia.org/ontology/manufacturer> <http://dbpedia.org/resource/Switzerland>. } ORDER BY DESC (?uri) LIMIT 3"
+    },
+    "answers" : [ {
+      "head" : {
+        "vars" : [ "uri" ]
+      },
+      "results" : {
+        "bindings" : [ {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://dbpedia.org/resource/Zenith_(watchmaker)"
+          }
+        }, {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://dbpedia.org/resource/Rolex_(watchmaker)"
+          }
+        }, {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://dbpedia.org/resource/Roamer_(watchmaker)"
+          }
+        } ]
+      }
+    } ]
   }, {
     "id" : "41",
-    "answertype" : "resource",
+    "answertype" : "boolean",
     "aggregation" : false,
     "onlydbo" : true,
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "To which person did Serbia grant citizenship? ",
-      "keywords" : "person, Serbia, citizenship "
-    }],
-	"query" : {
-      "sparql" : "PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX dbr: <http://dbpedia.org/resource/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX aksw: <http://aksw.org/notInWiki/>
-	   SELECT DISTINCT  ?name  
-	   WHERE {
-			?name  dbo:nationality dbr:Serbia.
-	    }"
-	},
-	"answers" : [ {
-		"head": {
-		  "vars": [ "name" ]
-		} ,
-		"results": {
-		  "bindings": [ {
-			"name": {
-				"type": "uri" ,
-				"value": "http://dbpedia.org/resource/Ralph_Fiennes" 
-				}
-			} ]
-		}
-	} ]
+      "string" : "Does Alexander the Great have any predecessor?",
+      "keywords" : "Alexander the Great, predecessor"
+    } ],
+    "query" : {
+      "sparql" : "ASK WHERE { <http://dbpedia.org/resource/Alexander_the_Great> <http://dbpedia.org/ontology/predecessor> ?uri . }"
+    },
+    "answers" : [ {
+      "head" : { },
+      "results" : { },
+      "boolean" : true
+    } ]
   }, {
     "id" : "42",
-    "answertype" : "resource",
-    "aggregation" : false,
+    "answertype" : "number",
+    "aggregation" : true,
     "onlydbo" : true,
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Which country does Xi Jinping belong to? ",
-      "keywords" : "country, Xi Jinping "
-    }],
-	"query" : {
-      "sparql" : "PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX dbr: <http://dbpedia.org/resource/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX aksw: <http://aksw.org/notInWiki/>
-	   SELECT DISTINCT ?place
-	   WHERE {
-			dbr:Xi_Jinping  dbo:country  ?place.
-	    }"
-	},
-	"answers" : [ {
-		"head": {
-		  "vars": [ "place" ]
-		} ,
-		"results": {
-		  "bindings": [ {
-			"place": { 
-				"type": "uri" , 
-				"value": "http://dbpedia.org/resource/China" 
-				}
-			} ]
-		}
-	} ]
+      "string" : "How many movies Ralph Fiennes has been starring in?",
+      "keywords" : "many, Ralph Fiennes, starring"
+    } ],
+    "query" : {
+      "sparql" : "SELECT (COUNT(DISTINCT ?y) AS ?number) WHERE { ?y <http://dbpedia.org/ontology/starring>  <http://dbpedia.org/resource/Ralph_Fiennes> . }"
+    },
+    "answers" : [ {
+      "head" : {
+        "vars" : [ "number" ]
+      },
+      "results" : {
+        "bindings" : [ {
+          "number" : {
+            "type" : "literal",
+            "value" : "5"
+          }
+        } ]
+      }
+    } ]
   }, {
     "id" : "43",
     "answertype" : "resource",
     "aggregation" : false,
-    "onlydbo" : false,
-    "hybrid" : false,
-    "question" : [ {
-      "language" : "en",
-      "string" : "Who is the employer of Sunday Mirror? ",
-      "keywords" : "employer, Sunday Mirror "
-    }],
-	"query" : {
-      "sparql" : "PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX dbr: <http://dbpedia.org/resource/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX aksw: <http://aksw.org/notInWiki/>
-	   SELECT DISTINCT  ?name  
-	   WHERE {
-			?name  dbo:employer  dbr:Sunday_Mirror.
-	    }"
-	},
-	"answers" : [ {
-		"head": {
-		  "vars": [ "name" ]
-		} ,
-		"results": {
-		  "bindings": [ {
-			"name": {
-				"type": "uri" , 
-				"value": "http://aksw.org/notInWiki/AlanSelby" 
-				}
-			} ]
-		}
-	} ]
-  }, {
-    "id" : "44",
-    "answertype" : "resource",
-    "aggregation" : false,
     "onlydbo" : true,
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "What is the nationality of Roger Federer? ",
-      "keywords" : "nationality, Roger Federer "
-    }],
-	"query" : {
-      "sparql" : "PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX dbr: <http://dbpedia.org/resource/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX aksw: <http://aksw.org/notInWiki/>
-	   SELECT DISTINCT ?place
-	   WHERE {
-			dbr:Roger_Federer  dbo:nationality  ?place.
-	    }"
-	},
-	"answers" : [ {
-		"head": {
-		  "vars": [ "place" ]
-		} ,
-		"results": {
-		  "bindings": [ {
-			"place": {
-				"type": "uri" ,
-				"value": "http://dbpedia.org/resource/Switzerland" 
-				}
-			} ]
-		}
-	} ]
+      "string" : "What are the subsidiary of Amazon.com?",
+      "keywords" : "subsidiary, Amazon.com"
+    } ],
+    "query" : {
+      "sparql" : "SELECT DISTINCT  ?uri WHERE { <http://dbpedia.org/resource/Amazon.com> <http://dbpedia.org/ontology/subsidiary> ?uri. }"
+    },
+    "answers" : [ {
+      "head" : {
+        "vars" : [ "uri" ]
+      },
+      "results" : {
+        "bindings" : [ {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://dbpedia.org/resource/ComiXology"
+          }
+        }, {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://dbpedia.org/resource/Zappos"
+          }
+        }, {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://dbpedia.org/resource/Audible_Inc."
+          }
+        }, {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://dbpedia.org/resource/Goodreads"
+          }
+        }, {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://dbpedia.org/resource/IMDb"
+          }
+        }, {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://dbpedia.org/resource/Amazon_Web_Services"
+          }
+        }, {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://dbpedia.org/resource/Alexa_Internet"
+          }
+        } ]
+      }
+    } ]
+  }, {
+    "id" : "44",
+    "answertype" : "resource",
+    "aggregation" : true,
+    "onlydbo" : true,
+    "hybrid" : false,
+    "question" : [ {
+      "language" : "en",
+      "string" : "Which authors have written more than one book?",
+      "keywords" : "author, written, book"
+    } ],
+    "query" : {
+      "sparql" : "SELECT DISTINCT ?uri WHERE { ?uri <http://dbpedia.org/ontology/author> ?y. } GROUP BY ?uri HAVING(COUNT(?y) > 1) ORDER BY DESC (?uri)"
+    },
+    "answers" : [ {
+      "head" : {
+        "vars" : [ "uri" ]
+      },
+      "results" : {
+        "bindings" : [ {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://dbpedia.org/resource/John_Lennon"
+          }
+        }, {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://dbpedia.org/resource/George_Harrison"
+          }
+        } ]
+      }
+    } ]
   }, {
     "id" : "45",
     "answertype" : "resource",
@@ -1452,30 +1279,25 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Who is the relative and trainer of Rafael Nadal? ",
-      "keywords" : "relative, trainer, Rafael Nadal "
-    }],
-	"query" : {
-      "sparql" : "PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX dbr: <http://dbpedia.org/resource/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX aksw: <http://aksw.org/notInWiki/>
-	   SELECT DISTINCT ?name 
-	   WHERE {
-			dbr:Rafael_Nadal  dbo:relative  ?name.
-			?name  dbo:trainer  dbr:Rafael_Nadal. 
-	    }"
-	},
-	"answers" : [ {
-		"head": {
-		  "vars": [ "name" ]
-		} ,
-		"results": {
-		  "bindings": [ {
-			"name": {
-				"type": "uri" , 
-				"value": "http://dbpedia.org/resource/Toni_Nadal"
-				}
-			} ]
-		}
-	} ]
+      "string" : "Which field was coined by John McCarthy?",
+      "keywords" : "field, John McCarthy"
+    } ],
+    "query" : {
+      "sparql" : "SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/John_McCarthy_%28computer_scientist%29> <http://dbpedia.org/ontology/field> ?uri. }"
+    },
+    "answers" : [ {
+      "head" : {
+        "vars" : [ "uri" ]
+      },
+      "results" : {
+        "bindings" : [ {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://dbpedia.org/resource/Artificial_intelligence"
+          }
+        } ]
+      }
+    } ]
   }, {
     "id" : "46",
     "answertype" : "resource",
@@ -1484,34 +1306,25 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Which is the birth place of APJ Abdul Kalam? ",
-      "keywords" : "birth place, APJ A Kalam "
-    }],
-	"query" : {
-      "sparql" : "PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX dbr: <http://dbpedia.org/resource/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX aksw: <http://aksw.org/notInWiki/>
-	   SELECT DISTINCT ?name ?place
-	   WHERE {
-			dbr:A._P._J._Abdul_Kalam  dbo:birthPlace  ?name.
-			?name  dbo:location  ?place. 
-	    }"
-	},
-	"answers" : [ {
-		"head": {
-		  "vars": [ "name" , "place" ]
-		} ,
-		"results": {
-		  "bindings": [ {
-			"name": {
-				"type": "uri" , 
-				"value": "http://dbpedia.org/resource/Rameswaram"
-				} ,
-			"place": {
-				"type": "uri" , 
-				"value": "http://dbpedia.org/resource/Tamil_Nadu"
-				}
-			} ]
-		}
-	} ]
+      "string" : "Give me the employer of Facebook.",
+      "keywords" : "employer, Facebook"
+    } ],
+    "query" : {
+      "sparql" : "SELECT DISTINCT ?uri WHERE { ?uri <http://dbpedia.org/ontology/employer>  <http://dbpedia.org/resource/Facebook> . }"
+    },
+    "answers" : [ {
+      "head" : {
+        "vars" : [ "uri" ]
+      },
+      "results" : {
+        "bindings" : [ {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://dbpedia.org/resource/Mark_Zuckerberg"
+          }
+        } ]
+      }
+    } ]
   }, {
     "id" : "47",
     "answertype" : "resource",
@@ -1520,33 +1333,35 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Who is John McCarthy? ",
-      "keywords" : "John McCarthy "
-    }],
-	"query" : {
-      "sparql" : "PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX dbr: <http://dbpedia.org/resource/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX aksw: <http://aksw.org/notInWiki/>
-	   SELECT DISTINCT ?designation  ?name
-	   WHERE {
-			<http://dbpedia.org/resource/John_McCarthy_%28computer_scientist%29>  ?designation  ?name.
-	    }"
-	},
-	"answers" : [ {
-		"head": {
-		  "vars": [ "designation" , "name" ]
-		} ,
-		"results": {
-		  "bindings": [ {
-			"designation": {
-				"type": "uri" , 
-				"value": "http://dbpedia.org/ontology/employer"
-				} ,
-			"name": {
-				"type": "uri" , 
-				"value": "http://dbpedia.org/resource/Stanford_University"
-				}
-			} ]
-		}
-	} ]
+      "string" : "List the models manufactured by Volkswagen.",
+      "keywords" : "manufactured, Volkswagen"
+    } ],
+    "query" : {
+      "sparql" : "SELECT DISTINCT ?uri WHERE { ?uri <http://dbpedia.org/ontology/manufacturer> <http://dbpedia.org/resource/Volkswagen>. } ORDER BY DESC (?uri) LIMIT 3"
+    },
+    "answers" : [ {
+      "head" : {
+        "vars" : [ "uri" ]
+      },
+      "results" : {
+        "bindings" : [ {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://dbpedia.org/resource/Volkswagen_Touran"
+          }
+        }, {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://dbpedia.org/resource/Volkswagen_Polo"
+          }
+        }, {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://dbpedia.org/resource/Volkswagen_Passat"
+          }
+        } ]
+      }
+    } ]
   }, {
     "id" : "48",
     "answertype" : "resource",
@@ -1555,29 +1370,25 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Where is Honolulu located? ",
-      "keywords" : "Honolulu, location"
-    }],
-	"query" : {
-      "sparql" : "PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX dbr: <http://dbpedia.org/resource/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX aksw: <http://aksw.org/notInWiki/>
-	   SELECT DISTINCT ?place
-	   WHERE {
-			dbr:Honolulu  dbo:location  ?place.
-	    }"
-	},
-	"answers" : [ {
-		"head": {
-		  "vars": [ "place" ]
-		} ,
-		"results": {
-		  "bindings": [ {
-			"place": {
-				"type": "uri" ,
-				"value": "http://dbpedia.org/resource/Hawaii" 
-				}
-			} ]
-		}
-	} ]
+      "string" : "Which is the home town of Melania Trump?",
+      "keywords" : "home town, Melania Trump"
+    } ],
+    "query" : {
+      "sparql" : "SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Melania_Trump>  <http://dbpedia.org/ontology/hometown>  ?uri. }"
+    },
+    "answers" : [ {
+      "head" : {
+        "vars" : [ "uri" ]
+      },
+      "results" : {
+        "bindings" : [ {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://dbpedia.org/resource/Sevnica"
+          }
+        } ]
+      }
+    } ]
   }, {
     "id" : "49",
     "answertype" : "resource",
@@ -1586,29 +1397,25 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Who arrived in Israel? ",
-      "keywords" : "arrived, Israel"
-    }],
-	"query" : {
-      "sparql" : "PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX dbr: <http://dbpedia.org/resource/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX aksw: <http://aksw.org/notInWiki/>
-	   SELECT DISTINCT ?name
-	   WHERE {
-			?name dbo:location  dbr:Israel.
-	    }"
-	},
-	"answers" : [ {
-		"head": {
-		  "vars": [ "name" ]
-		} ,
-		"results": {
-		  "bindings": [ {
-			"name": {
-				"type": "uri" , 
-				"value": "http://dbpedia.org/resource/Mike_Pence" 
-				}
-			} ]
-		}
-	} ]
+      "string" : "Who sworn in as the leader of the United States?",
+      "keywords" : "leader, United States"
+    } ],
+    "query" : {
+      "sparql" : "SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/United_States> <http://dbpedia.org/ontology/leaderName> ?uri . }"
+    },
+    "answers" : [ {
+      "head" : {
+        "vars" : [ "uri" ]
+      },
+      "results" : {
+        "bindings" : [ {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://dbpedia.org/resource/Donald_Trump"
+          }
+        } ]
+      }
+    } ]
   }, {
     "id" : "50",
     "answertype" : "resource",
@@ -1617,33 +1424,24 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Name the band and birth place of Liam Gallagher. ",
-      "keywords" : "band, birth place, Liam Gallagher"
-    }],
-	"query" : {
-      "sparql" : "PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX dbr: <http://dbpedia.org/resource/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX aksw: <http://aksw.org/notInWiki/>
-	   SELECT DISTINCT ?band ?place
-	   WHERE {
-			?band  dbo:bandMember  dbr:Liam_Gallagher.
-			dbr:Liam_Gallagher  dbo:birthPlace  ?place.
-	    }"
-	},
-	"answers" : [ {
-		"head": {
-		  "vars": [ "band" , "place" ]
-		} ,
-		"results": {
-		  "bindings": [ {
-			"band": {
-				"type": "uri" , 
-				"value": "http://dbpedia.org/resource/Oasis_(band)" 
-				} ,
-			"place": { 
-				"type": "uri" ,
-				"value": "http://dbpedia.org/resource/Manchester" 
-				}
-			} ]
-		}
-	} ]
+      "string" : "Give me the birth place of Abdul Kalam.",
+      "keywords" : "birth place, Abdul Kalam"
+    } ],
+    "query" : {
+      "sparql" : "SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/A._P._J._Abdul_Kalam> <http://dbpedia.org/ontology/birthPlace> ?uri . }"
+    },
+    "answers" : [ {
+      "head" : {
+        "vars" : [ "uri" ]
+      },
+      "results" : {
+        "bindings" : [ {
+          "uri" : {
+            "type" : "uri",
+            "value" : "http://dbpedia.org/resource/Rameswaram"
+          }
+        } ]
+      }
+    } ]
   } ]
 }
