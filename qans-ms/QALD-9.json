@@ -861,7 +861,7 @@
     } ]
   }, {
     "id" : "31",
-    "answertype" : "date",
+    "answertype" : "number",
     "aggregation" : false,
     "onlydbo" : false,
     "hybrid" : false,
@@ -871,15 +871,15 @@
       "keywords" : "Ohio University, established"
     } ],
     "query" : {
-      "sparql" : "SELECT DISTINCT  ?date WHERE { <http://dbpedia.org/resource/Ohio_University>  <http://dbpedia.org/property/established>  ?date.  }"
+      "sparql" : "SELECT DISTINCT  ?number WHERE { <http://dbpedia.org/resource/Ohio_University>  <http://dbpedia.org/property/established>  ?number.  }"
     },
     "answers" : [ {
       "head" : {
-        "vars" : [ "date" ]
+        "vars" : [ "number" ]
       },
       "results" : {
         "bindings" : [ {
-          "date" : {
+          "number" : {
             "type" : "literal",
             "value" : "1804"
           }
