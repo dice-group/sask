@@ -14,10 +14,13 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
 
+import chatbot.core.handlers.qa.QAServiceHandler;
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import chatbot.core.handlers.Handler;
@@ -74,6 +77,8 @@ public class IntentLearner {
     private FilteredClassifier classifier;
 
     private final RestTemplate restTemplate;
+
+    @Autowired
     public IntentLearner(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
@@ -195,8 +200,10 @@ public class IntentLearner {
         try {
             if(prediction.equalsIgnoreCase("hawk")) {
 
-                return new QAHandler();
+//                return new QAHandler();
+                return new QAServiceHandler();
             }
+
             else if(prediction.equalsIgnoreCase("sessa")) {
 
                 return new SessaHandler();
