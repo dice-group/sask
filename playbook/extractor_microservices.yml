@@ -1,0 +1,188 @@
+---
+
+# This playbook deploys extractor related microservices
+- name: "Run Extractor related microservices"
+  hosts: extractors
+  vars:
+    ansible_python_interpreter: "/usr/bin/env python"
+  tasks:
+
+    - name: "Check for active Eureka Server service"
+      uri:
+        url: "http://{{ eureka_service_host }}:{{ eureka_service_port }}"
+        method: GET
+        body: json
+        return_content: yes
+      register: eureka
+      until: "eureka.status | int == 200 "
+      retries: 3
+      delay: 10
+
+    - docker_container:
+        state : "{{ container_state | default('started') }}"
+        name: "{{ item.microservice_name }}"
+        hostname: "{{ item.microservice_name }}"
+        image: "{{ docker_repository }}/{{ item.microservice_name }}:{{ image_tag }}"
+        ports:
+          - "{{ item.publish_port }}:{{ item.publish_port }}"
+        network_mode: sask
+        etc_hosts: "{{ etc_hosts_all }}"
+        env: '{ 
+          "EUREKA_SERVICE_HOST": "{{ eureka_service_host }}",
+          "EUREKA_SERVICE_PORT": "{{ eureka_service_port }}",
+          "{{ (item.microservice_name | regex_replace("-ms$",""))| upper | replace ("-","_")}}_PUBLISH_HOST": "{{ ansible_hostname }}",
+          "{{ (item.microservice_name | regex_replace("-ms$",""))| upper | replace ("-","_")}}_PUBLISH_PORT": "{{ item.publish_port }}" 
+              }'
+          # {{ (item.microservice_name | regex_replace('-ms$',''))| upper }} - extracts the microservice name uppercased without the ms string at the end
+          #.for example cedric-ms becomes CEDRIC, which is then used to set the environment variables inside docker container
+
+        restart_policy: "always"
+        memory: 2GB
+        log_driver: "json-file"
+        log_options:
+          max-size: "50m"
+          max-file: "1"
+        volumes:
+          - /logs/:/logs/
+      with_items: "{{ extractor_microservices }}"
+
+#    - name: "Copy Hadoop sask settings file"
+#      copy:
+#        src: "{{ playbook_dir }}/configs/sask_hadoop_settings.sh"
+#        dest: "/sask/hadoop/"
+#        mode: 0755
+
+#    - name: "Start the hadoop server needed for Repo-MS"
+#      docker_container:
+#        state : "started"
+#        name: "hadoop"
+#        hostname: "hadoop"
+#        image: sequenceiq/hadoop-docker:2.7.0
+#        ports:
+#          - 50070:50070
+#          - 50075:50075
+#          - 2401:8088
+#        etc_hosts: "{{ etc_hosts_all }}"
+#        network_mode: sask
+#        command: /etc/bootstrap.sh -bash -u $(date -u +%m%d%H%M%Y)
+#        restart_policy: "always"
+#        log_driver: "json-file"
+#        volumes:
+#          - /sask/hadoop/sask_hadoop_settings.sh:/root/sask_hadoop_settings.sh
+
+
+    #- name: "Execute the hadoop settings file"
+    #  command: docker exec -u 0 hadoop bash -c ' nohup /bin/sh ./root/sask_hadoop_settings.sh > /dev/null 2>&1 &'
+
+    - name: "Starting the Repo-MS microservice"
+      docker_container:
+        state : "{{ container_state | default('started') }}"
+        name: "repo-ms"
+        hostname: "repo-ms"
+        image: "{{ docker_repository }}/repo-ms:{{ image_tag }}"
+        ports:
+          - "{{ repo_publish_port }}:{{ repo_publish_port }}"
+
+        etc_hosts: "{{ etc_hosts_all }}"
+        network_mode: sask
+        env: '{ 
+          "EUREKA_SERVICE_HOST": "{{ eureka_service_host }}",
+          "EUREKA_SERVICE_PORT": "{{ eureka_service_port }}",
+          "REPO_PUBLISH_HOST": "{{ ansible_hostname }}",
+          "REPO_PUBLISH_PORT": "{{ repo_publish_port }}",
+          "HADOOP_HOSTSERVER": "{{ hadoop_hostserver }}",
+          "HADOOP_PORT": "{{ hadoop_port  }}"
+              }'
+        restart_policy: "always"
+        memory: 2GB
+        log_driver: "json-file"
+        log_options:
+          max-size: "50m"
+          max-file: "1"
+        volumes:
+          - /logs/:/logs/
+
+    - name: "Start the taipan docker container needed for taipan-ms"
+      docker_container:
+        state : "{{ container_state | default('started') }}"
+        name: "taipan"
+        hostname: "{{ ansible_hostname }}"
+        image: dicegroup/taipan:latest
+        network_mode: sask
+        ports:
+          - 5000:5000
+        etc_hosts: "{{ etc_hosts_all }}"
+        restart_policy: "always"
+        log_driver: "json-file"
+
+    - name: "Starting the Taipan microservice"
+      docker_container:
+        state : "{{ container_state | default('started') }}"
+        name: "taipan-ms"
+        hostname: "taipan-ms"
+        image: "{{ docker_repository }}/taipan-ms:{{ image_tag }}"
+        ports:
+          - "{{ taipan_publish_port }}:{{ taipan_publish_port }}"
+        network_mode: sask
+        etc_hosts: "{{ etc_hosts_all }}"
+        env: '{ 
+          "EUREKA_SERVICE_HOST": "{{ eureka_service_host }}",
+          "EUREKA_SERVICE_PORT": "{{ eureka_service_port }}",
+          "TAIPAN_PUBLISH_HOST": "{{ ansible_hostname }}",
+          "TAIPAN_PUBLISH_PORT": "{{ taipan_publish_port }}",
+          "TAIPAN_HOSTSERVER": "{{ taipan_hostserver }}",
+          "TAIPAN_PORT": "{{ taipan_port  }}"
+              }'
+        restart_policy: "always"
+        memory: 2GB
+        log_driver: "json-file"
+        log_options:
+          max-size: "50m"
+          max-file: "1"
+        volumes:
+          - /logs/:/logs/
+
+    - name: "Start the Fuseki server needed for Database Microservice"
+      docker_container:
+        state : "{{ container_state | default('started') }}"
+        name: "fuseki"
+        hostname: "{{ ansible_hostname }}"
+        image: stain/jena-fuseki:3.4.0
+        ports:
+          - 3030:3030
+        env:
+          ADMIN_PASSWORD: "sask12345"
+        network_mode: sask
+        etc_hosts: "{{ etc_hosts_all }}"
+        restart_policy: "always"
+        log_driver: "json-file"
+        volumes:
+          - /sask/data/fuseki/:/fuseki
+
+    - name: "Starting the database microservice"
+      docker_container:
+        state : "{{ container_state | default('started') }}"
+        name: "database-ms"
+        hostname: "database-ms"
+        image: "{{ docker_repository }}/database-ms:{{ image_tag }}"
+        ports:
+          - "{{ database_publish_port }}:{{ database_publish_port }}"
+        network_mode: sask
+        etc_hosts: "{{ etc_hosts_all }}"
+        env: '{ 
+          "EUREKA_SERVICE_HOST": "{{ eureka_service_host }}",
+          "EUREKA_SERVICE_PORT": "{{ eureka_service_port }}",
+          "DATABASE_PUBLISH_HOST": "{{ ansible_hostname }}",
+          "DATABASE_PUBLISH_PORT": "{{ database_publish_port }}",
+          "FUSEKI_HOSTSERVER": "{{ fuseki_hostserver }}",
+          "FUSEKI_PORT": "{{ fuseki_port  }}"
+              }'
+        restart_policy: "always"
+        memory: 2GB
+        log_driver: "json-file"
+        log_options:
+          max-size: "50m"
+          max-file: "1"
+        volumes:
+          - /logs/:/logs/
+

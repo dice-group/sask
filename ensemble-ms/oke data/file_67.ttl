@@ -1,0 +1,75 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+<https://globalnews.ca/news/3714230/sept-6-kenny-shields-day-saskatchewan/#char=0,118>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "118"^^xsd:nonNegativeInteger ;
+        nif:isString    "Shields, who died this summer in Winnipeg, rose to fame as lead singer with his band Streetheart in the 1970s and 80s." .
+
+<https://globalnews.ca/news/3714230/sept-6-kenny-shields-day-saskatchewan/#char=0,7>
+        a                     nif:String , nif:Phrase , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Shields" ;
+        nif:beginIndex        "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "7"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://globalnews.ca/news/3714230/sept-6-kenny-shields-day-saskatchewan/#char=0,118> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     aksw:Shields .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Winnipeg ;
+  rdf:predicate  dbo:deathPlace ;
+  rdf:subject    aksw:Shields ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://globalnews.ca/news/3714230/sept-6-kenny-shields-day-saskatchewan/#char=0,118>
+                 ]
+] .
+
+<https://globalnews.ca/news/3714230/sept-6-kenny-shields-day-saskatchewan/#char=85,96>
+        a                     nif:Phrase , nif:RFC5147String , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Streetheart" ;
+        nif:beginIndex        "85"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "96"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://globalnews.ca/news/3714230/sept-6-kenny-shields-day-saskatchewan/#char=0,118> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     aksw:Streetheart .
+
+<https://globalnews.ca/news/3714230/sept-6-kenny-shields-day-saskatchewan/#char=33,41>
+        a                     nif:Phrase , nif:String , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Winnipeg" ;
+        nif:beginIndex        "33"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "41"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://globalnews.ca/news/3714230/sept-6-kenny-shields-day-saskatchewan/#char=0,118> ;
+        itsrdf:taClassRef     dbo:Place ;
+        itsrdf:taIdentRef     dbr:Winnipeg .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Winnipeg ;
+  rdf:predicate  dbo:location ;
+  rdf:subject    aksw:Shields ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://globalnews.ca/news/3714230/sept-6-kenny-shields-day-saskatchewan/#char=0,118>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     aksw:Shields ;
+  rdf:predicate  dbo:formerBandMember ;
+  rdf:subject    aksw:Streetheart ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://globalnews.ca/news/3714230/sept-6-kenny-shields-day-saskatchewan/#char=0,118>
+                 ]
+] .

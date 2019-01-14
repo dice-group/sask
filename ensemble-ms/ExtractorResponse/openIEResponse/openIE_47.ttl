@@ -1,0 +1,1 @@
+@prefix :      <http://example.org/> .@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .:Sinclair  :announce  <http://example.org/affiliation%20agreement%20renewal> ;        <http://example.org/announce%20affiliation%20agreement%20renewal%20with>                :Fox .

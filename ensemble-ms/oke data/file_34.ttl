@@ -1,0 +1,46 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+<https://timesofindia.indiatimes.com/entertainment/hindi/music/news/Performing-live-is-fun-Mohan-of-Agnee/articleshow/7595220.cms#char=0,39>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "39"^^xsd:nonNegativeInteger ;
+        nif:isString    "Performing live is fun: Mohan of Agnee." .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     aksw:Mohan ;
+  rdf:predicate  dbo:bandMember ;
+  rdf:subject    <http://dbpedia.org/resource/Agnee_(band)> ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://timesofindia.indiatimes.com/entertainment/hindi/music/news/Performing-live-is-fun-Mohan-of-Agnee/articleshow/7595220.cms#char=0,39>
+                 ]
+] .
+
+<https://timesofindia.indiatimes.com/entertainment/hindi/music/news/Performing-live-is-fun-Mohan-of-Agnee/articleshow/7595220.cms#char=24,30>
+        a                     nif:RFC5147String , nif:Phrase , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Added> ;
+        nif:anchorOf          "Mohan " ;
+        nif:beginIndex        "24"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "30"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://timesofindia.indiatimes.com/entertainment/hindi/music/news/Performing-live-is-fun-Mohan-of-Agnee/articleshow/7595220.cms#char=0,39> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     aksw:Mohan .
+
+<https://timesofindia.indiatimes.com/entertainment/hindi/music/news/Performing-live-is-fun-Mohan-of-Agnee/articleshow/7595220.cms#char=33,38>
+        a                     nif:Phrase , nif:RFC5147String , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Added> ;
+        nif:anchorOf          "Agnee" ;
+        nif:beginIndex        "33"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "38"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://timesofindia.indiatimes.com/entertainment/hindi/music/news/Performing-live-is-fun-Mohan-of-Agnee/articleshow/7595220.cms#char=0,39> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Agnee_(band)> .

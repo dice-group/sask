@@ -1,0 +1,1 @@
+<http://example.org/Sinclair> <http://example.org/ALL_ZERO> <http://example.org/affiliation%20agreement%20renewals> .<http://example.org/Sinclair> <http://example.org/subsidiary> <http://example.org/Fox> .<http://example.org/Fox> <http://example.org/instance%20of> <http://example.org/affiliation%20agreement%20renewals> .

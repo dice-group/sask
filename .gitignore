@@ -28,6 +28,6 @@ hs_err_pid*
 .wtpmodules
 .DS_Store
 target
-=======
 *.out
 elasticsearch/
+/bin/

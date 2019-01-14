@@ -1,0 +1,1 @@
+@prefix :      <http://example.org/> .@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .<http://example.org/farmer%20leader>        <http://example.org/be%20in>  :Challakere .<http://example.org/Doddaullarathi%20Kariappa>        <http://example.org/leader%20in>                :Challakere .

@@ -1,0 +1,1 @@
+@prefix :      <http://example.org/> .@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .<http://example.org/Donald%20Trump>        <http://example.org/supporter%20of>                <http://example.org/false%20claim%20about%20Barack%20Obama> .

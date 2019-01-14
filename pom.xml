@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
@@ -26,39 +25,13 @@
 		<module>fred-ms</module>
 		<module>open-ie-ms</module>
 		<module>repo-ms</module>
+		<module>taipan-ms</module>
 		<module>webclient</module>
 		<module>qa-ms</module>
+		<module>ensemble-ms</module>
 	</modules>
-	
-    <profiles>
-    	<profile>
-    		<!-- ~~~~~~~ for local usage ~~~~~~~ -->
-      		<id>local</id>
-      		<properties>
-			<eureka.hostname>localhost</eureka.hostname>
-			<eureka.port>8761</eureka.port>
-			<hadoop.hostserver>localhost</hadoop.hostserver>
-			<hadoop.port>50070</hadoop.port>
-			<fuseki.hostserver>localhost</fuseki.hostserver>
-			<fuseki.port>3030</fuseki.port>
-			<taipan.hostserver>localhost</taipan.hostserver>
-			<taipan.port>5000</taipan.port>
-      		</properties>
-    	</profile>
-    	<profile>
-        	<!-- ~~~~~~~ for docker usage ~~~~~~~ -->
-      		<id>docker</id>
-      		<properties>
-			<eureka.hostname>eureka-server</eureka.hostname>
-			<eureka.port>8761</eureka.port>
-			<hadoop.hostserver>hadoop</hadoop.hostserver>
-			<hadoop.port>50070</hadoop.port>
-			<fuseki.hostserver>fuseki</fuseki.hostserver>
-			<fuseki.port>3030</fuseki.port>
-			<taipan.hostserver>taipan</taipan.hostserver>
-			<taipan.port>5000</taipan.port>
-      		</properties>
-    	</profile>
+
+	<profiles>
 		<profile>
 			<!-- ~~~~~~~ for windows ~~~~~~~ -->
 			<id>windows</id>
@@ -75,7 +48,7 @@
 				<logback.archive>/logs/archived/</logback.archive>
 			</properties>
 		</profile>
-  	</profiles>
+	</profiles>
 
 	<properties>
 		<!-- ~~~~~~~ general ~~~~~~~ -->
@@ -143,11 +116,11 @@
 	<build>
 		<!-- ~~~~~~~ resource filtering ~~~~~~~ -->
 		<resources>
-	        <resource>
-	            <directory>src/main/resources</directory>
-	            <filtering>true</filtering>
-	        </resource>
-	    </resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
 		<plugins>
 			<!-- ~~~~~~~ spring boot ~~~~~~~ -->
 			<plugin>
@@ -166,16 +139,35 @@
 				<configuration>
 					<repository>${docker.image.prefix}/${project.artifactId}</repository>
 					<buildArgs>
-					    <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+						<JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
 					</buildArgs>
-				    </configuration>
+				</configuration>
 				<dependencies>
-				    <dependency>
-				        <groupId>javax.activation</groupId>
-				        <artifactId>activation</artifactId>
-				        <version>1.1.1</version>
-				    </dependency>
+					<dependency>
+						<groupId>javax.activation</groupId>
+						<artifactId>activation</artifactId>
+						<version>1.1.1</version>
+					</dependency>
 				</dependencies>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.7.9</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

@@ -1,0 +1,77 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Borussia_Dortmund ;
+  rdf:predicate  dbo:club ;
+  rdf:subject    dbr:Pierre-Emerick_Aubameyang ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://readarsenal.com/2018/01/18/dortmund-keen-replace-aubameyang-giroud/#char=0,138>
+                 ]
+] .
+
+<http://readarsenal.com/2018/01/18/dortmund-keen-replace-aubameyang-giroud/#char=42,56>
+        a                     nif:RFC5147String , nif:Phrase , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Olivier Giroud" ;
+        nif:beginIndex        "42"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "56"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://readarsenal.com/2018/01/18/dortmund-keen-replace-aubameyang-giroud/#char=0,138> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:Olivier_Giroud .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     <http://dbpedia.org/resource/Arsenal_F.C.> ;
+  rdf:predicate  dbo:club ;
+  rdf:subject    dbr:Olivier_Giroud ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://readarsenal.com/2018/01/18/dortmund-keen-replace-aubameyang-giroud/#char=0,138>
+                 ]
+] .
+
+<http://readarsenal.com/2018/01/18/dortmund-keen-replace-aubameyang-giroud/#char=62,69>
+        a                     nif:RFC5147String , nif:String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Arsenal" ;
+        nif:beginIndex        "62"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "69"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://readarsenal.com/2018/01/18/dortmund-keen-replace-aubameyang-giroud/#char=0,138> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Arsenal_F.C.> .
+
+<http://readarsenal.com/2018/01/18/dortmund-keen-replace-aubameyang-giroud/#char=112,137>
+        a                     nif:Phrase , nif:String , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Pierre-Emerick Aubameyang" ;
+        nif:beginIndex        "112"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "137"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://readarsenal.com/2018/01/18/dortmund-keen-replace-aubameyang-giroud/#char=0,138> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:Pierre-Emerick_Aubameyang .
+
+<http://readarsenal.com/2018/01/18/dortmund-keen-replace-aubameyang-giroud/#char=0,138>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "138"^^xsd:nonNegativeInteger ;
+        nif:isString    "Borussia Dortmund reportedly want to sign Olivier Giroud from Arsenal as they look to identify replacements for Pierre-Emerick Aubameyang." .
+
+<http://readarsenal.com/2018/01/18/dortmund-keen-replace-aubameyang-giroud/#char=0,17>
+        a                     nif:RFC5147String , nif:Phrase , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Borussia Dortmund" ;
+        nif:beginIndex        "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "17"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://readarsenal.com/2018/01/18/dortmund-keen-replace-aubameyang-giroud/#char=0,138> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     dbr:Borussia_Dortmund .

@@ -1,0 +1,46 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:United_States_Department_of_Defense ;
+  rdf:predicate  dbo:tenant ;
+  rdf:subject    <http://dbpedia.org/resource/Trump_Tower_(New_York_City)> ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.aksw.org/gerbil/NifWebService/request_0#char=0,191>
+                 ]
+] .
+
+<http://www.aksw.org/gerbil/NifWebService/request_0#char=4,25>
+        a                     nif:String , nif:Phrase , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Added> ;
+        nif:anchorOf          "Department of Defense" ;
+        nif:beginIndex        "4"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "25"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.aksw.org/gerbil/NifWebService/request_0#char=0,191> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     dbr:United_States_Department_of_Defense .
+
+<http://www.aksw.org/gerbil/NifWebService/request_0#char=0,191>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "191"^^xsd:nonNegativeInteger ;
+        nif:isString    "the Department of Defense is working through appropriate channels and in accordance with all applicable legal requirements in order to acquire a limited amount of leased space in Trump Tower." .
+
+<http://www.aksw.org/gerbil/NifWebService/request_0#char=179,190>
+        a                     nif:RFC5147String , nif:Phrase , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Added> ;
+        nif:anchorOf          "Trump Tower" ;
+        nif:beginIndex        "179"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "190"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.aksw.org/gerbil/NifWebService/request_0#char=0,191> ;
+        itsrdf:taClassRef     dbo:Place ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Trump_Tower_(New_York_City)> .

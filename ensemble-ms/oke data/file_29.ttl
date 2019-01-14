@@ -1,0 +1,57 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+<http://www.telegraph.co.uk/music/news/former-pussycat-doll-claims-band-prostitution-ring/#char=17,31>
+        a                     nif:RFC5147String , nif:Phrase , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Pussycat Dolls" ;
+        nif:beginIndex        "17"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "31"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.telegraph.co.uk/music/news/former-pussycat-doll-claims-band-prostitution-ring/#char=0,172> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     dbr:The_Pussycat_Dolls .
+
+<http://www.telegraph.co.uk/music/news/former-pussycat-doll-claims-band-prostitution-ring/#char=91,105>
+        a                     nif:Phrase , nif:String , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Pussycat Dolls" ;
+        nif:beginIndex        "91"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "105"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.telegraph.co.uk/music/news/former-pussycat-doll-claims-band-prostitution-ring/#char=0,172> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     dbr:The_Pussycat_Dolls .
+
+<http://www.telegraph.co.uk/music/news/former-pussycat-doll-claims-band-prostitution-ring/#char=0,172>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "172"^^xsd:nonNegativeInteger ;
+        nif:isString    "Former member of Pussycat Dolls claims band was a prostitution ring. Kaya Jones claims the Pussycat Dolls were operated as a prostitution ring during her time in the group." .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:The_Pussycat_Dolls ;
+  rdf:predicate  dbo:formerBandMember ;
+  rdf:subject    dbr:Kaya_Jones ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.telegraph.co.uk/music/news/former-pussycat-doll-claims-band-prostitution-ring/#char=0,172>
+                 ]
+] .
+
+<http://www.telegraph.co.uk/music/news/former-pussycat-doll-claims-band-prostitution-ring/#char=69,79>
+        a                     nif:String , nif:Phrase , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Kaya Jones" ;
+        nif:beginIndex        "69"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "79"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.telegraph.co.uk/music/news/former-pussycat-doll-claims-band-prostitution-ring/#char=0,172> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:Kaya_Jones .

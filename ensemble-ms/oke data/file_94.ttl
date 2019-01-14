@@ -1,0 +1,84 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:United_States ;
+  rdf:predicate  dbo:nationality ;
+  rdf:subject    dbr:Barack_Obama ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.bbc.com/news/election-us-2016-37381452#char=0,156>
+                 ]
+] .
+
+<http://www.bbc.com/news/election-us-2016-37381452#char=0,156>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "156"^^xsd:nonNegativeInteger ;
+        nif:isString    "Donald Trump, the main supporter of false claims about Barack Obama s birthplace, has finally said he accepts that the president was born in the US, period." .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:United_States ;
+  rdf:predicate  dbo:location ;
+  rdf:subject    dbr:Barack_Obama ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.bbc.com/news/election-us-2016-37381452#char=0,156>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:United_States ;
+  rdf:predicate  dbo:birthplace ;
+  rdf:subject    dbr:Barack_Obama ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.bbc.com/news/election-us-2016-37381452#char=0,156>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:United_States ;
+  rdf:predicate  dbo:country ;
+  rdf:subject    dbr:Barack_Obama ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.bbc.com/news/election-us-2016-37381452#char=0,156>
+                 ]
+] .
+
+<http://www.bbc.com/news/election-us-2016-37381452#char=145,147>
+        a                     nif:RFC5147String , nif:Phrase , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "US" ;
+        nif:beginIndex        "145"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "147"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.bbc.com/news/election-us-2016-37381452#char=0,156> ;
+        itsrdf:taClassRef     dbo:Place ;
+        itsrdf:taIdentRef     dbr:United_States .
+
+<http://www.bbc.com/news/election-us-2016-37381452#char=55,67>
+        a                     nif:Phrase , nif:RFC5147String , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Barack Obama" ;
+        nif:beginIndex        "55"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "67"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.bbc.com/news/election-us-2016-37381452#char=0,156> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:Barack_Obama .
+
+<http://www.bbc.com/news/election-us-2016-37381452#char=0,12>
+        a                     nif:RFC5147String , nif:Phrase , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Donald Trump" ;
+        nif:beginIndex        "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "12"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.bbc.com/news/election-us-2016-37381452#char=0,156> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:Donald_Trump .

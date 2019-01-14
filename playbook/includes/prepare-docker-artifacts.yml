@@ -1,0 +1,17 @@
+- name: Create a copies of the Docker template file for each of the webservices
+  template:  
+    src: "{{ playbook_dir }}/roles/build-images/templates/images-Dockerfile.j2"
+    dest: "{{ artifact_directory }}/{{ microservice }}-Dockerfile"
+
+- name: Check if the executables exist, if not run maven build
+  shell: ls {{ project_home_dir }}/{{ microservice }}/target/*.jar
+  register: result_war
+  ignore_errors: yes
+  failed_when : result_war == ""
+
+- name: Run maven build if there are no executable wars are found in target folder
+  command: mvn clean install -f {{ project_home_dir }}/{{ microservice }}/pom.xml -P linux
+  when: 'result_war.stderr != ""'
+
+- name: Move the needed executable files for each of the microservices to create a docker file
+  local_action: shell cp {{ project_home_dir }}/{{ item }}/target/*.jar {{ artifact_directory }}/{{ microservice }}.jar

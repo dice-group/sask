@@ -1,0 +1,93 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Nashik ;
+  rdf:predicate  dbo:district ;
+  rdf:subject    dbr:Maharashtra ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://economictimes.indiatimes.com/industry/energy/power/bhel-commissions-270-mw-thermal-unit-in-nashik-district-of-maharashtra-/articleshow/58837690.cms=0,71#char=0,71>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Maharashtra ;
+  rdf:predicate  dbo:location ;
+  rdf:subject    dbr:Nashik ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://economictimes.indiatimes.com/industry/energy/power/bhel-commissions-270-mw-thermal-unit-in-nashik-district-of-maharashtra-/articleshow/58837690.cms=0,71#char=0,71>
+                 ]
+] .
+
+<https://economictimes.indiatimes.com/industry/energy/power/bhel-commissions-270-mw-thermal-unit-in-nashik-district-of-maharashtra-/articleshow/58837690.cms=0,71#char=59,70>
+        a                     nif:RFC5147String , nif:Phrase , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Maharashtra" ;
+        nif:beginIndex        "59"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "70"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://economictimes.indiatimes.com/industry/energy/power/bhel-commissions-270-mw-thermal-unit-in-nashik-district-of-maharashtra-/articleshow/58837690.cms=0,71#char=0,71> ;
+        itsrdf:taClassRef     dbo:Place ;
+        itsrdf:taIdentRef     dbr:Maharashtra .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Maharashtra ;
+  rdf:predicate  dbo:locatedInArea ;
+  rdf:subject    dbr:Nashik ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://economictimes.indiatimes.com/industry/energy/power/bhel-commissions-270-mw-thermal-unit-in-nashik-district-of-maharashtra-/articleshow/58837690.cms=0,71#char=0,71>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Maharashtra ;
+  rdf:predicate  dbo:location ;
+  rdf:subject    dbr:Bharat_Heavy_Electricals ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://economictimes.indiatimes.com/industry/energy/power/bhel-commissions-270-mw-thermal-unit-in-nashik-district-of-maharashtra-/articleshow/58837690.cms=0,71#char=0,71>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Nashik ;
+  rdf:predicate  dbo:location ;
+  rdf:subject    dbr:Bharat_Heavy_Electricals ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://economictimes.indiatimes.com/industry/energy/power/bhel-commissions-270-mw-thermal-unit-in-nashik-district-of-maharashtra-/articleshow/58837690.cms=0,71#char=0,71>
+                 ]
+] .
+
+<https://economictimes.indiatimes.com/industry/energy/power/bhel-commissions-270-mw-thermal-unit-in-nashik-district-of-maharashtra-/articleshow/58837690.cms=0,71#char=0,4>
+        a                     nif:String , nif:Phrase , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "BHEL" ;
+        nif:beginIndex        "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "4"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://economictimes.indiatimes.com/industry/energy/power/bhel-commissions-270-mw-thermal-unit-in-nashik-district-of-maharashtra-/articleshow/58837690.cms=0,71#char=0,71> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     dbr:Bharat_Heavy_Electricals .
+
+<https://economictimes.indiatimes.com/industry/energy/power/bhel-commissions-270-mw-thermal-unit-in-nashik-district-of-maharashtra-/articleshow/58837690.cms=0,71#char=0,71>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "71"^^xsd:nonNegativeInteger ;
+        nif:isString    "BHEL commissions 270 MW thermal unit in Nashik district of Maharashtra." .
+
+<https://economictimes.indiatimes.com/industry/energy/power/bhel-commissions-270-mw-thermal-unit-in-nashik-district-of-maharashtra-/articleshow/58837690.cms=0,71#char=40,46>
+        a                     nif:String , nif:Phrase , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Nashik" ;
+        nif:beginIndex        "40"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "46"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://economictimes.indiatimes.com/industry/energy/power/bhel-commissions-270-mw-thermal-unit-in-nashik-district-of-maharashtra-/articleshow/58837690.cms=0,71#char=0,71> ;
+        itsrdf:taClassRef     dbo:Place ;
+        itsrdf:taIdentRef     dbr:Nashik .

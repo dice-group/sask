@@ -1,0 +1,30 @@
+### Spring properties
+# Service registers under this name
+spring:
+  application:
+    name: taipan-ms
+
+# Discovery Server Access
+eureka:
+  instance:
+    metadataMap:
+      type: extractor
+      friendlyname: TAIPAN
+    hostName: ${TAIPAN_PUBLISH_HOST:localhost} 
+    preferIpAddress: false 
+  client:
+    serviceUrl:
+      defaultZone: http://${EUREKA_SERVICE_HOST:localhost}:${EUREKA_SERVICE_PORT:8761}/eureka/
+
+# HTTP Server (Tomcat) Port
+server: 
+  port: ${TAIPAN_PUBLISH_PORT:2228}
+
+# Disable Spring Boot's "Whitelabel" default error page, so we can use our own
+error:
+  whitelabel:
+    enabled: false
+    
+taipan:
+  hostserver: ${TAIPAN_HOSTSERVER:localhost} 
+  port: ${TAIPAN_PORT:5000} 

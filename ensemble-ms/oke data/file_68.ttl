@@ -1,0 +1,46 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Roger_Federer ;
+  rdf:predicate  dbo:trainer ;
+  rdf:subject    <http://dbpedia.org/resource/Ivan_Ljubi%C4%8Di%C4%87> ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.india.com/travel/agra/#char=0,80>
+                 ]
+] .
+
+<http://www.tennisnow.com/Blogs/NET-POSTS/July-2017/Federer-Credits-Coach-Ljubicic.aspx#char=0,107>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "107"^^xsd:nonNegativeInteger ;
+        nif:isString    "Roger Federer credits coach Ivan Ljubicic s clarity and desire for contributing to his success this season." .
+
+<http://www.tennisnow.com/Blogs/NET-POSTS/July-2017/Federer-Credits-Coach-Ljubicic.aspx#char=0,13>
+        a                     nif:RFC5147String , nif:Phrase , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Roger Federer" ;
+        nif:beginIndex        "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "13"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.tennisnow.com/Blogs/NET-POSTS/July-2017/Federer-Credits-Coach-Ljubicic.aspx#char=0,107> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:Roger_Federer .
+
+<http://www.tennisnow.com/Blogs/NET-POSTS/July-2017/Federer-Credits-Coach-Ljubicic.aspx#char=28,41>
+        a                     nif:RFC5147String , nif:Phrase , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Ivan Ljubicic" ;
+        nif:beginIndex        "28"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "41"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.tennisnow.com/Blogs/NET-POSTS/July-2017/Federer-Credits-Coach-Ljubicic.aspx#char=0,107> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Ivan_Ljubi%C4%8Di%C4%87> .

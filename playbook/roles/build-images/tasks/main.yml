@@ -1,0 +1,36 @@
+---
+# tasks file for modules\
+
+- name: "create a local temp directory which will have the dockerfiles"
+  command: mktemp -d "{{ lookup('env', 'TMPDIR') | default('/tmp', true) }}/ansible.XXXX"
+  register: mktemp_output
+  check_mode: no
+
+- name: "Prepare the docker files and artifacts needed for docker image build"
+  include_tasks: "{{ playbook_dir }}/includes/prepare-docker-artifacts.yml artifact_directory={{ mktemp_output.stdout }} microservice={{ item }}"
+  with_list : "{{ microservices }}"
+
+- name: "Login to the docker registry"
+  docker_login: 
+    username: "{{ docker_repository_user }}"
+    password: "{{ docker_repository_user_password }}"
+    email: guru5590@gmail.com
+
+- name : "Build docker images for each of the microservice and push it to the repository"
+  docker_image :
+    path : "{{ mktemp_output.stdout }}"
+    dockerfile: "{{ item }}-Dockerfile"
+    name : "{{ docker_repository }}/{{ item }}"
+    tag: "{{ image_tag }}"
+    push: true
+  with_list: "{{ microservices }}"
+
+- name: "Logout of docker hub"
+  docker_login:
+    state: absent
+    email: guru5590@gmail.com
+
+- name: "Cleaning up the temp directory"
+  file:
+    path: "{{ mktemp_output.stdout }}/"
+    state: absent

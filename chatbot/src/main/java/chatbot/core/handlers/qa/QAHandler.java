@@ -8,6 +8,8 @@ import java.net.URLEncoder;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.log4j.Logger;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -25,10 +27,13 @@ import chatbot.io.response.ResponseList.MessageType;
  * @author Prashanth
  *
  */
+@Component
+@PropertySource("classpath:application.yml")
 public class QAHandler extends Handler {
 	// Handle Hawk Service.
 	private static Logger log = Logger.getLogger(QAHandler.class.getName());
-	private static final String URL = "http://185.2.103.92:8081/tebaqa/qa-simple?query="; // URL for TebaQA
+	
+	private static String URL = "http://185.2.103.92:8081/tebaqa/qa-simple?query=";
 
 	
 	private Response generateResponse(String incomingResponse) throws JsonProcessingException, IOException {
@@ -78,24 +83,41 @@ public class QAHandler extends Handler {
 			String response = sendHTTPRequest(sendText);
 			//If in future, multiple answers need to be returned, then split it into n*1 and call below functions in a loop
 			Response output = generateResponse(response); 
+			if(log.isDebugEnabled())
+				output.setClassPredicted("Class Predicted - QA");
 			responselist.addMessage(output);
 			return responselist;
 		} catch (JsonProcessingException e) {
 			// Check if we can create a logger.
 			log.error("search, JsonProcessingException in handling QA Queries,Stack Trace=" + e.getMessage());
 			ResponseList responselist = new ResponseList();
+			if(log.isDebugEnabled()) {
+				Response response = new Response();
+				response.setClassPredicted("Class Predicted - QA");
+				responselist.addMessage(response);
+			}
 			responselist.setError();
 			return responselist;
 		} catch (IOException e) {
 			// Check if we can create a logger.
 			log.error("search, IOException in handling QA Queries,Stack Trace=" + e.getMessage());
 			ResponseList responselist = new ResponseList();
+			if(log.isDebugEnabled()) {
+				Response response = new Response();
+				response.setClassPredicted("Class Predicted - QA");
+				responselist.addMessage(response);
+			}
 			responselist.setError();
 			return responselist;
 		} catch (Exception e) {
 			// Check if we can create a logger.
 			log.error("search, Exception in handling QA Queries,Stack Trace=" + e.getMessage());
 			ResponseList responselist = new ResponseList();
+			if(log.isDebugEnabled()) {
+				Response response = new Response();
+				response.setClassPredicted("Class Predicted - QA");
+				responselist.addMessage(response);
+			}
 			responselist.setError();
 			return responselist;
 

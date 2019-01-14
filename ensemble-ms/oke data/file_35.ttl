@@ -1,0 +1,55 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Facebook ;
+  rdf:predicate  dbo:employer ;
+  rdf:subject    dbr:Mark_Zuckerberg ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://globalnews.ca/news/3963175/facebook-news-feed-changes-business/#char=0,208>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Mark_Zuckerberg ;
+  rdf:predicate  dbo:ceo ;
+  rdf:subject    dbr:Facebook ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://globalnews.ca/news/3963175/facebook-news-feed-changes-business/#char=0,208>
+                 ]
+] .
+
+<https://globalnews.ca/news/3963175/facebook-news-feed-changes-business/#char=25,40>
+        a                     nif:RFC5147String , nif:String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Completed> ;
+        nif:anchorOf          "Mark Zuckerberg" ;
+        nif:beginIndex        "25"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "40"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://globalnews.ca/news/3963175/facebook-news-feed-changes-business/#char=0,208> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:Mark_Zuckerberg .
+
+<https://globalnews.ca/news/3963175/facebook-news-feed-changes-business/#char=0,208>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "208"^^xsd:nonNegativeInteger ;
+        nif:isString    "Facebook founder and CEO Mark Zuckerberg announced the shift in the configuration of the News Feed on Thursday, saying it would reduce engagement by users at first but would lead to their improved well-being." .
+
+<https://globalnews.ca/news/3963175/facebook-news-feed-changes-business/#char=0,8>
+        a                     nif:Phrase , nif:RFC5147String , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Completed> ;
+        nif:anchorOf          "Facebook" ;
+        nif:beginIndex        "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "8"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://globalnews.ca/news/3963175/facebook-news-feed-changes-business/#char=0,208> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     dbr:Facebook .

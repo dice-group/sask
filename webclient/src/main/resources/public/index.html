@@ -10,6 +10,7 @@
 <!-- ~~~~~~ bootstrap ~~~~~~ -->
 <link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap.css">
 <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 <!-- ~~~~~~ jquery ui ~~~~~~ -->
 <script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js"></script>
 <link rel="stylesheet"
@@ -39,6 +40,7 @@
 <!-- ~~~~~~ layout ~~~~~~ -->
 <link rel="stylesheet" href="/styles/global.css">
 <script src="/js/workspace/ColumnOrganizer.js"></script>
+<script src="/js/workspace/DataVisualization.js"></script>
 </head>
 <body>
 	<!-- navbar -->
@@ -89,6 +91,11 @@
 				<h4>Chatbot</h4>
 				<div id="chat-chatbot" class="sask-border"></div>
 			</div>
+			<div class="col-lg-9 sask-column closable" id="ex-query">
+				<h4>Query sask</h4>
+				<div id="ex-query-table">
+				</div>
+			</div>
 		</div>
 	</div>
 	<footer class="sask-footer">
@@ -105,8 +112,13 @@
 			var workspace;
 			var repo;
 			var upload;
+			var extractdata;
+			var queryTable;
 
 			$(document).ready(function() {
+				// queryTable 
+				queryTable = $('#ex-query-table');
+				
 				// columns
 				columnOrganizer = $("#sask-container").columnOrganizer({});
 
@@ -114,6 +126,7 @@
 				repo = $("#ex-repo").repository({
 					dao : dao,
 					onAddToWorkspace : onAddToWorkspace,
+					onAddToWorkspaceTable : onAddToWorkspaceTable,
 					onLoadToWorkspace : onLoadToWorkspace
 				});
 
@@ -139,12 +152,34 @@
 				$("#ex-uploadFile").click(upload.open);
 
 				refresh();
+
+				$('#ex-query').hide();
 			});
+			
+			function onAddToWorkspaceTable(target) {
+				var success = function(data) {
+					queryTable.DataVisualization({
+						data
+					});
+					
+					$('#ex-query').show();
+					$('#ex-workspace').parent().hide();
+					$('#chat-chatbot').parent().hide();
+				};
+				dao.queryGraph(success);
+			}
+
+			function onAddToWorkspaceGraph(target) {
+				var success = function(data) {
+					createGraph(triplesToGraph(data));
+					
+				};
+				dao.queryGraph(success);
+			}
 
 			function onBigMessage() {
 				var column = $(chatbot).parent();
 				columnOrganizer.columnOrganizer("maximizeColumn", column);
-
 			}
 
 			function onLoadToWorkspace(target) {

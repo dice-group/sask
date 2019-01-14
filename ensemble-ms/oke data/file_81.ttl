@@ -1,0 +1,117 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+<http://www.thehindu.com/education/google-phd-fellow-preksha-nema/article22265908.ece#char=19,31>
+        a                     nif:RFC5147String , nif:Phrase , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Added> ;
+        nif:anchorOf          "Preksha Nema" ;
+        nif:beginIndex        "19"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "31"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.thehindu.com/education/google-phd-fellow-preksha-nema/article22265908.ece#char=0,245> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     aksw:PrekshaNema .
+
+<http://www.thehindu.com/education/google-phd-fellow-preksha-nema/article22265908.ece#char=147,163>
+        a                     nif:RFC5147String , nif:String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Mitesh M. Khapra" ;
+        nif:beginIndex        "147"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "163"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.thehindu.com/education/google-phd-fellow-preksha-nema/article22265908.ece#char=0,245> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     aksw:MiteshM.Khapra .
+
+<http://www.thehindu.com/education/google-phd-fellow-preksha-nema/article22265908.ece#char=178,190>
+        a                     nif:Phrase , nif:String , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "B. Ravindran" ;
+        nif:beginIndex        "178"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "190"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.thehindu.com/education/google-phd-fellow-preksha-nema/article22265908.ece#char=0,245> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     aksw:B.Ravindran .
+
+<http://www.thehindu.com/education/google-phd-fellow-preksha-nema/article22265908.ece#char=108,116>
+        a                     nif:Phrase , nif:String , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Added> ;
+        nif:anchorOf          "Preksha " ;
+        nif:beginIndex        "108"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "116"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.thehindu.com/education/google-phd-fellow-preksha-nema/article22265908.ece#char=0,245> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     aksw:PrekshaNema .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     aksw:PrekshaNema ;
+  rdf:predicate  dbo:doctoralAdvisor ;
+  rdf:subject    aksw:MiteshM.Kapdra ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.thehindu.com/education/google-phd-fellow-preksha-nema/article22265908.ece#char=0,245>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     aksw:PrekshaNema ;
+  rdf:predicate  dbo:doctoralStudent ;
+  rdf:subject    aksw:B.Ravindran ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.thehindu.com/education/google-phd-fellow-preksha-nema/article22265908.ece#char=0,245>
+                 ]
+] .
+
+<http://www.thehindu.com/education/google-phd-fellow-preksha-nema/article22265908.ece#char=0,10>
+        a                     nif:Phrase , nif:RFC5147String , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Added> ;
+        nif:anchorOf          "IIT-Madras" ;
+        nif:beginIndex        "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "10"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.thehindu.com/education/google-phd-fellow-preksha-nema/article22265908.ece#char=0,245> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     dbr:Indian_Institute_of_Technology_Madras .
+
+<http://www.thehindu.com/education/google-phd-fellow-preksha-nema/article22265908.ece#char=81,87>
+        a                     nif:RFC5147String , nif:Phrase , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Google" ;
+        nif:beginIndex        "81"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "87"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.thehindu.com/education/google-phd-fellow-preksha-nema/article22265908.ece#char=0,245> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     dbr:Google .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     aksw:PrekshaNema ;
+  rdf:predicate  dbo:doctoralStudent ;
+  rdf:subject    aksw:MiteshM.Kapdra ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.thehindu.com/education/google-phd-fellow-preksha-nema/article22265908.ece#char=0,245>
+                 ]
+] .
+
+<http://www.thehindu.com/education/google-phd-fellow-preksha-nema/article22265908.ece#char=0,245>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "245"^^xsd:nonNegativeInteger ;
+        nif:isString    "IIT-Madras student Preksha Nema is one of four recipients in the country, of the Google PhD Fellowship 2017.Preksha is jointly guided by Professor Mitesh M. Khapra and Professor B. Ravindran at the Department of Computer Science and Engineering." .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     aksw:PrekshaNema ;
+  rdf:predicate  dbo:doctoralAdvisor ;
+  rdf:subject    aksw:B.Ravindran ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.thehindu.com/education/google-phd-fellow-preksha-nema/article22265908.ece#char=0,245>
+                 ]
+] .

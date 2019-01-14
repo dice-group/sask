@@ -1,0 +1,55 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+<https://www.usnews.com/news/best-countries/france#char=27,33>
+        a                     nif:String , nif:RFC5147String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "France" ;
+        nif:beginIndex        "27"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "33"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.usnews.com/news/best-countries/france#char=0,180> ;
+        itsrdf:taClassRef     dbo:Place ;
+        itsrdf:taIdentRef     dbr:France .
+
+<https://www.usnews.com/news/best-countries/france#char=0,180>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "180"^^xsd:nonNegativeInteger ;
+        nif:isString    "Located in Western Europe, France is one of the worlds oldest countries, and its reach extends around the globe through science, politics, economics and perhaps above all, culture." .
+
+<https://www.usnews.com/news/best-countries/france#char=11,25>
+        a                     nif:String , nif:RFC5147String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Western Europe" ;
+        nif:beginIndex        "11"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "25"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.usnews.com/news/best-countries/france#char=0,180> ;
+        itsrdf:taClassRef     dbo:Place ;
+        itsrdf:taIdentRef     dbr:Western_Europe .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Western_Europe ;
+  rdf:predicate  dbo:locatedInArea ;
+  rdf:subject    dbr:France ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.usnews.com/news/best-countries/france#char=0,183>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Western_Europe ;
+  rdf:predicate  dbo:country ;
+  rdf:subject    dbr:France ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.bbc.com/news/world-south-asia-12557384#char=0,126>
+                 ]
+] .

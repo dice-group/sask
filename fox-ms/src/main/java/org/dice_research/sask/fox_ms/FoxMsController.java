@@ -116,6 +116,7 @@ public class FoxMsController {
 		Query secondQuery = QueryFactory.create(secondModifyQuery);
 		QueryExecution secondQexec = QueryExecutionFactory.create(secondQuery, model);
 		result.add(secondQexec.execConstruct());
+		modelAsString=new StringWriter();
 		result.write(modelAsString, "TTL");
 		return modelAsString.toString();
 

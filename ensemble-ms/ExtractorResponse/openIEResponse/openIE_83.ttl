@@ -1,0 +1,1 @@
+@prefix :      <http://example.org/> .@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .<http://example.org/Vice%20President%20Pence>        <http://example.org/arrive%20in>                :Israel .

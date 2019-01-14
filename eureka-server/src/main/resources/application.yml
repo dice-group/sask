@@ -1,11 +1,19 @@
+# Service registers under this name
+# Control the InternalResourceViewResolver:
+spring:
+  application:
+    name: eureka-server
+
 # Configure this Discovery Server
 eureka:
   instance:
-    hostname: @eureka.hostname@
+    hostname: ${EUREKA_SERVICE_HOST:localhost}
   client: #Not a client
     registerWithEureka: false
     fetchRegistry: false
+    service-url:
+      defaultZone: http://${EUREKA_SERVICE_HOST:localhost}:${EUREKA_SERVICE_PORT:8761}/eureka
 
 # HTTP (Tomcat) port
 server:
-  port: @eureka.port@   
+  port: ${EUREKA_SERVICE_PORT:8761}   

@@ -1,0 +1,29 @@
+FROM openjdk:9.0.4-12-slim
+
+RUN \
+  groupadd --gid 1111 sask && \
+  useradd \
+    --comment "This is the user under which SASK microservices runs and that owns the data directory" \
+    --uid 2222 \
+    --gid 1111 \
+    --shell /bin/bash \
+    sask
+
+RUN \
+  mkdir /sask/ /logs/ && \
+  chown -R sask:sask /sask/ && \
+  chown -R sask:sask /logs/
+
+COPY {{ microservice }}.jar /sask/{{ microservice }}/{{ microservice }}.jar
+
+RUN \
+  chown -R sask:sask /sask/{{ microservice }}/&& \
+  chown -R sask:sask /sask/{{ microservice }}/{{ microservice }}.jar
+
+ENV PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin
+
+USER sask
+
+WORKDIR /sask/{{ microservice }}/
+
+CMD ["java", "--add-modules=java.xml.bind", "-Djava.security.egd=file:/dev/./urandom", "-jar","{{ microservice }}.jar"]

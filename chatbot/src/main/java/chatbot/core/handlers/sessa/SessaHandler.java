@@ -2,26 +2,35 @@
  * 
  */
 package chatbot.core.handlers.sessa;
-//import org.apache.catalina.connector.Response;
-import org.apache.log4j.Logger;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import java.io.IOException;
+import java.net.URLEncoder;
+
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+
+import chatbot.core.handlers.Handler;
 import chatbot.io.incomingrequest.IncomingRequest;
 import chatbot.io.response.EntryInformation;
 import chatbot.io.response.EntryInformation.Type;
 import chatbot.io.response.Response;
 import chatbot.io.response.ResponseList;
 import chatbot.io.response.ResponseList.MessageType;
-import chatbot.core.handlers.*;
-import java.net.URLEncoder;
 /**
  * @author Prashanth
  *
  */
+@Component
+@PropertySource("classpath:application.yml")
 public class SessaHandler extends Handler {
 	// Handle Hawk Service.
 	private static Logger log = Logger.getLogger(SessaHandler.class.getName());
-	private static final String URL = "http://localhost:7070/search?query="; // URL
+	
+	@Value("${sessa.search.url}")
+	private String URL;
 
 
 	private Response generateResponse(String incomingResponse) throws JsonProcessingException, IOException {
@@ -55,24 +64,41 @@ public class SessaHandler extends Handler {
 			String sendText = URL + URLEncoder.encode(query, "UTF-8");
 			String response = sendHTTPRequest(sendText);
 			Response output = generateResponse(response);
+			if(log.isDebugEnabled()) 
+				output.setClassPredicted("Class Predicted - Keyword Search");
 			responselist.addMessage(output);
 			return responselist;
 		} catch (JsonProcessingException e) {
 			// Check if we can create a logger.
 			log.error("search, JsonProcessingException in handling QA Queries,Stack Trace=" + e.getMessage());
 			ResponseList responselist = new ResponseList();
+			if(log.isDebugEnabled()) {
+				Response output = new Response();
+				output.setClassPredicted("Class Predicted - Keyword Search");
+				responselist.addMessage(output);
+			}
 			responselist.setError();
 			return responselist;
 		} catch (IOException e) {
 			// Check if we can create a logger.
 			log.error("search, IOException in handling QA Queries,Stack Trace=" + e.getMessage());
 			ResponseList responselist = new ResponseList();
+			if(log.isDebugEnabled()) {
+				Response output = new Response();
+				output.setClassPredicted("Class Predicted - Keyword Search");
+				responselist.addMessage(output);
+			}
 			responselist.setError();
 			return responselist;
 		} catch (Exception e) {
 			// Check if we can create a logger.
 			log.error("search, Exception in handling QA Queries,Stack Trace=" + e.getMessage());
 			ResponseList responselist = new ResponseList();
+			if(log.isDebugEnabled()) {
+				Response output = new Response();
+				output.setClassPredicted("Class Predicted - Keyword Search");
+				responselist.addMessage(output);
+			}
 			responselist.setError();
 			return responselist;
 
