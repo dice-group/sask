@@ -676,7 +676,7 @@
     "id" : "25",
     "answertype" : "resource",
     "aggregation" : false,
-    "onlydbo" : true,
+    "onlydbo" : false,
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
