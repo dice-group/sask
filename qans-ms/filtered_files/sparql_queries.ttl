@@ -181,9 +181,9 @@ WHERE {
 }
 
 
-SELECT DISTINCT  ?year 
+SELECT DISTINCT  ?number 
 WHERE { 
-     <http://dbpedia.org/resource/Ohio_University>  <http://dbpedia.org/property/established>  ?year.  
+     <http://dbpedia.org/resource/Ohio_University>  <http://dbpedia.org/property/established>  ?number.  
 }
 
 
