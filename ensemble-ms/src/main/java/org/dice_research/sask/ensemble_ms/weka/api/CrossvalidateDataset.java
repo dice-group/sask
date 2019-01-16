@@ -1,8 +1,13 @@
 package org.dice_research.sask.ensemble_ms.weka.api;
 
 import weka.core.Instances;
+import weka.core.Stopwords;
 import weka.core.converters.ArffSaver;
 import weka.core.converters.ConverterUtils.DataSource;
+import weka.core.stemmers.LovinsStemmer;
+import weka.core.stemmers.Stemmer;
+import weka.core.stopwords.Rainbow;
+import weka.core.tokenizers.NGramTokenizer;
 import weka.filters.Filter;
 
 import weka.core.Instance;
@@ -41,7 +46,16 @@ public class CrossvalidateDataset {
 			saver.writeBatch();
 			// provide filter
 			StringToWordVector converterVector = new StringToWordVector();
-			converterVector.setInputFormat(dataset);
+			  
+			    converterVector.setIDFTransform(true);
+
+			    LovinsStemmer lovins_stemmer = new LovinsStemmer();
+			    
+			    converterVector.setStemmer(lovins_stemmer);
+
+			    converterVector.setLowerCaseTokens(true);
+			    converterVector.getTokenizer();
+	         	converterVector.setInputFormat(dataset);
 			// apply the filter
 			Instances filteredDataset = Filter.useFilter(dataset, converterVector);
 			saver.setInstances(filteredDataset);
