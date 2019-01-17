@@ -48,7 +48,7 @@ public class CrossvalidateDataset {
 			StringToWordVector converterVector = new StringToWordVector();
 			  
 			    converterVector.setIDFTransform(true);
-
+			    
 			    LovinsStemmer lovins_stemmer = new LovinsStemmer();
 			    
 			    converterVector.setStemmer(lovins_stemmer);
