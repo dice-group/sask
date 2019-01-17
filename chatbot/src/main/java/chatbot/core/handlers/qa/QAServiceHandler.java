@@ -1,11 +1,14 @@
 package chatbot.core.handlers.qa;
 
 import chatbot.core.handlers.Handler;
+import chatbot.core.handlers.qa.dto.Answer;
 import chatbot.io.incomingrequest.IncomingRequest;
 import chatbot.io.response.EntryInformation;
 import chatbot.io.response.Response;
 import chatbot.io.response.ResponseList;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.apache.log4j.Logger;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.MediaType;
@@ -34,17 +37,26 @@ public class QAServiceHandler extends Handler {
     }
 
     public ResponseList search(IncomingRequest request) throws JsonProcessingException, IOException {
-        //TODO:create responseList from string response returned by QAservice
-        String answer = askQAService(request);
         EntryInformation entry = new EntryInformation();
-        entry.setDisplayText(answer);
-        entry.setButtonType(EntryInformation.Type.URL);
-        entry.setUri("http://test/uri");
-        Response response = new Response();
-        response.addEntry(entry);
         ResponseList responseList = new ResponseList();
-        responseList.addMessage(response);
-        responseList.setMessageType(ResponseList.MessageType.TEXT_WITH_URL);
+        StringBuilder stringBuilder = new StringBuilder();
+        Gson gson = new GsonBuilder().create();
+        String answer = askQAService(request);
+        Answer answerDto = gson.fromJson(answer, Answer.class);
+        answerDto.getQuestions().forEach(question -> {
+            question.getAnswers().forEach(answer_ -> {
+                answer_.getResults().getBindings().forEach(binding -> {
+                    stringBuilder.append(binding.getResource().getValue());
+                    stringBuilder.append(" ");
+                    entry.setDisplayText(stringBuilder.toString());
+                    entry.setButtonType(EntryInformation.Type.URL);
+                    Response response = new Response();
+                    response.addEntry(entry);
+                    responseList.addMessage(response);
+                    responseList.setMessageType(ResponseList.MessageType.TEXT_WITH_URL);
+                });
+            });
+        });
         return responseList;
     }
 

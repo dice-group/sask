@@ -196,8 +196,8 @@ public class IntentLearner {
      * @param  prediction
      */
     public Handler usePrediction(String prediction) {
-
-        try {
+        // TODO: 17/01/2019 For demonstration purpose this is commented out so that every request can go to SurniaQA
+        /*try {
             if(prediction.equalsIgnoreCase("hawk")) {
 
 //                return new QAHandler();
@@ -216,8 +216,8 @@ public class IntentLearner {
         }
         catch (Exception e) {
             e.printStackTrace();
-        }
-        return null;
+        }*/
+        return new QAServiceHandler();
     }
     /**
      * This method creates the instance to be classified, from the text that has been read.
