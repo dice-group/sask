@@ -775,12 +775,12 @@
         "bindings" : [ {
           "uri" : {
             "type" : "uri",
-            "value" : "http://dbpedia.org/resource/Clash_of_the_Titans_(2010_film)"
+            "value" : "http://dbpedia.org/resource/The_Invisible_Woman_(2013_film)"
           }
         }, {
           "uri" : {
             "type" : "uri",
-            "value" : "http://dbpedia.org/resource/Spectre_(2015_film)"
+            "value" : "http://dbpedia.org/resource/The_Reader_(2008_film)"
           }
         }, {
           "uri" : {
