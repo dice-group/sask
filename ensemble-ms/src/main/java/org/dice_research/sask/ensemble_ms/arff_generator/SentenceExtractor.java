@@ -592,7 +592,7 @@ public int findMaxscore(double sc_fox, double sc_openIE, double sc_sorokin) {
 
 		// List<String> sentences = new ArrayList<String>();
 		try {
-	    FileWriter fw = new FileWriter("TrainingData\\traindata2.arff",true);
+	    FileWriter fw = new FileWriter("WekaMlDataset\\traindata.arff",true);
 
 
 //			int x = 0;

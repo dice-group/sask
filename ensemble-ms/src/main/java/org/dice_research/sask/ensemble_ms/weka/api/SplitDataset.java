@@ -27,22 +27,20 @@ public class SplitDataset {
 
 	public static void main(String[] args){
 		// load the arff file
-		String filename = "TrainingData\\traindata2.arff";
+		String filename = "WekaMlDataset\\traindata.arff";
 		DataSource source;
-		try {
-			source = new DataSource(filename);
-		
-
+		try 
+		{
+			
+		source = new DataSource(filename);
 		Instances dataset = source.getDataSet();
-		
-		
 		System.out.println("printing summary of training data.....");
 		System.out.println(dataset.toSummaryString());
 		// save arff file
 
 		ArffSaver saver = new ArffSaver();
 		saver.setInstances(dataset);
-		saver.setFile(new File("Dataset\\Test_Dataset.arff"));
+		saver.setFile(new File("WekaDataset\\Test_Dataset.arff"));
 		saver.writeBatch();
 		// provide filter
 		StringToWordVector converterVector = new StringToWordVector();
@@ -67,7 +65,7 @@ public class SplitDataset {
 		System.out.println("Number of Classifier.................");
 		System.out.println(filteredDataset.numClasses());
 		System.out.println(filteredDataset.classAttribute());
-		int percent = 66;
+		int percent = 80;
 
 		int trainSize = (int) Math.round(filteredDataset.numInstances() * percent / 100);
 		int testSize = filteredDataset.numInstances() - trainSize;

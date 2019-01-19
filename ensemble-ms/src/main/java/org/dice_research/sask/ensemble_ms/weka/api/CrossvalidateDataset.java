@@ -14,6 +14,7 @@ import weka.core.Instance;
 import java.io.File;
 import java.util.Random;
 import weka.filters.unsupervised.attribute.StringToWordVector;
+import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
 import weka.classifiers.trees.J48;
 
@@ -26,30 +27,51 @@ import weka.classifiers.trees.J48;
  */
 
 public class CrossvalidateDataset {
+	static String filename = "WekaMlDataset\\traindata.arff";
+	
 
-	public static void main(String[] args) {
+	
+
+	
+	public static void main(String[] args)
+     {
+		
+		CrossvalidateDataset crossvalidateDataset = new CrossvalidateDataset();
+		crossvalidateDataset.buildClassfier();
+		
+
+	}
+
+
+
+
+
+	private void buildClassfier() 
+	{
 		// load the arff file
-
 		try {
-			String filename = "TrainingData\\traindata2.arff";
-			DataSource source;
-			source = new DataSource(filename);
-
-			Instances dataset = source.getDataSet();
+			
+			DataSource source = new DataSource(filename);
+              Instances dataset = source.getDataSet();
 			System.out.println("printing summary of training data.....");
 			System.out.println(dataset.toSummaryString());
 			// save arff file
 
 			ArffSaver saver = new ArffSaver();
 			saver.setInstances(dataset);
-			saver.setFile(new File("Dataset\\datasetArffExtraction.arff"));
+			saver.setFile(new File("WekaDataset\\datasetArffExtraction.arff"));
 			saver.writeBatch();
-			// provide filter
+			
+			
+			
+			// provide filter and set filter classifier
+			
+			
 			StringToWordVector converterVector = new StringToWordVector();
 			  
 			    converterVector.setIDFTransform(true);
 			    
-			    LovinsStemmer lovins_stemmer = new LovinsStemmer();
+              LovinsStemmer lovins_stemmer = new LovinsStemmer();
 			    
 			    converterVector.setStemmer(lovins_stemmer);
 
@@ -63,11 +85,14 @@ public class CrossvalidateDataset {
 			// System.out.println(filteredDataset.toString());
 			System.out.println(filteredDataset.classAttribute());
 
-			saver.setFile(new File("Dataset\\datasetArff_Filtered.arff"));
+			saver.setFile(new File("WekaDataset\\datasetArff_Filtered.arff"));
 			saver.writeBatch();
+			
 			// classify using j48
+	 
 			J48 Treeclassifier = new J48();
 			Treeclassifier.buildClassifier(filteredDataset);
+			Classifier classifier = Treeclassifier;
 			System.out.println("Classifier result.................");
 			System.out.println(Treeclassifier.toString());
 			System.out.println("printin data after filter.................");
@@ -79,7 +104,7 @@ public class CrossvalidateDataset {
 
 			Evaluation eval = new Evaluation(filteredDataset);
 			// System.out.println(eval.predictions().size());
-			eval.crossValidateModel(Treeclassifier, filteredDataset, 10, new Random(1));
+			eval.crossValidateModel(classifier, filteredDataset, 10, new Random(1));
 
 			System.out.println("Printing evalution summary.........");
 			System.out.println(eval.toSummaryString());
@@ -108,6 +133,9 @@ public class CrossvalidateDataset {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	
+		// TODO Auto-generated method stub
+		
 	}
 
 }
