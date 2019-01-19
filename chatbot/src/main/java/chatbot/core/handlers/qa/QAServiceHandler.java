@@ -1,14 +1,11 @@
 package chatbot.core.handlers.qa;
 
 import chatbot.core.handlers.Handler;
-import chatbot.core.handlers.qa.dto.Answer;
 import chatbot.io.incomingrequest.IncomingRequest;
 import chatbot.io.response.EntryInformation;
 import chatbot.io.response.Response;
 import chatbot.io.response.ResponseList;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.log4j.Logger;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.MediaType;
@@ -19,6 +16,8 @@ import org.springframework.web.util.UriTemplate;
 
 import java.io.IOException;
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 /**
  * @author sajjad
@@ -36,27 +35,58 @@ public class QAServiceHandler extends Handler {
         restTemplate = builder.build();
     }
 
-    public ResponseList search(IncomingRequest request) throws JsonProcessingException, IOException {
+    public ResponseList search(IncomingRequest request) {
         EntryInformation entry = new EntryInformation();
         ResponseList responseList = new ResponseList();
         StringBuilder stringBuilder = new StringBuilder();
-        Gson gson = new GsonBuilder().create();
+        ObjectMapper objectMapper = new ObjectMapper();
         String answer = askQAService(request);
-        Answer answerDto = gson.fromJson(answer, Answer.class);
-        answerDto.getQuestions().forEach(question -> {
-            question.getAnswers().forEach(answer_ -> {
-                answer_.getResults().getBindings().forEach(binding -> {
-                    stringBuilder.append(binding.getResource().getValue());
-                    stringBuilder.append(" ");
-                    entry.setDisplayText(stringBuilder.toString());
-                    entry.setButtonType(EntryInformation.Type.URL);
-                    Response response = new Response();
-                    response.addEntry(entry);
-                    responseList.addMessage(response);
-                    responseList.setMessageType(ResponseList.MessageType.TEXT_WITH_URL);
+        LinkedHashMap answerDto;
+        try {
+            answerDto = (LinkedHashMap) objectMapper.readValue(answer, Object.class);
+            // TODO: 19/01/2019 inefficient implementation, this could possibly be done with Regex, or find a way to desrialize JSON
+            // TODO: the problem with deserialization is that the incoming JSON response has different data types based on answer,
+            // TODO: therefor no static POJO can be used to deserialize it
+            answerDto.keySet().forEach(a -> {
+                ArrayList questions = (ArrayList) answerDto.get(a);
+                LinkedHashMap questionProperties = (LinkedHashMap) questions.get(0);
+                questionProperties.keySet().forEach(key -> {
+                    if ("answers".equals(key.toString())) {
+                        ArrayList answers = (ArrayList) questionProperties.get(key);
+                        LinkedHashMap answersMap = (LinkedHashMap) answers.get(0);
+                        answersMap.keySet().forEach(answerKey -> {
+                            if ("results".equals(answerKey)) {
+                                LinkedHashMap bindingsMap = (LinkedHashMap) answersMap.get(answerKey);
+                                bindingsMap.keySet().forEach(binding -> {
+                                    ArrayList bindingList = (ArrayList) bindingsMap.get(binding);
+                                    bindingList.forEach(bindingElement -> {
+                                        LinkedHashMap bindingElementMap = (LinkedHashMap) bindingElement;
+                                        bindingElementMap.keySet().forEach(bElementKey -> {
+                                            LinkedHashMap finalResults = (LinkedHashMap) bindingElementMap.get(bElementKey);
+                                            finalResults.keySet().forEach(fKey -> {
+                                                if ("value".equals(fKey)) {
+                                                    stringBuilder.append(finalResults.get(fKey));
+                                                    stringBuilder.append(" ");
+                                                    stringBuilder.append("\n");
+                                                }
+                                            });
+                                        });
+                                    });
+                                });
+                            }
+                        });
+                    }
                 });
             });
-        });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        entry.setDisplayText(stringBuilder.toString());
+        entry.setButtonType(EntryInformation.Type.URL);
+        Response response = new Response();
+        response.addEntry(entry);
+        responseList.addMessage(response);
+        responseList.setMessageType(ResponseList.MessageType.TEXT_WITH_URL);
         return responseList;
     }
 

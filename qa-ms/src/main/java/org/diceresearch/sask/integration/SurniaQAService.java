@@ -21,7 +21,6 @@ public class SurniaQAService {
 
     private final RestTemplate restTemplate;
 
-
     public SurniaQAService(RestTemplateBuilder restTemplateBuilder) {
         this.restTemplate = restTemplateBuilder.build();
     }
@@ -32,7 +31,6 @@ public class SurniaQAService {
      * @param query
      * @return
      */
-
     // TODO: 02/07/2018 temporarily returning String response, return proper response DTO if needed
     public ResponseEntity<String> askSurnia(String query) {
         logger.info("Requesting SurniaQA for following query: " + query);
