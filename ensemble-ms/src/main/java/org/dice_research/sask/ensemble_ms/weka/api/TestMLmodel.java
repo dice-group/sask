@@ -4,7 +4,7 @@ package org.dice_research.sask.ensemble_ms.weka.api;
 
 import weka.classifiers.Evaluation;
 import weka.classifiers.meta.FilteredClassifier;
-import weka.classifiers.trees.J48;
+
 import weka.classifiers.trees.RandomForest;
 import weka.core.Instance;
 import weka.core.Instances;
@@ -15,6 +15,18 @@ import weka.core.stopwords.WordsFromFile;
 import weka.core.tokenizers.NGramTokenizer;
 import weka.filters.unsupervised.attribute.StringToWordVector;
 import weka.filters.Filter;
+
+
+/**
+ * This class take training data for machine learning model and traindata data using RandomForest classifiers
+ * Class also uses strtowordvector filter which convert string text data to the token
+ * set the different properties for the filter strtoword vector such as stopword, stemmers,tokens 
+ * Test dataset on the arff file builded using class TestingDataBuilder  using Meta Filter Classifiers
+ * Class will predict the best extractor class for the given sentence 
+ * Which can be used to find the best extractor for any sentence
+ * 
+ * @author Harsh Shah(hjshah142)
+ */
 
 
 public class TestMLmodel {
@@ -97,17 +109,17 @@ public class TestMLmodel {
 		System.out.println("printing evalution details result.......");
 		System.out.println(evaluation.toClassDetailsString());
 		System.out.println(evaluation.toMatrixString("=== Overall Confusion Matrix ===\n"));
-		System.out.println("Sentence"+            " Actual  "   +           "Predicted Class");
+		System.out.println("-------------------------------------------------------------");
 		
 		
 		for (int i = 0; i < testingSet.numInstances(); i++) 
 		  {
 			
 			// get class double value for current instance
-			double actualClass = testingSet.instance(i).classValue();
+//			double actualClass = testingSet.instance(i).classValue();
 			// get class string value using the class index using the class's int value
 			String sentence  = testingSet.attribute(0).value(i);
-			String actual = testingSet.classAttribute().value((int) actualClass);
+//			String actual = testingSet.classAttribute().value((int) actualClass);
 			// get Instance object of current instance
 			Instance newInst = testingSet.instance(i);
 			// call classifyInstance, which returns a double value for the class
@@ -115,10 +127,10 @@ public class TestMLmodel {
 	
 			// use this value to get string value of the predicted class
 			String predString = testingSet.classAttribute().value((int) predNB);
-			System.out.println(sentence+ "   " +actual + "   " + predString);
+//			System.out.println(sentence+ "   " +actual + "   " + predString);
 			System.out.println("Sentence:");
 			System.out.println(sentence);
-			System.out.println("Prdicated class for Sentence:");
+			System.out.println("Prdicated best class for  this Sentence:");
 			System.out.println(predString);
 			System.out.println("---------------------------");
 			
