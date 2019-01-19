@@ -1,6 +1,6 @@
 [
   {
-    "questionStartWord": ["LIST", "WHO", "GIVE"],
+    "questionStartWord": ["LIST", "WHO", "GIVE", "WHICH"],
     "containsSuperlative": false,
     "resourceAmount": 1,
     "ontologyAmount": 1,
