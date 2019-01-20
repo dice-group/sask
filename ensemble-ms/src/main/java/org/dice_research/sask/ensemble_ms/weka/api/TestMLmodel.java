@@ -2,6 +2,7 @@ package org.dice_research.sask.ensemble_ms.weka.api;
 
 
 
+import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
 import weka.classifiers.meta.FilteredClassifier;
 
@@ -38,8 +39,9 @@ public class TestMLmodel {
 		{
 			Instances traindata = obj.loadMLmodel();
 			Instances testingSet = obj.loadTestData();
-			
-			obj.evaluateMLmodel(traindata,testingSet);
+			RandomForest treeClassifier = new RandomForest();	
+			Classifier classifier = treeClassifier;
+			obj.evaluateMLmodel(traindata,testingSet, classifier);
 			
 		} catch (Exception e) 
 		{
@@ -67,9 +69,9 @@ public class TestMLmodel {
 		return testingSet;
 	}
 
-	public void evaluateMLmodel(Instances traindata, Instances testingSet) throws Exception {
+	public void evaluateMLmodel(Instances traindata, Instances testingSet, Classifier classifier) throws Exception {
 //		J48 treeClassifier = new J48();
-		RandomForest treeClassifier = new RandomForest();	
+//		RandomForest treeClassifier = new RandomForest();	
 		StringToWordVector stringToWordVectorFilter = new StringToWordVector();
 //		set properties for strtoword vector filter
 		
@@ -92,23 +94,26 @@ public class TestMLmodel {
 	    stringToWordVectorFilter.setTokenizer(nGramTokenizer);
 
 	    stringToWordVectorFilter.setLowerCaseTokens(true);
-	    
+
 	   
 		stringToWordVectorFilter.setInputFormat(traindata);
 		traindata = Filter.useFilter(traindata,stringToWordVectorFilter);
-		System.out.println(traindata.toSummaryString());
+//		System.out.println(traindata.toSummaryString());
 		FilteredClassifier filteredClassifier = new FilteredClassifier();
 		filteredClassifier.setFilter(stringToWordVectorFilter);
-		filteredClassifier.setClassifier(treeClassifier);
+		filteredClassifier.setClassifier(classifier);
 		Evaluation evaluation = new Evaluation(traindata);
 		 
-		treeClassifier.buildClassifier(traindata);
+		classifier.buildClassifier(traindata);
 		evaluation.evaluateModel(filteredClassifier, testingSet);
-		System.out.println("Printing evalution summary.........");
-		System.out.println(evaluation.toSummaryString());
-		System.out.println("printing evalution details result.......");
-		System.out.println(evaluation.toClassDetailsString());
-		System.out.println(evaluation.toMatrixString("=== Overall Confusion Matrix ===\n"));
+		System.out.println("Classifiers Details:");
+	    System.out.println(classifier);
+		System.out.println(evaluation.toString());
+//		System.out.println("Printing evalution summary.........");
+//		System.out.println(evaluation.toSummaryString());
+//		System.out.println("printing evalution details result.......");
+//		System.out.println(evaluation.toClassDetailsString());
+//		System.out.println(evaluation.toMatrixString("=== Overall Confusion Matrix ===\n"));
 		System.out.println("-------------------------------------------------------------");
 		
 		

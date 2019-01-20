@@ -12,7 +12,6 @@ import weka.core.Instances;
  * SplitingMlmodel class take training data for machine learning model and split data set into train and test instances by percentage
  * Train machine learning model on train set using random forest tree classifier
  * Test dataset and compare the result of the classification
- * This class test the machine learning model performance with different percentage test and write f score of class o for every test 
  * @author Harsh Shah(hjshah142)
  */
 
