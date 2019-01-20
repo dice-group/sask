@@ -42,7 +42,7 @@ try {
 
 	}
 
-	private void evaluateModel(Instances traindata, int percent) throws Exception {
+	public Double evaluateModel(Instances traindata, int percent) throws Exception {
 		RandomForest treeClassifier = new RandomForest();
 //		J48 treeClassifier = new J48();
 
@@ -72,7 +72,7 @@ try {
 		stringToWordVectorFilter.setInputFormat(traindata);
 		traindata = Filter.useFilter(traindata,stringToWordVectorFilter);
 		
-		System.out.println(traindata.toSummaryString());
+//		System.out.println(traindata.toSummaryString());
 		
 //		 Divide the dataset into two part test and train
 		  
@@ -108,12 +108,15 @@ try {
 			String predString = test.classAttribute().value((int) predNB);
 			System.out.println(actual + "             " + predString);
 		}
+		double f_score = evaluation.fMeasure(0);
+		System.out.println(String.format("F-score "+ "%.2f", f_score));
+		return f_score;
 
 		} 	
 
 	
 
-	private Instances loadMLmodel() throws Exception {
+	public Instances loadMLmodel() throws Exception {
 		
 		String filename = "WekaMlDataset\\traindata.arff";
 		

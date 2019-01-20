@@ -137,13 +137,8 @@ public class SentenceExtractor {
 			System.out.println("-------------------------------------------------------------");
 			
 
-
-			
 			se.trainingFileWriter(training_data);
-			
 
-			
-			
 		
 //			clear the string list for oke and every extractors
 			se.sub.clear();
@@ -206,7 +201,8 @@ public int findMaxscore(double sc_fox, double sc_openIE, double sc_sorokin) {
 			return 0;
 		}
 		else 
-		{     		System.out.println("List of Subjects in OKE files.........  ");
+		{     		
+		System.out.println("List of Subjects in OKE files.........  ");
 		System.out.println(sub);
 		System.out.println("List of predicates  in OKE files.........  ");
 		System.out.println(pred);
