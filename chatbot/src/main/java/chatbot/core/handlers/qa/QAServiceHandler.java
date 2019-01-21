@@ -41,43 +41,10 @@ public class QAServiceHandler extends Handler {
         StringBuilder stringBuilder = new StringBuilder();
         ObjectMapper objectMapper = new ObjectMapper();
         String answer = askQAService(request);
-        LinkedHashMap answerDto;
+        Object answerDto;
         try {
-            answerDto = (LinkedHashMap) objectMapper.readValue(answer, Object.class);
-            // TODO: 19/01/2019 inefficient implementation, this could possibly be done with Regex, or find a way to desrialize JSON
-            // TODO: the problem with deserialization is that the incoming JSON response has different data types based on answer,
-            // TODO: therefor no static POJO can be used to deserialize it
-            answerDto.keySet().forEach(a -> {
-                ArrayList questions = (ArrayList) answerDto.get(a);
-                LinkedHashMap questionProperties = (LinkedHashMap) questions.get(0);
-                questionProperties.keySet().forEach(key -> {
-                    if ("answers".equals(key.toString())) {
-                        ArrayList answers = (ArrayList) questionProperties.get(key);
-                        LinkedHashMap answersMap = (LinkedHashMap) answers.get(0);
-                        answersMap.keySet().forEach(answerKey -> {
-                            if ("results".equals(answerKey)) {
-                                LinkedHashMap bindingsMap = (LinkedHashMap) answersMap.get(answerKey);
-                                bindingsMap.keySet().forEach(binding -> {
-                                    ArrayList bindingList = (ArrayList) bindingsMap.get(binding);
-                                    bindingList.forEach(bindingElement -> {
-                                        LinkedHashMap bindingElementMap = (LinkedHashMap) bindingElement;
-                                        bindingElementMap.keySet().forEach(bElementKey -> {
-                                            LinkedHashMap finalResults = (LinkedHashMap) bindingElementMap.get(bElementKey);
-                                            finalResults.keySet().forEach(fKey -> {
-                                                if ("value".equals(fKey)) {
-                                                    stringBuilder.append(finalResults.get(fKey));
-                                                    stringBuilder.append(" ");
-                                                    stringBuilder.append("\n");
-                                                }
-                                            });
-                                        });
-                                    });
-                                });
-                            }
-                        });
-                    }
-                });
-            });
+            answerDto = objectMapper.readValue(answer, Object.class);
+            this.findAnswers(answerDto, stringBuilder);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -88,6 +55,33 @@ public class QAServiceHandler extends Handler {
         responseList.addMessage(response);
         responseList.setMessageType(ResponseList.MessageType.TEXT_WITH_URL);
         return responseList;
+    }
+    /**
+     * Recursively loop over JSON object to find URIs
+     * This is relatively inefficient implementation, could possibly be done with Regex, or find a way to desrialize JSON
+     * However, the problem with deserialization is that the incoming JSON response has different data types based on answer,
+     * therefor no static POJO can be used to deserialize it at the momement
+     *
+     * @param answerDto
+     * @param stringBuilder
+     */
+    private void findAnswers(Object answerDto, StringBuilder stringBuilder) {
+        if (answerDto instanceof LinkedHashMap) {
+            LinkedHashMap answerDtoMap = (LinkedHashMap) answerDto;
+            answerDtoMap.keySet().forEach(answer -> {
+                if ("value".equals(answer)) {
+                    stringBuilder.append(answerDtoMap.get(answer));
+                    stringBuilder.append(" ");
+                    stringBuilder.append("\n");
+                } else findAnswers(answerDtoMap.get(answer), stringBuilder);
+            });
+        }
+        if (answerDto instanceof ArrayList) {
+            ArrayList answerDTOArray = (ArrayList) answerDto;
+            answerDTOArray.forEach(element -> {
+                findAnswers(element, stringBuilder);
+            });
+        }
     }
 
     private String askQAService(IncomingRequest request) {
