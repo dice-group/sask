@@ -1,0 +1,104 @@
+@relation traindata
+@attribute Sentences String
+@attribute best_extractor {0,1,2}
+@data
+'Google CEO Sundar Pichai responded today to the firing of employee James Damore over his controversial memo on workplace diversity',2
+'Pope Francis in Chile at start of Latin America visit',0
+' First Lady  apple pies in the Kruhek bakery in Melania Trumps hometown of Sevnica in Slovenia are selling like hot cakes',0
+'With Sundar Pichai  an Indian becoming Google CEO  the natural reaction for most people in the country is that it is a matter of pride',2
+'The class of 2016 has graduated from Wellesley College in Boston as the university s most famous alumna  Hillary Clinton  campaigns for the presidency',0
+'Ram Nath Kovind  a Dalit - one of India s lowest castes - was picked by an electoral college to become president in July 2017',2
+'The CEO of Google promised the company would drop everything to fix a glaring error that was pointed out on its cheeseburger emoji. The viral tweet caught the attention of CEO Sundar Pichai',2
+'     "Jenny McCarthy took it way back on Thursday  July 30  celebrating Throwback Thursday with an adorable photo of herself and her famous cousin Melissa McCarthy as kids',2
+'Cristiano Ronaldo s superb free kick gave Real Madrid a 1-0 win over Gremio as the Spanish champions retained their Fifa Club World Cup title in Abu Dhabi',0
+'The president of the European Commission  Jean-Claude Juncker  has told German media he will not seek a second term',0
+'The Eagles will perform without the late Frontman Glenn Frey for the first time since his death  according to an industry insider',2
+'Ajay Devgn was spotted outside a theatre here along with wife Kajol',2
+'Rajeev Motwani was mentor to Google s founders  Larry Page and Sergey Brin  when they were PhD students at Stanford university',0
+'They ultimately raised about $1 million from investors  family  and friends and set up shop in Menlo Park  California  under the name Google  which was derived from a misspelling of Pages original planned name  googol',0
+'Famed singer-songwriter John Lennon founded the Beatles  a band that impacted the popular music scene like no other before  or since',0
+'The Education Department has been approving plans at a fast and furious clip in recent weeks. So far  33 states  plus the District of Columbia and Puerto Rico',2
+'Japan is located in the east most of Asia so it is called as the Land of rising Sun',2
+'HSBC decided not to move its headquarters from London to Hong Kong. HSBC was established as the Hong Kong and Shanghai Bank almost exactly 151 years ago  opening for business in Hong Kong on March 1865 and in Shanghai a month later',1
+'Tata Consultancy Services (TCS) has taken on lease 1.8 million sq ft at Hiranandani Estate  Thane',0
+'Fifth Harmony s Camila Cabello has quit the girl group',0
+'Altice subsidary Numericable signs Virgin Mobile acquisition agreement',2
+'Oklahoma Trae Young is simply stunning. His deep 3-ball has drawn multiple comparisons to Steph Curry  and the Golden State Warrior called the freshman guard style unbelievable',2
+'MS Dhoni was an integral part of Chennai Super Kings (CSK) in the first eight editions of the Indian Premier League (IPL)',2
+'Microsoft CEO Satya Nadella is in the middle of a world tour to promote his new book Hit Refresh  in which he talks about how he s in the process of reinventing the computing giant',0
+'Carol Lynn Meylan and Russel Edward Caflisch were married Jan. 2 at the Manhattan Marriage Bureau',0
+'Veteran actress Dimple Kapadias nephew and producer-entrepreneur Twinkle Khannas cousin Karan Kapadia is set to make his Bollywood debut with Tony D Souza and Vishal Ranas upcoming yet-untitled film',2
+'In 1971  McDonald s settled its global headquarters in Oak Brook  a Chicago suburb with fewer than 8 000 people',2
+'It was a family affair at the Louis Vuitton menswear show in Paris today. Victoria Beckham joined husband David Beckham and their eldest son Brooklyn Beckham to take in Kim Jones  final collection for the French house',0
+'Former member of Pussycat Dolls claims band was a prostitution ring. Kaya Jones claims the Pussycat Dolls were operated as a prostitution ring during her time in the group',0
+'Along with Delhi and Jaipur  Agra forms the Golden Triangle of tourism in India',2
+'Pope Francis tells of anguish as relatives die in Argentina car crash. Two great-nephews and their mother killed on Cordoba-Rosario highway  while nephew Emanuel Bergogolio in critical condition',0
+'The many fields of expertise of this leading global technology player are concentrated in the Siemens Headquarters building in munich',2
+'Serbias conservative leader sworn in as president. Conservative politician Aleksandar Vucic was sworn in as Serbian president',0
+'Performing live is fun: Mohan of Agnee',0
+'Facebook founder and CEO Mark Zuckerberg announced the shift in the configuration of the News Feed on Thursday  saying it would reduce engagement by users at first but would lead to their improved well-being',2
+'the Department of Defense is working through appropriate channels and in accordance with all applicable legal requirements in order to acquire a limited amount of leased space in Trump Tower',0
+'Doddaullarathi Kariappa  a farmer leader in Challakere  Chitradurga  said the district has been reeling under drought for nine consecu tive years',2
+'Donald J. Trump is the 45th President of the United States. He believes the United States has incredible potential and will go on to exceed anything that it has achieved in the past',0
+'Knowledge Services and Dotstaff is incredibly happy to be a part of this wonderful community  said Joe Bielawski  the president of Knowledge Services',0
+'Tata Motors will merge its automotive component-making subsidiary TML Drivelines with itself  according to a filing with the stock markets on Tuesday',0
+'John Panozzo is the only drummer Styx has ever had; Styx is the only band Panozzo has ever worked with professionally',2
+'When V. Narayan registered at the Maruthi College of Engineering (MCE) in Chittoor district in 1983  the year it opened its impressive doors  he thought his future was secure. With the affiliation of the college to the International University IU at Missouri in the US  Narayan had visions of completing his education with a fancy foreign degree',0
+'Cousins Anthony Carrino and John Colaneri use their contracting skills to transform people s homes while they are whisked away on a short trip',2
+'Carolee Bull  head of the Department of Plant Pathology and Environmental Microbiology in Penn State s College of Agricultural Sciences  recently was recognized by her alma mater  Ohio University  for her professional achievements',0
+'When Arsene Wenger was appointed as Arsenal manager on 1 October 1996 from Japanese club Nagoya Grampus Eight he was an unknown entity to many Arsenal fans  but that is not the case anymore after a hugely successful tenure as the clubs longest serving manager',0
+'Mukesh and Nita Ambani s youngest son Anant Ambani  who became a victim of online trolls because of his weight  has hogged the limelight again and this time because of his speech',0
+'Former Indian president APJ Abdul Kalam  who was pivotal in the countrys nuclear weapons program  died Monday in northeastern India',0
+'Sinclair announces affiliation agreement renewals with Fox',0
+'     "Kim Jong-un became the supreme leader of North Korea in 2011  succeeding his father Kim Jong-il',0
+'Rahul Dravids elder son Samit has attracted attention by scoring a century in the Karnataka State Cricket Associations (KSCA) BTR Cup Under-14 Inter- School tournament',2
+'Backstreet Boys member AJ McLean said  We are reaching out to people who we were always inspired by or who may have been fans and we didn t even know',2
+'Ryan Lochte is headed back to the University of Florida. Beginning in September  Lochte will again be training in Gainesville under Gregg Troy. Ryan achieved his greatest success as a swimmer during his time at the University of Florida',0
+'Nokia  a brand born in 1865 in a paper mill in South west Finland is today considered to be one of the most successful and important Fortune 500 organisations',2
+'David Foster Wallace  one of the sports finest chroniclers  once described Johanna Kontas new coach  Michael Joyce  as a world-class tennis player',0
+'One fine day  when Moumita was reading about India s first lunar probe  Chandrayaan 1  in the Anandabazar Patrika in her hometown of Kolkata  she thought How lucky those people are to have the opportunity to be part of this',2
+'Serbia grants citizenship to actor Ralph Fiennes',2
+'Xi Jinping became president of China in 2012  ushering in an era of increased assertiveness and authoritarianism',0
+'Sunday Mirror reporter Alan Selby spent five weeks working at the online shop s warehouse in Essex and finished his last shift on Black Friday',2
+'BHEL commissions 270 MW thermal unit in Nashik district of Maharashtra',2
+'Born in 1981 in Switzerland  Roger Federer was among his country s top junior tennis players by age 11',0
+'Rafael Nadal s uncle  Toni Nadal  will step down as his coach after this year s ATP Tour',0
+'Dr APJ Abdul Kalam who was buried with full state honours at a public ground in Tamil Nadu s Rameswaram town where he was born. Dr Kalam died on Monday in Shillong after a massive cardiac arrest while delivering a lecture',0
+'Kungsleden signs new lease agreement with existing tenant Forsakringskassan',2
+'John McCarthy  a professor emeritus of computer science at Stanford  the man who coined the term artificial intelligence and subsequently went on to define the field for more than five decades',0
+'Bastian Schweinsteiger joins Chicago Fire from Manchester United',0
+'Barack Hussein Obama II was born on August 4  1961  in Honolulu  Hawaii',2
+'Shields  who died this summer in Winnipeg  rose to fame as lead singer with his band Streetheart in the 1970s and 80s',2
+'Roger Federer credits coach Ivan Ljubicic s clarity and desire for contributing to his success this season',0
+'Thousands of Indians have taken to the streets to mourn the death of Jayalalithaa Jayaram  chief minister of India s southern Tamil Nadu state  who died at the age of 68 after a prolonged illness.Jayalalithaa  one of the countrys most popular political leaders  died late on Monday evening at the private Apollo Hospital in the state capital  Chennai  where she suffered a heart attack on Sunday',0
+'Camila was born in Cuba  and lived in the capital of Havana and neighbouring Mexico before moving to the United States when she was five',0
+'THE GERMAN car maker Volkswagen added another luxury marque to its stable yesterday by agreeing to buy the Italian sports car maker Lamborghini',2
+'Facebooks founders knew they were creating something addictive that exploited a vulnerability in human psychology from the outset  according to the companys founding president Sean Parker',0
+'When Pepsi CEO Indra Nooyi got her pivotal promotion  her mother cut off the announcement and sent her out to get milk instead',2
+'Mr Trump said at a campaign event in Washington: President Barack Obama was born in the United States',0
+'Shilpa Shetty and Raj Kundra  both 42  have been married for over eight years now. Viaan  5  is the couple s only child. Shilpa s sister Shamita is also an actress',0
+'In June 323 BC  Alexander the Great died in Babylon aged 32  having conquered an empire stretching from modern Albania to eastern Pakistan',0
+'Jaipur  the capital city of Rajasthan  having a total population of 3 441 816 is the most populated city of the state and the tenth most populated city of the country',2
+'Melbourne City hand debut to Dylan Pierias  the A-League’s first player born in the 2000s',2
+'Los Angeles Angels-bound Shohei Ohtani bid farewell to fans of his former Japanese club on Monday as he sets off to join his new Major League Baseball team',0
+'Early last month it was reported that cricketer David Warner  29  and wife Candice  30  had put their sprawling home in Sydney s South Coogee on the market',0
+'IIT-Madras student Preksha Nema is one of four recipients in the country  of the Google PhD Fellowship 2017.Preksha is jointly guided by Professor Mitesh M. Khapra and Professor B. Ravindran at the Department of Computer Science and Engineering',0
+'Chitradurga  part of an arid region in Karnataka  has recorded a deficit of 43 percent',2
+'Can you imagine Rahul Dravid as a top corporate executive? He had earlier earned a degree in commerce from St. Joseph s College of Commerce in Bangalore',0
+'Vice President Pence arrives in Israel',2
+'Arjun Tendulkar  the son of legendary Indian batsman Sachin Tendulkar  turned heads at Don Bradmans home of Bowral  NSW  with a powerful performance for a Cricket Club',0
+'Donald Trump s unsettling record of comments about his daughter Ivank',0
+'MARK Zuckerberg and his wife Priscilla Chan have announced they welcomed another baby girl into the world',0
+'FC Barcelona and Lionel Messi signed on Saturday morning a new contract. After impressing throughout the various youth categories  he made his first team debut at just 16 years of age in a friendly against FC Porto',0
+'As visibility drops  Punjab districts order change in school timings. Some districts  such as Shahid Bhagat Singh Nagar  have asked schools to remain closed from January 3-6',1
+'Barcelona coach Ernesto Valverde admitted starting with Lionel Messi on the bench against Juventus was a tough decision',0
+'The University of Essex has been welcomed into the CFA Institute University Affiliation Program  widely considered as the investment professions most rigorous credentialing scheme',0
+'Newly-weds Virat Kohli and Anushka Sharma are making the most of their time in Cape Town',0
+'Singer-songwriter Liam Gallagher was born in Manchester on September 21  1972 - the youngest of three boys.Now 44  Liam spends most of his time talking about how his band Oasis will eventually get back together and make more music eventually',0
+'Donald Trump  the main supporter of false claims about Barack Obama s birthplace  has finally said he accepts that the president was born in the US  period',0
+'Audible  Amazon s audiobook and spoken-word subsidiary  on Thursday announced Channels  a subscription service that will offer a new library of audio  including original programs  articles read aloud and more',2
+'Borussia Dortmund reportedly want to sign Olivier Giroud from Arsenal as they look to identify replacements for Pierre-Emerick Aubameyang',0
+'The district of Coimbatore is one of the largest districts of the state of Tamil Nadu  covering the geographical area of 7469 Sq. km',2
+'Located in Western Europe  France is one of the worlds oldest countries  and its reach extends around the globe through science  politics  economics and perhaps above all  culture',2
+'Brad Smith is Microsoft s president and chief legal officer.In this role Smith is responsible for the company s corporate  external  and legal affairs',2
+'Zayn Malik Leaves One Direction',0
