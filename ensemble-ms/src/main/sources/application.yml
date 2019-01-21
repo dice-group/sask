@@ -1,0 +1,26 @@
+### Spring properties
+# Service registers under this name
+spring:
+  application:
+    name: ensemble-ms
+
+# Discovery Server Access
+eureka:
+  instance:
+    metadataMap:
+      type: ensemble
+      friendlyname: Ensemble
+    hostName: ${ENSEMBLE_PUBLISH_HOST:localhost} 
+    preferIpAddress: false 
+  client:
+    serviceUrl:
+      defaultZone: http://${EUREKA_SERVICE_HOST:localhost}:${EUREKA_SERVICE_PORT:8761}/eureka/
+
+# HTTP Server (Tomcat) Port
+server: 
+  port: ${ENSEMBLE_PUBLISH_PORT:2400}
+
+# Disable Spring Boot's "Whitelabel" default error page, so we can use our own
+error:
+  whitelabel:
+    enabled: false

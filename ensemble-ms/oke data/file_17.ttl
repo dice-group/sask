@@ -1,0 +1,64 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+<http://www.foxnewspoint.com/top-10-list-of-most-populous-countries-in-the-world-2017/#char=37,41>
+        a                     nif:Phrase , nif:RFC5147String , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Asia" ;
+        nif:beginIndex        "37"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "41"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.foxnewspoint.com/top-10-list-of-most-populous-countries-in-the-world-2017/#char=0,84> ;
+        itsrdf:taClassRef     dbo:Place ;
+        itsrdf:taIdentRef     dbr:Asia .
+
+<http://www.foxnewspoint.com/top-10-list-of-most-populous-countries-in-the-world-2017/#char=0,5>
+        a                     nif:String , nif:Phrase , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Japan" ;
+        nif:beginIndex        "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "5"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.foxnewspoint.com/top-10-list-of-most-populous-countries-in-the-world-2017/#char=0,84> ;
+        itsrdf:taClassRef     dbo:Place ;
+        itsrdf:taIdentRef     dbr:Japan .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Asia ;
+  rdf:predicate  dbo:location ;
+  rdf:subject    dbr:Japan ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.foxnewspoint.com/top-10-list-of-most-populous-countries-in-the-world-2017/#char=0,84>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Asia ;
+  rdf:predicate  dbo:country ;
+  rdf:subject    dbr:Japan ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.foxnewspoint.com/top-10-list-of-most-populous-countries-in-the-world-2017/#char=0,84>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Asia ;
+  rdf:predicate  dbo:locatedInArea ;
+  rdf:subject    dbr:Japan ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.foxnewspoint.com/top-10-list-of-most-populous-countries-in-the-world-2017/#char=0,84>
+                 ]
+] .
+
+<http://www.foxnewspoint.com/top-10-list-of-most-populous-countries-in-the-world-2017/#char=0,84>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "84"^^xsd:nonNegativeInteger ;
+        nif:isString    "Japan is located in the east most of Asia so it is called as the Land of rising Sun." .

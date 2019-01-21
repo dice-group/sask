@@ -1,0 +1,12 @@
+@base <http://MonaLisaExample.org/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dbo: <http://dbpedia.org/ontology/Artist> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+<e2> rdfs:label "Mona Lisa" . 
+<e2> dbo:artist <e1> .
+dbo:artist rdfs:label "artist" .
+<e1> rdfs:label "Leonardo da Vinci" .
+<e1> rdf:type <http://MonaLisaExample.org/r1> .
+rdf:type rdfs:label "type" .
+<http://MonaLisaExample.org/r1> rdfs:label "Person" .

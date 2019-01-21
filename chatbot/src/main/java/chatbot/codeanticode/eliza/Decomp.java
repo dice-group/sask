@@ -5,11 +5,11 @@ import java.lang.Math;
  */
 public class Decomp {
 	/** The decomp pattern */
-	String pattern;
+	private String pattern;
 	/** The mem flag */
 	boolean mem;
 	/** The reassembly list */
-	ReasembList reasemb;
+	private ReasembList reasemb;
 	/** The current reassembly point */
 	int currReasmb;
 

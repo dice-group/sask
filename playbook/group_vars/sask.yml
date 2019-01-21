@@ -1,0 +1,92 @@
+---
+## File defines the sask microservices details
+
+# vars file for modules
+
+microservices:
+  - chatbot
+  - eureka-server
+  - webclient
+  - cedric-ms
+  - database-ms
+  - sorookin-ms
+  - dbpedia-ms
+  - executer-ms
+  - fox-ms
+  - fred-ms
+  - open-ie-ms
+  - repo-ms
+  - taipan-ms
+
+image_tag: "latest"
+
+## Eureka Service Related properties -- START
+
+eureka_service_port: 8761
+
+eureka_service_host: "{{ groups['eureka-server']| first }}"
+
+## Eureka Service Related properties -- END
+
+
+## Chatbot Service Related properties -- START
+chatbot_instance_base_port: 9191
+
+#TODO: This value should be updated to the correct HAWK endpoint
+qa_hawk_url: "http://185.2.103.92:8081/tebaqa/qa-simple?query="
+
+#TODO: This value should be updated to the correct SESS endpoint
+sessa_search_url: "http://localhost:7070/search?query="
+
+## Chatbot Service Related properties -- END
+
+
+## WebClient Service Related properties -- START
+webclient_instance_base_port: 9090
+
+## WebClient Service Related properties -- END 
+
+
+## Extractor microservices, which has a dependency only on Eureka server
+extractor_microservices:
+  - { microservice_name: 'cedric-ms',                 publish_port: 2225 }
+  - { microservice_name: 'dbpedia-ms',                publish_port: 2224 }
+  - { microservice_name: 'executer-ms',               publish_port: 2500 }
+  - { microservice_name: 'fox-ms',                    publish_port: 2222 }
+  - { microservice_name: 'fred-ms',                   publish_port: 2223 }
+  - { microservice_name: 'open-ie-ms',                publish_port: 2226 }
+  - { microservice_name: 'sorookin-ms',               publish_port: 2227 }
+
+
+## Database-MS Service Related properties -- START
+database_publish_port: 3031
+
+# Hostserver where fuseki is running
+# It takes the hostname where fuseiki is running based on inventory
+fuseki_hostserver : "{{ groups['fuseki-server']| first }}"
+fuseki_port: 3030
+
+## Database-MS Service Related properties -- END
+
+
+## Repo-MS Service Related properties -- START
+repo_publish_port: 2300
+
+# Hostserver where Hadoop is running
+# It takes the hostname where hadoop is running based on inventory
+hadoop_hostserver : "hadoop"
+hadoop_port: 50070
+
+## Repo-MS Service Related properties -- END
+
+
+## Taipan-MS Service Related properties -- START
+taipan_publish_port: 2228
+
+# Hostserver where Taipan is running
+# It takes the hostname where Taipan is running based on inventory
+taipan_hostserver : "{{ groups['taipan-server']| first }}"
+taipan_port: 5000
+
+## Taipan-MS Service Related properties -- END
+

@@ -1,0 +1,64 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+<https://www.biography.com/people/roger-federer-13612203#char=16,27>
+        a                     nif:String , nif:RFC5147String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Switzerland" ;
+        nif:beginIndex        "16"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "27"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.biography.com/people/roger-federer-13612203#char=0,103> ;
+        itsrdf:taClassRef     dbo:Place ;
+        itsrdf:taIdentRef     dbr:Switzerland .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Switzerland ;
+  rdf:predicate  dbo:location ;
+  rdf:subject    dbr:Roger_Federer ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.biography.com/people/roger-federer-13612203#char=0,103>
+                 ]
+] .
+
+<https://www.biography.com/people/roger-federer-13612203#char=29,42>
+        a                     nif:Phrase , nif:RFC5147String , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Roger Federer" ;
+        nif:beginIndex        "29"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "42"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.biography.com/people/roger-federer-13612203#char=0,103> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:Roger_Federer .
+
+<https://www.biography.com/people/roger-federer-13612203#char=0,103>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "103"^^xsd:nonNegativeInteger ;
+        nif:isString    "Born in 1981 in Switzerland, Roger Federer was among his country's top junior tennis players by age 11." .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Switzerland ;
+  rdf:predicate  dbo:nationality ;
+  rdf:subject    dbr:Roger_Federer ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.biography.com/people/roger-federer-13612203#char=0,103>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Switzerland ;
+  rdf:predicate  dbo:country ;
+  rdf:subject    dbr:Roger_Federer ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.biography.com/people/roger-federer-13612203#char=0,103>
+                 ]
+] .

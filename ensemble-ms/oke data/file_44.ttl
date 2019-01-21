@@ -1,0 +1,68 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+<http://news.psu.edu/story/491586/2017/11/01/academics/college-agricultural-sciences-department-head-honored-alma-mater#char=0,12>
+        a                     nif:String , nif:Phrase , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Carolee Bull" ;
+        nif:beginIndex        "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "12"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://news.psu.edu/story/491586/2017/11/01/academics/college-agricultural-sciences-department-head-honored-alma-mater#char=0,231> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     aksw:CaroleeBull .
+
+<http://news.psu.edu/story/491586/2017/11/01/academics/college-agricultural-sciences-department-head-honored-alma-mater#char=180,195>
+        a                     nif:String , nif:RFC5147String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Ohio University" ;
+        nif:beginIndex        "180"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "195"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://news.psu.edu/story/491586/2017/11/01/academics/college-agricultural-sciences-department-head-honored-alma-mater#char=0,231> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     dbr:Ohio_University .
+
+<http://news.psu.edu/story/491586/2017/11/01/academics/college-agricultural-sciences-department-head-honored-alma-mater#char=90,135>
+        a                     nif:String , nif:Phrase , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Penn State's College of Agricultural Sciences" ;
+        nif:beginIndex        "90"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "135"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://news.psu.edu/story/491586/2017/11/01/academics/college-agricultural-sciences-department-head-honored-alma-mater#char=0,231> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     dbr:Penn_State_College_of_Agricultural_Sciences .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Ohio_University ;
+  rdf:predicate  dbo:almaMater ;
+  rdf:subject    aksw:CaroleeBull ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://news.psu.edu/story/491586/2017/11/01/academics/college-agricultural-sciences-department-head-honored-alma-mater#char=0,231>
+                 ]
+] .
+
+<http://news.psu.edu/story/491586/2017/11/01/academics/college-agricultural-sciences-department-head-honored-alma-mater#char=0,231>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "231"^^xsd:nonNegativeInteger ;
+        nif:isString    "Carolee Bull, head of the Department of Plant Pathology and Environmental Microbiology in Penn State's College of Agricultural Sciences, recently was recognized by her alma mater, Ohio University, for her professional achievements." .
+
+<http://news.psu.edu/story/491586/2017/11/01/academics/college-agricultural-sciences-department-head-honored-alma-mater#char=26,86>
+        a                     nif:Phrase , nif:String , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Department of Plant Pathology and Environmental Microbiology" ;
+        nif:beginIndex        "26"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "86"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://news.psu.edu/story/491586/2017/11/01/academics/college-agricultural-sciences-department-head-honored-alma-mater#char=0,231> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     aksw:DepartmentofPlantPathologyandEnvironmentalMicrobiology .

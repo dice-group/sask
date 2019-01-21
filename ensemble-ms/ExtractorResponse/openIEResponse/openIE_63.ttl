@@ -1,0 +1,1 @@
+@prefix :      <http://example.org/> .@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .<http://example.org/John%20McCarthy>        <http://example.org/emeritus%20at>                :Stanford ;        <http://example.org/emeritus%20of>                <http://example.org/computer%20science> .

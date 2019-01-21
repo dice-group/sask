@@ -10,13 +10,15 @@ eureka:
     metadataMap:
       type: extractor
       friendlyname: Fred
+    hostName: ${FRED_PUBLISH_HOST:localhost} 
+    preferIpAddress: false 
   client:
     serviceUrl:
-      defaultZone: http://localhost:1111/eureka/
+      defaultZone: http://${EUREKA_SERVICE_HOST:localhost}:${EUREKA_SERVICE_PORT:8761}/eureka/
 
 # HTTP Server (Tomcat) Port
 server: 
-  port: 2223
+  port: ${FRED_PUBLISH_PORT:2223}
 
 # Disable Spring Boot's "Whitelabel" default error page, so we can use our own
 error:

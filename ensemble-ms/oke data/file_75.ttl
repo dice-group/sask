@@ -1,0 +1,142 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+<https://www.ndtv.com/entertainment/twinkle-khanna-sussanne-khan-shilpa-shetty-spend-sunday-with-kids-1800206#char=137,144>
+        a                     nif:RFC5147String , nif:Phrase , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Shamita" ;
+        nif:beginIndex        "137"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "144"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.ndtv.com/entertainment/twinkle-khanna-sussanne-khan-shilpa-shetty-spend-sunday-with-kids-1800206#char=0,164> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:Shamita_Shetty .
+
+<https://www.ndtv.com/entertainment/twinkle-khanna-sussanne-khan-shilpa-shetty-spend-sunday-with-kids-1800206#char=18,28>
+        a                     nif:RFC5147String , nif:String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Raj Kundra" ;
+        nif:beginIndex        "18"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "28"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.ndtv.com/entertainment/twinkle-khanna-sussanne-khan-shilpa-shetty-spend-sunday-with-kids-1800206#char=0,164> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:Raj_Kundra .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     aksw:Viaan ;
+  rdf:predicate  dbo:relative ;
+  rdf:subject    dbr:Shamita_Shetty ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.ndtv.com/entertainment/twinkle-khanna-sussanne-khan-shilpa-shetty-spend-sunday-with-kids-1800206#char=0,164>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Shilpa_Shetty ;
+  rdf:predicate  dbo:child ;
+  rdf:subject    aksw:Viaan ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.ndtv.com/entertainment/twinkle-khanna-sussanne-khan-shilpa-shetty-spend-sunday-with-kids-1800206#char=0,164>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Raj_Kundra ;
+  rdf:predicate  dbo:relative ;
+  rdf:subject    dbr:Shamita_Shetty ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.ndtv.com/entertainment/twinkle-khanna-sussanne-khan-shilpa-shetty-spend-sunday-with-kids-1800206#char=0,164>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Shilpa_Shetty ;
+  rdf:predicate  dbo:child ;
+  rdf:subject    aksw:Viaan ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.ndtv.com/entertainment/twinkle-khanna-sussanne-khan-shilpa-shetty-spend-sunday-with-kids-1800206#char=0,164>
+                 ]
+] .
+
+<https://www.ndtv.com/entertainment/twinkle-khanna-sussanne-khan-shilpa-shetty-spend-sunday-with-kids-1800206#char=83,88>
+        a                     nif:Phrase , nif:RFC5147String , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Viaan" ;
+        nif:beginIndex        "83"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "88"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.ndtv.com/entertainment/twinkle-khanna-sussanne-khan-shilpa-shetty-spend-sunday-with-kids-1800206#char=0,164> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     aksw:Viaan .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     aksw:Viaan ;
+  rdf:predicate  dbo:parent ;
+  rdf:subject    dbr:Shilpa_Shetty ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.ndtv.com/entertainment/twinkle-khanna-sussanne-khan-shilpa-shetty-spend-sunday-with-kids-1800206#char=0,164>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Shilpa_Shetty ;
+  rdf:predicate  dbo:spouse ;
+  rdf:subject    dbr:Raj_Kundra ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.ndtv.com/entertainment/twinkle-khanna-sussanne-khan-shilpa-shetty-spend-sunday-with-kids-1800206#char=0,164>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     aksw:Viaan ;
+  rdf:predicate  dbo:parent ;
+  rdf:subject    dbr:Raj_Kundra ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.ndtv.com/entertainment/twinkle-khanna-sussanne-khan-shilpa-shetty-spend-sunday-with-kids-1800206#char=0,164>
+                 ]
+] .
+
+<https://www.ndtv.com/entertainment/twinkle-khanna-sussanne-khan-shilpa-shetty-spend-sunday-with-kids-1800206#char=121,127>
+        a                     nif:RFC5147String , nif:String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Shilpa" ;
+        nif:beginIndex        "121"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "127"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.ndtv.com/entertainment/twinkle-khanna-sussanne-khan-shilpa-shetty-spend-sunday-with-kids-1800206#char=0,164> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:Shilpa_Shetty .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Raj_Kundra ;
+  rdf:predicate  dbo:spouse ;
+  rdf:subject    dbr:Shilpa_Shetty ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.ndtv.com/entertainment/twinkle-khanna-sussanne-khan-shilpa-shetty-spend-sunday-with-kids-1800206#char=0,164>
+                 ]
+] .
+
+<https://www.ndtv.com/entertainment/twinkle-khanna-sussanne-khan-shilpa-shetty-spend-sunday-with-kids-1800206#char=0,13>
+        a                     nif:String , nif:RFC5147String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Shilpa Shetty" ;
+        nif:beginIndex        "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "13"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.ndtv.com/entertainment/twinkle-khanna-sussanne-khan-shilpa-shetty-spend-sunday-with-kids-1800206#char=0,164> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:Shilpa_Shetty .
+
+<https://www.ndtv.com/entertainment/twinkle-khanna-sussanne-khan-shilpa-shetty-spend-sunday-with-kids-1800206#char=0,164>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "164"^^xsd:nonNegativeInteger ;
+        nif:isString    "Shilpa Shetty and Raj Kundra, both 42, have been married for over eight years now. Viaan, 5, is the couple's only child. Shilpa's sister Shamita is also an actress." .

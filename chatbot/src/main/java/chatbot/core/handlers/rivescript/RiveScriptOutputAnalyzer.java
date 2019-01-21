@@ -1,10 +1,19 @@
 package chatbot.core.handlers.rivescript;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.util.stream.Collectors;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -21,28 +30,60 @@ import chatbot.io.response.ResponseList.MessageType;
 public class RiveScriptOutputAnalyzer {
 
 	private static Logger log = Logger.getLogger(RiveScriptOutputAnalyzer.class.getName());
-	private static final String TEMPLATE_FILE = "src/main/resources/rivescript/properties/template.yml";
 	private static final String ERRMSG = "error";
 	private static String yamlTemplateContents = null;
 	private static RiveScript bot = null;
 
 	public RiveScriptOutputAnalyzer() {
-		
+		resourceLoader();
 	}
 	
 	private static void resourceLoader() {
-		
-		bot = new RiveScript();
-		bot.loadDirectory("src/main/resources/rivescript/rivefiles");
-		bot.sortReplies();
-		
-		try {
-			yamlTemplateContents = new String(Files.readAllBytes(Paths.get(TEMPLATE_FILE)));
-		} catch (IOException e) {
-			log.error("resourceLoader, IO Exception while parsing YAML template,Stack Trace=" + e.getMessage());
-			e.printStackTrace();
-		}		
+        
+		ClassLoader cl = RiveScriptOutputAnalyzer.class.getClassLoader(); 
+		log.debug("Loading the Rive Script Files");
+    try {
+    		
+    		bot = new RiveScript(); 
+
+        // Create a directory to store the rive files which will be used by RiveScript loader
+        File temp = new File("rivefiles/");
+        temp.delete();
+        temp.mkdir();
+        
+        Resource[] messageResources = new PathMatchingResourcePatternResolver(cl).getResources("classpath*:rivescript/rivefiles/*.rive");
+        for (Resource resource: messageResources){
+        	
+        		File file = new File(temp + "/" + resource.getFilename() +"/");
+        		InputStream inputStream = resource.getInputStream();
+        		OutputStream outputStream = new FileOutputStream(file);
+        		IOUtils.copy(inputStream, outputStream);
+        		outputStream.close();
+
+        }
+        bot.loadDirectory(temp);
+        bot.sortReplies();
+        
+        // deleting the temp directory post loading the data
+        FileUtils.deleteDirectory(temp);
+       
+    } catch (Exception e) {
+    		log.error("resourceLoader, Exception while loading the resouce files,Stack Trace=" + e.getMessage());
+		e.printStackTrace();
+    }
+    
+    
+    log.debug("Loading the Template file containing the pre-defined questions");
+	try {
+		Resource[] messageResources = new PathMatchingResourcePatternResolver(cl).getResources("classpath*:rivescript/properties/template.yml");
+		// Since there is only one resource file, it is accessed directly
+		InputStream templateFileStream = messageResources[0].getInputStream();
+        yamlTemplateContents = new BufferedReader(new InputStreamReader(templateFileStream)).lines().collect(Collectors.joining("\n"));
+        } catch (IOException e) {
+		log.error("resourceLoader, IO Exception while parsing YAML template,Stack Trace=" + e.getMessage());
+		e.printStackTrace();
 	}
+}
 
 	public ResponseList riveHandler(String query) {
 
@@ -56,11 +97,14 @@ public class RiveScriptOutputAnalyzer {
 
 	private Response createPlainTextResponse(String response) {
 		Response obj = new Response();
-		obj.setContent(response);
+		obj.setContent(response);		
 		obj.setTitle("");
+		if(log.isDebugEnabled())
+			obj.setClassPredicted("Static Rivescript prediction");
 		return obj;
 	}
 
+	
 	// Custom Function to check if Query is found in Rive Script.
 	public static boolean isQueryFound(String query) {
 		resourceLoader();

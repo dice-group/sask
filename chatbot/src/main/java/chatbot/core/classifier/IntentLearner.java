@@ -7,19 +7,28 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.web.client.RestTemplate;
 
 import chatbot.core.handlers.Handler;
+import chatbot.core.handlers.automaticworkflow.AutomaticWorkflow;
 import chatbot.core.handlers.eliza.ElizaHandler;
 import chatbot.core.handlers.qa.QAHandler;
 import chatbot.core.handlers.rivescript.RiveScriptOutputAnalyzer;
 import chatbot.core.handlers.rivescript.RiveScriptQueryHandler;
 import chatbot.core.handlers.sessa.SessaHandler;
+import chatbot.io.incomingrequest.FeedbackRequest;
+import chatbot.io.incomingrequest.FeedbackRequest.Feedback;
 import chatbot.io.incomingrequest.IncomingRequest;
 import chatbot.utils.spellcheck.SpellCheck;
 import chatbot.utils.spellcheck.SpellCheck.LanguageList;
@@ -45,6 +54,7 @@ public class IntentLearner {
 	private static final String resourcePath = "classifier/";
 	private static final String trainingData = "intentdata.arff";
 	private static final String model = "intentdata.model";
+	public static final String[] automaticTerms = { "extract", "load" };
 	private static Logger log = Logger.getLogger(IntentLearner.class.getName());
 	/**
 	 * Object that stores the instance.
@@ -63,6 +73,11 @@ public class IntentLearner {
 	 */
 	private FilteredClassifier classifier;
 		
+	private final RestTemplate restTemplate;
+	public IntentLearner(RestTemplate restTemplate) {
+		this.restTemplate = restTemplate;
+	}
+
 	/**
 	 * This method loads a dataset in ARFF format. If the file does not exist, or
 	 * it has a wrong format, the attribute trainData is null.
@@ -201,6 +216,7 @@ public class IntentLearner {
 	 * This method creates the instance to be classified, from the text that has been read.
 	 */
 	public Instances makeTestInstance(String query) {
+		
 		// Create the attributes, class and text
 		ArrayList<String> fvNominalVal = new ArrayList<String>(3);
 		fvNominalVal.add("eliza");
@@ -305,7 +321,63 @@ public class IntentLearner {
 			}
 		}
 	}	
-	
+	public synchronized void deleteFromInstanceFile(String query) {
+		// Create the attributes, class and text
+		BufferedWriter bw = null;
+		//FileWriter fw = null;
+		query = query.replace("'", "");
+		try {
+			
+			String trainingDataFile = readResourceFromClassPath(resourcePath, trainingData);
+			File trainFile = new File(trainingDataFile);
+			
+			ClassLoader cl = IntentLearner.class.getClassLoader();
+
+			URL urlTempData = cl.getResource(resourcePath); 	
+			String tempDataFile = urlTempData.getFile();
+			File tempFile = new File(tempDataFile+ "temp.arff");
+			tempFile.createNewFile();
+			BufferedReader reader = new BufferedReader(new FileReader(trainFile));
+			BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
+
+			String sCurrentLine;
+
+			while ((sCurrentLine = reader.readLine()) != null) {
+				if(sCurrentLine.trim().contains(query)) {
+					continue;
+				}else {
+					 writer.write(sCurrentLine + System.getProperty("line.separator"));
+				}
+			}
+			writer.flush();
+			writer.close();
+			reader.close();
+			tempFile.renameTo(trainFile);
+			
+
+		} catch (IOException e) {
+
+			e.printStackTrace();
+
+		} finally {
+
+			try {
+
+				if (bw != null) {
+					bw.flush();
+					bw.close();
+				}
+
+				/*if (fw != null)
+					fw.close();*/
+
+			} catch (IOException ex) {
+
+				ex.printStackTrace();
+
+			}
+		}
+	}
 	/**
 	 * This method performs the classification of the instance.
 	 * Output is done at the command-line.
@@ -336,6 +408,7 @@ public class IntentLearner {
 	 */
 	public Handler classify(IncomingRequest request) {
 		try {
+			log.warn("In IntnetLearner Classify");
 			String query = request.getRequestContent().get(0).getText().toLowerCase();
 			//Preprocess User Input. Do not expect it to be perfect.
 			//Query may contain some basic spelling mistakes which require to be corrected.Currently Language is hardcoded. 
@@ -344,6 +417,15 @@ public class IntentLearner {
 			if(query.isEmpty()) {
 				log.warn("Handle Null inputs, Throwing Exception here");
 				throw new IllegalArgumentException("Null Input");
+			}
+			
+			for (String string : automaticTerms) {
+				if (query.contains(string)) {
+					log.warn("Query::"+query);
+					AutomaticWorkflow automaticWorflowObject = new AutomaticWorkflow(restTemplate);
+					return automaticWorflowObject;
+				}
+				
 			}
 			query = handlePreProcessing(query);
 			//Set Query here to Request for now?
@@ -375,31 +457,70 @@ public class IntentLearner {
 		log.info("Corrected Query:" + result); 
 		return result;
 	}
+	
+	private String readResourceFromClassPath(String resource, String datafile) {
+		
+		
+		try {
+			ClassLoader classLoader = IntentLearner.class.getClassLoader();
+			Resource[] messageResources = new PathMatchingResourcePatternResolver(classLoader).getResources("classpath*:"+ resource + datafile);
+			// Since there is only one resource file, it is accessed directly
+			
+			File file = new File(datafile);
+			InputStream inputStream = messageResources[0].getInputStream();
+			OutputStream outputStream = new FileOutputStream(file);
+			IOUtils.copy(inputStream, outputStream);
+			outputStream.close();
+			
+			return file.getPath();
+			
+	        } catch (IOException e) {
+			log.error("resourceLoader, IO Exception while parsing YAML template,Stack Trace=" + e.getMessage());
+			e.printStackTrace();
+			
+			return null;
+		}
+		
+	}
+	
 	/**
 	 * Handle intent classification
 	 */
 	public Handler handleIntentClassification(IncomingRequest request) {
 		//IntentLearner learner;
 		String query = request.getRequestContent().get(0).getText().toLowerCase();
+		query = query.replace("'", "");
 		//learner = new IntentLearner();
-		ClassLoader classLoader = this.getClass().getClassLoader();
-		URL urlTrainingData = classLoader.getResource(resourcePath+ trainingData);
-		String trainingDataFile = urlTrainingData.getFile();
+		
+		String trainingDataFile = readResourceFromClassPath(resourcePath, trainingData);
 		this.loadDataset(trainingDataFile);
 		
 		this.evaluate();
 		this.learn();
-		URL urlModel = classLoader.getResource(resourcePath + model);
-		this.saveModel(urlModel.getFile());
+		
+		String urlModel = readResourceFromClassPath(resourcePath, model);
+		this.saveModel(urlModel);
 		String prediction=this.classify(trainingDataFile , query);
 		return this.usePrediction(prediction);
 		
 	}
 	/**
+	 * process user feedback and delete entries that get negative feedback
+	 * @param request
+	 */
+	public void processFeedback(FeedbackRequest request) {
+		// TODO Auto-generated method stub
+		String query=request.getQuery();
+		Feedback feedback = request.getFeedback();
+		if(feedback.equals(Feedback.NEGATIVE)) {
+			deleteFromInstanceFile(query);
+		}
+	}
+	/**
 	 * Main method. It is an example of the usage of this class.
 	 * @param args Command-line arguments: fileData and fileModel.
 	 */
-	/*public static void main (String[] args) {
+/*	public static void main (String[] args) {
 	
 		IntentLearner learner;
 		
@@ -408,11 +529,15 @@ public class IntentLearner {
 		
 		learner.evaluate();
 		learner.learn();
+		learner.deleteFromInstanceFile("obama");
 		//
 		learner.saveModel("C:\\Users\\Divya\\Documents\\try\\intentdata.model");
 		//learner.makeTestInstance("prince of persia");
 		learner.classify("how do you feel about that");
 		//learner.usePrediction(request, "what would it mean to you", testInstance.classAttribute().value((int) pred));
 		
+		
 	}*/
+
+
 }	

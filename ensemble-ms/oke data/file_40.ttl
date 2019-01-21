@@ -1,0 +1,46 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+<https://www.hindustantimes.com/business-news/tata-motors-to-merge-its-subsidiary-tml-drivelines-unit-with-itself-for-synergy-cost-cutting/story-t8D5y1Kh6UNNisRGbTDkEJ.html#char=0,11>
+        a                     nif:RFC5147String , nif:String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Tata Motors" ;
+        nif:beginIndex        "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "11"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.hindustantimes.com/business-news/tata-motors-to-merge-its-subsidiary-tml-drivelines-unit-with-itself-for-synergy-cost-cutting/story-t8D5y1Kh6UNNisRGbTDkEJ.html#char=0,150> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     dbr:Tata_Motors .
+
+<https://www.hindustantimes.com/business-news/tata-motors-to-merge-its-subsidiary-tml-drivelines-unit-with-itself-for-synergy-cost-cutting/story-t8D5y1Kh6UNNisRGbTDkEJ.html#char=66,80>
+        a                     nif:String , nif:RFC5147String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "TML Drivelines" ;
+        nif:beginIndex        "66"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "80"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.hindustantimes.com/business-news/tata-motors-to-merge-its-subsidiary-tml-drivelines-unit-with-itself-for-synergy-cost-cutting/story-t8D5y1Kh6UNNisRGbTDkEJ.html#char=0,150> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     aksw:TMLDrivelines .
+
+<https://www.hindustantimes.com/business-news/tata-motors-to-merge-its-subsidiary-tml-drivelines-unit-with-itself-for-synergy-cost-cutting/story-t8D5y1Kh6UNNisRGbTDkEJ.html#char=0,150>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "150"^^xsd:nonNegativeInteger ;
+        nif:isString    "Tata Motors will merge its automotive component-making subsidiary TML Drivelines with itself, according to a filing with the stock markets on Tuesday." .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Tata_Motors ;
+  rdf:predicate  dbo:subsidiary ;
+  rdf:subject    aksw:TMLDrivelines ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.hindustantimes.com/business-news/tata-motors-to-merge-its-subsidiary-tml-drivelines-unit-with-itself-for-synergy-cost-cutting/story-t8D5y1Kh6UNNisRGbTDkEJ.html#char=0,150>
+                 ]
+] .

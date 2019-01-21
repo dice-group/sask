@@ -6,9 +6,15 @@ spring:
 
 # Discovery Server Access
 eureka:
+  instance:
+    metadataMap:
+      type: chatbot
+      friendlyname: Chatbot
+    hostName: ${CHATBOT_PUBLISH_HOST:localhost} 
+    preferIpAddress: false 
   client:
     serviceUrl:
-      defaultZone: http://localhost:1111/eureka/
+      defaultZone: http://${EUREKA_SERVICE_HOST:localhost}:${EUREKA_SERVICE_PORT:8761}/eureka/
 
 # Disable Spring Boot's "Whitelabel" default error page, so we can use our own
 error:
@@ -17,4 +23,14 @@ error:
 
 # Changing default port 8080 to 9191
 server:
-  port: 9191
+  port: ${CHATBOT_PUBLISH_PORT:9191}
+  
+# QA HAWK Service Endpoint
+qa:
+  hawq:
+    url: http://185.2.103.92:8081/tebaqa/qa-simple?query=
+
+# SESSA SEARCH Service Endpoint
+sessa:
+  search:
+    url: http://${SESSA_SEARCH_URL:localhost}/search?query=

@@ -1,0 +1,12 @@
+.sask-border {
+	-webkit-box-sizing: border-box;
+	border: rgb(221, 221, 221);
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 4px;
+}
+
+.sask-footer {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}

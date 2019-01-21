@@ -1,0 +1,64 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+<http://www.trendingtopmost.com/worlds-popular-list-top-10/2017-2018-2019-2020-2021/india/most-populated-cities-india-beautiful-famous-largest/#char=28,37>
+        a                     nif:Phrase , nif:RFC5147String , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Rajasthan" ;
+        nif:beginIndex        "28"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "37"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.trendingtopmost.com/worlds-popular-list-top-10/2017-2018-2019-2020-2021/india/most-populated-cities-india-beautiful-famous-largest/#char=0,167> ;
+        itsrdf:taClassRef     dbo:Place ;
+        itsrdf:taIdentRef     dbr:Rajasthan .
+
+<http://www.trendingtopmost.com/worlds-popular-list-top-10/2017-2018-2019-2020-2021/india/most-populated-cities-india-beautiful-famous-largest/#char=0,167>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "167"^^xsd:nonNegativeInteger ;
+        nif:isString    "Jaipur, the capital city of Rajasthan, having a total population of 3,441,816,is the most populated city of the state and the tenth most populated city of the country." .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Jaipur ;
+  rdf:predicate  dbo:district ;
+  rdf:subject    dbr:Rajasthan ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.trendingtopmost.com/worlds-popular-list-top-10/2017-2018-2019-2020-2021/india/most-populated-cities-india-beautiful-famous-largest/#char=0,167>
+                 ]
+] .
+
+<http://www.trendingtopmost.com/worlds-popular-list-top-10/2017-2018-2019-2020-2021/india/most-populated-cities-india-beautiful-famous-largest/#char=0,6>
+        a                     nif:Phrase , nif:String , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Jaipur" ;
+        nif:beginIndex        "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "6"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://www.trendingtopmost.com/worlds-popular-list-top-10/2017-2018-2019-2020-2021/india/most-populated-cities-india-beautiful-famous-largest/#char=0,167> ;
+        itsrdf:taClassRef     dbo:Place ;
+        itsrdf:taIdentRef     dbr:Jaipur .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Rajasthan ;
+  rdf:predicate  dbo:locatedInArea ;
+  rdf:subject    dbr:Jaipur ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.trendingtopmost.com/worlds-popular-list-top-10/2017-2018-2019-2020-2021/india/most-populated-cities-india-beautiful-famous-largest/#char=0,167>
+                 ]
+] .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Rajasthan ;
+  rdf:predicate  dbo:location ;
+  rdf:subject    dbr:Jaipur ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <http://www.trendingtopmost.com/worlds-popular-list-top-10/2017-2018-2019-2020-2021/india/most-populated-cities-india-beautiful-famous-largest/#char=0,167>
+                 ]
+] .

@@ -10,9 +10,13 @@ eureka:
     metadataMap:
       type: webclient
       friendlyname: Webclient
+      instance:
+    hostName: ${WEBCLIENT_PUBLISH_HOST:localhost} 
+    preferIpAddress: false 
   client:
     serviceUrl:
-      defaultZone: http://localhost:1111/eureka/
+      defaultZone: http://${EUREKA_SERVICE_HOST:localhost}:${EUREKA_SERVICE_PORT:8761}/eureka/
+
 
 # Disable Spring Boot's "Whitelabel" default error page, so we can use our own
 error:
@@ -21,29 +25,23 @@ error:
     
 #server port      
 server:
-  port: 9090
+  port: ${WEBCLIENT_PUBLISH_PORT:9090}
 
 #zuul route
 zuul:
   routes:
     chatbot:
-      path: /chatbot/**
-      serviceId: chatbot
-    fred:
-      path: /fred-ms/**
-      serviceId: FRED-MS
-    fox:
-      path: /fox-ms/**
-      serviceId: FOX-MS
-    spotlight:
-      path: /spotlight-ms/**
-      serviceId: SPOTLIGHT-MS
+      path: /CHATBOT/**
+      serviceId: CHATBOT
     repo:
       path: /REPO-MS/**
       serviceId: REPO-MS
     executer:
       path: /EXECUTER-MS/**
       serviceId: EXECUTER-MS
+    database:
+      path: /DATABASE-MS/**
+      serviceId: DATABASE-MS
 hystrix:
   command:
     default:
@@ -52,3 +50,9 @@ hystrix:
           strategy: THREAD
           thread:
             timeoutInMilliseconds: 10000
+
+ribbon:
+  eureka:
+    enabled: true
+    ReadTimeout: 20000
+    ConnectTimeout: 20000

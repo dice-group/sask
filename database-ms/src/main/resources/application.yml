@@ -10,15 +10,22 @@ eureka:
     metadataMap:
       type: db
       friendlyname: Fuseki
+    hostName: ${DATABASE_PUBLISH_HOST:localhost} 
+    preferIpAddress: false 
   client:
     serviceUrl:
-      defaultZone: http://localhost:1111/eureka/
+      defaultZone: http://${EUREKA_SERVICE_HOST:localhost}:${EUREKA_SERVICE_PORT:8761}/eureka/
+    
 
 # HTTP Server (Tomcat) Port
 server: 
-  port: 3031
+  port: ${DATABASE_PUBLISH_PORT:3031}
 
 # Disable Spring Boot's "Whitelabel" default error page, so we can use our own
 error:
   whitelabel:
     enabled: false
+    
+fuseki:    
+  hostserver: ${FUSEKI_HOSTSERVER:localhost}
+  port: ${FUSEKI_PORT:3030}

@@ -10,6 +10,7 @@
 <!-- ~~~~~~ bootstrap ~~~~~~ -->
 <link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap.css">
 <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 <!-- ~~~~~~ jquery ui ~~~~~~ -->
 <script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js"></script>
 <link rel="stylesheet"
@@ -36,6 +37,10 @@
 <!-- ~~~~~~ chatbot ~~~~~~ -->
 <script type="text/javascript" src="/js/chatbot/chatbot.js"></script>
 <link rel="stylesheet" href="/styles/chatbot/chatbot.css">
+<!-- ~~~~~~ layout ~~~~~~ -->
+<link rel="stylesheet" href="/styles/global.css">
+<script src="/js/workspace/ColumnOrganizer.js"></script>
+<script src="/js/workspace/DataVisualization.js"></script>
 </head>
 <body>
 	<!-- navbar -->
@@ -63,70 +68,70 @@
 		</div>
 	</nav>
 	<!-- content -->
-	<div class="container">
+	<div class="container" id="sask-container">
 		<div class="row">
-			<div id="tabs">
-				<ul>
-					<li><a href="#tabExtraction">Extraction group</a></li>
-					<li><a href="#tabSearch">Search group</a></li>
-				</ul>
-
-				<div id="tabExtraction">
-					<!-- extraction -->
-					<div class="row">
-						<div class="col-sm-3">
-							<h4>Repository</h4>
-							<div id="ex-repo"></div>
-							<button class="btn btn-primary" id="ex-refreshRepo">
-								<span class="glyphicon glyphicon-refresh"></span> Refresh
-							</button>
-							<button class="btn btn-primary" id="ex-uploadFile">
-								<span class="glyphicon glyphicon-cloud-upload"></span> Upload
-								file...
-							</button>
-						</div>
-						<div class="col-sm-9">
-							<h4>Workspace</h4>
-							<div id="ex-workspace"></div>
-						</div>
-					</div>
-				</div>
-				<div id="tabSearch">
-					<div id="container"></div>
-					<div id="controls">
-						<textarea id="textbox" placeholder="Enter your query here..."></textarea>
-						<button id="send" type="submit" disabled>SEND</button>
-					</div>
+			<div class="col-lg-3 sask-column">
+				<h4>Repository</h4>
+				<div id="ex-repo"></div>
+				<button class="btn btn-primary" id="ex-refreshRepo">
+					<span class="glyphicon glyphicon-refresh"></span> Refresh
+				</button>
+				<button class="btn btn-primary" id="ex-uploadFile">
+					<span class="glyphicon glyphicon-cloud-upload"></span> Upload
+					file...
+				</button>
+			</div>
+			<div class="col-lg-6 sask-column resizable" data-sizeMin="col-lg-6"
+				data-sizeMax="col-lg-9">
+				<h4>Workspace</h4>
+				<div id="ex-workspace" class="sask-border"></div>
+			</div>
+			<div class="col-lg-3 sask-column resizable" data-sizeMin="col-lg-3"
+				data-sizeMax="col-lg-12">
+				<h4>Chatbot</h4>
+				<div id="chat-chatbot" class="sask-border"></div>
+			</div>
+			<div class="col-lg-9 sask-column closable" id="ex-query">
+				<h4>Query sask</h4>
+				<div id="ex-query-table">
 				</div>
 			</div>
 		</div>
 	</div>
-	<footer class="footer">
+	<footer class="sask-footer">
 		<div class="container">
 			<span class="text-muted pull-right">Version: @pom.version@ |
 				Build time: @timestamp@ (GMT)</span>
 		</div>
 	</footer>
 	<script>
-		$(document).ready(function() {
-			$("#tabs").tabs();
-		});
 		(function($) {
 			var dao = new DAO({});
+			var columnOrganizer;
+			var chatbot;
 			var workspace;
 			var repo;
 			var upload;
+			var extractdata;
+			var queryTable;
 
 			$(document).ready(function() {
+				// queryTable 
+				queryTable = $('#ex-query-table');
+				
+				// columns
+				columnOrganizer = $("#sask-container").columnOrganizer({});
+
 				// repo
-				repo = $('#ex-repo').repository({
+				repo = $("#ex-repo").repository({
 					dao : dao,
 					onAddToWorkspace : onAddToWorkspace,
+					onAddToWorkspaceTable : onAddToWorkspaceTable,
 					onLoadToWorkspace : onLoadToWorkspace
 				});
 
 				// workspace
-				workspace = $('#ex-workspace').workspace({
+				workspace = $("#ex-workspace").workspace({
 					dao : dao,
 					onWorkflowSaved : refreshWorkflows
 				});
@@ -137,14 +142,48 @@
 					onUploaded : refreshRepo
 				});
 
+				// chatbot
+				chatbot = $("#chat-chatbot").chatbot({
+					dao : dao,
+					onBigMessage : onBigMessage
+				});
+
 				$("#ex-refreshRepo").click(refresh);
 				$("#ex-uploadFile").click(upload.open);
 
 				refresh();
+
+				$('#ex-query').hide();
 			});
+			
+			function onAddToWorkspaceTable(target) {
+				var success = function(data) {
+					queryTable.DataVisualization({
+						data
+					});
+					
+					$('#ex-query').show();
+					$('#ex-workspace').parent().hide();
+					$('#chat-chatbot').parent().hide();
+				};
+				dao.queryGraph(success);
+			}
+
+			function onAddToWorkspaceGraph(target) {
+				var success = function(data) {
+					createGraph(triplesToGraph(data));
+					
+				};
+				dao.queryGraph(success);
+			}
+
+			function onBigMessage() {
+				var column = $(chatbot).parent();
+				columnOrganizer.columnOrganizer("maximizeColumn", column);
+			}
 
 			function onLoadToWorkspace(target) {
-				workspace.workspace('loadWorkflowFromPath', target.id);
+				workspace.workspace("loadWorkflowFromPath", target.id);
 			}
 
 			function onAddToWorkspace(target) {
@@ -155,19 +194,19 @@
 					xPosition : 20,
 					yPosition : 20
 				};
-				workspace.workspace('addNode', newNode);
+				workspace.workspace("addNode", newNode);
 			}
 
 			function refreshRepo() {
-				repo.repository('refreshRepo');
+				repo.repository("refreshRepo");
 			}
 
 			function refreshWorkflows() {
-				repo.repository('refreshWorkflows');
+				repo.repository("refreshWorkflows");
 			}
 
 			function refresh() {
-				repo.repository('refresh');
+				repo.repository("refresh");
 			}
 		}(jQuery));
 	</script>

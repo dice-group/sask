@@ -1,0 +1,1 @@
+@prefix :      <http://example.org/> .@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .<http://example.org/Brad%20Smith>        :be     <http://example.org/Microsoft%20s%20president> .:Smith  :be                      :responsible ;        <http://example.org/be%20responsible%20for>                :company .

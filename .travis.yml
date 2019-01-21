@@ -1,10 +1,49 @@
+
+sudo: required
 language: java
 jdk:
   - oraclejdk8
   - oraclejdk9
   - openjdk8
 
+before_install:
+  - sudo apt-get update -qq
+
 install: true
 
 script:
-- mvn clean install
+  - mvn clean install -q -P linux
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+
+cache:
+  directories:
+  - $HOME/.m2
+
+jobs:
+  include:
+    - stage: deploy
+      if: branch = master
+      sudo: required
+      dist: trusty
+      python: "2.7"
+      services:
+      - docker
+      addons:
+        ssh_known_hosts:
+        - 131.234.29.7
+
+      before_install:
+      - openssl aes-256-cbc -K $encrypted_a09f00fca840_key -iv $encrypted_a09f00fca840_iv -in deploy_rsa.enc -out /tmp/deploy_rsa -d
+      - eval "$(ssh-agent -s)"
+      - chmod 600 /tmp/deploy_rsa
+      - ssh-add /tmp/deploy_rsa
+
+      install:
+      - sudo pip install docker_py
+      - sudo pip install ansible===2.4.0.0
+      script:
+      - ansible-playbook -i playbook/inventory/dev.inventory playbook/build-images.yml --extra-vars "image_tag=$TRAVIS_COMMIT"
+      - ansible-playbook -i playbook/inventory/sask_dev.inventory playbook/deploy_microservices.yml --extra-vars "image_tag=$TRAVIS_COMMIT"
+

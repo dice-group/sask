@@ -1,0 +1,214 @@
+date	When was the Battle of Gettysburg?	Battle of Gettysburg	"Battle of Gettysburg, date"	1863-07-03
+resource	List all the musicals with music by Elton John.	"musicals, music by, Elton John"	"Elton John, music by"	"""http://dbpedia.org/resource/The_Lion_King_(musical)"",""http://dbpedia.org/resource/Lestat_(musical)"",""http://dbpedia.org/resource/Billy_Elliot_the_Musical"",""http://dbpedia.org/resource/Aida_(musical)"""
+number	How high is the lighthouse in Colombo?	"high, lighthouse in Colombo"	"Colombo Lighthouse, height (µ)"	15
+resource	Who was the wife of U.S. president Lincoln?	"U.S. president, Lincoln, wife"	"Abraham Lincoln, spouse"	http://dbpedia.org/resource/Mary_Todd_Lincoln
+resource	Who is the host of the BBC Wildlife Specials?	"host, BBC Wildlife Specials"	"BBC Wildlife Specials, presenter"	http://dbpedia.org/resource/David_Attenborough
+number	How much did Pulp Fiction cost?	"cost, Pulp Fiction"	"Pulp Fiction, budget ($)"	8
+resource	In what city is the Heineken brewery?	"city, Heineken brewery"	"Heineken International, location city"	http://dbpedia.org/resource/Amsterdam
+date	When did Operation Overlord commence?	"when, Operation Overlord, commence"	"Operation Overlord, date"	1944-08-30
+resource	In which city does the Chile Route 68 end?	"city, Chile Route 68, ends"	"Chile Route 68, route end"	http://dbpedia.org/resource/Valparaíso
+resource	Who developed Slack?	"developer, Slack"	"Slack (software), product"	http://dbpedia.org/resource/Slack_Technologies
+resource	Who was married to president Chirac?	"married to, president Chirac"	"Jacques Chirac, spouse"	http://dbpedia.org/resource/Bernadette_Chirac
+resource	What did Bruce Carver die from?	"Bruce Carver, die"	"Bruce Carver, death date"	http://dbpedia.org/resource/Cancer
+resource	Who painted The Storm on the Sea of Galilee?	"The Storm on the Sea of Galilee, paint"	"The Storm on the Sea of Galilee, author"	http://dbpedia.org/resource/Rembrandt
+resource	Which cities does the Weser flow through?	"Weser, flow through, city"	"Weser, city"	"""http://dbpedia.org/resource/Fulda_(river)"",""http://dbpedia.org/resource/Kassel"",""http://dbpedia.org/resource/Minden"",""http://dbpedia.org/resource/Bremerhaven"",""http://dbpedia.org/resource/Bremen"",""http://dbpedia.org/resource/Hamelin"",""http://dbpedia.org/resource/Hann._Münden"""
+resource	How many seats does the home stadium of FC Porto have?	"How many seats, stadium of FC Porto"	"FC Porto, capacity"	50035
+resource	Who is the daughter of Robert Kennedy married to?	"Robert Kennedy, daughter, married"		http://dbpedia.org/resource/Cheryl_Hines
+resource	Which books by Kerouac were published by Viking Press?	"book, Kerouac, publish, Viking Press"		"""http://dbpedia.org/resource/On_the_Road"",""http://dbpedia.org/resource/Door_Wide_Open"",""http://dbpedia.org/resource/Atop_an_Underwood:_Early_Stories_and_Other_Writings"""
+number	How tall is Amazon Eve?	"Amazon Eve, tall"	"Amazon Eve, height (µ)"	2.02
+resource	Which museum exhibits The Scream by Munch?	"museum, Scream, Munch"	"The Scream, museum"	http://dbpedia.org/resource/National_Gallery_(Norway)
+resource	Who wrote the book Les Piliers de la terre?	"wrote, book, The pillars of the Earth"	"The Pillars of the Earth, author"	http://dbpedia.org/resource/Ken_Follett
+boolean	Is James Bond married?	"James Bond, married"		FALSE
+resource	Who discovered Ceres?	"discoverer, Ceres"	"Ceres (dwarf planet), discoverer"	http://dbpedia.org/resource/Giuseppe_Piazzi
+resource	Which river does the Brooklyn Bridge cross?	"river, cross, Brooklyn Bridge"	"Brooklyn Bridge, crosses"	http://dbpedia.org/resource/East_River
+resource	Who was called Frank The Tank?	"called, Frank The Tank"	"Frank The Tank, nickname"	http://dbpedia.org/resource/Giuseppe_Piazzi
+resource	What is the largest country in the world?	"largest country, world"		http://dbpedia.org/resource/Organization_for_Security_and_Co-operation_in_Europe
+resource	Who is the mayor of Paris?	"mayor, Paris"	"Paris, mayor"	http://dbpedia.org/resource/Anne_Hidalgo
+resource	Who is the coach of Ankara's ice hockey team?	"coach, ice hockey team, Ankara"		http://dbpedia.org/resource/?brahim_O?uz
+resource	Who is the mayor of the capital of French Polynesia?	"mayor, capital, French Polynesia"		http://dbpedia.org/resource/Michel_Buillard
+resource	Which awards did Douglas Hofstadter win?	"Douglas Hofstadter, award"	"Douglas Hofstadter, award"	"""http://dbpedia.org/resource/National_Book_Award"",""http://dbpedia.org/resource/American_Academy_of_Arts_and_Sciences"""
+string	How much did the Lego Movie cost?	"Lego Movie, cost"	"The Lego Movie, budget ($)"	6.00E+07
+resource	Where does Piccadilly start?	"Piccadilly, start"	"Piccadilly, route start"	http://dbpedia.org/resource/Dover_Street
+boolean	Do Prince Harry and Prince William have the same parents?	"Prince Harry, Prince William, same, parents"		TRUE
+resource	Who played Agent Smith in Matrix?	"played, Agent Smith, Matrix"	"Agent Smith, portrayer"	"""http://dbpedia.org/resource/Hugo_Weaving"",""http://dbpedia.org/resource/Ian_Bliss"""
+number	How many languages are spoken in Turkmenistan?	"languages, Turkmenistan"	"Turkmenistan, language"	"""http://dbpedia.org/resource/Russian_language"",""http://dbpedia.org/resource/Turkmen_language"""
+resource	In which films did Julia Roberts as well as Richard Gere play?	"film, play, Julia Roberts, Richard Gere"		"""http://dbpedia.org/resource/Runaway_Bride_(film)"",""http://dbpedia.org/resource/Pretty_Woman"""
+resource	In which country does the Ganges start?	"Ganges, start, country"	"Ganges, source country"	http://dbpedia.org/resource/India
+date	In which year was Rachel Stevens born?	"year, born, Rachel Stevens"	"Rachel Stevens, birth year"	1978
+boolean	Is Barack Obama a democrat?	"Barack Obama, democrat"		TRUE
+resource	Where was Bach born?	"birthplace, Bach"	"Johann Sebastian Bach, birth place"	http://dbpedia.org/resource/Eisenach
+number	How often did Jane Fonda marry?	"Jane Fonda, marry, how often"	"Jane Fonda, spouse"	"""http://dbpedia.org/resource/Ted_Turner"",""http://dbpedia.org/resource/Tom_Hayden"",""http://dbpedia.org/resource/Roger_Vadim"""
+resource	Who was the first to climb Mount Everest?	"first, climb, mount Everest"	"Mount Everest, person that first ascented a mountain"	"""http://dbpedia.org/resource/Tenzing_Norgay"",""http://dbpedia.org/resource/Edmund_Hillary"",""http://dbpedia.org/resource/Krzysztof_Wielicki"",""http://dbpedia.org/resource/Leszek_Cichy"""
+number	How many people live in Poland?	"How many people, Poland"	"Poland, population total"	38483957
+resource	What is the location of the Houses of Parliament?	"location, Houses of Parliament"	"Palace of Westminster, location"	"""http://dbpedia.org/resource/Greater_London"",""http://dbpedia.org/resource/United_Kingdom"",""http://dbpedia.org/resource/England"",""http://dbpedia.org/resource/City_of_Westminster"""
+boolean	Is Christian Bale starring in Batman Begins?	"Christian Bale, starring, Batman Begins"		FALSE
+resource	In which country is the Limerick Lake?	"Limerick Lake, country"	"Limerick Lake, country"	http://dbpedia.org/resource/Canada
+resource	What was the last movie with Alec Guinness?	"Alec Guinness, last, movie"		http://dbpedia.org/resource/Kafka_(film)
+resource	What is the highest mountain in Australia?	"Australia, highest mountain"		http://dbpedia.org/resource/Mawson_Peak
+boolean	Is Frank Herbert still alive?	"Frank Herbert, alive"		FALSE
+resource	Who created Family Guy?	"create, Family Guy"	"Family Guy, creator (agent)"	http://dbpedia.org/resource/Seth_MacFarlane
+resource	What is the official language of Suriname?	"Suriname, official language"	"Suriname, official language"	http://dbpedia.org/resource/Dutch_language
+resource	Who wrote the song Hotel California?	"write, song, Hotel California"	"Hotel California, writer"	http://dbpedia.org/resource/Don_Felder
+resource	Give me all actors starring in movies directed by William Shatner.	"actor, starring, movie, direct, William Shatner"		"""http://dbpedia.org/resource/Tom_Towles"",""http://dbpedia.org/resource/William_Shatner"",""http://dbpedia.org/resource/Brenda_Bakke"",""http://dbpedia.org/resource/John_Prosky"",""http://dbpedia.org/resource/Dan_Martin_(actor)"",""http://dbpedia.org/resource/Duane_Whitaker"",""http://dbpedia.org/resource/J.T._Colosa"",""http://dbpedia.org/resource/Chuck_Williams_(actor)"",""http://dbpedia.org/resource/Dick_Van_Patten"",""http://dbpedia.org/resource/Dan_Gauthier"",""http://dbpedia.org/resource/Amy_Acker"",""http://dbpedia.org/resource/Rickey_Medlocke"""
+resource	What is in a chocolate chip cookie?	"ingredients, chocolate chip cookie"	"Chocolate chip cookie, ingridient"	"""http://dbpedia.org/resource/Chocolate_chip"",""http://dbpedia.org/resource/Egg_(food)"",""http://dbpedia.org/resource/Butter"",""http://dbpedia.org/resource/Shortening"",""http://dbpedia.org/resource/Sodium_bicarbonate"",""http://dbpedia.org/resource/Flour"",""http://dbpedia.org/resource/Salt"",""http://dbpedia.org/resource/Brown_sugar"",""http://dbpedia.org/resource/Vanilla"",""http://dbpedia.org/resource/Sugar"""
+resource	Give me all professional skateboarders from Sweden.	"professional, skateboarder, Sweden"		http://dbpedia.org/resource/Ali_Boulala
+resource	Which ingredients do I need for carrot cake?	"carrot cake, ingredients"	"Carrot cake, ingredient"	"""http://dbpedia.org/resource/Almond"",""http://dbpedia.org/resource/Carrot"",""http://dbpedia.org/resource/Egg_(food)"",""http://dbpedia.org/resource/Flour"",""http://dbpedia.org/resource/Baking_powder"",""http://dbpedia.org/resource/Sugar"""
+resource	Does Neymar play for Real Madrid?	"Neymar, play, Real Madrid"		FALSE
+resource	Which computer scientist won an oscar?	"computer scientist, win, oscar"		http://dbpedia.org/resource/Edwin_Catmull
+number	How many companies were founded in the same year as Google?	"companies, founded, same year, Google"		0
+resource	In which UK city are the headquarters of the MI6?	"MI6, headquarters, city, UK"	"Secret Intelligence Service, MI6"	http://dbpedia.org/resource/London
+boolean	Was the Cuban Missile Crisis earlier than the Bay of Pigs Invasion?	"Cuban Missile Crisis, earlier, Bay of Pigs Invasion"		FALSE
+resource	What does IYCM stand for?	"IYCM, stand for"		http://dbpedia.org/resource/Youth_Climate_Movement
+date	When did the Ming dynasty dissolve?	"dissolve, Ming dynasty"	"Ming dynasty, dissolution date"	1644-04-25
+resource	List all episodes of the first season of the HBO television series The Sopranos!	"HBO, television series, Sopranos, first season, episode"		"""http://dbpedia.org/resource/Isabella_(The_Sopranos)"",""http://dbpedia.org/resource/Meadowlands_(The_Sopranos)"",""http://dbpedia.org/resource/The_Legend_of_Tennessee_Moltisanti"",""http://dbpedia.org/resource/I_Dream_of_Jeannie_Cusamano"",""http://dbpedia.org/resource/Boca_(The_Sopranos)"",""http://dbpedia.org/resource/Nobody_Knows_Anything"",""http://dbpedia.org/resource/Pax_Soprana"",""http://dbpedia.org/resource/A_Hit_Is_a_Hit"",""http://dbpedia.org/resource/Denial,_Anger,_Acceptance"",""http://dbpedia.org/resource/College_(The_Sopranos)"",""http://dbpedia.org/resource/46_Long"",""http://dbpedia.org/resource/The_Sopranos_(episode)"",""http://dbpedia.org/resource/Down_Neck"""
+number	"What is the total population of Melbourne, Florida?"	"total population, Melbourne Florida"	"Melbourne  Florida, population total"	76068
+boolean	Did Arnold Schwarzenegger attend a university?	"Arnold Schwarzenegger, attend, university"		TRUE
+resource	What country is Mount Everest in?	"country, Mount Everest"	"Mount Everest, located in area"	"""http://dbpedia.org/resource/China"",""http://dbpedia.org/resource/Nepal"""
+resource	What is the largest city in Australia?	"Australia, largest city"	"Australia, largest city"	http://dbpedia.org/resource/Sydney
+list	Give me all launch pads operated by NASA.	"launch pad, operate, NASA"	"NASA, operator"	"""http://dbpedia.org/resource/Mid-Atlantic_Regional_Spaceport_Launch_Pad_0"",""http://dbpedia.org/resource/Keweenaw_Rocket_Range"",""http://dbpedia.org/resource/Spaceport_Florida_Launch_Complex_36"",""http://dbpedia.org/resource/Wallops_Flight_Facility_Launch_Area_3"",""http://dbpedia.org/resource/Broglio_Space_Centre"",""http://dbpedia.org/resource/Kennedy_Space_Center_Launch_Complex_39"",""http://dbpedia.org/resource/Cape_Canaveral_Air_Force_Station_Launch_Complex_13"""
+resource	Who is the mayor of Tel Aviv?	"Tel Aviv, mayor"	"Tel Aviv, leader name"	http://dbpedia.org/resource/Ron_Huldai
+resource	List all episodes of the first season of the HBO television series The Sopranos.	"HBO, television series, Sopranos, first season, episode"		"""http://dbpedia.org/resource/Isabella_(The_Sopranos)"",""http://dbpedia.org/resource/Meadowlands_(The_Sopranos)"",""http://dbpedia.org/resource/The_Legend_of_Tennessee_Moltisanti"",""http://dbpedia.org/resource/I_Dream_of_Jeannie_Cusamano"",""http://dbpedia.org/resource/Boca_(The_Sopranos)"",""http://dbpedia.org/resource/Nobody_Knows_Anything"",""http://dbpedia.org/resource/Pax_Soprana"",""http://dbpedia.org/resource/A_Hit_Is_a_Hit"",""http://dbpedia.org/resource/Denial,_Anger,_Acceptance"",""http://dbpedia.org/resource/College_(The_Sopranos)"",""http://dbpedia.org/resource/46_Long"",""http://dbpedia.org/resource/The_Sopranos_(episode)"",""http://dbpedia.org/resource/Down_Neck"""
+resource	Who created Batman?	"Batman, creator"	"Batman, creator (agent)"	"""http://dbpedia.org/resource/Bill_Finger"",""http://dbpedia.org/resource/Bob_Kane"""
+resource	Who played Gus Fring in Breaking Bad?	"play, Gus Fring, Breaking Bad"	"Gus Fring, portrayer"	http://dbpedia.org/resource/Giancarlo_Esposito
+resource	In which programming language is GIMP written?	"GIMP, programming language"	"GIMP, programming language"	"""http://dbpedia.org/resource/C_(programming_language)"",""http://dbpedia.org/resource/GTK+"""
+resource	In which ancient empire could you pay with cocoa beans?	"ancient empire, pay, cocoa beans"	"Cocoa bean, currency"	"""http://dbpedia.org/resource/Aztec_Empire"",""http://dbpedia.org/resource/Tabasco_(former_state)"""
+resource	Who is the editor of Forbes?	"Forbes, editor"	"Forbes, editor"	http://dbpedia.org/resource/Steve_Forbes
+number	How many people live in the capital of Australia?	"Australia, capital, people, live"		381488
+resource	Which professional surfers were born in Australia?	"professional surfer, born, Australia"		"""http://dbpedia.org/resource/Ian_Cairns"",""http://dbpedia.org/resource/Midget_Farrelly"""
+resource	Which electronics companies were founded in Beijing?	"electronics companies, founded, Beijing"		http://dbpedia.org/resource/Lenovo
+resource	Give me all video games published by Mean Hamster Software.	"video game, publish, Mean Hamster Software"	"Mean Hamster Software, publisher"	"""http://dbpedia.org/resource/Crossbow_(video_game)"",""http://dbpedia.org/resource/Riven"""
+number	How many Aldi stores are there?	"own, Aldi"	"Aldi, number of locations"	9600
+resource	What is the capital of Cameroon?	"capital, Cameroon"	"Cameroon, capital"	http://dbpedia.org/resource/Yaoundé
+boolean	Is there a video game called Battle Chess?	"video game, Battle Chess"		TRUE
+boolean	Was the wife of president Lincoln called Mary?	"Lincoln, president, wife, called, Mary"		TRUE
+resource	Give me all movies directed by Francis Ford Coppola.	"movie, direct, Francis Ford Coppola"	"Francis Ford Coppola, film director"	"""http://dbpedia.org/resource/The_Rain_People"",""http://dbpedia.org/resource/The_Godfather_Part_III"",""http://dbpedia.org/resource/One_from_the_Heart"",""http://dbpedia.org/resource/The_Outsiders_(film)"",""http://dbpedia.org/resource/The_Terror_(1963_film)"",""http://dbpedia.org/resource/The_Godfather_Part_II"",""http://dbpedia.org/resource/Twixt_(film)"",""http://dbpedia.org/resource/The_Cotton_Club_(film)"",""http://dbpedia.org/resource/Tonight_for_Sure"",""http://dbpedia.org/resource/Peggy_Sue_Got_Married"",""http://dbpedia.org/resource/Apocalypse_Now"",""http://dbpedia.org/resource/The_Conversation"",""http://dbpedia.org/resource/Apocalypse_Now_Redux"",""http://dbpedia.org/resource/Bram_Stoker's_Dracula"",""http://dbpedia.org/resource/Rumble_Fish"",""http://dbpedia.org/resource/Hammett_(film)"",""http://dbpedia.org/resource/The_Godfather"",""http://dbpedia.org/resource/Youth_Without_Youth_(film)"",""http://dbpedia.org/resource/Finian's_Rainbow_(film)"",""http://dbpedia.org/resource/Dementia_13"",""http://dbpedia.org/resource/Tucker:_The_Man_and_His_Dream"",""http://dbpedia.org/resource/Gardens_of_Stone"",""http://dbpedia.org/resource/The_Rainmaker_(1997_film)"",""http://dbpedia.org/resource/You're_a_Big_Boy_Now"",""http://dbpedia.org/resource/Tetro"",""http://dbpedia.org/resource/New_York_Stories"",""http://dbpedia.org/resource/The_Godfather_Saga"",""http://dbpedia.org/resource/The_Godfather_(film_series)"",""http://dbpedia.org/resource/Battle_Beyond_the_Sun"",""http://dbpedia.org/resource/The_Bellboy_and_the_Playgirls"",""http://dbpedia.org/resource/Captain_EO__Captain_EO__1"",""http://dbpedia.org/resource/Jack_(1996_film)"""
+resource	Which of Tim Burton's films had the highest budget?	"highest budget, film, Tim Burton"		http://dbpedia.org/resource/Big_Eyes
+boolean	Does Breaking Bad have more episodes than Game of Thrones?	"Breaking Bad, episodes, more than, Game of Thrones"		FALSE
+resource	Who was called Rodzilla?	"called, Rodzilla"		http://dbpedia.org/resource/Rodney_Blake
+boolean	Was Natalie Portman born in the United States?	"Natalie Portman, born, United States"		FALSE
+resource	Give me the grandchildren of Elvis Presley.	"Elvis Presley, grandchildren"		http://dbpedia.org/resource/Riley_Keough
+resource	Which movies starring Mickey Rourke were directed by Guy Ritchie?	"movies, starring, Mickey Rourke, directed, Guy Ritchie"		http://dbpedia.org/resource/The_Hire
+resource	When did Dracula's creator die?	"Dracula, creator, die"		1912-04-20
+resource	Which country does the creator of Miffy come from?	"Miffy, creator, country"		http://dbpedia.org/resource/Netherlands
+string	What is Batman's real name?	"real name, Batman"	"Batman, alter ego"	
+resource	What form of government does Russia have?	"form of government, Russia"	"Russia, government type"	http://dbpedia.org/resource/Federalism
+number	How many companies were founded by the founder of Facebook?	"companies, founded by, founder, Facebook"		0
+resource	Give me all Canadian Grunge record labels.	"record label, Canadian, Grunge"		http://dbpedia.org/resource/Murderecords
+number	How many children did Benjamin Franklin have?	"Benjamin Franklin, child"	"Benjamin Franklin, child"	"""http://dbpedia.org/resource/William_Franklin"",""http://dbpedia.org/resource/Francis_Folger_Franklin"",""http://dbpedia.org/resource/Sarah_Franklin_Bache"""
+resource	List the children of Margaret Thatcher.	"Margaret Thatcher, child"	"Margaret Thatcher, child"	http://dbpedia.org/resource/Carol_Thatcher
+resource	From which region is the Melon de Bourgogne?	"region, Melon de Bourgogne"	"Melon de Bourgogne, wine region"	"""http://dbpedia.org/resource/Southern_Ontario"",""http://dbpedia.org/resource/Loire_Valley_(wine)"",""http://dbpedia.org/resource/Oregon"",""http://dbpedia.org/resource/Washington_(state)"""
+resource	Who is the oldest child of Meryl Streep?	"oldest child, Meryl Streep"		http://dbpedia.org/resource/Henry_Wolfe_Gummer
+boolean	Are tree frogs a type of amphibian?	"tree frog, amphibian"		TRUE
+boolean	Is Christian Bale starring in Velvet Goldmine?	"Christian Bale, starring, Velvet Goldmine"		TRUE
+resource	List all games by GMT.	"game, GMT"	"GMT Games, publisher"	"""http://dbpedia.org/resource/Washington's_War"",""http://dbpedia.org/resource/Fields_of_Fire_(game)"",""http://dbpedia.org/resource/Commands_&_Colors:_Ancients"",""http://dbpedia.org/resource/Twilight_Struggle"",""http://dbpedia.org/resource/Sword_of_Rome"",""http://dbpedia.org/resource/Paths_of_Glory_(board_game)"",""http://dbpedia.org/resource/Chandragupta_(board_game)"""
+boolean	Does the Isar flow into a lake?	"Isar, flow, lake"		TRUE
+resource	Which airports does Yeti Airlines serve?	"airports, Yeti Airlines"	"Yeti Airlines, target aiport"	http://dbpedia.org/resource/Pokhara
+resource	Which Indian company has the most employees?	"Indian company, the most employees"		http://dbpedia.org/resource/Indian_Railways
+resource	What color expresses loyalty?	"color, express, loyalty"		http://dbpedia.org/resource/Indigo
+resource	Which city has the most inhabitants?	"city, the most inhabitants"		http://dbpedia.org/resource/Karachi
+resource	Who created Wikipedia?	"Wikipedia, created"	"Wikipedia, author"	"""http://dbpedia.org/resource/Jimmy_Wales"",""http://dbpedia.org/resource/Larry_Sanger"""
+boolean	Is Rita Wilson the wife of Tom Hanks?	"Rita Wilson, wife, Tom Hanks"		TRUE
+boolean	Is the wife of president Obama called Michelle?	"Obama, president, wife, called, Michelle"		TRUE
+number	How many ethnic groups live in Slovenia?	"how many, ethnic groups, Slovenia"	"Slovenia, ethnic group"	4
+resource	Who is the president of Eritrea?	"president, Eritrea"	"Eritrea, leader"	http://dbpedia.org/resource/Isaias_Afwerki
+resource	Which films did Stanley Kubrick direct?	"film, Stanley Kubrick, direct"	"Stanley Kubrick, film director"	"""http://dbpedia.org/resource/Day_of_the_Fight"",""http://dbpedia.org/resource/Barry_Lyndon"",""http://dbpedia.org/resource/A_Clockwork_Orange_(film)"",""http://dbpedia.org/resource/2001:_A_Space_Odyssey_(film)"",""http://dbpedia.org/resource/The_Shining_(film)"",""http://dbpedia.org/resource/Fear_and_Desire"",""http://dbpedia.org/resource/The_Killing_(film)"",""http://dbpedia.org/resource/Paths_of_Glory"",""http://dbpedia.org/resource/Flying_Padre"",""http://dbpedia.org/resource/Eyes_Wide_Shut"",""http://dbpedia.org/resource/Full_Metal_Jacket"",""http://dbpedia.org/resource/Killer's_Kiss"",""http://dbpedia.org/resource/The_Seafarers"",""http://dbpedia.org/resource/Dr._Strangelove"",""http://dbpedia.org/resource/Spartacus_(film)"",""http://dbpedia.org/resource/Lolita_(1962_film)"""
+date	When was the Titanic completed?	"Titanic, completion date"	"RMS Titanic, completion date"	1912-04-02
+resource	How many pages does War and Peace have?	"how many, pages, War and Peace"	"War and Page, number of pages"	1225
+resource	Who is the youngest player in the Premier League?	"player, Premier League, youngest"		http://dbpedia.org/resource/Ernie_Pinkney
+resource	What is the highest mountain in Italy?	"highest, mountain, Italy"		http://dbpedia.org/resource/Mont_Blanc
+number	How tall is Claudia Schiffer?	"Claudia Schiffer, tall"	"Claudia Schiffer, height (µ)"	1.81
+resource	Who was John F. Kennedy's vice president?	"John F. Kennedy, vice president"	"John F. Kennedy, vice president"	http://dbpedia.org/resource/Lyndon_B._Johnson
+resource	Which subsidiary of Lufthansa serves both Dortmund and Berlin Tegel?	"subsidiary, Lufthansa, serve, Dortmund, Berlin Tegel"		http://dbpedia.org/resource/Germanwings
+resource	Who was the successor of John F. Kennedy?	"John F. Kennedy, successor"	"John F. Kennedy, successor"	"""http://dbpedia.org/resource/Benjamin_A._Smith_II"",""http://dbpedia.org/resource/Lyndon_B._Johnson"",""http://dbpedia.org/resource/Tip_O'Neill"""
+resource	Who composed the soundtrack for Cameron's Titanic?	"compose, soundtrack, Cameron's Titanic"	"Titanic (1997 film), music composer"	http://dbpedia.org/resource/James_Horner
+resource	Which movies did Kurosawa direct?	"film, direct, Kurosawa"	"Akira Kurosawa, film director"	"""http://dbpedia.org/resource/The_Idiot_(1951_film)"",""http://dbpedia.org/resource/Dreams_(1990_film)"",""http://dbpedia.org/resource/The_Bad_Sleep_Well"",""http://dbpedia.org/resource/The_Hidden_Fortress"",""http://dbpedia.org/resource/Throne_of_Blood"",""http://dbpedia.org/resource/Drunken_Angel"",""http://dbpedia.org/resource/Kagemusha"",""http://dbpedia.org/resource/Rhapsody_in_August"",""http://dbpedia.org/resource/Dersu_Uzala_(1975_film)"",""http://dbpedia.org/resource/Sanshiro_Sugata"",""http://dbpedia.org/resource/Seven_Samurai"",""http://dbpedia.org/resource/Sanjuro"",""http://dbpedia.org/resource/Scandal_(1950_film)"",""http://dbpedia.org/resource/Sanshiro_Sugata_Part_II"",""http://dbpedia.org/resource/One_Wonderful_Sunday"",""http://dbpedia.org/resource/The_Most_Beautiful"",""http://dbpedia.org/resource/The_Quiet_Duel"",""http://dbpedia.org/resource/Madadayo"",""http://dbpedia.org/resource/High_and_Low_(1963_film)"",""http://dbpedia.org/resource/Ikiru"",""http://dbpedia.org/resource/Red_Beard"",""http://dbpedia.org/resource/Dodes'ka-den"",""http://dbpedia.org/resource/Those_Who_Make_Tomorrow"",""http://dbpedia.org/resource/Yojimbo_(film)"",""http://dbpedia.org/resource/Rashomon"",""http://dbpedia.org/resource/Stray_Dog_(film)"",""http://dbpedia.org/resource/Horse_(1941_film)"",""http://dbpedia.org/resource/No_Regrets_for_Our_Youth"",""http://dbpedia.org/resource/Ran_(film)"",""http://dbpedia.org/resource/The_Lower_Depths_(1957_film)"",""http://dbpedia.org/resource/I_Live_in_Fear"",""http://dbpedia.org/resource/The_Men_Who_Tread_on_the_Tiger's_Tail"""
+resource	For which label did Elvis record his first album?	"Elvis, first, album, label"		http://dbpedia.org/resource/Pickwick_Records
+resource	In which time zone is Rome?	"time zone, Rome"	"Rome, time zone"	http://dbpedia.org/resource/Central_European_Time
+resource	Give me the currency of China.	"currency, China"	"China, currency"	http://dbpedia.org/resource/Renminbi
+resource	Who are the developers of DBpedia?	"developers, DBpedia"	"Dbpedia, developer"	"""http://dbpedia.org/resource/University_of_Mannheim"",""http://dbpedia.org/resource/Leipzig_University"",""http://dbpedia.org/resource/OpenLink_Software"""
+boolean	Does Abraham Lincoln's death place have a website?	"Abraham Lincoln, death place, website"		FALSE
+resource	Who is the king of the Netherlands?	"king, the Netherlands"	"Netherlands, leader"	http://dbpedia.org/resource/Willem-Alexander_of_the_Netherlands
+resource	In which city did Nikos Kazantzakis die?	"city, Nikos Kazantzakis, die"	"Nikos Kazantzakis, death place"	http://dbpedia.org/resource/Freiburg_im_Breisgau
+resource	Who was the father of Queen Elizabeth II?	"father, Queen Elizabeth II"	"Elizabeth II, parent"	http://dbpedia.org/resource/George_VI
+resource	Give me a list of all critically endangered birds.	"list, critically endangered birds"		http://dbpedia.org/resource/Chatham_pigeon
+number	How many inhabitants does the largest city in Canada have?	"inhabitants, largest city, Canada"		2615060
+resource	In which military conflicts did Lawrence of Arabia participate?	"Lawrence of Arabia, military conflict"	"T. E. Lawrence, battle"	"""http://dbpedia.org/resource/Battle_of_Aqaba"",""http://dbpedia.org/resource/World_War_I"",""http://dbpedia.org/resource/Battle_of_Fwelia"",""http://dbpedia.org/resource/Siege_of_Medina"",""http://dbpedia.org/resource/Battle_of_Deraa"",""http://dbpedia.org/resource/Arab_Revolt"",""http://dbpedia.org/resource/Battle_of_Megiddo_(1918)"",""http://dbpedia.org/resource/Battle_of_Talifeh"",""http://dbpedia.org/resource/Capture_of_Damascus_(1918)"",""http://dbpedia.org/resource/Battle_of_Aba_el_Lissan"",""http://dbpedia.org/resource/The_Tolkien_Reader"""
+resource	Which book has the most pages?	"book, the most pages"		http://dbpedia.org/resource/The_Tolkien_Reader
+resource	In which country does the Nile start?	"Nile, start, country"	"Nile, source country"	"""http://dbpedia.org/resource/Rwanda"",""http://dbpedia.org/resource/Ethiopia"""
+resource	Who is the Formula 1 race driver with the most races?	"Formula 1, race driver, races, most"		http://dbpedia.org/resource/Michael_Schumacher
+resource	Which companies produce hovercrafts?	"companies, produce, hovercrafts"	"Hovercraft, product"	"""http://dbpedia.org/resource/Saunders-Roe"",""http://dbpedia.org/resource/Hanjin_Heavy_Industries"",""http://dbpedia.org/resource/British_Hovercraft_Corporation"""
+boolean	Did Elvis Presley have children?	"Elvis Presley, children"		TRUE
+resource	In which city was the president of Montenegro born?	"city, born, president of Montenegro"	"President of Montenegro, child"	http://dbpedia.org/resource/Belgrade
+resource	Which country was Bill Gates born in?	"country, born, Bill Gates"		http://dbpedia.org/resource/United_States
+resource	In which countries do people speak Japanese?	"which countries, speak, Japanese"	"Japanese language, language"	"""http://dbpedia.org/resource/Japan"",""http://dbpedia.org/resource/Palau"",""http://dbpedia.org/resource/Allied_Military_Government_for_Occupied_Territories"""
+resource	Show me the book that Muhammad Ali wrote.	"book, wrote, Muhammad Ali"	"Muhammad Ali, author"	http://dbpedia.org/resource/The_Soul_of_a_Butterfly
+boolean	Is Michelle Obama the wife of Barack Obama?	"Michelle Obama, wife, Barack Obama"		TRUE
+number	What is the area code of Berlin?	"Berlin, area code"	"Berlin, area code"	30
+resource	Give me all actors starring in Last Action Hero.	"actor, starring, Last Action Hero"	"Last Action Hero, starring"	"""http://dbpedia.org/resource/Tom_Noonan"",""http://dbpedia.org/resource/F._Murray_Abraham"",""http://dbpedia.org/resource/Arnold_Schwarzenegger"",""http://dbpedia.org/resource/Bridgette_Wilson"",""http://dbpedia.org/resource/Charles_Dance"",""http://dbpedia.org/resource/Art_Carney"",""http://dbpedia.org/resource/Austin_O'Brien"",""http://dbpedia.org/resource/Robert_Prosky"",""http://dbpedia.org/resource/Anthony_Quinn"""
+string	What are the nicknames of San Francisco?	"San Francisco, nickname"		"""The City by the Bay"",""Fog City"",""San Fran"",""Frisco"",""The City that Knows How"",""Baghdad by the Bay"",""The Paris of the West"""
+resource	What was the first Queen album?	"first album, Queen"	"Queen band, first album"	http://dbpedia.org/resource/Queen_(Queen_album)
+resource	Through which countries does the Yenisei river flow?	"Yenisei river, flow through, country"	"Yenisei River, country"	"""http://dbpedia.org/resource/Russia"",""http://dbpedia.org/resource/Mongolia"""
+resource	Which television shows were created by Walt Disney?	"television show, create, Walt Disney"	"Walt Disneys, creator (agent)"	"""http://dbpedia.org/resource/List_of_Jiminy_Cricket_educational_serials"",""http://dbpedia.org/resource/Walt_Disney_anthology_television_series"",""http://dbpedia.org/resource/The_Mickey_Mouse_Club"""
+resource	What is the bridge with the longest span?	"bridge, longest span"		http://dbpedia.org/resource/Overseas_Highway
+resource	What country is Sitecore from?	"country, Sitecore"	"Sitecore, foundation place"	http://dbpedia.org/resource/Denmark
+resource	Whom did Lance Bass marry?	"wife, Lance Bass"	"Lance Bass, spouse"	http://dbpedia.org/resource/Michael_Turchin
+resource	What is the capital of Canada?	"capital, Canada"	"Canada, capital"	http://dbpedia.org/resource/Ottawa
+resource	Who was Vincent van Gogh inspired by?	"person, inspiring, Vincent van Gogh"	"Vincent van Gogh, inspired"	http://dbpedia.org/resource/Adolphe_Monticelli
+resource	In which city did John F. Kennedy die?	"city, John F. Kennedy, die"	"John F. Kennedy, death place"	http://dbpedia.org/resource/Dallas
+boolean	Was U.S. president Jackson involved in a war?	"U.S. president, Jackson, war"		TRUE
+resource	Who wrote the Game of Thrones theme?	"writer, Game of Thrones"	"Game of Thrones, composer"	http://dbpedia.org/resource/Ramin_Djawadi
+resource	Who designed the Brooklyn Bridge?	"Brooklyn Bridge, design"	"Brooklyn Bridge, architect"	http://dbpedia.org/resource/John_A._Roebling
+date	When did Boris Becker end his active career?	"Boris Becker, end career"	"Boris Becker, active years end date"	1999-06-25
+resource	Which types of grapes grow in Oregon?	"grape types, grow, Oregon"	"Oregon wine, growing grape"	"""http://dbpedia.org/resource/Chenin_blanc"",""http://dbpedia.org/resource/Pinot_Meunier"",""http://dbpedia.org/resource/Muscat_Blanc_à_Petits_Grains"",""http://dbpedia.org/resource/Riesling"",""http://dbpedia.org/resource/Carmine"",""http://dbpedia.org/resource/Grenache"",""http://dbpedia.org/resource/Zinfandel"",""http://dbpedia.org/resource/Léon_Millot"",""http://dbpedia.org/resource/Dolcetto"",""http://dbpedia.org/resource/Malbec"",""http://dbpedia.org/resource/Cabernet_Sauvignon"",""http://dbpedia.org/resource/Pinot_gris"",""http://dbpedia.org/resource/Melon"",""http://dbpedia.org/resource/Merlot"",""http://dbpedia.org/resource/Gamay"",""http://dbpedia.org/resource/Sauvignon_blanc"",""http://dbpedia.org/resource/Muscat_(grape)"",""http://dbpedia.org/resource/Chardonnay"",""http://dbpedia.org/resource/Huxelrebe"",""http://dbpedia.org/resource/Sangiovese"",""http://dbpedia.org/resource/Sémillon"",""http://dbpedia.org/resource/Gewürztraminer"",""http://dbpedia.org/resource/Müller-Thurgau"",""http://dbpedia.org/resource/Pinot_blanc"",""http://dbpedia.org/resource/Pinot_noir"",""http://dbpedia.org/resource/Black_Muscat"",""http://dbpedia.org/resource/Baco_noir"",""http://dbpedia.org/resource/Marechal_Foch"",""http://dbpedia.org/resource/Petit_Verdot"",""http://dbpedia.org/resource/Cabernet_Franc"",""http://dbpedia.org/resource/Viognier"",""http://dbpedia.org/resource/Scheurebe"",""http://dbpedia.org/resource/Syrah"",""http://dbpedia.org/resource/Barbera"""
+number	How tall is Michael Jordan?	"tall, Michael Jordan"	"Micheal Jordan, height (µ)"	1.9812
+resource	To which party does the mayor of Paris belong?	"party, mayor, Paris, belong"		http://dbpedia.org/resource/Socialist_Party_(France)
+resource	Who was the 16th president of the United States?	"United States, 16th president"		http://dbpedia.org/resource/Abraham_Lincoln
+number	How high is the Mount Everest?	"Mount Everest, high"	" Mount Everest, elevation (?)"	8848
+resource	Who was the doctoral supervisor of Albert Einstein?	"doctoral supervisor, Albert Einstein"	"Albert Einstein, doctoral advisor"	http://dbpedia.org/resource/Alfred_Kleiner
+resource	In which city does Sylvester Stallone live?	"city, live, Sylvester Stallone"	"Sylvester Stallone, residence"	"http://dbpedia.org/resource/Beverly_Hills,_California"
+resource	What is the currency of the Czech Republic?	"Czech republic, currency"	"Czech Republic, currency"	http://dbpedia.org/resource/Czech_koruna
+boolean	Did Socrates influence Aristotle?	"Socrates, influence, Aristotle"		TRUE
+resource	What is the time zone of Salt Lake City?	"Salt Lake City, time zone"	"Salt Lake City, time zone"	http://dbpedia.org/resource/Mountain_Time_Zone
+resource	Who is the son of Sonny and Cher?	"son, Sonny and Cher"	"Sonny Bono, parent"	http://dbpedia.org/resource/Chaz_Bono
+resource	In which city are the headquarters of the United Nations?	"city, headquarters of the United Nations"	"United Nations, admin center"	http://dbpedia.org/resource/New_York_City
+resource	Who is the founder of Penguin Books?	"founder, Penguin Books"	"Penguin Books, founder"	http://dbpedia.org/resource/Allen_Lane
+date	When was Jack Wolfskin founded?	"Jack Wolfskin, founded"	"Jack Wolfskin, founding year"	1981
+resource	Who is the mayor of Rotterdam?	"mayor, Rotterdam"	"Rotterdam, leader name"	http://dbpedia.org/resource/Ahmed_Aboutaleb
+resource	Give me all Swedish oceanographers.	"Swedish, oceanographer"		http://dbpedia.org/resource/Vagn_Walfrid_Ekman
+resource	Show me Hemingway's autobiography.	"autobiography, Hemingway"		http://dbpedia.org/resource/A_Moveable_Feast
+resource	Who are the parents of the wife of Juan Carlos I?	"Juan Carlos I, wife, parents"		"""http://dbpedia.org/resource/Frederica_of_Hanover"",""http://dbpedia.org/resource/Paul_of_Greece"""
+boolean	Did Tesla win a nobel prize in physics?	"Tesla, nobel prize, physics"		FALSE
+resource	Who is the tallest basketball player?	"tallest, basketball player"		http://dbpedia.org/resource/Thijs_Vermeulen
+resource	Which city has the least inhabitants?	"city, the least inhabitants"		"http://dbpedia.org/resource/Greenhorn,_Oregon"
+boolean	Is proinsulin a protein?	"proinsulin, protein"		TRUE
+resource	Who were the parents of Queen Victoria?	"parents, Queen Victoria"	"Queen Victoria, parent"	"""http://dbpedia.org/resource/Princess_Victoria_of_Saxe-Coburg-Saalfeld"",""http://dbpedia.org/resource/Prince_Edward,_Duke_of_Kent_and_Strathearn"""
+boolean	Did Che Guevara have children?	"children, Che Guevara"		TRUE
+boolean	Is Lake Baikal bigger than the Great Bear Lake?	"Lake Baikal, bigger than, Great Bear Lake"		TRUE
+boolean	Did Kaurismäki ever win the Grand Prix at Cannes?	"Kaurismäki, winner, Grand Prix at Cannes"		TRUE
+resource	Give me all books by William Goldman with more than 300 pages.	"book, William Goldman, pages, more than 300"		"""http://dbpedia.org/resource/Marathon_Man_(novel)"",""http://dbpedia.org/resource/Which_Lie_Did_I_Tell%3F"",""http://dbpedia.org/resource/Hype_and_Glory"",""http://dbpedia.org/resource/Tinsel_(novel)"",""http://dbpedia.org/resource/Boys_and_Girls_Together"",""http://dbpedia.org/resource/Control_(novel)"",""http://dbpedia.org/resource/The_Color_of_Light"",""http://dbpedia.org/resource/The_Princess_Bride"",""http://dbpedia.org/resource/Wait_Till_Next_Year"",""http://dbpedia.org/resource/Brothers_(Goldman_novel)"""
+resource	Where is Fort Knox located?	"Fort Knox, located"	"Fort Knox, location"	http://dbpedia.org/resource/Kentucky
+resource	In which U.S. state is Fort Knox located?	"Fort Knox, located, U.S. state"	"Fort Knox, location"	http://dbpedia.org/resource/Kentucky
+resource	Where is Syngman Rhee buried?	"where, Syngman Rhee, buried"	"Syngman Rhee, resting place"	http://dbpedia.org/resource/Seoul_National_Cemetery
+resource	What is the timezone in San Pedro de Atacama?	"timezone, San Pedro de Atacama"	"San Pedro de Atacama, time zone"	http://dbpedia.org/resource/Time_in_Chile
+resource	To which artistic movement did the painter of The Three Dancers belong?	"artistic movement, painter, The Three Dancers"		"""http://dbpedia.org/resource/Cubism"",""http://dbpedia.org/resource/Surrealism"""
+resource	Which scientist is known for the Manhattan Project and the Nobel Peace Prize?	"scientist, known for, Manhattan Project, Nobel Peace Prize"		http://dbpedia.org/resource/Joseph_Rotblat
+resource	Show me all books in Asimov's Foundation series.	"books, Asimov, Foundation series"	"Foundation series, series"	"""http://dbpedia.org/resource/Foundation's_Edge"",""http://dbpedia.org/resource/Second_Foundation"",""http://dbpedia.org/resource/Foundation_(Isaac_Asimov_novel)"",""http://dbpedia.org/resource/Foundation_and_Chaos"",""http://dbpedia.org/resource/Foundation's_Triumph"",""http://dbpedia.org/resource/The_Originist"",""http://dbpedia.org/resource/Prelude_to_Foundation"",""http://dbpedia.org/resource/Foundation's_Fear"",""http://dbpedia.org/resource/Foundation_and_Earth"",""http://dbpedia.org/resource/Forward_the_Foundation"",""http://dbpedia.org/resource/Foundation_and_Empire"""
+resource	Give me all cities in New Jersey with more than 100000 inhabitants.	"New Jersey, city, inhabitants, more than 100000"		"""http://dbpedia.org/resource/Newark,_New_Jersey"",""http://dbpedia.org/resource/Jersey_City,_New_Jersey"",""http://dbpedia.org/resource/Elizabeth,_New_Jersey"",""http://dbpedia.org/resource/Paterson,_New_Jersey"""
+resource	Which museum in New York has the most visitors?	"museum, New York, the most visitors"		http://dbpedia.org/resource/Museum_of_Motherhood
+number	How high is the Yokohama Marine Tower?	"high, Yokohama Marine Tower"	"Yokohama Marine Tower, height (µ)"	106.07
+boolean	Does the new Battlestar Galactica series have more episodes than the old one?	"new BattleStar Galactica series, episodes, more, old Battle Star Galactica series"		FALSE
+resource	Who is the youngest Darts player?	"Darts player, youngest"		http://dbpedia.org/resource/Max_Hopp
+resource	Who developed the video game World of Warcraft?	"video game, World of Warcraft, develop"	"World of Warcraft, developer"	http://dbpedia.org/resource/Blizzard_Entertainment
+resource	Who was the pope that founded the Vatican Television?	"pope, founded, Vatican Television"	"Vatican Television Center, founded by"	http://dbpedia.org/resource/Pope_John_Paul_II
+resource	Who composed the music for Harold and Maude?	"Harold and Maude, compose, music"	"Harold and Maude, music composer"	http://dbpedia.org/resource/Cat_Stevens
+resource	Give me all members of Prodigy.	"member, Prodigy"	"The Prodigy, band member"	"""http://dbpedia.org/resource/Maxim_(musician)"",""http://dbpedia.org/resource/Liam_Howlett"",""http://dbpedia.org/resource/Keith_Flint"""
+resource	Who is starring in Spanish movies produced by Benicio del Toro?	"starring, Spanish movies, produced, Benicio del Toro"		http://dbpedia.org/resource/Benicio_del_Toro
+resource	Which subsidiary of TUI Travel serves both Glasgow and Dublin?	"subsidiary, TUI Travel, serve, Glasgow, Dublin"		http://dbpedia.org/resource/Thomson_Airways
+resource	In which country is Mecca located?	"country, located, Mecca"	"Mecca, country"	http://dbpedia.org/resource/Saudi_Arabia
+number	How many languages are spoken in Colombia?	"languages, Colombia"	"Colombia, language"	2
+resource	What is the biggest stadium in Spain?	"biggest stadium, Spain"		http://dbpedia.org/resource/Camp_Nou
+resource	Which professional surfers were born on the Philippines?	"professional surfer, born, Philippines"		http://dbpedia.org/resource/Marcus_Adoro
+resource	What are the five boroughs of New York?	"five boroughs, New York"	"Borough (New York City), government type"	"""http://dbpedia.org/resource/Queens"",""http://dbpedia.org/resource/Staten_Island"",""http://dbpedia.org/resource/Manhattan"",""http://dbpedia.org/resource/The_Bronx"",""http://dbpedia.org/resource/Brooklyn"""
+boolean	Is Cola a beverage?	"Cola, beverage"		TRUE
+date	When did princess Diana die?	"date, princess Diana, died"	"Princess of Wales, death date"	1997-08-31
+resource	Where in France is sparkling wine produced?	"produced, France, sparkling wine"		http://dbpedia.org/resource/Loire_Valley_(wine)

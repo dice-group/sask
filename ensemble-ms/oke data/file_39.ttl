@@ -1,0 +1,68 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     aksw:JoeBielawski ;
+  rdf:predicate  dbo:president ;
+  rdf:subject    aksw:KnowledgeServices ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.indystar.com/story/news/local/hamilton-county/2017/06/06/indianapolis-company-moving-headquarters-fishers-adding-400-jobs/373808001/#char=0,150>
+                 ]
+] .
+
+<https://www.indystar.com/story/news/local/hamilton-county/2017/06/06/indianapolis-company-moving-headquarters-fishers-adding-400-jobs/373808001/#char=23,31>
+        a                     nif:RFC5147String , nif:Phrase , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Good> ;
+        nif:anchorOf          "Dotstaff" ;
+        nif:beginIndex        "23"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "31"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.indystar.com/story/news/local/hamilton-county/2017/06/06/indianapolis-company-moving-headquarters-fishers-adding-400-jobs/373808001/#char=0,150> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     aksw:Dotstaff .
+
+<https://www.indystar.com/story/news/local/hamilton-county/2017/06/06/indianapolis-company-moving-headquarters-fishers-adding-400-jobs/373808001/#char=0,150>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "150"^^xsd:nonNegativeInteger ;
+        nif:isString    "Knowledge Services and Dotstaff is incredibly happy to be a part of this wonderful community, said Joe Bielawski, the president of Knowledge Services." .
+
+<https://www.indystar.com/story/news/local/hamilton-county/2017/06/06/indianapolis-company-moving-headquarters-fishers-adding-400-jobs/373808001/#char=131,149>
+        a                     nif:RFC5147String , nif:String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Completed> ;
+        nif:anchorOf          "Knowledge Services" ;
+        nif:beginIndex        "131"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "149"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.indystar.com/story/news/local/hamilton-county/2017/06/06/indianapolis-company-moving-headquarters-fishers-adding-400-jobs/373808001/#char=0,150> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     aksw:KnowledgeServices .
+
+<https://www.indystar.com/story/news/local/hamilton-county/2017/06/06/indianapolis-company-moving-headquarters-fishers-adding-400-jobs/373808001/#char=0,18>
+        a                     nif:Phrase , nif:RFC5147String , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Completed> ;
+        nif:anchorOf          "Knowledge Services" ;
+        nif:beginIndex        "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "18"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.indystar.com/story/news/local/hamilton-county/2017/06/06/indianapolis-company-moving-headquarters-fishers-adding-400-jobs/373808001/#char=0,150> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     aksw:KnowledgeServices .
+
+<https://www.indystar.com/story/news/local/hamilton-county/2017/06/06/indianapolis-company-moving-headquarters-fishers-adding-400-jobs/373808001/#char=99,112>
+        a                     nif:String , nif:Phrase , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasCheckResult>
+                <http://gerbil.aksw.org/eaglet/vocab#Completed> ;
+        nif:anchorOf          "Joe Bielawski" ;
+        nif:beginIndex        "99"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "112"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.indystar.com/story/news/local/hamilton-county/2017/06/06/indianapolis-company-moving-headquarters-fishers-adding-400-jobs/373808001/#char=0,150> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     aksw:JoeBielawski .

@@ -1,0 +1,55 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+<https://economictimes.indiatimes.com/news/sports/tennis-toni-nadal-to-quit-as-rafas-coach-after-this-season/articleshow/57127810.cms#char=0,89>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "89"^^xsd:nonNegativeInteger ;
+        nif:isString    "Rafael Nadal's uncle, Toni Nadal, will step down as his coach after this year's ATP Tour." .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Rafael_Nadal ;
+  rdf:predicate  dbo:trainer ;
+  rdf:subject    dbr:Toni_Nadal ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://economictimes.indiatimes.com/news/sports/tennis-toni-nadal-to-quit-as-rafas-coach-after-this-season/articleshow/57127810.cms#char=0,89>
+                 ]
+] .
+
+<https://economictimes.indiatimes.com/news/sports/tennis-toni-nadal-to-quit-as-rafas-coach-after-this-season/articleshow/57127810.cms#char=0,12>
+        a                     nif:RFC5147String , nif:Phrase , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Rafael Nadal" ;
+        nif:beginIndex        "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "12"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://economictimes.indiatimes.com/news/sports/tennis-toni-nadal-to-quit-as-rafas-coach-after-this-season/articleshow/57127810.cms#char=0,89> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:Rafael_Nadal .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Toni_Nadal ;
+  rdf:predicate  dbo:relative ;
+  rdf:subject    dbr:Rafael_Nadal ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://economictimes.indiatimes.com/news/sports/tennis-toni-nadal-to-quit-as-rafas-coach-after-this-season/articleshow/57127810.cms#char=0,89>
+                 ]
+] .
+
+<https://economictimes.indiatimes.com/news/sports/tennis-toni-nadal-to-quit-as-rafas-coach-after-this-season/articleshow/57127810.cms#char=22,32>
+        a                     nif:RFC5147String , nif:String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Toni Nadal" ;
+        nif:beginIndex        "22"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "32"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://economictimes.indiatimes.com/news/sports/tennis-toni-nadal-to-quit-as-rafas-coach-after-this-season/articleshow/57127810.cms#char=0,89> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:Toni_Nadal .

@@ -1,6 +1,6 @@
 package org.dice_research.sask.executer_ms;
 
-import org.dice_research.sask.executer_ms.workflow.WorkflowDeserializer;
+import org.dice_research.sask_commons.workflow.WorkflowDeserializer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -15,7 +15,6 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
  * This class is responsible for launching the microservice.
  * 
  * @author Kevin Haack
- *
  */
 @SpringBootApplication
 @EnableDiscoveryClient

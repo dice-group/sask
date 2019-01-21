@@ -1,0 +1,95 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Argentina ;
+  rdf:predicate  dbo:locatedInArea ;
+  rdf:subject    aksw:Cordoba-Rosario ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.theguardian.com/world/2014/aug/19/pope-francis-argentina#char=0,195>
+                 ]
+] .
+
+<https://www.theguardian.com/world/2014/aug/19/pope-francis-argentina#char=116,131>
+        a                     nif:String , nif:RFC5147String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Cordoba-Rosario" ;
+        nif:beginIndex        "116"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "131"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.theguardian.com/world/2014/aug/19/pope-francis-argentina#char=0,195> ;
+        itsrdf:taClassRef     dbo:Place ;
+        itsrdf:taIdentRef     aksw:Cordoba-Rosario .
+
+<https://www.theguardian.com/world/2014/aug/19/pope-francis-argentina#char=154,172>
+        a                     nif:Phrase , nif:RFC5147String , nif:String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Emanuel Bergogolio" ;
+        nif:beginIndex        "154"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "172"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.theguardian.com/world/2014/aug/19/pope-francis-argentina#char=0,195> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     aksw:Emanuel_Bergogolio .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     aksw:Emanuel_Bergogolio ;
+  rdf:predicate  dbo:relative ;
+  rdf:subject    dbr:Pope_Francis ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.theguardian.com/world/2014/aug/19/pope-francis-argentina#char=0,195>
+                 ]
+] .
+
+<https://www.theguardian.com/world/2014/aug/19/pope-francis-argentina#char=0,195>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "195"^^xsd:nonNegativeInteger ;
+        nif:isString    "Pope Francis tells of anguish as relatives die in Argentina car crash. Two great-nephews and their mother killed on Cordoba-Rosario highway, while nephew Emanuel Bergogolio in critical condition." .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Argentina ;
+  rdf:predicate  dbo:country ;
+  rdf:subject    aksw:Cordoba-Rosario ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.theguardian.com/world/2014/aug/19/pope-francis-argentina#char=0,195>
+                 ]
+] .
+
+<https://www.theguardian.com/world/2014/aug/19/pope-francis-argentina#char=0,12>
+        a                     nif:Phrase , nif:String , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Pope Francis" ;
+        nif:beginIndex        "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "12"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.theguardian.com/world/2014/aug/19/pope-francis-argentina#char=0,195> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     dbr:Pope_Francis .
+
+<https://www.theguardian.com/world/2014/aug/19/pope-francis-argentina#char=50,59>
+        a                     nif:Phrase , nif:String , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Argentina" ;
+        nif:beginIndex        "50"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "59"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.theguardian.com/world/2014/aug/19/pope-francis-argentina#char=0,195> ;
+        itsrdf:taClassRef     dbo:Place ;
+        itsrdf:taIdentRef     dbr:Argentina .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     aksw:Cordoba-Rosario ;
+  rdf:predicate  dbo:location ;
+  rdf:subject    aksw:Emanuel_Bergogolio ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.theguardian.com/world/2014/aug/19/pope-francis-argentina#char=0,195>
+                 ]
+] .

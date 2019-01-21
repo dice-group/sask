@@ -1,0 +1,139 @@
+---
+
+- name: "Prepare the directory on the host system where the SASK are stored"
+  hosts: sask
+  vars:
+    ansible_python_interpreter: "/usr/bin/env python"
+  tasks:
+    - name: "Ensure SASK group is present"
+      group:
+        name: "sask"
+        gid: "1111"
+        state: present
+      become: true
+
+    - name: "Ensure SASK user is present"
+      user:
+        name: "sask"
+        comment: "This is the user under which sask runs and that owns the directory"
+        uid: "2222"
+        group: "sask"
+        createhome: no
+        state: present
+      become: true
+
+    - name: "Prepare SASK directory on the physical hosts"
+      file:
+        path: "{{ item }}"
+        state: directory
+        owner: "sask"
+        group: "sask"
+        mode: 0777
+      with_items:
+        - /logs/
+        - /sask/
+        - /sask/hadoop/
+      become: true
+
+    - name: Create a network
+      docker_network:
+        name: sask
+
+- name: "Run eureka Server"
+  hosts: eureka-server
+  vars:
+    ansible_python_interpreter: "/usr/bin/env python"
+  tasks:
+    - docker_container:
+        state : "{{ container_state | default('started') }}"
+        name: "eureka-server"
+        hostname: "eureka-server"
+        image: "{{ docker_repository }}/eureka-server:{{ image_tag }}"
+        ports:
+          - "{{ eureka_service_port }}:{{ eureka_service_port }}"
+
+        etc_hosts: "{{ etc_hosts_all }}"
+        env:
+          EUREKA_SERVICE_HOST: "{{ eureka_service_host }}"
+          EUREKA_SERVICE_PORT: "{{ eureka_service_port }}"
+
+        restart_policy: "always"
+        memory: 2GB
+        log_driver: "json-file"
+        log_options:
+          max-size: "50m"
+          max-file: "1"
+        #volumes:
+        #  - /var/lib/docker/eureka-server:/sask/eureka-server/
+        #TODO this will be enabled post enabling the logging to a file in the sourcecode
+
+
+- name: "Run Chatbot microservice"
+  hosts: chatbot
+  vars:
+    ansible_python_interpreter: "/usr/bin/env python"
+  tasks:
+    - docker_container:
+        state : "{{ container_state | default('started') }}"
+        name: "chatbot-instance-{{ item }}"
+        hostname: "chatbot-instance-{{ item }}"
+        image: "{{ docker_repository }}/chatbot:{{ image_tag }}"
+        ports:
+          - "{{ (chatbot_instance_base_port | int) + (item | int) }}:{{ (chatbot_instance_base_port | int) + (item | int) }}"
+        network_mode: sask
+        etc_hosts: "{{ etc_hosts_all }}"
+        env:
+          EUREKA_SERVICE_HOST: "{{ eureka_service_host }}"
+          EUREKA_SERVICE_PORT: "{{ eureka_service_port }}"
+          CHATBOT_PUBLISH_HOST: "{{ ansible_hostname }}"
+          CHATBOT_PUBLISH_PORT: "{{ (chatbot_instance_base_port | int) + (item | int) }}"
+          QA_HAWK_URL: "{{ qa_hawk_url }}"
+          SESSA_SEARCH_URL: "{{ sessa_search_url }}"
+
+        restart_policy: "always"
+        memory: 2GB
+        log_driver: "json-file"
+        log_options:
+          max-size: "50m"
+          max-file: "1"
+        #volumes:
+        #  - /var/lib/docker/chatbot:/sask/chatbot/
+      with_sequence: start=0 end="{{ (chatbot_instances_per_node | int) - 1 }}"
+
+- import_playbook: extractor_microservices.yml
+
+- name: "Run Webclient, which would be the user interface for the service"
+  hosts: webclient
+  vars:
+    ansible_python_interpreter: "/usr/bin/env python"
+  tasks:
+    
+      #TODO : Currently there is a bug where in the webclient doesn't refresh itself to find the new microservices, we need to fix this
+    - name: "Pause the webclient for a minute for all the other services to startup"
+      pause:
+        seconds: 20
+
+    - docker_container:
+        state : "{{ container_state | default('started') }}"
+        name: "webclient-instance-{{ item }}"
+        hostname: "webclient-instance-{{ item }}"
+        image: "{{ docker_repository }}/webclient:{{ image_tag }}"
+        ports:
+          - "{{ (webclient_instance_base_port | int) + (item | int) }}:{{ (webclient_instance_base_port | int) + (item | int) }}"
+        network_mode: sask
+        etc_hosts: "{{ etc_hosts_all }}"
+        env:
+          EUREKA_SERVICE_HOST: "{{ eureka_service_host }}"
+          EUREKA_SERVICE_PORT: "{{ eureka_service_port }}"
+          WEBCLIENT_PUBLISH_HOST: "{{ ansible_hostname }}"
+          WEBCLIENT_PUBLISH_PORT: "{{ (webclient_instance_base_port | int) + (item | int) }}"
+
+        restart_policy: "always"
+        memory: 2GB
+        log_driver: "json-file"
+        log_options:
+          max-size: "50m"
+          max-file: "1"
+        #volumes:
+        #  - /var/lib/docker/webclient:/sask/webclient/
+      with_sequence: start=0 end="{{ (webclient_instances_per_node | int) - 1 }}"

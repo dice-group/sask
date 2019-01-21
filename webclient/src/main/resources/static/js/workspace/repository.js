@@ -1,12 +1,13 @@
 /**
- * The IIFE for the repository.
+ * JQuery plugin for the repository.
+ * 
+ * @author Kevin Haack
  */
 ;
-(function($, window, document) {
+((function($, window, document) {
 
 	/* global jQuery, console */
-
-	'use strict';
+	"use strict";
 
 	/**
 	 * The plugin name.
@@ -21,9 +22,11 @@
 	var _default = {};
 
 	_default.settings = {
-		onAddToWorkspace : undefined,
-		onLoadToWorkspace : undefined,
-		dao : undefined
+		onAddToWorkspace : null,
+		onAddToWorkspaceTable: null,
+		onAddToWorkspaceGraph: null,
+		onLoadToWorkspace : null,
+		dao : null
 	};
 
 	_default.options = {};
@@ -43,7 +46,7 @@
 		nodes : []
 	}, {
 		text : "Target graphs",
-		id : '#parent3',
+		id : "#parent3",
 		type : "root",
 		nodes : []
 	}, {
@@ -52,6 +55,15 @@
 		type : "root",
 		nodes : []
 	} ];
+	
+	/**
+	 * logging function
+	 */
+	var logError = function(message) {
+		if (window.console) {
+			window.console.error(pluginName + ": " + message);
+		}
+	};
 
 	var Repository = function(element, options) {
 
@@ -123,7 +135,7 @@
 			self.initClasses();
 			self.initDragNDrop();
 		});
-	}
+	};
 
 	/**
 	 * Set the css classes of the nodes.
@@ -147,7 +159,7 @@
 		var self = this;
 		this.$element.find("li.file, li.extractor, li.db").draggable({
 			helper : "clone",
-			start : function(event, ui) {
+			start(event, ui) {
 				var node = self.getNodeFromTarget(this);
 				ui.helper.data("node", node);
 				ui.helper.width(this.clientWidth);
@@ -173,7 +185,7 @@
 		settings.onError = function() {
 			logError("Discover failed.");
 		};
-	}
+	};
 
 	/**
 	 * Remove.
@@ -192,6 +204,29 @@
 		var node = this.treeview.treeview("getNode", nodeId);
 		return node;
 	};
+	
+	/**
+	 * Compare the passed nodes
+	 */
+	Repository.prototype.compareNodes = function(a, b) {
+		if (a.type === "folder" && b.type !== "folder") {
+			return -1;
+		}
+
+		if (a.type !== "folder" && b.type === "folder") {
+			return 1;
+		}
+
+		if (a.text < b.text){
+			return -1;
+		}
+		
+		if (a.text > a.text){
+			return 1;
+		}
+		
+		return 0;
+	};
 
 	/**
 	 * Order the passed node by type and text.
@@ -204,32 +239,21 @@
 				i++;
 			}
 
-			node.nodes.sort(function(a, b) {
-				if (a.type == "folder" && b.type != "folder") {
-					return -1;
-				}
-
-				if (a.type !== "folder" && b.type == "folder") {
-					return 1;
-				}
-
-				if (node.text < node.text){
-					return -1;
-				}
-				if (node.text > node.text){
-					return 1;
-				}
-				return 0;
-			});
+			node.nodes.sort(this.compareNodes);
 		}
 
 		return node;
-	}
+	};
 
 	/**
 	 * Refresh the repo.
 	 */
 	Repository.prototype.refreshRepo = function() {
+		if(!this.options.dao.getDiscoverer().getRepo()) {
+			logError("repo not discovered");
+			return;
+		}
+		
 		var self = this;
 		var success = function(data) {
 			data = self.orderNode(data);
@@ -239,11 +263,11 @@
 			self.options.data = structureTemplate;
 
 			self.init(self.options);
-		}
+		};
 
 		var error = function(data) {
 			logError(data);
-		}
+		};
 
 		this.options.dao.getRepoStructure(success, error);
 	};
@@ -252,6 +276,11 @@
 	 * Refresh the workflows
 	 */
 	Repository.prototype.refreshWorkflows = function() {
+		if(!this.options.dao.getDiscoverer().getRepo()) {
+			logError("repo not discovered");
+			return;
+		}
+		
 		var self = this;
 		var success = function(data) {
 			structureTemplate[3].id = data.id;
@@ -259,11 +288,11 @@
 			self.options.data = structureTemplate;
 
 			self.init(self.options);
-		}
+		};
 
 		var error = function(data) {
 			logError(data);
-		}
+		};
 
 		this.options.dao.getWorkflows(success, error);
 	};
@@ -283,7 +312,7 @@
 					text : microservice.friendlyname,
 					id : microservice.serviceId,
 					type : "extractor",
-					icon : 'glyphicon glyphicon-wrench'
+					icon : "glyphicon glyphicon-wrench"
 				});
 			}
 		} else {
@@ -303,11 +332,11 @@
 			structureTemplate[2].nodes = data;
 			self.options.data = structureTemplate;
 			self.init(self.options);
-		}
+		};
 
 		var error = function(data) {
 			logError(data);
-		}
+		};
 
 		this.options.dao.getTargetGraphs(success, error);
 	};
@@ -327,14 +356,14 @@
 		var self = this;
 
 		// data root
-		new BootstrapMenu('#' + this.elementId + ' li.root[data-nodeid="0"]', {
-			fetchElementData : function(target) {
+		new BootstrapMenu("#" + this.elementId + " li.root[data-nodeid=\"0\"]", {
+			fetchElementData(target) {
 				return self.getNodeFromTarget(target);
 			},
 			actions : [ {
 				name : "New folder",
-				onClick : function(target) {
-					if (target == "#data") {
+				onClick(target) {
+					if (target === "#data") {
 						target = "";
 					}
 
@@ -344,95 +373,100 @@
 		});
 
 		// db
-		new BootstrapMenu('#' + this.elementId + ' li.db', {
-			fetchElementData : function(target) {
+		new BootstrapMenu("#" + this.elementId + " li.db", {
+			fetchElementData(target) {
 				return self.getNodeFromTarget(target);
 			},
-			actions : [ {
-				name : 'Add to Workspace',
-				onClick : function(target) {
+			actions : [{
+				name : "Add to Workspace",
+				onClick(target) {
 					self.options.onAddToWorkspace(target);
 				}
-			} ]
+			},{
+				name : "Query graph (as table)",
+				onClick(target) {
+				self.options.onAddToWorkspaceTable(target);
+				},
+			}]
 		});
 
 		// extractor
-		new BootstrapMenu('#' + this.elementId + ' li.extractor', {
-			fetchElementData : function(target) {
+		new BootstrapMenu("#" + this.elementId + " li.extractor", {
+			fetchElementData(target) {
 				return self.getNodeFromTarget(target);
 			},
 			actions : [ {
-				name : 'Add to Workspace',
-				onClick : function(target) {
+				name : "Add to Workspace",
+				onClick(target) {
 					self.options.onAddToWorkspace(target);
 				}
-			} ]
+			}]
 		});
 
 		// workflow
-		new BootstrapMenu('#' + this.elementId + ' li.workflow', {
-			fetchElementData : function(target) {
+		new BootstrapMenu("#" + this.elementId + " li.workflow", {
+			fetchElementData(target) {
 				return self.getNodeFromTarget(target);
 			},
 			actions : [ {
-				name : 'Load to workspace',
-				onClick : function(target) {
+				name : "Load to workspace",
+				onClick(target) {
 					self.options.onLoadToWorkspace(target);
 				}
 			}, {
-				name : 'Rename',
-				onClick : function(target) {
+				name : "Rename",
+				onClick(target) {
 					self.openRenameWorkflowDialog(target);
 				}
 			}, {
 				name : "Remove",
-				onClick : function(target) {
+				onClick(target) {
 					self.openRemoveFromWorkflowsDialog(target);
 				}
 			} ]
 		});
 
 		// file
-		new BootstrapMenu('#' + this.elementId + ' li.file', {
-			fetchElementData : function(target) {
+		new BootstrapMenu("#" + this.elementId + " li.file", {
+			fetchElementData(target) {
 				return self.getNodeFromTarget(target);
 			},
 			actions : [ {
-				name : 'Add to Workspace',
-				onClick : function(target) {
+				name : "Add to Workspace",
+				onClick(target) {
 					self.options.onAddToWorkspace(target);
 				}
 			}, {
-				name : 'Rename',
-				onClick : function(target) {
+				name : "Rename",
+				onClick(target) {
 					self.openRenameRepoDialog(target);
 				}
 			}, {
-				name : 'Remove',
-				onClick : function(target) {
+				name : "Remove",
+				onClick(target) {
 					self.openRemoveFromRepoDialog(target);
 				}
 			} ]
 		});
 
 		// folder
-		new BootstrapMenu('#' + this.elementId + ' li.folder', {
-			fetchElementData : function(target) {
+		new BootstrapMenu("#" + this.elementId + " li.folder", {
+			fetchElementData(target) {
 				return self.getNodeFromTarget(target);
 			},
 			actions : [ {
-				name : 'New folder',
-				onClick : function(target) {
+				name : "New folder",
+				onClick(target) {
 					self.openNewFolderDialog(target);
 				}
 			}, {
-				name : 'Rename',
-				onClick : function(target) {
+				name : "Rename",
+				onClick(target) {
 					self.openRenameRepoDialog(target);
 				}
 			}, {
-				name : 'Remove',
-				onClick : function(target) {
+				name : "Remove",
+				onClick(target) {
 					self.openRemoveFromRepoDialog(target);
 				}
 			} ]
@@ -446,25 +480,25 @@
 		var self = this;
 		var success = function(data) {
 			self.refreshRepo();
-		}
+		};
 
 		var error = function(data) {
 			logError(data);
-		}
+		};
 
 		var positiv = function() {
-			var target = $(this).find('input[name="target"]').val();
-			var name = $(this).find('input[name="name"]').val();
+			var target = $(this).find("input[name=\"target\"]").val();
+			var name = $(this).find("input[name=\"name\"]").val();
 
 			self.options.dao.renameRepo(success, error, target, name);
-			$(this).dialog('close');
+			$(this).dialog("close");
 		};
 
 		var negativ = function() {
 			$(this).dialog("close");
 		};
 
-		dialogs.dialogRename(positiv, negativ, target).dialog('open');
+		dialogs.dialogRename(positiv, negativ, target).dialog("open");
 	};
 
 	/**
@@ -474,25 +508,25 @@
 		var self = this;
 		var success = function(data) {
 			self.refreshWorkflows();
-		}
+		};
 
 		var error = function(data) {
 			logError(data);
-		}
+		};
 
 		var positiv = function() {
-			var target = $(this).find('input[name="target"]').val();
-			var name = $(this).find('input[name="name"]').val();
+			var target = $(this).find("input[name=\"target\"]").val();
+			var name = $(this).find("input[name=\"name\"]").val();
 
 			self.options.dao.renameWorkflow(success, error, target, name);
-			$(this).dialog('close');
+			$(this).dialog("close");
 		};
 
 		var negativ = function() {
 			$(this).dialog("close");
 		};
 
-		dialogs.dialogRename(positiv, negativ, target).dialog('open');
+		dialogs.dialogRename(positiv, negativ, target).dialog("open");
 	};
 
 	/**
@@ -503,24 +537,24 @@
 		var positiv = function() {
 			var success = function(data) {
 				self.refreshRepo();
-			}
+			};
 
 			var error = function(data) {
 				logError(data);
-			}
+			};
 
-			var target = $(this).find('input[name="target"]').val();
-			var name = $(this).find('input[name="name"]').val();
+			var target = $(this).find("input[name=\"target\"]").val();
+			var name = $(this).find("input[name=\"name\"]").val();
 
 			self.options.dao.createDirectory(success, error, target, name);
-			$(this).dialog('close');
+			$(this).dialog("close");
 		};
 
 		var negativ = function() {
 			$(this).dialog("close");
 		};
 
-		dialogs.dialogNewFolder(positiv, negativ, target).dialog('open');
+		dialogs.dialogNewFolder(positiv, negativ, target).dialog("open");
 	};
 
 	/**
@@ -530,14 +564,14 @@
 		var self = this;
 		var success = function(data) {
 			self.refreshRepo();
-		}
+		};
 
 		var error = function(data) {
 			logError(data);
-		}
+		};
 
 		var positiv = function() {
-			var target = $(this).find('input[name="target"]').val();
+			var target = $(this).find("input[name=\"target\"]").val();
 
 			self.options.dao.removeFromRepo(success, error, target);
 			$(this).dialog("close");
@@ -547,7 +581,7 @@
 			$(this).dialog("close");
 		};
 
-		dialogs.dialogRemove(positiv, negativ, target).dialog('open');
+		dialogs.dialogRemove(positiv, negativ, target).dialog("open");
 	};
 
 	/**
@@ -557,14 +591,14 @@
 		var self = this;
 		var success = function(data) {
 			self.refreshWorkflows();
-		}
+		};
 
 		var error = function(data) {
 			logError(data);
-		}
+		};
 
 		var positiv = function() {
-			var target = $(this).find('input[name="target"]').val();
+			var target = $(this).find("input[name=\"target\"]").val();
 
 			self.options.dao.removeFromWorkflows(success, error, target);
 			$(this).dialog("close");
@@ -574,16 +608,7 @@
 			$(this).dialog("close");
 		};
 
-		dialogs.dialogRemove(positiv, negativ, target).dialog('open');
-	};
-
-	/**
-	 * logging function
-	 */
-	var logError = function(message) {
-		if (window.console) {
-			window.console.error(pluginName + ": " + message);
-		}
+		dialogs.dialogRemove(positiv, negativ, target).dialog("open");
 	};
 
 	/**
@@ -597,20 +622,20 @@
 		this.each(function() {
 			var _this = $.data(this, pluginName);
 
-			if (typeof options === 'string') {
+			if (typeof options === "string") {
 				if (!_this) {
-					logError('Not initialized, can not call method : '
+					logError("Not initialized, can not call method : "
 							+ options);
 				} else if (!$.isFunction(_this[options])
-						|| options.charAt(0) === '_') {
-					logError('No such method : ' + options);
+						|| options.charAt(0) === "_") {
+					logError("No such method : " + options);
 				} else {
 					if (!(args instanceof Array)) {
 						args = [ args ];
 					}
 					result = _this[options].apply(_this, args);
 				}
-			} else if (typeof options === 'boolean') {
+			} else if (typeof options === "boolean") {
 				result = _this;
 			} else {
 				$.data(this, pluginName, new Repository(this, $.extend(true,
@@ -621,5 +646,4 @@
 		return result || this;
 	};
 
-})(jQuery, window, document);
-0
+})(jQuery, window, document));

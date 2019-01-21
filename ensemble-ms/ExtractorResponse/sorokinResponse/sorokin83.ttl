@@ -1,0 +1,1 @@
+<http://example.org/Pence> <http://example.org/position%20held> <http://example.org/Vice%20President> .<http://example.org/Pence> <http://example.org/country%20of%20citizenship> <http://example.org/Israel> .<http://example.org/Israel> <http://example.org/ALL_ZERO> <http://example.org/Vice%20President> .

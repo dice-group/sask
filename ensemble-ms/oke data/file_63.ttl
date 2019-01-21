@@ -1,0 +1,46 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+<https://www.reuters.com/article/brief-kungsleden-signs-new-lease-agreeme/brief-kungsleden-signs-new-lease-agreement-with-existing-tenant-frskringskassan-idUSFWN1OM0ED#char=58,75>
+        a                     nif:Phrase , nif:String , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Forsakringskassan" ;
+        nif:beginIndex        "58"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "75"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.reuters.com/article/brief-kungsleden-signs-new-lease-agreeme/brief-kungsleden-signs-new-lease-agreement-with-existing-tenant-frskringskassan-idUSFWN1OM0ED#char=0,76> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     dbr:Swedish_Social_Insurance_Agency .
+
+<https://www.reuters.com/article/brief-kungsleden-signs-new-lease-agreeme/brief-kungsleden-signs-new-lease-agreement-with-existing-tenant-frskringskassan-idUSFWN1OM0ED#char=0,76>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "76"^^xsd:nonNegativeInteger ;
+        nif:isString    "Kungsleden signs new lease agreement with existing tenant Forsakringskassan." .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Swedish_Social_Insurance_Agency ;
+  rdf:predicate  dbo:tenant ;
+  rdf:subject    aksw:Kungsleden ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://www.reuters.com/article/brief-kungsleden-signs-new-lease-agreeme/brief-kungsleden-signs-new-lease-agreement-with-existing-tenant-frskringskassan-idUSFWN1OM0ED#char=0,76>
+                 ]
+] .
+
+<https://www.reuters.com/article/brief-kungsleden-signs-new-lease-agreeme/brief-kungsleden-signs-new-lease-agreement-with-existing-tenant-frskringskassan-idUSFWN1OM0ED#char=0,10>
+        a                     nif:String , nif:RFC5147String , nif:Phrase ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Kungsleden" ;
+        nif:beginIndex        "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "10"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://www.reuters.com/article/brief-kungsleden-signs-new-lease-agreeme/brief-kungsleden-signs-new-lease-agreement-with-existing-tenant-frskringskassan-idUSFWN1OM0ED#char=0,76> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     aksw:Kungsleden .

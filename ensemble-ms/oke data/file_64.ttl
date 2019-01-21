@@ -1,0 +1,46 @@
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix aksw:  <http://aksw.org/notInWiki/> .
+@prefix dbr:   <http://dbpedia.org/resource/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+<https://news.stanford.edu/news/2011/october/john-mccarthy-obit-102511.html#char=0,193>
+        a               nif:Context , nif:String , nif:RFC5147String ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "193"^^xsd:nonNegativeInteger ;
+        nif:isString    "John McCarthy, a professor emeritus of computer science at Stanford, the man who coined the term artificial intelligence and subsequently went on to define the field for more than five decades." .
+
+[ a              oa:Annotation , rdf:Statement ;
+  rdf:object     dbr:Stanford_University ;
+  rdf:predicate  dbo:employer ;
+  rdf:subject    <http://dbpedia.org/resource/John_McCarthy_%28computer_scientist%29> ;
+  oa:hasTarget   [ a             oa:SpecificResource ;
+                   oa:hasSource  <https://news.stanford.edu/news/2011/october/john-mccarthy-obit-102511.html#char=0,193>
+                 ]
+] .
+
+<https://news.stanford.edu/news/2011/october/john-mccarthy-obit-102511.html#char=59,67>
+        a                     nif:Phrase , nif:String , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "Stanford" ;
+        nif:beginIndex        "59"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "67"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://news.stanford.edu/news/2011/october/john-mccarthy-obit-102511.html#char=0,193> ;
+        itsrdf:taClassRef     dbo:Organisation ;
+        itsrdf:taIdentRef     dbr:Stanford_University .
+
+<https://news.stanford.edu/news/2011/october/john-mccarthy-obit-102511.html#char=0,13>
+        a                     nif:Phrase , nif:String , nif:RFC5147String ;
+        <http://gerbil.aksw.org/eaglet/vocab#hasUserDecision>
+                <http://gerbil.aksw.org/eaglet/vocab#Correct> ;
+        nif:anchorOf          "John McCarthy" ;
+        nif:beginIndex        "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "13"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <https://news.stanford.edu/news/2011/october/john-mccarthy-obit-102511.html#char=0,193> ;
+        itsrdf:taClassRef     dbo:Person ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/John_McCarthy_%28computer_scientist%29> .
