@@ -47,6 +47,7 @@ public class WebController {
 			return answer;
 		}
 		catch (Exception e) {
+			System.out.println(e);
 			ResponseList responselist = new ResponseList();
 			responselist.setError();
 			return responselist;
