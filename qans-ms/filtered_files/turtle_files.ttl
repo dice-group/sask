@@ -1,0 +1,427 @@
+<http://dbpedia.org/resource/Johanna_Konta>
+        <http://dbpedia.org/ontology/trainer>
+                <http://dbpedia.org/resource/Michael_Joyce_%28tennis%29> .
+
+<http://dbpedia.org/resource/Chile>
+        <http://dbpedia.org/ontology/locatedInArea>
+                <http://dbpedia.org/resource/Latin_America> ;
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/Latin_America> .
+
+<http://dbpedia.org/resource/Russel_E._Caflisch>
+        <http://dbpedia.org/ontology/spouse>
+                <http://aksw.org/notInWiki/CarolLynnMeylan> .
+
+<http://dbpedia.org/resource/Facebook>
+        <http://dbpedia.org/ontology/ceo>
+                <http://dbpedia.org/resource/Mark_Zuckerberg> .
+
+<http://dbpedia.org/resource/North_Korea>
+        <http://dbpedia.org/ontology/leaderName>
+                <http://dbpedia.org/resource/Kim_Jong-un> , <http://dbpedia.org/resource/Kim_Jong-il> .
+
+<http://dbpedia.org/resource/David_Beckham>
+        <http://dbpedia.org/ontology/child>
+                <http://aksw.org/notInWiki/Brooklyn_Beckham> ;
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/Paris> ;
+        <http://dbpedia.org/ontology/spouse>
+                <http://dbpedia.org/resource/Victoria_Beckham> .
+
+<http://aksw.org/notInWiki/Moumita>
+        <http://dbpedia.org/ontology/country>
+                <http://dbpedia.org/resource/India> ;
+        <http://dbpedia.org/ontology/hometown>
+                <http://dbpedia.org/resource/Kolkata> ;
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/Kolkata> , <http://dbpedia.org/resource/India> .
+
+<http://dbpedia.org/resource/Oak_Brook,_Illinois>
+        <http://dbpedia.org/ontology/locatedInArea>
+                <http://dbpedia.org/resource/Chicago> ;
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/Chicago> .
+
+<http://dbpedia.org/resource/Anandabazar_Patrika>
+        <http://dbpedia.org/ontology/country>
+                <http://dbpedia.org/resource/India> ;
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/Kolkata> , <http://dbpedia.org/resource/India> .
+
+<http://dbpedia.org/resource/McDonalds>
+        <http://dbpedia.org/ontology/headquarter>
+                <http://dbpedia.org/resource/Oak_Brook,_Illinois> ;
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/Oak_Brook,_Illinois> , <http://dbpedia.org/resource/Chicago> .
+
+<http://dbpedia.org/resource/Bastian_Schweinsteiger>
+        <http://dbpedia.org/ontology/club>
+                <http://dbpedia.org/resource/Chicago_Fire_Soccer_Club> ;
+        <http://dbpedia.org/ontology/formerTeam>
+                <http://dbpedia.org/resource/Manchester_United_F.C.> .
+
+<http://dbpedia.org/resource/Hillary_Clinton>
+        <http://dbpedia.org/ontology/almaMater>
+                <http://dbpedia.org/resource/Wellesley_College> .
+
+<http://dbpedia.org/resource/Sundar_Pichai>
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Sundar Pichai" ;
+        <http://dbpedia.org/ontology/employer>
+                <http://dbpedia.org/resource/Google> .
+
+<http://dbpedia.org/resource/Anant_Ambani>
+        <http://dbpedia.org/ontology/child>
+                <http://dbpedia.org/resource/Nita_Ambani> , <http://dbpedia.org/resource/Mukesh_Ambani> .
+
+<http://dbpedia.org/resource/Ralph_Fiennes>
+        <http://dbpedia.org/ontology/nationality>
+                <http://dbpedia.org/resource/Serbia> .
+
+<http://dbpedia.org/resource/Melissa_McCarthy>
+        <http://dbpedia.org/ontology/relative>
+                <http://dbpedia.org/resource/Jenny_McCarthy> .
+
+<http://aksw.org/notInWiki/TMLDrivelines>
+        <http://dbpedia.org/ontology/subsidiary>
+                <http://dbpedia.org/resource/Tata_Motors> .
+
+<http://dbpedia.org/resource/Microsoft>
+        <http://dbpedia.org/ontology/ceo>
+                <http://dbpedia.org/resource/Satya_Nadella> .
+
+<http://dbpedia.org/resource/Ryan_Lochte>
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/Gainesville%2C_Florida> .
+
+<http://aksw.org/notInWiki/CaroleeBull>
+        <http://dbpedia.org/ontology/almaMater>
+                <http://dbpedia.org/resource/Ohio_University> .
+
+<http://dbpedia.org/resource/Rajeev_Motwani>
+        <http://dbpedia.org/ontology/doctoralAdvisor>
+                <http://dbpedia.org/resource/Sergey_Brin> , <http://dbpedia.org/resource/Larry_Page> .
+
+<http://dbpedia.org/resource/Dhoni>
+        <http://dbpedia.org/ontology/formerTeam>
+                <http://dbpedia.org/resource/Chennai_Super_Kings> .
+
+<http://dbpedia.org/resource/Mukesh_Ambani>
+        <http://dbpedia.org/ontology/parent>
+                <http://dbpedia.org/resource/Anant_Ambani> ;
+        <http://dbpedia.org/ontology/spouse>
+                <http://dbpedia.org/resource/Nita_Ambani> .
+
+<http://dbpedia.org/resource/Siemens>
+        <http://dbpedia.org/ontology/headquarter>
+                <http://dbpedia.org/resource/Munich> ;
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/Munich> .
+
+<http://dbpedia.org/resource/Kim_Jong-il>
+        <http://dbpedia.org/ontology/country>
+                <http://dbpedia.org/resource/North_Korea> ;
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/North_Korea> ;
+        <http://dbpedia.org/ontology/parent>
+                <http://dbpedia.org/resource/Kim_Jong-un> .
+
+<http://dbpedia.org/resource/Mark_Zuckerberg>
+        <http://dbpedia.org/ontology/employer>
+                <http://dbpedia.org/resource/Facebook> .
+
+<http://dbpedia.org/ontology/employee>
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "works for" .
+
+<http://dbpedia.org/resource/A._P._J._Abdul_Kalam>
+        <http://dbpedia.org/ontology/birthPlace>
+                <http://dbpedia.org/resource/Rameswaram> ;
+        <http://dbpedia.org/ontology/country>
+                <http://dbpedia.org/resource/Northeast_India> ;
+        <http://dbpedia.org/ontology/deathPlace>
+                <http://dbpedia.org/resource/Shillong> , <http://dbpedia.org/resource/Northeast_India> ;
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/Tamil_Nadu> , <http://dbpedia.org/resource/Shillong> , <http://dbpedia.org/resource/Rameswaram> , <http://dbpedia.org/resource/Northeast_India> .
+
+<http://dbpedia.org/resource/Donald_Trump>
+        <http://dbpedia.org/ontology/country>
+                <http://dbpedia.org/resource/United_States> ;
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/United_States> .
+
+<http://dbpedia.org/resource/Nokia>
+        <http://dbpedia.org/ontology/country>
+                <http://dbpedia.org/resource/Finland> ;
+        <http://dbpedia.org/ontology/foundationPlace>
+                <http://dbpedia.org/resource/Finland> ;
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/Finland> .
+
+<http://dbpedia.org/resource/Mike_Pence>
+        <http://dbpedia.org/ontology/country>
+                <http://dbpedia.org/resource/Israel> ;
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/Israel> .
+
+<http://aksw.org/notInWiki/Styx>
+        <http://dbpedia.org/ontology/formerBandMember>
+                <http://dbpedia.org/resource/John_Panozzo> .
+
+<http://aksw.org/notInWiki/Cordoba-Rosario>
+        <http://dbpedia.org/ontology/country>
+                <http://dbpedia.org/resource/Argentina> ;
+        <http://dbpedia.org/ontology/locatedInArea>
+                <http://dbpedia.org/resource/Argentina> .
+
+<http://aksw.org/notInWiki/Samit>
+        <http://dbpedia.org/ontology/child>
+                <http://dbpedia.org/resource/Rahul_Dravid> .
+
+<http://dbpedia.org/resource/Altice_(company)>
+        <http://dbpedia.org/ontology/subsidiary>
+                <http://dbpedia.org/resource/Numericable> .
+
+<http://dbpedia.org/resource/Serbia>
+        <http://dbpedia.org/ontology/leaderName>
+                <http://dbpedia.org/resource/Aleksandar_Vu%C4%8Di%C4%87> .
+
+<http://dbpedia.org/resource/The_Pussycat_Dolls>
+        <http://dbpedia.org/ontology/formerBandMember>
+                <http://dbpedia.org/resource/Kaya_Jones> .
+
+<http://dbpedia.org/resource/Fifth_Harmony>
+        <http://dbpedia.org/ontology/formerBandMember>
+                <http://dbpedia.org/resource/Camila_Cabello> .
+
+<http://dbpedia.org/resource/Gregg_Troy>
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/Gainesville%2C_Florida> ;
+        <http://dbpedia.org/ontology/trainer>
+                <http://dbpedia.org/resource/Ryan_Lochte> .
+
+<http://dbpedia.org/resource/John_McCarthy_%28computer_scientist%29>
+        <http://dbpedia.org/ontology/employer>
+                <http://dbpedia.org/resource/Stanford_University> .
+
+<http://dbpedia.org/resource/Nita_Ambani>
+        <http://dbpedia.org/ontology/parent>
+                <http://dbpedia.org/resource/Anant_Ambani> ;
+        <http://dbpedia.org/ontology/spouse>
+                <http://dbpedia.org/resource/Mukesh_Ambani> .
+
+<http://aksw.org/notInWiki/CarolLynnMeylan>
+        <http://dbpedia.org/ontology/spouse>
+                <http://dbpedia.org/resource/Russel_E._Caflisch> .
+
+<http://dbpedia.org/resource/The_Beatles>
+        <http://dbpedia.org/ontology/bandMember>
+                <http://dbpedia.org/resource/John_Lennon> .
+
+<http://aksw.org/notInWiki/Brooklyn_Beckham>
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/Paris> ;
+        <http://dbpedia.org/ontology/parent>
+                <http://dbpedia.org/resource/Victoria_Beckham> , <http://dbpedia.org/resource/David_Beckham> .
+
+<http://dbpedia.org/resource/Kim_Jong-un>
+        <http://dbpedia.org/ontology/child>
+                <http://dbpedia.org/resource/Kim_Jong-il> ;
+        <http://dbpedia.org/ontology/country>
+                <http://dbpedia.org/resource/North_Korea> ;
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/North_Korea> .
+
+<http://dbpedia.org/resource/Sergey_Brin>
+        <http://dbpedia.org/ontology/doctoralStudent>
+                <http://dbpedia.org/resource/Rajeev_Motwani> .
+
+<http://dbpedia.org/resource/Chandrayaan-1>
+        <http://dbpedia.org/ontology/country>
+                <http://dbpedia.org/resource/India> .
+
+<http://aksw.org/notInWiki/Emanuel_Bergogolio>
+        <http://dbpedia.org/ontology/location>
+                <http://aksw.org/notInWiki/Cordoba-Rosario> .
+
+<http://dbpedia.org/resource/Google>
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Google" ;
+        <http://dbpedia.org/ontology/CEO>
+                <http://dbpedia.org/resource/Sundar_Pichai> ;
+        <http://dbpedia.org/ontology/ceo>
+                <http://dbpedia.org/resource/Sundar_Pichai> ;
+        <http://dbpedia.org/ontology/foundationPlace>
+                <http://dbpedia.org/resource/Menlo_Park%2C_California> ;
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/Menlo_Park%2C_California> , <http://dbpedia.org/resource/California> .
+
+<http://dbpedia.org/resource/HSBC>
+        <http://dbpedia.org/ontology/foundationPlace>
+                <http://dbpedia.org/resource/Shanghai> , <http://dbpedia.org/resource/Hong_Kong> ;
+        <http://dbpedia.org/ontology/headquarter>
+                <http://dbpedia.org/resource/London> ;
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/Shanghai> , <http://dbpedia.org/resource/London> , <http://dbpedia.org/resource/Hong_Kong> .
+
+<http://dbpedia.org/resource/Sinclair_Broadcast_Group>
+        <http://dbpedia.org/ontology/affiliation>
+                <http://dbpedia.org/resource/Fox_Broadcasting_Company> .
+
+<http://dbpedia.org/resource/Roger_Federer>
+        <http://dbpedia.org/ontology/country>
+                <http://dbpedia.org/resource/Switzerland> ;
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/Switzerland> ;
+        <http://dbpedia.org/ontology/nationality>
+                <http://dbpedia.org/resource/Switzerland> .
+
+<http://dbpedia.org/resource/Kolkata>
+        <http://dbpedia.org/ontology/country>
+                <http://dbpedia.org/resource/India> ;
+        <http://dbpedia.org/ontology/locatedInArea>
+                <http://dbpedia.org/resource/India> ;
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/India> .
+
+<http://dbpedia.org/resource/Hiranandani_Estate>
+        <http://dbpedia.org/ontology/locatedInArea>
+                <http://dbpedia.org/resource/Thane> ;
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/Thane> ;
+        <http://dbpedia.org/ontology/tenant>
+                <http://dbpedia.org/resource/Tata_Consultancy_Services> .
+
+<http://dbpedia.org/resource/Rafael_Nadal>
+        <http://dbpedia.org/ontology/relative>
+                <http://dbpedia.org/resource/Toni_Nadal> .
+
+<http://dbpedia.org/resource/Liam_Gallagher>
+        <http://dbpedia.org/ontology/birthPlace>
+                <http://dbpedia.org/resource/Manchester> ;
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/Manchester> .
+
+<http://dbpedia.org/resource/Oasis_(band)>
+        <http://dbpedia.org/ontology/bandMember>
+                <http://dbpedia.org/resource/Liam_Gallagher> .
+
+<http://dbpedia.org/resource/Toni_Nadal>
+        <http://dbpedia.org/ontology/trainer>
+                <http://dbpedia.org/resource/Rafael_Nadal> .
+
+<http://dbpedia.org/resource/Rameswaram>
+        <http://dbpedia.org/ontology/locatedInArea>
+                <http://dbpedia.org/resource/Tamil_Nadu> ;
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/Tamil_Nadu> .
+
+<http://dbpedia.org/resource/Japan>
+        <http://dbpedia.org/ontology/country>
+                <http://dbpedia.org/resource/Asia> ;
+        <http://dbpedia.org/ontology/locatedInArea>
+                <http://dbpedia.org/resource/Asia> ;
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/Asia> .
+
+<http://aksw.org/notInWiki/Anthony_Carrino>
+        <http://dbpedia.org/ontology/relative>
+                <http://aksw.org/notInWiki/John_Colaneri> .
+
+<http://dbpedia.org/resource/United_States>
+        <http://dbpedia.org/ontology/leaderName>
+                <http://dbpedia.org/resource/Donald_Trump> .
+
+<http://dbpedia.org/resource/Menlo_Park%2C_California>
+        <http://dbpedia.org/ontology/locatedInArea>
+                <http://dbpedia.org/resource/California> ;
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/California> .
+
+<http://dbpedia.org/resource/Eagles_(band)>
+        <http://dbpedia.org/ontology/formerBandMember>
+                <http://dbpedia.org/resource/Glenn_Frey> .
+
+<http://aksw.org/notInWiki/AlanSelby>
+        <http://dbpedia.org/ontology/employer>
+                <http://dbpedia.org/resource/Sunday_Mirror> .
+
+<http://aksw.org/notInWiki/James_Damore>
+        <http://dbpedia.org/ontology/employee>
+                <http://dbpedia.org/resource/Google> .
+
+<http://dbpedia.org/resource/Larry_Page>
+        <http://dbpedia.org/ontology/doctoralStudent>
+                <http://dbpedia.org/resource/Rajeev_Motwani> .
+
+<http://dbpedia.org/resource/China>
+        <http://dbpedia.org/ontology/leaderName>
+                <http://dbpedia.org/resource/Xi_Jinping> .
+
+<http://dbpedia.org/resource/Barack_Obama>
+        <http://dbpedia.org/ontology/birthPlace>
+                <http://dbpedia.org/resource/Honolulu> ;
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/Honolulu> , <http://dbpedia.org/resource/Hawaii> .
+
+<http://dbpedia.org/resource/Victoria_Beckham>
+        <http://dbpedia.org/ontology/child>
+                <http://aksw.org/notInWiki/Brooklyn_Beckham> ;
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/Paris> ;
+        <http://dbpedia.org/ontology/spouse>
+                <http://dbpedia.org/resource/David_Beckham> .
+
+<http://aksw.org/notInWiki/KnowledgeServices>
+        <http://dbpedia.org/ontology/president>
+                <http://aksw.org/notInWiki/JoeBielawski> .
+
+<http://dbpedia.org/resource/Satya_Nadella>
+        <http://dbpedia.org/ontology/employer>
+                <http://dbpedia.org/resource/Microsoft> .
+
+<http://dbpedia.org/resource/Pope_Francis>
+        <http://dbpedia.org/ontology/country>
+                <http://dbpedia.org/resource/Chile> ;
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/Latin_America> , <http://dbpedia.org/resource/Chile> ;
+        <http://dbpedia.org/ontology/relative>
+                <http://aksw.org/notInWiki/Emanuel_Bergogolio> .
+
+<http://dbpedia.org/resource/Lionel_Messi>
+        <http://dbpedia.org/ontology/club>
+                <http://dbpedia.org/resource/FC_Barcelona> ;
+        <http://dbpedia.org/ontology/debutTeam>
+                <http://dbpedia.org/resource/FC_Barcelona> .
+
+<http://dbpedia.org/resource/European_Commission>
+        <http://dbpedia.org/ontology/president>
+                <http://dbpedia.org/resource/Jean-Claude_Juncker> .
+
+<http://dbpedia.org/resource/Honolulu>
+        <http://dbpedia.org/ontology/locatedInArea>
+                <http://dbpedia.org/resource/Hawaii> ;
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/Hawaii> .
+
+<http://dbpedia.org/resource/Wellesley_College>
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/Boston> .
+
+<http://dbpedia.org/resource/Tata_Consultancy_Services>
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/Thane> , <http://dbpedia.org/resource/Hiranandani_Estate> .
+
+<http://dbpedia.org/resource/Xi_Jinping>
+        <http://dbpedia.org/ontology/country>
+                <http://dbpedia.org/resource/China> ;
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/China> .
+
+<http://dbpedia.org/resource/Louis_Vuitton>
+        <http://dbpedia.org/ontology/location>
+                <http://dbpedia.org/resource/Paris> .
+
+<http://dbpedia.org/resource/Rahul_Dravid>
+        <http://dbpedia.org/ontology/parent>
+                <http://aksw.org/notInWiki/Samit> .

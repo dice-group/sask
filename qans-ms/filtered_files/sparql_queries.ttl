@@ -1,0 +1,308 @@
+SELECT DISTINCT ?uri
+WHERE { 
+  ?uri <http://dbpedia.org/ontology/employer> <http://dbpedia.org/resource/Google>. 
+}
+
+
+SELECT DISTINCT ?uri 
+WHERE { 
+    <http://dbpedia.org/resource/Pope_Francis>  <http://dbpedia.org/ontology/country> ?uri. 
+}
+
+
+SELECT DISTINCT ?uri 
+WHERE { 
+     <http://dbpedia.org/resource/Melania_Trump> <http://dbpedia.org/ontology/country> ?uri.
+}
+
+
+SELECT DISTINCT ?uri 
+WHERE { 
+    <http://dbpedia.org/resource/Google>  <http://dbpedia.org/ontology/ceo>  ?uri. 
+}
+
+
+SELECT DISTINCT ?uri 
+WHERE { 
+     <http://dbpedia.org/resource/India>  <http://dbpedia.org/ontology/leaderName>  ?uri. 
+}
+
+
+SELECT DISTINCT ?uri 
+WHERE { 
+     ?uri  <http://dbpedia.org/ontology/relative>  <http://dbpedia.org/resource/Jenny_McCarthy>. 
+}
+
+
+SELECT DISTINCT ?uri
+WHERE { 
+     <http://dbpedia.org/resource/Cristiano_Ronaldo>  <http://dbpedia.org/ontology/club>  ?uri.
+}
+
+
+SELECT DISTINCT ?uri 
+WHERE { 
+     <http://dbpedia.org/resource/European_Commission>  <http://dbpedia.org/ontology/president>  ?uri. 
+}
+
+
+SELECT DISTINCT ?date  
+WHERE { 
+    <http://dbpedia.org/resource/Eagles_(band)>  <http://dbpedia.org/ontology/date>  ?date. 
+}
+
+
+SELECT DISTINCT  ?uri 
+WHERE { 
+   ?uri <http://dbpedia.org/ontology/doctoralAdvisor>  <http://dbpedia.org/resource/Sergey_Brin>, <http://dbpedia.org/resource/Larry_Page> . 
+}
+
+
+SELECT DISTINCT  ?uri 
+WHERE { 
+     <http://dbpedia.org/resource/Google>   <http://dbpedia.org/ontology/foundationPlace>  ?uri . 
+}
+
+
+SELECT DISTINCT  ?number 
+WHERE { 
+     <http://dbpedia.org/resource/Puerto_Rico>  <http://dbpedia.org/ontology/populationTotal> ?number.
+}
+
+
+SELECT DISTINCT  ?uri 
+WHERE { 
+     <http://dbpedia.org/resource/The_Beatles>  <http://dbpedia.org/ontology/hometown>  ?uri. 
+}
+
+
+SELECT DISTINCT  ?uri
+WHERE { 
+     <http://dbpedia.org/resource/HSBC>  <http://dbpedia.org/ontology/headquarter>  ?uri.
+}
+
+
+SELECT DISTINCT  ?uri
+WHERE { 
+     <http://dbpedia.org/resource/Tata_Consultancy_Services>  <http://dbpedia.org/ontology/location>  ?uri .
+}
+
+
+SELECT DISTINCT  ?uri 
+WHERE { 
+     <http://dbpedia.org/resource/Fifth_Harmony>  <http://dbpedia.org/ontology/formerBandMember>  ?uri .
+}
+
+
+ASK 
+WHERE { 
+     <http://dbpedia.org/resource/Altice_(company)>  <http://dbpedia.org/ontology/industry> <http://dbpedia.org/resource/Telecommunication> . 
+}
+
+
+SELECT (SUM(?x) AS ?number) 
+WHERE { 
+      <http://dbpedia.org/resource/Dhoni>  <http://dbpedia.org/property/matches>  ?x.
+}
+
+
+SELECT DISTINCT  ?uri 
+WHERE { 
+     <http://dbpedia.org/resource/WinCC>  <http://dbpedia.org/ontology/developer>  ?uri . 
+     <http://dbpedia.org/resource/BS2000> <http://dbpedia.org/ontology/developer>  ?uri . 
+}
+
+
+SELECT DISTINCT  ?uri 
+WHERE {
+     ?uri  <http://dbpedia.org/ontology/employer>  <http://dbpedia.org/resource/Microsoft>. 
+}
+
+
+SELECT DISTINCT  ?uri 
+WHERE { 
+      <http://dbpedia.org/resource/Russel_E._Caflisch>   <http://dbpedia.org/ontology/field>  ?uri . 
+}
+
+
+SELECT DISTINCT  ?uri 
+WHERE { 
+     <http://dbpedia.org/resource/McDonalds> <http://dbpedia.org/ontology/headquarter>  ?uri .
+}
+
+
+SELECT DISTINCT  ?number
+WHERE { 
+     <http://dbpedia.org/resource/David_Beckham>  <http://dbpedia.org/property/children> ?number.
+}
+
+
+SELECT DISTINCT  ?uri 
+WHERE { 
+     <http://dbpedia.org/resource/The_Pussycat_Dolls>  <http://dbpedia.org/ontology/formerBandMember> ?uri. 
+}
+
+
+SELECT DISTINCT ?uri
+WHERE { 
+      <http://aksw.org/notInWiki/Cordoba-Rosario>  <http://dbpedia.org/ontology/country>  ?uri.
+}
+
+
+SELECT DISTINCT  ?number
+WHERE { 
+     <http://dbpedia.org/resource/Siemens>  <http://dbpedia.org/ontology/numberOfEmployees>  ?number. 
+}
+
+
+SELECT DISTINCT  ?uri 
+WHERE { 
+      <http://dbpedia.org/resource/Serbia>  <http://dbpedia.org/ontology/leaderName>  ?uri. 
+}
+
+
+SELECT DISTINCT  ?uri
+WHERE { 
+     ?uri <http://dbpedia.org/ontology/starring> <http://dbpedia.org/resource/Ralph_Fiennes> . 
+}
+ORDER BY DESC (?x) 
+LIMIT 3
+
+
+SELECT DISTINCT  ?uri 
+WHERE { 
+     <http://dbpedia.org/resource/Tata_Motors>  <http://dbpedia.org/ontology/subsidiary>  ?uri . 
+}
+
+
+SELECT DISTINCT  ?uri
+WHERE { 
+     ?uri <http://dbpedia.org/ontology/affiliation>  <http://aksw.org/notInWiki/InternationalUniversity> . 
+}
+
+
+SELECT DISTINCT  ?number 
+WHERE { 
+     <http://dbpedia.org/resource/Ohio_University>  <http://dbpedia.org/property/established>  ?number.  
+}
+
+
+ASK
+WHERE { 
+     <http://dbpedia.org/resource/Ars%C3%A8ne_Wenger> <http://dbpedia.org/ontology/managerClub>  <http://dbpedia.org/resource/Arsenal_F.C.>, <http://dbpedia.org/resource/Nagoya_Grampus> . 
+}
+
+
+SELECT DISTINCT  ?uri 
+WHERE { 
+     ?uri <http://dbpedia.org/ontology/affiliation>  <http://dbpedia.org/resource/Fox_Broadcasting_Company> . 
+}
+
+
+SELECT DISTINCT  ?uri 
+WHERE { 
+      <http://dbpedia.org/resource/North_Korea>  <http://dbpedia.org/ontology/leaderName>  ?uri . 
+}
+
+
+SELECT DISTINCT  ?uri
+WHERE {
+      <http://dbpedia.org/resource/Gregg_Troy> <http://dbpedia.org/ontology/trainer> ?uri . 
+}
+
+
+SELECT DISTINCT  ?uri 
+WHERE { 
+     <http://dbpedia.org/resource/Nokia>  <http://dbpedia.org/ontology/foundationPlace>  ?uri .
+}
+
+
+SELECT DISTINCT  ?uri
+WHERE {
+      <http://dbpedia.org/resource/Johanna_Konta>  <http://dbpedia.org/ontology/trainer> ?uri . 
+}
+
+
+SELECT DISTINCT  ?uri 
+WHERE { 
+      <http://dbpedia.org/resource/Facebook>  <http://dbpedia.org/ontology/ceo> ?uri .
+}
+
+
+SELECT DISTINCT  ?uri
+WHERE {
+      <http://dbpedia.org/resource/Facebook>  <http://dbpedia.org/ontology/president> ?uri . 
+}
+
+
+SELECT DISTINCT  ?uri 
+WHERE { 
+     ?uri <http://dbpedia.org/ontology/manufacturer> <http://dbpedia.org/resource/Switzerland>. 
+}
+ORDER BY DESC (?uri)
+LIMIT 3
+
+
+ASK 
+WHERE { 
+     <http://dbpedia.org/resource/Alexander_the_Great> <http://dbpedia.org/ontology/predecessor> ?uri .
+}
+
+
+SELECT (COUNT(DISTINCT ?y) AS ?number) 
+WHERE { 
+     ?y <http://dbpedia.org/ontology/starring>  <http://dbpedia.org/resource/Ralph_Fiennes> . 
+}
+
+
+SELECT DISTINCT  ?uri
+WHERE { 
+     <http://dbpedia.org/resource/Amazon.com> <http://dbpedia.org/ontology/subsidiary> ?uri.
+}
+
+
+SELECT DISTINCT ?uri
+WHERE {
+     ?uri <http://dbpedia.org/ontology/author> ?y. 
+}
+GROUP BY ?uri 
+HAVING(COUNT(?y) > 1) 
+ORDER BY DESC (?uri)
+
+
+SELECT DISTINCT ?uri
+WHERE { 
+     <http://dbpedia.org/resource/John_McCarthy_%28computer_scientist%29> <http://dbpedia.org/ontology/field> ?uri. 
+}
+
+
+SELECT DISTINCT ?uri 
+WHERE { 
+    ?uri <http://dbpedia.org/ontology/employer>  <http://dbpedia.org/resource/Facebook> . 
+}
+
+
+SELECT DISTINCT ?uri 
+WHERE { 
+     ?uri <http://dbpedia.org/ontology/manufacturer> <http://dbpedia.org/resource/Volkswagen>. 
+}
+ORDER BY DESC (?uri)
+LIMIT 3
+
+
+SELECT DISTINCT ?uri 
+WHERE { 
+     <http://dbpedia.org/resource/Melania_Trump>  <http://dbpedia.org/ontology/hometown>  ?uri.
+}
+
+
+SELECT DISTINCT ?uri
+WHERE { 
+     <http://dbpedia.org/resource/United_States> <http://dbpedia.org/ontology/leaderName> ?uri .
+}
+
+
+SELECT DISTINCT ?uri 
+WHERE {
+     <http://dbpedia.org/resource/A._P._J._Abdul_Kalam> <http://dbpedia.org/ontology/birthPlace> ?uri .
+}
