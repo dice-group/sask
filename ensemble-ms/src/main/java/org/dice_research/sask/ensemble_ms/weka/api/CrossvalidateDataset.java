@@ -112,6 +112,7 @@ public class CrossvalidateDataset {
 				// use this value to get string value of the predicted class
 				String predString = dataset.classAttribute().value((int) predNB);
 				System.out.println(actual + "            " + predString);
+				
 			}
 
 		} catch (Exception e) {

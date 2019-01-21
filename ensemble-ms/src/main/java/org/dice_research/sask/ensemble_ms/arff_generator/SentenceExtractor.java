@@ -29,6 +29,7 @@ import org.apache.jena.rdf.model.StmtIterator;
 import org.apache.jena.riot.RiotException;
 import org.apache.jena.util.FileManager;
 import org.apache.log4j.BasicConfigurator;
+import org.dice_research.sask.ensemble_ms.arff_generator.*;
 
 /**
  * This class take data from oke folder folder sort them and provide it to

@@ -31,7 +31,9 @@ public class TestingDataBuilder {
 
 			System.out.println("Enter the training sentence:" + i);
 			String testing_sentence = scanner.nextLine();
-			System.out.println("Entered sentence for testing  is " + testing_sentence);
+			System.out.println("Entered sentence for testing  is :" + testing_sentence);
+			testing_sentence = testing_sentence.replace(","," "); 
+			testing_sentence = testing_sentence.replace("'"," " );
 			String trainingData = "'" + testing_sentence + "'" + "," + "?";
 			testingDataBuilder.testingFileWriter(trainingData);
 
