@@ -1,24 +1,24 @@
 # Resource Description Framework
 
-## _**RDF**_ is a data model for describing "things" (web resources) and their interrelations.
+## _**RDF**_ is a data model for describing things (web resources) and their interrelations.
 
-* Resources are decribed in terms of properties and property values using RDF statements.
+  * Resources are decribed in terms of properties and property values using RDF statements.
 
-* Statements in RDF are _**Triples**_ consisting of *subject*, *predicate* and *object*.
+  * Statements in RDF are _Triples_ consisting of *subject*, *predicate* and *object*.
 
      For example: Alia sells books.
 
                  Subject : Alia, Predicate : sells, Object : books
                  
-* Subject and predicate could be URIs whereas object could be URIs or literals.
+  * Subject and predicate could be URIs whereas object could be URIs or literals.
 
-* Triples are usually graphs.
+  * Triples are usually graphs.
 
-* Subjects and objects are represented by nodes whereas predicates by links or edges.
+  * Subjects and objects are represented by nodes whereas predicates by links or edges.
 
-* _**Uniform Resource Identifier**_ (URI) - string of characters used to identify a name or a resource on the internet. 
+  * _Uniform Resource Identifier_ (URI) - string of characters used to identify a name or a resource on the internet. 
 
-* Common _**Serialization Formats**_ are:
+  * Common _Serialization Formats_ are:
 
                     Turtle
                     N-Triples
