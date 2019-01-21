@@ -42,7 +42,7 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Which place did Pope Francis visit?",
+      "string" : "Which place did Pope Francis visit.",
       "keywords" : "place, Pope Francis, visit"
     } ],
     "query" : {
@@ -69,7 +69,7 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Where does Melania Trump come from?",
+      "string" : "Where does Melania Trump come from.",
       "keywords" : "Melania Trump, come from"
     } ],
     "query" : {
@@ -96,7 +96,7 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Who is the Google ceo?",
+      "string" : "Who is the Google ceo.",
       "keywords" : "Google, ceo"
     } ],
     "query" : {
@@ -123,7 +123,7 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Who is a dalit to become the leader of India?",
+      "string" : "Who is a dalit to become the leader of India.",
       "keywords" : "dalit, leader, India"
     } ],
     "query" : {
@@ -150,7 +150,7 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Who is the relative of Jenny McCarthy?",
+      "string" : "Who is the relative of Jenny McCarthy.",
       "keywords" : "relative, Jenny McCarthy"
     } ],
     "query" : {
@@ -177,7 +177,7 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Which football club did Cristiano Ronaldo play for?",
+      "string" : "Which football club did Cristiano Ronaldo play for.",
       "keywords" : "football, club, Cristiano Ronaldo"
     } ],
     "query" : {
@@ -204,7 +204,7 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Who is the president of European Commission?",
+      "string" : "Who is the president of European Commission.",
       "keywords" : "president, European Commission"
     } ],
     "query" : {
@@ -231,7 +231,7 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "When did the Eagles begin?",
+      "string" : "When did the Eagles begin.",
       "keywords" : "Eagles, begin"
     } ],
     "query" : {
@@ -258,7 +258,7 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Who was the doctoral advisor of Larry Page and Sergey Brin?",
+      "string" : "Who was the doctoral advisor of Larry Page and Sergey Brin.",
       "keywords" : "doctoral advisor, Larry Page, Sergey Brin"
     } ],
     "query" : {
@@ -285,7 +285,7 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Where was Google founded?",
+      "string" : "Where was Google founded.",
       "keywords" : "Google, founded"
     } ],
     "query" : {
@@ -312,7 +312,7 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "What is the total population of Puerto Rico?",
+      "string" : "What is the total population of Puerto Rico.",
       "keywords" : "total population, Puerto Rico"
     } ],
     "query" : {
@@ -339,7 +339,7 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "What is the home town of The Beatles?",
+      "string" : "What is the home town of The Beatles.",
       "keywords" : "home town, The Beatles"
     } ],
     "query" : {
@@ -366,7 +366,7 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Where is the headquarters of HSBC?",
+      "string" : "Where is the headquarters of HSBC.",
       "keywords" : "headquarter, HSBC"
     } ],
     "query" : {
@@ -393,7 +393,7 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "What is the location of Tata Consultancy Services?",
+      "string" : "What is the location of Tata Consultancy Services.",
       "keywords" : "Tata Consultancy Services, location"
     } ],
     "query" : {
@@ -425,7 +425,7 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Who was the former band member of Fifth Harmony?",
+      "string" : "Who was the former band member of Fifth Harmony.",
       "keywords" : "former band member, Fifth Harmony"
     } ],
     "query" : {
@@ -452,7 +452,7 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Is Altice a telecommunication company?",
+      "string" : "Is Altice a telecommunication company.",
       "keywords" : "Altice, telecommunication company"
     } ],
     "query" : {
@@ -471,7 +471,7 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "How many matches did Dhoni play?",
+      "string" : "How many matches did Dhoni play.",
       "keywords" : "matches, Dhoni"
     } ],
     "query" : {
@@ -525,7 +525,7 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Who are the employers of Microsoft?",
+      "string" : "Who are the employers of Microsoft.",
       "keywords" : "employer, Microsoft"
     } ],
     "query" : {
@@ -557,7 +557,7 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "In which field did Russel E. Caflisch work?",
+      "string" : "In which field did Russel E. Caflisch work.",
       "keywords" : "field, Russel E. Caflisch"
     } ],
     "query" : {
@@ -584,7 +584,7 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "In which place is the headquarters of McDonalds situated?",
+      "string" : "In which place is the headquarters of McDonalds situated.",
       "keywords" : "headquarter, McDonalds"
     } ],
     "query" : {
@@ -611,7 +611,7 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "How many children does David Beckham have?",
+      "string" : "How many children does David Beckham have.",
       "keywords" : "many, children, David Beckham"
     } ],
     "query" : {
@@ -673,14 +673,14 @@
       }
     } ]
   }, {
-    "id" : "25",
+    "id" : "25",   
     "answertype" : "resource",
     "aggregation" : false,
     "onlydbo" : false,
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Where is the highway called Cordoba-Rosario?",
+      "string" : "Where is the highway called Cordoba Rosario.",
       "keywords" : "highway, Cordoba-Rosario"
     } ],
     "query" : {
@@ -707,7 +707,7 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "How many employees are working at Siemens?",
+      "string" : "How many employees are working at Siemens.",
       "keywords" : "many, employees, Siemens"
     } ],
     "query" : {
@@ -840,7 +840,7 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Which college has an affiliation to the International University?",
+      "string" : "Which college has an affiliation to the International University.",
       "keywords" : "college, affiliation, International University"
     } ],
     "query" : {
@@ -861,13 +861,13 @@
     } ]
   }, {
     "id" : "31",
-    "answertype" : "number",
+    "answertype" : "number",  
     "aggregation" : false,
     "onlydbo" : false,
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "When was Ohio University established?",
+      "string" : "When was Ohio University established.",
       "keywords" : "Ohio University, established"
     } ],
     "query" : {
@@ -881,7 +881,7 @@
         "bindings" : [ {
           "number" : {
             "type" : "literal",
-            "value" : "1804"
+            "value" : "1804" 
           }
         } ]
       }
@@ -894,7 +894,7 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Was Arsene Wenger appointed as a manager to Arsenal and Nagoya Grampus?",
+      "string" : "Was Arsene Wenger appointed as a manager to Arsenal and Nagoya Grampus.",
       "keywords" : "Arsene Wenger, manager, Arsenal, Nagoya Grampus"
     } ],
     "query" : {
@@ -913,7 +913,7 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Who announced an affiliation agreement renewals with Fox Broadcasting Company?",
+      "string" : "Who announced an affiliation agreement renewals with Fox Broadcasting Company.",
       "keywords" : "affiliation, Fox Broadcasting Company"
     } ],
     "query" : {
@@ -972,7 +972,7 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Who is the trainee of Gregg Troy?",
+      "string" : "Who is the trainee of Gregg Troy.",
       "keywords" : "trainee, Gregg Troy"
     } ],
     "query" : {
@@ -1026,7 +1026,7 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Which world-class tennis player became the trainer of Johanna Konta?",
+      "string" : "Which world-class tennis player became the trainer of Johanna Konta.",
       "keywords" : "trainer, Johanna Konta"
     } ],
     "query" : {
@@ -1144,7 +1144,7 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Does Alexander the Great have any predecessor?",
+      "string" : "Does Alexander the Great have any predecessor.",
       "keywords" : "Alexander the Great, predecessor"
     } ],
     "query" : {
@@ -1163,7 +1163,7 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "How many movies Ralph Fiennes has been starring in?",
+      "string" : "How many movies Ralph Fiennes has been starring in.",
       "keywords" : "many, Ralph Fiennes, starring"
     } ],
     "query" : {
@@ -1190,7 +1190,7 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "What are the subsidiary of Amazon.com?",
+      "string" : "What are the subsidiary of Amazon.com.",
       "keywords" : "subsidiary, Amazon.com"
     } ],
     "query" : {
@@ -1247,7 +1247,7 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Which authors have written more than one book?",
+      "string" : "Which authors have written more than one book.",
       "keywords" : "author, written, book"
     } ],
     "query" : {
@@ -1279,7 +1279,7 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Which field was coined by John McCarthy?",
+      "string" : "Which field was coined by John McCarthy.",
       "keywords" : "field, John McCarthy"
     } ],
     "query" : {
@@ -1370,7 +1370,7 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Which is the home town of Melania Trump?",
+      "string" : "Which is the home town of Melania Trump.",
       "keywords" : "home town, Melania Trump"
     } ],
     "query" : {
@@ -1397,7 +1397,7 @@
     "hybrid" : false,
     "question" : [ {
       "language" : "en",
-      "string" : "Who sworn in as the leader of the United States?",
+      "string" : "Who sworn in as the leader of the United States.",
       "keywords" : "leader, United States"
     } ],
     "query" : {
