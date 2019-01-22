@@ -29,6 +29,7 @@ import org.apache.jena.rdf.model.StmtIterator;
 import org.apache.jena.riot.RiotException;
 import org.apache.jena.util.FileManager;
 import org.apache.log4j.BasicConfigurator;
+import org.dice_research.sask.ensemble_ms.arff_generator.*;
 
 /**
  * This class take data from oke folder folder sort them and provide it to
@@ -37,7 +38,15 @@ import org.apache.log4j.BasicConfigurator;
  * Perform Sparql query on the ttl files from oke to construct rdf triple and write in ttl format
  * 
  * Filter the extractor response by reading as rdf model and write in N - Triple format
- * @author Harsh Shah
+ * 
+ * After that foxResponseProcessing(), openIEResponseProcessing(), sorokinResponseProcessing() functions will separate the 
+ * subjects, obkect, predicate and save it to the stringlist for every sentence and extactors
+ * ResponseMatching function will compare the triples of every extractor with oke response and based on the 
+ * -comparison it will calculate the score for every extractor
+ * findmaxscore() function will find the max score and select it as best extractor
+ * trainingFileWriter will write and prepare the training data for machine learning model(Function will write sentence 
+ * and best-extractor for that sentence.  
+ * @author Harsh Shah (hjshah142)
  */
 
 public class SentenceExtractor {
@@ -62,6 +71,7 @@ public class SentenceExtractor {
 	public List<String> sub = new ArrayList<String>();
 	public List<String> obj = new ArrayList<String>();
 	public List<String> pred = new ArrayList<String>();
+	int x = 0;
 
 	public static void main(String[] args) {
 
@@ -75,26 +85,36 @@ public class SentenceExtractor {
 				String s2 = f2.getName().substring(5, f2.getName().indexOf("."));
 				return Integer.valueOf(s1).compareTo(Integer.valueOf(s2));
 			}
+			
 		});
+		String file = "WekaMlDataset\\traindata.arff";
+
+		File f = new File(file);
+		if (f.exists()) {
+			// delete if exists
+			f.delete();
+		}
+		
 		// number of ttl files
 		// System.out.println(files.length);
-		for (int i = 0; i < 5 ;i++) {
+		for (int i = 0; i < files.length ;i++) {
 			
 			se.sentenceExtracion(i);
 			System.out.println("Extracted sentence From the file " + files[i].getName());
 			System.out.println(sentences.get(i));
-			System.out.println("Fox extractor response for file" + files[i].getName());
+//			System.out.println("Fox extractor response for file" + files[i].getName());
 //			System.out.println(fox_response_string);
-			System.out.println("Sorokin extractor response for file " + files[i].getName());
+//			System.out.println("Sorokin extractor response for file " + files[i].getName());
 //			System.out.println(sorokin_response_string);
 //			System.out.println("Cedric extractor response for file" + files[i].getName());
 //			System.out.println(cedric_response_string);
-			System.out.println("openIE extractor response for file " + files[i].getName());
-			System.out.println(openIE_response_string);
+//			System.out.println("openIE extractor response for file " + files[i].getName());
+//			System.out.println(openIE_response_string);
 
 			System.out.println("Gethering Sparql Query Result................................");
 			
 			String squery_Result = se.responseReader(i);
+			System.out.println(squery_Result);
 			double sc_fox = se.foxResponseMatching();
 			double sc_openIE = se.openIEResponseMathing();
 			double sc_sorokin = se.sorokinResponseMatching();
@@ -106,31 +126,22 @@ public class SentenceExtractor {
 			 String sentence = sentences.get(i);
 			 sentence = sentence.replace(","," "); 
 			 sentence = sentence.replace("'"," " );
-			 fox_response_string = fox_response_string.replace(",","."); 
-			 sorokin_response_string = sorokin_response_string.replace(",",".");
-			 openIE_response_string = openIE_response_string.replace(",",".");
-			 
-			 
-			 System.out.println("Training Data for file " + files[i].getName());
-//			String training_data = " ' " + sentences.get(i) + " ' " + ", " + "'" + fox_response_string + " ' " + ","
-//					+ " ' " + openIE_response_string + " ' " + "," + " ' " + openIE_response_string + " '  " + ","
-//					+ " ' " + cedric_response_string + " ' " + "," + " ' " + str1 + " ' ";
+//			 sentence = sentence.replace("\"\" ," " );
+//			 fox_response_string = fox_response_string.replace(",","."); 
+//			 sorokin_response_string = sorokin_response_string.replace(",",".");
+//			 openIE_response_string = openIE_response_string.replace(",",".");
+			System.out.println("----------------------------------------------------------");
 
-			System.out.println("------");
-//			String training_data = sentence + " ,  " +   fox_response_string  + " , " 
-//			+ sorokin_response_string + "," + openIE_response_string + "," + squery_Result + "," + max + "," + sc_fox + ","
-//					+ sc_openIE + "," + sc_sorokin;
-			String training_data = sentence + ","  + max ; 
+			String training_data = "'" + sentence + "'" + ","  + max ; 
 			
 			System.out.println(training_data);
 			System.out.println("-------------------------------------------------------------");
-			se.trainingFileWriter(training_data);
 			
 
-			
-			
+			se.trainingFileWriter(training_data);
+
 		
-			
+//			clear the string list for oke and every extractors
 			se.sub.clear();
 			se.obj.clear();
 			se.pred.clear();
@@ -191,7 +202,8 @@ public int findMaxscore(double sc_fox, double sc_openIE, double sc_sorokin) {
 			return 0;
 		}
 		else 
-		{     		System.out.println("List of Subjects in OKE files.........  ");
+		{     		
+		System.out.println("List of Subjects in OKE files.........  ");
 		System.out.println(sub);
 		System.out.println("List of predicates  in OKE files.........  ");
 		System.out.println(pred);
@@ -219,11 +231,11 @@ public int findMaxscore(double sc_fox, double sc_openIE, double sc_sorokin) {
 				
 		            double triple_counter = 0;
 		        
-					if (obj.get(a).equals(obj_sorokin.get(b)))
+					if (obj.get(a).toLowerCase().equals(obj_sorokin.get(b).toLowerCase()))
 					{triple_counter++;}
-					if (sub.get(a).equals(sub_sorokin.get(b)))
+					if (sub.get(a).toLowerCase().equals(sub_sorokin.get(b).toLowerCase()))
 					{triple_counter++;}
-					if (pred.get(a).equals(pred_sorokin.get(b)))
+					if (pred.get(a).toLowerCase().equals(pred_sorokin.get(b).toLowerCase()))
 					{triple_counter++;}
 					if(triple_counter> max)
 					{  
@@ -303,11 +315,11 @@ public int findMaxscore(double sc_fox, double sc_openIE, double sc_sorokin) {
 				
 		            double triple_counter = 0;
 		        
-					if (obj.get(a).equals(obj_openIE.get(b)))
+					if (obj.get(a).toLowerCase().equals(obj_openIE.get(b).toLowerCase()))
 					{triple_counter++;}
-					if (sub.get(a).equals(sub_openIE.get(b)))
+					if (sub.get(a).toLowerCase().equals(sub_openIE.get(b).toLowerCase()))
 					{triple_counter++;}
-					if (pred.get(a).equals(pred_openIE.get(b)))
+					if (pred.get(a).toLowerCase().equals(pred_openIE.get(b).toLowerCase()))
 					{triple_counter++;}
 					if(triple_counter> max)
 					{  
@@ -351,8 +363,7 @@ public int findMaxscore(double sc_fox, double sc_openIE, double sc_sorokin) {
 			sentence_data = sentence.substring(start, end);
 			// System.out.println(sentence_data);
 			sentences.add(sentence_data);
-			// Extractors responses
-			//
+
 			// Map<String, Integer> port_vs_extractorMap = new HashMap<String, Integer>();
 			// port_vs_extractorMap.put("fox", 2222);
 			// port_vs_extractorMap.put("fred", 2223);
@@ -582,7 +593,7 @@ public int findMaxscore(double sc_fox, double sc_openIE, double sc_sorokin) {
 			
 		}
 
-		System.out.println(files[i].getName() + "  Result after pasing sparql query.......");
+//		System.out.println(files[i].getName() + "  Result after pasing sparql query.......");
 		sparqueryList.add(sparql_query_result);
 		return sparql_query_result;
 	}
@@ -591,26 +602,23 @@ public int findMaxscore(double sc_fox, double sc_openIE, double sc_sorokin) {
 
 		// List<String> sentences = new ArrayList<String>();
 		try {
-	    FileWriter fw = new FileWriter("TrainingData\\traindata2.arff",true);
+	    FileWriter fw = new FileWriter("WekaMlDataset\\traindata.arff",true);
 
 
-//			int x = 0;
+
 			
 
-//			if (x == 0) {
-//				bw2.write("@relation DataExtraction2");
-//				bw2.newLine();
-//				bw2.write("@ATTRIBUTE Sentence	string");
-//				bw2.newLine();
-//				bw2.write("@ATTRIBUTE Foxoutput	string");
-//				bw2.newLine();
-//				bw2.newLine();
-//				bw2.write("@ATTRIBUTE OPENIEoutput	string");
-//				bw2.newLine();
-//				bw2.write("@data");
-//				bw2.newLine();
-//				x++;
-//			}
+			if (x == 0) {
+				fw.append("@relation traindata");
+				fw.write(System.getProperty("line.separator"));
+				fw.append("@attribute Sentences String");
+				fw.write(System.getProperty("line.separator"));
+				fw.append("@attribute best_extractor {0,1,2}");
+				fw.write(System.getProperty("line.separator"));
+				fw.append("@data");
+				fw.write(System.getProperty("line.separator"));
+				x++;
+			}
 
            fw.append(training_data);
           fw.write(System.getProperty( "line.separator" ));
@@ -673,15 +681,6 @@ public int findMaxscore(double sc_fox, double sc_openIE, double sc_sorokin) {
 
 		}
 
-		// System.out.println("List of Subjects......... ");
-		// System.out.println(sub_fox);
-		// System.out.println("List of predicates......... ");
-		// System.out.println(pred_fox);
-		// System.out.println("List of Objects......... ");
-		//
-		// System.out.println(obj_fox);
-		// System.out.println(" ...........");
-
         return fox_filtered_response;
 
 	}
@@ -696,7 +695,7 @@ public int findMaxscore(double sc_fox, double sc_openIE, double sc_sorokin) {
 		// create jena model for every files
 		Model model = ModelFactory.createDefaultModel();
 		model.read(filename);
-		System.out.println("For the file " + filename);
+//		System.out.println("For the file " + filename);
 		// Write as Turtle via model.write
 		StringWriter modelAsString = new StringWriter();
 		model.write(modelAsString, "N-TRIPLE");
@@ -757,7 +756,8 @@ public int findMaxscore(double sc_fox, double sc_openIE, double sc_sorokin) {
 			return 0;
 		}
 		else 
-		{     		System.out.println("List of Subjects in OKE files.........  ");
+		{     		
+		System.out.println("List of Subjects in OKE files.........  ");
 		System.out.println(sub);
 		System.out.println("List of predicates  in OKE files.........  ");
 		System.out.println(pred);

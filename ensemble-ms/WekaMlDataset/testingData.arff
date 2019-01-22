@@ -1,0 +1,25 @@
+@relation testdata
+@attribute Sentences String
+@attribute best_extractor {0,1,2}
+@data
+'Google CEO Sundar Pichai responded to the firing of employee James Damore',?
+'John F. Kennedy was elected as US President in 1960. ',?
+'Mr. Clinton is teaching Algebra to the students. ',?
+'The Earth revolves around the sun. ',?
+'Sundra Pichai is CEO of Google',?
+'Donald Trump is president of USA',?
+'Japan is located in the east most of Asia ',?
+'Facebook founder and CEO Mark Zuckerberg announced the shift in the configuration of the News Feed on Thursday',?
+'Microsoft CEO Satya Nadella is in the middle of a world tour to promote his new book .',?
+'Cristiano Ronaldo s superb goal gave Real Madrid a 1-0 win over Gremio.',?
+'Rafael Nadals uncle  Toni Nadal  will step down as his coach', ? 
+'Barack Hussein Obama II was born on August 4  1961  in Honolulu  Hawaii',?
+'Xi Jinping became president of China in 2012',?
+'ormer Indian president APJ Abdul Kalam  who was pivotal in the countrys nuclear weapons program  died in northeastern India',?
+'Donald J. Trump is the 45th President of the United States. ',?
+'FC Barcelona and Lionel Messi signed on Saturday morning a new contract.',?
+'Pepsi CEO Indra Nooyi got her pivotal promotion ',?
+'Vice President Pence arrives in Israel',?
+' Born in Honolulu  Hawaii  Obama is a graduate of Columbia University and Harvard Law School ',?
+'Jamendo has information on about 3 500 artists.',?
+'In June 323 BC  Alexander the Great died in Babylon',?
