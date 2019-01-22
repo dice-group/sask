@@ -103,7 +103,7 @@ public class TestMLmodel {
 		filteredClassifier.setFilter(stringToWordVectorFilter);
 		filteredClassifier.setClassifier(classifier);
 		Evaluation evaluation = new Evaluation(traindata);
-		System.out.println(evaluation.toClassDetailsString());	 
+//		System.out.println(evaluation.toClassDetailsString());	 
 		classifier.buildClassifier(traindata);
 		evaluation.evaluateModel(filteredClassifier, testingSet);
 		System.out.println("Classifiers Details:");

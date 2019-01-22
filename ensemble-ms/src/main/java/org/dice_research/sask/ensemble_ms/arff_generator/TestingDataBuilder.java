@@ -5,6 +5,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
+
+/**
+* This class will prepare the testing file in arff format for the machine learning model for testing best extractor for the sentence.
+* Class will take sentences as input and prepare arff file
+*File will be saved in WekaMlDataset\\testingData.arf
+* @author Harsh Shah (hjshah142)
+*/
+
 public class TestingDataBuilder {
 
 	int x = 0;
